@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="QuizDAO">
+	
+	<insert id="insertQuiz">
+		insert into quiz values(quiz_seq.nextval, #{quiz}, #{correct}, #{point})
+	</insert>
+	
+	<select id="selectAllQuiz" resultType="kh.spring.dto.QuizDTO">
+		select * from quiz
+	</select>
+	
+	<select id="selectRandQuiz" resultType="kh.spring.dto.QuizDTO">
+		select * from quiz where seq in (#{num1}, #{num2}, #{num3}, #{num4}, #{num5}, #{num6}, #{num7}, #{num8}, #{num9}, #{num10})
+	</select>
+	
+	<select id="getQuizNum" resultType="int">
+		select count(*) from quiz
+	</select>
+	
+	<select id="deleteQuiz">
+		delete from quiz where seq=#{value}
+	</select>
+	
+</mapper>

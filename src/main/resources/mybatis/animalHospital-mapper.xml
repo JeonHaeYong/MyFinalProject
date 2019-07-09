@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AnimalHospitalDAO">
+	
+	<select id="selectAllAniHospital" resultType="kh.spring.dto.AnimalHospitalDTO">
+		select * from animal_hospital
+	</select>
+	
+	<select id="selectAniHospitalPerPage">
+		select * from (select row_number()over(order by seq desc) as rown, animal_hospital.* from animal_hospital) where rown between #{start} and #{end}
+	</select>
+	
+	<select id="getRecordTotalCount" resultType="int">
+		select count(*) from animal_hospital
+	</select>
+	
+</mapper>

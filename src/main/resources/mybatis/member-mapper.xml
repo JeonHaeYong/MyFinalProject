@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MemberDAO">
+	
+	<insert id="insertMember">
+		insert into member values(#{id}, #{password}, #{name}, #{email}, #{birthDay,jdbcType=varchar}, #{gender,jdbcType=varchar}, 
+		#{phone,jdbcType=varchar}, #{zipcode,jdbcType=varchar}, #{address1,jdbcType=varchar}, #{addredd2,jdbcType=varchar}, #{type}, 0)
+	</insert>
+	
+	<select id="selectAllMembers" resultType="kh.spring.dto.MemberDTO">
+		select * from member;
+	</select>
+	
+	<select id="isLoginOk" resultType="int">
+		select count(*) from member where id=#{id} and password=#{password}
+	</select>
+	
+	<select id="idDuplCheck" resultType="int">
+		select count(*) from member where id=#{value}
+	</select>
+	
+	<select id="selectOneMember" resultType="kh.spring.dto.MemberDTO">
+		select * from member where id=#{value}
+	</select>
+	
+	<update id="modifyMember">
+		update member set password=#{password}, name=#{name}, email=#{email}, phone=#{phone}, 
+		zipcode=#{zipcode}, addredd1=#{address1}, addredd2=#{addredd2} where id=#{id}
+	</update>
+	
+	<delete id="deleteMember">
+		delete from member where id=#{value}
+	</delete>
+	
+</mapper>

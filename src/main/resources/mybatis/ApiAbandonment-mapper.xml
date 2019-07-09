@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ApiDAO">
+	
+	<insert id="insert">
+		insert into ApiAbandonedAnimal values(seq.nextval, #{noticeEdt},#{popfile},#{processState},#{sexCd},#{neuterYn},
+		#{specialMark},#{careNm},#{careTel},#{careAddr},#{orgNm},#{chargeNm},#{officeTel},#{noticeComment},#{desertionNo},
+		#{thumbnail},#{happenDt},#{happenPlace},#{kindCd},#{colorCd},#{age},#{weight},#{noticeNo},#{noticeSdt})
+	</insert>
+	
+	<select id="selectCount" resultType="java.lang.Integer">
+		select count(*) from ApiAbandonedAnimal
+	</select>
+	<select id="selectOneBySeq" resultType="kh.spring.dto.ApiAbandonedAnimalDTO">
+		select * from ApiAbandonedAnimal where seq=#{value}
+	</select>
+	<select id="selectAll" resultType="kh.spring.dto.ApiAbandonedAnimalDTO">
+		select * from (select row_number() over(order by seq desc) as rown, noticeEdt, popfile,
+		 processState, sexCd, neuterYn, specialMark, careNm, careTel, careAddr, orgNm, chargeNm,
+		  officeTel, noticeComment, desertionNo, thumbnail, happenDt, happenPlace, kindCd, colorCd,
+		   age, weight, noticeNo, noticeSdt from ApiAbandonedAnimal)" + " where rown between #{array[0]} and #{array[1]}
+	</select>
+	
+	<delete id="deleteBySeq">
+		delete from ApiAbandonedAnimal where seq=#{seq}
+	</delete>
+	
+</mapper>

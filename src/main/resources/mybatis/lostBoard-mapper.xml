@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="LostBoardDAO">
+
+	<select id="insertLostBoard">
+		insert into lostBoard values(seq.nextval, #{title}, #{writer}, #{lostDate}, #{siDo}, #{siGunGu}, #{place}, #{type},
+		 #{sex}, #{color}, #{age}, #{feat}, #{imagePath}, #{email}, #{phone}, default)
+	</select>
+	
+	<delete id="deleteLostBoard">
+		delete from lostBoard where seq=#{value}
+	</delete>
+	
+	<update id="modifyLostBoard">
+		update lostBoard set title=#{title}, writer=#{writer}, lostDate=#{lostDate}, siDo=#{siDo}, siGunGu=#{siGunGu}, 
+		place=#{place}, type=#{type}, sex=#{sex}, color=#{color}, age=#{age}, feat=#{feat}, imagePath=#{imagePath}, 
+		email=#{email}, phone=#{phone} where seq=#{seq}
+	</update>
+	
+	<select id="readOneLostBoard" resultType="kh.spring.dto.LostBoardDTO">
+		select * from lostBoard where seq=#{value}
+	</select>
+	
+	<select id="selectLostBoardPerPage">
+		select * from (select row_number() over(order by seq desc) as rown, title, writer, lostDate, siDo, siGunGu,
+		 place, type, sex, color, age, feat, imagePath, email, phone, writeTime from lostBoard) where rown between ? and ?
+	</select>
+	
+	<select id="lostBoardContentsSize" resultType="int">
+		select count(*) from lostBoard
+	</select>
+
+</mapper>

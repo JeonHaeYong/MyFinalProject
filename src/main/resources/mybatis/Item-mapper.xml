@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ItemDAO">
+	<delete id="delete">
+		delete from item where seq=#{seq}
+	</delete>
+	<insert id="upload">
+		insert into item values(item_seq.nextval,#{name},#{contents},#{price},#{seller},#{date},#{permission},#{imagePath} )
+	</insert>
+	<select id="selectBySeq" resultType="kh.spring.dto.ItemDTO">
+		select * from item where seq=#{value}
+	</select>
+	<select id="selectList" resultType="kh.spring.dto.ItemDTO">
+		select * from (select row_number() over(order by seq desc) as rown, name, contents, price, seller, date, permission, imagePath from item)"
+				+ " where rown between #{array[0]} and #{array[1]}
+	</select>
+	<select id="select" resultType="int">
+		select count(*) from item
+	</select>
+	<insert id="modify">
+		update item set name=#{name}, contents=#{contents}, price=#{price},
+		seller=#{seller}, date=#{date}, permission=#{permission},
+		imagePath=#{imagePath}
+	</insert>
+	
+</mapper>
