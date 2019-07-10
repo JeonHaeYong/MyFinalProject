@@ -7,7 +7,7 @@ import kh.spring.dto.AnimalHospitalDTO;
 
 public interface AnimalHospitalDAO {
 	public List<AnimalHospitalDTO> selectAllAniHospital();
-	public List<AnimalHospitalDTO> selectAniHospitalPerPage(int start, int end);
+	public List<AnimalHospitalDTO> selectAniHospitalPerPage(int currentPage);
 	public int getRecordTotalCount();
-	public Map<String, Integer> getNaviForAniHospital(int currentPage);
+	public String getNaviForAniHospital(int currentPage);
 }

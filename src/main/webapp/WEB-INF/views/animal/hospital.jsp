@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,23 +18,40 @@
 <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
+<script>
+	$(function(){
+		$(".pageNum").each(function(index,items){
+			if($(this).text() == ${currentPage}){
+				$(this).css("color","#EC7357");
+				$(this).css("font-weight","bold");
+			}
+		});
+	});
+		
+</script>
  <style>
      .jumbotron{background-image:url(https://www.condorferries.co.uk/media/2455/taking-your-pet-5.jpg);
-                background-size:100% 100%; height: 500px; margin: auto; margin-bottom: 80px;}
-     .container{margin-bottom: 30px; color: #754F44; }
+                background-size:100% 100%; height: 500px; margin-bottom: 80px;}
+     .container{margin-bottom: 30px; color: #754F44; max-width:1700px; }
      .header{background-color: #EC7357; color: white; text-align: center; font-size: 20px; height: 40px; line-height: 40px;}
-     .section{text-align: center; border-bottom: 1px solid black}
+     .header>div{padding: 0px;}
+     .section{text-align: center; border-bottom: 1px solid black;}
      .section:hover{background-color: #FDD69250;}
+     .section>div{padding: 0px;}
      .section>div:not(.addr){line-height: 50px;}
      .addr{text-align: left;}
      .footer{text-align: center; padding-top:15px; font-size: 18px;}
      .menu-bar{text-align: center; height: 200px;  }
      .menu-bar>div{height: 40px;}
+     .menu-bar>div:not(.menu){line-height: 40px;}
      .menu-bar>div:not(.menu):hover{background-color: #FBFFB950; font-weight: bold; }
      .menu-bar div:first-child{font-size: 20px; font-weight: bold;  border-bottom: 1px solid black; color: #754F44;}
       a[name="s-menu"]{color: #754F44; text-decoration-line: none;}
       a[name="s-menu"]:hover{color: #754F44;}
+      .pageNum,.prev,.next{text-decoration-line: none; color: #754F44; font-size:20px;}
+       .pageNum:hover,.prev:hover,.next:hover{font-weight: bold;}
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -54,45 +72,39 @@
                    <div class="menu">MENU</div>
                    <div><a href="" name="s-menu">임시보호중</a></div>
                    <div><a href="" name="s-menu">유기동물조회</a></div>
-                   <div><a href="" name="s-menu">동물병원 조회</a></div>
+                   <div><a href="toHospital?currentPage=1" name="s-menu">동물병원 조회</a></div>
                    <div><a href="" name="s-menu">보호센터 조회</a></div>
                </div>
                
                <div class="col-1"><!--메뉴바랑 리스트 사이 빈 공간--></div>
                  
                <div class="col-lg-8 col-md-7 col-sm-12 col-12">
-                   <div class="row header">
-                <div class="col-lg-2  d-none d-lg-block">No.</div>
-                <div class="col-lg-3 col-md-4 col-12">동물 병원</div>
-                <div class="col-lg-3 col-md-4 d-none d-md-block">전화번호</div>
-                <div class="col-lg-4  col-md-4 d-none d-md-block ">주소</div>
-            </div>
+                 <div class="row header">
+               		<div class="col-lg-1  d-none d-lg-block ">No.</div>
+                	<div class="col-lg-2 col-md-3 col-12 ">지역</div>
+                	<div class="col-lg-3 col-md-3 col-12 ">병원</div>
+                	<div class="col-lg-2 col-md-2 col-12 ">전화번호</div>
+                	<div class="col-lg-4  col-md-4 col-12  ">주소</div>
+           	   </div>
             <!--section start-->
-            <div class="row section">
-                <div class="col-lg-2  d-none d-lg-block no">1</div>
-                <div class="col-lg-3 col-md-4 col-12 hp">압구정웰동물병원</div>
-                <div class="col-lg-3 col-md-4 col-12 tel">3443-0275</div>
-                <div class="col-lg-4  col-md-4 col-12  addr">서울특별시 강남구 압구정로 108
-                    (신사동, 덕산빌딩 203호 )</div>
-            </div>
+            <c:forEach var="list" items="${list }">
+            	<div class="row section">
+                	<div class="col-lg-1  d-none d-lg-block no">${list.seq}</div>
+                	<div class="col-lg-2 col-md-3 col-12 siGun">${list.siGun }</div>
+                	<div class="col-lg-3 col-md-3 col-12 hp ">${list.title }</div>
+                	<div class="col-lg-2 col-md-2 col-12 tel">${list.tel }</div>
+                	<div class="col-lg-4  col-md-4 col-12  addr">${list.address }</div>
+            	</div>
+			</c:forEach>
+          
 
-            <div class="row section">
-                <div class="col-lg-2  d-none d-lg-block no">1</div>
-                <div class="col-lg-3 col-md-4 col-12 hp">압구정웰동물병원</div>
-                <div class="col-lg-3 col-md-4 col-12 tel">3443-0275</div>
-                <div class="col-lg-4  col-md-4 col-12 addr">서울특별시 강남구 압구정로 108 (신사동, 덕산빌딩 203호 )</div>
-            </div>
-
-            <div class="row section">
-                <div class="col-lg-2  d-none d-lg-block no">1</div>
-                <div class="col-lg-3 col-md-4 col-12 hp">압구정웰동물병원</div>
-                <div class="col-lg-3 col-md-4 col-12 tel">3443-0275</div>
-                <div class="col-lg-4  col-md-4 col-12 addr">서울특별시 강남구 압구정로 108 (신사동, 덕산빌딩 203호 )</div>
-            </div>
+          
             <!--section end-->
             <!--footer-->
             <div class="row footer">
-                <div class="col-12">페이지 네비</div>
+                <div class="col-12">
+                ${navi} 
+                </div>
             </div>
                </div>
            </div>
@@ -100,7 +112,6 @@
 	
 	<!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
    <jsp:include page="/WEB-INF/views/module/footer.jsp" ></jsp:include>
-   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
    <script src="resources/js/jquery-ui.js"></script>
    <script src="resources/js/popper.min.js"></script>
    <script src="resources/js/bootstrap.min.js"></script>
