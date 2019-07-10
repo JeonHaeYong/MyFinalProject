@@ -22,7 +22,6 @@
 	width: 35%;
 	height: auto;
 }
-
 </style>
 
 </head>
@@ -43,26 +42,21 @@
 
 					<div class="col-5 text-center">
 
-						<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-							<ol class="carousel-indicators">
-								<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-								<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-								<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-							</ol>
+
+						<div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
 							<div class="carousel-inner">
-								<div class="carousel-item active">
-									<img class="d-block w-100" src="resources/images/dog_1.jpg" alt="First slide">
+								<div class="carousel-item active" data-interval="3000">
+									<img src="resources/images/dog_1.jpg" class="d-block w-100" alt="...">
 								</div>
-								<div class="carousel-item">
-									<img class="d-block w-100" src="resources/images/dog_2.jpg" alt="Second slide">
+								<div class="carousel-item" data-interval="3000">
+									<img src="resources/images/dog_2.jpg" class="d-block w-100" alt="...">
 								</div>
-								<div class="carousel-item">
-									<img class="d-block w-100" src="resources/images/dog_3.jpg" alt="Third slide">
+								<div class="carousel-item" data-interval="3000">
+									<img src="resources/images/dog_3.jpg" class="d-block w-100" alt="...">
 								</div>
 							</div>
-							<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span>
-							</a> <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span
-								class="sr-only">Next</span>
+							<a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span>
+							</a> <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span>
 							</a>
 						</div>
 
@@ -129,54 +123,50 @@
 <script src="resources/js/isotope.pkgd.min.js"></script>
 <script src="resources/js/main.js"></script>
 <script>
-	$(function()
-    {
-		
-		CountDownTimer('07/30/2019', 'last_time_span'); //첫번째 인수로 넣은 날짜까지
-// 		CountDownTimer('01/01/2018 00:00 AM', 'newcountdown'); // 2018년 1월 1일까지, 시간을 표시하려면 01:00 AM과 같은 형식을 사용합니다.
+	$(function() {
 
-		function CountDownTimer(dt, id)
-		{
+		CountDownTimer('07/30/2019', 'last_time_span'); //첫번째 인수로 넣은 날짜까지
+		// 		CountDownTimer('01/01/2018 00:00 AM', 'newcountdown'); // 2018년 1월 1일까지, 시간을 표시하려면 01:00 AM과 같은 형식을 사용합니다.
+
+		function CountDownTimer(dt, id) {
 			var end = new Date(dt);
-	
+
 			var _second = 1000;
 			var _minute = _second * 60;
 			var _hour = _minute * 60;
 			var _day = _hour * 24;
 			var timer;
-		
-			var $target = $("#"+id+"");
-			
-			function showRemaining() 
-			{
+
+			var $target = $("#" + id + "");
+
+			function showRemaining() {
 				var now = new Date();
 				var distance = end - now;
-				if (distance < 0) 
-				{
-		
+				if (distance < 0) {
+
 					clearInterval(timer);
 					$target.text = '종료!';
-			
+
 					return;
 				}
-				
+
 				var days = Math.floor(distance / _day);
 				var hours = Math.floor((distance % _day) / _hour);
 				var minutes = Math.floor((distance % _hour) / _minute);
 				var seconds = Math.floor((distance % _minute) / _second);
-		
-				$target.text( days + '일 ' + hours + '시간 ' + minutes + '분 ' + seconds + '초');
+
+				$target.text(days + '일 ' + hours + '시간 ' + minutes + '분 '
+						+ seconds + '초');
 			}
-	
+
 			timer = setInterval(showRemaining, 1000);
 		}
 		// Source: stackoverflow
-		
-    });
-    
-    onload = function()
-    {
 
-    };
+	});
+
+	onload = function() {
+
+	};
 </script>
 </html>
