@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,90 +18,91 @@
 <link rel="stylesheet" href="resources/css/style.css">
 
 <style>
-
-	#container
-	{
-/* 		margin-top: 5%; */
-	}
-	
-	#left_img, #right_img
-	{
-		width: 35%;
-		height: auto;
-	}
-	
+#left_img, #right_img {
+	width: 35%;
+	height: auto;
+}
 
 </style>
 
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
-<jsp:include page="/WEB-INF/views/module/menu.jsp" ></jsp:include>
-<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
-	
-	
-<section class="site-section bg-light block-13">
+	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
+	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
+
+
+	<section class="site-section bg-light block-13">
 
 	<div id="container" class="container">
-	
+
 		<div class="row justify-content-center">
-		
+
 			<div class="col-6 my-5">
-			
+
 				<div class="row justify-content-center">
-				
+
 					<div class="col-5 text-center">
-						
-						<img src="/resources/images/nmnb1.jpg" alt="사진이 없습니다.">
-						
+
+						<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+							<ol class="carousel-indicators">
+								<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+								<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+								<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+							</ol>
+							<div class="carousel-inner">
+								<div class="carousel-item active">
+									<img class="d-block w-100" src="resources/images/dog_1.jpg" alt="First slide">
+								</div>
+								<div class="carousel-item">
+									<img class="d-block w-100" src="resources/images/dog_2.jpg" alt="Second slide">
+								</div>
+								<div class="carousel-item">
+									<img class="d-block w-100" src="resources/images/dog_3.jpg" alt="Third slide">
+								</div>
+							</div>
+							<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span>
+							</a> <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span
+								class="sr-only">Next</span>
+							</a>
+						</div>
+
 					</div>
-					
+
 					<div class="col-7 text-center">
-					
-						<h3>큰글씨 큰글씨</h3><br>
-						<br>
-						글씨글씨 글씨글씨<br>
-						글씨글씨 글씨글씨<br>
-						글씨글씨 글씨글씨<br>
-						
+
+						<h3>큰글씨 큰글씨</h3>
+						<br> <br> 글씨글씨 글씨글씨<br> 글씨글씨 글씨글씨<br> 글씨글씨 글씨글씨<br>
+
 					</div>
-				
+
 				</div>
-			
+
 			</div>
-			
+
 			<div class="col-12 text-center my-5">
-			
-				<img src="/resources/images/nmnb1.jpg" alt="사진이 없습니다." id="left_img" class="mx-5">
-				
-				<img src="/resources/images/nmnb1.jpg" alt="사진이 없습니다." id="right_img" class="mx-5">
-				
-				<br>
-				<br>
-				<br>
-				<br>
-				<input class="btn btn-info" type="button" value="후원">
-			
+
+				<img src="/resources/images/nmnb1.jpg" alt="사진이 없습니다." id="left_img" class="mx-5"> <img src="/resources/images/nmnb1.jpg" alt="사진이 없습니다." id="right_img" class="mx-5"> <br> <input
+					class="btn btn-info mt-5" type="button" value="후원">
+
 			</div>
-			
+
 			<div class="col-6 text-right my-5">
-				
-				<img src="/resources/images/clock-64.png" alt="사진이 없습니다.">
-				<span class="mr-5">3day 20 : 15 : 10</span>
-			
+
+				<img src="/resources/images/clock-64.png" alt="사진이 없습니다."> <span class="mr-5">3day 20 : 15 : 10</span>
+
 			</div>
-			
+
 			<div class="col-6 text-left my-5">
-				
-				<img src="/resources/images/pie-chart-64.png" alt="사진이 없습니다."  class="ml-5">
-				<span>asdasd</span>
-				
+
+				<img src="/resources/images/pie-chart-64.png" alt="사진이 없습니다." class="ml-5"> <span>모금액 / 모금목표</span>
+
 			</div>
-			
+
 		</div>
-	
+
 	</div>
 
-</section>
+	</section>
 
 
 
@@ -110,11 +110,11 @@
 
 
 
-	
-	
-	
-<!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
-<jsp:include page="/WEB-INF/views/module/footer.jsp" ></jsp:include>   
+
+
+
+	<!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
+	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="resources/js/jquery-ui.js"></script>
@@ -129,20 +129,14 @@
 <script src="resources/js/isotope.pkgd.min.js"></script>
 <script src="resources/js/main.js"></script>
 <script>
-        
 	$(function()
-	{
-		
-		
-		        
-	});
-        
-	onload = function()
-	{
-		
-		
-              
-	};
-        
+    {
+
+    });
+    
+    onload = function()
+    {
+
+    };
 </script>
 </html>
