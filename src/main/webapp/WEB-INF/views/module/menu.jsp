@@ -27,13 +27,13 @@
           <div class="col-12 col-md-10 d-none d-xl-block">
             <nav class="site-navigation position-relative text-right" role="navigation">
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li><a href="#home-section" class="nav-link">Home</a></li>
-                <li><a href="#about-section" class="nav-link">About</a></li>
-                <li><a href="#trainers-section" class="nav-link">Doctor</a></li>
-                <li><a href="#pricing-section" class="nav-link">Pricing</a></li>
-                <li><a href="#blog-section" class="nav-link">Blog</a></li>
-                <li><a href="#services-section" class="nav-link">Services</a></li>
-                <li><a href="#contact-section" class="nav-link">Contact</a></li>
+                <li><a href="#home-section" class="nav-link">유기동물</a></li>
+                <li><a href="#about-section" class="nav-link">임시보호중</a></li>
+                <li><a href="#trainers-section" class="nav-link">재회</a></li>
+                <li><a href="#pricing-section" class="nav-link">무료나눔</a></li>
+                <li><a href="#blog-section" class="nav-link">Fun</a></li>
+                <li><a href="#services-section" class="nav-link">후원하기</a></li>
+                <li><a href="#contact-section" class="nav-link">공지사항</a></li>
               </ul>
             </nav>
           </div>
