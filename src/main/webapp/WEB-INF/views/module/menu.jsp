@@ -8,7 +8,7 @@
 	</div>
 </div>
 
-<<<<<<< HEAD
+
 <div class="site-wrap">
 	<div class="site-mobile-menu site-navbar-target">
 		<div class="site-mobile-menu-header">
@@ -35,10 +35,10 @@
 						<ul
 							class="site-menu main-menu js-clone-nav mr-0 pl-0 d-none d-lg-block">
 							<li><a href="#home-section" class="nav-link">유기동물</a></li>
-							<li><a href="#about-section" class="nav-link">임시보호중</a></li>
+							<li><a href="/toHospital?currentPage=1" class="nav-link">임시보호중</a></li>
 							<li><a href="#trainers-section" class="nav-link">재회</a></li>
 							<li><a href="#pricing-section" class="nav-link">무료나눔</a></li>
-							<li><a href="#blog-section" class="nav-link">Fun</a></li>
+							<li><a href="/oxQuiz" class="nav-link">Fun</a></li>
 							<li><a href="#services-section" class="nav-link">후원하기</a></li>
 							<li><a href="#contact-section" class="nav-link ">공지사항</a></li>
 							<c:choose>
