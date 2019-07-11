@@ -5,11 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
+
 import kh.spring.dao.MemberDAO;
-=======
->>>>>>> e0b582e2d552868eb59a0ec79dcd7dd1de20ab0d
-import kh.spring.daoImpl.MemberDAOImpl;
+
 import kh.spring.dto.MemberDTO;
 import kh.spring.service.MemberService;
 
