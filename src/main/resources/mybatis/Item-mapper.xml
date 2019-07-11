@@ -5,22 +5,22 @@
 		delete from item where seq=#{seq}
 	</delete>
 	<insert id="upload">
-		insert into item values(item_seq.nextval,#{name},#{contents},#{price},#{seller},#{date},#{permission},#{imagePath} )
+		insert into item values(item_seq.nextval,#{name},#{contents},TO_CHAR(#{price},'999,999,999'),#{seller},default,#{permission},#{imagePath1},#{imagePath2,jdbcType=varchar},#{imagePath3,jdbcType=varchar} )
 	</insert>
 	<select id="selectBySeq" resultType="kh.spring.dto.ItemDTO">
 		select * from item where seq=#{value}
 	</select>
-	<select id="selectList" resultType="kh.spring.dto.ItemDTO">
-		select * from (select row_number() over(order by seq desc) as rown, name, contents, price, seller, date, permission, imagePath from item)"
-				+ " where rown between #{array[0]} and #{array[1]}
-	</select>
-	<select id="select" resultType="int">
+	<select id="getItemCount" resultType="int">
 		select count(*) from item
 	</select>
-	<insert id="modify">
-		update item set name=#{name}, contents=#{contents}, price=#{price},
-		seller=#{seller}, date=#{date}, permission=#{permission},
-		imagePath=#{imagePath}
-	</insert>
+	<select id="selectItemPerPage" resultType="kh.spring.dto.ItemDTO">
+		select * from (select row_number() over(order by seq desc) as rown, item.* from item) 
+		where rown between #{start} and #{end}
+	</select>
+<!-- 	<insert id="modify"> -->
+<!-- 		update item set name=#{name}, contents=#{contents}, price=#{price}, -->
+<!-- 		seller=#{seller}, date=#{date}, permission=#{permission}, -->
+<!-- 		imagePath=#{imagePath} -->
+<!-- 	</insert> -->
 	
 </mapper>

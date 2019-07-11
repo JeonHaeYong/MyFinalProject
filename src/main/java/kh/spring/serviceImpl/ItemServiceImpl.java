@@ -1,5 +1,6 @@
 package kh.spring.serviceImpl;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -14,49 +15,44 @@ import kh.spring.service.ItemService;
 public class ItemServiceImpl implements ItemService{
 	@Autowired
 	private ItemDAO itemDao;
-	
-	
-	public int deleteItem(ItemDTO dto) throws Exception {
-		int result = itemDao.deleteItem(dto);
-		return result;
-	}
-	
-	
-	public int modifyItem(ItemDTO dto) throws Exception {
-		int result = itemDao.modifyItem(dto);
-		return result;
-	}
-	
-	
-	public ItemDTO readOneItem(int seq) throws Exception {
-	
-			ItemDTO dto = itemDao.readOneItem(seq);
-			return dto;
-	}
-	
-
-	
-	public List<ItemDTO> selectAllItem(int currentPage) throws Exception {
-		List<ItemDTO> list = itemDao.selectAllItem(currentPage);
-		return list;
-	}
-	
-	
-	public Map<String, Integer> getNaviforItem(int currentPage) throws Exception {
-		Map<String, Integer> pageNavi = itemDao.getNaviforItem(currentPage);
-		return pageNavi;
-	}
-
 
 	@Override
-	public int uploadItem(ItemDTO dto) throws Exception {
-		return itemDao.uploadItem(dto);
+	public int uploadItem(ItemDTO dto) {
+		return itemDao.insertItem(dto);
 	}
-
 
 	@Override
-	public int itemContentsSize() throws Exception {
-		int result = itemDao.itemContentsSize();
-		return result;
+	public List<ItemDTO> selectItemPerPage(int currentPage) {
+		Map<String, Integer> navi = itemDao.getNaviforItem(currentPage);
+		return itemDao.selectItemPerPage(navi.get("fromIndex"), navi.get("toIndex"));
 	}
+
+	@Override
+	public ItemDTO readOneItem(int seq) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		ItemDTO dto = itemDao.readOneItem(seq);
+		dto.setFomredDate(sdf.format(dto.getWrite_date()));
+		return dto;
+	}
+
+	@Override
+	public int deleteItem(ItemDTO dto) {
+		return itemDao.deleteItem(dto);
+	}
+
+	@Override
+	public int modifyItem(ItemDTO dto) {
+		return itemDao.modifyItem(dto);
+	}
+
+	@Override
+	public int itemContentsSize() {
+		return itemDao.itemContentsSize();
+	}
+
+	@Override
+	public Map<String, Integer> getNaviforItem(int currentPage) {
+		return itemDao.getNaviforItem(currentPage);
+	}
+
 }

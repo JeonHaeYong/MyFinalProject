@@ -14,7 +14,7 @@ import kh.spring.dto.ItemDTO;
 @Repository
 public class ItemDAOImpl implements ItemDAO{
 	// 한 페이지에 몇 개의 글이 보이게 할 것인지
-	public static int recordCountPerPage = 15;
+	public static int recordCountPerPage = 12;
 	// 한 페이지에 네비게이터가 총 몇 개가 보이게 할 것인지
 	public static int naviCountPerPage = 5;
 
@@ -30,7 +30,7 @@ public class ItemDAOImpl implements ItemDAO{
 		return sst.selectOne("ItemDAO.selectBySeq", seq);
 	}
 
-	public int uploadItem(ItemDTO dto) {
+	public int insertItem(ItemDTO dto) {
 		return sst.insert("ItemDAO.upload", dto);
 	}
 
@@ -39,18 +39,16 @@ public class ItemDAOImpl implements ItemDAO{
 		return sst.update("ItemDAO.modify", dto);
 	}
 
-	public List<ItemDTO> selectAllItem(int currentPage){
-
-		int endNum = currentPage*recordCountPerPage;
-		int startNum = endNum - (recordCountPerPage-1);	
-
-		return sst.selectList("ItemDAO.selectList",new Object[] {startNum,endNum});
+	public List<ItemDTO> selectItemPerPage(int start, int end){
+		Map<String, Integer> param = new HashMap<>();
+		param.put("start", start);
+		param.put("end", end);
+		return sst.selectList("ItemDAO.selectItemPerPage", param);
 	}
 
 	public int itemContentsSize() {
-		return sst.selectOne("ItemDAO.select");
+		return sst.selectOne("ItemDAO.getItemCount");
 	}
-
 	public Map<String, Integer> getNaviforItem(int currentPage){ // 부트스트랩은 int로 받아야함
 		int recordTotalCount = this.itemContentsSize();
 		// 가지고 있는 게시글의 수에 맞는 페이지의 개수를 구함.

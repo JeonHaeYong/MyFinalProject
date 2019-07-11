@@ -3,73 +3,120 @@ package kh.spring.dto;
 import java.sql.Timestamp;
 
 public class ItemDTO {
-	private int seq;			// »óÇ° ¹øÈ£
-	private String name;		// »óÇ° ÀÌ¸§
-	private String contents;	// »óÇ° ¼³¸í
+	private int seq;			// ï¿½ï¿½Ç° ï¿½ï¿½È£
+	private String name;		// ï¿½ï¿½Ç° ï¿½Ì¸ï¿½
+	private String contents;	// ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½
 	private String price;
 	private String seller;
-	private Timestamp date;		// µî·ÏÀÏ
-	private String permission;	// °ü¸®ÀÚ Çã°¡ ¿©ºÎ
-	private String imagePath;
+	private Timestamp write_date;		// ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String permission;	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ã°¡ ï¿½ï¿½ï¿½ï¿½
+	private String imagePath1;
+	private String imagePath2;
+	private String imagePath3;
+	private String fomredDate;
 	
 	public ItemDTO() {}
-	public ItemDTO(int seq, String name, String contents, String price, String seller, Timestamp date,
-			String permission, String imagePath) {
+	public ItemDTO(int seq, String name, String contents, String price, String seller, Timestamp write_date,
+			String permission, String imagePath1, String imagePath2, String imagePath3, String fomredDate) {
+		super();
 		this.seq = seq;
 		this.name = name;
 		this.contents = contents;
 		this.price = price;
 		this.seller = seller;
-		this.date = date;
+		this.write_date = write_date;
 		this.permission = permission;
-		this.imagePath = imagePath;
+		this.imagePath1 = imagePath1;
+		this.imagePath2 = imagePath2;
+		this.imagePath3 = imagePath3;
+		this.fomredDate = fomredDate;
 	}
+
 	public int getSeq() {
 		return seq;
 	}
+
 	public void setSeq(int seq) {
 		this.seq = seq;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getContents() {
 		return contents;
 	}
+
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
+
 	public String getPrice() {
 		return price;
 	}
+
 	public void setPrice(String price) {
 		this.price = price;
 	}
+
 	public String getSeller() {
 		return seller;
 	}
+
 	public void setSeller(String seller) {
 		this.seller = seller;
 	}
-	public Timestamp getDate() {
-		return date;
+
+	public Timestamp getWrite_date() {
+		return write_date;
 	}
-	public void setDate(Timestamp date) {
-		this.date = date;
+
+	public void setWrite_date(Timestamp write_date) {
+		this.write_date = write_date;
 	}
+
 	public String getPermission() {
 		return permission;
 	}
+
 	public void setPermission(String permission) {
 		this.permission = permission;
 	}
-	public String getImagePath() {
-		return imagePath;
+
+	public String getImagePath1() {
+		return imagePath1;
 	}
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
+
+	public void setImagePath1(String imagePath1) {
+		this.imagePath1 = imagePath1;
+	}
+
+	public String getImagePath2() {
+		return imagePath2;
+	}
+
+	public void setImagePath2(String imagePath2) {
+		this.imagePath2 = imagePath2;
+	}
+
+	public String getImagePath3() {
+		return imagePath3;
+	}
+
+	public void setImagePath3(String imagePath3) {
+		this.imagePath3 = imagePath3;
+	}
+
+	public String getFomredDate() {
+		return fomredDate;
+	}
+
+	public void setFomredDate(String fomredDate) {
+		this.fomredDate = fomredDate;
 	}
 }
