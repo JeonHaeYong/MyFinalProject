@@ -22,10 +22,19 @@ public class MemberController {
 		return "myPage/user/user_myPage_support";
 	}
 	
-	@RequestMapping("toMyPage_shopping")
-	public String toMyPage_shopping() {
-		return "myPage/user/user_myPage_shopping";
+	@RequestMapping("toMyPage_cart")
+	public String toMyPage_cart() {
+		return "myPage/user/user_myPage_cart";
 	}
 	
+	@RequestMapping("toMyPage_buyList")
+	public String toMyPage_buyList() {
+		return "myPage/user/user_myPage_buyList";
+	}
+	
+	@RequestMapping("toMyPage_message")
+	public String toMyPage_message() {
+		return "myPage/user/user_myPage_message";
+	}
 	
 }

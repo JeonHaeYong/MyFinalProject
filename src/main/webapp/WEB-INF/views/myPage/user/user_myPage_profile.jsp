@@ -45,7 +45,7 @@
                 /*점보트론 이미지*/
                 .jumbotron>img{
 					width: 100%;
-					max-height: 720px;
+					max-height: 600px;
                 }
             </style>
         </head>
@@ -53,11 +53,10 @@
               data-offset="300" id="home-section">
             <jsp:include page="/WEB-INF/views/module/menu.jsp" ></jsp:include>
             <!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
-<!--             <div class="topBackGround">header fixed menu때문에 간격유지하려고</div> -->
             <div class="jumbotron px-0 pb-0">
-            	<img src="/resources/images/mypage/raccon.jpg">
+            	<img src="/mypage/dog_1.jpg">
             </div>
-            <section id="wrapper">
+            <section id="wrapper" class="mb-5">
                 <div class="container">
                     <div class="row">
                         <div class="col-4 p-2">
@@ -76,10 +75,13 @@
                                     	윤혜영님(닉네임)
                                 </div>
                                 <div>
-                                    현재포인트
+                                    	현재포인트
                                 </div>
                                 <div>
                                     200pt
+                                </div>
+                                <div>
+                                    안읽은 쪽지 : 3개
                                 </div>
                             </div>
                         </div>
@@ -96,7 +98,7 @@
                                     <a class="nav-link my_page_nav" id="pills-support-tab" href="toMyPage_support">후원목록</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link my_page_nav" id="pills-shopping-tab" href="toMyPage_shopping">장바구니</a>
+                                    <a class="nav-link my_page_nav" id="pills-cart-tab" href="toMyPage_cart">장바구니</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link my_page_nav" id="pills-buyList-tab" href="toMyPage_buyList">구매내역</a>
