@@ -19,7 +19,7 @@
 
 <style>
 #left_img, #right_img {
-	width: 35%;
+	width: 80%;
 	height: auto;
 }
 </style>
@@ -36,7 +36,7 @@
 
 		<div class="row justify-content-center">
 
-			<div class="col-6 my-5">
+			<div class="col-12 col-lg-6 my-5">
 
 				<div class="row justify-content-center">
 
@@ -72,23 +72,48 @@
 				</div>
 
 			</div>
-
+		
 			<div class="col-12 text-center my-5">
 
-				<img src="/resources/images/nmnb1.jpg" alt="사진이 없습니다." id="left_img" class="mx-5"> <img src="/resources/images/nmnb1.jpg" alt="사진이 없습니다." id="right_img" class="mx-5"> <br> <input
-					class="btn btn-info mt-5" type="button" value="후원">
+				<div class="row">
+				
+					<div class="col-12 col-lg-6 my-3 text-center">
+						
+						<img src="/resources/images/nmnb1.jpg" alt="사진이 없습니다." id="left_img" class="mx-5">
+					
+					</div>
+					
+					<div class="col-12 col-lg-6 my-3 text-center">
+					
+						<img src="/resources/images/nmnb1.jpg" alt="사진이 없습니다." id="right_img" class="mx-5">
+					
+					</div>
+				
+				</div>
+				
+				<div class="row">
+				
+					<div class="col-12 text-center">
+					
+						<input class="btn btn-info mt-5" type="button" value="후원">
+						
+					</div>
+				
+				</div>
 
 			</div>
 
-			<div class="col-6 text-right my-5">
+			<div class="col-12 col-md-6 text-center my-5">
 
-				<img src="/resources/images/clock-64.png" alt="사진이 없습니다."> <span id="last_time_span" class="mr-5">3day 20 : 15 : 10</span>
+				<img src="/resources/images/clock-64.png" alt="사진이 없습니다.">
+				<span id="last_time_span">3day 20 : 15 : 10</span>
 
 			</div>
 
-			<div class="col-6 text-left my-5">
+			<div class="col-12 col-md-6 text-center my-5">
 
-				<img src="/resources/images/pie-chart-64.png" alt="사진이 없습니다." class="ml-5"> <span>모금액 / 모금목표</span>
+				<img src="/resources/images/pie-chart-64.png" alt="사진이 없습니다.">
+				<span>모금액 / 모금목표</span>
 
 			</div>
 
@@ -125,9 +150,6 @@
 <script>
 	$(function()
     {
-	    
-		var currentMenu = $("#")
-		
 	    CountDownTimer('07/30/2019', 'last_time_span'); //첫번째 인수로 넣은 날짜까지
 	    // 		CountDownTimer('01/01/2018 00:00 AM', 'newcountdown'); // 2018년 1월 1일까지, 시간을 표시하려면 01:00 AM과 같은 형식을 사용합니다.
 	    
@@ -141,7 +163,9 @@
 		    var _day = _hour * 24;
 		    var timer;
 		    
-		    var $target = $("#" + id + "");
+		    var targetId = "#" + id;
+		    
+		    var $target = $(targetId);
 		    
 		    function showRemaining()
 		    {
