@@ -106,7 +106,7 @@ public class AnimalHospitalDAOImpl implements AnimalHospitalDAO {
 	//----검색기능-------------------------------------------------------------------------------------------------------------------------------
 	@Override
 	public int searchRecordTotalCount(String option) { // 병원 전체개수
-		return sst.selectOne("AnimalHospitalDAO.searchRecordCount",option);
+		return sst.selectOne("AnimalHospitalDAO.searchRecordCount", option);
 	}
 	@Override
 	public List<AnimalHospitalDTO> searchAniHospitalPerPage(int currentPage, String option){//리스트 10개씩 

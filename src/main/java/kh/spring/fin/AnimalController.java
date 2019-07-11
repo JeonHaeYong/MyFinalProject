@@ -68,13 +68,30 @@ public class AnimalController {
 		List<ProtectionCenterDTO> list = null;
 		String navi = null;
 		try {
-			navi = pcs.getNaviForCenter(currentPage);
+			navi = pcs.getNaviForCenter(currentPage, null);
 			list = pcs.selectCenterPerPage(currentPage);
 		}catch(Exception e) {e.printStackTrace();}
 		mav.addObject("list", list);
 		mav.addObject("navi", navi);
 		mav.setViewName("animal/protectionCenter");
 		return mav;
-		
+	}
+	@RequestMapping("searchToCenter")
+	public ModelAndView searchToCenter(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		String option = request.getParameter("option");
+		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		session.setAttribute("currentPage", currentPage);
+		System.out.println(option + "현재페이지" + currentPage);
+		List<ProtectionCenterDTO> list = null;
+		String navi = null;
+		try {
+			navi = pcs.getNaviForCenter(currentPage, option);
+			list = pcs.searchCenterPerPage(currentPage, option);
+		}catch(Exception e) {e.printStackTrace();}
+		mav.addObject("list", list);
+		mav.addObject("navi", navi);
+		mav.setViewName("animal/protectionCenter");
+		return mav;
 	}
 }

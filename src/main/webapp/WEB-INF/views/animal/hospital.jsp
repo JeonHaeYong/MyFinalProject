@@ -35,7 +35,6 @@
 				alert("지역을 선택해주세요.");
 			}
 			else{
-				alert(option);
 				location.href="searchToHospital?currentPage=1&&option="+option;
 			}
 		});

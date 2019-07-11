@@ -41,8 +41,14 @@ public class ProtectionCenterDAOimpl implements ProtectionCenterDAO{
 		return sst.selectOne("ProtectionCenterDAO.getRecordTotalCount");
 	}
 	@Override
-	public String getNaviForCenter(int currentPage){//페이지 네비게이션
-		int recordTotalCount = this.getRecordTotalCount();
+	public String getNaviForCenter(int currentPage, String option){//페이지 네비게이션
+		int recordTotalCount = 0;
+		if(option == null) {
+			recordTotalCount = this.getRecordTotalCount();
+		}else{
+			recordTotalCount = this.searchRecordTotalCount(option);
+		}
+		
 		// 가지고 있는 게시글의 수에 맞는 페이지의 개수를 구함.
 		int pageTotalCount = recordTotalCount / recordCountPerPage;//전체페이지수 
 		if(recordTotalCount % recordCountPerPage > 0) {
@@ -74,17 +80,46 @@ public class ProtectionCenterDAOimpl implements ProtectionCenterDAO{
 		}
 
 		StringBuilder sb = new StringBuilder();
-		if(needPrev) {
-			sb.append("<a class='prev' href='toCenter?currentPage=" + (startNavi - 1) + "'> ◀  </a>");
+		if(option == null) {
+			if(needPrev) {
+				sb.append("<a class='prev' href='toCenter?currentPage=" + (startNavi - 1) + "'> ◀  </a>");
+			}
+			for(int i = startNavi; i <= endNavi; i++) {
+				sb.append("<a class='pageNum' href='toCenter?currentPage=" + i + "'> " + i + "</a>");
+			}
+			if(needNext) {
+				sb.append("<a class='next' href='toCenter?currentPage=" + (endNavi + 1) + "'> ▶ </a>");
+			}
+		}else {
+			if(needPrev) {
+				sb.append("<a class='prev' href='searchToCenter?option="+option+"&&currentPage=" + (startNavi - 1) + "'> ◀  </a>");
+			}
+			for(int i = startNavi; i <= endNavi; i++) {
+				sb.append("<a class='pageNum' href='searchToCenter?option="+option+"&&currentPage=" + i + "'> " + i + "</a>");
+			}
+			if(needNext) {
+				sb.append("<a class='next' href='searchToCenter?option="+option+"&&currentPage=" + (endNavi + 1) + "'> ▶ </a>");
+			}
 		}
-		for(int i = startNavi; i <= endNavi; i++) {
-			sb.append("<a class='pageNum' href='toCenter?currentPage=" + i + "'> " + i + "</a>");
-		}
-		if(needNext) {
-			sb.append("<a class='next' href='toCenter?currentPage=" + (endNavi + 1) + "'> ▶ </a>");
-		}
-		return sb.toString();
 		
+		
+		return sb.toString();
+	}
+	
+	//-검색기능-----------------------------------------------------------------------------------------------------
+	@Override
+	public int searchRecordTotalCount(String option) {
+		return sst.selectOne("ProtectionCenterDAO.searchRecordCount", option + "%");
+	}
+	@Override
+	public List<ProtectionCenterDTO> searchCenterPerPage(int currentPage, String option){
+		Map<String, Object> param = new HashMap<>();
+		int end = currentPage * recordCountPerPage;
+		int start = end - 9;
+		param.put("option", option + "%");
+		param.put("start", start);
+		param.put("end", end);
+		return sst.selectList("ProtectionCenterDAO.searchCenterPerPage", param);
 	}
 	
 }

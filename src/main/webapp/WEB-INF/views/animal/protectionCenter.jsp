@@ -28,6 +28,15 @@
 				$(this).css("font-weight","bold");
 			}
 		});
+		$(".search-btn").on("click",function(){
+			var option = $("#search option:selected").val();
+			if(search == ""){
+				alert("지역을 선택해주세요.");
+			}
+			else{
+				location.href="searchToCenter?currentPage=1&&option="+option;
+			}
+		});
 		
 	});
 		
@@ -53,7 +62,10 @@
       a[name="s-menu"]:hover{color: #754F44;}
      .pageNum,.prev,.next{text-decoration-line: none; color: #754F44; font-size:20px;}
      .pageNum:hover,.prev:hover,.next:hover{font-weight: bold;}
-    
+     .search-box{margin-bottom:10px;}
+     .search-box>div{padding:0px;}
+     input[type="button"]{background-color:#FDD692; border:none;}
+     input[type="button"]:hover{background-color:#fcc96f; font-weight:bold;}
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -69,7 +81,19 @@
         </div>
 
         <div class="container">
-          
+           <div class="row search-box">
+           		 <div class="col-lg-2 col-md-3 col-sm-12 col-12"></div>
+           		 <div class="col-1"></div>
+           		<div class="col-lg-8 col-md-7 col-sm-12 col-12">
+           		<select id="search"><option value="" selected disabled hidden>==지역선택==</option>
+           			<option>강원도</option><option>경기도</option><option>경상남도</option>
+           			<option>경상북도</option><option>경상남도</option><option>대구광역시</option>
+           			<option>대전광역시</option><option>부산광역시</option><option>서울특별시</option>
+           			<option>세종특별자치시</option><option>울산광역시</option><option>인천광역시</option>
+           			<option>전라남도</option><option>전라북도</option><option>충청남도</option><option>충청북도</option></select>
+           		<input type="button" class="search-btn" value="검색">
+           		</div>
+           </div>
            <div class="row">
                <div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-bar">
                    <div class="menu">MENU</div>
