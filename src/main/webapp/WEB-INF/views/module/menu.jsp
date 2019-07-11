@@ -32,7 +32,7 @@
                 <li><a href="#trainers-section" class="nav-link">재회</a></li>
                 <li><a href="#pricing-section" class="nav-link">무료나눔</a></li>
                 <li><a href="#blog-section" class="nav-link">Fun</a></li>
-                <li><a href="#services-section" class="nav-link">후원하기</a></li>
+                <li><a href="donation" class="nav-link">후원하기</a></li>
                 <li><a href="#contact-section" class="nav-link">공지사항</a></li>
               </ul>
             </nav>
