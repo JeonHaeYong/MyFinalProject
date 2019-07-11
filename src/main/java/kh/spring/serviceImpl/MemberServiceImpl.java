@@ -2,16 +2,18 @@ package kh.spring.serviceImpl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kh.spring.dao.MemberDAO;
+import kh.spring.daoImpl.MemberDAOImpl;
 import kh.spring.dto.MemberDTO;
 import kh.spring.service.MemberService;
 
 @Service
 public class MemberServiceImpl implements MemberService {
 
-	private MemberDAO mdao;
+	@Autowired
+	private MemberDAOImpl mdao;
 	
 	@Override
 	public int insertMemberService(MemberDTO dto) {
@@ -46,6 +48,12 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int deleteMemberService(String id) {
 		return mdao.deleteMember(id);
+	}
+
+	@Override
+	public List<MemberDTO> selectByLikeId(String id)
+	{
+		return mdao.selectByLikeId(id);
 	}
 
 }

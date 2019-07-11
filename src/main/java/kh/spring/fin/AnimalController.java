@@ -47,8 +47,6 @@ public class AnimalController {
 		String option = request.getParameter("option");
 		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		session.setAttribute("currentPage", currentPage);
-		System.out.println(currentPage);
-		
 		List<AnimalHospitalDTO> list = new ArrayList<>();
 		String navi = null;
 		try {

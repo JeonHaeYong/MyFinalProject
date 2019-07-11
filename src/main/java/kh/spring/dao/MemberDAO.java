@@ -12,4 +12,5 @@ public interface MemberDAO {
 	public MemberDTO selectOneMember(String id);
 	public int modifyMember(MemberDTO dto);
 	public int deleteMember(String id);
+	public List<MemberDTO> selectByLikeId(String id);
 }

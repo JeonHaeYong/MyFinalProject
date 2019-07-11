@@ -8,7 +8,7 @@
 	</insert>
 	
 	<select id="selectAllMembers" resultType="kh.spring.dto.MemberDTO">
-		select * from member;
+		select * from member where;
 	</select>
 	
 	<select id="isLoginOk" resultType="int">
@@ -21,6 +21,10 @@
 	
 	<select id="selectOneMember" resultType="kh.spring.dto.MemberDTO">
 		select * from member where id=#{value}
+	</select>
+	
+	<select id="selectByLikeId" resultType="kh.spring.dto.MemberDTO">
+		select * from member where id like #{value}
 	</select>
 	
 	<update id="modifyMember">

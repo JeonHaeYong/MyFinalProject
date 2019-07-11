@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.spring.dao.MemberDAO;
@@ -12,6 +13,8 @@ import kh.spring.dto.MemberDTO;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
+	
+	@Autowired
 	private SqlSessionTemplate sst;
 
 	@Override
@@ -19,6 +22,12 @@ public class MemberDAOImpl implements MemberDAO {
 		return sst.insert("MemberDAO.insertMember", dto);
 	}
 
+	@Override
+	public List<MemberDTO> selectByLikeId(String id)
+	{
+		return sst.selectList("MemberDAO.selectByLikeId", "%"+id+"%");
+	}
+	
 	@Override
 	public List<MemberDTO> selectAllMembers() {
 		return sst.selectList("MemberDAO.selectAllMembers");
