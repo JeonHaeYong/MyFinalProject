@@ -85,7 +85,7 @@
         <!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 
         <div class="jumbotron myJumbo pr-0 pl-0 pb-2">
-            <img src="/resources/images/itemImage.jpg" id="jumboImg">
+            <img src="/resources/images/item/itemImage.jpg" id="jumboImg">
         </div>
         <div class="container">
             <div class="row m-3">
@@ -169,21 +169,6 @@
                 </div>
             </div>
         </div>
-        <div class="fixedMenu">
-        	<div class="">
-        		<input type="button" value="나눔하기">
-        	</div>
-        	<div>
-        		<select>
-        			<option>사료&amp;간식</option>
-        			<option>장난감</option>
-        			<option>기타</option>
-        		</select>
-        	</div>
-        	<div class="toCart">
-        		<img alt="" src="">
-        	</div>
-        </div>
 
         <!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
 
@@ -203,7 +188,7 @@
         <script>
             $(function(){
                 $(".nav-link").each(function(i, item){
-                    if($(item).attr("href")=="freeMarket?currentPage=1"){
+                    if($(item).attr("href").match("^freeMarket")){
                         $(this).attr("class", "active");
                     }
                 })

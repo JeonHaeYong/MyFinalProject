@@ -14,10 +14,13 @@ public class ItemDTO {
 	private String imagePath2;
 	private String imagePath3;
 	private String fomredDate;
+	private String category;
 	
 	public ItemDTO() {}
+
 	public ItemDTO(int seq, String name, String contents, String price, String seller, Timestamp write_date,
-			String permission, String imagePath1, String imagePath2, String imagePath3, String fomredDate) {
+			String permission, String imagePath1, String imagePath2, String imagePath3, String fomredDate,
+			String category) {
 		super();
 		this.seq = seq;
 		this.name = name;
@@ -30,6 +33,7 @@ public class ItemDTO {
 		this.imagePath2 = imagePath2;
 		this.imagePath3 = imagePath3;
 		this.fomredDate = fomredDate;
+		this.category = category;
 	}
 
 	public int getSeq() {
@@ -119,4 +123,13 @@ public class ItemDTO {
 	public void setFomredDate(String fomredDate) {
 		this.fomredDate = fomredDate;
 	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	
 }

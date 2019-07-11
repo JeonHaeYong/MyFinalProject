@@ -48,6 +48,37 @@
 		background-color: #ec7357;
 		color: white;
 	}
+	.fixedMenu{
+ 		position: absolute; 
+		width: 150px;
+		height: 200px;
+ 		top: 790px;
+		right: 0px;
+		border: none;
+		text-align: center;
+		background-color: #00000030;
+	}
+	#cartImg{
+		width: 50%;
+	}
+ 	.fixedMenu div{
+ 		margin: 10px;
+ 	}
+ 	.addBtn{
+ 		background-color: #ec735790;
+ 	}
+ 	.addBtn:hover, #searchBtn:hover{
+ 		background-color: #00000080;
+ 		color: white;
+ 	}
+ 	#searchForm{
+ 		width: 96px;
+ 	}
+	#searchBtn{
+		background-color: #ec735790;
+		border-radius: 5px 10px 10px 5px;
+		width: 38px;
+	}
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -56,7 +87,7 @@
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 
 	<div class="jumbotron myJumbo pr-0 pl-0 pb-2">
-		<img src="/resources/images/freemarketImage.jpg" id="jumboImg">
+		<img src="/resources/images/item/freemarketImage.jpg" id="jumboImg">
 	</div>
 	<div class="container">
 		<div class="row">
@@ -80,23 +111,47 @@
 		<div class="row">
 			<div class="col-12 d-flex justify-content-center" id="naviBox">
 				<c:if test="${pageNavi.needPrev == 1 }">
-					<a class="btn myBtn" href="freeMarket?currentPage=${pageNavi.startNavi - 1}">&laquo;</a>
+					<a class="btn myBtn" href="freeMarket?currentPage=${pageNavi.startNavi - 1}&category=${category}">&laquo;</a>
 				</c:if>
 				<c:if test="${pageNavi.currentPage > pageNavi.startNavi }">
-					<a class="btn myBtn" href="freeMarket?currentPage=${pageNavi.currentPage - 1}">&lt;</a>
+					<a class="btn myBtn" href="freeMarket?currentPage=${pageNavi.currentPage - 1}&category=${category}">&lt;</a>
 				</c:if>
 				<c:forEach var="i" begin="${pageNavi.startNavi}" end="${pageNavi.endNavi}">
-					<a class="btn myBtn" href="freeMarket?currentPage=${i }" class="pageNum">${i}</a>
+					<a class="btn myBtn" href="freeMarket?currentPage=${i }&category=${category}" class="pageNum">${i}</a>
 				</c:forEach>
 				<c:if test="${pageNavi.currentPage < pageNavi.pageTotalCount }">
-					<a class="btn myBtn" href="freeMarket?currentPage=${pageNavi.currentPage + 1}">&gt;</a>
+					<a class="btn myBtn" href="freeMarket?currentPage=${pageNavi.currentPage + 1}&category=${category}">&gt;</a>
 				</c:if>
 				<c:if test="${pageNavi.needNext == 1 }">
-					<a class="btn myBtn" href="freeMarket?currentPage=${pageNavi.endNavi + 1}">&raquo;</a>
+					<a class="btn myBtn" href="freeMarket?currentPage=${pageNavi.endNavi + 1}&category=${category}">&raquo;</a>
 				</c:if>
 			</div>
 		</div>
 	</div>
+	
+    <div class="fixedMenu">
+    	<div class="btnBox">
+			<a class="btn addBtn" href="addItem">나눔신청</a>
+    	</div>
+    	<div class="input-group selectBox">
+    		<form action="freeMarket" id="searchForm">
+    			<input type="hidden" name="currentPage" value="1">
+				<select class="custom-select" id="select" name="category">
+					<option selected value="all">분류</option>
+					<option value="food">사료&amp;간식</option>
+					<option value="toy">장난감</option>
+					<option value="clothing">의류</option>
+					<option value="etc">기타</option>
+				</select>
+			</form>
+			<div class="input-group-append m-0">
+				<a id="searchBtn"><img alt="검색" src="/resources/images/item/searchIcon.png"></a>
+			</div>
+    	</div>
+    	<div class="toCart">
+    		<a href="toMyPage"><img alt="" src="/resources/images/item/cart.png" id="cartImg"></a>
+    	</div>
+    </div>
 
 	<!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
 
@@ -116,10 +171,24 @@
 	<script>
 		$(function(){
 			$(".nav-link").each(function(i, item){
-				if($(item).attr("href")=="freeMarket?currentPage=1"){
+				if($(item).attr("href").match("^freeMarket")){
 					$(this).attr("class", "active");
 				}
-			})
+			});
+			
+			var menu = $(".fixedMenu");
+			var menuOffset = $(".fixedMenu").offset();
+			$(window).scroll(function(){
+				if($(this).scrollTop() >= 400){
+					menu.css("position", "fixed").css("top", "400px");
+				}else{
+					menu.css("position", "absolute").css("top", "790px");
+				}
+			});
+			
+			$("#searchBtn").on("click", function(){
+				$("#searchForm").submit();
+			});
 		})
 	</script>
 </body>

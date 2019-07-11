@@ -23,8 +23,14 @@ public class ItemServiceImpl implements ItemService{
 
 	@Override
 	public List<ItemDTO> selectItemPerPage(int currentPage) {
-		Map<String, Integer> navi = itemDao.getNaviforItem(currentPage);
+		Map<String, Integer> navi = itemDao.getNaviforItem(currentPage, itemDao.itemContentsSize());
 		return itemDao.selectItemPerPage(navi.get("fromIndex"), navi.get("toIndex"));
+	}
+
+	@Override
+	public List<ItemDTO> selectItemPerPageByCategory(int currentPage, String category) {
+		Map<String, Integer> navi = itemDao.getNaviforItem(currentPage, itemDao.itemContentsSize());
+		return itemDao.selectItemPerPageByCategory(category, navi.get("fromIndex"), navi.get("toIndex"));
 	}
 
 	@Override
@@ -49,10 +55,21 @@ public class ItemServiceImpl implements ItemService{
 	public int itemContentsSize() {
 		return itemDao.itemContentsSize();
 	}
-
+	
 	@Override
-	public Map<String, Integer> getNaviforItem(int currentPage) {
-		return itemDao.getNaviforItem(currentPage);
+	public int itemContentsSizeByCategory(String category) {
+		return itemDao.itemContentsSizeByCategory(category);
 	}
+	
+	@Override
+	public Map<String, Integer> getNaviforItem(int currentPage, String category) {
+		if(category.equals("all")) {
+			return itemDao.getNaviforItem(currentPage, itemDao.itemContentsSize());
+		}else {
+			return itemDao.getNaviforItem(currentPage, itemDao.itemContentsSizeByCategory(category));
+		}
+	}
+
+
 
 }

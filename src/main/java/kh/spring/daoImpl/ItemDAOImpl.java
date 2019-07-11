@@ -46,11 +46,25 @@ public class ItemDAOImpl implements ItemDAO{
 		return sst.selectList("ItemDAO.selectItemPerPage", param);
 	}
 
+
+	@Override
+	public List<ItemDTO> selectItemPerPageByCategory(String category, int start, int end) {
+		Map<String, String> param = new HashMap<>();
+		param.put("category", category);
+		param.put("start", start+"");
+		param.put("end", end+"");
+		return sst.selectList("ItemDAO.selectItemPerPageByCategory", param);
+	}
+
 	public int itemContentsSize() {
 		return sst.selectOne("ItemDAO.getItemCount");
 	}
-	public Map<String, Integer> getNaviforItem(int currentPage){ // 부트스트랩은 int로 받아야함
-		int recordTotalCount = this.itemContentsSize();
+	@Override
+	public int itemContentsSizeByCategory(String category) {
+		return sst.selectOne("ItemDAO.getItemCountByCategory", category);
+	}
+	public Map<String, Integer> getNaviforItem(int currentPage, int recordTotalCount){ // 부트스트랩은 int로 받아야함
+//		int recordTotalCount = this.itemContentsSize();
 		// 가지고 있는 게시글의 수에 맞는 페이지의 개수를 구함.
 		int pageTotalCount = recordTotalCount / recordCountPerPage;
 		if(recordTotalCount % recordCountPerPage > 0) {

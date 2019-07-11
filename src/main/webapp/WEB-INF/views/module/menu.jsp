@@ -30,7 +30,7 @@
                 <li><a href="" class="nav-link">유기동물</a></li>
                 <li><a href="" class="nav-link">임시보호중</a></li>
                 <li><a href="" class="nav-link">재회</a></li>
-                <li><a href="freeMarket?currentPage=1" class="nav-link">무료나눔</a></li>
+                <li><a href="freeMarket?currentPage=1&category=all" class="nav-link">무료나눔</a></li>
                 <li><a href="" class="nav-link">Fun</a></li>
                 <li><a href="" class="nav-link">후원하기</a></li>
                 <li><a href="" class="nav-link">공지사항</a></li>

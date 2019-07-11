@@ -4,19 +4,31 @@
 	<delete id="delete">
 		delete from item where seq=#{seq}
 	</delete>
+	
 	<insert id="upload">
-		insert into item values(item_seq.nextval,#{name},#{contents},TO_CHAR(#{price},'999,999,999'),#{seller},default,#{permission},#{imagePath1},#{imagePath2,jdbcType=varchar},#{imagePath3,jdbcType=varchar} )
+		insert into item values(item_seq.nextval,#{name},#{contents},TO_CHAR(#{price},'999,999,999'),#{seller},default,#{permission},#{imagePath1},#{imagePath2,jdbcType=varchar},#{imagePath3,jdbcType=varchar},#{category} )
 	</insert>
+	
 	<select id="selectBySeq" resultType="kh.spring.dto.ItemDTO">
 		select * from item where seq=#{value}
 	</select>
+	
 	<select id="getItemCount" resultType="int">
 		select count(*) from item
 	</select>
-	<select id="selectItemPerPage" resultType="kh.spring.dto.ItemDTO">
-		select * from (select row_number() over(order by seq desc) as rown, item.* from item) 
-		where rown between #{start} and #{end}
+	
+	<select id="getItemCountByCategory" resultType="int">
+		select count(*) from item where category=#{value}
 	</select>
+	
+	<select id="selectItemPerPage" resultType="kh.spring.dto.ItemDTO">
+		select * from (select row_number() over(order by seq desc) as rown, item.* from item) where rown between #{start} and #{end}
+	</select>
+	
+	<select id="selectItemPerPageByCategory" resultType="kh.spring.dto.ItemDTO">
+		select * from (select row_number() over(order by seq desc) as rown, item.* from item where category=#{category}) where rown between #{start} and #{end}
+	</select>
+	
 <!-- 	<insert id="modify"> -->
 <!-- 		update item set name=#{name}, contents=#{contents}, price=#{price}, -->
 <!-- 		seller=#{seller}, date=#{date}, permission=#{permission}, -->
