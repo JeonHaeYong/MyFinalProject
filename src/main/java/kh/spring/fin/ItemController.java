@@ -35,7 +35,7 @@ public class ItemController {
 	
 	@RequestMapping("addItem")
 	public String addItem() {
-		return "index";
+		return "item/addItem";
 	}
 
 	@RequestMapping("toMyPage_shopping")

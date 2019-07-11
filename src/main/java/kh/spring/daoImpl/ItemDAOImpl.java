@@ -45,8 +45,14 @@ public class ItemDAOImpl implements ItemDAO{
 		param.put("end", end);
 		return sst.selectList("ItemDAO.selectItemPerPage", param);
 	}
-
-
+	
+	/**
+	 * 
+	 * @param
+	 * @param
+	 * @param
+	 * @return
+	 */
 	@Override
 	public List<ItemDTO> selectItemPerPageByCategory(String category, int start, int end) {
 		Map<String, String> param = new HashMap<>();

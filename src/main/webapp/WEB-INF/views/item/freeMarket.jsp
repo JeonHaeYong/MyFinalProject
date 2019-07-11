@@ -26,7 +26,7 @@
 	}
 	#jumboImg{
 		width: 100%;
-		max-height: 720px;
+		max-height: 600px;
 	}
 	.myCard{
 		width: 90%;
@@ -137,11 +137,11 @@
     		<form action="freeMarket" id="searchForm">
     			<input type="hidden" name="currentPage" value="1">
 				<select class="custom-select" id="select" name="category">
-					<option selected value="all">분류</option>
-					<option value="food">사료&amp;간식</option>
-					<option value="toy">장난감</option>
-					<option value="clothing">의류</option>
-					<option value="etc">기타</option>
+					<option class="op" selected value="all">전체</option>
+					<option class="op" value="food">사료&amp;간식</option>
+					<option class="op" value="toy">장난감</option>
+					<option class="op" value="clothing">의류</option>
+					<option class="op" value="etc">기타</option>
 				</select>
 			</form>
 			<div class="input-group-append m-0">
@@ -176,13 +176,19 @@
 				}
 			});
 			
+			$(".op").each(function(i, item){
+				if($(item).val() == "${category}"){
+					$(this).attr("selected", true);
+				}
+			})
+			
 			var menu = $(".fixedMenu");
 			var menuOffset = $(".fixedMenu").offset();
 			$(window).scroll(function(){
 				if($(this).scrollTop() >= 400){
 					menu.css("position", "fixed").css("top", "400px");
 				}else{
-					menu.css("position", "absolute").css("top", "790px");
+					menu.css("position", "absolute").css("top", "720px");
 				}
 			});
 			

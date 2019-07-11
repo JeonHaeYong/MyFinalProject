@@ -26,7 +26,7 @@
             }
             #jumboImg{
                 width: 100%;
-                max-height: 720px;
+                max-height: 600px;
             }
             .itemImage{
                 width: 100%;
