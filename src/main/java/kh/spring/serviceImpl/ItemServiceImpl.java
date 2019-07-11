@@ -16,46 +16,40 @@ public class ItemServiceImpl implements ItemService{
 	private ItemDAO itemDao;
 	
 	
-	public int deleteItem(ItemDTO dto) throws Exception {
+	public int deleteItem(ItemDTO dto){
 		int result = itemDao.deleteItem(dto);
 		return result;
 	}
 	
 	
-	public int modifyItem(ItemDTO dto) throws Exception {
+	public int modifyItem(ItemDTO dto){
 		int result = itemDao.modifyItem(dto);
 		return result;
 	}
-	
-	
-	public ItemDTO readOneItem(int seq) throws Exception {
-	
+		
+	public ItemDTO readOneItem(int seq){
 			ItemDTO dto = itemDao.readOneItem(seq);
 			return dto;
 	}
 	
-
-	
-	public List<ItemDTO> selectAllItem(int currentPage) throws Exception {
+	public List<ItemDTO> selectAllItem(int currentPage){
 		List<ItemDTO> list = itemDao.selectAllItem(currentPage);
 		return list;
 	}
 	
 	
-	public Map<String, Integer> getNaviforItem(int currentPage) throws Exception {
+	public Map<String, Integer> getNaviforItem(int currentPage){
 		Map<String, Integer> pageNavi = itemDao.getNaviforItem(currentPage);
 		return pageNavi;
 	}
 
-
 	@Override
-	public int uploadItem(ItemDTO dto) throws Exception {
+	public int uploadItem(ItemDTO dto){
 		return itemDao.uploadItem(dto);
 	}
 
-
 	@Override
-	public int itemContentsSize() throws Exception {
+	public int itemContentsSize(){
 		int result = itemDao.itemContentsSize();
 		return result;
 	}
