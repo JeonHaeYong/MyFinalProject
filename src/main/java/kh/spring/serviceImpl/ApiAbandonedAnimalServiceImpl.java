@@ -15,25 +15,25 @@ public class ApiAbandonedAnimalServiceImpl implements ApiAbandonedAnimalService{
 	@Autowired
 	private ApiAbandonedAnimalDAO apiAbdnDao;
 	
-	public Map<String, Integer> getNaviforApiAbandonedAnimal(int currentPage) throws Exception {
+	public Map<String, Integer> getNaviforApiAbandonedAnimal(int currentPage){
 		Map<String, Integer> pageNavi = apiAbdnDao.getNaviForApiAbandonedAnimal(currentPage);
 		return pageNavi;
 	}
 
 	@Override
-	public List<ApiAbandonedAnimalDTO> selectApiAbandonedAnimal(int currentPage) throws Exception {
+	public List<ApiAbandonedAnimalDTO> selectApiAbandonedAnimal(int currentPage){
 		List<ApiAbandonedAnimalDTO> dto = apiAbdnDao.selectAllApiAbandonedAnimal(currentPage);
 		return dto;
 	}
 
 	@Override
-	public ApiAbandonedAnimalDTO readOneApiAbandonedAnimal(int seq) throws Exception {
+	public ApiAbandonedAnimalDTO readOneApiAbandonedAnimal(int seq){
 		ApiAbandonedAnimalDTO dto = apiAbdnDao.readOneApiAbandonedAnimal(seq);
 		return dto;	
 	}
 
 	@Override
-	public int ApiAbandonedAnimalContentsSize() throws Exception {
+	public int apiAbandonedAnimalContentsSize(){
 		int result = apiAbdnDao.apiAbandonedAnimalContentsSize();
 		return result;
 	}

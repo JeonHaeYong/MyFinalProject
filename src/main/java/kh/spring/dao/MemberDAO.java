@@ -13,4 +13,6 @@ public interface MemberDAO {
 	public int modifyMember(MemberDTO dto);
 	public int deleteMember(String id);
 	public String testSHA256(String str);
+	public List<MemberDTO> selectByLikeId(String id);
+
 }

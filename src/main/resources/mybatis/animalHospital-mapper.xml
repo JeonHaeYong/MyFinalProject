@@ -6,12 +6,19 @@
 		select * from animal_hospital
 	</select>
 	
-	<select id="selectAniHospitalPerPage">
-		select * from (select row_number()over(order by seq desc) as rown, animal_hospital.* from animal_hospital) where rown between #{start} and #{end}
+	<select id="selectAniHospitalPerPage" resultType="kh.spring.dto.AnimalHospitalDTO">
+		select * from (select row_number()over(order by seq asc) as rown, animal_hospital.* from animal_hospital) where rown between #{start} and #{end}
 	</select>
-	
 	<select id="getRecordTotalCount" resultType="int">
 		select count(*) from animal_hospital
+	</select>
+	
+	
+	<select id="searchRecordCount" resultType="Integer">
+		select count(*)as count from animal_hospital where sigun = #{value}
+	</select>
+	<select id="searchAniHospitalPerPage" resultType="kh.spring.dto.AnimalHospitalDTO">
+		select * from (select row_number()over(order by seq asc) as rown, animal_hospital.* from animal_hospital where sigun = #{option}) where rown between #{start} and #{end}
 	</select>
 	
 </mapper>

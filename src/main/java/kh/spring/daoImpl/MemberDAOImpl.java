@@ -15,6 +15,7 @@ import kh.spring.dto.MemberDTO;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
+
 	@Autowired
 	private SqlSessionTemplate sst;
 
@@ -26,6 +27,12 @@ public class MemberDAOImpl implements MemberDAO {
 		return result;
 	}
 
+	@Override
+	public List<MemberDTO> selectByLikeId(String id)
+	{
+		return sst.selectList("MemberDAO.selectByLikeId", "%"+id+"%");
+	}
+	
 	@Override
 	public List<MemberDTO> selectAllMembers() {
 		return sst.selectList("MemberDAO.selectAllMembers");

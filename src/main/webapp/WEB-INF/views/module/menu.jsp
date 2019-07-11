@@ -8,6 +8,7 @@
 	</div>
 </div>
 
+<<<<<<< HEAD
 <div class="site-wrap">
 	<div class="site-mobile-menu site-navbar-target">
 		<div class="site-mobile-menu-header">
@@ -50,7 +51,7 @@
 								<c:otherwise>
 									<li><a href="/logout" class="nav-link ">
 											로그아웃 </a></li>
-									<li><a href="#contact-section" class="nav-link pl-0 pr-0 ">마이페이지</a></li>
+									<li><a href="toMyPage" class="nav-link pl-0 pr-0 ">마이페이지</a></li>
 								</c:otherwise>
 							</c:choose>
 						</ul>
