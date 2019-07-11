@@ -123,50 +123,56 @@
 <script src="resources/js/isotope.pkgd.min.js"></script>
 <script src="resources/js/main.js"></script>
 <script>
-	$(function() {
+	$(function()
+    {
+	    
+		var currentMenu = $("#")
+		
+	    CountDownTimer('07/30/2019', 'last_time_span'); //첫번째 인수로 넣은 날짜까지
+	    // 		CountDownTimer('01/01/2018 00:00 AM', 'newcountdown'); // 2018년 1월 1일까지, 시간을 표시하려면 01:00 AM과 같은 형식을 사용합니다.
+	    
+	    function CountDownTimer(dt, id)
+	    {
+		    var end = new Date(dt);
+		    
+		    var _second = 1000;
+		    var _minute = _second * 60;
+		    var _hour = _minute * 60;
+		    var _day = _hour * 24;
+		    var timer;
+		    
+		    var $target = $("#" + id + "");
+		    
+		    function showRemaining()
+		    {
+			    var now = new Date();
+			    var distance = end - now;
+			    if(distance < 0)
+			    {
+				    
+				    clearInterval(timer);
+				    $target.text = '종료!';
+				    
+				    return;
+			    }
+			    
+			    var days = Math.floor(distance / _day);
+			    var hours = Math.floor((distance % _day) / _hour);
+			    var minutes = Math.floor((distance % _hour) / _minute);
+			    var seconds = Math.floor((distance % _minute) / _second);
+			    
+			    $target.text(days + '일 ' + hours + '시간 ' + minutes + '분 ' + seconds + '초');
+		    }
+		    
+		    timer = setInterval(showRemaining, 1000);
+	    }
+	    // Source: stackoverflow
+	    
+    });
+    
+    onload = function()
+    {
 
-		CountDownTimer('07/30/2019', 'last_time_span'); //첫번째 인수로 넣은 날짜까지
-		// 		CountDownTimer('01/01/2018 00:00 AM', 'newcountdown'); // 2018년 1월 1일까지, 시간을 표시하려면 01:00 AM과 같은 형식을 사용합니다.
-
-		function CountDownTimer(dt, id) {
-			var end = new Date(dt);
-
-			var _second = 1000;
-			var _minute = _second * 60;
-			var _hour = _minute * 60;
-			var _day = _hour * 24;
-			var timer;
-
-			var $target = $("#" + id + "");
-
-			function showRemaining() {
-				var now = new Date();
-				var distance = end - now;
-				if (distance < 0) {
-
-					clearInterval(timer);
-					$target.text = '종료!';
-
-					return;
-				}
-
-				var days = Math.floor(distance / _day);
-				var hours = Math.floor((distance % _day) / _hour);
-				var minutes = Math.floor((distance % _hour) / _minute);
-				var seconds = Math.floor((distance % _minute) / _second);
-
-				$target.text(days + '일 ' + hours + '시간 ' + minutes + '분 '
-						+ seconds + '초');
-			}
-
-			timer = setInterval(showRemaining, 1000);
-		}
-		// Source: stackoverflow
-
-	});
-
-	onload = function() {
-
-	};
+    };
 </script>
 </html>
