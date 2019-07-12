@@ -15,7 +15,12 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kh.spring.dao.BlackListDAO;
 import kh.spring.dao.MemberDAO;
+
+
+import kh.spring.dto.BlackListDTO;
+
 import kh.spring.dto.MemberDTO;
 import kh.spring.mail.MailHandler;
 import kh.spring.mail.TempKey;
@@ -28,6 +33,8 @@ public class MemberServiceImpl implements MemberService {
 	private MemberDAO mdao;
 	@Autowired
 	private HttpSession session;
+	@Autowired
+	private BlackListDAO bdao;
 
 
 	@Override
@@ -43,8 +50,23 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int isLoginOkService(String id, String password) {
-		return mdao.isLoginOk(id, password);
+	public int isLoginOkService(String id, String password){
+		try
+		{
+			if(bdao.selectCountById(new BlackListDTO(id)) == 1)
+			{
+				return 0;
+			}
+			else
+			{
+				return mdao.isLoginOk(id, password);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return 0;
+		}
 	}
 
 	@Override

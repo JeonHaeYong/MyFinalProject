@@ -19,6 +19,7 @@ import com.google.gson.JsonObject;
 
 import kh.spring.dto.MemberDTO;
 import kh.spring.service.MemberService;
+import kh.spring.serviceImpl.BlackListServiceImpl;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +33,6 @@ public class MemberController {
 	@Autowired
 	private HttpSession session;
 
-	
 	
 	//로그인
 	@RequestMapping("login")
@@ -133,33 +133,17 @@ public class MemberController {
 		@ResponseBody
 		@RequestMapping("email.do")
 		public String emailajax(String email) {
-			
-			
-
 				boolean check=mservice.create(email);
 			if(check)
 			{return "true";}
 			else return "false";
-			
-			
-		}
-	
-	//이메일 인증 테스트 
-	@RequestMapping("email")
-	public String joinPost(MemberDTO dto)  {
-		System.out.println("currnent join email" +dto.getEmail());
-		//mservice.create(email);
-		
-		return "member/join";
 	}
+	
 	@RequestMapping("emailcheck")
-	public String checkJSP()  {
-		
+	public String checkJSP()  {		
 		System.out.println("인증");
-		
 		return "member/emailcheck";
 	}
-	
 	@ResponseBody
 	@RequestMapping("authkey.do")
 	public String  authkey(String key)  {
