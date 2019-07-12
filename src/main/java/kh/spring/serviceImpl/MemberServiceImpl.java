@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kh.spring.daoImpl.MemberDAOImpl;
+
+import kh.spring.dao.MemberDAO;
+
 import kh.spring.dto.MemberDTO;
 import kh.spring.service.MemberService;
 
@@ -13,11 +15,15 @@ import kh.spring.service.MemberService;
 public class MemberServiceImpl implements MemberService {
 
 	@Autowired
-	private MemberDAOImpl mdao;
+	private MemberDAO mdao;
+	
+
 	
 	@Override
 	public int insertMemberService(MemberDTO dto) {
-		return mdao.insertMember(dto);
+		dto.setType(1);//일반회원인 경우 type =1
+		int result = mdao.insertMember(dto);	
+		return result;
 	}
 
 	@Override

@@ -72,16 +72,15 @@
                                     <img src="/resources/images/dog_1.jpg" class="rounded-circle" style="width: 100px; height: 100px;">
                                 </div>
                                 <div>
-                                    	윤혜영님(닉네임)
-                                </div>
+                                    	${memberDTO.name }님                                </div>
                                 <div>
                                     	현재포인트
                                 </div>
                                 <div>
-                                    200pt
+                                    ${memberDTO.point } point
                                 </div>
                                 <div>
-                                    안읽은 쪽지 : 3개
+                                    	안읽은 쪽지 : 3개
                                 </div>
                             </div>
                         </div>
