@@ -26,6 +26,7 @@
 	}
 	#jumboImg{
 		width: 100%;
+		height: 100%;
 		max-height: 600px;
 	}
 </style>
@@ -42,23 +43,43 @@
 		<div class="row d-flex justify-content-center">
 			<div class="col-12 input-group mb-3">
 	 			<div class="input-group-prepend">
-					<span class="input-group-text" id="basic-addon1">제 목</span>
+					<span class="input-group-text" id="basic-addon1">상품명</span>
 				</div>
-				<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+				<input type="text" class="form-control" placeholder="Name" aria-label="" aria-describedby="basic-addon1">
+			</div>
+			<div class="col-md-7 col-12 input-group mb-3">
+	 			<div class="input-group-prepend">
+					<span class="input-group-text" id="basic-addon1">금액</span>
+				</div>
+				<input type="text" class="form-control" placeholder="금액은 이 달의 후원단체로 보내집니다!" aria-label="Username" aria-describedby="basic-addon1">
+			</div>
+			<div class="col-md-5 col-12">
+				<div class=" input-group mb-3">
+					<div class="input-group-prepend">
+						<label class="input-group-text">카테고리</label>
+					</div>
+					<select class="custom-select" id="selectCategory">
+						<option selected>선택안함</option>
+						<option>사료&amp;간식</option>
+						<option value="toy">장난감</option>
+						<option value="clothing">의류</option>
+						<option value="etc">기타</option>
+					</select>
+				</div>
 			</div>
 			<div class="col-12 row input-group mb-3">
 <!-- 				<div class="row d-flex justify-content-center"> -->
 					<div class="col-4 custom-file">
-						<input type="file" class="custom-file-input" id="inputGroupFile01">
-						<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+						<input type="file" class="custom-file-input inputFile" name="imagePath1" aria-describedby="imagePath1">
+						<label class="custom-file-label" id="imagePath1">Choose file</label>
 					</div>
 					<div class="col-4 custom-file">
-						<input type="file" class="custom-file-input" id="inputGroupFile01">
-						<label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+						<input type="file" class="custom-file-input inputFile" name="imagePath2" aria-describedby="imagePath2">
+						<label class="custom-file-label" id="imagePath2">Choose file</label>
 					</div>
 					<div class="col-4 custom-file">
-						<input type="file" class="custom-file-input" id="inputGroupFile01">
-						<label class="custom-file-label" for="inputGroupFile03">Choose file</label>
+						<input type="file" class="custom-file-input inputFile" name="imagePath3" aria-describedby="imagePath3">
+						<label class="custom-file-label" id="imagePath3">Choose file</label>
 					</div>
 <!-- 				</div> -->
 			</div>
@@ -90,10 +111,11 @@
 	<script src="resources/js/jquery.sticky.js"></script>
 	<script src="resources/js/isotope.pkgd.min.js"></script>
 	<script src="resources/js/main.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script> -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script> -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
 	<script>
@@ -140,6 +162,10 @@
 				cache : false
 			});
 		}
+		$(".inputFile").change(function(){
+			var label = "#" + $(this).attr("name");
+			$(label).text(this.value.split("\\").pop());
+		})
 	</script>
 </body>
 </html>
