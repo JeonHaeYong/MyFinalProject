@@ -16,28 +16,28 @@ public class ProtectionCenterServiceimpl implements ProtectionCenterService{
 	private ProtectionCenterDAO pdao;
 
 	@Override
-	public List<ProtectionCenterDTO> selectAllCenter() {
+	public List<ProtectionCenterDTO> selectAllCenterService() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
-	public List<ProtectionCenterDTO> selectCenterPerPage(int currentPage) {
+	public List<ProtectionCenterDTO> selectCenterPerPageService(int currentPage) {
 		List<ProtectionCenterDTO> list = new ArrayList<>();
 		list = pdao.selectCenterPerPage(currentPage);
 		return list;
 	}
 	@Override
-	public int getRecordTotalCount() {
+	public int getRecordTotalCountService() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 	@Override
-	public String getNaviForCenter(int currentPage, String option) {
+	public String getNaviForCenterService(int currentPage, String option) {
 		String navi = pdao.getNaviForCenter(currentPage, option);
 		return navi;
 	}
 	@Override
-	public List<ProtectionCenterDTO> searchCenterPerPage(int currentPage, String option){
+	public List<ProtectionCenterDTO> searchCenterPerPageService(int currentPage, String option){
 		List<ProtectionCenterDTO> list = new ArrayList<>();
 		return list = pdao.searchCenterPerPage(currentPage, option);
 	}

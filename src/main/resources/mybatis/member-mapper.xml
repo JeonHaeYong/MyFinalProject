@@ -36,4 +36,9 @@
 		delete from member where id=#{value}
 	</delete>
 	
+	<!-- 퀴즈에서 씀!-->
+	<select id="memberPoint" resultType="kh.spring.dto.MemberDTO">
+		select rank, id, point from(select rank() over(order by point desc)as rank, member.* from member) where rank  between 1 and 10
+	</select>
+	
 </mapper>

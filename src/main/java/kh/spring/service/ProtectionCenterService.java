@@ -5,9 +5,9 @@ import java.util.List;
 import kh.spring.dto.ProtectionCenterDTO;
 
 public interface ProtectionCenterService {
-	public List<ProtectionCenterDTO> selectAllCenter();
-	public List<ProtectionCenterDTO> selectCenterPerPage(int currentPage);
-	public int getRecordTotalCount();
-	public String getNaviForCenter(int currentPage,String option);
-	public List<ProtectionCenterDTO> searchCenterPerPage(int currentPage, String option);
+	public List<ProtectionCenterDTO> selectAllCenterService();
+	public List<ProtectionCenterDTO> selectCenterPerPageService(int currentPage);
+	public int getRecordTotalCountService();
+	public String getNaviForCenterService(int currentPage,String option);
+	public List<ProtectionCenterDTO> searchCenterPerPageService(int currentPage, String option);
 }
