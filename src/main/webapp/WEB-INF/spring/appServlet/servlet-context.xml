@@ -60,4 +60,8 @@
    </beans:property>
    </beans:bean>
    
+   
+   <!--네이버  -->
+   <beans:bean id="naverLoginBO" class="kh.spring.loginapi.NaverLoginBO"></beans:bean>
+   
 </beans:beans>
