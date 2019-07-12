@@ -106,7 +106,25 @@
 						
 						
 					</div>
-				
+					
+					
+					
+					<div class="row justify-content-center">
+						
+						<div class="col-8 col-md-8 col-lg-6 text-center my-5">
+							
+							<input id="reason_text" class="form-control" type="text" placeholder="계정 정지 사유를 입력하세요">
+							
+						</div>
+						
+						<div class="col-4 col-md-4 col-lg-2 text-center my-5">
+							
+							<input id="black_btn" class="btn btn-danger no_radius" type="button" value="등록하기">
+							
+						</div>
+						
+					</div>
+					
 				</div>
 				
 			</div>
@@ -153,18 +171,48 @@
 	    		{
 // 	    			console.log(response[i-1].id);
 	    			var $idCol = $('<div class="col-6 col-md-6 col-lg-6 text-center my-1">'+response[i-1].id+'</div>');
-	    			var $checkCol = $('<div class="col-6 col-md-6 col-lg-6 text-center my-1"><input type="checkbox">'+'블랙리스트 등록'+'</div>');
+	    			var $checkCol = $('<div class="col-6 col-md-6 col-lg-6 text-center my-1"><input class="black_check" name="'+response[i-1].id+'" type="checkbox">'+'블랙리스트 등록'+'</div>');
 	    			$("#search_result_div").append($idCol);
 	    			$("#search_result_div").append($checkCol);
 	    		}
-	    		var $btnCol = $('<div class="col-12 col-md-12 col-lg-12 text-center my-5"><input class="btn btn-danger no_radius" type="button" value="등록하기"></div>');
-	    		$("#search_result_div").append($btnCol);
 	    	})
 	    	.fail(function()
 	    	{
 	    		alert("error");
 	    	});
 		});
+	    
+	    $("#black_btn").on("click", function()
+		{
+	    	var reasonValue = $("#reason_text").val();
+	    	var $checkboxClass = $(".black_check"); 
+	    	var checkboxNumber = $checkboxClass.length;
+	    	
+	    	var id = "";
+	    	
+	    	for(var i = 1 ; i <= checkboxNumber ; i++)
+	    	{
+	    		if($checkboxClass.eq(i-1).prop("checked") == true)
+	    		{
+	    			id = id + " " + $checkboxClass.eq(i-1).attr("name");
+	    		}
+	    	}
+	    	
+	    	var $form = $('<form></form>');
+	        $form.attr('action', 'admin-member-black');
+	        $form.attr('method', 'POST');
+	        $form.appendTo('body');
+	         
+	        var idArr = $('<input type="hidden" value="'+id+'" name="id">');
+	     	var blackReason = $('<input type="hidden" value="'+reasonValue+'" name="reason">')
+	        $form.append(idArr).append(blackReason);
+	        $form.submit();
+		
+	       	 
+	    	
+		});
+	    
+	    
     });
     
 	
