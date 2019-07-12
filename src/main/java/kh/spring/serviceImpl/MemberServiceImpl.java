@@ -62,4 +62,10 @@ public class MemberServiceImpl implements MemberService {
 		return mdao.selectByLikeId(id);
 	}
 
+	//퀴즈에서 씀
+	@Override
+	public List<MemberDTO> memberPointService() {
+		return mdao.memberPoint();
+	}
+
 }

@@ -21,5 +21,9 @@
 	<select id="deleteQuiz">
 		delete from quiz where seq=#{value}
 	</select>
+	<update id="updatePoint">
+		update member set point = (point + #{point}) where id = #{id}
+	</update>
+	
 	
 </mapper>

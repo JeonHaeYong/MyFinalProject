@@ -85,5 +85,11 @@ public class MemberDAOImpl implements MemberDAO {
 		return SHA;
 	}
 
+	//퀴즈에서 씀!!
+	@Override
+	public List<MemberDTO> memberPoint() {
+		return sst.selectList("MemberDAO.memberPoint");
+	}
+
 
 }

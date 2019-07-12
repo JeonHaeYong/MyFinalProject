@@ -10,4 +10,6 @@ public interface QuizDAO {
 	public List<QuizDTO> selectRandQuiz(int quizNum);
 	public int getQuizNum();
 	public int deleteQuiz(int seq);
+	public int updatePoint(int point, String id);
+	
 }

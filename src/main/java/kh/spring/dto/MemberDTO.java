@@ -13,10 +13,11 @@ public class MemberDTO {
 	private String address2;
 	private int type;
 	private int point;
+	private int rank;
 	
 	public MemberDTO() {}
 	public MemberDTO(String id, String password, String name, String email, String birthDay, String gender,
-			String phone, String zipcode, String address1, String address2, int type, int point) {
+			String phone, String zipcode, String address1, String address2, int type, int point, int rank) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
@@ -29,6 +30,7 @@ public class MemberDTO {
 		this.address2 = address2;
 		this.type = type;
 		this.point = point;
+		this.rank = rank;
 	}
 	public String getId() {
 		return id;
@@ -101,6 +103,12 @@ public class MemberDTO {
 	}
 	public void setPoint(int point) {
 		this.point = point;
+	}
+	public int getRank() {
+		return rank;
+	}
+	public void setRank(int rank) {
+		this.rank = rank;
 	}
 	
 }

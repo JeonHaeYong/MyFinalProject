@@ -56,7 +56,13 @@ public class QuizDAOImpl implements QuizDAO {
 
 	@Override
 	public int deleteQuiz(int seq) {
-		return sst.delete("QuizDAO", seq);
+		return sst.delete("QuizDAO", seq);//아직 안만듬 ㅠ
 	}
-
+	@Override
+	public int updatePoint(int point, String id) {
+		Map<String,Object> hs = new HashMap<>();
+		hs.put("point", point);
+		hs.put("id", id);
+		return sst.update("QuizDAO.updatePoint",hs);
+	}
 }
