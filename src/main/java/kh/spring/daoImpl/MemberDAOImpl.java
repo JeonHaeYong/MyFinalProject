@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,7 +20,8 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Autowired
 	private SqlSessionTemplate sst;
-
+	@Autowired
+	private HttpSession session;
 	@Override
 	public int insertMember(MemberDTO dto) {
 		dto.setPassword(this.testSHA256(dto.getPassword()));
@@ -85,5 +88,11 @@ public class MemberDAOImpl implements MemberDAO {
 		return SHA;
 	}
 
-
+	
+	
+	
+	
+	//------이메일 테스트 
+	
+	
 }

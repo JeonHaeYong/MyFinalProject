@@ -41,11 +41,29 @@
 	overflow: auto;
 	height: 600px;
 }
-.jumbotron{
-background-color:white;
+
+.jumbotron {
+	background-color: white;
 }
-#title{
-font-size:35px;
+
+#title {
+	font-size: 35px;
+}
+
+#joininfo>div {
+	margin-bottom: 10px;
+}
+
+#divPasswordCheck {
+	font-size: 15px;
+}
+
+input[type=text] {
+	width: 250px;
+}
+
+input[type=password] {
+	width: 250px;
 }
 </style>
 </head>
@@ -56,21 +74,17 @@ font-size:35px;
 	<!-- <div id="fix"></div> -->
 	<div class="jumbotron px-0 pb-0">
 		<img src="resources/images/joinimg.jpg" height="600px" width="100%">
-			
-		
-		
+
 	</div>
-
-
 
 	<div id="agree" align="center" class="container">
-	<div class="row">
-			<div class="col-12 col-sm-12 col-md-12 col-lg-12 pb-4" id="title"  >
-		<img src="resources/images/dogfoot.png" height="100px" width="100px" >
-		<b> 회 원 가 입 </b> 
-		<img src="resources/images/dogfoot.png" height="100px" width="100px" >
-	</div>
-	</div>
+		<div class="row">
+			<div class="col-12 col-sm-12 col-md-12 col-lg-12 pb-4" id="title">
+				<img src="resources/images/dogfoot.png" height="100px" width="100px">
+				<b> 회 원 가 입 </b> <img src="resources/images/dogfoot.png"
+					height="100px" width="100px">
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-12 col-sm-12 col-md-12 col-lg-12" id="textinfo">
 				제1조(목적) 본 회원약관은 AcAT(이하 '갑'라 한다)이 운영하는 인터넷관련 서비스(이하 '서비스'라 한다)를 이용함에
@@ -143,34 +157,33 @@ font-size:35px;
 				<input type="radio" id="provisionY" name="provisionYn">
 				동의합니다. <input type="radio" id="provisionN" name="provisionYn">
 				동의하지 않습니다.
-				</div>
-				<div class="col-4 col-sm-5 col-md-5 col-lg-5 pt-3" align="left">
-				<img src="resources/images/nextbtn.png" height="100px" width="100px" id="next">
-
 			</div>
-
+			<div class="col-4 col-sm-5 col-md-5 col-lg-5 pt-3" align="left">
+				<img src="resources/images/nextbtn.png" height="100px" width="100px"
+					id="next">
+			</div>
 		</div>
 	</div>
 
 	<div id="joininfo" class="container">
 		<div class="row">
-			<div class="col-12 col-sm-12 col-md-12 col-lg-12 pb-4" id="title"  >
-		<img src="resources/images/dogfoot.png" height="100px" width="100px" >
-		<b> 회 원 가 입 </b> 
-		<img src="resources/images/dogfoot.png" height="100px" width="100px" >
-	</div>
-	</div>
-		
-		<div id=infotitle></div>
+			<div class="col-12 col-sm-12 col-md-12 col-lg-12 pb-4" id="title">
+				<img src="resources/images/dogfoot.png" height="100px" width="100px">
+				<b> 회 원 가 입 </b> <img src="resources/images/dogfoot.png"
+					height="100px" width="100px">
+			</div>
+		</div>
+
+
 		<form action="joininfo" method="get" id="joinform">
 			<div class="row">
 				<div class="col-lg-3 col-md-3 col-sm-3 col-3">아이디</div>
-				<div class="col-lg-3 col-md- col-sm-6 col-6">
+				<div class="col-lg-3 col-md-5 col-sm-9 col-9">
 					<input type="text" id="id" name="id" required
-						placeholder="영대소문자 및 숫자 포함 5글자이상" flag="false" regexflag="false">
+						placeholder="영대소문자및숫자포함5글자이상" flag="false" regexflag="false">
 				</div>
-				<div class="col-lg-6 col-md-3 col-sm-3 col-3">
-					<p id="idresult"></p>
+				<div class="col-lg-6 col-md-4 col-sm-6 d-none d-md-block ">
+					<p id="idresult">dfddfdff</p>
 				</div>
 			</div>
 			<div class="row">
@@ -182,11 +195,9 @@ font-size:35px;
 				</div>
 			</div>
 			<div class="row">
-				<div id="divPasswordCheck" class="col-lg-3 col-md-3 col-sm-3 col-3">비밀번호
-					확인</div>
+				<div id="divPasswordCheck" class="col-lg-3 col-md-3 col-sm-3 col-3">비밀번호확인</div>
 				<div class="col-lg-9 col-md-9 col-sm-9 col-9">
-					<input type="password" id="passwordCheck" placeholder="패스워드 확인"
-						maxlength="30">
+					<input type="password" id="passwordCheck" placeholder="패스워드 확인">
 				</div>
 			</div>
 
@@ -199,10 +210,15 @@ font-size:35px;
 			</div>
 
 			<div class="row">
-				<div id="email" class="col-lg-3 col-md-3 col-sm-3 col-3">이메일</div>
+				<div class="col-lg-3 col-md-3 col-sm-3 col-3">이메일</div>
 				<div class="col-lg-9 col-md-9 col-sm-9 col-9">
-					<input type="text" id="emal" placeholder="ex)dogandcat@aaa.com"
-						name="email">
+
+					<input type="text" id="email" placeholder="ex)dogandcat@aaa.com"
+						name="email" flag="false"> <input type="button"
+						id="emailcheck" value="인증">
+
+
+
 				</div>
 			</div>
 
@@ -227,24 +243,31 @@ font-size:35px;
 				<div id="phone" class="col-lg-3 col-md-3 col-sm-3 col-3">휴대폰
 					번호</div>
 				<div class="col-lg-9 col-md-9 col-sm-9 col-9">
-					<input type="tel" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11"
+					<input type="text" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11"
 						name="phone">
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-3 col-md-3 col-sm-3 col-3">
-					주소 <input type="button" value="찾기" id="search">
-				</div>
+				<div class="col-lg-3 col-md-3 col-sm-3 col-3">주소</div>
 				<div class="col-lg-9 col-md-9 col-sm-9 col-9">
-					<input type="text" id="zipcode" placeholder="우편번호" name="zipcode">
-					<input type="text" id="address1" placeholder="주소" name="address1">
-					<input type="text" id="address2" placeholder="상세주소를 입력하시오"
-						name="address2">
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+							<input type="text" id="zipcode" placeholder="우편번호" name="zipcode">
+						</div>
+						<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+							<input type="text" id="address1" placeholder="주소" name="address1">
+						</div>
+						<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+							<input type="text" id="address2" placeholder="상세주소를 입력하시오"
+								name="address2"><input type="button" value="찾기"
+								id="search">
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-12">
-					<button type="button" id="signin">Sign in</button>
+					<input type="button" id="signin" value="Sign in">
 				</div>
 			</div>
 		</form>
@@ -301,115 +324,137 @@ font-size:35px;
 	<script src="resources/js/main.js"></script>
 
 	<!--  joinscript-->
+
+	<!--  메일인증-->
+
 	<script>
-			$("#signin").on("click", function() {
-				$("#joinform").submit();
-			});
-			$("#next").on("click", function() {
-				if ($("#provisionY").prop("checked")) {
-					$("#joininfo").show();
-					$("#agree").hide();
-				} else {
-					alert("회원가입 약관에 동의해주세요");
-					$("#joininfo").hide();
-					$("#agree").show();
-				}
-			});
+		$("#emailcheck").on("click",function(){
+			console.log($("#email").val());	
+			$.ajax({
+					url : "email.do",
+					type : "post",
+					data : {
+						email :$("#email").val()
+					 },
+					 dataType:"json"
+				}).done(function(resp) {
+					console.log(resp);
+					if(resp==true){
+						window.open('emailcheck', 'window팝업', 'width=400, height=600, menubar=no, status=no, toolbar=no');  
+					}
+					
+				});
+			});	
 		
-	<!-- 아이디 중복확인 ajax -->
+	
+	
+	</script>
+	<script>
+		$("#signin").on("click", function() {
+			$("#joinform").submit();
+		});
+		$("#next").on("click", function() {
+			if ($("#provisionY").prop("checked")) {
+				$("#joininfo").show();
+				$("#agree").hide();
+			} else {
+				alert("회원가입 약관에 동의해주세요");
+				$("#joininfo").hide();
+				$("#agree").show();
+			}
+		});
 
-			$("#id").on("input", function() {
-				var idtestString = $("#id").val();
-				var regex = /^[A-Za-z0-9]{5,}$/g;
-				var result = regex.exec(idtestString);
-				if (result == null) {
-					$("#id").attr("regexflag", "false");
-					$("#idresult").html("조건을 충족시켜주세요");
+		//아이디 중복확인 ajax
 
-				} else {
-					$("#id").attr("regexflag", "true");
-					$.ajax({
-						url : "idajax.do",
-						type : "post",
-						data : {
-							id : $("#id").val()
-						}
-					}).done(function(resp) {
-						console.log(resp);
-						if (resp == "true") {
-							$("#idresult").html("중복된아이디");
-							$("#id").attr("flag", "false");
-						} else {
-							$("#idresult").html("사용가능한아이디");
-							$("#id").attr("flag", "true");
-						}
-					})
+		$("#id").on("input", function() {
+			var idtestString = $("#id").val();
+			var regex = /^[A-Za-z0-9]{5,}$/g;
+			var result = regex.exec(idtestString);
+			if (result == null) {
+				$("#id").attr("regexflag", "false");
+				$("#idresult").html("조건을 충족시켜주세요");
 
-				}
-			})
-		
-</script>
+			} else {
+				$("#id").attr("regexflag", "true");
+				$.ajax({
+					url : "idajax.do",
+					type : "post",
+					data : {
+						id : $("#id").val()
+					}
+				}).done(function(resp) {
+					console.log(resp);
+					if (resp == "true") {
+						$("#idresult").html("중복된아이디");
+						$("#id").attr("flag", "false");
+					} else {
+						$("#idresult").html("사용가능한아이디");
+						$("#id").attr("flag", "true");
+					}
+				})
+
+			}
+		})
+	</script>
 	<!--우편번호  -->
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<script>
-			document.getElementById("search").onclick = searchAddress;
+		document.getElementById("search").onclick = searchAddress;
 
-			function searchAddress() {
-				new daum.Postcode(
-						{
-							oncomplete : function(data) {
+		function searchAddress() {
+			new daum.Postcode(
+					{
+						oncomplete : function(data) {
 
-								var roadAddr = data.roadAddress;
-								var extraRoadAddr = '';
+							var roadAddr = data.roadAddress;
+							var extraRoadAddr = '';
 
-								if (data.bname !== ''
-										&& /[동|로|가]$/g.test(data.bname)) {
-									extraRoadAddr += data.bname;
-								}
-
-								if (data.buildingName !== ''
-										&& data.apartment === 'Y') {
-									extraRoadAddr += (extraRoadAddr !== '' ? ', '
-											+ data.buildingName
-											: data.buildingName);
-								}
-
-								if (extraRoadAddr !== '') {
-									extraRoadAddr = ' (' + extraRoadAddr + ')';
-								}
-
-								document.getElementById("zipcode").value = data.zonecode;
-								document.getElementById("address1").value = roadAddr;
-
-								if (roadAddr !== '') {
-									document
-											.getElementById("sample4_extraAddress").value = extraRoadAddr;
-								} else {
-									document
-											.getElementById("sample4_extraAddress").value = '';
-								}
-								var guideTextBox = document
-										.getElementById("guide");
-								// 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-								if (data.autoRoadAddress) {
-									var expRoadAddr = data.autoRoadAddress
-											+ extraRoadAddr;
-									guideTextBox.innerHTML = '(예상 도로명 주소 : '
-											+ expRoadAddr + ')';
-									guideTextBox.style.display = 'block';
-
-								} else if (data.autoJibunAddress) {
-									var expJibunAddr = data.autoJibunAddress;
-									guideTextBox.innerHTML = '(예상 지번 주소 : '
-											+ expJibunAddr + ')';
-									guideTextBox.style.display = 'block';
-								} else {
-									guideTextBox.innerHTML = '';
-									guideTextBox.style.display = 'none';
-								}
+							if (data.bname !== ''
+									&& /[동|로|가]$/g.test(data.bname)) {
+								extraRoadAddr += data.bname;
 							}
-						}).open();
-			}
-		</script>
+
+							if (data.buildingName !== ''
+									&& data.apartment === 'Y') {
+								extraRoadAddr += (extraRoadAddr !== '' ? ', '
+										+ data.buildingName : data.buildingName);
+							}
+
+							if (extraRoadAddr !== '') {
+								extraRoadAddr = ' (' + extraRoadAddr + ')';
+							}
+
+							document.getElementById("zipcode").value = data.zonecode;
+							document.getElementById("address1").value = roadAddr;
+
+							if (roadAddr !== '') {
+								document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+							} else {
+								document.getElementById("sample4_extraAddress").value = '';
+							}
+							var guideTextBox = document.getElementById("guide");
+							// 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+							if (data.autoRoadAddress) {
+								var expRoadAddr = data.autoRoadAddress
+										+ extraRoadAddr;
+								guideTextBox.innerHTML = '(예상 도로명 주소 : '
+										+ expRoadAddr + ')';
+								guideTextBox.style.display = 'block';
+
+							} else if (data.autoJibunAddress) {
+								var expJibunAddr = data.autoJibunAddress;
+								guideTextBox.innerHTML = '(예상 지번 주소 : '
+										+ expJibunAddr + ')';
+								guideTextBox.style.display = 'block';
+							} else {
+								guideTextBox.innerHTML = '';
+								guideTextBox.style.display = 'none';
+							}
+						}
+					}).open();
+		}
+	</script>
+
+
 </body>
 </html>

@@ -13,4 +13,8 @@ public interface MemberService {
 	public int modifyMemberService(MemberDTO dto);
 	public int deleteMemberService(String id);
 	public List<MemberDTO> selectByLikeId(String id);
+	public boolean create(String email);
+
+	
+
 }

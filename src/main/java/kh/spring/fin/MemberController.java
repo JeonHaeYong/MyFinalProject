@@ -5,9 +5,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import kh.spring.dto.MemberDTO;
 import kh.spring.service.MemberService;
@@ -24,6 +32,8 @@ public class MemberController {
 	@Autowired
 	private HttpSession session;
 
+	
+	
 	//로그인
 	@RequestMapping("login")
 	public String lign(MemberDTO dto) {
@@ -69,6 +79,12 @@ public class MemberController {
 		{return "true";}
 		else return "false";
 	}
+	//이메일 인증
+
+	
+	
+	
+	
 	//로그아웃
 	@RequestMapping("logout")
 	public String logout() {
@@ -76,6 +92,11 @@ public class MemberController {
 		return  "redirect:/";
 	}
 
+	
+	
+	
+	
+	
 	//마이페이지
 	@RequestMapping("toMyPage")
 	public String toMyPage() {
@@ -108,5 +129,45 @@ public class MemberController {
 		return "myPage/user/user_myPage_message";
 	}
 
+	//메일확인
+		@ResponseBody
+		@RequestMapping("email.do")
+		public String emailajax(String email) {
+			
+			
 
+				boolean check=mservice.create(email);
+			if(check)
+			{return "true";}
+			else return "false";
+			
+			
+		}
+	
+	//이메일 인증 테스트 
+	@RequestMapping("email")
+	public String joinPost(MemberDTO dto)  {
+		System.out.println("currnent join email" +dto.getEmail());
+		//mservice.create(email);
+		
+		return "member/join";
+	}
+	@RequestMapping("emailcheck")
+	public String checkJSP()  {
+		
+		System.out.println("인증");
+		
+		return "member/emailcheck";
+	}
+	
+	@ResponseBody
+	@RequestMapping("authkey.do")
+	public String  authkey(String key)  {
+	System.out.println(session.getAttribute("authkey"));
+		if(key.equals((String) session.getAttribute("authkey")))
+		return "true";
+		else
+		return "false";
+	}
 }
+
