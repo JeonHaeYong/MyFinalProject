@@ -12,4 +12,5 @@ public interface MemberService {
 	public MemberDTO selectOneMemberService(String id);
 	public int modifyMemberService(MemberDTO dto);
 	public int deleteMemberService(String id);
+	public List<MemberDTO> selectByLikeId(String id);
 }

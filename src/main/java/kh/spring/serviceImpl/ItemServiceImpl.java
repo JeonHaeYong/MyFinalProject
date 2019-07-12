@@ -15,7 +15,7 @@ import kh.spring.service.ItemService;
 public class ItemServiceImpl implements ItemService{
 	@Autowired
 	private ItemDAO itemDao;
-
+	
 	@Override
 	public int uploadItem(ItemDTO dto) {
 		return itemDao.insertItem(dto);
@@ -69,7 +69,5 @@ public class ItemServiceImpl implements ItemService{
 			return itemDao.getNaviforItem(currentPage, itemDao.itemContentsSizeByCategory(category));
 		}
 	}
-
-
 
 }

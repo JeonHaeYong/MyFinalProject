@@ -40,58 +40,58 @@
 		<img src="/resources/images/item/addItemImage.jpg" id="jumboImg">
 	</div>
 	<div class="container">
-		<div class="row d-flex justify-content-center">
-			<div class="col-12 input-group mb-3">
-	 			<div class="input-group-prepend">
-					<span class="input-group-text" id="basic-addon1">상품명</span>
-				</div>
-				<input type="text" class="form-control" placeholder="Name" aria-label="" aria-describedby="basic-addon1">
-			</div>
-			<div class="col-md-7 col-12 input-group mb-3">
-	 			<div class="input-group-prepend">
-					<span class="input-group-text" id="basic-addon1">금액</span>
-				</div>
-				<input type="text" class="form-control" placeholder="금액은 이 달의 후원단체로 보내집니다!" aria-label="Username" aria-describedby="basic-addon1">
-			</div>
-			<div class="col-md-5 col-12">
-				<div class=" input-group mb-3">
-					<div class="input-group-prepend">
-						<label class="input-group-text">카테고리</label>
+		<form id="itemForm" action="addItemProc" method="post" enctype="multipart/form-data">
+			<div class="row d-flex justify-content-center">
+				<div class="col-12 input-group mb-3">
+		 			<div class="input-group-prepend">
+						<span class="input-group-text">상품명</span>
 					</div>
-					<select class="custom-select" id="selectCategory">
-						<option selected>선택안함</option>
-						<option>사료&amp;간식</option>
-						<option value="toy">장난감</option>
-						<option value="clothing">의류</option>
-						<option value="etc">기타</option>
-					</select>
+					<input type="text" class="form-control" name="name" id="name" placeholder="Name">
 				</div>
-			</div>
-			<div class="col-12 row input-group mb-3">
-<!-- 				<div class="row d-flex justify-content-center"> -->
-					<div class="col-4 custom-file">
-						<input type="file" class="custom-file-input inputFile" name="imagePath1" aria-describedby="imagePath1">
-						<label class="custom-file-label" id="imagePath1">Choose file</label>
+				<div class="col-md-7 col-12 input-group mb-3">
+		 			<div class="input-group-prepend">
+						<span class="input-group-text">금액</span>
 					</div>
+					<input type="number" class="form-control" name="price" id="price" min="0" max="100000" placeholder="금액은 이 달의 후원단체로 보내집니다!">
+				</div>
+				<div class="col-md-5 col-12">
+					<div class=" input-group mb-3">
+						<div class="input-group-prepend">
+							<label class="input-group-text">카테고리</label>
+						</div>
+						<select class="custom-select" id="selectCategory" name="category">
+							<option selected>선택안함</option>
+							<option value="food">사료&amp;간식</option>
+							<option value="toy">장난감</option>
+							<option value="clothing">의류</option>
+							<option value="etc">기타</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-12 row input-group mb-3">
 					<div class="col-4 custom-file">
-						<input type="file" class="custom-file-input inputFile" name="imagePath2" aria-describedby="imagePath2">
-						<label class="custom-file-label" id="imagePath2">Choose file</label>
+						<input type="file" class="custom-file-input inputFile" name="image1" labelId="imagePath1" accept=".jpg,.jpeg,.png,.gif,.bmp">
+						<label class="custom-file-label overflow-hidden" id="imagePath1">Choose file</label>
 					</div>
 					<div class="col-4 custom-file">
-						<input type="file" class="custom-file-input inputFile" name="imagePath3" aria-describedby="imagePath3">
-						<label class="custom-file-label" id="imagePath3">Choose file</label>
+						<input type="file" class="custom-file-input inputFile" name="image2" id="image2" labelId="imagePath2" accept=".jpg,.jpeg,.png,.gif,.bmp" disabled>
+						<label class="custom-file-label overflow-hidden" id="imagePath2">Choose file</label>
 					</div>
-<!-- 				</div> -->
+					<div class="col-4 custom-file">
+						<input type="file" class="custom-file-input inputFile" name="image3" id="image3" labelId="imagePath3" accept=".jpg,.jpeg,.png,.gif,.bmp" disabled>
+						<label class="custom-file-label overflow-hidden" id="imagePath3">Choose file</label>
+					</div>
+				</div>
+				<div class="inputContents col-12 p-0">
+					<input type="hidden" id="submitContents" name="contents">
+					<div id="contents" class="summernote"></div>
+				</div>
 			</div>
-			<div class="inputContents col-12 p-0">
-				<input type="hidden" id="submitContents" name="contents">
-				<div id="contents" class="summernote" contenteditable="true"></div>
-			</div>
-		</div>
+		</form>
 		<div class="row">
 			<div class="col-12 d-flex justify-content-end">
-				<a class="btn" href="addItemProc">신청</a>
-				<a class="btn" href="">취소</a>
+				<input type="button" class="btn" id="writeBtn" value="신청">
+				<input type="button" class="btn" id="cancelBtn" value="취소">
 			</div>
 		</div>
 	</div>
@@ -152,6 +152,7 @@
 				$(".note-editable").append("<img src='"+resp+"'>");
 			})
 		}
+		
 		function deleteFile(src) {
 			$.ajax({
 				data : {
@@ -162,10 +163,60 @@
 				cache : false
 			});
 		}
+		
 		$(".inputFile").change(function(){
-			var label = "#" + $(this).attr("name");
+			var label = "#" + $(this).attr("labelId");
 			$(label).text(this.value.split("\\").pop());
-		})
+			if(label == "#imagePath1"){
+				$("#image2").attr("disabled", false);
+			}else if(label == "#imagePath2"){
+				$("#image3").attr("disabled", false);
+			}
+		});
+		
+		$("#writeBtn").on("click", function(){
+			$("#submitContents").val($(".note-editable").html());
+			var name = $("#name").val();
+			name = name.replace(/<.?script>/g, "/");
+			
+			var price = $("#price").val();
+			var regex = /^[0-9]{1,6}$/
+			
+			var category = $("#selectCategory option:selected").val();
+			alert(category);
+			
+			var image1 = $("#image1").val();
+			
+			var contents = $("#submitContents").val();
+			contents = contents.replace(/<.?script>/g, "/");
+			contents = contents.replace(/(&nbsp;)+/ig, "");
+			contents = contents.replace(/^[ ]+/ig, "");	// &nbsp;자르고나서 또 맨앞에 오는 공백 자르기
+			contents = contents.replace(/(<p><br><\/p><p><br><\/p>)+/ig, "<p><br><\/p>");// 내용없이 엔터쳤을때
+			contents = contents.replace(/(<p>[ ]*?<\/p>)/ig, "<p><br><\/p>");// 공백만 넣고 엔터쳤을때
+			
+			if($("#name").val() == ""){
+				alert("상품명을 입력해주세요.");
+				$("#name").focus();
+				return;
+			}else if(price == "" || regex.exec(price) == null){
+				alert("금액을 숫자로 입력해주세요.");
+				$("#price").val("").focus();
+				return;
+			}else if(category == ""){
+				alert("카테고리를 선택해주세요.");
+				return;
+			}else if(image1 == ""){
+				alert("이미지를 등록해주세요.");
+				return;
+			}else if(contents == "<p><br></p>"){
+				alert("내용을 입력해주세요.");
+				$("#contents").focus();
+				return;
+			}else{
+				$("#image3").attr("disabled", false);
+				$("#itemForm").submit();
+			}
+		});
 	</script>
 </body>
 </html>

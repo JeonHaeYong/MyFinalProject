@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProtectionCenterDAO">
+	<select id="selectAllCenter" resultType="kh.spring.dto.ProtectionCenterDTO">
+		select * from where animal_center
+	</select>
+	<select id="selectCenterPerPage" resultType="kh.spring.dto.ProtectionCenterDTO">
+				select * from (select row_number()over(order by seq asc) as rown, animal_center.* from animal_center) where rown between #{start} and #{end}
+	</select>
+	<select id="getRecordTotalCount" resultType="Integer">
+		select count(*)as count from animal_center
+	</select>
+	
+	<select id="searchRecordCount" resultType="Integer">
+		select count(*)as count from animal_center where address like #{value}
+	</select>
+	<select id="searchCenterPerPage" resultType="kh.spring.dto.ProtectionCenterDTO">
+		select * from (select row_number()over(order by seq asc) as rown, animal_center.* from animal_center where address like #{option}) where rown between #{start} and #{end}
+	</select>
+</mapper>
