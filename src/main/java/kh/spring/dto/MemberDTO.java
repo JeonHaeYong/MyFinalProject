@@ -109,6 +109,7 @@ public class MemberDTO {
 	}
 	public void setRank(int rank) {
 		this.rank = rank;
+
 	}
 	
 }

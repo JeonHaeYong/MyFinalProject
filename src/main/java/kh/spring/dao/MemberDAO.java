@@ -16,4 +16,5 @@ public interface MemberDAO {
 	public List<MemberDTO> selectByLikeId(String id);
 	public List<MemberDTO> memberPoint();//퀴즈에서 씀
 
+
 }
