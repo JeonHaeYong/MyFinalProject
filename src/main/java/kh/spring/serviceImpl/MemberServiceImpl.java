@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 
 
 import kh.spring.dao.MemberDAO;
-
+import kh.spring.daoImpl.BlackListDAOImpl;
+import kh.spring.dto.BlackListDTO;
 import kh.spring.dto.MemberDTO;
 import kh.spring.service.MemberService;
 
@@ -16,7 +17,8 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private MemberDAO mdao;
-	
+	@Autowired
+	private BlackListDAOImpl bdao;
 
 	
 	@Override
@@ -32,8 +34,23 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int isLoginOkService(String id, String password) {
-		return mdao.isLoginOk(id, password);
+	public int isLoginOkService(String id, String password){
+		try
+		{
+			if(bdao.selectCountById(new BlackListDTO(id)) == 1)
+			{
+				return 0;
+			}
+			else
+			{
+				return mdao.isLoginOk(id, password);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return 0;
+		}
 	}
 
 	@Override

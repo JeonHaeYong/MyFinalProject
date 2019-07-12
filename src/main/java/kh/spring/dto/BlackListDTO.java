@@ -13,6 +13,11 @@ public class BlackListDTO
 	{
 		super();
 	}
+	public BlackListDTO(String id)
+	{
+		super();
+		this.id = id;
+	}
 	public BlackListDTO(String id, String reason)
 	{
 		super();

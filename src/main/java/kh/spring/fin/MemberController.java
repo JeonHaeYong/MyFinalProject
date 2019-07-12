@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.spring.dto.MemberDTO;
 import kh.spring.service.MemberService;
+import kh.spring.serviceImpl.BlackListServiceImpl;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,7 @@ public class MemberController {
 	private MemberService mservice;
 	@Autowired
 	private HttpSession session;
-
+	
 	//로그인
 	@RequestMapping("login")
 	public String lign(MemberDTO dto) {
