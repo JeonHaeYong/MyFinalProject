@@ -28,7 +28,7 @@
             <nav class="site-navigation position-relative text-right" role="navigation">
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li><a href="#home-section" class="nav-link">유기동물</a></li>
-                <li><a href="#about-section" class="nav-link">임시보호중</a></li>
+                <li><a href="#about-section" class="nav-link">실종신고</a></li>
                 <li><a href="#trainers-section" class="nav-link">재회</a></li>
                 <li><a href="#pricing-section" class="nav-link">무료나눔</a></li>
                 <li><a href="#blog-section" class="nav-link">Fun</a></li>
