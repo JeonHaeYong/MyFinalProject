@@ -37,7 +37,7 @@ public class AdminController
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "admin-member-search")
+	@RequestMapping(value = "admin-member-search", produces="application/json;charset=utf-8")
 	public String searchMember(String id)
 	{
 		logger.info("검색한 ID : {}", id);
@@ -46,11 +46,29 @@ public class AdminController
 		
 		JsonArray ja = new JsonArray();
 		
-		for(int i = 1 ; i <= list.size() ; i++)
+		try
 		{
-			JsonObject jo = new JsonObject();
-			jo.addProperty("id", list.get(i-1).getId());
-			ja.add(jo);
+			for(int i = 1 ; i <= list.size() ; i++)
+			{
+				JsonObject jo = new JsonObject();
+				String resultId =list.get(i-1).getId();
+				String status = "정상";
+				
+				try
+				{
+					status = "차단 사유 : " + bs.selectById(new BlackListDTO(resultId)).getReason();
+				}
+				catch(java.lang.NullPointerException e){}
+				
+				
+				jo.addProperty("id", resultId);
+				jo.addProperty("status", status);
+				ja.add(jo);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
 		}
 		
 		
@@ -65,6 +83,11 @@ public class AdminController
 			String[] idArr = id.split(" ");
 			logger.info("블랙할 아이디의 수 {}", idArr.length-1);
 			logger.info("블랙 사유 : {}", reason);
+			
+			if((reason == null) || reason.equals(""))
+			{
+				reason = "없음";
+			}
 			
 			if(idArr.length >= 2)
 			{
@@ -82,9 +105,24 @@ public class AdminController
 			e.printStackTrace();
 		}
 		
+		return "redirect: admin-member";
+	}
+	
+	@RequestMapping(value = "admin-member-release", method = RequestMethod.POST)
+	public String releaseMember(BlackListDTO dto)
+	{
+		try
+		{
+			bs.delete(dto);
+			logger.info("차단 해제한 아이디 : {}", dto.getId());
+		}
+		catch(Exception e)
+		{
+			logger.warn("차단 실패한 아이디 : {}", dto.getId());
+			e.printStackTrace();
+		}
 		
-		
-		return "admin-member";
+		return "redirect: admin-member";
 	}
 	
 }

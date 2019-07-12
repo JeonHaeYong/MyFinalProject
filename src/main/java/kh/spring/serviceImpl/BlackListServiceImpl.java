@@ -21,6 +21,11 @@ public class BlackListServiceImpl implements BlackListService
 	@Override
 	public void insert(BlackListDTO dto) throws Exception
 	{
+		if(dto.getReason() == null)
+		{
+			dto.setReason("없음");
+		}
+		
 		if(blacklistDAO.selectCountById(dto) != 1)
 		{
 			blacklistDAO.insert(dto);
@@ -31,11 +36,23 @@ public class BlackListServiceImpl implements BlackListService
 		}
 		
 	}
-
-	@Override
-	public Object delete() throws Exception
+	
+	public BlackListDTO selectById(BlackListDTO dto) throws Exception
 	{
-		return null;
+		return blacklistDAO.selectById(dto);
+	}
+	
+	@Override
+	public void delete(BlackListDTO dto) throws Exception
+	{
+		if((dto.getId() != null) && (blacklistDAO.selectCountById(dto) != 0))
+		{
+			blacklistDAO.deleteById(dto);
+		}
+		else
+		{
+			logger.warn("블랙리스트에 존재하지 않는 아이디 : {}", dto.getId());
+		}
 	}
 
 	
