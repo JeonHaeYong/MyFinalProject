@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ChartDAO">
+
+	<select id="getTodayVisitCount" resultType="java.lang.Integer">
+		select visit_count from chart where to_char(time, 'yy/mm/dd') = to_char(sysdate, 'yy/mm/dd')
+	</select>
+
+</mapper>

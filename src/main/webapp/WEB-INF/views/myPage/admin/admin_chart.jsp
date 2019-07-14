@@ -32,7 +32,7 @@
 	border-radius: 0px !important;
 }
 
-.chart_col{
+.chart_col {
 	height: 10%;
 }
 </style>
@@ -78,15 +78,15 @@
 		<div class="row justify-content-center mt-5">
 
 			<div class="col-6 text-center my-3 chart_col">1번 영역</div>
-			
+
 			<div class="col-6 text-center my-3 chart_col">2번 영역</div>
 
 		</div>
-		
+
 		<div class="row justify-content-center">
 
 			<div class="col-6 text-center my-3 chart_col">3번 영역</div>
-			
+
 			<div class="col-6 text-center my-3 chart_col">4번 영역</div>
 
 		</div>
@@ -113,12 +113,27 @@
 <script src="resources/js/isotope.pkgd.min.js"></script>
 <script src="resources/js/main.js"></script>
 <script>
-	$(function() {
-
-	});
-
-	onload = function() {
-
-	};
+	$(function()
+    {
+		$.ajax
+    	({
+    		url: "admin-chart-visit",
+    		type: "POST",
+    		dataType: "JSON"
+    	})
+    	.done(function(response)
+    	{
+    		console.log(response.todayVisitCount);
+    	})
+    	.fail(function()
+    	{
+    		alert("error");
+    	});
+    });
+    
+    onload = function()
+    {
+	    
+    };
 </script>
 </html>

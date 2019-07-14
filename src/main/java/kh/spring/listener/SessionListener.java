@@ -4,15 +4,10 @@ package kh.spring.listener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import kh.spring.daoImpl.ChartDAOImpl;
-import oracle.net.aso.c;
 
 public class SessionListener implements HttpSessionListener
 {
@@ -25,6 +20,25 @@ public class SessionListener implements HttpSessionListener
 		try
 		{
 			ChartDAOImpl chartDAO = new ChartDAOImpl();
+			
+			int todayRecordExistCheck = chartDAO.selectCountTodayRecord();	//0이면 insert 해야되고 1이면 그냥 진행하면 된다.
+			
+			if(todayRecordExistCheck == 0)
+			{
+				logger.info("오늘 Record 가 없음");
+				
+				int insertResult = chartDAO.insertTodayRecord();			//오늘 날짜 Record를 추가한다.
+				
+				if(insertResult == 1)
+				{
+					logger.info("오늘 Record 추가 완료");
+				}
+				else
+				{
+					logger.error("오늘 Record 추가 중 에러 발생");
+				}
+			}
+			
 			int result = chartDAO.visitCountPlus();
 			
 			if(result == 1)
