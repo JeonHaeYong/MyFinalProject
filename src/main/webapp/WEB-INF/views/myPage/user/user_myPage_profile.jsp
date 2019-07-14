@@ -80,7 +80,7 @@
                                     ${memberDTO.point } point
                                 </div>
                                 <div>
-                                    	안읽은 쪽지 : 3개
+                                    	안읽은 쪽지 : <a href="#">${msg }개</a>
                                 </div>
                             </div>
                         </div>
@@ -115,7 +115,7 @@
                                         <div class="form-group row">
                                             <label for="my_id" class="col-sm-2 col-form-label">ID</label>
                                             <div class="col-sm-10">
-                                                <input type="text" readonly class="form-control-plaintext" id="my_id" value="임시 id입니다.">
+                                                <input type="text" readonly class="form-control-plaintext" id="my_id" value="${memberDTO.id }">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -127,43 +127,43 @@
                                         <div class="form-group row">
                                             <label for="my_nickname" class="col-sm-2 col-form-label">Nickname</label>
                                             <div class="col-sm-10">
-                                                <input type="text" readonly class="form-control-plaintext" id="my_nickname" value="임시 닉네임입니다.">
+                                                <input type="text" readonly class="form-control-plaintext" id="my_nickname" value="${memberDTO.name }">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="my_email" class="col-sm-2 col-form-label">Email</label>
                                             <div class="col-sm-10">
-                                                <input type="text" readonly class="form-control-plaintext" id="my_email" value="example@email.com">
+                                                <input type="text" readonly class="form-control-plaintext" id="my_email" value="${memberDTO.email }">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="my_birth" class="col-sm-2 col-form-label">Birthday</label>
                                             <div class="col-sm-10">
-                                                <input type="text" readonly class="form-control-plaintext" id="my_birth" value="1993/07/08">
+                                                <input type="text" readonly class="form-control-plaintext" id="my_birth" value="${memberDTO.birthDay }">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="my_gender" class="col-sm-2 col-form-label">Gender</label>
                                             <div class="col-sm-10">
-                                                <input type="text" readonly class="form-control-plaintext" id="my_gender" value="여자">
+                                                <input type="text" readonly class="form-control-plaintext" id="my_gender" value="${memberDTO.gender }">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="my_phone" class="col-sm-2 col-form-label">Phone</label>
                                             <div class="col-sm-10">
-                                                <input type="text" readonly class="form-control-plaintext" id="my_phone" value="010-0000-0000">
+                                                <input type="text" readonly class="form-control-plaintext" id="my_phone" value="${memberDTO.phone }">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="my_zipcode" class="col-sm-2 col-form-label">Zipcode</label>
                                             <div class="col-sm-10">
-                                                <input type="text" readonly class="form-control-plaintext" id="my_zipcode" value="05050">
+                                                <input type="text" readonly class="form-control-plaintext" id="my_zipcode" value="${memberDTO.zipcode }">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="my_address" class="col-sm-2 col-form-label">Address</label>
                                             <div class="col-sm-10">
-                                                <input type="text" readonly class="form-control-plaintext" id="my_address" value="서울 성북구 123123">
+                                                <input type="text" readonly class="form-control-plaintext" id="my_address" value="${memberDTO.address1 }">
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-center">

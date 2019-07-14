@@ -19,6 +19,7 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import kh.spring.dto.MemberDTO;
 import kh.spring.loginapi.NaverLoginBO;
 import kh.spring.service.MemberService;
+import kh.spring.service.MessageService;
 
 @Controller
 public class MemberController {
@@ -26,6 +27,8 @@ public class MemberController {
 
 	@Autowired
 	private MemberService mservice;
+	@Autowired
+	private MessageService msgService;
 	@Autowired
 	private HttpSession session;
 
@@ -184,8 +187,10 @@ public class MemberController {
 		//memberDTO담기
 		//System.out.println("로그인아이디-> "+session.getAttribute("id"));
 		String loginId = (String)session.getAttribute("id");
+		int msgYet = msgService.selectMsgYetReadCount(loginId);
 		MemberDTO dto = mservice.selectOneMemberService(loginId);
 		request.setAttribute("memberDTO", dto);
+		request.setAttribute("msg", msgYet);
 		return "myPage/user/user_myPage_profile";
 	}
 

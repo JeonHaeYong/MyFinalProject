@@ -22,7 +22,8 @@ public class PerfCheckAdvice {
 		long endTime = System.currentTimeMillis();
 		
 		String methodName = pjp.getSignature().getName();
-		System.out.println((endTime - startTime)/1000.0 + "초 동안 "+ pjp.getClass()+" -> "+methodName + " 작업수행");
+		String className = pjp.getSignature().getDeclaringTypeName();
+		System.out.println((endTime - startTime)/1000.0 + "초 동안 "+ className +" -> "+methodName + " 작업수행");
 		
 		return retVal; 	
 	}
