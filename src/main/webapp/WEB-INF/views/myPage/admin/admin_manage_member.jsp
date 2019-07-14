@@ -22,7 +22,7 @@
 
 #container
 {
-	margin-top: 10%;
+	margin-top: 5%;
 }
 .my_buttons
 {
@@ -76,7 +76,7 @@
 				</div>
 				
 				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="#" class="btn btn-warning my_buttons">공백</a>
+					<a href="admin-chart" class="btn btn-warning my_buttons">통계</a>
 				</div>
 
 			</div>

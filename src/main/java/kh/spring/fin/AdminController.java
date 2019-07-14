@@ -29,7 +29,7 @@ public class AdminController
 	@Autowired
 	BlackListServiceImpl bs;
 	
-	@RequestMapping(value = "admin-member", method = RequestMethod.GET)
+	@RequestMapping(value = "admin-member")
 	public String manageMemberPage()
 	{
 		logger.info("회원 관리 페이지");
@@ -125,4 +125,9 @@ public class AdminController
 		return "redirect: admin-member";
 	}
 	
+	@RequestMapping(value = "admin-chart")
+	public String chartPage()
+	{
+		return "myPage/admin/admin_chart";
+	}
 }
