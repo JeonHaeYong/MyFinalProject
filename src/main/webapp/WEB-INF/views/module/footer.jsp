@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 
@@ -37,10 +37,12 @@
 						
 						<!-- 네이버 로그인 화면으로 이동 시키는 URL -->
 						<!-- 네이버 로그인 화면에서 ID, PW를 올바르게 입력하면 callback 메소드 실행 요청 -->
-						<div id="naver_id_login" style="text-align: center">
-							<a href="${url}"> <img width="223"
-								src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
+						
+						<c:if test="${id eq null}">
+						<div id="naver_id_login" >
+							<a href="${url}"> <img src="resources/images/naver.png" width="60" height="60px" alt="네이버 이미지"  /></a>
 						</div>
+						</c:if>
 						<br>
 						<button type="button" type="button" id="findId">ID 찾기</button>
 						<button type="button" type="button" id="reinputpw">PW 찾기</button>
@@ -54,23 +56,6 @@
 </div>
 
 <!-- footer영역입니다 -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <footer class="site-footer">
 	<div class="container">
 		<div class="row">

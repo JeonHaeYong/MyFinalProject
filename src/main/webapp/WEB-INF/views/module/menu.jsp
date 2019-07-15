@@ -47,6 +47,8 @@
 									<li><a href="join" class="nav-link pl-0 pr-0">회원가입</a></li>
 								</c:when>
 								<c:otherwise>
+								
+
 									<li><a href="/logout" class="nav-link ">
 											로그아웃 </a></li>
 									<li><a href="toMyPage" class="nav-link pl-0 pr-0 ">마이페이지</a></li>
