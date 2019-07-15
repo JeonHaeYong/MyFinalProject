@@ -15,5 +15,4 @@ public interface MemberService {
 	public List<MemberDTO> selectByLikeId(String id);
 	public List<MemberDTO> memberPointService();//퀴즈에서 씀
 	public boolean create(String email);
-
 }

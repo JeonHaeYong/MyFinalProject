@@ -4,4 +4,14 @@
 	<select id="selectMsgYetReadCount" resultType="int">
 		select count(*) from message where recipient = #{id} and readOk = 'N'
 	</select>
+	<insert id="insertMsg">
+		insert into message values(message_seq.nextval,#{sender},#{recipient},#{contents},default,default)
+	</insert>
+	<select id="selectAllMsgByCurrentPage_received" resultType="kh.spring.dto.MessageDTO">
+		select * from (select row_number() over(order by MESSAGE_DATE desc) as rown, message.* 
+		from message where recipient=#{id}) where rown between #{start} and #{end}
+	</select>
+	<update id="updateReadOkToYes">
+		update message set readOk = 'Y' where seq = #{seq}
+	</update>
 </mapper>

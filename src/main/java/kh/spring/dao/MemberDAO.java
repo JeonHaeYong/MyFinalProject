@@ -15,6 +15,5 @@ public interface MemberDAO {
 	public String testSHA256(String str);
 	public List<MemberDTO> selectByLikeId(String id);
 	public List<MemberDTO> memberPoint();//퀴즈에서 씀
-
-
+	
 }
