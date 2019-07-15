@@ -73,15 +73,15 @@ input[type=password] {
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 	<!-- <div id="fix"></div> -->
 	<div class="jumbotron px-0 pb-0">
-		<img src="resources/images/joinimg.jpg" height="600px" width="100%">
+		<img src="resources/images/member/joinimg.jpg" height="600px" width="100%">
 
 	</div>
 
 	<div id="agree"  class="container">
 		<div class="row">
 			<div class="col-12 col-sm-12 col-md-12 col-lg-12 pb-4 " align="center"id="title">
-				<img src="resources/images/dogfoot.png" height="100px" width="100px">
-				<b> 회 원 가 입 </b> <img src="resources/images/dogfoot.png"
+				<img src="resources/images/member/dogfoot.png" height="100px" width="100px">
+				<b> 회 원 가 입 </b> <img src="resources/images/member/dogfoot.png"
 					height="100px" width="100px">
 			</div>
 		</div>
@@ -159,7 +159,7 @@ input[type=password] {
 				동의하지 않습니다.
 			</div>
 			<div class="col-4 col-sm-5 col-md-5 col-lg-5 pt-3" align="left">
-				<img src="resources/images/nextbtn.png" height="100px" width="100px"
+				<img src="resources/images/member/nextbtn.png" height="100px" width="100px"
 					id="next">
 			</div>
 		</div>
@@ -168,8 +168,8 @@ input[type=password] {
 	<div id="joininfo" class="container">
 		<div class="row">
 			<div class="col-12 col-sm-12 col-md-12 col-lg-12 pb-4" id="title">
-				<img src="resources/images/dogfoot.png" height="100px" width="100px">
-				<b> 회 원 가 입 </b> <img src="resources/images/dogfoot.png"
+				<img src="resources/images/member/dogfoot.png" height="100px" width="100px">
+				<b> 회 원 가 입 </b> <img src="resources/images/member/dogfoot.png"
 					height="100px" width="100px">
 			</div>
 		</div>

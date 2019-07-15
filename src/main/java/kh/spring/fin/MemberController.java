@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import kh.spring.dto.MemberDTO;
 import kh.spring.loginapi.NaverLoginBO;
+import kh.spring.loginapi.kakao_restapi;
 import kh.spring.service.MemberService;
 import kh.spring.service.MessageService;
 
@@ -124,7 +126,7 @@ public class MemberController {
 		this.naverLoginBO = naverLoginBO;
 	}
 
-	
+
 
 	//네이버 로그인 성공시 callback호출 메소드
 	@RequestMapping(value = "callback", method = { RequestMethod.GET, RequestMethod.POST })
@@ -161,21 +163,21 @@ public class MemberController {
 		//String name=response_obj.get("name").getAsString();	        
 
 		//memberDTO 에 set하기 
-		dto.setId(id);
+		dto.setId("N_"+id);
 		dto.setType(2);
 		dto.setName(nickname);
 		dto.setGender(gender);
 		dto.setEmail(email);
 		try{
-			if(mservice.idDuplCheckService(id)>0)
+			if(mservice.idDuplCheckService("N_"+id)>0)
 			{
-				session.setAttribute("id",id); //세션 생성
+				session.setAttribute("id","N_"+id); //세션 생성
 				System.out.println("네이버 로그인 성공");
 				return "redirect:/";
 			}	
 			else {		
 				if(	mservice.insertNaverJoin(dto)>0) {
-					session.setAttribute("id",id); //세션 생성
+					session.setAttribute("id","N_"+id); //세션 생성
 					System.out.println("네이버 로그인 성공");
 					return "redirect:/";
 
@@ -192,14 +194,76 @@ public class MemberController {
 		return "redirect:/";
 
 	}
+	//카카오
+	private kakao_restapi kakao_restapi = new kakao_restapi();
+	@RequestMapping(value = "/oauth", produces = "application/json")
+	public String kakaoLogin(@RequestParam("code") String code, Model model, HttpSession session,MemberDTO dto) {
+		System.out.println("로그인 할때 임시 코드값");
+		//카카오 홈페이지에서 받은 결과 코드
+		System.out.println(code);
+		System.out.println("로그인 후 결과값");
+		//카카오 rest api 객체 선언
+		kakao_restapi kr = new kakao_restapi();
+		//결과값을 node에 담아줌
+		System.out.println(kr);
+		JsonNode node = kr.getAccessToken(code);
+		//결과값 출력
+		System.out.println(node);
+		//노드 안에 있는 access_token값을 꺼내 문자열로 변환
+		String token = node.get("access_token").toString();
+		//세션에 담아준다.
+		session.setAttribute("token", token);
+		//사용자 정보 요청
 
 
+		JsonNode userInfo = kr.getKakaoUserInfo(token);
+		// Get id
+		String id = userInfo.path("id").asText();//아이디값
+		String nickname = null;	 //닉네임
+		String kaccount_email =userInfo.path("kaccount_email").asText(); //이메일
+
+		// 유저정보 카톡에서 가져오기 Get properties
+		JsonNode properties = userInfo.path("properties");
+		if (properties.isMissingNode()) {
+			// if "name" node is missing
+
+		} else {
+			nickname = properties.path("nickname").asText();
+		}
+
+		try{
+			if(mservice.idDuplCheckService("k_"+id)>0)
+			{
+				session.setAttribute("id","k_"+id); //세션 생성
+				System.out.println("카카오 로그인 성공");
+				return "redirect:/";
+			}
+			else {
+				dto.setId("k_"+id);
+				dto.setName(nickname);
+				dto.setEmail(kaccount_email);
+				dto.setType(3);
+
+				if(	mservice.insertNaverJoin(dto)>0) {
+					session.setAttribute("id","k_"+id); //세션 생성
+					System.out.println("네이버 로그인 성공");
+					return "redirect:/";
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "redirect:/";
+	}
+
+	
+	
 	//마이페이지
 	@RequestMapping("toMyPage")
 	public String toMyPage(HttpServletRequest request) {
 		System.out.println("마이페이지로");
 		//memberDTO담기
-		//System.out.println("로그인아이디-> "+session.getAttribute("id"));
+		System.out.println("로그인아이디-> "+session.getAttribute("id"));
 		String loginId = (String)session.getAttribute("id");
 		int msgYet = msgService.selectMsgYetReadCount(loginId);
 		MemberDTO dto = mservice.selectOneMemberService(loginId);
