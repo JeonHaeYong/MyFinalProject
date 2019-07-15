@@ -13,6 +13,12 @@ public class ChartDAOImpl implements ChartDAO
 	private SqlSessionTemplate sst;
 	
 	@Override
+	public int insertRandomRecord(int time, int count) throws Exception
+	{
+		return sst.insert("ChartDAO.insertRandomRecord", new Object[] {time, count});
+	}
+	
+	@Override
 	public int selectCountTodayRecord() throws Exception
 	{
 		return sst.selectOne("ChartDAO.selectCountTodayRecord");
@@ -38,15 +44,15 @@ public class ChartDAOImpl implements ChartDAO
 	}
 
 	@Override
-	public int getWeekVisitCount() throws Exception
+	public int getRecentSevenVisitCount() throws Exception
 	{
-		return sst.selectOne("ChartDAO.getWeekVisitCount");
+		return sst.selectOne("ChartDAO.getRecentSevenVisitCount");
 	}
 
 	@Override
-	public int getMonthVisitCount() throws Exception
+	public int getRecentThirtyVisitCount() throws Exception
 	{
-		return sst.selectOne("ChartDAO.getMonthVisitCount");
+		return sst.selectOne("ChartDAO.getRecentThirtyVisitCount");
 	}
 
 	@Override
@@ -55,9 +61,18 @@ public class ChartDAOImpl implements ChartDAO
 		return sst.selectOne("ChartDAO.getTotalVisitCount");
 	}
 
-	
-	
-	
+	//month 1은 현재월 2는 전달 3은 2달전
+	@Override
+	public int getMonthVisitCount(int month) throws Exception
+	{
+		return sst.selectOne("ChartDAO.getMonthVisitCount", month);
+	}
+	@Override
+	public String getMonthVisitTime(int month) throws Exception
+	{
+		return sst.selectOne("ChartDAO.getMonthVisitTime", month);
+	}
+
 	
 	
 }

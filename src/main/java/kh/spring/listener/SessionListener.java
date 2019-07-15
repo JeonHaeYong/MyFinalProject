@@ -47,6 +47,7 @@ public class SessionListener implements HttpSessionListener, ApplicationContextA
 				{
 					logger.error("오늘 Record 추가 중 에러 발생");
 				}
+				
 			}
 			
 			int result = chartDAO.visitCountPlus();

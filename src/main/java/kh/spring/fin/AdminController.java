@@ -85,7 +85,7 @@ public class AdminController
 	}
 	@ResponseBody
 	@RequestMapping(value = "admin-chart-visit", produces="application/json;charset=utf-8")
-	public String chartTodayVisit()
+	public String chartGetVisitCount()
 	{
 		String result = "error";
 		try
@@ -100,5 +100,19 @@ public class AdminController
 		return result;
 		
 	}
-	
+	@RequestMapping(value = "admin-chart-insert")
+	public String insertDummyData()
+	{
+		String result = "error";
+		try
+		{
+			result = chartService.insertRandomRecord();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }
