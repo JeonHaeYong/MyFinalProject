@@ -13,4 +13,8 @@ public interface MemberService {
 	public int modifyMemberService(MemberDTO dto);
 	public int deleteMemberService(String id);
 	public List<MemberDTO> selectByLikeId(String id);
+	public List<MemberDTO> memberPointService();//퀴즈에서 씀
+	public boolean create(String email);
+	public int insertNaverJoin(MemberDTO dto);
+
 }

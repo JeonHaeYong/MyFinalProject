@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
  <!--구글폰트-->
         <link href="https://fonts.googleapis.com/css?family=Gamja+Flower&display=swap&subset=korean" rel="stylesheet">
  <style>
@@ -37,6 +37,7 @@
                 padding: 10px;
                 text-align: center;
                 margin: 0px;
+                margin-top:45px;
                 padding: 0px;
             
             }
@@ -48,14 +49,29 @@
             .menu-box{width: 150px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px; margin-top: 50px;}
             .menu-box>div{height: 35px;}
             .menu-box>div:first-child{font-weight: bold; border-bottom: 1px solid #754F44; line-height: 33px;}
-            .menu-box>div:nth-child(2):hover,.menu-box>div:nth-child(3):hover{background-color: #FBFFB950;}
+            .menu-box>div:not(.s-menu):hover{background-color: #FBFFB950;}
             .menu-row{text-align: -webkit-center;}
             a[name="s-menu"]{color: #754F44; text-decoration-line: none;}
             a[name="s-menu"]:hover{color: #754F44; text-decoration-line: none; font-weight:bold;}
-           
+           /*---------------------------------------------------------------------------------------------------------------------------------------------*/
+            .result-box{border: 0px solid black; width: 70%;  margin-top: 30px; margin-bottom: 30px;}
+            .header{font-size: 25px; text-align: center; background-color: #EC7357; color: white;}
+            .section{border-bottom: 1px solid black; height: 40px; line-height: 35px;  font-size: 20px;}
+            .footer{margin-top: 10px; margin-bottom: 30px;}
+            #restart-btn{width:130px; height:130px; cursor: pointer;}
+          /*---------------------------------------------------------------------------------------------------------------------------------------------*/
+            .result-box>div:first-child{font-size: 30px;}
+            .num,.wrong-q{position: relative; top:25px;}
+            .wrong{margin-bottom: 40px; }
+          
+            .incorrCount,.corrCount,.getPoint{font-size:30px;}
+            
+            
         </style>
 <script>
 	$(function(){
+		console.log(${type});
+		$(".result-box").hide();
 		var quizNum = 1;
 		var corr = new Array(); //선택한 답 목록
 		var index = 0;
@@ -66,8 +82,7 @@
 			quizNum++;
 			$("#quiz" + quizNum).css("display", "block");
 			if(index == 10){
-				alert(corr);
-				//$("#quizBox").html("");
+				$(".quiz-box").html("");
 				$.ajax({
 					url: "answerCheck",
 					method: "post",
@@ -77,15 +92,45 @@
 						corr: corr
 					}
 				}).done(function(resp){
-					// resp에는 맞힌 문제 번호(answer), 총 획득 포인트(point)!!
-					alert(resp.answer);
+					// resp에는 맞힌 문제 번호(answer), 틀린문제(wrong) ,총 획득 포인트(point)!!
+				/* 	 alert(resp.answer);
+						alert(resp.wrong);
 					alert(resp.answer.length);	// 맞힌 문제 개수
-					alert(resp.point);
+					alert(resp.point);  */
+					
+					 $(".quiz-box").append($(".result-box").html()).css("font-family","'Gamja Flower', cursive");
+					$(".corrCount").append("맞은 갯수: " + resp.answer.length);
+					$(".getPoint").append("획득 포인트: " + resp.point);
+					//틀린문제
+					var incorr = "<c:forEach var='i' begin='0' end='10' varStatus='status' ><div class='col-1 wrong-n${status.index}'></div><div class='col-5 wrong-q${status.index}'></div><div class='col-1 answer${status.index}'></div><div class='col-5 ex${status.index}'></div></c:forEach>";
+					$(".wrong").append(incorr);	
+					 for(var i = 0; i < 10; i++){
+							if(resp.wrongList[i]){
+								 $(".wrong-n"+i).append(resp.wrongList[i].seq);
+								  $(".wrong-q"+i).append(resp.wrongList[i].quiz);
+								  $(".answer"+i).append(resp.wrongList[i].correct);
+								  $(".ex"+i).append(resp.wrongList[i].explain);
+							}
+						};
+					//랭킹
+					   for(var i = 0; i < 10; i++){
+						 if(resp.rankList[i]){
+						 	$(".rank"+(i+1)).append(resp.rankList[i].rank);
+						 	$(".id"+(i+1)).append(resp.rankList[i].id);
+						 	$(".point"+(i+1)).append(resp.rankList[i].point);
+						 };
+					 }; 
+					 
 				});
 			}
-			
 		});
-	})
+		//동적으로 만들어진 태그에 이벤트 걸기
+		$(document).on("click","#restart-btn",function(){//첫번째 : click / change  등등의 이벤트/두번째 : 이벤트 적용할 타겟 태그 /세번째 : 동작 함수
+			location.href="oxQuiz"
+		});
+		
+
+	});
 </script>
 </head>
  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
@@ -98,9 +143,17 @@
             <div class="row">
                 <div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-row">
                     <div class="row menu-box">
-                        <div class="col-12">M E N U</div>
-                        <div class="col-12 "><a name="s-menu" href="">OX QUIZ</a></div>
+                        <div class="col-12 s-menu">M E N U</div>
+                        <div class="col-12 "><a name="s-menu" href="oxQuiz">OX QUIZ</a></div>
                         <div class="col-12"><a name="s-menu" href="">반려동물 상식</a></div>
+                         <c:choose>
+                        	<c:when test="${type == 4}">
+                        		<div class="col-12"><a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a></div> <!-- 관리자만 볼 수 있게! -->
+                        	</c:when>
+                        	<c:otherwise>
+                        		 <div class="col-12" hidden><a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a></div> 
+                        	</c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
                 <div class="col-1"></div>
@@ -114,15 +167,59 @@
                        </c:forEach>
                         <div class="choose col-12">
                             <div class="row">
-                                <div class="btnImage col-lg-6 col-md-6 col-12" ox="o">O</div><!--/resources/images/oImage.png-->
+                                <div class="btnImage col-lg-6 col-md-6 col-12" ox="o">O</div>
                                 <div class="btnImage col-lg-6 col-md-6 col-12" ox="x">X</div>
                             </div>
                         </div>
                     </div>
+         
                 </div>
             </div>
-        </div>
-<!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
+             </div>
+<!-----결과확인----------------------------------------------------------------------------------------------------------------------------------------->
+	<div class='result-box'>
+		<!-- 맞힌문제 개수 / 획득 포인트 -->
+		<div class="row">
+			<div class="col-6 corrCount"></div><div class="col-6 getPoint"></div>
+		</div>
+		<!-- 틀린문제 / 해설 -->
+		<div class="col-12 incorrCount">틀린문제</div>
+		<div class="row header">
+			<div class="col-1">NO.</div>
+			<div class="col-5">문제</div>
+			<div class="col-1">정답</div>
+			<div class="col-5">설명</div>
+		</div>
+		<div class="row wrong"><!-- 틀린문제 들어올 자리 --></div>
+		
+		<!--랭킹  -->
+		<div class='row header'>
+			<div class='col-4'>RANK</div>
+			<div class='col-4'>ID</div>
+			<div class='col-4'>POINT</div>
+		</div>
+		<c:forEach var="i" begin="0" end="10" varStatus="status">
+			<div class='row section'>
+				<div class='col-4 rank${status.index+1 }'></div>
+				<div class='col-4 id${status.index+1 }'></div>
+				<div class='col-4 point${status.index+1 }'></div>
+			</div>
+		</c:forEach>
+		<!-- 재시작 버튼 -->
+		<div class='row footer'>
+			<div class='col-12'>
+				<img alt='' src='/resources/images/restart-btn.png' id='restart-btn'>
+			</div>
+		</div>
+
+	</div>
+
+
+
+
+
+
+	<!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
    <jsp:include page="/WEB-INF/views/module/footer.jsp" ></jsp:include>
    <script src="resources/js/jquery-ui.js"></script>
    <script src="resources/js/popper.min.js"></script>

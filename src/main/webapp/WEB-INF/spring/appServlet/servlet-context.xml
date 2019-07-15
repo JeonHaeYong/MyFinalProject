@@ -3,9 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -37,13 +39,37 @@
 		<beans:property name="mapperLocations" value="classpath:/mybatis/*-mapper.xml"/>
 	</beans:bean>
 	
-	<beans:bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+	<beans:bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
 		<beans:constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</beans:bean>
-	
+
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="maxUploadSize" value="10000000"/>
 	</beans:bean>
-	
-	
+
+	<aop:aspectj-autoproxy/>
+
+	<!-- 메일 보내기 (SEND) -->
+   <beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+     <beans:property name="host" value="smtp.gmail.com" />
+    <beans:property name="port" value="587" />
+   <beans:property name="username" value="wlsgid916@gmail.com" />
+   <beans:property name="password" value="wlsgid2732" />
+    
+
+      <!-- email 요청시는 SMTP -->
+      <beans:property name="javaMailProperties">
+         <beans:props>
+             <beans:prop key="mail.transport.protocol">smtp</beans:prop>
+             <beans:prop key="mail.smtp.auth">true</beans:prop>
+             <beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+             <beans:prop key="mail.debug">true</beans:prop>
+         </beans:props>
+   </beans:property>
+   </beans:bean>
+   
+   
+   <!--네이버  -->
+   <beans:bean id="naverLoginBO" class="kh.spring.loginapi.NaverLoginBO"></beans:bean>
+
 </beans:beans>

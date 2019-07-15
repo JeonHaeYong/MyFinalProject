@@ -26,57 +26,50 @@ public class AnimalController {
 	ProtectionCenterService pcs;
 	
 	@RequestMapping("toHospital")
-	public ModelAndView toHospital(HttpServletRequest request) {// 동물병원 조회
-		ModelAndView mav = new ModelAndView();
+	public String toHospital(HttpServletRequest request) {// 동물병원 조회
 		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		session.setAttribute("currentPage", currentPage);
 		List<AnimalHospitalDTO> list = null;
 		String navi = null;
 		try {
-			list = ahs.selectAniHospitalPerPage(currentPage);
-			navi = ahs.getNaviForAniHospital(currentPage, null);//검색아님 option = null
+			list = ahs.selectAniHospitalPerPageService(currentPage);
+			navi = ahs.getNaviForAniHospitalService(currentPage, null);//검색아님 option = null
 		}catch(Exception e) {e.printStackTrace();}
-		mav.addObject("list", list);
-		mav.addObject("navi", navi);
-		mav.setViewName("animal/hospital");
-		return mav;
+		request.setAttribute("list", list);
+		request.setAttribute("navi", navi);
+		return "animal/hospital";
 	}
 	@RequestMapping("searchToHospital")
-	public ModelAndView searchHospital(HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView();
+	public String searchHospital(HttpServletRequest request) {
 		String option = request.getParameter("option");
 		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		session.setAttribute("currentPage", currentPage);
 		List<AnimalHospitalDTO> list = new ArrayList<>();
 		String navi = null;
 		try {
-			list = ahs.searchAniHospitalPerPage(currentPage, option);
-			navi = ahs.getNaviForAniHospital(currentPage, option);
+			list = ahs.searchAniHospitalPerPageService(currentPage, option);
+			navi = ahs.getNaviForAniHospitalService(currentPage, option);
 		}catch(Exception e) {e.printStackTrace();}
-		mav.addObject("list", list);
-		mav.addObject("navi", navi);
-		mav.setViewName("animal/hospital");
-		return mav;
+		request.setAttribute("list", list);
+		request.setAttribute("navi", navi);
+		return "animal/hospital";
 	}
 	@RequestMapping("toCenter")
-	public ModelAndView toCenter(HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView();
+	public String toCenter(HttpServletRequest request) {
 		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		session.setAttribute("currentPage", currentPage);
 		List<ProtectionCenterDTO> list = null;
 		String navi = null;
 		try {
-			navi = pcs.getNaviForCenter(currentPage, null);
-			list = pcs.selectCenterPerPage(currentPage);
+			navi = pcs.getNaviForCenterService(currentPage, null);
+			list = pcs.selectCenterPerPageService(currentPage);
 		}catch(Exception e) {e.printStackTrace();}
-		mav.addObject("list", list);
-		mav.addObject("navi", navi);
-		mav.setViewName("animal/protectionCenter");
-		return mav;
+		request.setAttribute("list", list);
+		request.setAttribute("navi", navi);
+		return "animal/protectionCenter";
 	}
 	@RequestMapping("searchToCenter")
-	public ModelAndView searchToCenter(HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView();
+	public String searchToCenter(HttpServletRequest request) {
 		String option = request.getParameter("option");
 		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		session.setAttribute("currentPage", currentPage);
@@ -84,12 +77,11 @@ public class AnimalController {
 		List<ProtectionCenterDTO> list = null;
 		String navi = null;
 		try {
-			navi = pcs.getNaviForCenter(currentPage, option);
-			list = pcs.searchCenterPerPage(currentPage, option);
+			navi = pcs.getNaviForCenterService(currentPage, option);
+			list = pcs.searchCenterPerPageService(currentPage, option);
 		}catch(Exception e) {e.printStackTrace();}
-		mav.addObject("list", list);
-		mav.addObject("navi", navi);
-		mav.setViewName("animal/protectionCenter");
-		return mav;
+		request.setAttribute("list", list);
+		request.setAttribute("navi", navi);
+		return"animal/protectionCenter";
 	}
 }

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 
@@ -18,7 +18,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form action="login" id="loginform" name="formname"method="post">
+				<form action="login" id="loginform" name="formname" method="post">
 					<div class="form-group">
 						<label for="exampleFormControlInput1">ID</label> <input
 							type="text" class="form-control" id="joinemail"
@@ -31,37 +31,36 @@
 							placeholder="비밀번호 입력하시오" required name="password"
 							onkeypress="press(this.form)">
 					</div>
-				
-				<div class="modal-footer">
-				<button type="button" type="button" id="findId">ID 찾기</button>
-				<button type="button" type="button"	id="reinputpw">PW 찾기</button>
-				<button type="button" type="button"	id="joinMem">회원 가입</button>
-				<button type="submit"  id="login">login</button>
-				</div>
-			</form>
+
+					<div class="modal-footer">
+
+
+						<!-- 네이버 로그인 화면으로 이동 시키는 URL -->
+						<!-- 네이버 로그인 화면에서 ID, PW를 올바르게 입력하면 callback 메소드 실행 요청 -->
+
+						<c:if test="${id eq null}">
+							<a	href="https://kauth.kakao.com/oauth/authorize?client_id=8f0beb524de484b185f094b0604de956&redirect_uri=http://localhost/oauth&response_type=code">
+								<img src="resources/images/member/kakaobtn.png">
+							</a>
+
+							<div id="naver_id_login">
+								<a href="${url}"> <img src="resources/images/member/naver.png"
+									width="60" height="60px" alt="네이버 이미지" /></a>
+							</div>
+						</c:if>
+						<br>
+						<button type="button" type="button" id="findId">ID 찾기</button>
+						<button type="button" type="button" id="reinputpw">PW 찾기</button>
+						<button type="button" type="button" id="joinMem">회원 가입</button>
+						<button type="submit" id="login">login</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
 </div>
 
 <!-- footer영역입니다 -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <footer class="site-footer">
 	<div class="container">
 		<div class="row">
@@ -118,7 +117,9 @@
 					<p>
 						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						Copyright &copy;
-						<script>document.write(new Date().getFullYear());</script>
+						<script>
+							document.write(new Date().getFullYear());
+						</script>
 						All rights reserved | This template is made with <i
 							class="icon-heart-o" aria-hidden="true"></i> by <a
 							href="https://colorlib.com" target="_blank">Colorlib</a>

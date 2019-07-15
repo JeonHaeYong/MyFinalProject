@@ -26,7 +26,7 @@ public class QuizServiceImpl implements QuizService {
 	}
 
 	@Override
-	public List<QuizDTO> selectRandQuizService() {
+	public List<QuizDTO> selectRandQuizService() { //퀴즈 랜덤
 		int quizNum = qdao.getQuizNum();
 		return qdao.selectRandQuiz(quizNum);
 	}
@@ -35,5 +35,16 @@ public class QuizServiceImpl implements QuizService {
 	public int deleteQuizService(int seq) {
 		return qdao.deleteQuiz(seq);
 	}
-	
+	@Override
+	public int updatePointService(int point, String id) {
+		return qdao.updatePoint(point, id);
+	}
+	@Override
+	public List<QuizDTO> selectQuizPerPageService(int currentPage){
+		return qdao.selectQuizPerPage(currentPage);
+	}
+	@Override
+	public String getNaviQuizService(int currentPage) {
+		return qdao.getNaviQuiz(currentPage);
+	}
 }

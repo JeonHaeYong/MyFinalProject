@@ -42,8 +42,8 @@
 		
 </script>
 <style>
-     .jumbotron{background-image:url(https://www.condorferries.co.uk/media/2455/taking-your-pet-5.jpg);
-                background-size:100% 100%; height: 600px; margin-bottom: 80px;}
+	 .jumbotron{background-color:white;}
+     .jumbotron>img{width:100%; height: 700px; margin-bottom: 50px;}
      .container{margin-bottom: 30px; color: #754F44; max-width:1700px; }
      .header{background-color: #EC7357; color: white; text-align: center; font-size: 20px; height: 40px; line-height: 40px;}
      .header>div{padding: 0px;}
@@ -74,10 +74,7 @@
    <!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 
 	 <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-                <h1 class="display-1">Title</h1>
-                <p class="lead">랄라라라ㅏ라</p>
-            </div>
+           <img  src="/resources/images/cat_2.jpg">
         </div>
 
         <div class="container">
