@@ -18,7 +18,7 @@
 	</div>
 
 	<header class="site-navbar js-sticky-header site-navbar-target"
-		role="banner">
+		role="banner" style="height:68px;">
 		<div class="container">
 			<div class="row  align-items-center">
 				<div class="col-6 col-xl-2">
