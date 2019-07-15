@@ -44,7 +44,7 @@
 							</a>
 
 							<div id="naver_id_login">
-								<a href="${url}"> <img src="resources/images/naver.png"
+								<a href="${url}"> <img src="resources/images/member/naver.png"
 									width="60" height="60px" alt="네이버 이미지" /></a>
 							</div>
 						</c:if>
