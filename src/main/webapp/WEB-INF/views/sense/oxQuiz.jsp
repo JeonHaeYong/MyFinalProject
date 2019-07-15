@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
  <!--구글폰트-->
         <link href="https://fonts.googleapis.com/css?family=Gamja+Flower&display=swap&subset=korean" rel="stylesheet">
  <style>
@@ -145,7 +145,7 @@
                         <div class="col-12 s-menu">M E N U</div>
                         <div class="col-12 "><a name="s-menu" href="oxQuiz">OX QUIZ</a></div>
                         <div class="col-12"><a name="s-menu" href="">반려동물 상식</a></div>
-                        <div class="col-12"><a name="s-menu" href="">관리자 설정</a></div> <!-- 관리자만 볼 수 있게! -->
+                        <div class="col-12"><a name="s-menu" href="quizAdmin?currentPage=1">관리자 설정</a></div> <!-- 관리자만 볼 수 있게! -->
                     </div>
                 </div>
                 <div class="col-1"></div>

@@ -83,4 +83,41 @@ public class QuizController {
 		System.out.println(data);
 		return data;
 	}
+	@RequestMapping("quizAdmin")
+	public String quizAdmin(HttpServletRequest request) {
+		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		session.setAttribute("currentPage", currentPage);
+		List<QuizDTO> quizList = new ArrayList<>();
+		String navi = null;
+		try {
+			quizList = qs.selectQuizPerPageService(currentPage);
+			navi = qs.getNaviQuizService(currentPage);
+		}catch(Exception e) {e.printStackTrace();}
+		request.setAttribute("quizList", quizList);
+		request.setAttribute("navi", navi);
+		return "sense/quizAdmin";
+	}
+	@RequestMapping("insertQuiz")
+	public String insertQuiz(HttpServletRequest request) {
+		String quiz = request.getParameter("quiz");
+		String correct = request.getParameter("correct");
+		int point = Integer.parseInt(request.getParameter("point"));
+		String explain = request.getParameter("explain");
+		
+		QuizDTO qdto = new QuizDTO(0, quiz, correct, point, explain);
+		qs.insertQuizService(qdto);
+		return "redirect:/quizAdmin";
+	}
+	@RequestMapping("deleteQuiz")
+	public String deleteQuiz(HttpServletRequest request) {
+		String[] num = request.getParameterValues("check");
+		int[] seq = new int[num.length];
+		for(int i = 0; i < num.length; i++) {
+			seq[i] = Integer.parseInt(num[i]);
+			try {
+				qs.deleteQuizService(seq[i]);
+			}catch(Exception e) {e.printStackTrace();}
+		}
+		return "redirect:/quizAdmin?currentPage=" + session.getAttribute("currentPage");
+	}
 }
