@@ -22,4 +22,5 @@
 		delete from cart where item_seq=#{item_seq} and id=#{id}
 	</delete>
 	
+	
 </mapper>

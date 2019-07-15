@@ -150,36 +150,38 @@
                                         			<h4>장바구니가 비어있습니다.</h4>
                                         		</div>
 											</c:if>
-                                        	<c:forEach var="dto" items="${list }" varStatus="status">
-	                                            <div class="col-lg-6 col-12 d-flex justify-content-center">
-													<div class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input itemCheck" id="customCheck${status.count }" seq="${dto.seq }">
-														<label class="custom-control-label" for="customCheck${status.count }"></label>
-													</div>
-	                                                <div class="card mb-3" style="width: 90%;">
-	                                                    <div class="row no-gutters">
-	                                                        <div class="col-md-4">
-	                                                            <img src="${dto.imagePath1 }" class="card-img itemImage">
-	                                                        </div>
-	                                                        <div class="col-md-8">
-	                                                            <div class="card-body">
-	                                                                <h5 class="card-title">상품명 : <a class="itemName" href="item?seq=${dto.seq }">${dto.name }</a></h5>
-	                                                                <p class="card-text">금액 : ${dto.price }</p>
-	                                                                <p class="card-text"><small class="text-muted">판매자 : ${dto.seller }</small></p>
-	                                                            </div>
-	                                                        </div>
-	                                                    </div>
-	                                                </div>
-	                                            </div>
-                                            </c:forEach>
+											<form action="toPayment" id="itemCheckForm" method="post">
+	                                        	<c:forEach var="dto" items="${list }" varStatus="status">
+		                                            <div class="col-lg-6 col-12 d-flex justify-content-center">
+														<div class="custom-control custom-checkbox">
+															<input type="checkbox" class="custom-control-input itemCheck" id="customCheck${status.count }" name="items" value="${dto.seq }">
+															<label class="custom-control-label" for="customCheck${status.count }"></label>
+														</div>
+		                                                <div class="card mb-3" style="width: 90%;">
+		                                                    <div class="row no-gutters">
+		                                                        <div class="col-md-4">
+		                                                            <img src="${dto.imagePath1 }" class="card-img itemImage">
+		                                                        </div>
+		                                                        <div class="col-md-8">
+		                                                            <div class="card-body">
+		                                                                <h5 class="card-title">상품명 : <a class="itemName" href="item?seq=${dto.seq }">${dto.name }</a></h5>
+		                                                                <p class="card-text">금액 : ${dto.price }</p>
+		                                                                <p class="card-text"><small class="text-muted">판매자 : ${dto.seller }</small></p>
+		                                                            </div>
+		                                                        </div>
+		                                                    </div>
+		                                                </div>
+		                                            </div>
+	                                            </c:forEach>
+                                            </form>
                                             <div class="col-12 d-flex justify-content-left">
-                                            	<button class="btn rounded" id="delBtn">선택 상품 삭제하기</button>
+                                            	<input type="button" class="btn rounded" id="delBtn" value="선택 상품 삭제하기">
                                             </div>
                                         </div>
                                         <div class="row">
 	                                        <div class="col-12">
-	                                        	<button class="btn btn-outline-warning rounded" id="payBtn">선택 상품 결제하기</button>
-	                                        	<button class="btn btn-outline-warning rounded" id="allPayBtn">전체 상품 결제하기</button>
+	                                        	<input type="button" class="btn btn-outline-warning rounded" id="payBtn" value="선택 상품 결제하기">
+	                                        	<input type="button" class="btn btn-outline-warning rounded" id="allPayBtn" value="전체 상품 결제하기">
 	                                        </div>
                                         </div>
                                     </div>
@@ -253,6 +255,15 @@
             		});
             		window.location.reload();
         		}
+        	});
+        	
+        	$("#allPayBtn").on("click", function(){
+        		$("#allCheck").click();
+        		$("#itemCheckForm").submit();
+        	});
+        	
+        	$("#payBtn").on("click", function(){
+        		$("#itemCheckForm").submit();
         	});
         	
         </script>

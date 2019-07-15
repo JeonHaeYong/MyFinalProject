@@ -42,7 +42,7 @@ public class MemberController {
 
 	//로그인
 	@RequestMapping("login")
-	public String lign(MemberDTO dto) {
+	public String login(MemberDTO dto) {
 		System.out.println(dto.getId());
 		try{
 			int result=mservice.isLoginOkService(dto.getId(), dto.getPassword());

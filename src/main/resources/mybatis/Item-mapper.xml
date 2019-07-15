@@ -30,6 +30,10 @@
 		select * from (select row_number() over(order by seq desc) as rown, item.* from item where category=#{category}) where rown between #{start} and #{end}
 	</select>
 	
+	<select id="selectItemForPayment" resultType="kh.spring.dto.ItemDTO">
+		select * from item where seq in (#{value, jdbcType=number})
+	</select>
+	
 <!-- 	<insert id="modify"> -->
 <!-- 		update item set name=#{name}, contents=#{contents}, price=#{price}, -->
 <!-- 		seller=#{seller}, date=#{date}, permission=#{permission}, -->
