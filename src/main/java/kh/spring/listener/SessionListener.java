@@ -6,28 +6,38 @@ import javax.servlet.http.HttpSessionListener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
 
 import kh.spring.daoImpl.ChartDAOImpl;
 
-public class SessionListener implements HttpSessionListener
+@Component
+public class SessionListener implements HttpSessionListener, ApplicationContextAware
 {
 	
 	private static final Logger logger = LoggerFactory.getLogger(SessionListener.class);
-
+	
+	@Autowired
+	ChartDAOImpl chartDAO;
+	
 	@Override
 	public void sessionCreated(HttpSessionEvent se)
 	{
 		try
 		{
-			ChartDAOImpl chartDAO = new ChartDAOImpl();
+			logger.info("Session 생성됨");
 			
-			int todayRecordExistCheck = chartDAO.selectCountTodayRecord();	//0이면 insert 해야되고 1이면 그냥 진행하면 된다.
+			int todayRecordExistCheck = chartDAO.selectCountTodayRecord(); //0이면 insert 해야되고 1이면 그냥 진행하면 된다.
 			
 			if(todayRecordExistCheck == 0)
 			{
 				logger.info("오늘 Record 가 없음");
 				
-				int insertResult = chartDAO.insertTodayRecord();			//오늘 날짜 Record를 추가한다.
+				int insertResult = chartDAO.insertTodayRecord(); //오늘 날짜 Record를 추가한다.
 				
 				if(insertResult == 1)
 				{
@@ -56,7 +66,7 @@ public class SessionListener implements HttpSessionListener
 		}
 		
 	}
-
+	
 	@Override
 	public void sessionDestroyed(HttpSessionEvent se)
 	{
@@ -64,57 +74,17 @@ public class SessionListener implements HttpSessionListener
 		
 	}
 	
-//	@Autowired
-//	ChartDAOImpl chartDAO;
-//	
-//	@Override
-//	public void sessionCreated(HttpSessionEvent se)
-//	{
-//		
-//		try
-//		{
-//			ChartDAO chartDAO = new ChartDAOImpl();
-//			chartDAO.visitCountPlus();
-//		}
-//		catch(Exception e)
-//		{
-//			e.printStackTrace();
-//		}
-//		
-////		HttpSession session = se.getSession();
-////		
-////		 ApplicationContext ctx = 
-////             WebApplicationContextUtils.
-////                   getWebApplicationContext(session.getServletContext());
-////		 
-////         SqlSessionTemplate sst = 
-////             (SqlSessionTemplate) ctx.getBean("sqlSessionFactory");
-////         
-////         System.out.println(sst.update("ChartDAO.visitCountPlus"));
-//
-//	}
-//
-//	@Override
-//	public void sessionDestroyed(HttpSessionEvent se)
-//	{
-//		
-//		
-//	}
-//	@Override
-//	public void sessionCreated(HttpSessionEvent se)
-//	{
-//		this.getSessionService(se).update("ChartDAO.visit");
-//	}
-//	
-//	@Override
-//	public void sessionDestroyed(HttpSessionEvent se)
-//	{
-//	}
-//	
-//	private SqlSessionTemplate getSessionService(HttpSessionEvent se)
-//	{
-//		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(se.getSession().getServletContext());
-//		return (SqlSessionTemplate)context.getBean("sqlSession");
-//	}
-	
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException
+	{
+		if(applicationContext instanceof WebApplicationContext)
+		{
+			( (WebApplicationContext)applicationContext ).getServletContext().addListener(this);
+		}
+		else
+		{
+			//Either throw an exception or fail gracefully, up to you
+			throw new RuntimeException("Must be inside a web application context");
+		}
+	}
 }

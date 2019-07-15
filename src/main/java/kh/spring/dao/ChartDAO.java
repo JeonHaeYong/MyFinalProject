@@ -1,10 +1,8 @@
 package kh.spring.dao;
 
-import java.sql.Connection;
-
 public interface ChartDAO
 {
-	public Connection getConnection() throws Exception;
+//	public Connection getConnection() throws Exception;
 	public int selectCountTodayRecord() throws Exception;
 	public int insertTodayRecord() throws Exception;
 	public int visitCountPlus() throws Exception;

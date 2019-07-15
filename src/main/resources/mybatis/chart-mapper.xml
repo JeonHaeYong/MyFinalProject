@@ -2,8 +2,44 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ChartDAO">
 
+	<select id="selectCountTodayRecord" resultType="java.lang.Integer">
+		select count(*) from chart where to_char(time, 'yy/mm/dd' ) = to_char( sysdate, 'yy/mm/dd')
+	</select>
+
+	<insert id="insertTodayRecord">
+		insert into chart values(default, default)
+	</insert>
+
+	<update id="visitCountPlus">
+		update chart set visit_count = (visit_count + 1) where (to_char(time, 'yy/mm/dd') = to_char( sysdate, 'yy/mm/dd'))
+	</update>
+
 	<select id="getTodayVisitCount" resultType="java.lang.Integer">
 		select visit_count from chart where to_char(time, 'yy/mm/dd') = to_char(sysdate, 'yy/mm/dd')
 	</select>
-
+	
+	<select id="getWeekVisitCount" resultType="java.lang.Integer">
+		select floor(avg(visit_count)) 
+		from chart 
+		where TO_NUMBER(to_char(time, 'yymmdd'), '99999999') 
+	    	BETWEEN 
+	        	(select TO_NUMBER(to_char(sysdate - 6, 'yymmdd'), '99999999') from dual) 
+	        	and 
+	        	(select TO_NUMBER(to_char(sysdate, 'yymmdd'), '99999999') from dual)
+	</select>
+	
+	<select id="getMonthVisitCount" resultType="java.lang.Integer">
+		select floor(avg(visit_count)) 
+		from chart 
+		where TO_NUMBER(to_char(time, 'yymmdd'), '99999999') 
+	    	BETWEEN 
+	        	(select TO_NUMBER(to_char(sysdate - 29, 'yymmdd'), '99999999') from dual) 
+	        	and 
+	        	(select TO_NUMBER(to_char(sysdate, 'yymmdd'), '99999999') from dual)
+	</select>
+	
+	<select id="getTotalVisitCount" resultType="java.lang.Integer">
+		select sum(visit_count) from chart
+	</select>
+	
 </mapper>

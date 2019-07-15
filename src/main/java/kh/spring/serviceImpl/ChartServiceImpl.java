@@ -29,8 +29,19 @@ public class ChartServiceImpl implements ChartService
 		JsonObject jo = new JsonObject();
 		
 		int todayVisitCount = chartDAO.getTodayVisitCount();
+		int weekVisitCount = chartDAO.getWeekVisitCount();
+		int monthVisitCount = chartDAO.getMonthVisitCount();
+		int totalVisitCount = chartDAO.getTotalVisitCount();
+		
 		jo.addProperty("todayVisitCount", todayVisitCount);
+		jo.addProperty("weekVisitCount", weekVisitCount);
+		jo.addProperty("monthVisitCount", monthVisitCount);
+		jo.addProperty("totalVisitCount", totalVisitCount);
+		
 		logger.info("오늘 방문자 : {}", todayVisitCount);
+		logger.info("최근 7일 방문자 : {}", weekVisitCount);
+		logger.info("최근 30일 방문자 : {}", monthVisitCount);
+		logger.info("총 방문자 : {}", totalVisitCount);
 		
 		
 		return new Gson().toJson(jo);
