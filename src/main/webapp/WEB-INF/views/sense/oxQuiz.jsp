@@ -61,7 +61,11 @@
           /*---------------------------------------------------------------------------------------------------------------------------------------------*/
             .result-box>div:first-child{font-size: 30px;}
             .num,.wrong-q{position: relative; top:25px;}
-            .wrong{margin-bottom: 40px;}
+            .wrong{margin-bottom: 40px; }
+          
+            .incorrCount,.corrCount,.getPoint{font-size:30px;}
+            
+            
         </style>
 <script>
 	$(function(){
@@ -88,22 +92,34 @@
 					}
 				}).done(function(resp){
 					// resp에는 맞힌 문제 번호(answer), 틀린문제(wrong) ,총 획득 포인트(point)!!
-					/* alert(resp.answer);
+				/* 	 alert(resp.answer);
 						alert(resp.wrong);
 					alert(resp.answer.length);	// 맞힌 문제 개수
-					alert(resp.point); */
+					alert(resp.point);  */
 					
-					$(".quiz-box").append($(".result-box").html()).css("font-family","'Gamja Flower', cursive");
-					 
+					 $(".quiz-box").append($(".result-box").html()).css("font-family","'Gamja Flower', cursive");
+					$(".corrCount").append("맞은 갯수: " + resp.answer.length);
+					$(".getPoint").append("획득 포인트: " + resp.point);
+					//틀린문제
+					var incorr = "<c:forEach var='i' begin='0' end='10' varStatus='status' ><div class='col-1 wrong-n${status.index}'></div><div class='col-5 wrong-q${status.index}'></div><div class='col-1 answer${status.index}'></div><div class='col-5 ex${status.index}'></div></c:forEach>";
+					$(".wrong").append(incorr);	
 					 for(var i = 0; i < 10; i++){
+							if(resp.wrongList[i]){
+								 $(".wrong-n"+i).append(resp.wrongList[i].seq);
+								  $(".wrong-q"+i).append(resp.wrongList[i].quiz);
+								  $(".answer"+i).append(resp.wrongList[i].correct);
+								  $(".ex"+i).append(resp.wrongList[i].explain);
+							}
+						};
+					//랭킹
+					   for(var i = 0; i < 10; i++){
 						 if(resp.rankList[i]){
-						 	console.log(resp.rankList[i].id);
 						 	$(".rank"+(i+1)).append(resp.rankList[i].rank);
 						 	$(".id"+(i+1)).append(resp.rankList[i].id);
 						 	$(".point"+(i+1)).append(resp.rankList[i].point);
-						 }
-					 }
-					
+						 };
+					 }; 
+					 
 				});
 			}
 		});
@@ -154,34 +170,34 @@
              </div>
 <!-----결과확인----------------------------------------------------------------------------------------------------------------------------------------->
 	<div class='result-box'>
-		<div class="col-12">틀린문제</div>
+		<!-- 맞힌문제 개수 / 획득 포인트 -->
+		<div class="row">
+			<div class="col-6 corrCount"></div><div class="col-6 getPoint"></div>
+		</div>
+		<!-- 틀린문제 / 해설 -->
+		<div class="col-12 incorrCount">틀린문제</div>
 		<div class="row header">
-			<div class="col-4">NO.</div>
-			<div class="col-4">문제</div>
-			<div class="col-4">설명</div>
+			<div class="col-1">NO.</div>
+			<div class="col-5">문제</div>
+			<div class="col-1">정답</div>
+			<div class="col-5">설명</div>
 		</div>
-		<div class="row wrong">
-			<div class="col-4 num">1</div>
-			<div class="col-4 wrong-q">강아지는 땀샘이 발바닥에 있다.</div>
-			<div class="col-4 ex">강아지는 발바닥에 땀샘이 있어요. 발바닥의 땀샘을 통해 땀을 배출하고
-				체온조절을 한답니다.</div>
-		</div>
-
-
+		<div class="row wrong"><!-- 틀린문제 들어올 자리 --></div>
+		
+		<!--랭킹  -->
 		<div class='row header'>
 			<div class='col-4'>RANK</div>
 			<div class='col-4'>ID</div>
 			<div class='col-4'>POINT</div>
 		</div>
 		<c:forEach var="i" begin="0" end="10" varStatus="status">
-
 			<div class='row section'>
 				<div class='col-4 rank${status.index+1 }'></div>
 				<div class='col-4 id${status.index+1 }'></div>
 				<div class='col-4 point${status.index+1 }'></div>
 			</div>
-
 		</c:forEach>
+		<!-- 재시작 버튼 -->
 		<div class='row footer'>
 			<div class='col-12'>
 				<img alt='' src='/resources/images/restart-btn.png' id='restart-btn'>

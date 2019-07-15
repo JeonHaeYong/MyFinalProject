@@ -50,7 +50,7 @@ public class QuizController {
 	 * @return 맞힌 문제 목록과 획득한 포인트
 	 */
 	@ResponseBody
-	@RequestMapping("answerCheck")
+	@RequestMapping(value="answerCheck", produces = "text/plain;charset=UTF-8")
 	public String answerCheck(HttpServletRequest request, String[] corr, String[] incorr) {
 		ModelAndView mav = new ModelAndView();
 		String id = (String)session.getAttribute("id");
@@ -64,8 +64,10 @@ public class QuizController {
 				point += list.get(i).getPoint(); //i번째 문제의 포인터를 누적
 			}else{
 				wrong.add(list.get(i+1)); // 틀린문제 
+				
 			}
 		}
+		System.out.println("틀린문제 개수 : " + wrong.size());
 		List<MemberDTO> rankList = new ArrayList<>();
 		try {
 			qs.updatePointService(point, id); // 포인트 업데이트
@@ -75,8 +77,9 @@ public class QuizController {
 		Gson g = new Gson();
 		String rank = g.toJson(rankList);
 		String wrongList = g.toJson(wrong);
+		request.setAttribute("size", wrong.size());
 		
-		String data =  "{\"answer\":" + answer + ",\"wrongList\""+ wrongList +", \"point\":" + point + ",\"rankList\":"+rank+"}";
+		String data =  "{\"answer\":" + answer +",\"wrongList\":" + wrongList + ",\"point\":" + point + ",\"rankList\":"+rank+"}";
 		System.out.println(data);
 		return data;
 	}
