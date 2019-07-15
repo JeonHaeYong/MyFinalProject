@@ -42,7 +42,7 @@
 							<c:choose>
 								<c:when test="${id eq null}">
 									<li><button type="button" data-toggle="modal"
-											data-target="#loginmodal">
+											data-target="#loginmodal" class="login-btn">
 											로그인 </button></li>
 									<li><a href="join" class="nav-link pl-0 pr-0">회원가입</a></li>
 								</c:when>
