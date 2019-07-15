@@ -141,11 +141,6 @@
 		
 		function drawChart()
 	    {
-// 			$("#recent_chart_div").clearChart();
-// 			$("#compare_chart_div").clearChart();
-// 			$("#year_chart_div").clearChart();
-			
-			
 			
 	    	$.ajax
 	    	({
@@ -208,7 +203,6 @@
 	    			chart2.draw(view2, options2);
 	    				    
 	    		}
-	    		
 	    		
 	    		function yearChart()
 	    		{
