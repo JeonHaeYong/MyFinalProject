@@ -35,6 +35,22 @@ public class ItemDTO {
 		this.fomredDate = fomredDate;
 		this.category = category;
 	}
+	public ItemDTO(int seq, String name, String contents, String price, String seller, Timestamp write_date,
+			String permission, String imagePath1, String imagePath2, String imagePath3, String category) {
+		super();
+		this.seq = seq;
+		this.name = name;
+		this.contents = contents;
+		this.price = price;
+		this.seller = seller;
+		this.write_date = write_date;
+		this.permission = permission;
+		this.imagePath1 = imagePath1;
+		this.imagePath2 = imagePath2;
+		this.imagePath3 = imagePath3;
+		this.category = category;
+	}
+	
 
 	public int getSeq() {
 		return seq;

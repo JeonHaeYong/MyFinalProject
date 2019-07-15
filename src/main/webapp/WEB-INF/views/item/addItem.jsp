@@ -22,12 +22,23 @@
 <link rel="stylesheet" href="resources/css/style.css">
 <style>
 	.myJumbo{
-		background-color: white;
+		background-color: white !important;
 	}
 	#jumboImg{
 		width: 100%;
 		height: 100%;
 		max-height: 600px;
+	}
+	.myBtn{
+		background-color: #ec7357 !important;
+		color: white !important;
+		border-radius: 10px;
+		width: 100px;
+		padding: 10px;
+		margin: 10px;
+	}
+	.myBtn:hover{
+		background-color: #00000030 !important;
 	}
 </style>
 </head>
@@ -60,7 +71,7 @@
 							<label class="input-group-text">카테고리</label>
 						</div>
 						<select class="custom-select" id="selectCategory" name="category">
-							<option selected>선택안함</option>
+							<option selected value="none">선택안함</option>
 							<option value="food">사료&amp;간식</option>
 							<option value="toy">장난감</option>
 							<option value="clothing">의류</option>
@@ -70,7 +81,7 @@
 				</div>
 				<div class="col-12 row input-group mb-3">
 					<div class="col-4 custom-file">
-						<input type="file" class="custom-file-input inputFile" name="image1" labelId="imagePath1" accept=".jpg,.jpeg,.png,.gif,.bmp">
+						<input type="file" class="custom-file-input inputFile" id="image1" name="image1" labelId="imagePath1" accept=".jpg,.jpeg,.png,.gif,.bmp">
 						<label class="custom-file-label overflow-hidden" id="imagePath1">Choose file</label>
 					</div>
 					<div class="col-4 custom-file">
@@ -89,9 +100,9 @@
 			</div>
 		</form>
 		<div class="row">
-			<div class="col-12 d-flex justify-content-end">
-				<input type="button" class="btn" id="writeBtn" value="신청">
-				<input type="button" class="btn" id="cancelBtn" value="취소">
+			<div class="col-12 d-flex justify-content-end mt-3 mb-3">
+				<input type="button" class="btn myBtn" id="writeBtn" value="신청">
+				<input type="button" class="btn myBtn" id="cancelBtn" value="취소">
 			</div>
 		</div>
 	</div>
@@ -183,7 +194,6 @@
 			var regex = /^[0-9]{1,6}$/
 			
 			var category = $("#selectCategory option:selected").val();
-			alert(category);
 			
 			var image1 = $("#image1").val();
 			
@@ -202,7 +212,7 @@
 				alert("금액을 숫자로 입력해주세요.");
 				$("#price").val("").focus();
 				return;
-			}else if(category == ""){
+			}else if(category == "none" || category == ""){
 				alert("카테고리를 선택해주세요.");
 				return;
 			}else if(image1 == ""){
@@ -212,10 +222,14 @@
 				alert("내용을 입력해주세요.");
 				$("#contents").focus();
 				return;
-			}else{
-				$("#image3").attr("disabled", false);
-				$("#itemForm").submit();
 			}
+			$("#itemForm").submit();
+		});
+		$("#cancelBtn").on("click", function(){
+			if(confirm("입력하신 내용이 모두 사라집니다. 그래도 취소하시겠습니까?")){
+				location.href = "freeMarket?currentPage=1&category=all";
+			}
+			return false;
 		});
 	</script>
 </body>

@@ -18,6 +18,7 @@ public class ItemServiceImpl implements ItemService{
 	
 	@Override
 	public int uploadItem(ItemDTO dto) {
+		System.out.println("Service 실행");
 		return itemDao.insertItem(dto);
 	}
 

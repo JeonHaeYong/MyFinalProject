@@ -10,10 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.spring.dto.MemberDTO;
+import kh.spring.service.CartService;
 import kh.spring.service.MemberService;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MemberController {
@@ -21,6 +19,8 @@ public class MemberController {
 
 	@Autowired
 	private MemberService mservice;
+	@Autowired
+	private CartService cs;
 	@Autowired
 	private HttpSession session;
 
@@ -91,11 +91,6 @@ public class MemberController {
 	@RequestMapping("toMyPage_support")
 	public String toMyPage_support() {
 		return "myPage/user/user_myPage_support";
-	}
-
-	@RequestMapping("toMyPage_cart")
-	public String toMyPage_cart() {
-		return "myPage/user/user_myPage_cart";
 	}
 
 	@RequestMapping("toMyPage_buyList")

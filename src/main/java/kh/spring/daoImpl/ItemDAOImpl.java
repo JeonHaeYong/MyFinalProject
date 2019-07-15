@@ -31,6 +31,8 @@ public class ItemDAOImpl implements ItemDAO{
 	}
 
 	public int insertItem(ItemDTO dto) {
+		System.out.println("DAO 실행");
+		System.out.println(dto.getCategory() + " " + dto.getSeller());
 		return sst.insert("ItemDAO.upload", dto);
 	}
 

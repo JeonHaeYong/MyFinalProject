@@ -149,7 +149,7 @@
 			</div>
     	</div>
     	<div class="toCart">
-    		<a href="toMyPage"><img alt="" src="/resources/images/item/cart.png" id="cartImg"></a>
+    		<a href="toMyPage_cart"><img alt="" src="/resources/images/item/cart.png" id="cartImg"></a>
     	</div>
     </div>
 

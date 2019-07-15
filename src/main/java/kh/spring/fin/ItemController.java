@@ -21,7 +21,6 @@ public class ItemController {
 
 	@RequestMapping("freeMarket")
 	public String freeMarket(HttpServletRequest request, int currentPage, String category) {
-		System.out.println(category);
 		if(category.equals("all")) {
 			request.setAttribute("itemList", is.selectItemPerPage(currentPage));
 		}else {
@@ -37,18 +36,12 @@ public class ItemController {
 		request.setAttribute("item", is.readOneItem(seq));
 		return "item/item";
 	}
-	
+
 	@RequestMapping("addItem")
 	public String addItem() {
 		return "item/addItem";
 	}
 
-	@RequestMapping("toMyPage_shopping")
-	public String toMyPage_shopping(HttpServletRequest request) {
-		request.setAttribute("shopping", true);
-		return "myPage/user/user_myPage";
-	}
-	
 	@ResponseBody
 	@RequestMapping("imageUpload")
 	public String imageUploadLogin(HttpServletRequest request, MultipartFile image) {
@@ -66,7 +59,13 @@ public class ItemController {
 		}
 		return imagePath;
 	}
-	
+
+	/**
+	 * 섬머노트에디터에서 이미지 삭제시 실행되는 메서드
+	 * @param request
+	 * @param imagePath
+	 * @return null
+	 */
 	@ResponseBody
 	@RequestMapping("deleteImage")
 	public String deleteImageLogin(HttpServletRequest request, String imagePath) {
@@ -90,25 +89,46 @@ public class ItemController {
 		//		session.setAttribute("flag", false);
 		return null;
 	}
-	
-	@RequestMapping("addItemProc")
+
+	/**
+	 * 나눔 신청시 실행되는 메서드
+	 * @param request
+	 * @param dto : ItemDTO
+	 * @param image1 : 첫번째 첨부 이미지 (필수)
+	 * @param image2
+	 * @param image3
+	 * @return 무료나눔 페이지로 이동
+	 */
+	@RequestMapping("/addItemProc")
 	public String joinProc(HttpServletRequest request, ItemDTO dto, MultipartFile image1, MultipartFile image2, MultipartFile image3) {
 		String id = (String)request.getSession().getAttribute("id");
 		String resourcePath = request.getSession().getServletContext().getRealPath("/resources");
 		System.out.println(resourcePath);
-		System.out.println(dto.getImagePath1());
 		long currTime = System.currentTimeMillis();
 		try {
-			image1.transferTo(new File(resourcePath + "/" + id + "/" + currTime + "_image1.png"));
-			dto.setImagePath1("/resources/" + id + "/" + currTime + "_image1.png");
-			image2.transferTo(new File(resourcePath + "/" + id + "/" + currTime + "_image2.png"));
-			image3.transferTo(new File(resourcePath + "/" + id + "/" + currTime + "_image3.png"));
+			// 첫번째 이미지 있을 때 저장! 없으면 무료나눔 페이지로 바로 이동.
+			if(!image1.isEmpty()) {
+				image1.transferTo(new File(resourcePath + "/" + id + "/" + currTime + "_image1.png"));
+				dto.setImagePath1("/resources/" + id + "/" + currTime + "_image1.png");
+			}else {
+				return "redirect:freeMarket?currentPage=1&category=all";
+			}
+			
+			// 두번째, 세번째 이미지 있을 때 저장!
+			if(!image2.isEmpty()) {
+				image2.transferTo(new File(resourcePath + "/" + id + "/" + currTime + "_image2.png"));
+				dto.setImagePath2("/resources/" + id + "/" + currTime + "_image2.png");
+			}
+			if(!image3.isEmpty()) {
+				image3.transferTo(new File(resourcePath + "/" + id + "/" + currTime + "_image3.png"));
+				dto.setImagePath3("/resources/" + id + "/" + currTime + "_image3.png");
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}	
-		dto.setImagePath2("/resources/" + id + "/" + currTime + "_image2.png");
-		dto.setImagePath3("/resources/" + id + "/" + currTime + "_image3.png");
+		dto.setSeller(id);
 		is.uploadItem(dto);
 		return "redirect:freeMarket?currentPage=1&category=all";
 	}
+	
 }

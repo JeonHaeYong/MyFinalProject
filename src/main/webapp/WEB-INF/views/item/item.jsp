@@ -137,7 +137,7 @@
 	                	</div>
 	                	<div class="col-12 align-self-center text-center">
 	                		<a class="btn cartBtn" id="addCart" href="">장바구니 담기</a>
-	                		<a class="btn cartBtn" href="toMyPage_shopping">장바구니 가기</a>
+	                		<a class="btn cartBtn" id="goCart" href="">장바구니 가기</a>
 	                	</div>
                 	</div>
                 </div>
@@ -191,8 +191,47 @@
                     if($(item).attr("href").match("^freeMarket")){
                         $(this).attr("class", "active");
                     }
-                })
-            })
+                });
+                if(${sessionScope.id == item.seller}){
+                	$("#addCart").css("pointer-events", "none");
+                	$("#addCart").css("background-color", "#ec735750");
+                }
+            });
+            
+            $("#addCart").on("click", function(){
+            	if(${sessionScope.id == null}){
+            		alert("로그인 후 이용하실 수 있습니다.");
+            		return false;
+            	}else{
+            		$.ajax({
+                		url: "addCart",
+                		data:{
+                			item_seq: ${item.seq}
+                		}
+                	}).done(function(resp){
+                		if(resp == "1"){
+                			if(confirm("장바구니에 담았습니다. 장바구니로 이동할까요?")){
+                				location.href = "toMyPage_cart?currentPage=1";
+                			}
+                		}else if(resp == "-1"){
+                			alert("장바구니에 이미 존재하는 상품입니다.");
+                		}else if(resp == "-2"){
+                			alert("장바구니가 가득 찼습니다! 장바구니에는 최대 10개의 상품을 담으실 수 있습니다.");
+                		}
+                	});
+                	return false;
+            	}
+			});
+            
+            $("#goCart").on("click", function(e){
+            	e.preventDefault();
+            	if(${sessionScope.id == null}){
+            		alert("로그인 후 이용하실 수 있습니다.");
+            		return false;
+            	}else{
+            		location.href = "toMyPage_cart";
+            	}
+            });
+            
         </script>
-    </body>
 </html>

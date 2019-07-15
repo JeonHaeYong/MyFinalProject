@@ -6,7 +6,8 @@
 	</delete>
 	
 	<insert id="upload">
-		insert into item values(item_seq.nextval,#{name},#{contents},TO_CHAR(#{price},'999,999,999'),#{seller},default,default,#{imagePath1},#{imagePath2,jdbcType=varchar},#{imagePath3,jdbcType=varchar},#{category})
+		insert into item values(item_seq.nextval, #{name}, #{contents}, TO_CHAR(#{price},'999,999,999'), #{seller}, default, default,
+		#{imagePath1}, #{imagePath2,jdbcType=VARCHAR}, #{imagePath3,jdbcType=VARCHAR}, #{category}, default)
 	</insert>
 	
 	<select id="selectBySeq" resultType="kh.spring.dto.ItemDTO">
