@@ -42,14 +42,13 @@
         .quiz,.answer,.point,.explain{font-size: 25px;}
         .quiz{  margin-top: 50px;}
         .answer,.point{margin-top:20px; margin-bottom: 20px;}
-        
         .input-quiz{width: 94%; margin-left: 10px; height:35px;}
         .input-o,.input-x{width: 40px;}
         .input-point{width: 30px; margin-left: 10px; height: 35px;}
         textarea{width: 100%; font-size: 20px; }
         .button-box{text-align: center; margin-bottom: 10px; margin-top:10px;}
-        input[type="button"]{background-color: #EC7357; border: none; font-size: 20px; color:white; border-radius: 5px;}
-        input[type="button"]:hover{font-weight: bold; background-color: #f7613e;}
+        input[type="button"],input[type="submit"]{background-color: #EC7357; border: none; font-size: 20px; color:white; border-radius: 5px;}
+        input[type="button"]:hover,input[type="submit"]:hover{font-weight: bold; background-color: #f7613e;}
          /*--퀴즈 리스트-------------------------------------------------------------------------------------------------------------------------------------------*/
 
         .quiz-list,.navi{font-size: 25px;}
@@ -68,16 +67,20 @@
 				$(this).css("font-weight","bold");
         	}
         });
-        $(".quiz-btn").on("click",function(){
-        	if($(".input-quiz").val() != "" && $("input:radio[name=correct]").is(":checked")==true&&$(".input-point").val()!=""&&$(".input-explain").val()!=""){
-        		alert("dd");
-        		$("#quizForm").submit();
-        	}else{alert("내용을 입력해주세요.");}
-        });
+        
+        /* Regex */
+     $(".input-point").on("input",function(){
+    	 var point = $(".input-point").val();
+       	 var testPoint = point.value;
+       	 var regex = /[0-9]/g;
+       	 var result = regex.exec(testPoint);
+       	 if(testPoint == null){
+       		 $(".point-span").text("숫자만 입력해주세요");
+       	 }
+     });
         $(".delete-btn").on("click",function(){
         	$("#deleteForm").submit();
         });
-        
     });
 </script>
 
@@ -94,34 +97,41 @@
                         <div class="col-12 s-menu">M E N U</div>
                         <div class="col-12 "><a name="s-menu" href="oxQuiz">OX QUIZ</a></div>
                         <div class="col-12"><a name="s-menu" href="">반려동물 상식</a></div>
-                        <div class="col-12"><a name="s-menu" href="quizAdmin?currentPage=1">관리자 설정</a></div> <!-- 관리자만 볼 수 있게! -->
+                        <c:choose>
+                        	<c:when test="${type == 4}">
+                        		<div class="col-12"><a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a></div> <!-- 관리자만 볼 수 있게! -->
+                        	</c:when>
+                        	<c:otherwise>
+                        		 <div class="col-12" hidden><a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a></div> 
+                        	</c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
                 <div class="col-1"></div>
                 <div class="col-lg-9 col-md-8 col-sm-12 col-12 insert-quiz">
                    <div class="row header"><div class="col-12">퀴즈 등록</div></div>
                    
-                      <form action="insertQuiz" method="post" id="quizForm">
+                      <form action="insertQuiz.admin" method="post" id="quizForm">
                     <div class="row section">
-                        <div class="col-12 quiz">Quiz<input type="text" name="quiz" class="input-quiz"></div>
+                        <div class="col-12 quiz">Quiz<input type="text" name="quiz" class="input-quiz" required maxlength="333"></div>
                         <div class="col-6 answer">
                            <div class="row">
                                <div class="col-lg-3 col-md-12 col-sm-12 col-12"> O or X</div>
                                <div class="col-lg-9 col-md-12 col-sm-12 col-12">
-                                    O<input type="radio" name="correct" class="input-o" value="o">
-                                    X<input type="radio" name="correct" class="input-x" value="x">
+                                    O<input type="radio" name="correct" class="input-o" value="o" required>
+                                    X<input type="radio" name="correct" class="input-x" value="x" required>
                                </div>
                            </div>
                         </div>
-                        <div class="col-6 point">point<input type="text" name="point" class="input-point"></div>
+                        <div class="col-6 point">point<input type="text" name="point" class="input-point" pattern="[0-9]{1,2}" required><span class="point-span"></span></div>
                         <div class="col-12 explain">설명</div>
-                        <div class="col-12"> <textarea name="explain" id="" cols="30" rows="10" class="input-explain"></textarea></div>
+                        <div class="col-12"> <textarea name="explain" id="" cols="30" rows="10" class="input-explain" required maxlength="1000"></textarea></div>
                     </div>
-                    <div class="row button-box"><div class="col-12"><input type="button" class="quiz-btn" value="등록"></div></div>
+                    <div class="row button-box"><div class="col-12"><input type="submit" class="quiz-btn" value="등록"></div></div>
                 </form>
                     <!--문제 리스트 -->
          	        <div class="row header"><div class="col-12">QUIZ LIST</div></div>
-         	        <form action="deleteQuiz" method="post" id="deleteForm">
+         	        <form action="deleteQuiz.admin" method="post" id="deleteForm">
          	        <c:forEach var="list" items="${quizList }">
          	          <div class="row quiz-list">
                        <div class="col-1 check-del ">

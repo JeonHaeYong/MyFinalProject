@@ -37,6 +37,7 @@
                 padding: 10px;
                 text-align: center;
                 margin: 0px;
+                margin-top:45px;
                 padding: 0px;
             
             }
@@ -69,6 +70,7 @@
         </style>
 <script>
 	$(function(){
+		console.log(${type});
 		$(".result-box").hide();
 		var quizNum = 1;
 		var corr = new Array(); //선택한 답 목록
@@ -80,7 +82,6 @@
 			quizNum++;
 			$("#quiz" + quizNum).css("display", "block");
 			if(index == 10){
-				//alert(corr);
 				$(".quiz-box").html("");
 				$.ajax({
 					url: "answerCheck",
@@ -145,7 +146,14 @@
                         <div class="col-12 s-menu">M E N U</div>
                         <div class="col-12 "><a name="s-menu" href="oxQuiz">OX QUIZ</a></div>
                         <div class="col-12"><a name="s-menu" href="">반려동물 상식</a></div>
-                        <div class="col-12"><a name="s-menu" href="quizAdmin?currentPage=1">관리자 설정</a></div> <!-- 관리자만 볼 수 있게! -->
+                         <c:choose>
+                        	<c:when test="${type == 4}">
+                        		<div class="col-12"><a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a></div> <!-- 관리자만 볼 수 있게! -->
+                        	</c:when>
+                        	<c:otherwise>
+                        		 <div class="col-12" hidden><a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a></div> 
+                        	</c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
                 <div class="col-1"></div>

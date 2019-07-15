@@ -114,13 +114,13 @@ public class QuizDAOImpl implements QuizDAO {
 		}
 		StringBuilder sb = new StringBuilder();
 		if(needPrev) {
-			sb.append("<a class='prev' href='quizAdmin?currentPage=" + (startNavi - 1) + "'> ◀  </a>");
+			sb.append("<a class='prev' href='quizAdmin.admin?currentPage=" + (startNavi - 1) + "'> ◀  </a>");
 		}
 		for(int i = startNavi; i <= endNavi; i++) {
-			sb.append("<a class='pageNum' href='quizAdmin?currentPage=" + i + "'> " + i + "</a>");
+			sb.append("<a class='pageNum' href='quizAdmin.admin?currentPage=" + i + "'> " + i + "</a>");
 		}
 		if(needNext) {
-			sb.append("<a class='next' href='quizAdmin?currentPage=" + (endNavi + 1) + "'> ▶ </a>");
+			sb.append("<a class='next' href='quizAdmin.admin?currentPage=" + (endNavi + 1) + "'> ▶ </a>");
 		}
 		return sb.toString();
 	}

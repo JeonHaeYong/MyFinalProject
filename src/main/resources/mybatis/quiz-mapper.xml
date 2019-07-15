@@ -17,7 +17,7 @@
 	</select>
 	
 	<select id="selectRandQuiz" resultType="kh.spring.dto.QuizDTO">
-		select * from quiz where seq in (#{num1}, #{num2}, #{num3}, #{num4}, #{num5}, #{num6}, #{num7}, #{num8}, #{num9}, #{num10})
+		select * from (select row_number()over(order by seq desc) as rown, quiz.* from quiz) where rown in (#{num1}, #{num2}, #{num3}, #{num4}, #{num5}, #{num6}, #{num7}, #{num8}, #{num9}, #{num10})
 	</select>
 	
 	<select id="getQuizNum" resultType="int">
