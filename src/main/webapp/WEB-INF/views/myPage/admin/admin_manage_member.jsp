@@ -31,7 +31,13 @@
 	
 	background-color: #EC7357 !important;
 }
-
+.selected_my_buttons {
+	border-radius: 0px !important;
+	width: 100%;
+	height: 100%;
+	
+	background-color: black !important;
+}
 .my_buttons:hover{
 	background-color: black !important;
 }
@@ -41,6 +47,9 @@
 }
 .my_navi_btns:hover
 {
+	background-color: black !important;
+}
+.selected_btn{
 	background-color: black !important;
 }
 .no_radius
@@ -70,7 +79,7 @@
 			<div id="menu_row" class="row justify-content-center">
 
 				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="admin-member" class="btn btn-danger my_buttons">회원 관리</a>					
+					<a href="admin-member" class="btn btn-danger selected_my_buttons">회원 관리</a>					
 				</div>
 				
 				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
@@ -245,7 +254,17 @@
 	    		
 	    		for(var i = response.startNavi ; i <= response.endNavi ; i++)
 	    		{
-	    			var $naviBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+	    			
+	    			if(i == response.currentPage)
+	    			{
+		    			var $naviBtn = $('<input class="btn btn-danger selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+
+	    			}
+	    			else
+	    			{
+		    			var $naviBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+
+	    			}
 	    			$naviRow.append($naviBtn);
 	    		}
 	    		
@@ -304,23 +323,33 @@
 	    		console.log(response.startNavi);
 	    		console.log(response.endNavi);
 	    		
-	    		var $naviRow = $('<div id="navi_row" class="row justify-content-center my-1"></div>');
+				var $naviRow = $('<div id="navi_row" class="row justify-content-center my-1"></div>');
 	    		
 	    		if(response.needPrev)
 	    		{
-	    			var $prevBtn = $('<input class="navi_btns" type="button" value="이전" name="'+(response.startNavi-1)+'">');
+	    			var $prevBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="이전" name="'+(response.startNavi-1)+'">');
 	    			$naviRow.append($prevBtn);
 	    		}
 	    		
 	    		for(var i = response.startNavi ; i <= response.endNavi ; i++)
 	    		{
-	    			var $naviBtn = $('<input class="navi_btns" type="button" value="'+i+'" name="'+i+'">');
+	    			
+	    			if(i == response.currentPage)
+	    			{
+		    			var $naviBtn = $('<input class="btn btn-danger selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+
+	    			}
+	    			else
+	    			{
+		    			var $naviBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+
+	    			}
 	    			$naviRow.append($naviBtn);
 	    		}
 	    		
 	    		if(response.needNext)
 	    		{
-	    			var $nextBtn = $('<input class="navi_btns" type="button" value="이후" name="'+(response.endNavi+1)+'">');
+	    			var $nextBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="이후" name="'+(response.endNavi+1)+'">');
 	    			$naviRow.append($nextBtn);
 	    		}
 	    		

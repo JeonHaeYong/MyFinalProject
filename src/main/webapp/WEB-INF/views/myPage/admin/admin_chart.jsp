@@ -29,11 +29,16 @@
 	
 	background-color: #EC7357 !important;
 }
-
 .my_buttons:hover{
 	background-color: black !important;
 }
-
+.selected_my_buttons {
+	border-radius: 0px !important;
+	width: 100%;
+	height: 100%;
+	
+	background-color: black !important;
+}
 .no_radius {
 	border-radius: 0px !important;
 }
@@ -92,7 +97,7 @@
 			</div>
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="admin-chart" class="btn btn-danger my_buttons">통계</a>
+				<a href="admin-chart" class="btn btn-danger selected_my_buttons">통계</a>
 			</div>
 
 		</div>
