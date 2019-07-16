@@ -306,10 +306,7 @@ jQuery(document).ready(function($) {
 //  };
 //  OnePageNavigation();
 
-
   var siteScroll = function() {
-
-     
 
      $(window).scroll(function() {
 

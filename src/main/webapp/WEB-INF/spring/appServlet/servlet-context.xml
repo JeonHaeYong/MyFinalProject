@@ -42,7 +42,11 @@
 	<beans:bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
 		<beans:constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</beans:bean>
-	
+
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="10000000"/>
+	</beans:bean>
+
 	<aop:aspectj-autoproxy/>
 
 	<!-- 메일 보내기 (SEND) -->
@@ -67,7 +71,5 @@
    
    <!--네이버  -->
    <beans:bean id="naverLoginBO" class="kh.spring.loginapi.NaverLoginBO"></beans:bean>
-   
-   
-   
+
 </beans:beans>

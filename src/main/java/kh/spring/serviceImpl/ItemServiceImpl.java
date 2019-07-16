@@ -1,5 +1,6 @@
 package kh.spring.serviceImpl;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -15,42 +16,59 @@ public class ItemServiceImpl implements ItemService{
 	@Autowired
 	private ItemDAO itemDao;
 	
-	
-	public int deleteItem(ItemDTO dto){
-		int result = itemDao.deleteItem(dto);
-		return result;
-	}
-	
-	
-	public int modifyItem(ItemDTO dto){
-		int result = itemDao.modifyItem(dto);
-		return result;
-	}
-		
-	public ItemDTO readOneItem(int seq){
-			ItemDTO dto = itemDao.readOneItem(seq);
-			return dto;
-	}
-	
-	public List<ItemDTO> selectAllItem(int currentPage){
-		List<ItemDTO> list = itemDao.selectAllItem(currentPage);
-		return list;
-	}
-	
-	
-	public Map<String, Integer> getNaviforItem(int currentPage){
-		Map<String, Integer> pageNavi = itemDao.getNaviforItem(currentPage);
-		return pageNavi;
+	@Override
+	public int uploadItem(ItemDTO dto) {
+		System.out.println("Service 실행");
+		return itemDao.insertItem(dto);
 	}
 
 	@Override
-	public int uploadItem(ItemDTO dto){
-		return itemDao.uploadItem(dto);
+	public List<ItemDTO> selectItemPerPage(int currentPage) {
+		Map<String, Integer> navi = itemDao.getNaviforItem(currentPage, itemDao.itemContentsSize());
+		return itemDao.selectItemPerPage(navi.get("fromIndex"), navi.get("toIndex"));
 	}
 
 	@Override
-	public int itemContentsSize(){
-		int result = itemDao.itemContentsSize();
-		return result;
+	public List<ItemDTO> selectItemPerPageByCategory(int currentPage, String category) {
+		Map<String, Integer> navi = itemDao.getNaviforItem(currentPage, itemDao.itemContentsSize());
+		return itemDao.selectItemPerPageByCategory(category, navi.get("fromIndex"), navi.get("toIndex"));
 	}
+
+	@Override
+	public ItemDTO readOneItem(int seq) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		ItemDTO dto = itemDao.readOneItem(seq);
+		dto.setFomredDate(sdf.format(dto.getWrite_date()));
+		return dto;
+	}
+
+	@Override
+	public int deleteItem(ItemDTO dto) {
+		return itemDao.deleteItem(dto);
+	}
+
+	@Override
+	public int modifyItem(ItemDTO dto) {
+		return itemDao.modifyItem(dto);
+	}
+
+	@Override
+	public int itemContentsSize() {
+		return itemDao.itemContentsSize();
+	}
+	
+	@Override
+	public int itemContentsSizeByCategory(String category) {
+		return itemDao.itemContentsSizeByCategory(category);
+	}
+	
+	@Override
+	public Map<String, Integer> getNaviforItem(int currentPage, String category) {
+		if(category.equals("all")) {
+			return itemDao.getNaviforItem(currentPage, itemDao.itemContentsSize());
+		}else {
+			return itemDao.getNaviforItem(currentPage, itemDao.itemContentsSizeByCategory(category));
+		}
+	}
+
 }

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.scribejava.core.model.OAuth2AccessToken;
@@ -25,6 +24,7 @@ import kh.spring.dto.MemberDTO;
 import kh.spring.dto.MessageDTO;
 import kh.spring.loginapi.NaverLoginBO;
 import kh.spring.loginapi.kakao_restapi;
+import kh.spring.service.CartService;
 import kh.spring.service.MemberService;
 import kh.spring.service.MessageService;
 
@@ -35,6 +35,8 @@ public class MemberController {
 	@Autowired
 	private MemberService mservice;
 	@Autowired
+	private CartService cs;
+	@Autowired
 	private MessageService msgService;
 	@Autowired
 	private HttpSession session;
@@ -42,7 +44,7 @@ public class MemberController {
 
 	//로그인
 	@RequestMapping("login")
-	public String lign(MemberDTO dto) {
+	public String login(MemberDTO dto) {
 		System.out.println(dto.getId());
 		try{
 			int result=mservice.isLoginOkService(dto.getId(), dto.getPassword());
