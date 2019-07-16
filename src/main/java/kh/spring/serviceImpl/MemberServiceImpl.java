@@ -90,12 +90,19 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<MemberDTO> selectByLikeId(String id)
+	public List<MemberDTO> selectByLikeId(String id, String page)
 	{
-		return mdao.selectByLikeId(id);
+		int recordPerPage =  10;
+		int pageStart = Integer.parseInt(page) * recordPerPage - recordPerPage + 1;
+		int pageEnd = Integer.parseInt(page) * recordPerPage;
+		return mdao.selectByLikeId(id, pageStart, pageEnd);
 	}
 	
-	
+	@Override
+	public int selectCountByLikeId(String id) throws Exception
+	{
+		return mdao.selectCountByLikeId(id);
+	}
 	
 	
     // 메일 test

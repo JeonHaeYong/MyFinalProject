@@ -24,11 +24,24 @@
 {
 	margin-top: 5%;
 }
-.my_buttons
-{
+.my_buttons {
 	border-radius: 0px !important;
 	width: 100%;
 	height: 100%;
+	
+	background-color: #EC7357 !important;
+}
+
+.my_buttons:hover{
+	background-color: black !important;
+}
+.my_navi_btns
+{
+	background-color: #EC7357 !important;
+}
+.my_navi_btns:hover
+{
+	background-color: black !important;
 }
 .no_radius
 {
@@ -56,27 +69,27 @@
 			<div id="menu_row" class="row justify-content-center">
 
 				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="admin-member" class="btn btn-warning my_buttons">회원 관리</a>					
+					<a href="admin-member" class="btn btn-danger my_buttons">회원 관리</a>					
 				</div>
 				
 				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="#" class="btn btn-warning my_buttons">무료 나눔 물품 승인</a>
+					<a href="#" class="btn btn-danger my_buttons">무료 나눔 물품 승인</a>
 				</div>
 				
 				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="#" class="btn btn-warning my_buttons">무료 나눔 거래 내역</a>
+					<a href="#" class="btn btn-danger my_buttons">무료 나눔 거래 내역</a>
 				</div>
 				
 				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="#" class="btn btn-warning my_buttons">월 별 후원금 및 전달 기관</a>
+					<a href="#" class="btn btn-danger my_buttons">월 별 후원금 및 전달 기관</a>
 				</div>
 				
 				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="#" class="btn btn-warning my_buttons">퀴즈 당첨자</a>
+					<a href="#" class="btn btn-danger my_buttons">퀴즈 당첨자</a>
 				</div>
 				
 				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="admin-chart" class="btn btn-warning my_buttons">통계</a>
+					<a href="admin-chart" class="btn btn-danger my_buttons">통계</a>
 				</div>
 
 			</div>
@@ -95,7 +108,7 @@
 						
 						<div class="col-4 col-md-4 col-lg-2 text-center my-auto">
 							
-							<input id="search_btn" class="btn btn-info" type="button" value="검색">
+							<input id="search_btn" class="btn btn-info my_buttons" type="button" value="검색">
 							
 						</div>
 						
@@ -119,7 +132,7 @@
 						
 						<div class="col-4 col-md-4 col-lg-2 text-center my-5">
 							
-							<input id="black_btn" class="btn btn-danger no_radius" type="button" value="등록하기">
+							<input id="black_btn" class="btn btn-danger my_buttons" type="button" value="등록하기">
 							
 						</div>
 						
@@ -135,8 +148,18 @@
 							
 						<div class="col-4 col-md-4 col-lg-2 text-center my-5">
 								
-							<input id="release_btn" class="btn btn-danger no_radius" type="button" value="해제하기">
+							<input id="release_btn" class="btn btn-danger my_buttons" type="button" value="해제하기">
 								
+						</div>
+						
+					</div>
+					
+					<div class="row justify-content-center">
+						
+						<div class="col-12 text-center my-5">
+							
+							<a href="admin-member-insert">데이터 입력</a>
+							
 						</div>
 						
 					</div>
@@ -168,6 +191,8 @@
 <script>
 	$(function()
     {
+		var keyword;
+		
 	    $("#search_btn").on("click", function()
 		{
 	    	$.ajax
@@ -178,26 +203,127 @@
 	    		data:
 	    		{
 	    			id: $("#search_text").val()
+	    			,page: '1'
+	    		}
+	    	})
+	    	.done(function(response)
+	    	{
+	    		keyword = $("#search_text").val();
+	    		$("#search_result_div").empty();
+	    		
+	    		var size = response.size;
+	    		var array = response.array;
+	    		
+// 	    		console.log(response)
+// 	    		alert(size);
+	    		
+	    		for(var i = 1 ; i <= array.length ; i++)
+	    		{
+// 	    			console.log(response[i-1].id);
+					var $row = $('<div class="row justify-content-center my-1"></div>');
+	    			var $idCol = $('<div class="col-6 col-md-6 col-lg-4 text-center my-1">'+array[i-1].id+'</div>');
+	    			var $statusCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].status+'</div>');
+	    			var $checkCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1"><input class="black_check" name="'+array[i-1].id+'" type="checkbox">'+'블랙리스트 등록'+'</div>');
+	    			$row.append($idCol).append($statusCol).append($checkCol);
+	    			$("#search_result_div").append($row);
+	    		}
+	    		
+	    		console.log(response.currentPage);
+	    		console.log(response.needPrev);
+	    		console.log(response.needNext);
+	    		console.log(response.startNavi);
+	    		console.log(response.endNavi);
+	    		
+	    		var $naviRow = $('<div id="navi_row" class="row justify-content-center my-1"></div>');
+	    		
+	    		if(response.needPrev)
+	    		{
+	    			var $prevBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="이전" name="'+(response.startNavi-1)+'">');
+	    			$naviRow.append($prevBtn);
+	    		}
+	    		
+	    		for(var i = response.startNavi ; i <= response.endNavi ; i++)
+	    		{
+	    			var $naviBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+	    			$naviRow.append($naviBtn);
+	    		}
+	    		
+	    		if(response.needNext)
+	    		{
+	    			var $nextBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="이후" name="'+(response.endNavi+1)+'">');
+	    			$naviRow.append($nextBtn);
+	    		}
+	    		
+	    		$("#search_result_div").append($naviRow);
+	    		
+	    	})
+	    	.fail(function()
+	    	{
+	    		alert("error");
+	    	});
+		});
+	    
+	    $(document).on("click", ".navi_btns", function()
+		{
+	    	$.ajax
+	    	({
+	    		url: "admin-member-search",
+	    		type: "POST",
+	    		dataType: "JSON",
+	    		data:
+	    		{
+	    			id: $("#search_text").val()
+	    			,page: this.name
 	    		}
 	    	})
 	    	.done(function(response)
 	    	{
 	    		$("#search_result_div").empty();
-	    		for(var i = 1 ; i <= response.length ; i++)
+	    		
+	    		var size = response.size;
+	    		var array = response.array;
+	    		
+// 	    		console.log(response)
+// 	    		alert(size);
+	    		
+	    		for(var i = 1 ; i <= array.length ; i++)
 	    		{
 // 	    			console.log(response[i-1].id);
 					var $row = $('<div class="row justify-content-center my-1"></div>');
-	    			var $idCol = $('<div class="col-6 col-md-6 col-lg-4 text-center my-1">'+response[i-1].id+'</div>');
-	    			var $statusCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+response[i-1].status+'</div>');
-	    			var $checkCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1"><input class="black_check" name="'+response[i-1].id+'" type="checkbox">'+'블랙리스트 등록'+'</div>');
+	    			var $idCol = $('<div class="col-6 col-md-6 col-lg-4 text-center my-1">'+array[i-1].id+'</div>');
+	    			var $statusCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].status+'</div>');
+	    			var $checkCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1"><input class="black_check" name="'+array[i-1].id+'" type="checkbox">'+'블랙리스트 등록'+'</div>');
 	    			$row.append($idCol).append($statusCol).append($checkCol);
 	    			$("#search_result_div").append($row);
-	    			
-	    			if(i == 20)
-	    			{
-	    				break;
-	    			}
 	    		}
+	    		
+	    		console.log(response.currentPage);
+	    		console.log(response.needPrev);
+	    		console.log(response.needNext);
+	    		console.log(response.startNavi);
+	    		console.log(response.endNavi);
+	    		
+	    		var $naviRow = $('<div id="navi_row" class="row justify-content-center my-1"></div>');
+	    		
+	    		if(response.needPrev)
+	    		{
+	    			var $prevBtn = $('<input class="navi_btns" type="button" value="이전" name="'+(response.startNavi-1)+'">');
+	    			$naviRow.append($prevBtn);
+	    		}
+	    		
+	    		for(var i = response.startNavi ; i <= response.endNavi ; i++)
+	    		{
+	    			var $naviBtn = $('<input class="navi_btns" type="button" value="'+i+'" name="'+i+'">');
+	    			$naviRow.append($naviBtn);
+	    		}
+	    		
+	    		if(response.needNext)
+	    		{
+	    			var $nextBtn = $('<input class="navi_btns" type="button" value="이후" name="'+(response.endNavi+1)+'">');
+	    			$naviRow.append($nextBtn);
+	    		}
+	    		
+	    		$("#search_result_div").append($naviRow);
 	    	})
 	    	.fail(function()
 	    	{
@@ -212,7 +338,6 @@
 	    	var checkboxNumber = $checkboxClass.length;
 	    	
 	    	var id = "";
-	    	
 	    	for(var i = 1 ; i <= checkboxNumber ; i++)
 	    	{
 	    		if($checkboxClass.eq(i-1).prop("checked") == true)
