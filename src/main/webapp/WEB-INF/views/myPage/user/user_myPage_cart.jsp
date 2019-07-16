@@ -45,12 +45,12 @@
                     text-align: center;
                 }
                 /*점보트론 이미지*/
-                .myJumbo{
+                .jumbotron{
                 	background-color: white;
                 }
-                #jumboImg{
-					width: 100%;
-					max-height: 600px;
+                .jumbotron>img{
+                    width: 100%;
+                    max-height: 600px;
                 }
                 .itemImage{
                 	height: 100%;
@@ -75,7 +75,7 @@
                 	color: white;
                 }
             </style>
-
+			<jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
         </head>
         <body data-spy="scroll" data-target=".site-navbar-target"
               data-offset="300" id="home-section">
@@ -99,7 +99,7 @@
                                         			<h4>장바구니가 비어있습니다.</h4>
                                         		</div>
 											</c:if>
-											<form action="toPayment" id="itemCheckForm" method="post">
+											<form class="row" action="toPayment" id="itemCheckForm" method="post">
 	                                        	<c:forEach var="dto" items="${list }" varStatus="status">
 		                                            <div class="col-lg-6 col-12 d-flex justify-content-center">
 														<div class="custom-control custom-checkbox">

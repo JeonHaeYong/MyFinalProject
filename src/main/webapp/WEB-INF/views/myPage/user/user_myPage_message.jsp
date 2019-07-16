@@ -45,16 +45,28 @@
                         text-align: center;
                     }
                     /*점보트론 이미지*/
-                    .jumbotron>img{
-                        width: 100%;
-                        height: 600px;
-                    }
+                .jumbotron{
+                	background-color: white;
+                }
+                .jumbotron>img{
+                    width: 100%;
+                    max-height: 600px;
+                }
                     /*부트스트랩 모달시 패딩 없애주기.*/
                     .modal-open {padding-right: 0px !important;}
-                    .sent_msg_click,.recipient_msg_click{
-                    	
+                    .readMsg{
+                    	color : gray;
                     }
+                    /*쪽지함 마다 다르게 스타일주기*/
+                    .sent_msg_click{
+                    	color : royalblue;
+                    }
+                    .s_list_row:hover,.r_list_row:hover{
+                    	background-color: rgba(128, 128, 128, 0.06);
+                    }
+                    
                 </style>
+                <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
             </head>
             <body data-spy="scroll" data-target=".site-navbar-target"
                   data-offset="300" id="home-section">
@@ -76,7 +88,7 @@
                                     </nav>
                                     <div class="tab-content" id="nav-tabContent">
                                         <!-- 받은쪽지함 -->
-                                        <div class="tab-pane fade show active" id="nav-inbox" role="tabpanel" aria-labelledby="nav-inbox-tab">
+                                        <div class="tab-pane fade show active selectedBox" id="nav-inbox" role="tabpanel" aria-labelledby="nav-inbox-tab">
                                             <div class="row">
                                                 <div class="col-1">
                                                     <div class="custom-control custom-checkbox">
@@ -91,22 +103,36 @@
                                             </div>
                                             <!-- 테이블에서 값 가져오기 -->
                                             <!-- 받은쪽지함 내용 -->
+                                            <c:if test="${receivedList.size()==0 }">
+                                            	<div class="row">
+                                            		<div class="col-12 text-center">
+                                            			받은 쪽지가 없습니다.
+                                            		</div>
+                                            	</div>
+                                            </c:if>
+                                            <form id="receivedMsg_delete_form" action="deleteMsg" method="post">
                                             <c:forEach var="r_list" items="${receivedList }" varStatus="status">
-                                                <div class="row">
+                                                <div class="row r_list_row">
                                                     <div class="col-1">
                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input received_check" id="r_${status.count }">
+                                                            <input type="checkbox" class="custom-control-input received_check" id="r_${status.count }" name="msgSeq" value="${r_list.seq }">
                                                             <label class="custom-control-label" for="r_${status.count }"></label>
                                                         </div> 
                                                     </div>
                                                     <div class="col-2 text-truncate">${r_list.sender }</div>
                                                     <div class="col-5 r_click_parent text-truncate">
-                                                    	<a class="received_msg_click" href="#" seq="${r_list.seq }" data-toggle="modal" data-target="#r_msg_modal" value="${r_list.sender }">${r_list.contents }</a>
+                                                    	<c:if test="${r_list.readOk =='N'}">
+                                                    		<a class="received_msg_click text-decoration-none" href="#" seq="${r_list.seq }" data-toggle="modal" data-target="#r_msg_modal" value="${r_list.recipient }">${r_list.contents }</a>
+                                                    	</c:if>
+                                                    	<c:if test="${r_list.readOk =='Y'}">
+                                                    		<a class="received_msg_click text-decoration-none readMsg" href="#" seq="${r_list.seq }" data-toggle="modal" data-target="#r_msg_modal" value="${r_list.recipient }">${r_list.contents }</a>
+                                                    	</c:if>
                                                     </div>
                                                     <div class="col-3">${r_list.message_date }</div>
                                                     <div class="col-1 r_readOk">${r_list.readOk }</div>
                                                 </div>
                                             </c:forEach>
+                                            </form>
                                             <!-- 받은쪽지클릭하면 내용띄워주기 -->
                                             <div class="modal fade p-0" id="r_msg_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -121,7 +147,7 @@
                                                         	<div class="container-fluid">
                                                         	<div id="r_sender_modal">보낸사람 : </div>
                                                             <div>
-                                                            	<textarea class="border-0" id="r_contents_modal" rows="5" cols="50" style="resize:none;" readonly></textarea>
+                                                            	<textarea class="border-0" id="r_contents_modal" rows="8" cols="50" style="resize:none;" readonly></textarea>
                                                             </div>
                                                         	</div>
                                                         </div>
@@ -148,12 +174,12 @@
                                             </div><!-- /받은쪽지 네비게이터-->
                                         </div>
                                         <!-- 보낸쪽지함 -->
-                                        <div class="tab-pane fade" id="nav-sentbox" role="tabpanel" aria-labelledby="nav-sentbox-tab">
-                                            <div class="row">
+                                        <div class="tab-pane fade selectedBox" id="nav-sentbox" role="tabpanel" aria-labelledby="nav-sentbox-tab">
+                                            <div class="row ">
                                                 <div class="col-1">
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                                        <label class="custom-control-label" for="customCheck2"></label>
+                                                        <input type="checkbox" class="custom-control-input" id="s_allCheck">
+                                                        <label class="custom-control-label" for="s_allCheck"></label>
                                                     </div> 
                                                 </div>
                                                 <div class="col-2">받은사람</div>
@@ -161,22 +187,24 @@
                                                 <div class="col-3">보낸날짜</div>
                                                 <div class="col-1">Read</div>
                                             </div>
+                                            <form id="sentMsg_delete_form" action="deleteMsg" method="post">
                                             <c:forEach var="s_list" items="${sentList }" varStatus="status">
-                                                <div class="row">
+                                                <div class="row s_list_row">
                                                     <div class="col-1">
                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input sent_check" id="s_${status.count }">
+                                                            <input type="checkbox" class="custom-control-input sent_check" id="s_${status.count }" name="msgSeq" value="${s_list.seq }">
                                                             <label class="custom-control-label" for="s_${status.count }"></label>
                                                         </div> 
                                                     </div>
                                                     <div class="col-2 text-truncate">${s_list.recipient }</div>
                                                     <div class="col-5 s_click_parent text-truncate">
-                                                    	<a class="sent_msg_click" href="#" seq="${s_list.seq }" data-toggle="modal" data-target="#s_msg_modal" value="${s_list.recipient }">${s_list.contents }</a>
+                                                    	<a class="sent_msg_click text-decoration-none" href="#" seq="${s_list.seq }" data-toggle="modal" data-target="#s_msg_modal" value="${s_list.recipient }">${s_list.contents }</a>
                                                     </div>
                                                     <div class="col-3">${s_list.message_date }</div>
                                                     <div class="col-1 s_readOk">${s_list.readOk }</div>
                                                 </div>
                                             </c:forEach>
+                                           	</form>
                                             <!-- 보낸쪽지클릭하면 내용띄워주기 -->
                                             <div class="modal fade p-0" id="s_msg_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -191,13 +219,12 @@
                                                         	<div class="container-fluid">
                                                         	<div id="s_recipient_modal">받은사람:</div>
                                                             <div>
-                                                            	<textarea class="border-0" id="s_contents_modal" rows="5" cols="50" style="resize:none;" readonly></textarea>
+                                                            	<textarea class="border-0" id="s_contents_modal" rows="8" cols="50" style="resize:none;" readonly></textarea>
                                                             </div>
                                                         	</div>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-primary">Save changes</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -227,9 +254,10 @@
                         <!-- /쪽지함 -->
                     </div>
                 </div>
-                <div>
-                    <div class="text-center">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">쪽지보내기</button>
+                <div class="row">
+                    <div class="col-12 text-center">
+                    	<button type="button" class="btn btn-outline-warning rounded" id="selectMsg_delete">선택 삭제하기</button>
+                        <button type="button" class="btn btn-outline-warning rounded" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">쪽지보내기</button>
                     </div>
                     <div class="modal fade text-left" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -248,7 +276,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="message-text" class="col-form-label">보낼메세지:</label>
-                                            <textarea rows="5" cols="80" class="form-control" id="message-text" style="resize:none;" name="contents"></textarea>
+                                            <textarea rows="8" cols="80" class="form-control" id="message-text" style="resize:none;" name="contents"></textarea>
                                         </div>
                                         <div><span id="counter">0/300</span></div>
                                         <input type="hidden" value="${memberDTO.id }" name="sender">
@@ -284,14 +312,14 @@
             <script>
                 $('#message-text').keyup(function (e){
                     var content = $(this).val();
-                    if(content.length>150){
-                        alert("쪽지는 150자 이내만 가능합니다.");
-                        content = content.substr(0,150);
-                        $('#counter').html(content.length + '/150');
+                    if(content.length>300){
+                        alert("쪽지는 300자 이내만 가능합니다.");
+                        content = content.substr(0,300);
+                        $('#counter').html(content.length + '/300');
                         $(this).val(content);
                         return;
                     }else{
-                        $('#counter').html(content.length + '/150');
+                        $('#counter').html(content.length + '/300');
                     }
                 });
                 $("#msg_close_btn").on("click",function(){
@@ -301,6 +329,10 @@
                     var recipient = $("#recipient-name").val();
                     var content = $('#message-text').val();
                     //alert(recipient + " : " + content);
+                    if("${memberDTO.id}"==recipient){
+                    	alert("쪽지는 본인에게 쓸수없습니다.");
+                    	return false;
+                    }
                     $.ajax({
                         url: "idExistOk",
                         method: "post",
@@ -317,29 +349,53 @@
                         $("#msg_send_form").submit();
                     });
                 });
-                $("#r_allCheck").on("change",function(){
-                    if($(this).prop("checked")){
-                        $(".received_check").prop("checked",true);
+                //checkbox function
+                function allChecked( all , part ) {
+                	if($(all).prop("checked")){
+                        $(part).prop("checked",true);
                     }else{
-                        $(".received_check").prop("checked",false);
+                        $(part).prop("checked",false);
                     }
-                });
-                $(".received_check").on("change",function(){
-                    if(!($(this).prop("checked"))&&$("#r_allCheck").prop("checked")){
-                        $("#r_allCheck").prop("checked",false);
-                        return false;
-                    }
-                    var length = $(".received_check").length;
+				}
+                function partChecked( all , part ) {
+                    var length = $(part).length;
                     var count = 0;
-                    $(".received_check").each(function(i,item){
+                    $(part).each(function(i,item){
+                    	if(!($(item).prop("checked"))&&$(all).prop("checked")){
+                            $(all).prop("checked",false);
+                            return false;
+                        }                      
                         if($(item).prop("checked")){
                             count++;
-                        } 
+                        }
+                        if(length==count){
+                            $(all).prop("checked",true);
+                        }
                     });
-                    if(length==count){
-                        $("#r_allCheck").prop("checked",true);
-                    }
+				}
+                //받은쪽지함에서 Checkbox 전체버튼, 개별버튼 작동하게하기.
+                $("#r_allCheck").on("change",function(){
+					var all = $(this);
+					var check = $(".received_check");
+					allChecked(all,check);
                 });
+                $(".received_check").on("change",function(){
+					var all = $("#r_allCheck");
+					var check = $(".received_check");
+					partChecked(all,check);
+                });
+              //보낸쪽지함에서 Checkbox 전체버튼, 개별버튼 작동하게하기.
+                $("#s_allCheck").on("change",function(){
+					var all = $(this);
+					var check = $(".sent_check");
+					allChecked(all,check);
+                });
+                $(".sent_check").on("change",function(){
+					var all = $("#s_allCheck");
+					var check = $(".sent_check");
+					partChecked(all,check);
+                });
+                
                 $(".received_msg_click").on("click" , function(){
                 	$("#r_sender_modal").html("");
                 	$("#r_contents_modal").html("");
@@ -349,6 +405,7 @@
                 	$("#r_contents_modal").append(contents);
                 	var readOk = $(this).parent(".r_click_parent").siblings(".r_readOk").text();
                 	var readOkModi = $(this).parent(".r_click_parent").siblings(".r_readOk");
+                	var clickThis = $(this);
                 	if(readOk=="N"){
                 		$.ajax({
                     		url : "updateReadOk"
@@ -357,10 +414,11 @@
                     			seq : $(this).attr("seq")
                     		}
                     	}).done(function(resp){
-                    		if(resp=="1"){
+                    		if(resp=="2"){
                     			$(readOkModi).text("Y");//msg읽음으로 바꿈
                     			var yetMsg = $("#yet_noRead_msg").text();//msg안읽은 갯수 가져오기.
                     			$("#yet_noRead_msg").text(yetMsg-1);//msg안읽은 갯수 바꾸기.
+                    			$(clickThis).addClass("readMsg");
                     		}
                     	}).fail(function(a,b,c){
                 			alert("error");
@@ -374,6 +432,23 @@
                 	var recipient = $(this).attr("value");
                 	$("#s_recipient_modal").append("받은사람 : "+recipient+"<hr>");
                 	$("#s_contents_modal").append(contents);
+                });
+                $("#selectMsg_delete").on("click",function(){//선택한 메세지 삭제하기.
+                	//선택한 메세지가 없을때,
+                	var length = $(".selectBox.active>form input[type='checkbox']").length;
+                	var count = 0;
+                	alert("each이전"+length +":"+count);
+                	$(".selectBox.active>form input[type='checkbox']").each(function(i,item){
+                		if(!$(item).prop("checked")){
+                			count++;
+                		}
+                	})
+                	alert(length +":"+count);
+                	if(length==count){
+                		alert("삭제할 쪽지를 선택해주세요.");
+                		return false;
+                	}
+                	$(".selectedBox.active>form").submit();
                 });
             </script>
         </html>
