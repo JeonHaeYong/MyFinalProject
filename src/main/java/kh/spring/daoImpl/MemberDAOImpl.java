@@ -41,11 +41,15 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	@Override
-	public List<MemberDTO> selectByLikeId(String id)
+	public List<MemberDTO> selectByLikeId(String id, int pageStart, int pageEnd)
 	{
-		return sst.selectList("MemberDAO.selectByLikeId", "%"+id+"%");
+		return sst.selectList("MemberDAO.selectByLikeId", new Object[] {"%"+id+"%", pageStart, pageEnd});
 	}
-	
+	@Override
+	public int selectCountByLikeId(String id) throws Exception
+	{
+		return sst.selectOne("MemberDAO.selectCountByLikeId","%"+id+"%");
+	}
 	@Override
 	public List<MemberDTO> selectAllMembers() {
 		return sst.selectList("MemberDAO.selectAllMembers");
@@ -107,5 +111,6 @@ public class MemberDAOImpl implements MemberDAO {
 	public List<MemberDTO> memberPoint() {
 		return sst.selectList("MemberDAO.memberPoint");
 	}
+	
 
 }

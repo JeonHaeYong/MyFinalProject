@@ -41,14 +41,31 @@ public class AdminController
 		logger.info("회원 관리 페이지");
 		return "myPage/admin/admin_manage_member";
 	}
+	@RequestMapping(value = "admin-member-insert")
+	public String insertRandomMembers()
+	{
+		logger.info("회원 데이터 삽입 시도");
+		String result = "error";
+		
+		try
+		{
+			result = blackService.insertRandomMembers();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 	@ResponseBody
 	@RequestMapping(value = "admin-member-search", produces="application/json;charset=utf-8")
-	public String searchMember(String id)
+	public String searchMember(String id, String page)
 	{
 		String result = "error";
 		try
 		{
-			result = blackService.searchMember(id);
+			result = blackService.searchMember(id, page);
 		}
 		catch(Exception e)
 		{
