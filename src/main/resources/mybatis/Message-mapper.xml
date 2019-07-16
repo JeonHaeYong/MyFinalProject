@@ -2,32 +2,49 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MessageDAO">
 	<select id="selectMsgYetReadCount" resultType="int">
-		select count(*) from message where recipient = #{id} and readOk = 'N'
+		select count(*) from message where recipient = #{id} and owner=#{id} and readOk = 'N'
 	</select>
 	<insert id="insertMsg">
-		insert into message values(message_seq.nextval,#{sender},#{recipient},#{contents},default,default)
+		insert into message values(message_seq.nextval,#{sender},#{recipient},#{contents},default,default,#{owner},
+		<choose>
+			<when test="subseq==0">
+				message_seq.currval)
+			</when>
+			<otherwise>
+				#{subseq})
+			</otherwise>
+		</choose>
 	</insert>
+	<select id="selectSeqCurrVal" resultType="int">
+		select message_seq.currval from dual
+	</select>
 	<select id="selectAllMsgByCurrentPage" resultType="kh.spring.dto.MessageDTO">
 		select * from (select row_number() over(order by MESSAGE_DATE desc) as rown, message.* 
 		from message where 
 		<if test="recipient!=null">
-			recipient=#{recipient})
+			recipient=#{recipient} and owner = #{recipient} )
 		</if>
 		<if test="sender!=null">
-			sender=#{sender})
+			sender=#{sender} and owner = #{sender})
 		</if> 
 		where rown between #{start} and #{end}
 	</select>
 	<update id="updateReadOkToYes">
-		update message set readOk = 'Y' where seq = #{seq}
+		update message set readOk = 'Y' where subseq = #{seq}
 	</update>
 	<select id="getMsgAllCount" resultType="int">
 		select count(*) from message where 
 		<if test="recipient!=null">
-			recipient=#{recipient}
+			recipient=#{recipient} and owner = #{recipient}
 		</if>
 		<if test="sender!=null">
-			sender=#{sender}
+			sender=#{sender} and owner = #{sender}
 		</if>
 	</select>
+	<delete id="deleteMsgBySeq">
+		delete from message where seq in
+		<foreach item="seq" index="index" collection="array" open="(" separator="," close=")">
+        	#{seq}
+  		</foreach>
+	</delete>
 </mapper>

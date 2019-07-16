@@ -267,6 +267,7 @@ public class MemberController {
 	public String toMyPage(HttpServletRequest request) {
 		MemberDTO dto = (MemberDTO)request.getAttribute("memberDTO");
 		int type= dto.getType();
+		System.out.println("관리자확인->" + type);
 		if(type==4) {//관리자라면
 			return "myPage/admin/admin_chart";
 		}
