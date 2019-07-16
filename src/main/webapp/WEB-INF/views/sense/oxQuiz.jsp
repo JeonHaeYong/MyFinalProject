@@ -20,10 +20,11 @@
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
 
- <!--구글폰트-->
-        <link href="https://fonts.googleapis.com/css?family=Gamja+Flower&display=swap&subset=korean" rel="stylesheet">
+
  <style>
-            .bigImg{width: 100%; height: 700px;}
+           
+     		.jumbotron{background-color:white;}
+     		.jumbotron>img{width:100%; height: 700px;}
             #title{width: 100%; text-align: center; margin: auto; margin-bottom: 50px;}
             h3,h1{ font-family:'Gamja Flower', cursive;}
             .container{
@@ -136,7 +137,9 @@
  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
    <jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 <!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
-      <img class="bigImg" src="/resources/images/dog_7.png">
+      <div class="jumbotron px-0 pb-0">
+     	<img  src="/resources/images/dog_7.png">
+      </div>
         <div id="title"><h1>나는 얼마나 잘 알고 있을까??</h1></div>
 
         <div class="container">
@@ -146,14 +149,14 @@
                         <div class="col-12 s-menu">M E N U</div>
                         <div class="col-12 "><a name="s-menu" href="oxQuiz">OX QUIZ</a></div>
                         <div class="col-12"><a name="s-menu" href="">반려동물 상식</a></div>
-                         <c:choose>
+                          <c:choose>
                         	<c:when test="${type == 4}">
                         		<div class="col-12"><a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a></div> <!-- 관리자만 볼 수 있게! -->
                         	</c:when>
                         	<c:otherwise>
                         		 <div class="col-12" hidden><a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a></div> 
                         	</c:otherwise>
-                        </c:choose>
+                        </c:choose> 
                     </div>
                 </div>
                 <div class="col-1"></div>

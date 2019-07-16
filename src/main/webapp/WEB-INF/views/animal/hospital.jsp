@@ -43,10 +43,9 @@
 </script>
  <style>
  	.jumbotron{background-color:white;}
-     .jumbotron>img{width:100%;
-                 height: 700px; }
-     .container{margin-bottom: 30px; color: #754F44; max-width:1700px; }
-     .header{background-color: #EC7357; color: white; text-align: center; font-size: 20px; height: 40px; line-height: 40px;}
+     .jumbotron>img{width:100%; height: 700px; }
+     .container{margin-bottom: 30px; color: #754F44; }
+     .header{background-color: #EC7357; color: white; text-align: center; font-size: 25px; height: 40px; line-height: 40px; font-family:'Gamja Flower', cursive;}
      .header>div{padding: 0px;}
      .section{text-align: center; border-bottom: 1px solid black;}
      .section:hover{background-color: #FDD69250;}
@@ -54,30 +53,31 @@
      .section>div:not(.addr){line-height: 50px;}
      
      .footer{text-align: center; padding-top:15px; font-size: 18px;}
-     .menu-bar{text-align: center; height: 200px;  }
+     .menu-bar{text-align: center; height: 200px; font-family:'Gamja Flower', cursive; }
      .menu-bar>div{height: 40px;}
      .menu-bar>div:not(.menu){line-height: 40px;}
      .menu-bar>div:not(.menu):hover{background-color: #FBFFB950; font-weight: bold; }
-     .menu-bar div:first-child{font-size: 20px; font-weight: bold;  border-bottom: 1px solid black; color: #754F44;}
-     a[name="s-menu"]{color: #754F44; text-decoration-line: none;}
+     .menu-bar div:first-child{font-size: 25px; font-weight: bold;  border-bottom: 1px solid black; color: #754F44;}
+     a[name="s-menu"]{color: #754F44; text-decoration-line: none; font-size:20px;}
      a[name="s-menu"]:hover{color: #754F44;}
-     .pageNum,.prev,.next{text-decoration-line: none; color: #754F44; font-size:20px;}
+     .pageNum,.prev,.next{text-decoration-line: none; color: #754F44; font-size:25px; font-family:'Gamja Flower', cursive;}
      .pageNum:hover,.prev:hover,.next:hover{font-weight: bold;}
      .search-box{margin-bottom:10px;}
      .search-box>div{padding:0px;}
-     input[type="button"]{background-color:#FDD692; border:none;}
+     input[type="button"]{background-color:#FDD692; border:none; font-family:'Gamja Flower', cursive; font-size:20px; padding: 0px 3px;}
      input[type="button"]:hover{background-color:#fcc96f; font-weight:bold;}
+    
+     .contents{max-width:1700px;}
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
    <jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
    <!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 	   <div class="jumbotron px-0 pb-0">
-	   	<img  src="/resources/images/dog_8.jpg">
-            
+	   		<img  src="/resources/images/dog_8.jpg">
         </div>
 
-        <div class="container">
+        <div class="container contents">
             <div class="row search-box">
            		 <div class="col-lg-2 col-md-3 col-sm-12 col-12"></div>
            		 <div class="col-1"></div>
