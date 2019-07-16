@@ -11,13 +11,13 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Login</h5>
+				<div id="modal-title" class="col" >로그인</div>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body" id="body">
 				<form action="login" id="loginform" name="formname" method="post">
 					<div class="form-group">
 						<label for="exampleFormControlInput1">ID</label> <input
@@ -32,27 +32,28 @@
 							onkeypress="press(this.form)">
 					</div>
 
-					<div class="modal-footer">
-
-
-						<!-- 네이버 로그인 화면으로 이동 시키는 URL -->
-						<!-- 네이버 로그인 화면에서 ID, PW를 올바르게 입력하면 callback 메소드 실행 요청 -->
-
-						<c:if test="${id eq null}">
-							<a	href="https://kauth.kakao.com/oauth/authorize?client_id=8f0beb524de484b185f094b0604de956&redirect_uri=http://localhost/oauth&response_type=code">
-								<img src="resources/images/member/kakaobtn.png">
+					<div id="wrapper">
+						<div id="login">
+							<input type="submit" id="loginbtn" class="col pl-2 pr-2" value="login">
+						</div>
+						<div id="search_and_join" align="center" class="col pb-1 pb-1">
+							<hr>
+							<div id="search"><a class="pr-3">아이디 찾기</a>| <a class="p1-3 pr-3"> 비밀번호 찾기</a>| <a href=join
+								class="pl-3" target="_blank">회원가입 </a></div>
+							<hr>
+						</div>
+						<div id="naverlogin" >
+							<a href="${url}"> <img
+								src="resources/images/member/naver.png"  class="col pb-2 pl-3"
+								alt="네이버 이미지" id="loginimg" /></a>
+						</div>
+						<div id="kakaologin">
+							<a
+								href="https://kauth.kakao.com/oauth/authorize?client_id=8f0beb524de484b185f094b0604de956&redirect_uri=http://localhost/oauth&response_type=code">
+								<img src="resources/images/member/kakaobtn.png" class="col" id="kakaoimg">
 							</a>
+						</div>
 
-							<div id="naver_id_login">
-								<a href="${url}"> <img src="resources/images/member/naver.png"
-									width="60" height="60px" alt="네이버 이미지" /></a>
-							</div>
-						</c:if>
-						<br>
-						<button type="button" type="button" id="findId">ID 찾기</button>
-						<button type="button" type="button" id="reinputpw">PW 찾기</button>
-						<button type="button" type="button" id="joinMem">회원 가입</button>
-						<button type="submit" id="login">login</button>
 					</div>
 				</form>
 			</div>
@@ -131,6 +132,9 @@
 
 		</div>
 	</div>
+	
 </footer>
 
 </div>
+<!--구글폰트-->
+<link href="https://fonts.googleapis.com/css?family=Gamja+Flower&display=swap&subset=korean" rel="stylesheet">

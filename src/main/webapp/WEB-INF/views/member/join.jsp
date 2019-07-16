@@ -19,56 +19,59 @@
 <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
-<!--구글폰트-->
-<link href="https://fonts.googleapis.com/css?family=Gamja+Flower&display=swap&subset=korean" rel="stylesheet">
 
-<jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
+
+<jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
 
 <!--join info style  -->
-<style>
-#joininfo {
-	display: none;
+    <style>
+#joinInfo {
+	  display: none;   
+	text-align: -webkit-center;
+    width: 600px;
 }
-
-/* div {
-	border: 1px solid black;
-} */
-#joininfo, #agree {
+#joinInfo, #agree {
 	box-sizing: border-box;
 	margin-top: 100px;
 	margin-bottom: 200px;
+	margin:auto;
 }
-
-#textinfo {
+#textInfo {
 	overflow: auto;
 	height: 600px;
 }
-
 .jumbotron {
 	background-color: white;
 }
-
 #title {
 	font-size: 35px;
 }
-
-#joininfo>div {
+#joinInfo>div {
 	margin-bottom: 10px;
 }
-
 #divPasswordCheck {
 	font-size: 15px;
 }
-
 input[type=text] {
 	width: 250px;
 }
-
 input[type=password] {
 	width: 250px;
 }
+/*-소히가 도와주는 프론트~~~-----------------------------------------------------------------------------------------------------------  */
 .login-btn{background:none; border:none; font-family:'Gamja Flower', cursive; font-size:20px; color:#EC7357;}
 .login-btn:hover{font-weight:bold; color:#ed461f;}
+.first-col{text-align: right;}
+b{font-family:'Gamja Flower', cursive; font-size:40px;}
+.agree{font-family:'Gamja Flower', cursive; font-size:20px;}
+
+.row>div:nth-child(2){text-align: left;}
+.zipcode{text-align: left;}
+#joinForm>.row{margin-bottom: 20px;}
+.input-addr>div{margin-bottom: 10px;}
+#search-btn{margin-left:5px;}
+.btn,input[type="reset"],input[type="submit"]{background-color: #EC7357; border: none; font-size: 15px; color:white; border-radius: 5px; padding:3px 5px;}
+.btn:hover,input[type="reset"]:hover,input[type="submit"]:hover{font-weight: bold; background-color: #f7613e;}
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -90,7 +93,7 @@ input[type=password] {
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-12 col-sm-12 col-md-12 col-lg-12" id="textinfo" align="left">
+			<div class="col-12 col-sm-12 col-md-12 col-lg-12" id="textInfo" align="left">
 				제1조(목적) 본 회원약관은 AcAT(이하 '갑'라 한다)이 운영하는 인터넷관련 서비스(이하 '서비스'라 한다)를 이용함에
 				있어 관리자와 이용자(이하 '회원'라 한다)의 권리, 의무 및 책임사항을 규정함을 목적으로 한다.<br> 제2조
 				(약관의 효력) 1.본 약관은 '갑'에 회원 가입 시 회원들에게 통지함으로써 효력을 발생합니다.<br>
@@ -157,7 +160,7 @@ input[type=password] {
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-8 col-sm-7 col-md-7 col-lg-7 pt-5" align="right">
+			<div class="col-8 col-sm-7 col-md-7 col-lg-7 pt-5 agree" align="right">
 				<input type="radio" id="provisionY" name="provisionYn">
 				동의합니다. <input type="radio" id="provisionN" name="provisionYn">
 				동의하지 않습니다.
@@ -167,10 +170,14 @@ input[type=password] {
 					id="next">
 			</div>
 		</div>
+		<!--회원가입 폼------------------------------------------------------------------------------------------------------------------------------- -->
+		 
 	</div>
 
-	<div id="joininfo" class="container">
-		<div class="row">
+<div class="container">	
+<div class="row " id="joinInfo">
+		<div class="col-12">
+		<div class="row ">
 			<div class="col-12 col-sm-12 col-md-12 col-lg-12 pb-4" id="title">
 				<img src="resources/images/member/dogfoot.png" height="100px" width="100px">
 				<b> 회 원 가 입 </b> <img src="resources/images/member/dogfoot.png"
@@ -179,64 +186,66 @@ input[type=password] {
 		</div>
 
 
-		<form action="joininfo" method="get" id="joinform">
+		<form action="joininfo" method="post" id="joinForm"  onsubmit="return submit_check()">
 			<div class="row">
-				<div class="col-lg-3 col-md-3 col-sm-3 col-3">아이디</div>
-				<div class="col-lg-3 col-md-5 col-sm-9 col-9">
+				<div class="col-lg-3 col-md-3 col-sm-3 col-3 first-col">아이디</div>
+				<div class="col-lg-9 col-md-3 col-sm-9 col-9">
 					<input type="text" id="id" name="id" required
-						placeholder="영대소문자및숫자포함5글자이상" flag="false" regexflag="false">
+						placeholder="영대소문자및숫자포함5글자이상" flag="false" regexFlag="false">
 				</div>
-				<div class="col-lg-6 col-md-4 col-sm-6 d-none d-md-block ">
-					<p id="idresult"></p>
+				<div class="col-12 span">
+					<span id="idresult"></span>
 				</div>
 			</div>
+			
 			<div class="row">
-				<div id="divPassword" class="col-lg-3 col-md-3 col-sm-3 col-3">
+				<div id="divPassword" class="col-lg-3 col-md-3 col-sm-3 col-3 first-col">
 					비밀번호</div>
 				<div class="col-lg-9 col-md-9 col-sm-9 col-9">
 					<input type="password" id="password" name="password"
-						placeholder="패스워드" maxlength="30">
+						placeholder="패스워드" maxlength="30" required regexFlag="false" >
 				</div>
+				<div class="col-12"><span id="pwResult"></span></div>
 			</div>
+			
 			<div class="row">
-				<div id="divPasswordCheck" class="col-lg-3 col-md-3 col-sm-3 col-3">비밀번호확인</div>
+				<div id="divPasswordCheck" class="col-lg-3 col-md-3 col-sm-3 col-3 first-col">비밀번호확인</div>
 				<div class="col-lg-9 col-md-9 col-sm-9 col-9">
-					<input type="password" id="passwordCheck" placeholder="패스워드 확인">
+					<input type="password" id="passwordCheck" placeholder="패스워드 확인" required>
 				</div>
+				<div class="col-12"><span id="pwCheckResult"></span></div>	
 			</div>
 
 			<div class="row">
-				<div id="inputName" class="col-lg-3 col-md-3 col-sm-3 col-3">이름</div>
+				<div id="inputName" class="col-lg-3 col-md-3 col-sm-3 col-3 first-col">이름</div>
 				<div class="col-lg-9 col-md-9 col-sm-9 col-9">
 					<input type="text" placeholder="한글만 입력 가능합니다." maxlength="15"
-						name="name">
+						name="name" class="name" required regexFlag="false">
 				</div>
 			</div>
 
 			<div class="row">
-				<div class="col-lg-3 col-md-3 col-sm-3 col-3">이메일</div>
+				<div class="col-lg-3 col-md-3 col-sm-3 col-3 first-col">이메일</div>
 				<div class="col-lg-9 col-md-9 col-sm-9 col-9">
 
 					<input type="text" id="email" placeholder="ex)dogandcat@aaa.com"
-						name="email" flag="false"> <input type="button"
-						id="emailcheck" value="인증">
-
-
-
+						name="email" flag="false" required regexFlag="false" >
+						<input type="button" id="emailcheck" value="인증" class="btn">
 				</div>
+				<div class="col-12"><span class="emailResult"></span></div>
 			</div>
 
 			<div class="row">
-				<div id="birthDay" class="col-lg-3 col-md-3 col-sm-3 col-3">생년월일</div>
+				<div id="birthDay" class="col-lg-3 col-md-3 col-sm-3 col-3 first-col">생년월일</div>
 				<div class="col-lg-9 col-md-9 col-sm-9 col-9">
 					<input type="text" id="birthday" placeholder="20000101"
-						name="birthDay">
+						name="birthDay" required regexFlag="false">
 				</div>
 			</div>
 
 
 			<div class="row">
-				<div id="gender" class="col-lg-3 col-md-3 col-sm-3 col-3">성별</div>
+				<div id="gender" class="col-lg-3 col-md-3 col-sm-3 col-3 first-col">성별</div>
 				<div class="col-lg-9 col-md-9 col-sm-9 col-9">
 					<input type="radio" name="gender" value="M">남 <input
 						type="radio" name="gender" value="F">여
@@ -244,37 +253,40 @@ input[type=password] {
 			</div>
 
 			<div class="row">
-				<div id="phone" class="col-lg-3 col-md-3 col-sm-3 col-3">휴대폰
+				<div id="phone" class="col-lg-3 col-md-3 col-sm-3 col-3 first-col">휴대폰
 					번호</div>
 				<div class="col-lg-9 col-md-9 col-sm-9 col-9">
 					<input type="text" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11"
-						name="phone">
+						name="phone" id="phoneNum" required regexFlag="false">
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-3 col-md-3 col-sm-3 col-3">주소</div>
+				<div class="col-lg-3 col-md-3 col-sm-3 col-3 first-col">주소</div>
 				<div class="col-lg-9 col-md-9 col-sm-9 col-9">
-					<div class="row">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-12">
-							<input type="text" id="zipcode" placeholder="우편번호" name="zipcode">
+					<div class="row input-addr">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-12 zipcode">
+							<input type="text" id="zipcode" placeholder="우편번호" name="zipcode" required>
+							<input type="button" value="찾기" id="search-btn" class="btn">
 						</div>
 						<div class="col-lg-12 col-md-12 col-sm-12 col-12">
-							<input type="text" id="address1" placeholder="주소" name="address1">
+							<input type="text" id="address1" placeholder="주소" name="address1" required>
 						</div>
 						<div class="col-lg-12 col-md-12 col-sm-12 col-12">
-							<input type="text" id="address2" placeholder="상세주소를 입력하시오"
-								name="address2"><input type="button" value="찾기"
-								id="search">
+							<input type="text" id="address2" placeholder="상세주소를 입력하시오" name="address2" required>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row footer">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-12">
-					<input type="button" id="signin" value="Sign in">
+					<input type="submit" id="signin" value="완료">
+					<input type="reset">
 				</div>
 			</div>
 		</form>
+	</div>
+		
+		</div>
 	</div>
 
 
@@ -344,7 +356,7 @@ input[type=password] {
 				}).done(function(resp) {
 					console.log(resp);
 					if(resp==true){
-						window.open('emailcheck', 'window팝업', 'width=400, height=600, menubar=no, status=no, toolbar=no');  
+						window.open('emailcheck', 'window팝업', 'width=430, height=300, menubar=no, status=no, toolbar=no');  
 					}
 					
 				});
@@ -354,32 +366,39 @@ input[type=password] {
 	
 	</script>
 	<script>
-		$("#signin").on("click", function() {
-			$("#joinform").submit();
-		});
+		
+		
+		function submit_check(){ //submit 조건
+			if($("#passwordCheck").val() !=$("#password").val()){
+				alert("비밀번호가 일치하지 않습니다.");
+				return false;
+			}else{return true;}
+		};
 		$("#next").on("click", function() {
 			if ($("#provisionY").prop("checked")) {
-				$("#joininfo").show();
+				$("#joinInfo").show();
 				$("#agree").hide();
 			} else {
 				alert("회원가입 약관에 동의해주세요");
-				$("#joininfo").hide();
+				$("#joinInfo").hide();
 				$("#agree").show();
 			}
 		});
 
 		//아이디 중복확인 ajax
 
-		$("#id").on("input", function() {
+		$("#id").on("focusout", function() {
 			var idtestString = $("#id").val();
-			var regex = /^[A-Za-z0-9]{5,}$/g;
+			var regex = /^[a-zA-Z][a-zA-Z0-9_]{6,12}$/g;
 			var result = regex.exec(idtestString);
 			if (result == null) {
-				$("#id").attr("regexflag", "false");
-				$("#idresult").html("조건을 충족시켜주세요");
+				$("#id").attr("regexFlag", "false");
+				$("#id").val("");
+				$("#idresult").html("알파벳으로 시작하고 6~12자리 이하로 작성해주세요.");
 
 			} else {
-				$("#id").attr("regexflag", "true");
+				$("#id").attr("regexFlag", "true");
+				$("#idresult").html("");
 				$.ajax({
 					url : "idajax.do",
 					type : "post",
@@ -389,21 +408,90 @@ input[type=password] {
 				}).done(function(resp) {
 					console.log(resp);
 					if (resp == "true") {
-						$("#idresult").html("중복된아이디");
+						$("#idresult").html("이미 사용되고 있는 아이디 입니다.");
+						$("#idresult").css("color","red");
 						$("#id").attr("flag", "false");
 					} else {
-						$("#idresult").html("사용가능한아이디");
+						$("#idresult").html("사용가능한 아이디 입니다.");
+						$("#idresult").css("color","greed");
 						$("#id").attr("flag", "true");
 					}
 				})
 
 			}
-		})
+		});
+		/* 비밀번호 Regex */
+	$("#password").on("focusout",function(){
+		var password = $("#password").val();
+		var regex = /^[a-zA-Z0-9]{8,15}$/g;
+		var result = regex.exec(password);
+		if(result==null){
+			$("#password").val("");
+			$("#pwResult").html("알파벳과 숫자의 조합으로 8~15이하로 입력해주세요.");
+			$("#pwResult").css("color","red");
+		}else{
+			$("#password").attr("regexFlag","true");
+			$("#pwResult").html("");
+		}
+	});
+		$("#passwordCheck").on("focusout",function(){
+			if($("#password").val() != $(this).val()){
+				$("#pwCheckResult").html("비밀번호가 같지 않습니다.");
+				$("#pwCheckResult").css("color","red");
+			}else{$("#pwCheckResult").html("");}
+		});
+		/* 이름 regex */
+		$(".name").on("focusout",function(){
+			var name = $(".name").val();
+			var regex = /^[가-힣\s]{2,6}$/g;
+			var result = regex.exec(name);
+			if(result == null){
+				$(".name").val("");
+			}else{$(".name").attr("regexFlag","true")}
+		});
+		/* 이메일 regex */
+		$("#email").on("focusout",function(){
+			var email = $("#email").val();
+			var regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+			/* 안에 있는 내용은 정규표현식 검증에 사용되는 패턴이 이 안에 위치함
+			/ /i 정규표현식에 사용된 패턴이 대소문자를 구분하지 않도록 i를 사용함
+			^ 표시는 처음시작하는 부분부터 일치한다는 표시임
+			 [0-9a-zA-Z] 하나의 문자가 []안에 위치한 규칙을 따른다는 것으로 숫자와 알파벳 소문지 대문자인 경우를 뜻 함
+			 * 이 기호는 0또는 그 이상의 문자가 연속될 수 있음을 말함 */
+			var result = regex.exec(email);
+			if(result == null){
+				$(".emailResult").html("올바른 이메일을 작성해주세요.");
+				$("#email").val("");
+			}else{
+				$("#email").attr("regexFlag","true");
+				$(".emailResult").html("");
+			}
+		});
+		/* 생년월일 regex */
+		$("#birthday").on("focusout",function(){
+			var birth = $("#birthday").val();
+			var regex = /[0-9]{8}/g
+			var result = regex.exec(birth);
+			if(result == null){
+				$("#birthday").val("");
+			}else{$("#birthday").attr("regexFlag","true");}
+		});
+		/* 전화번호 regex */
+		$("#phoneNum").on("focusout",function(){
+			var phone = $("#phoneNum").val();
+			var regex = /^[010]{3}[0-9]{8}/g
+			var result = regex.exec(phone);
+			if(result == null){
+				$("#phoneNum").val("");
+			}else{$("#phoneNum").attr("regexFlag","true");}
+		});
+		
+		
 	</script>
 	<!--우편번호  -->
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<script>
-		document.getElementById("search").onclick = searchAddress;
+		document.getElementById("search-btn").onclick = searchAddress;
 
 		function searchAddress() {
 			new daum.Postcode(

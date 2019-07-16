@@ -1,20 +1,17 @@
 package kh.spring.dto;
 
-import java.util.Date;
-
 public class MessageDTO {
     private int seq;
     private String sender;
     private String recipient;
     private String contents;
     private String readOk;
-    private Date message_date;
+    private String message_date;
     
 	public MessageDTO() {
 		super();
 	}
-
-	public MessageDTO(int seq, String sender, String recipient, String contents, String readOk, Date message_date) {
+	public MessageDTO(int seq, String sender, String recipient, String contents, String readOk, String message_date) {
 		super();
 		this.seq = seq;
 		this.sender = sender;
@@ -64,13 +61,14 @@ public class MessageDTO {
 		this.readOk = readOk;
 	}
 
-	public Date getMessage_date() {
+	public String getMessage_date() {
 		return message_date;
 	}
 
-	public void setMessage_date(Date message_date) {
+	public void setMessage_date(String message_date) {
 		this.message_date = message_date;
 	}
+
 	
     
     

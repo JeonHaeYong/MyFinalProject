@@ -4,23 +4,43 @@
 	<delete id="delete">
 		delete from item where seq=#{seq}
 	</delete>
+	
 	<insert id="upload">
-		insert into item values(item_seq.nextval,#{name},#{contents},#{price},#{seller},#{date},#{permission},#{imagePath} )
+		insert into item values(item_seq.nextval, #{name}, #{contents}, TO_CHAR(#{price},'999,999,999'), #{seller}, default, default,
+		#{imagePath1}, #{imagePath2,jdbcType=VARCHAR}, #{imagePath3,jdbcType=VARCHAR}, #{category}, default)
 	</insert>
+	
 	<select id="selectBySeq" resultType="kh.spring.dto.ItemDTO">
 		select * from item where seq=#{value}
 	</select>
-	<select id="selectList" resultType="kh.spring.dto.ItemDTO">
-		select * from (select row_number() over(order by seq desc) as rown, name, contents, price, seller, date, permission, imagePath from item)"
-				+ " where rown between #{array[0]} and #{array[1]}
-	</select>
-	<select id="select" resultType="int">
+	
+	<select id="getItemCount" resultType="int">
 		select count(*) from item
 	</select>
-	<insert id="modify">
-		update item set name=#{name}, contents=#{contents}, price=#{price},
-		seller=#{seller}, date=#{date}, permission=#{permission},
-		imagePath=#{imagePath}
-	</insert>
+	
+	<select id="getItemCountByCategory" resultType="int">
+		select count(*) from item where category=#{value}
+	</select>
+	
+	<select id="selectItemPerPage" resultType="kh.spring.dto.ItemDTO">
+		select * from (select row_number() over(order by seq desc) as rown, item.* from item) where rown between #{start} and #{end}
+	</select>
+	
+	<select id="selectItemPerPageByCategory" resultType="kh.spring.dto.ItemDTO">
+		select * from (select row_number() over(order by seq desc) as rown, item.* from item where category=#{category}) where rown between #{start} and #{end}
+	</select>
+	
+	<select id="selectItemForPayment" resultType="kh.spring.dto.ItemDTO">
+		select * from item where seq in 
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+	
+<!-- 	<insert id="modify"> -->
+<!-- 		update item set name=#{name}, contents=#{contents}, price=#{price}, -->
+<!-- 		seller=#{seller}, date=#{date}, permission=#{permission}, -->
+<!-- 		imagePath=#{imagePath} -->
+<!-- 	</insert> -->
 	
 </mapper>
