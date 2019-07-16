@@ -22,10 +22,6 @@
 <link rel="stylesheet" href="resources/css/style.css">
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
 
-<style>
-	.login-btn{background:none; border:none; font-family:'Gamja Flower', cursive; font-size:20px; color:#EC7357;}
-	.login-btn:hover{font-weight:bold; color:#ed461f;}
-</style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
    data-offset="300" id="home-section">

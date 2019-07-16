@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <!-- 로그인 Modal Style영역입니다 -->
 <style>
+.login-btn{background:none; border:none; font-family:'Gamja Flower', cursive; font-size:20px; color:#EC7357;}
+	.login-btn:hover{font-weight:bold; color:#ed461f;}
  #loginbtn{
  height:50px;
  background-color:#FFBF00;

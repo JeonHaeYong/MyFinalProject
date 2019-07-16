@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="resources/css/style.css">
 
 
-<jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
 
 <!--join info style  -->
     <style>
