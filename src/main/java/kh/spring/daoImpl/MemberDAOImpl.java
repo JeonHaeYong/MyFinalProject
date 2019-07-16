@@ -82,6 +82,14 @@ public class MemberDAOImpl implements MemberDAO {
 	public int deleteMember(String id) {
 		return sst.delete("MemberDAO.deleteMember", id);
 	}
+	@Override
+	public int updatePw(String id, String pw) {
+		Map<String,String> hs = new HashMap<>();
+		String password = this.testSHA256(pw);
+		hs.put("id", id);
+		hs.put("pw", password);
+		return sst.update("MemberDAO.updatePw",hs);
+	}
 
 	@Override
 	public String testSHA256(String str){
@@ -112,5 +120,13 @@ public class MemberDAOImpl implements MemberDAO {
 		return sst.selectList("MemberDAO.memberPoint");
 	}
 	
-
+//아이디 찾기 
+	@Override
+	public String findID(String name,String birthday) {
+		Map<String,String>map=new HashMap<>();
+		map.put("birthday",birthday);
+		map.put("name", name);
+		return sst.selectOne("MemberDAO.idFind",map);
+	}
+	
 }

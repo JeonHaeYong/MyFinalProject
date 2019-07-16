@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -96,21 +97,21 @@ public class MemberController {
 	}
 	//이메일 인증 확인
 	@ResponseBody
-	@RequestMapping("email.do")
+	@RequestMapping("email.do") // 이메일로 인증번호 보내는거 
 	public String emailajax(String email) {
 		boolean check=mservice.create(email);
 		if(check)
-		{return "true";}
+		{return "true";} // 이메일 인증번호 쓰는창뜸
 		else return "false";
 	}
 
-	@RequestMapping("emailcheck")
+	@RequestMapping("emailcheck") //오프너 열라고 
 	public String checkJSP()  {		
 		System.out.println("인증");
 		return "member/emailcheck";
 	}
 	@ResponseBody
-	@RequestMapping("authkey.do")
+	@RequestMapping("authkey.do") // 인증번호랑 회원이 쓴거랑 같은지 확인
 	public String  authkey(String key)  {
 		System.out.println(session.getAttribute("authkey"));
 		if(key.equals((String) session.getAttribute("authkey")))
@@ -260,7 +261,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 
-	
+
 	//-----------------------------마이페이지 	
 	//마이페이지 -> aop로 user정보랑 안읽은메세지 갯수 request에 담기
 	@RequestMapping("toMyPage")
@@ -319,7 +320,7 @@ public class MemberController {
 		//보낸쪽지
 		List<MessageDTO> sentList = msgService.selectAllMsgByCurrentPage("sender",loginId, page);
 		request.setAttribute("sentList", sentList);
-		
+
 		//페이지 navi담기.
 		//받은쪽지
 		List<String> receivedNavi = msgService.getNaviforMsg(page, "recipient", loginId);
@@ -329,7 +330,7 @@ public class MemberController {
 		request.setAttribute("sentNavi", sentNavi);
 		return "myPage/user/user_myPage_message";
 	}
-	
+
 	/**
 	 * 메세지 보낼때, 받는사람이 존재하는 id인지 확인
 	 * @return
@@ -342,9 +343,68 @@ public class MemberController {
 		//exist==1 존재 , 0이면 없음
 		return exist+"";
 	}
-//-----------------------------/마이페이지 
+	//-----------------------------/마이페이지 
+
+
+	
+	
+//-----------------------------아이디 찾기 
+	@RequestMapping("findIdJSP")
+	public String findIdjsp(){
+		return "member/findId";
+	}
+	
+	@ResponseBody
+	@RequestMapping("findId")
+	public String findId(String idname,String email,String birthday) {
+		System.out.println(idname);
+		String id=mservice.FindId(idname,birthday);
+		System.out.println(id);
+		if(id==null)
+		{return "null";
+			
+		}else {
+			boolean check=mservice.FindIdbyemail(email,id);
+			if(check) {
+				return "true";
+			}else
+			return "false";
+		}
+	}
+	
+		
+	
+
+	//-비밀번호 찾기--------------------------------------------------------------------------------------------
+	@RequestMapping("findPassword")
+	public String findPassword() {
+		return "member/findPassword";
+	}
+	@ResponseBody
+	@RequestMapping("findPwProc")
+	public String findPwProc(HttpServletRequest request) {
+		String id = request.getParameter("id");
+		String email = request.getParameter("email");
+		int idcheck=mservice.idDuplCheckService(request.getParameter("id"));
+		String result = null;
+		if(idcheck==1) { // 아이디 존재 여부
+			boolean check = mservice.newPw(email);
+			if(check){
+				String newPw = (String)session.getAttribute("newPw");
+				int update = mservice.updatePwService(id, newPw);
+				if(update == 1) {
+					result = "1";
+				}
+			}else{ result = "2"; }
+		}else {
+			System.out.println("아이디 존재 안함");
+			result = "0";}
+
+		return result;
+	}
+
+}
 	
 
 
-}
 

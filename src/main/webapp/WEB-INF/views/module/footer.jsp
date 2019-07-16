@@ -38,7 +38,8 @@
 						</div>
 						<div id="search_and_join" align="center" class="col pb-1 pb-1">
 							<hr>
-							<div id="search"><a class="pr-3">아이디 찾기</a>| <a class="p1-3 pr-3"> 비밀번호 찾기</a>| <a href=join
+
+							<div id="search"><a href="findId"class="pr-3">아이디 찾기</a>| <a class="p1-3 pr-3 " href="findPassword"> 비밀번호 찾기</a>| <a href=join
 								class="pl-3" target="_blank">회원가입 </a></div>
 							<hr>
 						</div>

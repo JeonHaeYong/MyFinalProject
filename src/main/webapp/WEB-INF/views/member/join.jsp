@@ -84,7 +84,7 @@ b {
 	padding-bottom:200px;
 }
 
-.row>div:nth-child(2) {
+#joinForm>.row>div:nth-child(2) {
 	text-align: left;
 }
 
@@ -125,26 +125,80 @@ padding-left:302px;
 width:80px;
 height:40px;
 }
+.menu-row{
+text-align: -webkit-center;
+
+}
+.s-menu1>a{
+ text-decoration:none;
+ color:black;
+ font-size:20px;
+ font-family: 'Gamja Flower', cursive;
+}
+.s-menu1:hover{
+background-color:#F3F78130;
+}
+
+#searchpwandid{
+ font-size:20px;
+ font-family: 'Gamja Flower', cursive;
+}
+.s-menu1{
+ padding-top:10px;
+ padding-left:0px;
+ padding-right:0px;
+}
+.s-menu
+{
+color:#B45F04;
+
+border-bottom:2px solid black;
+}
+.menu-box{
+width:150px;
+height:100px;
+padding-bottom:120px;
+margin-bottom:150px;
+}
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="300" id="home-section">
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
-
+  
+            
 	<div class="jumbotron px-0 pb-0">
 		<img src="resources/images/member/joinimg.jpg" height="600px"
 			width="100%">
 
 	</div>
 
-	<div id="agree" class="container">
-		<div class="row">
+   <div class="row">
 			<div class="col-12 col-sm-12 col-md-12 col-lg-12 pb-5  title"
 				align="center" >
 				<b> 회 원 가 입 </b>
 			</div>
 		</div>
+    <div class="container">
+        <div class="row">
+             <div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-row">
+                    <div class="row menu-box">
+                        <div class="col-12 s-menu"><b>M E N U</b></div>
+                        <div class="col-12 s-menu1 " ><a href="join">회원가입</a></div>
+                         <div class="col-12 s-menu1" ><a href="findIdJSP">아이디 찾기</a></div>
+                        <div class="col-12 s-menu1" ><a href=""> 비밀번호 찾기</a></div>
+                         
+                    </div>
+                </div>
+                 <div class="col-1"></div>
+            <div class="col-lg-9 col-md-8 col-sm-12 col-12 write-section">
+
+
+
+<!-- 약관  -->
+	<div id="agree" class="container">
+		
 		<div id="privateagreetext">개인정보 동의 약관</div>
 		<hr>
 		<div class="row">
@@ -232,11 +286,7 @@ height:40px;
 	<div class="container" id="jointool">
 		<div class="row " id="joinInfo">
 			<div class="col-12 col-sm-12 col-md-12 col-lg-12">
-				<div class="row ">
-					<div class="col-12 col-sm-12 col-md-12 col-lg-12 pb-2 title">
-					 <b> 회 원 가 입 </b> 
-					</div>
-				</div>
+				
 
 			<hr>
 				<form action="joininfo" method="post" id="joinForm"
@@ -365,7 +415,11 @@ height:40px;
 	</div>
 
 
-
+ </div>
+        </div>
+        
+        
+    </div>
 
 
 	
@@ -440,7 +494,7 @@ height:40px;
 						$("#id").attr("flag", "false");
 					} else {
 						$("#idresult").html("사용가능한 아이디 입니다.");
-						$("#idresult").css("color", "greed");
+						$("#idresult").css("color", "green");
 						$("#id").attr("flag", "true");
 					}
 				})
