@@ -81,7 +81,7 @@ b {
 .agree {
 	font-family: 'Gamja Flower', cursive;
 	font-size: 20px;
-	padding-bottom:300px;
+	padding-bottom:200px;
 }
 
 .row>div:nth-child(2) {
@@ -116,6 +116,14 @@ b {
 .btn:hover, input[type="reset"]:hover, input[type="submit"]:hover {
 	font-weight: bold;
 	background-color: #f7613e;
+	color:white;
+}
+.span{
+padding-left:302px;
+}
+#signin,#reset{
+width:80px;
+height:40px;
 }
 </style>
 </head>
@@ -253,7 +261,7 @@ b {
 								placeholder="패스워드" maxlength="30" required regexFlag="false"
 								class="textbox">
 						</div>
-						<div class="col-12">
+						<div class="col-12 span">
 							<span id="pwResult"></span>
 						</div>
 					</div>
@@ -265,7 +273,7 @@ b {
 							<input type="password" id="passwordCheck" placeholder="패스워드 확인"
 								required class="textbox">
 						</div>
-						<div class="col-12">
+						<div class="col-12 span">
 							<span id="pwCheckResult"></span>
 						</div>
 					</div>
@@ -289,7 +297,7 @@ b {
 								class="textbox"> <input type="button" id="emailcheck"
 								value="인증" class="btn">
 						</div>
-						<div class="col-12">
+						<div class="col-12 span">
 							<span class="emailResult"></span>
 						</div>
 					</div>
@@ -346,7 +354,7 @@ b {
 					<div class="row footer">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-12" id="formfooterbtn">
 							<input type="submit" id="signin" value="완료"> <input
-								type="reset">
+								type="reset" id="reset">
 						</div>
 					</div>
 					
