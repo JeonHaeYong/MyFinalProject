@@ -120,5 +120,13 @@ public class MemberDAOImpl implements MemberDAO {
 		return sst.selectList("MemberDAO.memberPoint");
 	}
 	
-
+//아이디 찾기 
+	@Override
+	public String findID(String name,String birthday) {
+		Map<String,String>map=new HashMap<>();
+		map.put("birthday",birthday);
+		map.put("name", name);
+		return sst.selectOne("MemberDAO.idFind",map);
+	}
+	
 }

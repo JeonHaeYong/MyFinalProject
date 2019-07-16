@@ -435,16 +435,13 @@
                 });
                 $("#selectMsg_delete").on("click",function(){//선택한 메세지 삭제하기.
                 	//선택한 메세지가 없을때,
-                	var length = $(".selectBox.active>form input[type='checkbox']").length;
                 	var count = 0;
-                	alert("each이전"+length +":"+count);
-                	$(".selectBox.active>form input[type='checkbox']").each(function(i,item){
-                		if(!$(item).prop("checked")){
+                	$(".selectedBox.active>form input[type='checkbox']").each(function(i,item){
+                		if($(item).prop("checked")){
                 			count++;
                 		}
                 	})
-                	alert(length +":"+count);
-                	if(length==count){
+                	if(count==0){
                 		alert("삭제할 쪽지를 선택해주세요.");
                 		return false;
                 	}

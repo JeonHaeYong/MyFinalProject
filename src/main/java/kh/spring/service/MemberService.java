@@ -18,5 +18,8 @@ public interface MemberService {
 	public boolean create(String email);
 	public boolean newPw(String email);
 	public int insertNaverJoin(MemberDTO dto);
+	public String FindId(String idname, String birthday); //이름으로 아이디 찾기 
+	public boolean FindIdbyemail(String email, String id);//이메일로 아이디 보내기
 	public int updatePwService(String id, String pw);
+
 }
