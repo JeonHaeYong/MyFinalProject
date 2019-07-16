@@ -285,12 +285,19 @@ public class MemberController {
 		}
 		return "true";
 	}
+	//마이페이지에서 pw변경
 	@RequestMapping("modifyPwByMyPage")
-	public String modifyPwByMyPage(String pw) {
-		System.out.println("넘어온 pw -> " + pw);
+	public String modifyPwByMyPage(String id, String pw) {
+		int result = mservice.updatePwService(id, pw);
+		System.out.println("ID:"+id+"의 pw변경이 " + result +"행 완료되었습니다.");
+		return "redirect:toMyPage";
+	}
+	//정보수정하기(id,pw제외)
+	@RequestMapping("modifyProfile")
+	public String modifyProfileInfo(MemberDTO dto) {
+		
 		return "";
 	}
-
 	@RequestMapping("toMyPage_writeList")
 	public String toMyPage_writeList(HttpServletRequest request) {
 		return "myPage/user/user_myPage_writeList";
@@ -398,7 +405,8 @@ public class MemberController {
 			}else{ result = "2"; }
 		}else {
 			System.out.println("아이디 존재 안함");
-			result = "0";}
+			result = "0";
+			}
 
 		return result;
 	}

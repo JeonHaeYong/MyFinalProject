@@ -68,11 +68,11 @@
             <div class="tab-content" id="pills-tabContent">
                 <!-- 내정보 -->
                 <div class="tab-pane fade show active" id="pills-profile">
-                    <form id="modifyProfile" action="modifyProfile" method="post">
+                    <form id="modify_profile_form" action="modifyProfile" method="post">
                         <div class="form-group row">
                             <label for="my_id" class="col-sm-2 col-form-label">ID</label>
                             <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" id="my_id" value="${memberDTO.id }">
+                                <input type="text" readonly class="form-control-plaintext" id="my_id" value="${memberDTO.id }" name="id">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -110,7 +110,7 @@
 											
 									</div>
 								      <div class="modal-footer">
-								        <button id="change_pw_btn" type="button" class="btn btn-primary">비밀번호 변경</button>
+								        <button id="change_pw_btn" type="button" class="btn btn-primary rounded">비밀번호 변경</button>
 								      </div>
 								    </div>
 								  </div>
@@ -120,47 +120,55 @@
                         <div class="form-group row">
                             <label for="my_nickname" class="col-sm-2 col-form-label">Nickname</label>
                             <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" id="my_nickname" value="${memberDTO.name }">
+                                <input type="text" readonly class="form-control-plaintext modify_info_input" id="my_nickname" value="${memberDTO.name }">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="my_email" class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" id="my_email" value="${memberDTO.email }">
+                                <input type="text" readonly class="form-control-plaintext modify_info_input" id="my_email" value="${memberDTO.email }">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="my_birth" class="col-sm-2 col-form-label">Birthday</label>
                             <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" id="my_birth" value="${memberDTO.birthDay }">
+                                <input type="text" readonly class="form-control-plaintext modify_info_input" id="my_birth" value="${memberDTO.birthDay }">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="my_gender" class="col-sm-2 col-form-label">Gender</label>
                             <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" id="my_gender" value="${memberDTO.gender }">
+                                <input type="text" readonly class="form-control-plaintext modify_info_input" id="my_gender" value="${memberDTO.gender }">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="my_phone" class="col-sm-2 col-form-label">Phone</label>
                             <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" id="my_phone" value="${memberDTO.phone }">
+                                <input type="text" readonly class="form-control-plaintext modify_info_input" id="my_phone" value="${memberDTO.phone }">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="my_zipcode" class="col-sm-2 col-form-label">Zipcode</label>
                             <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" id="my_zipcode" value="${memberDTO.zipcode }">
+                            	<div class="form-inline">
+                            		<input type="text" readonly class="form-control-plaintext w-25 addr_info_input" id="my_zipcode" value="${memberDTO.zipcode }">
+                               	 	<input type="button" class="py-1 ml-2 btn btn-outline-warning btn-sm rounded address_search_btn d-none" value="찾기">
+								</div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="my_address" class="col-sm-2 col-form-label">Address</label>
                             <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" id="my_address" value="${memberDTO.address1 }">
+                                <input type="text" readonly class="form-control-plaintext addr_info_input" id="my_address" value="${memberDTO.address1 }">
                             </div>
                         </div>
-                        <div class="d-flex justify-content-center">
-                            <button type="button" class="btn btn-outline-warning rounded">수정하기</button>
+                        <div class="d-flex justify-content-center modify_bot_part">
+                            <button id="modify_btn" type="button" class="btn btn-outline-warning rounded">내정보 수정</button>
+                        </div>
+                        <div class="justify-content-center modify_bot_part hide">
+                            <button id="modify_profile_btn" type="button" class="btn btn-outline-warning rounded mx-1">정보 수정 완료</button>
+                            <button id="back_btn" type="button" class="btn btn-outline-warning rounded mx-1">정보수정 취소</button>
+                            <input id="reset_btn" type="reset" class="d-none">
                         </div>
                     </form>
                 </div>
@@ -184,7 +192,8 @@
         <script src="resources/js/isotope.pkgd.min.js"></script>
         <script src="resources/js/main.js"></script>
         <script>
-        	var PwInputCount = 0;
+        	var PwInputCount = 0;//pw변경시 현재비밀번호 틀리는 숫자 카운트
+        	$(".modify_bot_part.hide").hide();
         	$("#change_pw_btn").on("click",function(){
         		var pw1 = $("#changePw1").val();
         		var pw2 = $("#changePw2").val();
@@ -215,20 +224,48 @@
         				alert("현재비밀번호가 틀립니다.\r\n현재" + (++PwInputCount) + "회/5회 입력 틀렸습니다."  );
         				if(PwInputCount==5){
             				alert("현재비밀번호를 5번 틀리셨습니다.로그아웃됩니다.");
-             				$("#modifyProfile").attr("action","logout");
-             				$("#modifyProfile").submit();
+             				$("#modify_profile_form").attr("action","logout");
+             				$("#modify_profile_form").submit();
             			}
         			}else{
         				alert("비밀번호를 변경합니다.");
-        				$("#modifyProfile").attr("action","modifyPwByMyPage");
-        				$("#modifyProfile").submit();
+        				$("#modify_profile_form").attr("action","modifyPwByMyPage");
+        				$("#modify_profile_form").submit();
         			}
         		});
         	});
-        	$('#password_change_modal').on('hidden.bs.modal', function (e) {
+        	$('#password_change_modal').on('hidden.bs.modal', function (e) {//modal 취소클릭해서 없어진후에 실행
         		 $("#currPw").val("");
         		 $("#changePw1").val("");
         		 $("#changePw2").val("");
+        	});
+        	$("#modify_btn").on("click",function(){//내정보 수정하기
+        		//주소 찾기 버튼 나오게하기.
+        		$(".address_search_btn").removeClass("d-none");
+        		//수정가능한 정보들의 readonly없애기
+        		$(".modify_info_input").attr("readonly",false);
+        		$(".modify_info_input").css("background-color","rgba(30, 144, 255, 0.15)");
+        		$(".addr_info_input").css("background-color","rgba(128, 128, 128, 0.1)");
+        		//버튼 토글
+        		$(".modify_bot_part").toggle();
+        		$(".modify_bot_part").removeClass("d-flex");
+        		$(".modify_bot_part.hide").addClass("d-flex");
+        	});
+        	$("#back_btn").on("click",function(){//정보수정취소
+        		$("#reset_btn").trigger("click");//정보 리셋시키기
+        		//주소찾기버튼 없애기.
+        		$(".address_search_btn").addClass("d-none");
+        		//readonly다시 되돌리기.
+        		//수정가능한 정보들의 readonly없애기
+        		$(".modify_info_input").attr("readonly",true);
+        		$(".modify_info_input,.addr_info_input").css("background-color","inherit");
+        		//버튼 토글
+        		$(".modify_bot_part").toggle();
+        		$(".modify_bot_part").addClass("d-flex");
+        		$(".modify_bot_part.hide").removeClass("d-flex");
+        	});
+        	$("#modify_profile_btn").on("click",function(){//정보 수정 완료->컨트롤러
+        		$("#modify_profile_form").submit();
         	});
         </script>
     </html>
