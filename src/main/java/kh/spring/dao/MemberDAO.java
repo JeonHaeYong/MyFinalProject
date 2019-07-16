@@ -17,4 +17,5 @@ public interface MemberDAO {
 	public int selectCountByLikeId(String id) throws Exception;
 	public List<MemberDTO> memberPoint();//퀴즈에서 씀
 	int insertNaverJoin(MemberDTO dto); //네이버 로그인 시 자동가입으로 사용
+	public int updatePw(String id, String pw);
 }

@@ -440,7 +440,7 @@ height:40px;
 						$("#id").attr("flag", "false");
 					} else {
 						$("#idresult").html("사용가능한 아이디 입니다.");
-						$("#idresult").css("color", "greed");
+						$("#idresult").css("color", "green");
 						$("#id").attr("flag", "true");
 					}
 				})

@@ -16,5 +16,7 @@ public interface MemberService {
 	public int selectCountByLikeId(String id) throws Exception;
 	public List<MemberDTO> memberPointService();//퀴즈에서 씀
 	public boolean create(String email);
+	public boolean newPw(String email);
 	public int insertNaverJoin(MemberDTO dto);
+	public int updatePwService(String id, String pw);
 }

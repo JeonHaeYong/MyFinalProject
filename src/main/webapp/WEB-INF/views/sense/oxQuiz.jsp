@@ -49,7 +49,7 @@
             #quiz1{display: block;}
             .menu-box{width: 150px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px; margin-top: 50px;}
             .menu-box>div{height: 35px;}
-            .menu-box>div:first-child{font-weight: bold; border-bottom: 1px solid #754F44; line-height: 33px;}
+            .menu-box>div:first-child{font-weight: bold; border-bottom: 1px solid #754F44; line-height: 33px; color:#B45F04; font-size:40px;}
             .menu-box>div:not(.s-menu):hover{background-color: #FBFFB950;}
             .menu-row{text-align: -webkit-center;}
             a[name="s-menu"]{color: #754F44; text-decoration-line: none;}

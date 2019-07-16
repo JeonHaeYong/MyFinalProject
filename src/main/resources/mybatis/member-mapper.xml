@@ -44,6 +44,9 @@
 	<delete id="deleteMember">
 		delete from member where id=#{value}
 	</delete>
+	<update id="updatePw">
+		update member set password = #{pw} where id = #{id}
+	</update>
 	
 	<!-- 퀴즈에서 씀!-->
 	<select id="memberPoint" resultType="kh.spring.dto.MemberDTO">

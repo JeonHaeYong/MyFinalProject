@@ -142,6 +142,32 @@ public class MemberServiceImpl implements MemberService {
 			return false;
 		}
 	}
+	@Override
+	@Transactional
+	public boolean newPw(String email)  {
+	
+		// 임의의 authkey 생성
+		String authkey = new TempKey().getKey(50, false);
+		session.setAttribute("newPw",authkey);	
+		// mail 작성 관련 
+		try {
+		 MailHandler  sendMail = new  MailHandler (mailSender);
+
+		sendMail.setSubject("임시비밀번호 입니다.");
+		sendMail.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>")
+				.append("<p>임시비밀번호 입니다. 로그인 하시면 비밀번호를 꼭 변경해주세요.</p>")
+				.append("임시비밀번호:")
+				.append(authkey)
+				.toString());
+		sendMail.setFrom("wlsgid916@gmial.com", "관리자입니다");
+		sendMail.setTo(email);
+		sendMail.send();
+		return true;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 
 	
 	//네이버 회원가입
@@ -151,6 +177,10 @@ public class MemberServiceImpl implements MemberService {
 		int result = mdao.insertNaverJoin(dto);	
 		return result;
 	
+	}
+	@Override
+	public int updatePwService(String id, String pw) {
+		return mdao.updatePw(id, pw);
 	}
 
 }
