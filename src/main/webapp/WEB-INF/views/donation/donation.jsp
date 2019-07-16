@@ -27,6 +27,7 @@
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 
 
