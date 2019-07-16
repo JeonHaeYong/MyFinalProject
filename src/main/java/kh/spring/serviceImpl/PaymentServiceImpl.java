@@ -15,7 +15,7 @@ public class PaymentServiceImpl implements PaymentService {
 	@Autowired
 	private PaymentDAO pdao;
 	
-	public List<ItemDTO> selectItemForPaymentService(String itemStr) {
-		return pdao.selectItemForPayment(itemStr);
+	public List<ItemDTO> selectItemForPaymentService(String[] items) {
+		return pdao.selectItemForPayment(items);
 	}
 }

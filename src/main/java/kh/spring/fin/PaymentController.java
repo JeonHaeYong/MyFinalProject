@@ -1,11 +1,14 @@
 package kh.spring.fin;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kh.spring.dto.ItemDTO;
 import kh.spring.service.PaymentService;
 
 @Controller
@@ -16,25 +19,13 @@ public class PaymentController {
 	
 	@RequestMapping("toPayment")
 	public String toPayment(HttpServletRequest request, String[] items) {
-//		String itemStr = items[0] + "', ";
-//		for(int i = 1; i < items.length; i++) {
-//			if(i == items.length-1) {
-//				itemStr += "'" + items[i];
-//				break;
-//			}
-//			itemStr += "'" + items[i] + "', ";
-//		}
-		String itemStr = "";
-		for(int i = 0; i < items.length; i++) {
-			if(i == items.length-1) {
-				itemStr += items[i];
-				break;
-			}
-			itemStr += items[i] + ", ";
+		List<ItemDTO> itemList = ps.selectItemForPaymentService(items);
+		int totalAmount = 0;
+		for(ItemDTO dto : itemList) {
+			totalAmount += Integer.parseInt(dto.getPrice().replaceAll(",", "").replaceAll(" ", ""));
 		}
-		
-		System.out.println(itemStr);
-		request.setAttribute("items", ps.selectItemForPaymentService(itemStr));
+		request.setAttribute("items", itemList);
+		request.setAttribute("totalAmount", totalAmount);
 		return "payment/payment";
 	}
 }

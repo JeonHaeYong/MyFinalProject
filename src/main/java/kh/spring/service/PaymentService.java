@@ -5,5 +5,5 @@ import java.util.List;
 import kh.spring.dto.ItemDTO;
 
 public interface PaymentService {
-	public List<ItemDTO> selectItemForPaymentService(String itemStr);
+	public List<ItemDTO> selectItemForPaymentService(String[] items);
 }

@@ -15,7 +15,7 @@ public class PaymentDAOImpl implements PaymentDAO {
 	@Autowired
 	private SqlSessionTemplate sst;
 	
-	public List<ItemDTO> selectItemForPayment(String itemStr) {
-		return sst.selectList("ItemDAO.selectItemForPayment", itemStr);
+	public List<ItemDTO> selectItemForPayment(String[] items) {
+		return sst.selectList("ItemDAO.selectItemForPayment", items);
 	}
 }

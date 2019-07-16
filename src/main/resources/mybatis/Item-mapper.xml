@@ -31,7 +31,10 @@
 	</select>
 	
 	<select id="selectItemForPayment" resultType="kh.spring.dto.ItemDTO">
-		select * from item where seq in (#{value, jdbcType=number})
+		select * from item where seq in 
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach>
 	</select>
 	
 <!-- 	<insert id="modify"> -->

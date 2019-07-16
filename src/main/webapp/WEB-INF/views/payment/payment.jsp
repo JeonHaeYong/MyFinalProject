@@ -28,6 +28,19 @@
 		width: 100%;
 		max-height: 600px;
 	}
+/* 	.myCard{ */
+/* 		height: 150px; */
+/* 	} */
+	.imageBox{
+		width: 150px;
+	}
+	#itemImage{
+		width: 100%; 
+		height: 100%;
+	}
+	#lab{
+		color: white;
+	}
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -44,17 +57,67 @@
 			</div>
 		</div>
 		<div class="row m-3">
-			<c:forEach var="dto" items="${items }">
-				<div class="col-lg-4 col-md-6 col-12 d-flex justify-content-center mb-4">
-					<div class="card myCard">
-						<img class="card-img-top cardImg" src="${dto.imagePath1 }" alt="Card image">
-						<div class="card-body">
-							<h4 class="card-title"><a href="item?seq=${dto.seq }" class="detail">${dto.name }</a></h4>
-							<p class="card-text">${dto.price } 원</p>
+			<c:forEach var="dto" items="${items }" varStatus="status">
+				<div class="col-lg-12 col-12 d-flex justify-content-center">
+					<div class="card mb-3 myCard" style="width: 90%;">
+						<div class="row no-gutters">
+							<div class="col-md-4 imageBox">
+								<img src="/resources/images/item/item1.jpg" class="card-img itemImage">
+							</div>
+							<div class="col-md-8">
+								<div class="card-body">
+									<h5 class="card-title">상품명 : ${dto.name }</h5>
+									<p class="card-text">금액 : ${dto.price }원</p>
+									<p class="card-text"><small class="text-muted">판매자 : ${dto.seller }</small></p>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</c:forEach>
+			<div class="col-12">
+				전체 금액 : ${totalAmount }원
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<h5>구매자 정보</h5>
+			</div>
+			<div class="col-12 d-flex justify-content-center">
+				<form>
+					<div class="form-group">
+						<label for="inputName">이름</label>
+						<input type="text" class="form-control" id="inputName" value="${member.name }">
+					</div>
+					<div class="form-group">
+						<label for="inputEmail">이메일</label>
+						<input type="email" class="form-control" id="inputEmail" value="${member.email }">
+					</div>
+					<div class="form-group">
+						<label for="inputPhone">전화번호</label>
+						<input type="tel" class="form-control" id="inputPhone" value="${member.phone }">
+					</div>
+					<div class="form-row">
+						<div class="form-group col-8">
+							<label for="zipcode">우편번호</label>
+							<input type="text" class="form-control" id="zipcode" value="${member.zipcode }">
+						</div>
+						<div class="form-group col-4">
+							<label for="zipcode" id="lab">우</label>
+							<button type="submit" class="btn btn-primary m-auto p-auto form-control">찾기</button>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputAddress">주소</label>
+						<input type="text" class="form-control" id="inputAddress" value="${member.address1 }">
+					</div>
+					<div class="form-group">
+						<label for="inputAddress2">상세주소</label>
+						<input type="text" class="form-control" id="inputAddress2" value="${member.address2 }">
+					</div>
+					<button type="submit" class="btn btn-primary">Sign in</button>
+				</form>
+			</div>
 		</div>
 	</div>
 
