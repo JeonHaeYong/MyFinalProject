@@ -70,8 +70,8 @@ b{font-family:'Gamja Flower', cursive; font-size:40px;}
 #joinForm>.row{margin-bottom: 20px;}
 .input-addr>div{margin-bottom: 10px;}
 #search-btn{margin-left:5px;}
- input[type="button"],input[type="reset"],input[type="submit"]{background-color: #EC7357; border: none; font-size: 17px; color:white; border-radius: 5px;}
- input[type="button"]:hover,input[type="reset"]:hover,input[type="submit"]:hover{font-weight: bold; background-color: #f7613e;}
+.btn,input[type="reset"],input[type="submit"]{background-color: #EC7357; border: none; font-size: 15px; color:white; border-radius: 5px; padding:3px 5px;}
+.btn:hover,input[type="reset"]:hover,input[type="submit"]:hover{font-weight: bold; background-color: #f7613e;}
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -230,7 +230,7 @@ b{font-family:'Gamja Flower', cursive; font-size:40px;}
 
 					<input type="text" id="email" placeholder="ex)dogandcat@aaa.com"
 						name="email" flag="false" required regexFlag="false" >
-						<input type="button" id="emailcheck" value="인증">
+						<input type="button" id="emailcheck" value="인증" class="btn">
 				</div>
 				<div class="col-12"><span class="emailResult"></span></div>
 			</div>
@@ -266,7 +266,7 @@ b{font-family:'Gamja Flower', cursive; font-size:40px;}
 					<div class="row input-addr">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-12 zipcode">
 							<input type="text" id="zipcode" placeholder="우편번호" name="zipcode" required>
-							<input type="button" value="찾기" id="search-btn">
+							<input type="button" value="찾기" id="search-btn" class="btn">
 						</div>
 						<div class="col-lg-12 col-md-12 col-sm-12 col-12">
 							<input type="text" id="address1" placeholder="주소" name="address1" required>
