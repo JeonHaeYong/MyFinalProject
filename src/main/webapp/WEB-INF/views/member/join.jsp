@@ -336,16 +336,16 @@ height:40px;
 							<div class="row input-addr">
 								<div class="col-lg-12 col-md-12 col-sm-12 col-12 zipcode">
 									<input type="text" id="zipcode" placeholder="우편번호"
-										name="zipcode" required> <input type="button"
-										value="찾기" id="search-btn" class="btn" class="textbox">
+										name="zipcode" required readonly> <input type="button"
+										value="찾기" id="search-btn" class="btn" class="textbox" >
 								</div>
 								<div class="col-lg-12 col-md-12 col-sm-12 col-12">
 									<input type="text" id="address1" placeholder="주소"
-										name="address1" required class="textbox">
+										name="address1" required class="textbox" readonly>
 								</div>
 								<div class="col-lg-12 col-md-12 col-sm-12 col-12">
 									<input type="text" id="address2" placeholder="상세주소를 입력하시오"
-										name="address2" required class="textbox">
+										name="address2" required class="textbox" >
 								</div>
 							</div>
 						</div>
@@ -368,32 +368,7 @@ height:40px;
 
 
 
-	<!-- 수신여부 보류 
-		 <div class="form-group">
-			<label for="inputEmailReceiveYn" class="col-lg-2 control-label">이메일
-				수신여부</label>
-			<div class="col-lg-10">
-				<label class="radio-inline"> <input type="radio"
-					id="emailReceiveYn" name="emailReceiveYn" value="Y" checked>
-					동의합니다.
-				</label> <label class="radio-inline"> <input type="radio"
-					id="emailReceiveYn" name="emailReceiveYn" value="N"> 동의하지
-					않습니다.
-				</label>
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="inputPhoneNumber" class="col-lg-2 control-label">SMS
-				수신여부</label>
-			<div class="col-lg-10">
-				<label class="radio-inline"> <input type="radio"
-					id="smsReceiveYn" name="smsReceiveYn" value="Y"> 동의합니다.
-				</label> <label class="radio-inline"> <input type="radio"
-					id="smsReceiveYn" name="smsReceiveYn" value="N"> 동의하지 않습니다.
-				</label>
-			</div>
-		</div> -->
-
+	
 
 
 
@@ -581,62 +556,41 @@ height:40px;
 		});
 	</script>
 	<!--우편번호  -->
-	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	  <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<script>
 		document.getElementById("search-btn").onclick = searchAddress;
 
 		function searchAddress() {
-			new daum.Postcode(
-					{
-						oncomplete : function(data) {
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-							var roadAddr = data.roadAddress;
-							var extraRoadAddr = '';
+                    // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                    var roadAddr = data.roadAddress; // 도로명 주소 변수
+                    var extraRoadAddr = ''; // 참고 항목 변수
 
-							if (data.bname !== ''
-									&& /[동|로|가]$/g.test(data.bname)) {
-								extraRoadAddr += data.bname;
-							}
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraRoadAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraRoadAddr !== ''){
+                        extraRoadAddr = ' (' + extraRoadAddr + ')';
+                    }
 
-							if (data.buildingName !== ''
-									&& data.apartment === 'Y') {
-								extraRoadAddr += (extraRoadAddr !== '' ? ', '
-										+ data.buildingName : data.buildingName);
-							}
+                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                    document.getElementById('zipcode').value = data.zonecode;
+                    document.getElementById("address1").value = roadAddr;
+                }
+            }).open();
+        }
 
-							if (extraRoadAddr !== '') {
-								extraRoadAddr = ' (' + extraRoadAddr + ')';
-							}
-
-							document.getElementById("zipcode").value = data.zonecode;
-							document.getElementById("address1").value = roadAddr;
-
-							if (roadAddr !== '') {
-								document.getElementById("sample4_extraAddress").value = extraRoadAddr;
-							} else {
-								document.getElementById("sample4_extraAddress").value = '';
-							}
-							var guideTextBox = document.getElementById("guide");
-							// 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-							if (data.autoRoadAddress) {
-								var expRoadAddr = data.autoRoadAddress
-										+ extraRoadAddr;
-								guideTextBox.innerHTML = '(예상 도로명 주소 : '
-										+ expRoadAddr + ')';
-								guideTextBox.style.display = 'block';
-
-							} else if (data.autoJibunAddress) {
-								var expJibunAddr = data.autoJibunAddress;
-								guideTextBox.innerHTML = '(예상 지번 주소 : '
-										+ expJibunAddr + ')';
-								guideTextBox.style.display = 'block';
-							} else {
-								guideTextBox.innerHTML = '';
-								guideTextBox.style.display = 'none';
-							}
-						}
-					}).open();
-		}
 	</script>
 
 

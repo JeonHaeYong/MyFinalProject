@@ -39,7 +39,8 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int insertMemberService(MemberDTO dto) {
-		dto.setType(1);//일반회원인 경우 type =1
+		dto.setType(1);
+		dto.getAddress2().replaceAll("<script", "##");
 		int result = mdao.insertMember(dto);	
 		return result;
 	}
