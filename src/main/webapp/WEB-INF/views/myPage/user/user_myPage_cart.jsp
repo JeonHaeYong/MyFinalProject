@@ -56,7 +56,6 @@
             <jsp:include page="/WEB-INF/views/module/menu.jsp" ></jsp:include>
             <!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
            <jsp:include page="/WEB-INF/views/myPage/user/user_module/top_menu_info.jsp"></jsp:include>
-                            <!-- /마이페이지 상단메뉴 -->
                             <div class="tab-content" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-profile">
                                 <!-- 장바구니 -->
