@@ -273,6 +273,22 @@ public class MemberController {
 		}
 		return "myPage/user/user_myPage_profile";
 	}
+	
+	//내정보 -> 비밀번호 변경시 입력한 현재비밀번호가 맞는 비밀번호인지 확인
+	@ResponseBody
+	@RequestMapping("currPwCheck")
+	public String currPwCheck(String id , String pw) {
+		int result = mservice.isLoginOkService(id, pw);
+		if(result==0) {
+			return "false";
+		}
+		return "true";
+	}
+	@RequestMapping("modifyPwByMyPage")
+	public String modifyPwByMyPage(String pw) {
+		System.out.println("넘어온 pw -> " + pw);
+		return "";
+	}
 
 	@RequestMapping("toMyPage_writeList")
 	public String toMyPage_writeList(HttpServletRequest request) {
