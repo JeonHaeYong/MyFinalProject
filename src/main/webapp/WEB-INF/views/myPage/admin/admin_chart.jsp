@@ -149,7 +149,9 @@
 		drawChart();
 		setInterval(drawChart, 5000);
 	    
-		var temp;
+		var temp1;
+		var temp2;
+		var temp3;
 		
 		function drawChart()
 	    {
@@ -189,9 +191,15 @@
 	    			{ 
 	    				title : "일 평균 방문자 수", chartArea: {width: '80%', height: '80%'}, bar :{groupWidth : "95%"}, legend :{position : "none"}
 	    			};
+	    			if(temp1 != null)
+	    			{
+	    				temp1.clearChart();
+	    			}
+	    			
 	    			var chart1 = new google.visualization.ColumnChart(document.getElementById("recent_chart_div"));
-	    			chart1.clearChart();
 	    			chart1.draw(view1, options1);
+	    			
+	    			temp1 = chart1;
 	    		}
 	    			    
 	    		function compareChart()
@@ -208,12 +216,17 @@
 	    			([
 	    				0, 1,{ calc : "stringify", sourceColumn : 1, type : "string", role : "annotation" }, 2
 	    			]);
-	    				    
+	    			
+	    			if(temp2 != null)
+	    			{
+	    				temp2.clearChart();
+	    			}
+	    			
 	    			var options2 = { title : '전월 / 현월 방문자 수 비교', pieHole : 0.4, chartArea: {width: '80%', height: '80%'} };
 	    			var chart2 = new google.visualization.PieChart(document.getElementById("compare_chart_div"));
-	    			chart2.clearChart();
 	    			chart2.draw(view2, options2);
-	    				    
+	    			
+	    			temp2 = chart2;
 	    		}
 	    		
 	    		function yearChart()
@@ -247,16 +260,15 @@
 	    				chartArea: {width: '60%', height: '70%'}
 	    			};
 
-	    			if(temp != null)
+	    			if(temp3 != null)
 	    			{
-	    				temp.clearChart();
+	    				temp3.clearChart();
 	    			}
 	    			
 	    			var chart3 = new google.visualization.ComboChart(document.getElementById('year_chart_div'));
-	    			
-	    			
 	    			chart3.draw(data3, options3);
-	    			temp = chart3;
+	    			
+	    			temp3 = chart3;
 	    		}
 	    	})
 	    	.fail(function()
