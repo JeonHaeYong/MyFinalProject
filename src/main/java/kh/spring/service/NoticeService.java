@@ -8,5 +8,5 @@ public interface NoticeService
 	
 	public String insertDummy() throws Exception;
 	
-	public String selectForPage() throws Exception;
+	public String selectForPage(String page) throws Exception;
 }

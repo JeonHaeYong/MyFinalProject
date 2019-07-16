@@ -221,11 +221,9 @@
 	    		keyword = $("#search_text").val();
 	    		$("#search_result_div").empty();
 	    		
-	    		var size = response.size;
 	    		var array = response.array;
 	    		
 // 	    		console.log(response)
-// 	    		alert(size);
 	    		
 	    		for(var i = 1 ; i <= array.length ; i++)
 	    		{
@@ -300,11 +298,9 @@
 	    	{
 	    		$("#search_result_div").empty();
 	    		
-	    		var size = response.size;
 	    		var array = response.array;
 	    		
 // 	    		console.log(response)
-// 	    		alert(size);
 	    		
 	    		for(var i = 1 ; i <= array.length ; i++)
 	    		{

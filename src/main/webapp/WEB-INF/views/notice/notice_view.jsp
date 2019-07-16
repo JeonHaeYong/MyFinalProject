@@ -18,8 +18,18 @@
 <link rel="stylesheet" href="resources/css/style.css">
 
 <style>
+	#container
+	{
+		margin-top: 5%;
+	}
 
-
+	h3
+	{
+		border-bottom: 1px solid black;
+		
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
 
 
 </style>
@@ -36,11 +46,18 @@
 		<div id="container" class="container">
 
 			<div class="row justify-content-center">
+				
+				<div class="col-2 col-md-2 col-lg-2 text-center my-1"><h3>글 번호</h3></div>
+				<div class="col-6 col-md-6 col-lg-6 text-center my-1"><h3>제목</h3></div>
+				<div class="col-2 col-md-2 col-lg-2 text-center my-1"><h3>작성 일자</h3></div>
+				<div class="col-2 col-md-2 col-lg-2 text-center my-1"><h3>조회수</h3></div>
+				
+				<div id="contents_div" class="col-12 col-md-12 col-lg-12 text-center my-5">
+					
+				</div>
 
 				<div class="col-12 col-md-12 col-lg-12 text-center my-5">
-
 					<a href="notice-write-random">데이터 삽입</a>
-
 				</div>
 
 			</div>
@@ -68,7 +85,154 @@
 <script>
 	$(function()
     {
-	    
+		$.ajax
+    	({
+    		url: "notice-view-do",
+    		type: "POST",
+    		dataType: "JSON",
+    		data:
+    		{
+    			page: '1'
+    		}
+    	})
+    	
+    	.done(function(response)
+    	{
+    		var array = response.array;
+// 	    	console.log(response);
+    		
+			for(var i = 1 ; i <= array.length ; i++)
+	    	{
+				var $row = $('<div class="row justify-content-center my-1"></div>');
+				var $seqCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1">'+array[i-1].seq+'</div>');
+	    		var $titleCol = $('<div class="col-6 col-md-6 col-lg-6 text-center my-1">'+array[i-1].title+'</div>');
+	    		var $writeTimeCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1">'+array[i-1].write_time+'</div>');
+	    		var $viewCountCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1">'+array[i-1].view_count+'</div>');
+	    		$row.append($seqCol).append($titleCol).append($writeTimeCol).append($viewCountCol);
+	    		$("#contents_div").append($row);
+	    	}
+    		
+//     		console.log(response.currentPage);
+//     		console.log(response.needPrev);
+//     		console.log(response.needNext);
+//     		console.log(response.startNavi);
+//     		console.log(response.endNavi);
+    		
+    		var $naviRow = $('<div id="navi_row" class="row justify-content-center my-5"></div>');
+    		
+    		if(response.needPrev)
+    		{
+    			var $prevBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="이전" name="'+(response.startNavi-1)+'">');
+    			$naviRow.append($prevBtn);
+    		}
+    		
+    		for(var i = response.startNavi ; i <= response.endNavi ; i++)
+    		{
+    			
+    			if(i == response.currentPage)
+    			{
+	    			var $naviBtn = $('<input class="btn btn-danger selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+
+    			}
+    			else
+    			{
+	    			var $naviBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+
+    			}
+    			$naviRow.append($naviBtn);
+    		}
+    		
+    		if(response.needNext)
+    		{
+    			var $nextBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="이후" name="'+(response.endNavi+1)+'">');
+    			$naviRow.append($nextBtn);
+    		}
+    		
+    		$("#contents_div").append($naviRow);
+    		
+    	})
+    	.fail(function()
+    	{
+    		alert("error");
+    	});
+		
+		$(document).on("click", ".navi_btns", function()
+		{
+			$.ajax
+	    	({
+	    		url: "notice-view-do",
+	    		type: "POST",
+	    		dataType: "JSON",
+	    		data:
+	    		{
+	    			page: this.name
+	    		}
+	    	})
+	    	
+	    	.done(function(response)
+	    	{
+	    		$("#contents_div").empty();
+	    		
+	    		var array = response.array;
+//	 	    	console.log(response);
+	    		
+	    		for(var i = 1 ; i <= array.length ; i++)
+	    		{
+					var $row = $('<div class="row justify-content-center my-1"></div>');
+					var $seqCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1">'+array[i-1].seq+'</div>');
+	    			var $titleCol = $('<div class="col-6 col-md-6 col-lg-6 text-center my-1">'+array[i-1].title+'</div>');
+	    			var $writeTimeCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1">'+array[i-1].write_time+'</div>');
+	    			var $viewCountCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1">'+array[i-1].view_count+'</div>');
+	    			$row.append($seqCol).append($titleCol).append($writeTimeCol).append($viewCountCol);
+	    			$("#contents_div").append($row);
+	    		}
+	    		
+//	     		console.log(response.currentPage);
+//	     		console.log(response.needPrev);
+//	     		console.log(response.needNext);
+//	     		console.log(response.startNavi);
+//	     		console.log(response.endNavi);
+	    		
+	    		var $naviRow = $('<div id="navi_row" class="row justify-content-center my-5"></div>');
+	    		
+	    		if(response.needPrev)
+	    		{
+	    			var $prevBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="이전" name="'+(response.startNavi-1)+'">');
+	    			$naviRow.append($prevBtn);
+	    		}
+	    		
+	    		for(var i = response.startNavi ; i <= response.endNavi ; i++)
+	    		{
+	    			
+	    			if(i == response.currentPage)
+	    			{
+		    			var $naviBtn = $('<input class="btn btn-danger selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+
+	    			}
+	    			else
+	    			{
+		    			var $naviBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+
+	    			}
+	    			$naviRow.append($naviBtn);
+	    		}
+	    		
+	    		if(response.needNext)
+	    		{
+	    			var $nextBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="이후" name="'+(response.endNavi+1)+'">');
+	    			$naviRow.append($nextBtn);
+	    		}
+	    		
+	    		$("#contents_div").append($naviRow);
+	    		
+	    	})
+	    	.fail(function()
+	    	{
+	    		alert("error");
+	    	});
+		});
+		
+		
     });
     
     onload = function()

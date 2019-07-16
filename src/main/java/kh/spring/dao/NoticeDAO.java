@@ -9,4 +9,5 @@ public interface NoticeDAO
 	public int insert(NoticeDTO dto) throws Exception;
 
 	public List<NoticeDTO> selectForPage(int pageStart, int pageEnd) throws Exception;
+	public int selectCountAll() throws Exception;
 }
