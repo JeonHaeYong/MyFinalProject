@@ -44,7 +44,18 @@ public class MessageDAOImpl implements MessageDAO{
 	public int getMsgAllCount(String type, String id) {
 		Map<String,String> map = new HashMap<>();
 		map.put(type , id);
+		System.out.println(type+":"+id);
 		return sst.selectOne("MessageDAO.getMsgAllCount",map);
+	}
+
+	@Override
+	public int selectSeqCurrVal() {
+		return sst.selectOne("MessageDAO.selectSeqCurrVal");
+	}
+
+	@Override
+	public int deleteMsgBySeq(String[] seq) {
+		return sst.delete("MessageDAO.deleteMsgBySeq",seq);
 	}
 
 

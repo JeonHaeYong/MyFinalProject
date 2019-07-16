@@ -1,5 +1,7 @@
 package kh.spring.fin;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,5 +39,13 @@ public class MessageController {
 	@RequestMapping("updateReadOk")
 	public String updateReadOk(String seq) {
 		return msgService.updateReadOkToYes(seq)+"";
+	}
+	
+	@RequestMapping("deleteMsg")
+	public String deleteMsgBySeq(HttpServletRequest request) {
+		String[] seq = request.getParameterValues("msgSeq");
+		int result = msgService.deleteMsgBySeq(seq);
+		System.out.println(result+"행 삭제되었습니다.");
+		return "redirect:toMyPage_message";
 	}
 }

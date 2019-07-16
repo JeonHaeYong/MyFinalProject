@@ -44,11 +44,15 @@
                     text-align: center;
                 }
                 /*점보트론 이미지*/
+                .jumbotron{
+                	background-color: white;
+                }
                 .jumbotron>img{
                     width: 100%;
                     max-height: 600px;
                 }
             </style>
+            <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
         </head>
         <body data-spy="scroll" data-target=".site-navbar-target"
               data-offset="300" id="home-section">

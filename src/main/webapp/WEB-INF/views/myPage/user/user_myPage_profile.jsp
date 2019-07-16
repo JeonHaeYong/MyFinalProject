@@ -43,11 +43,20 @@
                     text-align: center;
                 }
                 /*점보트론 이미지*/
+                .jumbotron{
+                	background-color: white;
+                }
                 .jumbotron>img{
                     width: 100%;
                     max-height: 600px;
                 }
+                /*부트스트랩 모달시 패딩 없애주기.*/
+                    .modal-open {padding-right: 0px !important;}
+                    .readMsg{
+                    	color : gray;
+                    }
             </style>
+            <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
         </head>
         <body data-spy="scroll" data-target=".site-navbar-target"
               data-offset="300" id="home-section">
@@ -69,7 +78,43 @@
                         <div class="form-group row">
                             <label for="my_password" class="col-sm-2 col-form-label">Password</label>
                             <div class="col-sm-10">
-                                <button type="button" id="my_password" class="btn btn-outline-warning rounded">비밀번호 변경하기</button>
+                                <button type="button" id="my_password" class="btn btn-outline-warning rounded" data-toggle="modal" data-target="#password_change_modal">비밀번호 변경하기</button>
+                                <!-- Modal -->
+								<div class="modal fade" id="password_change_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+								  <div class="modal-dialog modal-dialog-centered" role="document">
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								          <span aria-hidden="true">&times;</span>
+								        </button>
+								      </div>
+								      <div class="modal-body">
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<span class="input-group-text" id="basic-addon1">현재 비밀번호</span>
+											</div>
+											<input type="text" class="form-control" placeholder="Username" aria-label="password" aria-describedby="basic-addon1">
+										</div>
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<span class="input-group-text" id="basic-addon1">변경할 비밀번호</span>
+											</div>
+											<input type="text" class="form-control" placeholder="Username" aria-label="password" aria-describedby="basic-addon1">
+										</div>
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<span class="input-group-text" id="basic-addon1">변경할 비밀번호 확인</span>
+											</div>
+											<input type="text" class="form-control" placeholder="Username" aria-label="password" aria-describedby="basic-addon1">
+										</div>
+									</div>
+								      <div class="modal-footer">
+								        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								        <button type="button" class="btn btn-primary">비밀번호 변경</button>
+								      </div>
+								    </div>
+								  </div>
+								</div>
                             </div>
                         </div>
                         <div class="form-group row">

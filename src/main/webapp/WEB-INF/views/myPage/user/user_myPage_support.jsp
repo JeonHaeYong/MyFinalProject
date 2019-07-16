@@ -44,9 +44,12 @@
                     text-align: center;
                 }
                 /*점보트론 이미지*/
+                .jumbotron{
+                	background-color: white;
+                }
                 .jumbotron>img{
-					width: 100%;
-					max-height: 600px;
+                    width: 100%;
+                    max-height: 600px;
                 }
 /*                 <!-- 해당페이지 스타일--> */
 				.support_contents{
@@ -56,7 +59,7 @@
 					background-color: rgba(137, 255, 137, 0.34);
 				}
             </style>
-
+			<jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
    data-offset="300" id="home-section">

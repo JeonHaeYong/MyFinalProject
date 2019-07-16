@@ -98,15 +98,15 @@ public class MemberServiceImpl implements MemberService {
 		int pageEnd = Integer.parseInt(page) * recordPerPage;
 		return mdao.selectByLikeId(id, pageStart, pageEnd);
 	}
-	
+
 	@Override
 	public int selectCountByLikeId(String id) throws Exception
 	{
 		return mdao.selectCountByLikeId(id);
 	}
-	
-	
-    // 메일 test
+
+
+	// 메일 test
 	@Autowired
 	private JavaMailSender mailSender;	
 
@@ -119,67 +119,97 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	@Transactional
 	public boolean create(String email)  {
-	
+
 		// 임의의 authkey 생성
 		String authkey = new TempKey().getKey(50, false);
 		session.setAttribute("authkey",authkey);	
 		// mail 작성 관련 
 		try {
-		 MailHandler  sendMail = new  MailHandler (mailSender);
+			MailHandler  sendMail = new  MailHandler (mailSender);
 
-		sendMail.setSubject("[Hoon's Board v2.0] 회원가입 이메일 인증");
-		sendMail.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>")
-				.append("<p>아래의 인증번호를 입력하시면 이메일 인증이 완료됩니다.</p>")
-				.append("인증번호=")
-				.append(authkey)
-				.toString());
-		sendMail.setFrom("wlsgid916@gmial.com ", "관리자입니다");
-		sendMail.setTo(email);
-		sendMail.send();
-		return true;
+			sendMail.setSubject("[Hoon's Board v2.0] 회원가입 이메일 인증");
+			sendMail.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>")
+					.append("<p>아래의 인증번호를 입력하시면 이메일 인증이 완료됩니다.</p>")
+					.append("인증번호=")
+					.append(authkey)
+					.toString());
+			sendMail.setFrom("wlsgid916@gmial.com ", "관리자입니다");
+			sendMail.setTo(email);
+			sendMail.send();
+			return true;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	@Override
+	@Transactional
+	public boolean newPw(String email)  {
+
+		// 임의의 authkey 생성
+		String authkey = new TempKey().getKey(50, false);
+		session.setAttribute("newPw",authkey);	
+		// mail 작성 관련 
+		try {
+			MailHandler  sendMail = new  MailHandler (mailSender);
+
+			sendMail.setSubject("임시비밀번호 입니다.");
+			sendMail.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>")
+					.append("<p>임시비밀번호 입니다. 로그인 하시면 비밀번호를 꼭 변경해주세요.</p>")
+					.append("임시비밀번호:")
+					.append(authkey)
+					.toString());
+			sendMail.setFrom("wlsgid916@gmial.com", "관리자입니다");
+			sendMail.setTo(email);
+			sendMail.send();
+			return true;
 		}catch(Exception e) {
 			e.printStackTrace();
 			return false;
 		}
 	}
 
-	
+
 	//네이버 회원가입
 	@Override
 	public int insertNaverJoin(MemberDTO dto) {
-		
+
 		int result = mdao.insertNaverJoin(dto);	
 		return result;
-	
+
 	}
 	
-	
+	//비밀번호 재설정
+	@Override
+	public int updatePwService(String id, String pw) {
+		return mdao.updatePw(id, pw);
+	}
+
 	//이메일로 아이디 찾기 
 	@Override
 	public String FindId(String idname,String birthday) {
-		
+
 		return mdao.findID(idname,birthday);
 	}
-	
+
 	//이메일로 아이디 보내기 
 	@Override
 	@Transactional
 	public boolean FindIdbyemail(String email,String id)  {
-	
-		
+
 		// mail 작성 관련 
 		try {
-		 MailHandler  sendMail = new  MailHandler (mailSender);
+			MailHandler  sendMail = new  MailHandler (mailSender);
 
-		sendMail.setSubject("회원님의 아이디 ");
-		sendMail.setText(new StringBuffer().append("<h1>[아이디 정보]</h1>")
-				.append("회원님의 아이디는 ")
-				.append(id).append("입니다")
-				.toString());
-		sendMail.setFrom("wlsgid916@gmial.com ", "관리자입니다");
-		sendMail.setTo(email);
-		sendMail.send();
-		return true;
+			sendMail.setSubject("회원님의 아이디 ");
+			sendMail.setText(new StringBuffer().append("<h1>[아이디 정보]</h1>")
+					.append("회원님의 아이디는 ")
+					.append(id).append("입니다")
+					.toString());
+			sendMail.setFrom("wlsgid916@gmial.com ", "관리자입니다");
+			sendMail.setTo(email);
+			sendMail.send();
+			return true;
 		}catch(Exception e) {
 			e.printStackTrace();
 			return false;
