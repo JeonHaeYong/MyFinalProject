@@ -2,6 +2,7 @@ package kh.spring.fin;
 
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,6 +21,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import kh.spring.dto.MemberDTO;
+import kh.spring.dto.MessageDTO;
 import kh.spring.loginapi.NaverLoginBO;
 import kh.spring.loginapi.kakao_restapi;
 import kh.spring.service.CartService;
@@ -259,40 +261,72 @@ public class MemberController {
 	}
 
 	
-	
-	//마이페이지
+	//-----------------------------마이페이지 	
+	//마이페이지 -> aop로 user정보랑 안읽은메세지 갯수 request에 담기
 	@RequestMapping("toMyPage")
 	public String toMyPage(HttpServletRequest request) {
-		System.out.println("마이페이지로");
-		//memberDTO담기
-		System.out.println("로그인아이디-> "+session.getAttribute("id"));
-		String loginId = (String)session.getAttribute("id");
-		int msgYet = msgService.selectMsgYetReadCount(loginId);
-		MemberDTO dto = mservice.selectOneMemberService(loginId);
-		request.setAttribute("memberDTO", dto);
-		request.setAttribute("msg", msgYet);
+		MemberDTO dto = (MemberDTO)request.getAttribute("memberDTO");
+		int type= dto.getType();
+		if(type==4) {//관리자라면
+			return "myPage/admin/admin_chart";
+		}
 		return "myPage/user/user_myPage_profile";
 	}
 
 	@RequestMapping("toMyPage_writeList")
-	public String toMyPage_writeList() {
+	public String toMyPage_writeList(HttpServletRequest request) {
 		return "myPage/user/user_myPage_writeList";
 	}
 
 	@RequestMapping("toMyPage_support")
-	public String toMyPage_support() {
+	public String toMyPage_support(HttpServletRequest request) {
 		return "myPage/user/user_myPage_support";
 	}
 
 	@RequestMapping("toMyPage_buyList")
-	public String toMyPage_buyList() {
+	public String toMyPage_buyList(HttpServletRequest request) {
 		return "myPage/user/user_myPage_buyList";
 	}
 
 	@RequestMapping("toMyPage_message")
-	public String toMyPage_message() {
+	public String toMyPage_message(HttpServletRequest request,String currentPage) {
+		if(currentPage==null) {
+			currentPage = "1";
+		}
+		int page = Integer.parseInt(currentPage);
+		String loginId = (String)session.getAttribute("id");
+		//페이지에 띄울 쪽지 리스트 담기.
+		//받은쪽지
+		List<MessageDTO> receivedList = msgService.selectAllMsgByCurrentPage("recipient",loginId, page);
+		request.setAttribute("receivedList", receivedList);
+		//보낸쪽지
+		List<MessageDTO> sentList = msgService.selectAllMsgByCurrentPage("sender",loginId, page);
+		request.setAttribute("sentList", sentList);
+		
+		//페이지 navi담기.
+		//받은쪽지
+		List<String> receivedNavi = msgService.getNaviforMsg(page, "recipient", loginId);
+		request.setAttribute("receivedNavi", receivedNavi);
+		//보낸쪽지
+		List<String> sentNavi = msgService.getNaviforMsg(page, "sender", loginId);
+		request.setAttribute("sentNavi", sentNavi);
 		return "myPage/user/user_myPage_message";
 	}
+	
+	/**
+	 * 메세지 보낼때, 받는사람이 존재하는 id인지 확인
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("idExistOk")
+	public String idExistOk(String id) {
+		System.out.println(id);
+		int exist = mservice.idDuplCheckService(id);
+		//exist==1 존재 , 0이면 없음
+		return exist+"";
+	}
+//-----------------------------/마이페이지 
+	
 
 
 }

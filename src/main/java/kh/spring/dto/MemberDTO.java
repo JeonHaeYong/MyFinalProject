@@ -11,7 +11,7 @@ public class MemberDTO {
 	private String zipcode;
 	private String address1;
 	private String address2;
-	private int type;
+	private int type;//1.일반 2.네이버 3.카카오 4.관리자
 	private int point;
 	private int rank;
 	

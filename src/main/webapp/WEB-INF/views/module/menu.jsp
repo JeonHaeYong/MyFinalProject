@@ -9,16 +9,11 @@
 </div>
 <div class="site-wrap">
 	<div class="site-mobile-menu site-navbar-target">
-		<div class="site-mobile-menu-header">
-			<div class="site-mobile-menu-close mt-3">
-				<span class="icon-close2 js-menu-toggle"></span>
-			</div>
-		</div>
 		<div class="site-mobile-menu-body"></div>
 	</div>
 
 	<header class="site-navbar js-sticky-header site-navbar-target"
-		role="banner">
+		role="banner" style="height:68px;">
 		<div class="container">
 			<div class="row  align-items-center">
 				<div class="col-6 col-xl-2">
@@ -35,15 +30,15 @@
 							<li><a href="#home-section" class="nav-link">유기동물</a></li>
 							<li><a href="/toHospital?currentPage=1" class="nav-link">임시보호중</a></li>
 							<li><a href="#trainers-section" class="nav-link">재회</a></li>
-							<li><a href="freeMarket?currentPage=1&category=all" class="nav-link">무료나눔</a></li>
+							<li><a href="/freeMarket?currentPage=1&category=all" class="nav-link">무료나눔</a></li>
 							<li><a href="/oxQuiz" class="nav-link">Fun</a></li>
 							<li><a href="#services-section" class="nav-link">후원하기</a></li>
 							<li><a href="#contact-section" class="nav-link ">공지사항</a></li>
 							<c:choose>
 								<c:when test="${id eq null}">
-									<li><button type="button" data-toggle="modal"
-											data-target="#loginmodal">
-											로그인 </button></li>
+									<li><input type="button" data-toggle="modal"
+											data-target="#loginmodal" class="login-btn" value="로그인">
+										</li>
 									<li><a href="join" class="nav-link pl-0 pr-0">회원가입</a></li>
 								</c:when>
 								<c:otherwise>

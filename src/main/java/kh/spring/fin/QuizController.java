@@ -32,10 +32,6 @@ public class QuizController {
 	
 	@RequestMapping("oxQuiz")
 	public String oxQuiz(HttpServletRequest request) {
-		//지울 코드
-		session.setAttribute("id", "sohee");
-		session.setAttribute("type", 4);//지울 코드
-		
 		List<QuizDTO> list = qs.selectRandQuizService();
 		System.out.println("문제 개수:"+list.size());
 		session.setAttribute("list", list); // 랜덤으로 뽑은 문제목록 세션에 담기
