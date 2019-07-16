@@ -356,7 +356,7 @@ b{font-family:'Gamja Flower', cursive; font-size:40px;}
 				}).done(function(resp) {
 					console.log(resp);
 					if(resp==true){
-						window.open('emailcheck', 'window팝업', 'width=400, height=600, menubar=no, status=no, toolbar=no');  
+						window.open('emailcheck', 'window팝업', 'width=430, height=300, menubar=no, status=no, toolbar=no');  
 					}
 					
 				});
