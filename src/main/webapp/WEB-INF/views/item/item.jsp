@@ -143,31 +143,12 @@
                 	</div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row m-3">
             	<div class="col-12">
             		<div class="contents">
             			${item.contents }
             		</div>
             	</div>
-            </div>
-            <div class="row">
-                <div class="col-12 d-flex justify-content-center" id="naviBox">
-                    <c:if test="${pageNavi.needPrev == 1 }">
-                        <a class="btn myBtn" href="freeMarket?currentPage=${pageNavi.startNavi - 1}">&laquo;</a>
-                    </c:if>
-                    <c:if test="${pageNavi.currentPage > pageNavi.startNavi }">
-                        <a class="btn myBtn" href="freeMarket?currentPage=${pageNavi.currentPage - 1}">&lt;</a>
-                    </c:if>
-                    <c:forEach var="i" begin="${pageNavi.startNavi}" end="${pageNavi.endNavi}">
-                        <a class="btn myBtn" href="freeMarket?currentPage=${i }" class="pageNum">${i}</a>
-                    </c:forEach>
-                    <c:if test="${pageNavi.currentPage < pageNavi.pageTotalCount }">
-                        <a class="btn myBtn" href="freeMarket?currentPage=${pageNavi.currentPage + 1}">&gt;</a>
-                    </c:if>
-                    <c:if test="${pageNavi.needNext == 1 }">
-                        <a class="btn myBtn" href="freeMarket?currentPage=${pageNavi.endNavi + 1}">&raquo;</a>
-                    </c:if>
-                </div>
             </div>
         </div>
 

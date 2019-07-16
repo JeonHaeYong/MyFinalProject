@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PaymentDAO">
+
+	<insert id="insertPayment">
+		insert into payment values(payment_seq.nextval, #{item_seq}, #{buyer}, #{name}, #{email}, #{phone}, #{zipcode}, #{address1}, #{address2}, #{seller}, #{type})
+	</insert>
+	
+	<select id="selectAllPayment" resultType="kh.spring.dto.PaymentDTO">
+		select * from payment
+	</select>
+	
+	<select id="selectPaymentById" resultType="kh.spring.dto.PaymentDTO">
+		select * from payment where buyer=#{value}
+	</select>
+	
+</mapper>

@@ -182,6 +182,7 @@
         		if(!$(this).prop("checked")){
         			$("#allCheck").prop("checked", false);
         		}
+        		console.log("item_seq: " + $(this).val());
         	});
         	
         	$("#delBtn").on("click", function(){
@@ -194,7 +195,7 @@
             				$.ajax({
                     			url: "deleteCart",
                     			data: {
-                    				item_seq: $(item).attr("seq")
+                    				item_seq: $(item).val()
                     			}
                     		});
             			}
@@ -204,7 +205,9 @@
         	});
         	
         	$("#allPayBtn").on("click", function(){
-        		$("#allCheck").click();
+        		if(!$("#allCheck").prop("checked")){
+        			$("#allCheck").click();
+        		}
         		$("#itemCheckForm").submit();
         	});
         	
