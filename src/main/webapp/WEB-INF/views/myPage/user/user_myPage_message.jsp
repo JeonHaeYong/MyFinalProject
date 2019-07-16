@@ -51,6 +51,9 @@
                     }
                     /*부트스트랩 모달시 패딩 없애주기.*/
                     .modal-open {padding-right: 0px !important;}
+                    .sent_msg_click,.recipient_msg_click{
+                    	
+                    }
                 </style>
             </head>
             <body data-spy="scroll" data-target=".site-navbar-target"
@@ -83,10 +86,11 @@
                                                 </div>
                                                 <div class="col-2">보낸사람</div>
                                                 <div class="col-5">내용</div>
-                                                <div class="col-3">날짜</div>
+                                                <div class="col-3">받은날짜</div>
                                                 <div class="col-1">read</div>
                                             </div>
                                             <!-- 테이블에서 값 가져오기 -->
+                                            <!-- 받은쪽지함 내용 -->
                                             <c:forEach var="r_list" items="${receivedList }" varStatus="status">
                                                 <div class="row">
                                                     <div class="col-1">
@@ -103,6 +107,7 @@
                                                     <div class="col-1 r_readOk">${r_list.readOk }</div>
                                                 </div>
                                             </c:forEach>
+                                            <!-- 받은쪽지클릭하면 내용띄워주기 -->
                                             <div class="modal fade p-0" id="r_msg_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                     <div class="modal-content">
@@ -113,8 +118,12 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <div id="r_sender_modal">보낸사람 : </div>
-                                                            <div id="r_contents_modal"></div>
+                                                        	<div class="container-fluid">
+                                                        	<div id="r_sender_modal">보낸사람 : </div>
+                                                            <div>
+                                                            	<textarea class="border-0" id="r_contents_modal" rows="5" cols="50" style="resize:none;" readonly></textarea>
+                                                            </div>
+                                                        	</div>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -123,6 +132,20 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <!-- 받은쪽지 네비게이터 띄워주기 -->
+                                            <div class="row">
+                                            	<div class="col-12">
+                                            		<ul class="pagination justify-content-center">
+                                            		<c:forEach var="navi" items="${receivedNavi }">
+														<li class="page-item">
+															<form>
+																<a class="page-link text-decoration-none" href="#">${navi }</a>
+															</form>
+														</li>
+                                            		</c:forEach>
+                                            		</ul>
+                                            	</div>
+                                            </div><!-- /받은쪽지 네비게이터-->
                                         </div>
                                         <!-- 보낸쪽지함 -->
                                         <div class="tab-pane fade" id="nav-sentbox" role="tabpanel" aria-labelledby="nav-sentbox-tab">
@@ -135,14 +158,73 @@
                                                 </div>
                                                 <div class="col-2">받은사람</div>
                                                 <div class="col-5">내용</div>
-                                                <div class="col-3">날짜</div>
-                                                <div class="col-1">읽음여부</div>
+                                                <div class="col-3">보낸날짜</div>
+                                                <div class="col-1">Read</div>
                                             </div>
+                                            <c:forEach var="s_list" items="${sentList }" varStatus="status">
+                                                <div class="row">
+                                                    <div class="col-1">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input sent_check" id="s_${status.count }">
+                                                            <label class="custom-control-label" for="s_${status.count }"></label>
+                                                        </div> 
+                                                    </div>
+                                                    <div class="col-2 text-truncate">${s_list.recipient }</div>
+                                                    <div class="col-5 s_click_parent text-truncate">
+                                                    	<a class="sent_msg_click" href="#" seq="${s_list.seq }" data-toggle="modal" data-target="#s_msg_modal" value="${s_list.recipient }">${s_list.contents }</a>
+                                                    </div>
+                                                    <div class="col-3">${s_list.message_date }</div>
+                                                    <div class="col-1 s_readOk">${s_list.readOk }</div>
+                                                </div>
+                                            </c:forEach>
+                                            <!-- 보낸쪽지클릭하면 내용띄워주기 -->
+                                            <div class="modal fade p-0" id="s_msg_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">쪽지 읽기</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                        	<div class="container-fluid">
+                                                        	<div id="s_recipient_modal">받은사람:</div>
+                                                            <div>
+                                                            	<textarea class="border-0" id="s_contents_modal" rows="5" cols="50" style="resize:none;" readonly></textarea>
+                                                            </div>
+                                                        	</div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /보낸쪽지클릭하면 내용띄워주기 -->
+                                            <!-- 보낸쪽지 네비게이터 띄워주기 -->
+                                            <div class="row">
+                                            	<div class="col-12">
+                                            		<ul class="pagination justify-content-center">
+                                            		<c:forEach var="navi" items="${sentNavi }">
+														<li class="page-item">
+															<form>
+																<a class="page-link text-decoration-none" href="#">${navi }</a>
+															</form>
+														</li>
+                                            		</c:forEach>
+                                            		</ul>
+                                            	</div>
+                                            </div>
+                                            <!-- /보낸쪽지 네비게이터-->
                                         </div>
+                                        <!-- /보낸쪽지함 -->
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- /쪽지함 -->
                     </div>
                 </div>
                 <div>
@@ -202,14 +284,14 @@
             <script>
                 $('#message-text').keyup(function (e){
                     var content = $(this).val();
-                    if(content.length>300){
-                        alert("쪽지는 300자 이내만 가능합니다.");
-                        content = content.substr(0,300);
-                        $('#counter').html(content.length + '/300');
+                    if(content.length>150){
+                        alert("쪽지는 150자 이내만 가능합니다.");
+                        content = content.substr(0,150);
+                        $('#counter').html(content.length + '/150');
                         $(this).val(content);
                         return;
                     }else{
-                        $('#counter').html(content.length + '/300');
+                        $('#counter').html(content.length + '/150');
                     }
                 });
                 $("#msg_close_btn").on("click",function(){
@@ -276,12 +358,22 @@
                     		}
                     	}).done(function(resp){
                     		if(resp=="1"){
-                    			$(readOkModi).text("Y");
+                    			$(readOkModi).text("Y");//msg읽음으로 바꿈
+                    			var yetMsg = $("#yet_noRead_msg").text();//msg안읽은 갯수 가져오기.
+                    			$("#yet_noRead_msg").text(yetMsg-1);//msg안읽은 갯수 바꾸기.
                     		}
                     	}).fail(function(a,b,c){
                 			alert("error");
                 		});
                 	}
+                });
+                $(".sent_msg_click").on("click" , function(){
+                	$("#s_recipient_modal").html("");
+                	$("#s_contents_modal").html("");
+                	var contents = $(this).text();
+                	var recipient = $(this).attr("value");
+                	$("#s_recipient_modal").append("받은사람 : "+recipient+"<hr>");
+                	$("#s_contents_modal").append(contents);
                 });
             </script>
         </html>

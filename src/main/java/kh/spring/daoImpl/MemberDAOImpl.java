@@ -2,6 +2,8 @@ package kh.spring.daoImpl;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,11 +27,19 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int insertMember(MemberDTO dto) {
 		dto.setPassword(this.testSHA256(dto.getPassword()));
-		int result = sst.insert("MemberDAO.insertMember", dto);
-		System.out.println(result);
-		return result;
+		
+		return  sst.insert("MemberDAO.insertMember", dto);
 	}
-
+//네이버 회원가입
+	@Override
+	public int insertNaverJoin(MemberDTO dto) {
+		long time = System.currentTimeMillis(); //현재시간값으로 비밀번호 임의로 설정 
+		SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+		String str = dayTime.format(new Date(time));
+		dto.setPassword(this.testSHA256(str));
+		return  sst.insert("MemberDAO.insertNaverJoin", dto);
+	}
+	
 	@Override
 	public List<MemberDTO> selectByLikeId(String id)
 	{
@@ -88,6 +98,10 @@ public class MemberDAOImpl implements MemberDAO {
 		return SHA;
 	}
 
+	
+	
+	
+	
 	//퀴즈에서 씀!!
 	@Override
 	public List<MemberDTO> memberPoint() {

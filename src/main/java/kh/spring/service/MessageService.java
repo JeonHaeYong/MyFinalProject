@@ -7,7 +7,7 @@ import kh.spring.dto.MessageDTO;
 public interface MessageService {
 	public int selectMsgYetReadCount(String id);
 	public int insertMsg_service(MessageDTO dto);
-	public List<MessageDTO> selectAllMsgByCurrentPage_sent(String id , String currentPage);
-	public List<MessageDTO> selectAllMsgByCurrentPage_received(String id ,String currentPage);
-	public int updateReadOkToYes(String seq);
+	public List<MessageDTO> selectAllMsgByCurrentPage(String type, String id , int currentPage);
+	public int updateReadOkToYes(String seq);//readOk 를 'N' -> 'Y' 로 업데이트하기.
+	public List<String> getNaviforMsg(int currentPage,String type,String id);
 }

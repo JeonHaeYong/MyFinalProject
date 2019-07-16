@@ -21,12 +21,18 @@
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
-
+<!--구글폰트-->
+        <link href="https://fonts.googleapis.com/css?family=Gamja+Flower&display=swap&subset=korean" rel="stylesheet">
+<style>
+	.login-btn{background:none; border:none; font-family:'Gamja Flower', cursive; font-size:20px; color:#EC7357;}
+	.login-btn:hover{font-weight:bold; color:#ed461f;}
+</style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
    data-offset="300" id="home-section">
    <jsp:include page="/WEB-INF/views/module/menu.jsp" ></jsp:include>
    <!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
+
 <section class="site-blocks-cover overflow-hidden bg-light">
       <div class="container">
          <div class="row">
@@ -386,5 +392,6 @@
                            }
                            //                            로그인 버튼과 회원가입 버튼의 script
   		 </script>
+  		
 </body>
 </html>

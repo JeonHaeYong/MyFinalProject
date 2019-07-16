@@ -135,6 +135,16 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 
+	
+	//네이버 회원가입
+	@Override
+	public int insertNaverJoin(MemberDTO dto) {
+		
+		int result = mdao.insertNaverJoin(dto);	
+		return result;
+	
+	}
+
 }
 
 

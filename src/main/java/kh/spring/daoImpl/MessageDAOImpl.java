@@ -28,22 +28,23 @@ public class MessageDAOImpl implements MessageDAO{
 	}
 
 	@Override
-	public List<MessageDTO> selectAllMsgByCurrentPage_sent(String id, int start, int end) {
-		return null;
-	}
-
-	@Override
-	public List<MessageDTO> selectAllMsgByCurrentPage_received(String id, int start, int end) {
+	public List<MessageDTO> selectAllMsgByCurrentPage(String type , String id, int start, int end) {
 		Map<String,String> map = new HashMap<>();
-		map.put("id", id);
+		map.put(type , id);
 		map.put("start", start+"");
 		map.put("end", end+"");
-		return sst.selectList("MessageDAO.selectAllMsgByCurrentPage_received", map);
+		return sst.selectList("MessageDAO.selectAllMsgByCurrentPage", map);
 	}
 
 	@Override
 	public int updateReadOkToYes(String seq) {
 		return sst.update("MessageDAO.updateReadOkToYes",seq);
+	}
+	@Override
+	public int getMsgAllCount(String type, String id) {
+		Map<String,String> map = new HashMap<>();
+		map.put(type , id);
+		return sst.selectOne("MessageDAO.getMsgAllCount",map);
 	}
 
 

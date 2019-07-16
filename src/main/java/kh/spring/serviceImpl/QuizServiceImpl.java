@@ -39,4 +39,12 @@ public class QuizServiceImpl implements QuizService {
 	public int updatePointService(int point, String id) {
 		return qdao.updatePoint(point, id);
 	}
+	@Override
+	public List<QuizDTO> selectQuizPerPageService(int currentPage){
+		return qdao.selectQuizPerPage(currentPage);
+	}
+	@Override
+	public String getNaviQuizService(int currentPage) {
+		return qdao.getNaviQuiz(currentPage);
+	}
 }

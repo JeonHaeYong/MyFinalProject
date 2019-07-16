@@ -52,9 +52,9 @@
 <!-- 한글설정 END -->
 
 <!-- Listener 설정  시작-->
-	<listener>
-		<listener-class>kh.spring.listener.SessionListener</listener-class>
-	</listener>
+<!-- 	<listener> -->
+<!-- 		<listener-class>kh.spring.listener.SessionListener</listener-class> -->
+<!-- 	</listener> -->
 <!-- Listener 설정  끝-->
 
 </web-app>

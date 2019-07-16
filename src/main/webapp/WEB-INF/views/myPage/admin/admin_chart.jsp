@@ -35,6 +35,21 @@
 .chart_col {
 	height: 10%;
 }
+#recent_chart_div
+{
+	height: 30%;
+	min-height: 300px;
+}
+#compare_chart_div
+{
+	height: 30%;
+	min-height: 300px;
+}
+#year_chart_div
+{
+	height: 50%;
+	min-height: 500px;
+}
 </style>
 
 </head>
@@ -77,20 +92,21 @@
 
 		<div class="row justify-content-center mt-5">
 
-			<div class="col-6 text-center my-3 chart_col">1번 영역</div>
+			<div id="recent_chart_div" class="col-6 text-center my-3 chart_col">1번 영역</div>
 
-			<div class="col-6 text-center my-3 chart_col">2번 영역</div>
+			<div id="compare_chart_div" class="col-6 text-center my-3 chart_col">2번 영역</div>
 
 		</div>
 
 		<div class="row justify-content-center">
 
-			<div class="col-6 text-center my-3 chart_col">3번 영역</div>
-
-			<div class="col-6 text-center my-3 chart_col">4번 영역</div>
+			<div id="year_chart_div" class="col-12 text-center my-3 chart_col">3번 영역</div>
 
 		</div>
-
+		
+		<div class="row justify-content-center">
+			<a href="admin-chart-insert">데이터 입력</a>		
+		</div>
 	</div>
 
 	</section>
@@ -112,28 +128,135 @@
 <script src="resources/js/jquery.sticky.js"></script>
 <script src="resources/js/isotope.pkgd.min.js"></script>
 <script src="resources/js/main.js"></script>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 <script>
 	$(function()
     {
-		$.ajax
-    	({
-    		url: "admin-chart-visit",
-    		type: "POST",
-    		dataType: "JSON"
-    	})
-    	.done(function(response)
-    	{
-    		console.log(response.todayVisitCount);
-    	})
-    	.fail(function()
-    	{
-    		alert("error");
-    	});
+		drawChart();
+		setInterval(drawChart, 5000);
+	    
+		var temp;
+		
+		function drawChart()
+	    {
+			
+	    	$.ajax
+	    	({
+				url : "admin-chart-visit"
+				, type : "POST"
+				, dataType : "JSON"
+			})
+			.done(function(response)
+	    	{
+
+	    		google.charts.load('current',{ 'packages' :['corechart'] });
+	    		
+	    		google.charts.setOnLoadCallback(drawChart);
+	    		google.charts.setOnLoadCallback(compareChart);
+	    		google.charts.setOnLoadCallback(yearChart);
+	    		
+	    		function drawChart()
+	    		{
+	    			var data1 = google.visualization.arrayToDataTable(
+	    			[
+	    				["Element", "Density",{ role : "style" }]
+	    				,["오늘", response.todayVisitCount, "#b87333"]
+	    				,["최근 7일", response.recentSevenVisitCount, "silver"]
+	    				,["최근 30일", response.recentThirtyVisitCount, "gold"]
+	    			]);
+	    				    
+	    			var view1 = new google.visualization.DataView(data1);
+	    			view1.setColumns
+	    			([
+						0, 1,{calc : "stringify", sourceColumn : 1, type : "string", role : "annotation"}, 2
+	    			]);
+	    				    
+	    			var options1 =
+	    			{ 
+	    				title : "일 평균 방문자 수", chartArea: {width: '80%', height: '80%'}, bar :{groupWidth : "95%"}, legend :{position : "none"}
+	    			};
+	    			var chart1 = new google.visualization.ColumnChart(document.getElementById("recent_chart_div"));
+	    			chart1.clearChart();
+	    			chart1.draw(view1, options1);
+	    		}
+	    			    
+	    		function compareChart()
+	    		{
+	    			var data2 = google.visualization.arrayToDataTable(
+	    			[
+	    				["Element", "Density",{role : "style"}]
+	    				,[response.year[1].time, response.year[1].count, "red"]
+	    				,[response.year[0].time, response.year[0].count, "blue"]
+	    			]);
+	    			
+	    			var view2 = new google.visualization.DataView(data2);
+	    			view2.setColumns
+	    			([
+	    				0, 1,{ calc : "stringify", sourceColumn : 1, type : "string", role : "annotation" }, 2
+	    			]);
+	    				    
+	    			var options2 = { title : '전월 / 현월 방문자 수 비교', pieHole : 0.4, chartArea: {width: '80%', height: '80%'} };
+	    			var chart2 = new google.visualization.PieChart(document.getElementById("compare_chart_div"));
+	    			chart2.clearChart();
+	    			chart2.draw(view2, options2);
+	    				    
+	    		}
+	    		
+	    		function yearChart()
+	    		{
+	    			    	
+					// Some raw data (not necessarily accurate)
+	    			var data3 = google.visualization.arrayToDataTable
+	    			([
+	    				['월', '월 평균 방문자 수', 'Line']
+	    				,[response.year[11].time, response.year[11].count, response.year[11].count]
+	    				,[response.year[10].time, response.year[10].count, response.year[10].count]
+	    				,[response.year[9].time, response.year[9].count, response.year[9].count]
+	    				,[response.year[8].time, response.year[8].count, response.year[8].count]
+	    				,[response.year[7].time, response.year[7].count, response.year[7].count]
+	    				,[response.year[6].time, response.year[6].count, response.year[6].count]
+	    				,[response.year[5].time, response.year[5].count, response.year[5].count]
+	    				,[response.year[4].time, response.year[4].count, response.year[4].count]
+	    				,[response.year[3].time, response.year[3].count, response.year[3].count]
+	    				,[response.year[2].time, response.year[2].count, response.year[2].count]
+	    				,[response.year[1].time, response.year[1].count, response.year[1].count]
+	    				,[response.year[0].time, response.year[0].count, response.year[0].count]
+	    			]);
+
+	    			var options3 = 
+	    			{
+	    				title : '최근 1년간 월별 하루 평균 방문자 수',
+// 	    				vAxis: {title: '단위 : 1'},
+// 	    				hAxis: {title: '단위 : 월'},
+	    				seriesType: 'bars',
+	    				series: {1: {type: 'line'}},
+	    				chartArea: {width: '60%', height: '70%'}
+	    			};
+
+	    			if(temp != null)
+	    			{
+	    				temp.clearChart();
+	    			}
+	    			
+	    			var chart3 = new google.visualization.ComboChart(document.getElementById('year_chart_div'));
+	    			
+	    			
+	    			chart3.draw(data3, options3);
+	    			temp = chart3;
+	    		}
+	    	})
+	    	.fail(function()
+	    	{
+	    		alert("error");
+	    	});
+	    }
     });
     
     onload = function()
     {
-	    
+
     };
 </script>
 </html>

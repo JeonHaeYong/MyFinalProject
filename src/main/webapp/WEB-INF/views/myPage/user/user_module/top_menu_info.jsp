@@ -27,7 +27,7 @@
                                     ${memberDTO.point } point
                                 </div>
                                 <div>
-                                    안읽은 쪽지 : <a href="#">${msg }개</a>
+                                    안읽은 쪽지 : <a href="#" id="yet_noRead_msg">${msg }</a>개
                                 </div>
                             </div>
                         </div>

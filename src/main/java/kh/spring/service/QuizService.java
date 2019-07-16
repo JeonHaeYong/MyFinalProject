@@ -10,4 +10,6 @@ public interface QuizService {
 	public List<QuizDTO> selectRandQuizService();
 	public int deleteQuizService(int seq);
 	public int updatePointService(int point, String id);
+	public List<QuizDTO> selectQuizPerPageService(int currentPage);
+	public String getNaviQuizService(int currentPage);
 }
