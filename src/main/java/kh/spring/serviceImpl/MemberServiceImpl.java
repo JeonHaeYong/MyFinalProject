@@ -152,7 +152,39 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	
 	}
+	
+	
+	//이메일로 아이디 찾기 
+	@Override
+	public String FindId(String idname,String birthday) {
+		
+		return mdao.findID(idname,birthday);
+	}
+	
+	//이메일로 아이디 보내기 
+	@Override
+	@Transactional
+	public boolean FindIdbyemail(String email,String id)  {
+	
+		
+		// mail 작성 관련 
+		try {
+		 MailHandler  sendMail = new  MailHandler (mailSender);
 
+		sendMail.setSubject("회원님의 아이디 ");
+		sendMail.setText(new StringBuffer().append("<h1>[아이디 정보]</h1>")
+				.append("회원님의 아이디는 ")
+				.append(id).append("입니다")
+				.toString());
+		sendMail.setFrom("wlsgid916@gmial.com ", "관리자입니다");
+		sendMail.setTo(email);
+		sendMail.send();
+		return true;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }
 
 

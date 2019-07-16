@@ -17,4 +17,6 @@ public interface MemberService {
 	public List<MemberDTO> memberPointService();//퀴즈에서 씀
 	public boolean create(String email);
 	public int insertNaverJoin(MemberDTO dto);
+	public String FindId(String idname, String birthday); //이름으로 아이디 찾기 
+	public boolean FindIdbyemail(String email, String id);//이메일로 아이디 보내기
 }

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -328,6 +329,36 @@ public class MemberController {
 //-----------------------------/마이페이지 
 	
 
-
+	
+	
+//-----------------------------아이디 찾기 
+	@RequestMapping("findIdJSP")
+	public String findIdjsp(){
+		return "member/findId";
+	}
+	
+	@ResponseBody
+	@RequestMapping("findId")
+	public String findId(String idname,String email,String birthday) {
+		System.out.println(idname);
+		String id=mservice.FindId(idname,birthday);
+		System.out.println(id);
+		if(id==null)
+		{return "null";
+			
+		}else {
+			boolean check=mservice.FindIdbyemail(email,id);
+			if(check) {
+				return "true";
+			}else
+			return "false";
+		}
+	}
+	
+		
+	
 }
+	
+
+
 
