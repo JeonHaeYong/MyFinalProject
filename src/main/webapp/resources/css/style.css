@@ -387,8 +387,7 @@ body:after {
           margin-top: 0px;
           visibility: visible;
           opacity: 1; }
-.login-btn{background:none; border:none; font-family:'Gamja Flower', cursive; font-size:20px; color:#EC7357;}
-	.login-btn:hover{font-weight:bold; color:#ed461f;}
+
 .site-mobile-menu {
   width: 300px;
   position: fixed;
