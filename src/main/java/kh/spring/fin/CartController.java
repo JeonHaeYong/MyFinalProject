@@ -35,8 +35,11 @@ public class CartController {
 	
 	@ResponseBody
 	@RequestMapping("deleteCart")
-	public String deleteCart(HttpServletRequest request, int item_seq) {
-		cs.deleteCartService(item_seq, (String)request.getSession().getAttribute("id"));
+	public String deleteCart(HttpServletRequest request, String[] seqs) {
+		for(int i = 0; i < seqs.length; i++) {
+			System.out.println(seqs[i]);
+		}
+		cs.deleteCartService(seqs);
 		return null;
 	}
 }

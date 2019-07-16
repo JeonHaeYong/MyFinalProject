@@ -26,8 +26,19 @@
 	border-radius: 0px !important;
 	width: 100%;
 	height: 100%;
+	
+	background-color: #EC7357 !important;
 }
-
+.my_buttons:hover{
+	background-color: black !important;
+}
+.selected_my_buttons {
+	border-radius: 0px !important;
+	width: 100%;
+	height: 100%;
+	
+	background-color: black !important;
+}
 .no_radius {
 	border-radius: 0px !important;
 }
@@ -55,6 +66,7 @@
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 
 
@@ -65,27 +77,27 @@
 		<div id="menu_row" class="row justify-content-center">
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="admin-member" class="btn btn-warning my_buttons">회원 관리</a>
+				<a href="admin-member" class="btn btn-danger my_buttons">회원 관리</a>
 			</div>
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="#" class="btn btn-warning my_buttons">무료 나눔 물품 승인</a>
+				<a href="#" class="btn btn-danger my_buttons">무료 나눔 물품 승인</a>
 			</div>
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="#" class="btn btn-warning my_buttons">무료 나눔 거래 내역</a>
+				<a href="#" class="btn btn-danger my_buttons">무료 나눔 거래 내역</a>
 			</div>
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="#" class="btn btn-warning my_buttons">월 별 후원금 및 전달 기관</a>
+				<a href="#" class="btn btn-danger my_buttons">월 별 후원금 및 전달 기관</a>
 			</div>
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="#" class="btn btn-warning my_buttons">퀴즈 당첨자</a>
+				<a href="#" class="btn btn-danger my_buttons">퀴즈 당첨자</a>
 			</div>
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="admin-chart" class="btn btn-warning my_buttons">통계</a>
+				<a href="admin-chart" class="btn btn-danger selected_my_buttons">통계</a>
 			</div>
 
 		</div>

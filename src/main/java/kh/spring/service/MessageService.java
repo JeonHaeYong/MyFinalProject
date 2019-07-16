@@ -10,4 +10,5 @@ public interface MessageService {
 	public List<MessageDTO> selectAllMsgByCurrentPage(String type, String id , int currentPage);
 	public int updateReadOkToYes(String seq);//readOk 를 'N' -> 'Y' 로 업데이트하기.
 	public List<String> getNaviforMsg(int currentPage,String type,String id);
+	public int deleteMsgBySeq(String[] seq);
 }

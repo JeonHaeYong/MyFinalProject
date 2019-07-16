@@ -95,7 +95,9 @@
 			<div class="col-12 d-flex justify-content-center">
 				<form action="paymentProc" method="post" id="payForm">
 					<c:forEach var="dto" items="${items }" varStatus="status">
-						<input type="text" class="seqs" name="seqs" value="${dto.seq }">
+						<input type="hidden" name="list[${status.index }].seq" value="${dto.seq }">
+						<input type="hidden" name="list[${status.index }].name" value="${dto.name }">
+						<input type="hidden" name="list[${status.index }].seller" value="${dto.seller }">
 					</c:forEach>
 					<div class="form-group">
 						<label for="inputName">이름</label>
@@ -129,7 +131,7 @@
 					</div>
 					<div class="form-group">
 						결제 방식
-						<select class="form-control" id="selectMethod">
+						<select class="form-control" id="selectMethod" name="type">
 		    				<option value="0">결제 방식</option>
 		    				<option value="card">카드결제</option>
 		    				<option value="trans">실시간 계좌이체</option>

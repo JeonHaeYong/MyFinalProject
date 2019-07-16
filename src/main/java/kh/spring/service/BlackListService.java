@@ -8,6 +8,8 @@ public interface BlackListService
 	public BlackListDTO selectById(BlackListDTO dto) throws Exception;
 	public String delete(BlackListDTO dto) throws Exception;
 	
-	public String searchMember(String id) throws Exception;
+	public String searchMember(String id, String page) throws Exception;
 	public String blackMember(String id, String reason) throws Exception;
+	
+	public String insertRandomMembers() throws Exception;
 }

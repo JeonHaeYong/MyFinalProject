@@ -7,11 +7,15 @@ public class MessageDTO {
     private String contents;
     private String readOk;
     private String message_date;
+    private String owner;
+    private int subseq;
     
 	public MessageDTO() {
 		super();
 	}
-	public MessageDTO(int seq, String sender, String recipient, String contents, String readOk, String message_date) {
+	
+	public MessageDTO(int seq, String sender, String recipient, String contents, String readOk, String message_date,
+			String owner, int subseq) {
 		super();
 		this.seq = seq;
 		this.sender = sender;
@@ -19,6 +23,8 @@ public class MessageDTO {
 		this.contents = contents;
 		this.readOk = readOk;
 		this.message_date = message_date;
+		this.owner = owner;
+		this.subseq = subseq;
 	}
 
 	public int getSeq() {
@@ -69,7 +75,21 @@ public class MessageDTO {
 		this.message_date = message_date;
 	}
 
+	public String getOwner() {
+		return owner;
+	}
+
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+
+	public int getSubseq() {
+		return subseq;
+	}
+
+	public void setSubseq(int subseq) {
+		this.subseq = subseq;
+	}
 	
-    
-    
+
 }

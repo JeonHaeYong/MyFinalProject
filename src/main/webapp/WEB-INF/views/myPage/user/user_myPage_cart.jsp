@@ -50,8 +50,8 @@
                 	background-color: white;
                 }
                 .jumbotron>img{
-					width: 100%;
-					max-height: 600px;
+                    width: 100%;
+                    max-height: 600px;
                 }
                 .itemImage{
                 	height: 100%;
@@ -76,7 +76,7 @@
                 	color: white;
                 }
             </style>
-
+			<jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
         </head>
         <body data-spy="scroll" data-target=".site-navbar-target"
               data-offset="300" id="home-section">
@@ -104,7 +104,7 @@
 	                                        	<c:forEach var="dto" items="${list }" varStatus="status">
 		                                            <div class="col-lg-6 col-12 d-flex justify-content-center">
 														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input itemCheck" id="customCheck${status.count }" name="items" value="${dto.seq }">
+															<input type="checkbox" class="custom-control-input itemCheck" id="customCheck${status.count }" name="items" value="${dto.cart_seq }">
 															<label class="custom-control-label" for="customCheck${status.count }"></label>
 														</div>
 		                                                <div class="card mb-3" style="width: 80%;">
@@ -182,7 +182,6 @@
         		if(!$(this).prop("checked")){
         			$("#allCheck").prop("checked", false);
         		}
-        		console.log("item_seq: " + $(this).val());
         	});
         	
         	$("#delBtn").on("click", function(){
@@ -190,17 +189,27 @@
         		if($(".itemCheck").length == 0 || count == 0){
         			alert("삭제할 상품이 없습니다. 다시 선택해주세요.");
         		}else{
+        			var checkedItem = new Array();
+        			var index = 0;
         			$(".itemCheck").each(function(i, item){
             			if($(item).prop("checked")){
-            				$.ajax({
-                    			url: "deleteCart",
-                    			data: {
-                    				item_seq: $(item).val()
-                    			}
-                    		});
+            				checkedItem[index] = $(this).val();
+            				index++;
             			}
             		});
-            		window.location.reload();
+        			for(var i = 0; i < checkedItem.length; i++){
+        				alert(checkedItem[i]);
+        			}
+        			jQuery.ajaxSettings.traditional = true; 
+        			$.ajax({
+            			url: "deleteCart",
+            			type: "post",
+            			data: {
+            				"seqs": checkedItem
+            			}
+            		}).done(function(resp){
+            			window.location.reload();
+            		});
         		}
         	});
         	

@@ -3,7 +3,7 @@
 <mapper namespace="PaymentDAO">
 
 	<insert id="insertPayment">
-		insert into payment values(payment_seq.nextval, #{item_seq}, #{buyer}, #{name}, #{email}, #{phone}, #{zipcode}, #{address1}, #{address2}, #{seller}, #{type})
+		insert into payment values(payment_seq.nextval, #{item_seq}, #{item_name}, #{buyer}, #{name}, #{email}, #{phone}, #{zipcode}, #{address1}, #{address2}, #{seller}, #{type})
 	</insert>
 	
 	<select id="selectAllPayment" resultType="kh.spring.dto.PaymentDTO">

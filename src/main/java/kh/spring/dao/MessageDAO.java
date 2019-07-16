@@ -10,4 +10,6 @@ public interface MessageDAO {
 	public List<MessageDTO> selectAllMsgByCurrentPage(String type, String id, int start , int end);
 	public int updateReadOkToYes(String seq);
 	public int getMsgAllCount(String type, String id);
+	public int selectSeqCurrVal();
+	public int deleteMsgBySeq(String[] seq);
 }

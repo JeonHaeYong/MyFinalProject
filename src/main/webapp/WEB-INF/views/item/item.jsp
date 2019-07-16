@@ -31,6 +31,7 @@
             }
             .itemImage{
                 width: 100%;
+                height: 500px;
             }
             .itemInfoRow{
             	position: relative;
@@ -148,6 +149,11 @@
             		<div class="contents">
             			${item.contents }
             		</div>
+            	</div>
+            </div>
+            <div class="row m-3">
+            	<div class="col-12 d-flex justify-content-end">
+            		<a class="btn cartBtn" href="freeMarket?currentPage=${currentPage }&category=${category}">목록으로</a> 
             	</div>
             </div>
         </div>

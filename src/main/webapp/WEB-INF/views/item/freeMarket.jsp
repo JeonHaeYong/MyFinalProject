@@ -102,7 +102,7 @@
 					<div class="card myCard">
 						<img class="card-img-top cardImg" src="${dto.imagePath1 }" alt="Card image">
 						<div class="card-body">
-							<h4 class="card-title"><a href="item?seq=${dto.seq }" class="detail">${dto.name }</a></h4>
+							<h4 class="card-title"><a href="item?currentPage=${pageNavi.currentPage }&category=${category }&seq=${dto.seq }" class="detail">${dto.name }</a></h4>
 							<p class="card-text">${dto.price } 원</p>
 						</div>
 					</div>

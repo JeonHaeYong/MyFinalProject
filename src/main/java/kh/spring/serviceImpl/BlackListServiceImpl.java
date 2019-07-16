@@ -77,12 +77,13 @@ public class BlackListServiceImpl implements BlackListService
 	}
 
 	@Override
-	public String searchMember(String id) throws Exception
+	public String searchMember(String id, String page) throws Exception
 	{
 		logger.info("검색한 ID : {}", id);
-		List<MemberDTO> list = ms.selectByLikeId(id);
+		List<MemberDTO> list = ms.selectByLikeId(id, page);
 		logger.info("검색된 아이디의 수 : {}", list.size());
 		
+		JsonObject outerjo = new JsonObject();
 		JsonArray ja = new JsonArray();
 		
 		for(int i = 1 ; i <= list.size() ; i++)
@@ -102,8 +103,69 @@ public class BlackListServiceImpl implements BlackListService
 			jo.addProperty("status", status);
 			ja.add(jo);
 		}
+		outerjo.add("array", ja);
 		
-		return new Gson().toJson(ja);
+		int currentPage = Integer.parseInt(page);
+		int recordCountPerPage = 10;
+		int naviCountPerPage = 5;
+		int recordTotalCount = ms.selectCountByLikeId(id);
+		int pageTotalCount;
+		boolean needPrev = true;
+		boolean needNext = true;
+		
+		if( recordTotalCount % recordCountPerPage == 0)
+		{
+			pageTotalCount = recordTotalCount / recordCountPerPage;
+		}
+		else
+		{
+			pageTotalCount = recordTotalCount / recordCountPerPage + 1;
+		}
+
+		if(currentPage < 1)
+		{
+			currentPage = 1;
+		}
+		else if(currentPage > pageTotalCount)
+		{
+			currentPage = pageTotalCount;
+		}
+		
+		int startNavi = (currentPage - 1) / naviCountPerPage * naviCountPerPage + 1;
+		int endNavi = startNavi + naviCountPerPage - 1;
+		if(endNavi > pageTotalCount)
+		{
+			endNavi = pageTotalCount;
+		}
+		
+		if(startNavi == 1)
+		{
+			needPrev = false;
+		}
+		if(endNavi == pageTotalCount)
+		{
+			needNext = false;
+		}
+		
+		outerjo.addProperty("size", ms.selectCountByLikeId(id));
+		outerjo.addProperty("currentPage", currentPage);
+		outerjo.addProperty("needPrev", needPrev);
+		outerjo.addProperty("needNext", needNext);
+		outerjo.addProperty("startNavi", startNavi);
+		outerjo.addProperty("endNavi", endNavi);
+
+		
+		
+		
+		
+		
+		
+		
+		return new Gson().toJson(outerjo);
+		
+		
+
+		
 	}
 	@Override
 	public String blackMember(String id, String reason) throws Exception
@@ -139,5 +201,50 @@ public class BlackListServiceImpl implements BlackListService
 			return "redirect: error";
 		}
 		
+	}
+
+	public String insertRandomMembers() throws Exception
+	{
+		String alphabetString = "abcdefghijklmnopqrstuvwxyz0123456789";
+		
+		for(int j = 1 ; j <= 1000 ; j++)
+		{
+			int times = (int)(Math.random() * 4 + 4);
+			
+			String idString = "";
+			
+			for(int i = 1 ; i <= times ; i++)
+			{
+				int index = (int)(Math.random() * 36);
+				idString = idString + alphabetString.charAt(index);
+			}
+			
+			int duplResult = ms.idDuplCheckService(idString);
+			
+			if(1 <= duplResult)
+			{
+				j = j -1;
+				continue;
+			}
+			else
+			{
+				MemberDTO dto = new MemberDTO();
+				
+				dto.setId(idString);
+				dto.setPassword("pwpw");
+				dto.setName(idString + "name");
+				dto.setEmail("sdfsdf@sdfsdf.sdfsdf");
+				
+				int insertResult = ms.insertMemberService(dto);
+				
+				if(!(insertResult == 1))
+				{
+					j = j -1;
+					continue;
+				}
+			}
+		}
+		logger.info("아이디 삽입 완료");
+		return "redirect: admin-member";
 	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kh.spring.dao.MessageDAO;
 import kh.spring.dto.MessageDTO;
@@ -20,9 +21,23 @@ public class MessageServiceImpl implements MessageService{
 	public int selectMsgYetReadCount(String id) {
 		return dao.selectMsgYetReadCount(id);
 	}
-
+	
+	/**
+	 * 쪽지보낼때, insert 2번
+	 */
 	@Override
+	@Transactional
 	public int insertMsg_service(MessageDTO dto) {
+		String recipient = dto.getRecipient();
+		String sender = dto.getSender();
+		//1. 받은사람의 메세지목록에 추가하기.
+		dto.setOwner(recipient);
+		dao.insertMsg(dto);
+		//message_seq현재 val 얼마인지 가져오기.
+		int subseq = dao.selectSeqCurrVal();
+		//2. 보낸사람의 메세지 목록에 추가하기.
+		dto.setOwner(sender);
+		dto.setSubseq(subseq);
 		return dao.insertMsg(dto);
 	}
 
@@ -129,6 +144,13 @@ public class MessageServiceImpl implements MessageService{
 			list.add("다음>");
 		}
 		return list;
+	}
+	/**
+	 * 선택한 쪽지 삭제하기
+	 */
+	@Override
+	public int deleteMsgBySeq(String[] seq) {
+		return dao.deleteMsgBySeq(seq);
 	}
 	
 }

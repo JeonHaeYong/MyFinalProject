@@ -1,6 +1,5 @@
 package kh.spring.fin;
 
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kh.spring.dto.ItemDTO;
+import kh.spring.dto.ItemDTOList;
 import kh.spring.dto.MemberDTO;
+import kh.spring.dto.PaymentDTO;
 import kh.spring.service.MemberService;
 import kh.spring.service.PaymentService;
 
@@ -42,8 +43,9 @@ public class PaymentController {
 	}
 	
 	@RequestMapping("paymentProc")
-	public String paymentProc(HttpServletRequest request, String[] seqs, MemberDTO dto) {
-		
+	public String paymentProc(HttpServletRequest request, ItemDTOList list, PaymentDTO dto) {
+		dto.setBuyer((String)request.getSession().getAttribute("id"));
+		ps.paymentComplete(dto, list);
 		return "payment/paymentComplete";
 	}
 }

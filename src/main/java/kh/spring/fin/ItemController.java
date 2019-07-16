@@ -32,7 +32,9 @@ public class ItemController {
 	}
 
 	@RequestMapping("item")
-	public String readOneItem(HttpServletRequest request, int seq) {
+	public String readOneItem(HttpServletRequest request, int currentPage, String category, int seq) {
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("category", category);
 		request.setAttribute("item", is.readOneItem(seq));
 		return "item/item";
 	}

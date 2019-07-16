@@ -8,5 +8,5 @@ import kh.spring.dto.ItemDTO;
 public interface CartService {
 	public int insertCartService(CartDTO dto);
 	public List<ItemDTO> selectCartPerPage(String id);
-	public int deleteCartService(int item_seq, String id);
+	public int deleteCartService(String[] seqs);
 }
