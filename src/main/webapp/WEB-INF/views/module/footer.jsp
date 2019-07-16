@@ -131,6 +131,9 @@
 
 		</div>
 	</div>
+	
 </footer>
 
 </div>
+<!--구글폰트-->
+<link href="https://fonts.googleapis.com/css?family=Gamja+Flower&display=swap&subset=korean" rel="stylesheet">
