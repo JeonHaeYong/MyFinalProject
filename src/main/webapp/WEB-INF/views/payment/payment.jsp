@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
+<jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
 <style>
 	.myJumbo{
 		background-color: white;

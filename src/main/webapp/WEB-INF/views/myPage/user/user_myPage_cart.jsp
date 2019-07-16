@@ -20,6 +20,7 @@
             <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
             <link rel="stylesheet" href="resources/css/aos.css">
             <link rel="stylesheet" href="resources/css/style.css">
+            <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
             <style>
                 .topBackGround{
                     height: 100px;
@@ -45,10 +46,10 @@
                     text-align: center;
                 }
                 /*점보트론 이미지*/
-                .myJumbo{
+                .jumbotron{
                 	background-color: white;
                 }
-                #jumboImg{
+                .jumbotron>img{
 					width: 100%;
 					max-height: 600px;
                 }
@@ -99,14 +100,14 @@
                                         			<h4>장바구니가 비어있습니다.</h4>
                                         		</div>
 											</c:if>
-											<form action="toPayment" id="itemCheckForm" method="post">
+											<form class="row" action="toPayment" id="itemCheckForm" method="post">
 	                                        	<c:forEach var="dto" items="${list }" varStatus="status">
 		                                            <div class="col-lg-6 col-12 d-flex justify-content-center">
 														<div class="custom-control custom-checkbox">
 															<input type="checkbox" class="custom-control-input itemCheck" id="customCheck${status.count }" name="items" value="${dto.seq }">
 															<label class="custom-control-label" for="customCheck${status.count }"></label>
 														</div>
-		                                                <div class="card mb-3" style="width: 90%;">
+		                                                <div class="card mb-3" style="width: 80%;">
 		                                                    <div class="row no-gutters">
 		                                                        <div class="col-md-4">
 		                                                            <img src="${dto.imagePath1 }" class="card-img itemImage">
