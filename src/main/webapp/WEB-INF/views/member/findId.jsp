@@ -30,6 +30,11 @@
 	font-family: 'Gamja Flower', cursive;
 	font-size: 40px;
 }
+/*  ------메뉴-----------*/
+b {
+	font-family: 'Gamja Flower', cursive;
+	font-size: 40px;
+}
 
 .menu-row {
 	text-align: -webkit-center;
@@ -67,11 +72,17 @@
 .write-section {
 	margin-bottom: 200px;
 }
-
+/* --------내용 */
 #wrapper {
 	padding-top: 20px;
 	padding-left: 50px;
+	font-family: 'Gamja Flower', cursive;
 }
+  .suggest{font-size:20px;
+    margin-top:10px;
+  }
+   #idname,#email,#birthday{width:350px;
+ }
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -106,7 +117,7 @@
 						<a href="findId">아이디 찾기</a>
 					</div>
 					<div class="col-12 s-menu1">
-						<a href=""> 비밀번호 찾기</a>
+						<a href="findPassword"> 비밀번호 찾기</a>
 					</div>
 
 				</div>
@@ -122,28 +133,32 @@
 
 				<div id="wrapper">
 
-					<form action="findId" method="post" id="idForm"
-						>
+					<form action="findId" method="post" id="idForm">
 						<div class="row" id="namediv">
-							<div class="col-lg-12 col-md-12 col-sm-12 col-12">본인의 성함을
+							<div class="col-lg-12 col-md-12 col-sm-12 col-12   suggest">본인의 성함을
 								입력하시오.</div>
 							<div class="col-lg-12 col-md-12 col-sm-12 col-12">
-								<input type="text" placeholder="이름을 입력하시오" name="idname" id="idname">
+								<input type="text" placeholder="이름을 입력하시오" name="idname"
+									id="idname">
 							</div>
 						</div>
 						<div class="row" id="emaildiv">
-							<div class="col-lg-12 col-md-12 col-sm-12 col-12">생년월일</div>
+							<div class="col-lg-12 col-md-12 col-sm-12 col-12   suggest">생년월일</div>
 							<div class="col-lg-12 col-md-12 col-sm-12 col-12">
-								<input type="text" placeholder="생년월일" name="birthday" id="birthday">
+								<input type="text" placeholder="생년월일" name="birthday"
+									id="birthday">
 							</div>
 						</div>
 						<div class="row" id="emaildiv">
-							<div class="col-lg-12 col-md-12 col-sm-12 col-12">정보를 받을 이메일을 입력하시오.</div>
-							<div class="col-lg-12 col-md-12 col-sm-12 col-12">
-								<input type="text" placeholder="이메일을 입력하시오" name="email" id="email">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-12 suggest">전송 받을
+								이메일을 입력하시오.</div>
+							<div class="col-lg-6 col-md-12 col-sm-12 col-12">
+								<input type="text" placeholder="이메일을 입력하시오" name="email"
+									id="email">
 							</div>
+							<div class="col-lg-6 col-md-12 col-sm-12 btn-box"><input type="button" value="확인"  id="findid"></div>
 						</div>
-						<div> <input type="button" value="찾기" id="findid"></div>
+						
 					</form>
 				</div>
 
@@ -182,14 +197,14 @@
 	<script src="resources/js/isotope.pkgd.min.js"></script>
 	<script src="resources/js/main.js"></script>
 
-<script>
+	<script>
 
 $("#findid").on("click", function() {
 				console.log($("#email").val());
-				alert(" 해당 이메일에 인증 번호를 전송 중 입니다 \n 아래의 확인을 누르시면 인증번호 확인 창을 확인해주세요");
+				alert(" 해당 이메일에  전송 중 입니다 \n 아래의 확인을 누르신 후 이메일을 확인하시오");
 				$
 						.ajax({
-							url : "findId",
+							url : "findIdProc",
 							type : "post",
 							data : {
 								idname :$("#idname").val(),
@@ -201,7 +216,7 @@ $("#findid").on("click", function() {
 						.done(
 								function(resp) {
 								if(resp==true){
-									alert('메일 전송에 성공하였습니다. 해당메일을 확인하시오');
+									alert('이메일에 아이디가 발송되었습니다.');
 								}
 								else if(resp==null)
 									{

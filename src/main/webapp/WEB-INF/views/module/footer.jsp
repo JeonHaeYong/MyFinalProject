@@ -32,7 +32,7 @@
 							onkeypress="press(this.form)">
 					</div>
 
-					<div id="wrapper">
+					<div id="loginwrapper">
 						<div id="login">
 							<input type="submit" id="loginbtn" class="col pl-2 pr-2" value="login">
 						</div>
