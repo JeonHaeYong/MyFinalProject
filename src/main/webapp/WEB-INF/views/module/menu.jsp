@@ -33,7 +33,7 @@
 							<li><a href="freeMarket?currentPage=1&category=all" class="nav-link">무료나눔</a></li>
 							<li><a href="/oxQuiz" class="nav-link">Fun</a></li>
 							<li><a href="donation" class="nav-link">후원하기</a></li>
-							<li><a href="#contact-section" class="nav-link ">공지사항</a></li>
+							<li><a href="notice-view-page" class="nav-link ">공지사항</a></li>
 							<c:choose>
 								<c:when test="${id eq null}">
 									<li><input type="button" data-toggle="modal"
