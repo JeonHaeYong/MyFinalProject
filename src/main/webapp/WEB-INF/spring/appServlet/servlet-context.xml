@@ -72,5 +72,10 @@
    
    <!--네이버  -->
    <beans:bean id="naverLoginBO" class="kh.spring.loginapi.NaverLoginBO"></beans:bean>
-
+   
+	<!-- tx -->
+	<beans:bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<beans:property name="dataSource" ref="dataSource"></beans:property>
+	</beans:bean>
+	
 </beans:beans>

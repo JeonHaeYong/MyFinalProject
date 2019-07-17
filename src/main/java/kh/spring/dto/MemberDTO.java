@@ -15,6 +15,13 @@ public class MemberDTO {
 	private int point;
 	private int rank;
 	
+	public String toString() {
+		String toStr = "아이디->"+id+" ,이름->"+this.name+" ,생일->"+this.birthDay+"\r\n";
+		toStr += "성별->"+this.gender+" ,폰번호->"+this.phone+"\r\n";
+		toStr += "우편번호->"+this.zipcode+"\r\n주소1->"+this.address1+",주소2->"+this.address2;
+		return toStr;
+	}
+	
 	public MemberDTO() {}
 	public MemberDTO(String id, String password, String name, String email, String birthDay, String gender,
 			String phone, String zipcode, String address1, String address2, int type, int point, int rank) {

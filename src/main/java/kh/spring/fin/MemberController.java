@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -273,7 +274,33 @@ public class MemberController {
 		}
 		return "myPage/user/user_myPage_profile";
 	}
-
+	
+	//내정보 -> 비밀번호 변경시 입력한 현재비밀번호가 맞는 비밀번호인지 확인
+	@ResponseBody
+	@RequestMapping("currPwCheck")
+	public String currPwCheck(String id , String pw) {
+		int result = mservice.isLoginOkService(id, pw);
+		if(result==0) {
+			return "false";
+		}
+		return "true";
+	}
+	//마이페이지에서 pw변경
+	@RequestMapping("modifyPwByMyPage")
+	public String modifyPwByMyPage(String id, String pw) {
+		int result = mservice.updatePwService(id, pw);
+		System.out.println("ID:"+id+"의 pw변경이 " + result +"행 완료되었습니다.");
+		return "redirect:toMyPage";
+	}
+	//정보수정하기(id,pw,email제외)
+	@RequestMapping("modifyProfile")
+	public String modifyProfileInfo(MemberDTO dto) {
+		System.out.println(dto.toString());//값 제대로 넘어오는것 확인
+		//id에 대해 업데이트 하기.
+		int result = mservice.updateMemberInfoByMyPage(dto);
+		System.out.println(dto.getId()+"님의 정보업데이트가 " +result+"행 완료되었습니다.");
+		return "redirect:toMyPage";
+	}
 	@RequestMapping("toMyPage_writeList")
 	public String toMyPage_writeList(HttpServletRequest request) {
 		return "myPage/user/user_myPage_writeList";
@@ -328,7 +355,37 @@ public class MemberController {
 	}
 	//-----------------------------/마이페이지 
 
-	//-아이디찾기/비밀번호 찾기--------------------------------------------------------------------------------------------
+
+	
+	
+//-----------------------------아이디 찾기 
+	@RequestMapping("findId")
+	public String findIdjsp(){
+		return "member/findId";
+	}
+	
+	@ResponseBody
+	@RequestMapping("findIdProc")
+	public String findId(String idname,String email,String birthday) {
+		System.out.println(idname);
+		String id=mservice.FindId(idname,birthday);
+		System.out.println(id);
+		if(id==null)
+		{return "null";
+			
+		}else {
+			boolean check=mservice.FindIdbyemail(email,id);
+			if(check) {
+				return "true";
+			}else
+			return "false";
+		}
+	}
+	
+		
+	
+
+	//-비밀번호 찾기--------------------------------------------------------------------------------------------
 	@RequestMapping("findPassword")
 	public String findPassword() {
 		return "member/findPassword";
@@ -351,9 +408,14 @@ public class MemberController {
 			}else{ result = "2"; }
 		}else {
 			System.out.println("아이디 존재 안함");
-			result = "0";}
+			result = "0";
+			}
 
 		return result;
 	}
+
 }
+	
+
+
 

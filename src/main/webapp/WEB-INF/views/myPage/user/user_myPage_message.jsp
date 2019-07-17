@@ -122,10 +122,10 @@
                                                     <div class="col-2 text-truncate">${r_list.sender }</div>
                                                     <div class="col-5 r_click_parent text-truncate">
                                                     	<c:if test="${r_list.readOk =='N'}">
-                                                    		<a class="received_msg_click text-decoration-none" href="#" seq="${r_list.seq }" data-toggle="modal" data-target="#r_msg_modal" value="${r_list.recipient }">${r_list.contents }</a>
+                                                    		<a class="received_msg_click text-decoration-none" href="#" seq="${r_list.seq }" data-toggle="modal" data-target="#r_msg_modal" value="${r_list.sender }">${r_list.contents }</a>
                                                     	</c:if>
                                                     	<c:if test="${r_list.readOk =='Y'}">
-                                                    		<a class="received_msg_click text-decoration-none readMsg" href="#" seq="${r_list.seq }" data-toggle="modal" data-target="#r_msg_modal" value="${r_list.recipient }">${r_list.contents }</a>
+                                                    		<a class="received_msg_click text-decoration-none readMsg" href="#" seq="${r_list.seq }" data-toggle="modal" data-target="#r_msg_modal" value="${r_list.sender }">${r_list.contents }</a>
                                                     	</c:if>
                                                     </div>
                                                     <div class="col-3">${r_list.message_date }</div>
@@ -435,16 +435,13 @@
                 });
                 $("#selectMsg_delete").on("click",function(){//선택한 메세지 삭제하기.
                 	//선택한 메세지가 없을때,
-                	var length = $(".selectBox.active>form input[type='checkbox']").length;
                 	var count = 0;
-                	alert("each이전"+length +":"+count);
-                	$(".selectBox.active>form input[type='checkbox']").each(function(i,item){
-                		if(!$(item).prop("checked")){
+                	$(".selectedBox.active>form input[type='checkbox']").each(function(i,item){
+                		if($(item).prop("checked")){
                 			count++;
                 		}
                 	})
-                	alert(length +":"+count);
-                	if(length==count){
+                	if(count==0){
                 		alert("삭제할 쪽지를 선택해주세요.");
                 		return false;
                 	}

@@ -22,6 +22,10 @@
 		select count(*) from member where id=#{value}
 	</select>
 	
+	<select id="idFind" resultType="String">
+		select id from member where name=#{name} and  birthDay=#{birthday}
+	</select>
+	
 	<select id="selectOneMember" resultType="kh.spring.dto.MemberDTO">
 		select * from member where id=#{value}
 	</select>
@@ -52,5 +56,31 @@
 	<select id="memberPoint" resultType="kh.spring.dto.MemberDTO">
 		select rank, id, point from(select rank() over(order by point desc)as rank, member.* from member) where rank  between 1 and 10
 	</select>
-	
+	<select id="selectOneMemberDTO_useMyPageAdvice" resultType="kh.spring.dto.MemberDTO">
+		select id , password , name , email , nvl( birthDay , '(미설정)') as birthDay ,nvl( GENDER , '(미설정)') as gender
+		,nvl( PHONE , '(미설정)') as phone ,nvl( ZIPCODE , '(미설정)') as zipcode ,nvl( ADDRESS1 , '(미설정)') as address1 
+		,nvl( ADDRESS2 , '(미입력)') as address2, type , point from member where id=#{id}
+	</select>
+	<update id="updateMemberInfoByMyPage">
+		update member set name=#{name}
+			<if test="birthDay!=null">
+				,birthday = #{birthDay}
+			</if>
+			<if test="gender!=null">
+				,gender = #{gender}
+			</if>
+			<if test="phone!=null">
+				,phone = #{phone}
+			</if>
+			<if test="zipcode!=null">
+				,zipcode = #{zipcode}
+			</if>
+			<if test="address1!=null">
+				,address1 = #{address1}
+			</if>
+			<if test="address2!=null">
+				,address2 = #{address2}
+			</if>
+		where id=#{id}
+	</update>
 </mapper>
