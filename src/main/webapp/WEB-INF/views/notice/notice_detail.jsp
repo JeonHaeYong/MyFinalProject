@@ -75,6 +75,8 @@
 				<div class="col-12 col-md-12 col-lg-12 text-right my-5">
 
 					<input id="back_btn" class="btn btn-danger" type="button" value="돌아가기">
+					<input id="update_btn" class="btn btn-danger" type="button" value="수정하기">
+					<input id="delete_btn" class="btn btn-danger" type="button" value="삭제하기">
 				
 				</div>
 				
@@ -105,8 +107,20 @@
     {
 		$("#back_btn").on("click", function()
 		{
-			history.back();
-		});	    
+// 			history.back();
+			location.href = "notice-view-page";
+		});
+		
+		$("#update_btn").on("click", function()
+		{
+			location.href = "notice-update-page?seq=${dto.seq}";
+		});
+		
+		$("#delete_btn").on("click", function()
+		{
+			location.href = "notice-delete-do?seq=${dto.seq}";
+		});
+		
     });
     
     onload = function()

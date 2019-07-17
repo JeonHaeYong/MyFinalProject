@@ -26,4 +26,20 @@
 		update notice set view_count = view_count + 1 where seq = #{seq}
 	</update>
 	
+	<update id="updateTitleBySeq">
+		update notice set title = #{title} where seq = #{seq}
+	</update>
+	
+	<update id="updateContentsBySeq">
+		update notice set contents = #{contents} where seq = #{seq}
+	</update>
+	
+	<update id="updateWriteTimeBySeq">
+		update notice set write_time = sysdate where seq = #{seq}
+	</update>
+	
+	<delete id="deleteBySeq">
+		delete from notice where seq = #{seq}
+	</delete>
+	
 </mapper>

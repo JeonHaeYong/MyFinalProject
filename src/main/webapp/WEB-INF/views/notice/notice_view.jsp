@@ -188,7 +188,7 @@
 	    		{
 					var $row = $('<div class="row justify-content-center my-1"></div>');
 					var $seqCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1">'+array[i-1].seq+'</div>');
-	    			var $titleCol = $('<div class="col-6 col-md-6 col-lg-6 text-center my-1">'+array[i-1].title+'</div>');
+					var $titleCol = $('<div class="col-6 col-md-6 col-lg-6 text-center my-1"><a href=notice-detail-page?seq='+array[i-1].seq+'>'+array[i-1].title+'</a></div>');
 	    			var $writeTimeCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1">'+array[i-1].write_time+'</div>');
 	    			var $viewCountCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1">'+array[i-1].view_count+'</div>');
 	    			$row.append($seqCol).append($titleCol).append($writeTimeCol).append($viewCountCol);
