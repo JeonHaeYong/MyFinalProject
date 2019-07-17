@@ -26,5 +26,23 @@ public class NoticeDAOImpl implements NoticeDAO
 	{
 		return sst.selectList("NoticeDAO.selectForPage", new Object[] {pageStart, pageEnd});
 	}
+
+	@Override
+	public int selectCountAll() throws Exception
+	{
+		return sst.selectOne("NoticeDAO.selectCountAll");
+	}
+
+	@Override
+	public NoticeDTO selectDTO(NoticeDTO dto) throws Exception
+	{
+		return sst.selectOne("NoticeDAO.selectDTO", dto);
+	}
+
+	@Override
+	public int viewCountPlus(NoticeDTO dto) throws Exception
+	{
+		return sst.update("NoticeDAO.viewCountPlus", dto);
+	}
 	
 }

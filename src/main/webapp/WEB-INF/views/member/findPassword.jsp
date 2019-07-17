@@ -22,19 +22,58 @@
 <style>
 			.jumbotron {background-color: white;}
 	 		 #title{width: 100%; text-align: center; margin: auto; margin-bottom: 50px;}
-            h3,h1{ font-family:'Gamja Flower', cursive;}
+            h3{ font-family:'Gamja Flower', cursive;}
             .container{min-width: 400px;box-sizing: border-box;margin-bottom:100px; font-family: 'Gamja Flower', cursive;}
-            .menu-box{width: 150px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px; margin-top: 50px;}
-            .menu-box>div{height: 35px;}
-            .menu-box>div:first-child {font-weight: bold; border-bottom: 1px solid #754F44; line-height: 33px; color:#B45F04; font-size:40px;}
-            .menu-box>div:not(.s-menu):hover{background-color: #FBFFB950;}
-            .menu-row{text-align: -webkit-center;}
-            a[name="s-menu"]{color: #754F44; text-decoration-line: none;}
-            a[name="s-menu"]:hover{color: #754F44; text-decoration-line: none; font-weight:bold;}
+          b {
+	font-family: 'Gamja Flower', cursive;
+	font-size: 40px;
+}
+.menu-row{
+text-align: -webkit-center;
+
+}
+.s-menu1>a{
+ text-decoration:none;
+ color:black;
+ font-size:20px;
+ font-family: 'Gamja Flower', cursive;
+}
+.s-menu1:hover{
+background-color:#F3F78130;
+}
+
+
+.s-menu1{
+ padding-top:10px;
+ padding-left:0px;
+ padding-right:0px;
+}
+.s-menu
+{
+color:#B45F04;
+border-bottom:2px solid black;
+}
+.menu-box{
+width:150px;
+height:100px;
+padding-bottom:120px;
+margin-bottom:150px;
+}
+#wrapper {
+	padding-top: 20px;
+	padding-left: 50px;
+	
+}
+#title {
+	padding-top: 80px;
+font-family: 'Gamja Flower', cursive;
+	font-size: 40px;
+}
+
            /*---------------------------------------------------------------------------------------------------------------------------------------------*/
-              .section{ padding: 10px;;margin: 0px;padding: 0px; margin-top:70px; }
+              .section{ padding: 10px;;margin: 0px;padding: 0px; margin-top:0px; }
 /*---------------------------------------------------------------------------------------------------------------------------------------------*/
-              .suggest{font-size:20px;}
+              .suggest{font-size:20px; }
               .email,.id{width:350px;}
               .input-email{margin-bottom:20px;}
               input[type="submit"]{background-color: #EC7357; border: none; font-size: 20px; color:white; border-radius: 5px;}
@@ -86,19 +125,23 @@
 		<img src="resources/images/member/joinimg.jpg" height="600px"width="100%">
 	</div>
 	
-  <div id="title"><h1>비밀번호 찾기</h1></div>
+  <div id="title"><b>비밀번호 찾기</b></div>
     <div class="container">
         <div class="row">
-             <div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-row">
+               <div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-row">
                     <div class="row menu-box">
-                        <div class="col-12 s-menu">M E N U</div>
-                        <div class="col-12 "><a name="s-menu" href="join">회원가입</a></div>
-                        <div class="col-12"><a name="s-menu" href="findId">아이디 찾기</a></div>
-                           <div class="col-12"><a name="s-menu" href="findPassword">비밀번호 찾기</a></div> <!-- 관리자만 볼 수 있게! -->
+                        <div class="col-12 s-menu"><b>M E N U</b></div>
+                        <div class="col-12 s-menu1 " ><a href="join">회원가입</a></div>
+                         <div class="col-12 s-menu1" ><a href="findId">아이디 찾기</a></div>
+                        <div class="col-12 s-menu1" ><a href="findPassword"> 비밀번호 찾기</a></div>
+                         
                     </div>
                 </div>
                  <div class="col-1"></div>
             <div class="col-lg-9 col-md-8 col-sm-12 col-12 section">
+           
+           <hr>
+            <div id="wrapper">
             <form action="findPwProc" method="post" id="findPwForm">
               <div class="row">
               	<div class="col-12 suggest">아이디를 입력해주세요.</div>
@@ -111,6 +154,7 @@
               	<div class="col-12"><span class="e-span"></span></div>
               </div>
               </form>
+              </div>
               <div class="row"><div class="col-12"><span class="result"></span></div></div>
             </div>
         </div>

@@ -8,6 +8,7 @@ public class NoticeDTO
 	private String title;
 	private String contents;
 	private Date write_time;
+	private int view_count;
 	
 	public NoticeDTO()
 	{
@@ -19,15 +20,16 @@ public class NoticeDTO
 		this.title = title;
 		this.contents = contents;
 	}
-	public NoticeDTO(int seq, String title, String contents, Date write_time)
+	public NoticeDTO(int seq, String title, String contents, Date write_time, int view_count)
 	{
 		super();
 		this.seq = seq;
 		this.title = title;
 		this.contents = contents;
 		this.write_time = write_time;
+		this.view_count = view_count;
 	}
-	
+
 	public int getSeq()
 	{
 		return seq;
@@ -66,6 +68,16 @@ public class NoticeDTO
 	public void setWrite_time(Date write_time)
 	{
 		this.write_time = write_time;
+	}
+	
+	public int getView_count()
+	{
+		return view_count;
+	}
+	
+	public void setView_count(int view_count)
+	{
+		this.view_count = view_count;
 	}
 	
 	

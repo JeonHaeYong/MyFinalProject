@@ -3,7 +3,7 @@
 <mapper namespace="NoticeDAO">
 
 	<insert id="insert">
-		INSERT INTO NOTICE VALUES (NOTICE_SEQ.NEXTVAL, #{title}, #{contents}, default)
+		INSERT INTO NOTICE VALUES (NOTICE_SEQ.NEXTVAL, #{title}, #{contents}, default, default)
 	</insert>
 	
 	<select id="selectForPage" resultType="kh.spring.dto.NoticeDTO">
@@ -13,5 +13,17 @@
 		where rown 
 		    between #{array[0]} and #{array[1]}
 	</select>
+	
+	<select id="selectCountAll" resultType="java.lang.Integer">
+		select count(*) from notice
+	</select>
+	
+	<select id="selectDTO" resultType="kh.spring.dto.NoticeDTO">
+		select * from  notice where seq = #{seq}
+	</select>
+	
+	<update id="viewCountPlus">
+		update notice set view_count = view_count + 1 where seq = #{seq}
+	</update>
 	
 </mapper>

@@ -359,13 +359,13 @@ public class MemberController {
 	
 	
 //-----------------------------아이디 찾기 
-	@RequestMapping("findIdJSP")
+	@RequestMapping("findId")
 	public String findIdjsp(){
 		return "member/findId";
 	}
 	
 	@ResponseBody
-	@RequestMapping("findId")
+	@RequestMapping("findIdProc")
 	public String findId(String idname,String email,String birthday) {
 		System.out.println(idname);
 		String id=mservice.FindId(idname,birthday);
