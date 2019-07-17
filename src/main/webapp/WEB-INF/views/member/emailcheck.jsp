@@ -81,12 +81,13 @@
 					{
 						opener.$("#email").prop("flag","true");
 						window.close();
+						opener.alert("인증이 완료되었습니다");
 					}
 					else{
 						alert("인증번호가 잘못되었습니다 이메일 인증을 다시 작성하시오");
 						opener.document.getElementById("email").value = "";
 						window.close();
-
+						
 					}
 
 				});
