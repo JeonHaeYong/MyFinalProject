@@ -147,7 +147,6 @@ public class BlackListServiceImpl implements BlackListService
 			needNext = false;
 		}
 		
-		outerjo.addProperty("size", ms.selectCountByLikeId(id));
 		outerjo.addProperty("currentPage", currentPage);
 		outerjo.addProperty("needPrev", needPrev);
 		outerjo.addProperty("needNext", needNext);
@@ -234,6 +233,7 @@ public class BlackListServiceImpl implements BlackListService
 				dto.setPassword("pwpw");
 				dto.setName(idString + "name");
 				dto.setEmail("sdfsdf@sdfsdf.sdfsdf");
+				dto.setAddress2("jusojuso");
 				
 				int insertResult = ms.insertMemberService(dto);
 				
