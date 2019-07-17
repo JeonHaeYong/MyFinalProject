@@ -101,7 +101,7 @@
 				</div>
 				
 				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="#" class="btn btn-danger my_buttons">월 별 후원금 및 전달 기관</a>
+					<a href="admin-donation" class="btn btn-danger my_buttons">월 별 후원금 및 전달 기관</a>
 				</div>
 				
 				<div class="col-6 col-md-4 col-lg-2 text-center px-1">

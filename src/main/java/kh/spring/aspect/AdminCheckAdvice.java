@@ -17,37 +17,37 @@ import kh.spring.serviceImpl.MemberServiceImpl;
 @Aspect
 public class AdminCheckAdvice
 {
-	private static final Logger logger = LoggerFactory.getLogger(AdminCheckAdvice.class);
-	
-	@Autowired
-	private HttpSession session;
-	@Autowired
-	MemberServiceImpl memberService;
-	
-	@Around("execution(* kh.spring.fin.AdminController.*(..))")
-	public Object adminCheck(ProceedingJoinPoint pjp)
-	{
-		Object returnObj = "error";
-		
-		try
-		{
-			String id = (String)session.getAttribute("id");
-			MemberDTO dto = memberService.selectOneMemberService(id);
-			
-			if(dto.getType() != 4)
-			{
-				logger.warn("관리자 계정이 아닙니다 : {}", id);
-				return returnObj;
-			}
-			
-			returnObj = pjp.proceed();
-			logger.info("관리자 계정이 맞습니다 : {}", id);
-		}
-		catch(Throwable e)
-		{
-			e.printStackTrace();
-		}
-		
-		return returnObj;
-	}
+//	private static final Logger logger = LoggerFactory.getLogger(AdminCheckAdvice.class);
+//	
+//	@Autowired
+//	private HttpSession session;
+//	@Autowired
+//	MemberServiceImpl memberService;
+//	
+//	@Around("execution(* kh.spring.fin.AdminController.*(..))")
+//	public Object adminCheck(ProceedingJoinPoint pjp)
+//	{
+//		Object returnObj = "error";
+//		
+//		try
+//		{
+//			String id = (String)session.getAttribute("id");
+//			MemberDTO dto = memberService.selectOneMemberService(id);
+//			
+//			if(dto.getType() != 4)
+//			{
+//				logger.warn("관리자 계정이 아닙니다 : {}", id);
+//				return returnObj;
+//			}
+//			
+//			returnObj = pjp.proceed();
+//			logger.info("관리자 계정이 맞습니다 : {}", id);
+//		}
+//		catch(Throwable e)
+//		{
+//			e.printStackTrace();
+//		}
+//		
+//		return returnObj;
+//	}
 }
