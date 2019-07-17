@@ -18,4 +18,12 @@
 		select count(*) from notice
 	</select>
 	
+	<select id="selectDTO" resultType="kh.spring.dto.NoticeDTO">
+		select * from  notice where seq = #{seq}
+	</select>
+	
+	<update id="viewCountPlus">
+		update notice set view_count = view_count + 1 where seq = #{seq}
+	</update>
+	
 </mapper>

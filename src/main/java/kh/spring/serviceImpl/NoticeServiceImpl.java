@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -153,6 +154,33 @@ public class NoticeServiceImpl implements NoticeService
 		}
 		logger.info("데이터 삽입 완료");
 		return "redirect: notice-view-page";
+	}
+
+	@Override
+	public Object NoticeDetailPage(NoticeDTO dto) throws Exception
+	{
+		ModelAndView mav = new ModelAndView();
+		
+		int viewCountResult = noticeDAO.viewCountPlus(dto);
+		
+		if(viewCountResult == 1)
+		{
+			NoticeDTO resultDTO = noticeDAO.selectDTO(dto);
+			
+			logger.info("제목 : {}", resultDTO.getTitle());
+			logger.info("내용 : {}", resultDTO.getContents());
+			logger.info("시간 : {}", resultDTO.getWrite_time());
+			logger.info("조회 : {}", resultDTO.getView_count());
+			
+			mav.addObject("dto", resultDTO);
+			mav.setViewName("/notice/notice_detail");
+		}
+		else
+		{
+			mav.setViewName("error");
+		}
+		
+		return mav;
 	}
 
 	

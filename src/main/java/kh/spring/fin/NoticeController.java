@@ -86,4 +86,21 @@ public class NoticeController
 		return result;
 	}
 	
+	
+	@RequestMapping(value = "notice-detail-page")
+	public Object noticeDetailPage(NoticeDTO dto)
+	{
+		Object result = "error";
+		
+		try
+		{
+			result = noticeService.NoticeDetailPage(dto);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }

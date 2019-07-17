@@ -32,5 +32,17 @@ public class NoticeDAOImpl implements NoticeDAO
 	{
 		return sst.selectOne("NoticeDAO.selectCountAll");
 	}
+
+	@Override
+	public NoticeDTO selectDTO(NoticeDTO dto) throws Exception
+	{
+		return sst.selectOne("NoticeDAO.selectDTO", dto);
+	}
+
+	@Override
+	public int viewCountPlus(NoticeDTO dto) throws Exception
+	{
+		return sst.update("NoticeDAO.viewCountPlus", dto);
+	}
 	
 }

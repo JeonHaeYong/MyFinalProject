@@ -10,4 +10,6 @@ public interface NoticeDAO
 
 	public List<NoticeDTO> selectForPage(int pageStart, int pageEnd) throws Exception;
 	public int selectCountAll() throws Exception;
+	public NoticeDTO selectDTO(NoticeDTO dto) throws Exception;
+	public int viewCountPlus(NoticeDTO dto) throws Exception;
 }
