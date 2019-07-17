@@ -37,9 +37,10 @@
               .suggest{font-size:20px;}
               .email,.id{width:350px;}
               .input-email{margin-bottom:20px;}
-              input[type="submit"]{background-color: #EC7357; border: none; font-size: 20px; color:white; border-radius: 5px;}
-              input[type="submit"]:hover{font-weight: bold; background-color: #f7613e;}
-              
+              .btn-box{margin-left:150px;}
+              .compl-btn{background-color: #EC7357; border: none; font-size: 20px; color:white; border-radius: 5px;}
+              .compl-btn:hover{font-weight: bold; background-color: #f7613e;}
+             
 </style>
 <script>
 	$(function(){
@@ -64,7 +65,11 @@
 					if(resp == "1"){
 						alert("이메일로 임시 비밀번호가 발송되었습니다.");
 						$(".result").html("입력하신 이메일로 임시 비밀번호가 발송되었습니다.<br>로그인후, 비밀번호를 꼭!! 변경해주세요.");
-					}else{alert("아이디가 존재하지 않습니다.");}
+					}else if(resp =="0"){
+						alert("아이디가 존재하지 않습니다.");
+						}else if(resp == "2"){
+							alert("이메일 발송에 실패하였습니다.");
+						}
 				})
 				
 			}else if($(".email").val()=="" && $(".id").val()==""){
@@ -100,14 +105,14 @@
                  <div class="col-1"></div>
             <div class="col-lg-9 col-md-8 col-sm-12 col-12 section">
             <form action="findPwProc" method="post" id="findPwForm">
-              <div class="row">
+              <div class="row input-section">
               	<div class="col-12 suggest">아이디를 입력해주세요.</div>
               	<div class="col-12"><input type="text" name="id" class="id"></div>
               	<div class="col-12 suggest">가입하실 때, 입력하신 이메일을 입력해주세요.</div>
-              	<div class="col-lg-6 col-md-12 col-sm-12 input-email">
+              	<div class="col-12 input-email">
               		<input type="text" name="email" class="email" regexFlag="false">
               	</div>
-              	<div class="col-lg-6 col-md-12 col-sm-12 btn-box"><input type="button" value="확인" class="compl-btn"></div>
+              	<div class="col-12 btn-box"><input type="button" value="확인" class="compl-btn"></div>
               	<div class="col-12"><span class="e-span"></span></div>
               </div>
               </form>

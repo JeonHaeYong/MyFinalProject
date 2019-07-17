@@ -154,9 +154,9 @@ public class MemberServiceImpl implements MemberService {
 		 MailHandler  sendMail = new  MailHandler (mailSender);
 
 		sendMail.setSubject("임시비밀번호 입니다.");
-		sendMail.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>")
+		sendMail.setText(new StringBuffer().append("<h1>[임시 비밀번호]</h1>")
 				.append("<p>임시비밀번호 입니다. 로그인 하시면 비밀번호를 꼭 변경해주세요.</p>")
-				.append("임시비밀번호:")
+				.append("임시비밀번호: ")
 				.append(authkey)
 				.toString());
 		sendMail.setFrom("wlsgid916@gmial.com", "관리자입니다");
