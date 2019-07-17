@@ -215,6 +215,42 @@ public class MemberServiceImpl implements MemberService {
 			return false;
 		}
 	}
+	
+	/**
+	 * myPage 이동시에 info보내주기.->nvl(null가능컬럼, (미설정))
+	 * 
+	 */
+	@Override
+	public MemberDTO selectOneMemberDTO_useMyPageAdvice(String id) {
+		return mdao.selectOneMemberDTO_useMyPageAdvice(id);
+	}
+
+	@Override
+	public int updateMemberInfoByMyPage(MemberDTO dto) {
+		//값을 입력하지않았는데, null이 아니라 "" 로 넘어온다면 null로 바꿔주기.
+		if(dto.getName()!=null&&dto.getName().equals("")) {
+			dto.setName(null);
+		}
+		if(dto.getBirthDay()!=null&&dto.getBirthDay().equals("")) {
+			dto.setBirthDay(null);
+		}
+		if(dto.getGender()!=null&&dto.getGender().equals("")) {
+			dto.setGender(null);
+		}
+		if(dto.getPhone()!=null&&dto.getPhone().equals("")) {
+			dto.setPhone(null);
+		}
+		if(dto.getZipcode()!=null&&dto.getZipcode().equals("")) {
+			dto.setZipcode(null);
+		}
+		if(dto.getAddress1()!=null&&dto.getAddress1().equals("")) {
+			dto.setAddress1(null);
+		}
+		if(dto.getAddress2()!=null&&dto.getAddress2().equals("")) {
+			dto.setAddress2(null);
+		}
+		return mdao.updateMemberInfoByMyPage(dto);
+	}
 }
 
 

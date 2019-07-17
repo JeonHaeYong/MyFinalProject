@@ -122,10 +122,10 @@
                                                     <div class="col-2 text-truncate">${r_list.sender }</div>
                                                     <div class="col-5 r_click_parent text-truncate">
                                                     	<c:if test="${r_list.readOk =='N'}">
-                                                    		<a class="received_msg_click text-decoration-none" href="#" seq="${r_list.seq }" data-toggle="modal" data-target="#r_msg_modal" value="${r_list.recipient }">${r_list.contents }</a>
+                                                    		<a class="received_msg_click text-decoration-none" href="#" seq="${r_list.seq }" data-toggle="modal" data-target="#r_msg_modal" value="${r_list.sender }">${r_list.contents }</a>
                                                     	</c:if>
                                                     	<c:if test="${r_list.readOk =='Y'}">
-                                                    		<a class="received_msg_click text-decoration-none readMsg" href="#" seq="${r_list.seq }" data-toggle="modal" data-target="#r_msg_modal" value="${r_list.recipient }">${r_list.contents }</a>
+                                                    		<a class="received_msg_click text-decoration-none readMsg" href="#" seq="${r_list.seq }" data-toggle="modal" data-target="#r_msg_modal" value="${r_list.sender }">${r_list.contents }</a>
                                                     	</c:if>
                                                     </div>
                                                     <div class="col-3">${r_list.message_date }</div>

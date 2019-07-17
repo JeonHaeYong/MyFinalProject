@@ -19,5 +19,7 @@ public interface MemberDAO {
 	public int insertNaverJoin(MemberDTO dto); //네이버 로그인 시 자동가입으로 사용
 	public String findID(String name, String birthday);
 	public int updatePw(String id, String pw);
+	public MemberDTO selectOneMemberDTO_useMyPageAdvice(String id);
+	public int updateMemberInfoByMyPage(MemberDTO dto);
 
 }
