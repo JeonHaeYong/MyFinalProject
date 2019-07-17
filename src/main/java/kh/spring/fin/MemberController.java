@@ -22,11 +22,12 @@ import com.google.gson.JsonParser;
 
 import kh.spring.dto.MemberDTO;
 import kh.spring.dto.MessageDTO;
+import kh.spring.dto.PaymentDTO;
 import kh.spring.loginapi.NaverLoginBO;
 import kh.spring.loginapi.kakao_restapi;
-import kh.spring.service.CartService;
 import kh.spring.service.MemberService;
 import kh.spring.service.MessageService;
+import kh.spring.service.PaymentService;
 
 @Controller
 public class MemberController {
@@ -35,9 +36,9 @@ public class MemberController {
 	@Autowired
 	private MemberService mservice;
 	@Autowired
-	private CartService cs;
-	@Autowired
 	private MessageService msgService;
+	@Autowired
+	private PaymentService ps;
 	@Autowired
 	private HttpSession session;
 
@@ -285,7 +286,14 @@ public class MemberController {
 	}
 
 	@RequestMapping("toMyPage_buyList")
-	public String toMyPage_buyList(HttpServletRequest request) {
+	public String toMyPage_buyList(HttpServletRequest request, String currentPage) {
+		String id = (String)request.getSession().getAttribute("id");
+		if(currentPage == null) {
+			currentPage = "1";
+		}
+		List<PaymentDTO> buyList = ps.selectPaymentPerPageForBuyList(id, Integer.parseInt(currentPage));
+		request.setAttribute("buyList", buyList);
+		request.setAttribute("pageNavi", ps.getNaviForBuyList(id, Integer.parseInt(currentPage)));
 		return "myPage/user/user_myPage_buyList";
 	}
 

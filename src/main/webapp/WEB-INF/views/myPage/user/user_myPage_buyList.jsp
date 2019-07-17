@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
     <html>
         <head>
@@ -69,23 +70,40 @@
                                             <div class="col-12"> </div>
                                         </div>
                                         <div class="row buyList_contents">
-                                            <div class="col-12 d-flex justify-content-center">
-                                                <div class="card mb-3" style="max-width: 540px;">
-                                                    <div class="row no-gutters">
-                                                        <div class="col-md-4">
-                                                            <img src="/resources/images/dog_1.jpg" class="card-img">
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <div class="card-body">
-                                                                <h5 class="card-title">구매상품 이름</h5>
-                                                                <p class="card-text">구매상품 금액</p>
-                                                                <p class="card-text"><small class="text-muted">구매날짜 / 판매자</small></p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                        	<div class="col-12 row mb-3">
+                                                <div class="col-5">상품명</div>
+                                                <div class="col-2">금액</div>
+                                                <div class="col-3">구매일</div>
+                                                <div class="col-2">판매자</div>
                                             </div>
+                                        	<c:forEach var="dto" items="${buyList }">
+	                                            <div class="col-12 row mb-2">
+                                                    <div class="col-5">${dto.item_name}</div>
+                                                    <div class="col-2">${dto.item_price }</div>
+                                                    <div class="col-3">${dto.pay_date }</div>
+                                                    <div class="col-2">${dto.seller }</div>
+                                                </div>
+                                        	</c:forEach>
                                         </div>
+                                        <div class="row">
+											<div class="col-12 d-flex justify-content-center" id="naviBox">
+												<c:if test="${pageNavi.needPrev == 1 }">
+													<a class="" href="toMyPage_buyList?currentPage=${pageNavi.startNavi - 1}">&laquo;</a>
+												</c:if>
+												<c:if test="${pageNavi.currentPage > pageNavi.startNavi }">
+													<a class="" href="toMyPage_buyList?currentPage=${pageNavi.currentPage - 1}">&lt;</a>
+												</c:if>
+												<c:forEach var="i" begin="${pageNavi.startNavi}" end="${pageNavi.endNavi}">
+													<a class="" href="toMyPage_buyList?currentPage=${i }" class="pageNum">${i}</a>
+												</c:forEach>
+												<c:if test="${pageNavi.currentPage < pageNavi.pageTotalCount }">
+													<a class="" href="toMyPage_buyList?currentPage=${pageNavi.currentPage + 1}">&gt;</a>
+												</c:if>
+												<c:if test="${pageNavi.needNext == 1 }">
+													<a class="" href="toMyPage_buyList?currentPage=${pageNavi.endNavi + 1}">&raquo;</a>
+												</c:if>
+											</div>
+										</div>
                                     </div>
                                 </div>
                             </div>

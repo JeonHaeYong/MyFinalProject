@@ -1,6 +1,8 @@
 package kh.spring.serviceImpl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +38,8 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 	
 	@Transactional("txManager")
-	public List<PaymentDTO> paymentComplete(PaymentDTO dto, ItemDTOList list) {
+	public List<ItemDTO> paymentComplete(PaymentDTO dto, ItemDTOList list) {
+		System.out.println("구매 서비스 실행");
 		String msg = "";
 		String[] cartSeqs = new String[list.getList().size()];
 		int i = 0;
@@ -45,7 +48,7 @@ public class PaymentServiceImpl implements PaymentService {
 			pdto.setItem_seq(idto.getSeq());
 			pdto.setItem_name(idto.getName());
 			pdto.setSeller(idto.getSeller());
-			msg = pdto.getItem_name() + " 상품이 결제 완료되었습니다.\n"
+			msg = pdto.getItem_name() + " 상품이 결제 완료되었습니다.\n구매자에게 무료나눔 물품을 전달해주세요.\n"
 					+ "< 구매자 정보 >\n"
 					+ "ID: " + pdto.getBuyer() + "\n"
 					+ "EMAIL: " + pdto.getEmail() + "\n"
@@ -62,10 +65,23 @@ public class PaymentServiceImpl implements PaymentService {
 		}
 		cdao.deleteCart(cartSeqs);
 		
-		return pdao.selectPaymentByOrderNum(dto.getOrderNumber());
+		return idao.selectItemByOrderNum(dto.getOrderNumber());
 	}
 	
 	public List<ItemDTO> selectItemByOrderNum(String orderNumber){
 		return idao.selectItemByOrderNum(orderNumber);
+	}
+	
+	public List<PaymentDTO> selectPaymentPerPageForBuyList(String id, int currentPage) {
+		Map<String, Integer> navi = pdao.getNaviForBuyList(currentPage, pdao.getPaymentTotalCountById(id));
+		Map<String, String> param = new HashMap<>();
+		param.put("id", id);
+		param.put("start", navi.get("fromIndex")+"");
+		param.put("end", navi.get("toIndex")+"");
+		return pdao.selectPaymentPerPageForBuyList(param);
+	}
+	
+	public Map<String, Integer> getNaviForBuyList(String id, int currentPage) {
+		return pdao.getNaviForBuyList(currentPage, pdao.getPaymentTotalCountById(id));
 	}
 }

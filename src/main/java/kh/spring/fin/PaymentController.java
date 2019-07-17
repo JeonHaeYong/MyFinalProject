@@ -45,7 +45,7 @@ public class PaymentController {
 	@RequestMapping("paymentProc")
 	public String paymentProc(HttpServletRequest request, ItemDTOList list, PaymentDTO dto) {
 		dto.setBuyer((String)request.getSession().getAttribute("id"));
-		request.setAttribute("payItem", ps.selectItemByOrderNum(dto.getOrderNumber()));
+		request.setAttribute("payItem", ps.paymentComplete(dto, list));
 		request.setAttribute("payMem", dto);
 		return "payment/paymentComplete";
 	}

@@ -33,6 +33,16 @@
 		text-align: center;
 		line-height: 60px;
 	}
+	.formTop{
+		text-align: center;
+	}
+	.formTop p{
+		font-size: 13px;
+		color: red;
+	}
+	#lab{
+		color: white;
+	}
 </style>
 </head>http://localhost/resources/images/payment.jpg
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -48,6 +58,9 @@
 			<h3>결제가 완료되었습니다.</h3>
 		</div>
 		<div class="row justify-content-center">
+			<div class="col-12 formTop">
+				<h4>구매 내역</h4>
+			</div>
 			<div class="col-12 d-flex justify-content-center" style="height: 50px;">
 				<div class="card mb-3 myCard" style="width: 90%; border-color:white;">
 					<div class="row no-gutters">
@@ -71,7 +84,7 @@
 						<div class="row no-gutters">
 							<div class="col-12 row">
 								<div class="col-md-6 col-12 cardContents">
-									<p><h5 class="card-title">${dto.name }</h5><p>
+									<p><a href="item?seq=${dto.seq }&currentPage=1&category=all"><h5 class="card-title">${dto.name }</h5></a><p>
 								</div>
 								<div  class="col-md-3 col-6 cardContents">
 									<p class="card-text">${dto.price }원</p>
@@ -86,6 +99,9 @@
 			</c:forEach>
 		</div>
 		<div class="row justify-content-center">
+			<div class="col-12 formTop">
+				<h4>구매자 정보</h4>
+			</div>
 			<div class="col-8">
 				<div class="form-group">
 					<label for="inputName">이름</label>
@@ -127,6 +143,15 @@
 						<input type="text" class="form-control" id="type" name="type" value="${payMem.type }" readonly>
 					</div>
 				</div>
+				<div class="form-row">
+					<div class="col-6 form-group">
+						<input type="button" class="btn btn-primary m-auto p-auto form-control" id="toMyPage_buyList" value="구매내역 확인">
+					</div>
+					<div class="col-6 form-group">
+						<input type="button" class="btn btn-primary m-auto p-auto form-control" id="goFreemarket" value="무료나눔 목록">
+					</div>
+				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -146,5 +171,13 @@
 	<script src="resources/js/jquery.sticky.js"></script>
 	<script src="resources/js/isotope.pkgd.min.js"></script>
 	<script src="resources/js/main.js"></script>
+	<script>
+		$("#goBuyList").on("click", function(){
+			location.href = "toMyPage_buyList";
+		});
+		$("#goFreemarket").on("click", function(){
+			location.href = "freeMarket?currentPage=1&category=all";
+		});
+	</script>
 </body>
 </html>
