@@ -57,6 +57,10 @@
 
 		<div id="container" class="container">
 			
+			
+			
+			
+			
 			<div id="menu_row" class="row justify-content-center">
 
 				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
@@ -85,14 +89,104 @@
 
 			</div>
 			
+			
+			
+			
+			
 			<div class="row justify-content-center">
 
 				<div class="col-12 col-md-12 col-lg-12 text-center my-5">
 
-				
-
+					<div class="row justify-content-center">
+						
+						<div class="col-12 col-md-12 col-lg-4 text-center my-1">
+						
+							<label>후원 업체명</label>
+						
+						</div>
+						
+						<div class="col-12 col-md-12 col-lg-8 text-center my-1">
+						
+							<input id="name_text" class="form-control" type="text">
+						
+						</div>
+						
+					</div>
+					
+					<div class="row justify-content-center">
+						
+						<div class="col-12 col-md-12 col-lg-4 text-center my-1">
+						
+							<label>목표 금액</label>
+						
+						</div>
+						
+						<div class="col-12 col-md-12 col-lg-8 text-center my-1">
+						
+							<input id="goalmoney_text" class="form-control" type="text">
+						
+						</div>
+						
+					</div>
+					
+					<div class="row justify-content-center">
+						
+						<div class="col-12 col-md-12 col-lg-4 text-center my-1">
+						
+							<label>기한 설정</label>
+						
+						</div>
+						
+						<div class="col-12 col-md-12 col-lg-8 text-center my-1">
+						
+							<input id="deadline_text" class="form-control" type="text">
+						
+						</div>
+						
+					</div>
+					
+					<div class="row justify-content-center">
+						
+						<div class="col-12 col-md-12 col-lg-4 text-center my-1">
+						
+							<label>설명</label>
+						
+						</div>
+						
+						<div class="col-12 col-md-12 col-lg-8 text-center my-1">
+						
+							<input id="contents_text" class="form-control" type="text">
+						
+						</div>
+						
+					</div>
+					
+					<div class="row justify-content-center">
+						
+						<div class="col-12 col-md-12 col-lg-12 text-center my-5">
+						
+							<input id="submit_btn" class="btn btn-warning" type="button" value="후원 업체 등록">
+						
+						</div>
+						
+					</div>
+					
 				</div>
 
+			</div>
+			
+			
+			
+			
+			
+			<div class="row justify-content-center">
+				
+				<div class="col-12 col-md-12 col-lg-12 text-center my-5">
+						
+					<input id="search_btn" class="btn btn-warning" type="button" value="후원 업체 조회">
+						
+				</div>
+				
 			</div>
 
 		</div>
