@@ -88,7 +88,7 @@
                                     </nav>
                                     <div class="tab-content" id="nav-tabContent">
                                         <!-- 받은쪽지함 -->
-                                        <div class="tab-pane fade show active selectedBox" id="nav-inbox" role="tabpanel" aria-labelledby="nav-inbox-tab">
+                                        <div class="tab-pane fade show active selectedBox" id="nav-inbox" role="tabpanel" aria-labelledby="nav-inbox-tab" name="receivedBox">
                                             <div class="row">
                                                 <div class="col-1">
                                                     <div class="custom-control custom-checkbox">
@@ -111,6 +111,7 @@
                                             	</div>
                                             </c:if>
                                             <form id="receivedMsg_delete_form" action="deleteMsg" method="post">
+                                            <!-- 받은쪽지함 내용들 -->
                                             <c:forEach var="r_list" items="${receivedList }" varStatus="status">
                                                 <div class="row r_list_row">
                                                     <div class="col-1">
@@ -132,6 +133,7 @@
                                                     <div class="col-1 r_readOk">${r_list.readOk }</div>
                                                 </div>
                                             </c:forEach>
+                                            <!-- 받은쪽지함 내용들 -->
                                             </form>
                                             <!-- 받은쪽지클릭하면 내용띄워주기 -->
                                             <div class="modal fade p-0" id="r_msg_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -165,7 +167,7 @@
                                             		<c:forEach var="navi" items="${receivedNavi }">
 														<li class="page-item">
 															<form>
-																<a class="page-link text-decoration-none" href="#">${navi }</a>
+																<a class="navi_click_a page-link text-decoration-none" href="#receivedBox" value="recipient">${navi }</a>
 															</form>
 														</li>
                                             		</c:forEach>
@@ -174,7 +176,7 @@
                                             </div><!-- /받은쪽지 네비게이터-->
                                         </div>
                                         <!-- 보낸쪽지함 -->
-                                        <div class="tab-pane fade selectedBox" id="nav-sentbox" role="tabpanel" aria-labelledby="nav-sentbox-tab">
+                                        <div class="tab-pane fade selectedBox" id="nav-sentbox" role="tabpanel" aria-labelledby="nav-sentbox-tab" name="sentBox">
                                             <div class="row ">
                                                 <div class="col-1">
                                                     <div class="custom-control custom-checkbox">
@@ -189,6 +191,7 @@
                                             </div>
                                             <form id="sentMsg_delete_form" action="deleteMsg" method="post">
                                             <c:forEach var="s_list" items="${sentList }" varStatus="status">
+                                            <!-- 보낸쪽지함 내용들 -->
                                                 <div class="row s_list_row">
                                                     <div class="col-1">
                                                         <div class="custom-control custom-checkbox">
@@ -203,6 +206,7 @@
                                                     <div class="col-3">${s_list.message_date }</div>
                                                     <div class="col-1 s_readOk">${s_list.readOk }</div>
                                                 </div>
+                                                <!-- //보낸쪽지함 내용들 -->
                                             </c:forEach>
                                            	</form>
                                             <!-- 보낸쪽지클릭하면 내용띄워주기 -->
@@ -237,7 +241,7 @@
                                             		<c:forEach var="navi" items="${sentNavi }">
 														<li class="page-item">
 															<form>
-																<a class="page-link text-decoration-none" href="#">${navi }</a>
+																<a class="navi_click_a page-link text-decoration-none" href="#sentBox" value="sender">${navi }</a>
 															</form>
 														</li>
                                             		</c:forEach>
@@ -447,5 +451,27 @@
                 	}
                 	$(".selectedBox.active>form").submit();
                 });
+                $(".navi_click_a").on("click",function(){
+                	var category = $(this).attr("value");
+                	var currentPage = $(this).text();
+                	//리스트랑 navi 가져오기.
+                	$.ajax({
+                		url: "ClickMsgNavi",
+                		type: "post",
+                		dataType : "json",
+                		data : {
+                			category : category,
+                			currentPage : currentPage
+                		}
+                	}).done(function(resp){
+                		console.log("ajax완료");
+                		console.log(resp.list);
+                		console.log(resp.navi);
+                	}).fail(function(a,b,c){
+                		alert(a);
+                		alert(b);
+                		alert(c);
+                	})
+                })
             </script>
         </html>
