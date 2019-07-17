@@ -66,13 +66,13 @@
 		</div>
 		<div class="row m-3">
 			<c:forEach var="dto" items="${items }" varStatus="status">
-				<div class="col-lg-12 col-12 d-flex justify-content-center">
+				<div class="col-12 d-flex justify-content-center">
 					<div class="card mb-3 myCard" style="width: 90%;">
 						<div class="row no-gutters">
-							<div class="col-md-4 imageBox">
-								<img src="/resources/images/item/item1.jpg" class="card-img itemImage">
+							<div class="col-4 imageBox">
+								<img src="${dto.imagePath1 }" class="card-img itemImage">
 							</div>
-							<div class="col-md-8">
+							<div class="col-8">
 								<div class="card-body">
 									<h5 class="card-title">상품명 : ${dto.name }</h5>
 									<p class="card-text">금액 : ${dto.price }원</p>
@@ -96,9 +96,11 @@
 				<form action="paymentProc" method="post" id="payForm">
 					<c:forEach var="dto" items="${items }" varStatus="status">
 						<input type="hidden" name="list[${status.index }].seq" value="${dto.seq }">
+						<input type="hidden" name="list[${status.index }].cart_seq" value="${dto.cart_seq }">
 						<input type="hidden" name="list[${status.index }].name" value="${dto.name }">
 						<input type="hidden" name="list[${status.index }].seller" value="${dto.seller }">
 					</c:forEach>
+					<input type="hidden" name="orderNumber" id="orderNumber">
 					<div class="form-group">
 						<label for="inputName">이름</label>
 						<input type="text" class="form-control" id="inputName" name="name" value="${member.name }">
@@ -213,10 +215,9 @@
 				return;
 			}
 			
-			$(".seqs").each(function(i, item){
-				console.log($(item).val());
-			});
-			
+			var orderNum = new Date().getTime();
+			alert(orderNum);
+			$("#orderNumber").val(orderNum);
 			
 			$("#payForm").submit();
 			
@@ -243,7 +244,7 @@
 // 				    'vbank':가상계좌,
 // 				    'phone':휴대폰소액결제 
 // 				 */
-// 				merchant_uid : 'merchant_' + new Date().getTime(),
+// 				merchant_uid : orderNum,
 // 				/* 
 // 				    merchant_uid에 경우 
 // 				    https://docs.iamport.kr/implementation/payment

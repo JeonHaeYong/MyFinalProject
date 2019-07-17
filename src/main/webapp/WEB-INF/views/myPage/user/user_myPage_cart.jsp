@@ -91,12 +91,14 @@
                                             <div class="col-12"> </div>
                                         </div>
                                         <div class="row cart_contents">
-                                        	<div class="col-12 d-flex justify-content-left custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" id="allCheck">
-												<label class="custom-control-label" for="allCheck">전체선택</label>
-											</div>
+                                        	<c:if test="${list.size() != 0 }">
+	                                        	<div class="col-12 d-flex justify-content-left custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input" id="allCheck">
+													<label class="custom-control-label" for="allCheck">전체선택</label>
+												</div>
+											</c:if>
 											<c:if test="${list.size() == 0 }">
-												<div class="col-12 d-flex justify-content-center">
+												<div class="col-12 d-flex justify-content-center mt-3">
                                         			<h4>장바구니가 비어있습니다.</h4>
                                         		</div>
 											</c:if>
@@ -217,10 +219,18 @@
         		if(!$("#allCheck").prop("checked")){
         			$("#allCheck").click();
         		}
+        		if($(".itemCheck").length == 0 || count == 0){
+        			alert("장바구니에 상품이 없습니다.");
+        			return;
+        		}
         		$("#itemCheckForm").submit();
         	});
         	
         	$("#payBtn").on("click", function(){
+        		if($(".itemCheck").length == 0 || count == 0){
+        			alert("선택하신 상품이 없습니다. 다시 선택해주세요.");
+        			return;
+        		}
         		$("#itemCheckForm").submit();
         	});
         	

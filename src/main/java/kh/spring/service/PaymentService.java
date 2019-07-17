@@ -8,5 +8,6 @@ import kh.spring.dto.PaymentDTO;
 
 public interface PaymentService {
 	public List<ItemDTO> selectItemForPaymentService(String[] items);
-	public int paymentComplete(PaymentDTO dto, ItemDTOList list);
+	public List<PaymentDTO> paymentComplete(PaymentDTO dto, ItemDTOList list);
+	public List<ItemDTO> selectItemByOrderNum(String orderNumber);
 }

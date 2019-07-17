@@ -10,4 +10,5 @@ public interface PaymentDAO {
 	public int insertPayment(PaymentDTO dto);
 	public List<PaymentDTO> selectAllPayment();
 	public List<PaymentDTO> selectPaymentById(String id);
+	public List<PaymentDTO> selectPaymentByOrderNum(String orderNumber);
 }

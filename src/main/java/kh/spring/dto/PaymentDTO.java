@@ -13,10 +13,11 @@ public class PaymentDTO {
 	private String address2;
 	private String seller;
 	private String type;
+	private String orderNumber;
 	
 	public PaymentDTO() {}
 	public PaymentDTO(int seq, int item_seq, String item_name, String buyer, String name, String email, String phone,
-			String zipcode, String address1, String address2, String seller, String type) {
+			String zipcode, String address1, String address2, String seller, String type, String orderNumber) {
 		this.seq = seq;
 		this.item_seq = item_seq;
 		this.item_name = item_name;
@@ -29,6 +30,7 @@ public class PaymentDTO {
 		this.address2 = address2;
 		this.seller = seller;
 		this.type = type;
+		this.orderNumber = orderNumber;
 	}
 
 	public int getSeq() {
@@ -125,6 +127,14 @@ public class PaymentDTO {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
 	}
 	
 }

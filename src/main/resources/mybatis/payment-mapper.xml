@@ -3,7 +3,8 @@
 <mapper namespace="PaymentDAO">
 
 	<insert id="insertPayment">
-		insert into payment values(payment_seq.nextval, #{item_seq}, #{item_name}, #{buyer}, #{name}, #{email}, #{phone}, #{zipcode}, #{address1}, #{address2}, #{seller}, #{type})
+		insert into payment values(payment_seq.nextval, #{item_seq}, #{item_name}, #{buyer}, #{name},
+		#{email}, #{phone}, #{zipcode}, #{address1}, #{address2}, #{seller}, #{type}, #{orderNumber})
 	</insert>
 	
 	<select id="selectAllPayment" resultType="kh.spring.dto.PaymentDTO">
@@ -12,6 +13,10 @@
 	
 	<select id="selectPaymentById" resultType="kh.spring.dto.PaymentDTO">
 		select * from payment where buyer=#{value}
+	</select>
+	
+	<select id="selectPaymentByOrderNum" resultType="kh.spring.dto.PaymentDTO">
+		select * from payment where ordernumber = #{value}
 	</select>
 	
 </mapper>

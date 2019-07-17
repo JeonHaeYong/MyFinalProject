@@ -33,4 +33,8 @@ public class PaymentDAOImpl implements PaymentDAO {
 		return sst.selectList("PaymentDAO.selectPaymentById", id);
 	}
 	
+	public List<PaymentDTO> selectPaymentByOrderNum(String orderNumber) {
+		return sst.selectList("PaymentDAO.selectPaymentByOrderNum", orderNumber);
+	}
+	
 }

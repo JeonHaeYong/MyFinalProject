@@ -21,14 +21,114 @@
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
-</head>
+<style>
+	.myJumbo{
+		background-color: white;
+	}
+	#jumboImg{
+		width: 100%;
+		max-height: 600px;
+	}
+	.cardContents{
+		text-align: center;
+		line-height: 60px;
+	}
+</style>
+</head>http://localhost/resources/images/payment.jpg
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="300" id="home-section">
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 
+	<div class="jumbotron myJumbo pr-0 pl-0 pb-2">
+		<img src="/resources/images/payment.jpg" id="jumboImg">
+	</div>
 	<div class="container">
-		결제 완료 페이지!!!!
+		<div class="row justify-content-center mb-3">
+			<h3>결제가 완료되었습니다.</h3>
+		</div>
+		<div class="row justify-content-center">
+			<div class="col-12 d-flex justify-content-center" style="height: 50px;">
+				<div class="card mb-3 myCard" style="width: 90%; border-color:white;">
+					<div class="row no-gutters">
+						<div class="col-12 row">
+							<div class="col-md-6 col-12 d-none d-md-block cardContents">
+								<p>상품명</h5></p>
+							</div>
+							<div class="col-md-3 col-6 d-none d-md-block cardContents">
+								<p class="card-text">가격</p>
+							</div>
+							<div class="col-md-3 col-6 d-none d-md-block cardContents">
+								<p class="card-text">판매자</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<c:forEach var="dto" items="${payItem }" varStatus="status">
+				<div class="col-12 d-flex justify-content-center" style="height: 80px;">
+					<div class="card mb-3 myCard" style="width: 90%;">
+						<div class="row no-gutters">
+							<div class="col-12 row">
+								<div class="col-md-6 col-12 cardContents">
+									<p><h5 class="card-title">${dto.name }</h5><p>
+								</div>
+								<div  class="col-md-3 col-6 cardContents">
+									<p class="card-text">${dto.price }원</p>
+								</div>
+								<div  class="col-md-3 col-6 cardContents">
+									<p class="card-text">${dto.seller }</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+		<div class="row justify-content-center">
+			<div class="col-8">
+				<div class="form-group">
+					<label for="inputName">이름</label>
+					<input type="text" class="form-control" id="inputName" name="name" value="${payMem.name }" readonly>
+				</div>
+				<div class="form-group">
+					<label for="inputEmail">이메일</label>
+					<input type="email" class="form-control" id="inputEmail" name="email" value="${payMem.email }" readonly>
+				</div>
+				<div class="form-group">
+					<label for="inputPhone">전화번호</label>
+					<input type="tel" class="form-control" id="inputPhone" name="phone" value="${payMem.phone }" readonly>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-8">
+						<label for="zipcode">우편번호</label>
+						<input type="text" class="form-control" id="zipcode" name="zipcode" value="${payMem.zipcode }" readonly>
+					</div>
+					<div class="form-group col-4">
+						<label for="zipcode" id="lab">우</label>
+						<input type="button" class="btn btn-primary m-auto p-auto form-control" id="searchBtn" value="찾기">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputAddress">주소</label>
+					<input type="text" class="form-control" id="inputAddress" name="address1" value="${payMem.address1 }" readonly>
+				</div>
+				<div class="form-group">
+					<label for="inputAddress2">상세주소</label>
+					<input type="text" class="form-control" id="inputAddress2" name="address2" value="${payMem.address2 }" readonly>
+				</div>
+				<div class="form-row">
+					<div class="col-6 form-group">
+						<label for="totalAmount">결제 금액</label>
+						<input type="text" class="form-control" id="totalAmount" name="totalAmount" value="${payMem.type }" readonly>
+					</div>
+					<div class="col-6 form-group">
+						<label for="type">결제 방식</label>
+						<input type="text" class="form-control" id="type" name="type" value="${payMem.type }" readonly>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
