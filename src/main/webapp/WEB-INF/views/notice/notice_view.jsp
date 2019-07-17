@@ -36,10 +36,16 @@
 		border-bottom: 1px solid bisque;
 	}
 
+	#notice_link
+	{
+		color: #EC7357 !important;
+		font-weight: 600 !important;
+	}
+
 </style>
 
 </head>
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
@@ -93,6 +99,7 @@
 <script>
 	$(function()
     {
+		
 		$.ajax
     	({
     		url: "notice-view-do",
