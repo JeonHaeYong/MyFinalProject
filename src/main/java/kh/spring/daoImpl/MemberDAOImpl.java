@@ -109,11 +109,6 @@ public class MemberDAOImpl implements MemberDAO {
 		}
 		return SHA;
 	}
-
-	
-	
-	
-	
 	//퀴즈에서 씀!!
 	@Override
 	public List<MemberDTO> memberPoint() {
@@ -127,6 +122,17 @@ public class MemberDAOImpl implements MemberDAO {
 		map.put("birthday",birthday);
 		map.put("name", name);
 		return sst.selectOne("MemberDAO.idFind",map);
+	}
+	//로그인id 의 member정보 null은 미설정으로 나오도록 하기.
+	@Override
+	public MemberDTO selectOneMemberDTO_useMyPageAdvice(String id) {
+		return sst.selectOne("MemberDAO.selectOneMemberDTO_useMyPageAdvice",id);
+	}
+	
+	//mypage에서 정보수정시, 입력한 정보에 맞게 update해주기.
+	@Override
+	public int updateMemberInfoByMyPage(MemberDTO dto) {
+		return sst.update("MemberDAO.updateMemberInfoByMyPage",dto);
 	}
 	
 }

@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>Write Form</title>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"rel="stylesheet">
 <link rel="stylesheet" href="resources/fonts/icomoon/style.css">
@@ -19,9 +20,12 @@
 <link rel="stylesheet" href="resources/css/style.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <!-- summernote -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+
+
 <style>
 	
             .jumbotron{background-color:white;}
@@ -46,6 +50,7 @@
         .title-section>div:first-child{font-size: 25px;}
         .title{width: 100%;}
         .content-section{margin-bottom: 20px;}
+        
     </style>
      <script>
           $(function(){
@@ -53,17 +58,33 @@
                     placeholder: '내용을 입력해주세요. ^_^',
                     tabsize: 2,
                     height: 300,
+                    focus:true,
+                    lang:'ko-KR',
+                    callbacks:{
+                    	onImageUpload: function(files, editor, welEditable){
+                    		var data = new FormData();
+                    		data.append("file",files[0]);
+                    		$.ajax({
+                    			url:"imageUpload.train",
+                    			data:data,
+                    			type:"post",
+                    			cache:false,
+                    			contentType:false,
+                    			enctype:"multipart/form-data",
+                    			processData:false
+                    		}).done(function(resp){
+                    			console.log(resp);
+                    			$(".note-editable").append("<img src='"+resp+"'>");
+                    		})
+                    	}
+                    }
                 });
               $(".write-btn").on("click",function(){
                   //summernote -> textarea에 옮겨담기
-                  if($(".title").val() != "" && $(".content")val() != ""){
-                      $("#writeForm").submit();
-                  }else if($(".title").val() == ""){
-                      alert("제목을 입력해주세요.");
-                  }else if($(".content").val() == ""){
-                      
-                  }
-              })
+                  var summernote = $("#summernote").summernote('code');
+                var contents = $("#contents").val(summernote);  
+                 $("#writeForm").submit();
+              });
           });
       
     </script>
@@ -87,7 +108,7 @@
                 </div>
                  <div class="col-1"></div>
             <div class="col-lg-9 col-md-8 col-sm-12 col-12 write-section">
-              <form action="writeProc.info" method="post" id="writeForm">
+              <form action="writeProc.train" method="post" id="writeForm" enctype="multipart/form-data">
                <div class="row title-section">
                    <div class="col-lg-2 col-md-2 col-sm-2 col-12">제목</div>
                    <div class="col-lg-10 col-md-10 col-sm-10 col-12"><input type="text" name="title" class="title" maxlength="100"></div>
@@ -95,7 +116,7 @@
                <div class="row content-section">
                    <div class="col-12">
                        <div id="summernote"></div>
-                       <textarea hidden class="content"></textarea>
+                       <textarea rows="" cols="" id="contents" name="content" hidden></textarea>
                    </div>
                </div>
               <div class="row button-box">
@@ -110,8 +131,9 @@
 	
 	<!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
    <jsp:include page="/WEB-INF/views/module/footer.jsp" ></jsp:include>
+ 
    <script src="resources/js/jquery-ui.js"></script>
-   <script src="resources/js/popper.min.js"></script>
+   <script src="resources/js/umd/popper.min.js"></script>
    <script src="resources/js/bootstrap.min.js"></script>
    <script src="resources/js/owl.carousel.min.js"></script>
    <script src="resources/js/jquery.countdown.min.js"></script>
@@ -121,5 +143,6 @@
    <script src="resources/js/jquery.sticky.js"></script>
    <script src="resources/js/isotope.pkgd.min.js"></script>
    <script src="resources/js/main.js"></script>
+
 </body>
 </html>

@@ -24,11 +24,16 @@
 		margin-top: 5%;
 	}
 
+	#notice_link
+	{
+		color: #EC7357 !important;
+		font-weight: 600 !important;
+	}
 
 </style>
 
 </head>
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
@@ -75,6 +80,8 @@
 				<div class="col-12 col-md-12 col-lg-12 text-right my-5">
 
 					<input id="back_btn" class="btn btn-danger" type="button" value="돌아가기">
+					<input id="update_btn" class="btn btn-danger" type="button" value="수정하기">
+					<input id="delete_btn" class="btn btn-danger" type="button" value="삭제하기">
 				
 				</div>
 				
@@ -105,8 +112,20 @@
     {
 		$("#back_btn").on("click", function()
 		{
-			history.back();
-		});	    
+// 			history.back();
+			location.href = "notice-view-page";
+		});
+		
+		$("#update_btn").on("click", function()
+		{
+			location.href = "notice-update-page?seq=${dto.seq}";
+		});
+		
+		$("#delete_btn").on("click", function()
+		{
+			location.href = "notice-delete-do?seq=${dto.seq}";
+		});
+		
     });
     
     onload = function()

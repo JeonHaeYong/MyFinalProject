@@ -21,5 +21,7 @@ public interface MemberService {
 	public String FindId(String idname, String birthday); //이름으로 아이디 찾기 
 	public boolean FindIdbyemail(String email, String id);//이메일로 아이디 보내기
 	public int updatePwService(String id, String pw);
+	public MemberDTO selectOneMemberDTO_useMyPageAdvice(String id);//myPage 이동시에 info보내주기.->nvl(null가능컬럼, (미설정))
+	public int updateMemberInfoByMyPage(MemberDTO dto);//mypage에서 정보수정하기.
 
 }

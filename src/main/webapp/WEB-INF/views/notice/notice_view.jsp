@@ -36,10 +36,16 @@
 		border-bottom: 1px solid bisque;
 	}
 
+	#notice_link
+	{
+		color: #EC7357 !important;
+		font-weight: 600 !important;
+	}
+
 </style>
 
 </head>
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
@@ -59,7 +65,11 @@
 				<div id="contents_div" class="col-12 col-md-12 col-lg-12 text-center my-5">
 					
 				</div>
-
+				
+				<div class="col-12 col-md-12 col-lg-12 text-right my-1">
+					<input id="write_btn" class="btn btn-danger mx-1" type="button" value="글 작성">
+				</div>
+				
 				<div class="col-12 col-md-12 col-lg-12 text-center my-5">
 					<a href="notice-write-random">데이터 삽입</a>
 				</div>
@@ -89,6 +99,7 @@
 <script>
 	$(function()
     {
+		
 		$.ajax
     	({
     		url: "notice-view-do",
@@ -184,7 +195,7 @@
 	    		{
 					var $row = $('<div class="row justify-content-center my-1"></div>');
 					var $seqCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1">'+array[i-1].seq+'</div>');
-	    			var $titleCol = $('<div class="col-6 col-md-6 col-lg-6 text-center my-1">'+array[i-1].title+'</div>');
+					var $titleCol = $('<div class="col-6 col-md-6 col-lg-6 text-center my-1"><a href=notice-detail-page?seq='+array[i-1].seq+'>'+array[i-1].title+'</a></div>');
 	    			var $writeTimeCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1">'+array[i-1].write_time+'</div>');
 	    			var $viewCountCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1">'+array[i-1].view_count+'</div>');
 	    			$row.append($seqCol).append($titleCol).append($writeTimeCol).append($viewCountCol);
@@ -236,6 +247,10 @@
 	    	});
 		});
 		
+		$("#write_btn").on("click", function()
+		{
+			location.href = "notice-write-page";
+		});
 		
     });
     

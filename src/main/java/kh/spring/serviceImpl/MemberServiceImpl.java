@@ -161,18 +161,19 @@ public class MemberServiceImpl implements MemberService {
 		session.setAttribute("newPw",authkey);	
 		// mail 작성 관련 
 		try {
-			MailHandler  sendMail = new  MailHandler (mailSender);
 
-			sendMail.setSubject("임시비밀번호 입니다.");
-			sendMail.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>")
-					.append("<p>임시비밀번호 입니다. 로그인 하시면 비밀번호를 꼭 변경해주세요.</p>")
-					.append("임시비밀번호:")
-					.append(authkey)
-					.toString());
-			sendMail.setFrom("wlsgid916@gmial.com", "관리자입니다");
-			sendMail.setTo(email);
-			sendMail.send();
-			return true;
+		 MailHandler  sendMail = new  MailHandler (mailSender);
+
+		sendMail.setSubject("임시비밀번호 입니다.");
+		sendMail.setText(new StringBuffer().append("<h1>[임시 비밀번호]</h1>")
+				.append("<p>임시비밀번호 입니다. 로그인 하시면 비밀번호를 꼭 변경해주세요.</p>")
+				.append("임시비밀번호: ")
+				.append(authkey)
+				.toString());
+		sendMail.setFrom("wlsgid916@gmial.com", "관리자입니다");
+		sendMail.setTo(email);
+		sendMail.send();
+		return true;
 		}catch(Exception e) {
 			e.printStackTrace();
 			return false;
@@ -216,8 +217,42 @@ public class MemberServiceImpl implements MemberService {
 
 		return mdao.findID(idname,birthday);
 	}
+	/**
+	 * myPage 이동시에 info보내주기.->nvl(null가능컬럼, (미설정))
+	 * 
+	 */
+	@Override
+	public MemberDTO selectOneMemberDTO_useMyPageAdvice(String id) {
+		return mdao.selectOneMemberDTO_useMyPageAdvice(id);
+	}
 
-	
+	//마이페이지->정보수정시
+	@Override
+	public int updateMemberInfoByMyPage(MemberDTO dto) {
+		//값을 입력하지않았는데, null이 아니라 "" 로 넘어온다면 null로 바꿔주기.
+		if(dto.getName()!=null&&dto.getName().equals("")) {
+			dto.setName(null);
+		}
+		if(dto.getBirthDay()!=null&&dto.getBirthDay().equals("")) {
+			dto.setBirthDay(null);
+		}
+		if(dto.getGender()!=null&&dto.getGender().equals("")) {
+			dto.setGender(null);
+		}
+		if(dto.getPhone()!=null&&dto.getPhone().equals("")) {
+			dto.setPhone(null);
+		}
+		if(dto.getZipcode()!=null&&dto.getZipcode().equals("")) {
+			dto.setZipcode(null);
+		}
+		if(dto.getAddress1()!=null&&dto.getAddress1().equals("")) {
+			dto.setAddress1(null);
+		}
+		if(dto.getAddress2()!=null&&dto.getAddress2().equals("")) {
+			dto.setAddress2(null);
+		}
+		return mdao.updateMemberInfoByMyPage(dto);
+	}
 }
 
 

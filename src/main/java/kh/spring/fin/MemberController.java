@@ -292,11 +292,14 @@ public class MemberController {
 		System.out.println("ID:"+id+"의 pw변경이 " + result +"행 완료되었습니다.");
 		return "redirect:toMyPage";
 	}
-	//정보수정하기(id,pw제외)
+	//정보수정하기(id,pw,email제외)
 	@RequestMapping("modifyProfile")
 	public String modifyProfileInfo(MemberDTO dto) {
-		
-		return "";
+		System.out.println(dto.toString());//값 제대로 넘어오는것 확인
+		//id에 대해 업데이트 하기.
+		int result = mservice.updateMemberInfoByMyPage(dto);
+		System.out.println(dto.getId()+"님의 정보업데이트가 " +result+"행 완료되었습니다.");
+		return "redirect:toMyPage";
 	}
 	@RequestMapping("toMyPage_writeList")
 	public String toMyPage_writeList(HttpServletRequest request) {

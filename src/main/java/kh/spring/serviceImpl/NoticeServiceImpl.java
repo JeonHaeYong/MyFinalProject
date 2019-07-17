@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -181,6 +182,61 @@ public class NoticeServiceImpl implements NoticeService
 		}
 		
 		return mav;
+	}
+
+	@Override
+	public Object NoticeUpdatePage(NoticeDTO dto) throws Exception
+	{
+		ModelAndView mav = new ModelAndView();
+		
+		NoticeDTO resultDTO = noticeDAO.selectDTO(dto);
+			
+		logger.info("제목 : {}", resultDTO.getTitle());
+		logger.info("내용 : {}", resultDTO.getContents());
+		logger.info("시간 : {}", resultDTO.getWrite_time());
+		logger.info("조회 : {}", resultDTO.getView_count());
+			
+		mav.addObject("dto", resultDTO);
+		mav.setViewName("/notice/notice_write");
+		
+		return mav;
+	}
+
+	@Transactional("txManager")
+	@Override
+	public Object NoticeUpdateDo(NoticeDTO dto) throws Exception
+	{
+		int titleResult = noticeDAO.updateTitleBySeq(dto);
+		int contentsResult = noticeDAO.updateContentsBySeq(dto);
+		int writeTimeResult = noticeDAO.updateWriteTimeBySeq(dto);
+		
+		String result = "";
+		
+		if(((titleResult == 1) && (contentsResult == 1)) && (writeTimeResult == 1))
+		{
+			result = "redirect: notice-detail-page?seq="+dto.getSeq();
+		}
+		else
+		{
+			result = "error";
+		}
+		
+		return result;
+	}
+
+	@Override
+	public String NoticeDeleteDo(NoticeDTO dto) throws Exception
+	{
+		String result = "error";
+		
+		int deleteResult = noticeDAO.deleteBySeq(dto);
+		
+		if(deleteResult == 1)
+		{
+			result = "redirect: notice-view-page";
+		}
+		
+		return result;
 	}
 
 	
