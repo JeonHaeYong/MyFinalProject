@@ -44,5 +44,29 @@ public class NoticeDAOImpl implements NoticeDAO
 	{
 		return sst.update("NoticeDAO.viewCountPlus", dto);
 	}
+
+	@Override
+	public int updateTitleBySeq(NoticeDTO dto) throws Exception
+	{
+		return sst.update("NoticeDAO.updateTitleBySeq", dto);
+	}
+
+	@Override
+	public int updateContentsBySeq(NoticeDTO dto) throws Exception
+	{
+		return sst.update("NoticeDAO.updateContentsBySeq", dto);
+	}
+
+	@Override
+	public int updateWriteTimeBySeq(NoticeDTO dto) throws Exception
+	{
+		return sst.update("NoticeDAO.updateWriteTimeBySeq", dto);
+	}
+
+	@Override
+	public int deleteBySeq(NoticeDTO dto) throws Exception
+	{
+		return sst.delete("NoticeDAO.deleteBySeq", dto);
+	}
 	
 }

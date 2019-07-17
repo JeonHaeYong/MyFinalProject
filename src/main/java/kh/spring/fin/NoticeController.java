@@ -99,7 +99,39 @@ public class NoticeController
 		
 		return result;
 	}
-
+	@RequestMapping(value = "notice-update-page")
+	public Object noticeUpdatePage(NoticeDTO dto)
+	{
+		Object result = "error";
+			
+		try
+		{
+			result = noticeService.NoticeUpdatePage(dto);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+			
+		return result;
+	}
+	@RequestMapping(value = "notice-update-do")
+	public Object noticeUpdateDo(NoticeDTO dto)
+	{
+		Object result = "error";
+			
+		try
+		{
+			result = noticeService.NoticeUpdateDo(dto);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+			
+		return result;
+	}
+	
 	@RequestMapping(value = "notice-write-random", method = RequestMethod.GET)
 	public String noticeWriteDummy()
 	{
@@ -119,6 +151,22 @@ public class NoticeController
 		return result;
 	}
 	
+	@RequestMapping(value = "notice-delete-do")
+	public String noticeDelete(NoticeDTO dto)
+	{
+		String result = "error";
+		
+		try
+		{
+			result = noticeService.NoticeDeleteDo(dto);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 	
 	@RequestMapping(value = "notice-detail-page")
 	public Object noticeDetailPage(NoticeDTO dto)
@@ -136,4 +184,5 @@ public class NoticeController
 		
 		return result;
 	}
+	
 }

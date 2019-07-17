@@ -15,10 +15,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import kh.spring.loginapi.NaverLoginBO;
 import kh.spring.loginapi.kakao_restapi;
 
-
-
-
-
 @Controller
 public class HomeController {
 	private NaverLoginBO naverLoginBO;

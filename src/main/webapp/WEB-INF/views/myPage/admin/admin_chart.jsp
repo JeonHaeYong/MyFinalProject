@@ -61,10 +61,16 @@
 	height: 50%;
 	min-height: 500px;
 }
+
+#mypage_link
+{
+	color: #EC7357 !important;
+	font-weight: 600 !important;
+}
 </style>
 
 </head>
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
@@ -89,7 +95,7 @@
 			</div>
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="#" class="btn btn-danger my_buttons">월 별 후원금 및 전달 기관</a>
+				<a href="admin-donation" class="btn btn-danger my_buttons">월 별 후원금 및 전달 기관</a>
 			</div>
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">

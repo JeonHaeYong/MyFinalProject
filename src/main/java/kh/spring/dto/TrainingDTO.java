@@ -1,5 +1,6 @@
 package kh.spring.dto;
 
+import java.security.Timestamp;
 import java.sql.Date;
 
 public class TrainingDTO {
@@ -8,13 +9,13 @@ public class TrainingDTO {
 	private String contents;
 	private String image;
 	private String writer;
-	private Date writeDate;
+	private Timestamp writeDate;
 	private String ip;
 	
 	public TrainingDTO() {
 		super();
 	}
-	public TrainingDTO(int seq, String title, String contents, String image, String writer, Date writeDate, String ip) {
+	public TrainingDTO(int seq, String title, String contents, String image, String writer, Timestamp writeDate, String ip) {
 		super();
 		this.seq = seq;
 		this.title = title;
@@ -54,10 +55,10 @@ public class TrainingDTO {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-	public Date getWriteDate() {
+	public Timestamp getWriteDate() {
 		return writeDate;
 	}
-	public void setWriteDate(Date writeDate) {
+	public void setWriteDate(Timestamp writeDate) {
 		this.writeDate = writeDate;
 	}
 	public String getIp() {

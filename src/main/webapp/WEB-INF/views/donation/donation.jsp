@@ -22,10 +22,26 @@
 	width: 80%;
 	height: auto;
 }
+
+#donation_link
+{
+	color: #EC7357 !important;
+	font-weight: 600 !important;
+}
+
+#donation_btn
+{
+	background-color: #EC7357 !important;
+}
+
+#donation_btn:hover
+{
+	background-color: black !important;
+}
 </style>
 
 </head>
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
@@ -96,7 +112,7 @@
 				
 					<div class="col-12 text-center">
 					
-						<input class="btn btn-info mt-5" type="button" value="후원">
+						<input id="donation_btn" class="btn btn-info mt-5" type="button" value="후원">
 						
 					</div>
 				

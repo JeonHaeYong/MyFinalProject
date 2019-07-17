@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TrainingDAO">
+	<insert id="insertTrainingWithoutImg"> <!-- 이미지 없는 글 등록 -->
+		insert into training_board values(training_seq.nextval, #{title}, #{contents}, null, #{writer}, default, #{ip})
+	</insert>
+	<insert id="insertTraining"> <!-- 이미지 있는 글 등록 -->
+		insert into training_board values(training_seq.nextval, #{title}, #{contents}, #{image}, #{writer}, default, #{ip})
+	</insert>
+</mapper>

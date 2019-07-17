@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -31,10 +32,16 @@
 	background-color: black !important;
 }
 
+#notice_link
+{
+	color: #EC7357 !important;
+	font-weight: 600 !important;
+}
+
 </style>
 
 </head>
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 <%-- 	<jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include> --%>
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
@@ -123,15 +130,11 @@
 		$("#summernote").summernote
 		({
 			height : 400,
-		        
 			minHeight : null,
-		        
 			maxHeight : null,
-		        
 			focus : true,
-		        
 			lang : 'ko-KR',
-		        
+			dialogsInBody: true,
 			callbacks :
 			{
 				onImageUpload : function(files, editor, welEditable)
@@ -165,32 +168,8 @@
 		    
 	    }
 		
-		$("#write_btn").on("click", function()
-		{
-			var form = $('<form></form>');
-	    	form.attr('action', 'notice-write-do');
-	    	form.attr('method', 'POST');
-	    	form.appendTo('body');
-	               		
-	    	var text = $(".note-editable").html();
-	    	
-		    if((text != "<br>") && ($("#title_text").val() != ""))
-		    {
-		    	var title = $('<input type="hidden" name="title">');
-		    	var contents = $('<input type="hidden" id="contents_hidden" name="contents">');
-		    	
-		   		form.append(title).append(contents);
-		   		
-		    	title.val($("#title_text").val());
-		    	contents.val(text);
-		               			    
-		    	form.submit();
-		    }
-		    else
-		    {
-		   		alert("작성 내용을 확인하세요.");
-		    }
-		});
+		$("#title_text").val("${dto.title}");
+		$(".note-editable").children("p").html(`${ dto.contents }`);
 		
     });
     
@@ -199,4 +178,68 @@
 		
     };
 </script>
+<c:if test="${dto != null}">
+<script>
+
+
+
+	$("#write_btn").on("click", function()
+	{
+		var form = $('<form></form>');
+		form.attr('action', 'notice-update-do');
+		form.attr('method', 'POST');
+		form.appendTo('body');
+	           	               		
+		var text = $(".note-editable").html();
+	           	    	
+		if((text != "<br>") && ($("#title_text").val() != ""))
+		{
+			var seq = $('<input type="hidden" name="seq" value="${dto.seq}">');
+			var title = $('<input type="hidden" name="title">');
+			var contents = $('<input id="contents_hidden" type="hidden" name="contents">');
+		           		    	
+			form.append(seq).append(title).append(contents);
+		           		   		
+			title.val($("#title_text").val());
+			contents.val(text);
+		           		               			    
+			form.submit();
+		}
+		else
+		{
+			alert("작성 내용을 확인하세요.");
+		}
+	});
+</script>
+</c:if>
+<c:if test="${dto == null}">
+<script>
+	$("#write_btn").on("click", function()
+	{
+		var form = $('<form></form>');
+		form.attr('action', 'notice-write-do');
+		form.attr('method', 'POST');
+		form.appendTo('body');
+	           	               		
+		var text = $(".note-editable").html();
+	           	    	
+		if((text != "<br>") && ($("#title_text").val() != ""))
+		{
+			var title = $('<input type="hidden" name="title">');
+			var contents = $('<input type="hidden" id="contents_hidden" name="contents">');
+		           		    	
+			form.append(title).append(contents);
+		           		   		
+			title.val($("#title_text").val());
+			contents.val(text);
+		           		               			    
+			form.submit();
+		}
+		else
+		{
+			alert("작성 내용을 확인하세요.");
+		}
+	});
+</script>
+</c:if>
 </html>

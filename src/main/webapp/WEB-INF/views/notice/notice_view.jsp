@@ -36,10 +36,29 @@
 		border-bottom: 1px solid bisque;
 	}
 
+	#notice_link
+	{
+		color: #EC7357 !important;
+		font-weight: 600 !important;
+	}
+	
+	#write_btn, .my_navi_btns
+	{
+		background-color: #EC7357 !important;
+	}
+	#write_btn:hover, .my_navi_btns:hover
+	{
+		background-color: black !important;
+	}
+	.selected_btn
+	{
+		background-color: black !important;
+	}
+	
 </style>
 
 </head>
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
@@ -93,77 +112,6 @@
 <script>
 	$(function()
     {
-		$.ajax
-    	({
-    		url: "notice-view-do",
-    		type: "POST",
-    		dataType: "JSON",
-    		data:
-    		{
-    			page: '1'
-    		}
-    	})
-    	
-    	.done(function(response)
-    	{
-    		var array = response.array;
-// 	    	console.log(response);
-    		
-			for(var i = 1 ; i <= array.length ; i++)
-	    	{
-				var $row = $('<div class="row justify-content-center tb-border my-1"></div>');
-				var $seqCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1">'+array[i-1].seq+'</div>');
-	    		var $titleCol = $('<div class="col-6 col-md-6 col-lg-6 text-center my-1"><a href=notice-detail-page?seq='+array[i-1].seq+'>'+array[i-1].title+'</a></div>');
-	    		var $writeTimeCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1">'+array[i-1].write_time+'</div>');
-	    		var $viewCountCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1">'+array[i-1].view_count+'</div>');
-	    		$row.append($seqCol).append($titleCol).append($writeTimeCol).append($viewCountCol);
-	    		$("#contents_div").append($row);
-	    	}
-    		
-//     		console.log(response.currentPage);
-//     		console.log(response.needPrev);
-//     		console.log(response.needNext);
-//     		console.log(response.startNavi);
-//     		console.log(response.endNavi);
-    		
-    		var $naviRow = $('<div id="navi_row" class="row justify-content-center my-5"></div>');
-    		
-    		if(response.needPrev)
-    		{
-    			var $prevBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="이전" name="'+(response.startNavi-1)+'">');
-    			$naviRow.append($prevBtn);
-    		}
-    		
-    		for(var i = response.startNavi ; i <= response.endNavi ; i++)
-    		{
-    			
-    			if(i == response.currentPage)
-    			{
-	    			var $naviBtn = $('<input class="btn btn-danger selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
-
-    			}
-    			else
-    			{
-	    			var $naviBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
-
-    			}
-    			$naviRow.append($naviBtn);
-    		}
-    		
-    		if(response.needNext)
-    		{
-    			var $nextBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="이후" name="'+(response.endNavi+1)+'">');
-    			$naviRow.append($nextBtn);
-    		}
-    		
-    		$("#contents_div").append($naviRow);
-    		
-    	})
-    	.fail(function()
-    	{
-    		alert("error");
-    	});
-		
 		$(document).on("click", ".navi_btns", function()
 		{
 			$.ajax
@@ -176,30 +124,22 @@
 	    			page: this.name
 	    		}
 	    	})
-	    	
 	    	.done(function(response)
 	    	{
 	    		$("#contents_div").empty();
 	    		
 	    		var array = response.array;
-//	 	    	console.log(response);
 	    		
 	    		for(var i = 1 ; i <= array.length ; i++)
 	    		{
 					var $row = $('<div class="row justify-content-center my-1"></div>');
 					var $seqCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1">'+array[i-1].seq+'</div>');
-	    			var $titleCol = $('<div class="col-6 col-md-6 col-lg-6 text-center my-1">'+array[i-1].title+'</div>');
+					var $titleCol = $('<div class="col-6 col-md-6 col-lg-6 text-center my-1"><a href=notice-detail-page?seq='+array[i-1].seq+'>'+array[i-1].title+'</a></div>');
 	    			var $writeTimeCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1">'+array[i-1].write_time+'</div>');
 	    			var $viewCountCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1">'+array[i-1].view_count+'</div>');
 	    			$row.append($seqCol).append($titleCol).append($writeTimeCol).append($viewCountCol);
 	    			$("#contents_div").append($row);
 	    		}
-	    		
-//	     		console.log(response.currentPage);
-//	     		console.log(response.needPrev);
-//	     		console.log(response.needNext);
-//	     		console.log(response.startNavi);
-//	     		console.log(response.endNavi);
 	    		
 	    		var $naviRow = $('<div id="navi_row" class="row justify-content-center my-5"></div>');
 	    		
@@ -245,11 +185,80 @@
 			location.href = "notice-write-page";
 		});
 		
+		
     });
     
     onload = function()
     {
 		
     };
+</script>
+<script>
+	$(function()
+    {
+		$.ajax
+    	({
+    		url: "notice-view-do",
+    		type: "POST",
+    		dataType: "JSON",
+    		data:
+    		{
+    			page: '1'
+    		}
+    	})
+    	.done(function(response)
+    	{
+    		var array = response.array;
+    		
+			for(var i = 1 ; i <= array.length ; i++)
+	    	{
+				var $row = $('<div class="row justify-content-center tb-border my-1"></div>');
+				var $seqCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1">'+array[i-1].seq+'</div>');
+	    		var $titleCol = $('<div class="col-6 col-md-6 col-lg-6 text-center my-1"><a href=notice-detail-page?seq='+array[i-1].seq+'>'+array[i-1].title+'</a></div>');
+	    		var $writeTimeCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1">'+array[i-1].write_time+'</div>');
+	    		var $viewCountCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1">'+array[i-1].view_count+'</div>');
+	    		$row.append($seqCol).append($titleCol).append($writeTimeCol).append($viewCountCol);
+	    		$("#contents_div").append($row);
+	    	}
+    		
+    		var $naviRow = $('<div id="navi_row" class="row justify-content-center my-5"></div>');
+    		
+    		if(response.needPrev)
+    		{
+    			var $prevBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="이전" name="'+(response.startNavi-1)+'">');
+    			$naviRow.append($prevBtn);
+    		}
+    		
+    		for(var i = response.startNavi ; i <= response.endNavi ; i++)
+    		{
+    			
+    			if(i == response.currentPage)
+    			{
+	    			var $naviBtn = $('<input class="btn btn-danger selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+
+    			}
+    			else
+    			{
+	    			var $naviBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+
+    			}
+    			$naviRow.append($naviBtn);
+    		}
+    		
+    		if(response.needNext)
+    		{
+    			var $nextBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="이후" name="'+(response.endNavi+1)+'">');
+    			$naviRow.append($nextBtn);
+    		}
+    		
+    		$("#contents_div").append($naviRow);
+    		
+    	})
+    	.fail(function()
+    	{
+    		alert("error");
+    	});
+		
+    });
 </script>
 </html>
