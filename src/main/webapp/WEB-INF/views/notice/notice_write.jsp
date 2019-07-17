@@ -36,7 +36,7 @@
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
-	<jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
+<%-- 	<jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include> --%>
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 
 
@@ -146,34 +146,22 @@
 		
 		function sendFile(file, editor)
 	    {
-		    var data = new FormData();
-		    
-		    data.append('file', file);
-		    
-		    $.ajax(
-		    {
-		        data : data,
-		        
-		        type : "POST",
-		        
-		        url : 'upload.notice',
-		        
-		        cache : false,
-		        
-		        contentType : false,
-		        
-		        enctype : 'multipart/form-data',
-		        
-		        processData : false
-		    
-		    }).done(function(data)
-		    {
-			    $(editor).summernote('editor.insertImage', "files/" + data);
-			    
-		    }).fail(function(data)
-		    {
-			    alert("error");
-		    });
+			var data = new FormData(); // <form></form>
+			data.append("image", file); // <form><input type="file"></form>
+			$.ajax
+			({
+				url : "notice-write-image",
+				data : data,
+				type : "POST",
+				cache : false,
+				contentType : false,
+				enctype : "multipart/form-data",
+				processData : false
+			})
+			.done(function(resp) 
+			{
+				$(".note-editable").append("<img src='"+resp+"'>");
+			})
 		    
 	    }
 		

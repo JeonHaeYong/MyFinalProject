@@ -59,7 +59,11 @@
 				<div id="contents_div" class="col-12 col-md-12 col-lg-12 text-center my-5">
 					
 				</div>
-
+				
+				<div class="col-12 col-md-12 col-lg-12 text-right my-1">
+					<input id="write_btn" class="btn btn-danger mx-1" type="button" value="글 작성">
+				</div>
+				
 				<div class="col-12 col-md-12 col-lg-12 text-center my-5">
 					<a href="notice-write-random">데이터 삽입</a>
 				</div>
@@ -236,6 +240,10 @@
 	    	});
 		});
 		
+		$("#write_btn").on("click", function()
+		{
+			location.href = "notice-write-page";
+		});
 		
     });
     
