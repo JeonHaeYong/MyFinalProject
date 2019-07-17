@@ -29,7 +29,17 @@
 		color: #EC7357 !important;
 		font-weight: 600 !important;
 	}
+	
+	#back_btn, #update_btn, #delete_btn
+	{
+		background-color: #EC7357 !important;
+	}
+	#back_btn:hover, #update_btn:hover, #delete_btn:hover
+	{
+		background-color: black !important;
+	}
 
+	
 </style>
 
 </head>

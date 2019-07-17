@@ -28,6 +28,16 @@
 	color: #EC7357 !important;
 	font-weight: 600 !important;
 }
+
+#donation_btn
+{
+	background-color: #EC7357 !important;
+}
+
+#donation_btn:hover
+{
+	background-color: black !important;
+}
 </style>
 
 </head>
@@ -102,7 +112,7 @@
 				
 					<div class="col-12 text-center">
 					
-						<input class="btn btn-info mt-5" type="button" value="후원">
+						<input id="donation_btn" class="btn btn-info mt-5" type="button" value="후원">
 						
 					</div>
 				
