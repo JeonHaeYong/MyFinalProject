@@ -145,7 +145,7 @@
 				</div>
 				<div class="form-row">
 					<div class="col-6 form-group">
-						<input type="button" class="btn btn-primary m-auto p-auto form-control" id="toMyPage_buyList" value="구매내역 확인">
+						<input type="button" class="btn btn-primary m-auto p-auto form-control" id="goBuyList" value="구매내역 확인">
 					</div>
 					<div class="col-6 form-group">
 						<input type="button" class="btn btn-primary m-auto p-auto form-control" id="goFreemarket" value="무료나눔 목록">

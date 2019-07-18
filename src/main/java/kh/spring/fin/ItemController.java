@@ -20,19 +20,29 @@ public class ItemController {
 	private ItemService is;
 
 	@RequestMapping("freeMarket")
-	public String freeMarket(HttpServletRequest request, int currentPage, String category) {
-		if(category.equals("all")) {
-			request.setAttribute("itemList", is.selectItemPerPage(currentPage));
-		}else {
-			request.setAttribute("itemList", is.selectItemPerPageByCategory(currentPage, category));
+	public String freeMarket(HttpServletRequest request, String currentPage, String category) {
+		if(currentPage == null) {
+			currentPage = "1";
 		}
-		request.setAttribute("pageNavi", is.getNaviforItem(currentPage, category));
+		if(category == null || category.equals("all")) {
+			category = "all";
+			request.setAttribute("itemList", is.selectItemPerPage(Integer.parseInt(currentPage)));
+		}else {
+			request.setAttribute("itemList", is.selectItemPerPageByCategory(Integer.parseInt(currentPage), category));
+		}
+		request.setAttribute("pageNavi", is.getNaviforItem(Integer.parseInt(currentPage), category));
 		request.setAttribute("category", category);
 		return "item/freeMarket";
 	}
 
 	@RequestMapping("item")
-	public String readOneItem(HttpServletRequest request, int currentPage, String category, int seq) {
+	public String readOneItem(HttpServletRequest request, String currentPage, String category, int seq) {
+		if(currentPage == null) {
+			currentPage = "1";
+		}
+		if(category == null) {
+			category = "all";
+		}
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("category", category);
 		request.setAttribute("item", is.readOneItem(seq));

@@ -52,6 +52,24 @@
                     width: 100%;
                     max-height: 600px;
                 }
+                #cart_wrapper{
+                	color: #754F44;
+                }
+                .itemName{
+                	text-decoration: none;
+                }
+                .itemName:hover{
+                	font-weight: bold;
+                }
+                .navi{
+                	color: #754F44;
+                	text-decoration: none;
+                	margin: 0px 5px;
+/*                 	font-family:  */
+                }
+                .navi:hover{
+                	font-weight: bold;
+                }
             </style>
             <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
         </head>
@@ -67,18 +85,15 @@
                                 <div class="tab-pane fade show active" id="pills-profile">
                                     <div id="cart_wrapper">
                                         <div class="row border-bottom border-success">
-                                            <div class="col-12"> </div>
+                                            <div class="col-5">상품명</div>
+                                            <div class="col-2">금액</div>
+                                            <div class="col-3">구매일</div>
+                                            <div class="col-2">판매자</div>
                                         </div>
                                         <div class="row buyList_contents">
-                                        	<div class="col-12 row mb-3">
-                                                <div class="col-5">상품명</div>
-                                                <div class="col-2">금액</div>
-                                                <div class="col-3">구매일</div>
-                                                <div class="col-2">판매자</div>
-                                            </div>
                                         	<c:forEach var="dto" items="${buyList }">
 	                                            <div class="col-12 row mb-2">
-                                                    <div class="col-5">${dto.item_name}</div>
+                                                    <div class="col-5"><a class="itemName" href="item?seq=${dto.item_seq }">${dto.item_name}</a></div>
                                                     <div class="col-2">${dto.item_price }</div>
                                                     <div class="col-3">${dto.pay_date }</div>
                                                     <div class="col-2">${dto.seller }</div>
@@ -88,19 +103,19 @@
                                         <div class="row">
 											<div class="col-12 d-flex justify-content-center" id="naviBox">
 												<c:if test="${pageNavi.needPrev == 1 }">
-													<a class="" href="toMyPage_buyList?currentPage=${pageNavi.startNavi - 1}">&laquo;</a>
+													<a class="navi" href="toMyPage_buyList?currentPage=${pageNavi.startNavi - 1}">&laquo;</a>
 												</c:if>
 												<c:if test="${pageNavi.currentPage > pageNavi.startNavi }">
-													<a class="" href="toMyPage_buyList?currentPage=${pageNavi.currentPage - 1}">&lt;</a>
+													<a class="navi" href="toMyPage_buyList?currentPage=${pageNavi.currentPage - 1}">&lt;</a>
 												</c:if>
 												<c:forEach var="i" begin="${pageNavi.startNavi}" end="${pageNavi.endNavi}">
-													<a class="" href="toMyPage_buyList?currentPage=${i }" class="pageNum">${i}</a>
+													<a class="navi" href="toMyPage_buyList?currentPage=${i }" class="pageNum">${i}</a>
 												</c:forEach>
 												<c:if test="${pageNavi.currentPage < pageNavi.pageTotalCount }">
-													<a class="" href="toMyPage_buyList?currentPage=${pageNavi.currentPage + 1}">&gt;</a>
+													<a class="navi" href="toMyPage_buyList?currentPage=${pageNavi.currentPage + 1}">&gt;</a>
 												</c:if>
 												<c:if test="${pageNavi.needNext == 1 }">
-													<a class="" href="toMyPage_buyList?currentPage=${pageNavi.endNavi + 1}">&raquo;</a>
+													<a class="navi" href="toMyPage_buyList?currentPage=${pageNavi.endNavi + 1}">&raquo;</a>
 												</c:if>
 											</div>
 										</div>
@@ -124,7 +139,13 @@
         <script src="resources/js/jquery.fancybox.min.js"></script>
         <script src="resources/js/jquery.sticky.js"></script>
         <script src="resources/js/isotope.pkgd.min.js"></script>
-
-
         <script src="resources/js/main.js"></script>
+        <script>
+        	$(".navi").each(function(i, item){
+        		if($(item).text() == ${pageNavi.currentPage}){
+        			$(item).css("color", "#EC7357");
+        		}
+        	});
+        </script>
+        
     </html>

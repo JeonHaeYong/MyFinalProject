@@ -48,10 +48,11 @@ public class PaymentServiceImpl implements PaymentService {
 			pdto.setItem_seq(idto.getSeq());
 			pdto.setItem_name(idto.getName());
 			pdto.setSeller(idto.getSeller());
-			msg = pdto.getItem_name() + " 상품이 결제 완료되었습니다.\n구매자에게 무료나눔 물품을 전달해주세요.\n"
+			msg = "\"" + pdto.getItem_name() + "\" 상품이 결제 완료되었습니다.\n구매자에게 무료나눔 물품을 전달해주세요.\n\n"
 					+ "< 구매자 정보 >\n"
 					+ "ID: " + pdto.getBuyer() + "\n"
 					+ "EMAIL: " + pdto.getEmail() + "\n"
+					+ "PHONE: " + pdto.getPhone() + "\n"
 					+ "NAME: " + pdto.getName() + "\n"
 					+ "ADDRESS: " + pdto.getZipcode() + "\n\t"
 					+ pdto.getAddress1() + "\n\t" + pdto.getAddress2();

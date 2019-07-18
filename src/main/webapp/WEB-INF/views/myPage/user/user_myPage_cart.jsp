@@ -187,7 +187,6 @@
         	});
         	
         	$("#delBtn").on("click", function(){
-        		console.log(count);
         		if($(".itemCheck").length == 0 || count == 0){
         			alert("삭제할 상품이 없습니다. 다시 선택해주세요.");
         		}else{
@@ -199,9 +198,6 @@
             				index++;
             			}
             		});
-        			for(var i = 0; i < checkedItem.length; i++){
-        				alert(checkedItem[i]);
-        			}
         			jQuery.ajaxSettings.traditional = true; 
         			$.ajax({
             			url: "deleteCart",

@@ -52,6 +52,13 @@
             	display: inline-block;
             	width: 80%;
             }
+            #soldout{
+            	color: white;
+            	background-color: #bf5e47;
+            }
+            #soldout:hover{
+            	
+            }
             .cartBtn{
 				background-color: #ec7357;
 				color: white;
@@ -138,7 +145,14 @@
 	                		<p><span class="column">Date</span><span class="cell">${item.fomredDate }</span></p>
 	                	</div>
 	                	<div class="col-12 align-self-center text-center">
-	                		<a class="btn cartBtn" id="addCart" href="">장바구니 담기</a>
+	                		<c:choose>
+	                			<c:when test="${item.soldout == 'y' }">
+	                				<a class="btn cartBtn" id="soldout" disabled>판매완료 상품</a>
+	                			</c:when>
+	                			<c:otherwise>
+	                				<a class="btn cartBtn" id="addCart" href="">장바구니 담기</a>
+	                			</c:otherwise>
+	                		</c:choose>
 	                		<a class="btn cartBtn" id="goCart" href="">장바구니 가기</a>
 	                	</div>
                 	</div>
