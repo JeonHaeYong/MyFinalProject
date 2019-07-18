@@ -61,6 +61,12 @@
 	color: #EC7357 !important;
 	font-weight: 600 !important;
 }
+#search_result_div > .id_row > div
+{
+	border-top: 1px solid gray !important;
+	border-bottom: 1px solid gray !important;
+}
+
 </style>
 
 </head>
@@ -95,7 +101,7 @@
 				</div>
 				
 				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="#" class="btn btn-danger my_buttons">월 별 후원금 및 전달 기관</a>
+					<a href="admin-donation" class="btn btn-danger my_buttons">월 별 후원금 및 전달 기관</a>
 				</div>
 				
 				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
@@ -232,7 +238,7 @@
 	    		for(var i = 1 ; i <= array.length ; i++)
 	    		{
 // 	    			console.log(response[i-1].id);
-					var $row = $('<div class="row justify-content-center my-1"></div>');
+					var $row = $('<div class="row justify-content-center my-1 id_row"></div>');
 	    			var $idCol = $('<div class="col-6 col-md-6 col-lg-4 text-center my-1">'+array[i-1].id+'</div>');
 	    			var $statusCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].status+'</div>');
 	    			var $checkCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1"><input class="black_check" name="'+array[i-1].id+'" type="checkbox">'+'블랙리스트 등록'+'</div>');
@@ -246,7 +252,7 @@
 	    		console.log(response.startNavi);
 	    		console.log(response.endNavi);
 	    		
-	    		var $naviRow = $('<div id="navi_row" class="row justify-content-center my-1"></div>');
+	    		var $naviRow = $('<div id="navi_row" class="row justify-content-center mb-1 mt-3"></div>');
 	    		
 	    		if(response.needPrev)
 	    		{
@@ -309,7 +315,7 @@
 	    		for(var i = 1 ; i <= array.length ; i++)
 	    		{
 // 	    			console.log(response[i-1].id);
-					var $row = $('<div class="row justify-content-center my-1"></div>');
+					var $row = $('<div class="row justify-content-center my-1 id_row"></div>');
 	    			var $idCol = $('<div class="col-6 col-md-6 col-lg-4 text-center my-1">'+array[i-1].id+'</div>');
 	    			var $statusCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].status+'</div>');
 	    			var $checkCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1"><input class="black_check" name="'+array[i-1].id+'" type="checkbox">'+'블랙리스트 등록'+'</div>');
@@ -323,7 +329,7 @@
 	    		console.log(response.startNavi);
 	    		console.log(response.endNavi);
 	    		
-				var $naviRow = $('<div id="navi_row" class="row justify-content-center my-1"></div>');
+				var $naviRow = $('<div id="navi_row" class="row justify-content-center mb-1 mt-3"></div>');
 	    		
 	    		if(response.needPrev)
 	    		{

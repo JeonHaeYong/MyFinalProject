@@ -35,6 +35,7 @@ public class AdminController
 	@Autowired
 	ChartServiceImpl chartService;
 	
+	//Member Start
 	@RequestMapping(value = "admin-member")
 	public String manageMemberPage()
 	{
@@ -106,7 +107,11 @@ public class AdminController
 		
 		return result;
 	}
+	//Member End
 	
+	
+	
+	//Chart Start
 	@RequestMapping(value = "admin-chart")
 	public String chartPage()
 	{
@@ -144,6 +149,20 @@ public class AdminController
 		
 		return result;
 	}
+	//Chart End
+	
+	
+	
+	//Donation Start
+	@RequestMapping(value = "admin-donation")
+	public String donationPage()
+	{
+		return "myPage/admin/admin_donation";
+	}
+	//Donation End
+	
+	
+	
 	//퀴즈 관리자 -------------------------------------------------------------------------------------------
 	@RequestMapping("quizAdmin.admin")
 	public String quizAdmin(HttpServletRequest request) {

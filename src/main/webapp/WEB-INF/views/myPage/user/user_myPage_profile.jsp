@@ -143,11 +143,11 @@
                             <div class="col-sm-10 gender_radio hide form-control-plaintext">
                                 <div class="modify_info_input">
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="customRadioInline1" name="gender" class="custom-control-input" value="F">
+                                        <input type="radio" id="customRadioInline1" name="gender" class="custom-control-input gender_radio_input" value="F">
                                         <label class="custom-control-label" for="customRadioInline1">여자</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="customRadioInline2" name="gender" class="custom-control-input" value="M">
+                                        <input type="radio" id="customRadioInline2" name="gender" class="custom-control-input gender_radio_input" value="M">
                                         <label class="custom-control-label" for="customRadioInline2">남자</label>
                                     </div>
                                 </div>
@@ -214,6 +214,11 @@
             var PwInputCount = 0;//pw변경시 현재비밀번호 틀리는 숫자 카운트
             $(".modify_bot_part.hide").hide();
             $(".gender_radio.hide").hide();
+            $(".gender_radio_input").each(function(i,item){
+            	if($("#my_gender").val()==$(item).val()){
+            		$(item).prop("checked",true);
+            	}
+            });
             $("#change_pw_btn").on("click",function(){
                 var currPw = $("#currPw").val();
                 var pw1 = $("#changePw1").val();
