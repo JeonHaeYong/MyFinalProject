@@ -12,4 +12,6 @@ public interface DonationService
 	
 	public Object selectDTO() throws Exception;
 	
+	public Object changeImage(MultipartFile left, MultipartFile right) throws Exception;
+	
 }

@@ -178,14 +178,23 @@ public class AdminController
 		
 		return result;
 	}
-	public Object changeLeftImage(MultipartFile left)
+	@RequestMapping(value = "admin-donation-image", method = RequestMethod.POST)
+	public Object changeLeftImage(MultipartFile left, MultipartFile right)
 	{
-		return "";
+		Object result = "error";
+		
+		try
+		{
+			result = donationService.changeImage(left, right);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
-	public Object changeRightImage(MultipartFile right)
-	{
-		return "";
-	}
+	
 	//Donation End
 	
 	

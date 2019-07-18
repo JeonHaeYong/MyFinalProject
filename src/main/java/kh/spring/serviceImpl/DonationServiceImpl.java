@@ -55,26 +55,40 @@ public class DonationServiceImpl implements DonationService
 			folder.mkdirs();
 		}
 		
+		String insertPath1 = "없음";
+		String insertPath2 = "없음";
+		String insertPath3 = "없음";
+		
 //		logger.info("resource path : {}", resourcePath);
+		long currTime = 0;
 		
-		long currTime = System.currentTimeMillis();
-		String filePath1 = resourcePath + "/donation/"+ currTime +".jpg";
-		image1.transferTo(new File(filePath1));
-		String insertPath1 = "resources/donation/"+ currTime +".jpg";
-		
-		Thread.sleep(10);
-		
-		currTime = System.currentTimeMillis();
-		String filePath2 = resourcePath + "/donation/"+ currTime +".jpg";
-		image2.transferTo(new File(filePath2));
-		String insertPath2 = "resources/donation/"+ currTime +".jpg";
+		if(image1.getSize() != 0)
+		{
+			currTime = System.currentTimeMillis();
+			String filePath1 = resourcePath + "/donation/donation1.jpg";
+			image1.transferTo(new File(filePath1));
+			insertPath1 = "resources/donation/donation1.jpg";
+		}
 		
 		Thread.sleep(10);
 		
-		currTime = System.currentTimeMillis();
-		String filePath3 = resourcePath + "/donation/"+ currTime +".jpg";
-		image3.transferTo(new File(filePath3));
-		String insertPath3 = "resources/donation/"+ currTime +".jpg";
+		if(image2.getSize() != 0)
+		{
+			currTime = System.currentTimeMillis();
+			String filePath2 = resourcePath + "/donation/donation2.jpg";
+			image2.transferTo(new File(filePath2));
+			insertPath2 = "resources/donation/donation2.jpg";
+		}
+		
+		Thread.sleep(10);
+		
+		if(image3.getSize() != 0)
+		{
+			currTime = System.currentTimeMillis();
+			String filePath3 = resourcePath + "/donation/donation3.jpg";
+			image3.transferTo(new File(filePath3));
+			insertPath3 = "resources/donation/donation3.jpg";
+		}
 		
 		logger.info("name : {}", name);
 		logger.info("title : {}", title);
@@ -119,6 +133,34 @@ public class DonationServiceImpl implements DonationService
 		
 		return mav;
 	}
+
+	@Override
+	public Object changeImage(MultipartFile left, MultipartFile right) throws Exception
+	{
+		String resourcePath = session.getServletContext().getRealPath("/resources");
+		
+		File folder = new File(resourcePath + "/donation");
+		
+		if(!(folder.exists()))
+		{
+			folder.mkdirs();
+		}
+		
+		
+		if(left != null)
+		{
+			String filePath = resourcePath + "/donation/left.jpg";
+			left.transferTo(new File(filePath));
+		}
+		if(right != null)
+		{
+			String filePath = resourcePath + "/donation/right.jpg";
+			right.transferTo(new File(filePath));
+		}
+		
+		return "redirect: admin-donation";
+	}
+
 	
 	
 	

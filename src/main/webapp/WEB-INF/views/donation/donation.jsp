@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -61,19 +62,38 @@
 
 
 						<div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
-							<div class="carousel-inner">
-								<div class="carousel-item active" data-interval="3000">
-									<img src="${dto.image1}" class="d-block w-100" alt="...">
-								</div>
-								<div class="carousel-item" data-interval="3000">
-									<img src="${dto.image2}" class="d-block w-100" alt="...">
-								</div>
-								<div class="carousel-item" data-interval="3000">
-									<img src="${dto.image3}" class="d-block w-100" alt="...">
-								</div>
+							<div id="carousel-inner" class="carousel-inner">
+								
+								<c:if test="${dto.image1 != '없음'}">
+									<div class="carousel-item" data-interval="3000">
+										<img src="${dto.image1}" class="d-block w-100" alt="...">
+									</div>
+								</c:if>
+								
+								<c:if test="${dto.image2 != '없음'}">
+									<div class="carousel-item" data-interval="3000">
+										<img src="${dto.image2}" class="d-block w-100" alt="...">
+									</div>
+								</c:if>
+								
+								<c:if test="${dto.image3 != '없음'}">
+									<div class="carousel-item" data-interval="3000">
+										<img src="${dto.image3}" class="d-block w-100" alt="...">
+									</div>
+								</c:if>
+								
+								<c:if test="${ ((dto.image1 == '없음') && (dto.image2 == '없음')) && (dto.image3 == '없음') }">
+									<div class="carousel-item" data-interval="3000">
+										<img src="resources/images/dog_1.jpg" class="d-block w-100" alt="...">
+									</div>
+								</c:if>
+								
 							</div>
-							<a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span>
-							</a> <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span>
+							<a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev"> 
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span>
+							</a> 
+							<a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next"> 
+								<span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span>
 							</a>
 						</div>
 
@@ -167,6 +187,9 @@
 <script>
 	$(function()
     {
+		
+		$("#carousel-inner div:first-child").addClass("active");
+		
 		var time = "${dto.enddate}";
 		var forTime = time.substring(5, 7)+"/"+time.substring(8, 10)+"/"+time.substring(0, 4);
 		
@@ -211,6 +234,12 @@
 		    timer = setInterval(showRemaining, 1000);
 	    }
 	    // Source: stackoverflow
+	   
+	    
+	    $("img").on("error", function()
+		{
+	    	$(this).attr("src","resources/images/dog_1.jpg");
+		});
 	    
     });
     

@@ -256,15 +256,54 @@
 			 
 			
 			<div class="row justify-content-center">
-				
+
 				<div class="col-12 col-md-12 col-lg-12 text-center my-5">
+				
+					<div class="row justify-content-center">
 						
-					<input id="search_btn" class="btn btn-warning" type="button" value="후원 업체 조회">
+						<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+								
+							<label>좌측 사진</label>
+								
+						</div>
+								
+						<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+								
+							<input id="left_file" class="form-control" name="left" type="file">
+								
+						</div>
+								
+					</div>
+					
+					<div class="row justify-content-center">
+								
+						<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+								
+							<label>우측 사진</label>
+								
+						</div>
+								
+						<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+								
+							<input id="right_file" class="form-control" name="right" type="file">
+								
+						</div>
+								
+					</div>
+					
+					<div class="row justify-content-center">
 						
+						<div class="col-12 col-md-12 col-lg-12 text-center my-5">
+						
+							<input id="image_change_btn" class="btn btn-warning" type="button" value="사진 변경">
+						
+						</div>
+						
+					</div>
+				
 				</div>
 				
 			</div>
-			
 			
 			
 			
@@ -323,6 +362,14 @@
 			var $image1 = $("#image1_file");
 			var $image2 = $("#image2_file");
 			var $image3 = $("#image3_file");
+			
+// 			var check = true;
+// 			while(check)
+// 			{
+// 				if(($image1.val() == "") && ($image2.val() != ""))
+// 				{
+// 				}
+// 			}
 	        
 	        var $goalmoney = $('<input type="hidden" name="goalmoney">');
 	        $goalmoney.val($("#goalmoney_text").val());
@@ -338,6 +385,39 @@
 	        .append($goalmoney).append($startdate).append($enddate);
 	        $form.submit();
 		});
+	    
+	    
+	    $("#image_change_btn").on("click", function()
+		{
+	    	var leftValue = $("#left_file").val();
+	    	var rightValue = $("#right_file").val();
+	    	
+	    	var $form = $('<form></form>');
+	        $form.attr('action', 'admin-donation-image');
+	        $form.attr('method', 'POST');
+	        $form.attr('enctype', 'multipart/form-data');
+	        $form.appendTo('body');
+	        
+	        if((leftValue != "") && (rightValue == ""))
+	        {
+	        	$form.append("#left_file");
+	        }
+	        else if((leftValue == "") && (rightValue != ""))
+	        {
+	        	$form.append($("#right_file"));
+	        }
+	        else if((leftValue != "") && (rightValue != ""))
+	        {
+	        	$form.append($("#left_file")).append($("#right_file"));
+	        }
+	        
+	        if((leftValue != "") || (rightValue != ""))
+	        {
+	        	$form.submit();
+	        }
+		});
+	    
+	    
     });
     
     onload = function()
