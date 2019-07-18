@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="NoticeDAO">
+
+	<insert id="insert">
+		INSERT INTO NOTICE VALUES (NOTICE_SEQ.NEXTVAL, #{title}, #{contents}, default, default)
+	</insert>
+	
+	<select id="selectForPage" resultType="kh.spring.dto.NoticeDTO">
+		select * 
+		from 
+		    (select row_number() over(order by seq desc) as rown, notice.* from notice) 
+		where rown 
+		    between #{array[0]} and #{array[1]}
+	</select>
+	
+	<select id="selectCountAll" resultType="java.lang.Integer">
+		select count(*) from notice
+	</select>
+	
+	<select id="selectDTO" resultType="kh.spring.dto.NoticeDTO">
+		select * from  notice where seq = #{seq}
+	</select>
+	
+	<update id="viewCountPlus">
+		update notice set view_count = view_count + 1 where seq = #{seq}
+	</update>
+	
+	<update id="updateTitleBySeq">
+		update notice set title = #{title} where seq = #{seq}
+	</update>
+	
+	<update id="updateContentsBySeq">
+		update notice set contents = #{contents} where seq = #{seq}
+	</update>
+	
+	<update id="updateWriteTimeBySeq">
+		update notice set write_time = sysdate where seq = #{seq}
+	</update>
+	
+	<delete id="deleteBySeq">
+		delete from notice where seq = #{seq}
+	</delete>
+	
+</mapper>

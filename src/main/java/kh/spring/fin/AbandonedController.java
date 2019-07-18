@@ -67,7 +67,12 @@ public class AbandonedController {
 		}
 		return null;
 	}
-
+	
+	@RequestMapping("toAbandoned")
+	public String abandoned() {
+		return "abandoned";
+	}
+	
 	@RequestMapping("select")
 	public String select(HttpServletRequest request, int currentPage, String from, String to, String species, String speciesKind, String sido, String sigungu, String shelter) {
 		System.out.println(currentPage);

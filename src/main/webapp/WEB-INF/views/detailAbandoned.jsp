@@ -83,7 +83,7 @@
 			</div>
 			<div class="col-lg-8 col-md-8 col-sm-12 col-12 row">
 				<div id="animalPhoto">
-					<img src="${dto.popfile }" style="height: 150px">
+					<img src="${dto.popfile }" style="width:200px; height: 150px">
 				</div>
 						
 				<table class="table">
@@ -94,7 +94,7 @@
 						</tr>
 						
 						<tr>
-							<th scope="row" style="width:20%">공고번호</th>
+							<th scope="row" style="width:18%">공고번호</th>
 							<td>${dto.noticeNo }</td>
 						</tr>
 						<tr>
@@ -142,9 +142,9 @@
 						</tr>
 						<tr>
 							<th scope="row">보호센터이름</th>
-							<td width="40%">${dto.careNm }</td>
-							<th width="20%" scope="row">전화번호</th>
-							<td width="20%">${dto.careTel }</td>
+							<td width="46%">${dto.careNm }</td>
+							<th width="18%" scope="row">전화번호</th>
+							<td width="18%">${dto.careTel }</td>
 						</tr>
 						<tr>
 							<th scope="row">보호장소</th>
@@ -172,7 +172,7 @@
 
 및 민법 제253조의 규정에 불구하고 해당 시,군,구자치구가 그 동물의 소유권을 취득하게 됩니다.
 <!-- 				<div style="text-align:center; margin:0 auto;"><a href="javascript:history.back();">목록</a></div> -->
-				<button type="button" id="btnList">목록</button>
+				<button type="button" onclick="goBack();">목록</button>
 			</div>
 
 		</div>
@@ -181,12 +181,15 @@
 		<!-- ----Footerë¶ë¶ìëë¤^_^---------------------------------------------------------------------------------------------------------- -->
 
 		<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
-</body>
-<script>
-	$("#btnList").on("click",function(){
-		location.href="javascript:history.back()";
-	})
+<script type="text/javascript">
+	function goBack(){
+		window.history.back();
+	}
+
+	
 </script>
+</body>
+
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="resources/js/jquery-ui.js"></script>

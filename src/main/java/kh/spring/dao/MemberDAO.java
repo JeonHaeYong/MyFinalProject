@@ -12,4 +12,14 @@ public interface MemberDAO {
 	public MemberDTO selectOneMember(String id);
 	public int modifyMember(MemberDTO dto);
 	public int deleteMember(String id);
+	public String testSHA256(String str);
+	public List<MemberDTO> selectByLikeId(String id, int pageStart, int pageEnd);
+	public int selectCountByLikeId(String id) throws Exception;
+	public List<MemberDTO> memberPoint();//퀴즈에서 씀
+	public int insertNaverJoin(MemberDTO dto); //네이버 로그인 시 자동가입으로 사용
+	public String findID(String name, String birthday);
+	public int updatePw(String id, String pw);
+	public MemberDTO selectOneMemberDTO_useMyPageAdvice(String id);
+	public int updateMemberInfoByMyPage(MemberDTO dto);
+
 }

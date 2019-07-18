@@ -179,6 +179,7 @@ sup { top: -.5em; }
 // Links
 //
 
+/*
 a {
   color: $link-color;
   text-decoration: $link-decoration;
@@ -189,6 +190,7 @@ a {
     text-decoration: $link-hover-decoration;
   }
 }
+*/
 
 // And undo these styles for placeholder links/named anchors (without href)
 // which have not been made explicitly keyboard-focusable (without tabindex).

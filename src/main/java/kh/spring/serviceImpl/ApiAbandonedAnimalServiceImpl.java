@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -46,7 +45,7 @@ public class ApiAbandonedAnimalServiceImpl implements ApiAbandonedAnimalService{
 	
 		return dto;
 	}
-	
+
 	public int deleteAll() {
 		int result = dao.deleteAll();
 		return result;

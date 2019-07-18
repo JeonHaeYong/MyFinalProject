@@ -46,8 +46,33 @@
 	background-color: #FDD69250;
 }
 
-.section>div:not(.addr){
-	line-height:50px;
+.section
+>
+div
+
+
+:not
+
+ 
+
+(
+.addr
+
+ 
+
+){
+line-height
+
+
+:
+
+ 
+
+50
+px
+
+
+;
 }
 .addr {
 	text-align: left;
@@ -87,9 +112,29 @@ a {
 a:hover {
 	color: #754F44;
 }
-/* .myCard{ */
-/* 	width:90%; */
-/* } */
+
+dt {
+	float: left;
+}
+
+.card-body {
+	height: 200px;
+	padding: 0px 0px;
+	margin-bottom: 20px;
+}
+
+.title {
+	width: 37%;
+	margin-bottom: 0px;
+}
+
+.content {
+	width: 57%;
+	margin-bottom: 0px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
 </style>
 
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
@@ -656,80 +701,85 @@ a:hover {
 				<!--메뉴바랑 리스트 사이 빈 공간-->
 			</div>
 
-
-
 			<div class="col-lg-8 col-md-8 col-sm-12 col-12 row">
+
 				<h2 style="font-color: black; text-align: center;">유기동물 조회</h2>
-				<div>「동물보호법」 제 17조 및 동법 시행규칙 제 7조에 따라 유기·유실동물을 보호하고 있는 경우에는
-					소유자 등이 보호조치 사실을 알 수 있도록 7일 동안 공고하여야 합니다. 공고중인 동물 소유자는 해당 시군구 및
-					동물보호센터에 문의하시어 동물을 찾아가시기 바랍니다. 다만, 「동물보호법」제19조 및 동법 시행규칙 제21조에 따라
-					소유자에게 보호비용이 청구될 수 있습니다. 또한 「동물보호법」제 17조에 따른 공고가 있는 날부터 10일이 경과하여도
-					소유자 등을 알 수 없는 경우에는 「유실물법」 제12조 및 「민법」제253조의 규정에도 불구하고 해당 시·도지사 또는
-					시장·군수·구청장이 그 동물의 소유권을 취득하게 됩니다.</div>
-				<form action="select" method="get">
-					날짜 <input id="from" type="date" name="from" required> ~ <input
-						id="to" type="date" name="to" required><br>
-					시도 <select id="sido_select" name="sido">
-						<option class="op_sido" value="0">전체</option>
-						<option class="op_sido" value="6110000">서울특별시</option>
-						<option class="op_sido" value="6260000">부산광역시</option>
-						<option class="op_sido" value="6270000">대구광역시</option>
-						<option class="op_sido" value="6280000">인천광역시</option>
-						<option class="op_sido" value="6290000">광주광역시</option>
-						<option class="op_sido" value="6300000">대전광역시</option>
-						<option class="op_sido" value="6310000">울산광역시</option>
-						<option class="op_sido" value="6410000">경기도</option>
-						<option class="op_sido" value="6420000">강원도</option>
-						<option class="op_sido" value="6430000">충청북도</option>
-						<option class="op_sido" value="6440000">충청남도</option>
-						<option class="op_sido" value="6450000">전라북도</option>
-						<option class="op_sido" value="6460000">전라남도</option>
-						<option class="op_sido" value="6470000">경상북도</option>
-						<option class="op_sido" value="6480000">경상남도</option>
-						<option class="op_sido" value="6500000">제주특별자치도</option>
-					</select>
-					시군구 <select id="sigungu_select" name="sigungu">
-						<option class="op_sigungu" value="0">전체</option>
-					</select>
-					보호센터 <select id="shelter_select" name="shelter">
-						<option value="0">전체</option>
-					</select>
-					품종 <select id="species_select" name="species">
-						<option class="op_species" value="0">전체</option>
-						<option class="op_species" value="417000">개</option>
-						<option class="op_species" value="422400">고양이</option>
-						<option class="op_species" value="429900">기타</option>
-					</select> <select id="kind_select" name="speciesKind">
-						<option class="op_kind" value="0">선택</option>
-					</select> <input type="hidden" name="currentPage" value=1> <input
-						id="btnSelect" type="button" value="조회">
-					<!-- 						<input id="btnSearch" type="submit" value="insert"> -->
-				</form>
+				<div>
+					**이 페이지에서 조회되는 유기동물 자료는 동물보호관리시스템에서 제공하는 OpenAPI 공공데이터입니다.<br>
+					「동물보호법」 제 17조 및 동법 시행규칙 제 7조에 따라 유기·유실동물을 보호하고 있는 경우에는 소유자 등이 보호조치
+					사실을 알 수 있도록 7일 동안 공고하여야 합니다. 공고중인 동물 소유자는 해당 시군구 및 동물보호센터에 문의하시어
+					동물을 찾아가시기 바랍니다. 다만, 「동물보호법」제19조 및 동법 시행규칙 제21조에 따라 소유자에게 보호비용이 청구될
+					수 있습니다. 또한 「동물보호법」제 17조에 따른 공고가 있는 날부터 10일이 경과하여도 소유자 등을 알 수 없는
+					경우에는 「유실물법」 제12조 및 「민법」제253조의 규정에도 불구하고 해당 시·도지사 또는 시장·군수·구청장이 그
+					동물의 소유권을 취득하게 됩니다.
+				</div>
+				<div id="formWrapper">
+					<form action="select" method="get">
+						날짜 <input id="from" type="date" name="from" required> ~ <input
+							id="to" type="date" name="to" required><br> 시도 <select
+							id="sido_select" name="sido">
+							<option class="op_sido" value="0">전체</option>
+							<option class="op_sido" value="6110000">서울특별시</option>
+							<option class="op_sido" value="6260000">부산광역시</option>
+							<option class="op_sido" value="6270000">대구광역시</option>
+							<option class="op_sido" value="6280000">인천광역시</option>
+							<option class="op_sido" value="6290000">광주광역시</option>
+							<option class="op_sido" value="6300000">대전광역시</option>
+							<option class="op_sido" value="6310000">울산광역시</option>
+							<option class="op_sido" value="6410000">경기도</option>
+							<option class="op_sido" value="6420000">강원도</option>
+							<option class="op_sido" value="6430000">충청북도</option>
+							<option class="op_sido" value="6440000">충청남도</option>
+							<option class="op_sido" value="6450000">전라북도</option>
+							<option class="op_sido" value="6460000">전라남도</option>
+							<option class="op_sido" value="6470000">경상북도</option>
+							<option class="op_sido" value="6480000">경상남도</option>
+							<option class="op_sido" value="6500000">제주특별자치도</option>
+						</select> 시군구 <select id="sigungu_select" name="sigungu">
+							<option class="op_sigungu" value="0">전체</option>
+						</select> 보호센터 <select id="shelter_select" name="shelter">
+							<option value="0">전체</option>
+						</select> 품종 <select id="species_select" name="species">
+							<option class="op_species" value="0">전체</option>
+							<option class="op_species" value="417000">개</option>
+							<option class="op_species" value="422400">고양이</option>
+							<option class="op_species" value="429900">기타</option>
+						</select> <select id="kind_select" name="speciesKind">
+							<option class="op_kind" value="0">선택</option>
+						</select> <input type="hidden" name="currentPage" value=1> <input
+							id="btnSelect" type="button" value="조회">
+						<!-- 						<input id="btnSearch" type="submit" value="insert"> -->
+					</form>
+				</div>
 
-
-
-
-				<!-- 				<div class="card-deck row col-12"> -->
-			
 				<c:forEach var="dto" items="${list}">
 
 					<div class="card myCard col-4">
-						<a href="detailAbandoned?seq=${dto.seq }"><img src="${dto.popfile }" class="card-img-top"
-							alt="..." style="height: 150px"></a>
+						<a href="detailAbandoned?seq=${dto.seq }"><img
+							src="${dto.popfile }" class="card-img-top" alt="..."
+							style="height: 150px"></a>
 						<div class="card-body">
 
 							<p class="card-text">
-								공고번호 : ${dto.noticeNo}<br> 접수일 :
-								<fmt:formatDate value="${dto.noticeSdt }" pattern="yyyy-MM-dd" />
-								<br> 품종 : ${dto.kindCd }<br> 성별 : ${dto.sexCd }<br>
-								발견 장소 : ${dto.happenPlace }<br> 특징 : ${dto.specialMark }
-
+								<label class="title"><strong>공고번호</strong> </label><label
+									class="content">${dto.noticeNo}</label><br> <label
+									class="title"><strong>접수일 </strong> </label><label
+									class="content"><fmt:formatDate
+										value="${dto.noticeSdt }" pattern="yyyy-MM-dd" /></label> <br> <label
+									class="title"><strong>품종 </strong></label><label
+									class="content">${dto.kindCd }</label><br> <label
+									class="title"><strong>성별 </strong></label><label
+									class="content">${dto.sexCd }</label><br> <label
+									class="title"><strong>발견 장소 </strong></label><label
+									class="content">${dto.happenPlace }</label><br> <label
+									class="title"><strong>특징 </strong></label><label
+									class="content">${dto.specialMark }</label><br>
 							</p>
 						</div>
 					</div>
 
 				</c:forEach>
-			
+
 
 				<form id="apiSelect" action="select" method="post">
 					<input type="hidden" id="currentPage" value="" name="currentPage">
@@ -741,6 +791,7 @@ a:hover {
 						type="hidden" value="${sigungu }" name="sigungu"> <input
 						type="hidden" value="${shelter }" name="shelter">
 				</form>
+
 
 				<div class="col-8 justify-content-center" id="naviBox">
 					<c:if test="${pageNavi.needPrev == 1 }">
