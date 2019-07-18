@@ -158,6 +158,7 @@ public class AdminController
 	
 	
 	//Donation Start
+	
 	@RequestMapping(value = "admin-donation")
 	public String donationPage()
 	{
@@ -196,6 +197,23 @@ public class AdminController
 	}
 	
 	//Donation End
+	
+	
+	
+	//Item Start
+	
+	@RequestMapping(value = "admin-item")
+	public String itemPage()
+	{
+		return "myPage/admin/admin_item";
+	}
+//	@RequestMapping(value = "admin-item-insert")
+//	public String insertItemDummy()
+//	{
+//		return "myPage/admin/admin_item";
+//	}
+	
+	//Item End
 	
 	
 	

@@ -39,6 +39,12 @@
 {
 	background-color: black !important;
 }
+
+.c-img
+{
+	width: 100% !important;
+	height: 300px !important;
+}
 </style>
 
 </head>
@@ -66,25 +72,25 @@
 								
 								<c:if test="${dto.image1 != '없음'}">
 									<div class="carousel-item" data-interval="3000">
-										<img src="${dto.image1}" class="d-block w-100" alt="...">
+										<img src="${dto.image1}" class="d-block w-100 c-img" alt="...">
 									</div>
 								</c:if>
 								
 								<c:if test="${dto.image2 != '없음'}">
 									<div class="carousel-item" data-interval="3000">
-										<img src="${dto.image2}" class="d-block w-100" alt="...">
+										<img src="${dto.image2}" class="d-block w-100 c-img" alt="...">
 									</div>
 								</c:if>
 								
 								<c:if test="${dto.image3 != '없음'}">
 									<div class="carousel-item" data-interval="3000">
-										<img src="${dto.image3}" class="d-block w-100" alt="...">
+										<img src="${dto.image3}" class="d-block w-100 c-img" alt="...">
 									</div>
 								</c:if>
 								
 								<c:if test="${ ((dto.image1 == '없음') && (dto.image2 == '없음')) && (dto.image3 == '없음') }">
 									<div class="carousel-item" data-interval="3000">
-										<img src="resources/images/dog_1.jpg" class="d-block w-100" alt="...">
+										<img src="resources/images/dog_1.jpg" class="d-block w-100 c-img" alt="...">
 									</div>
 								</c:if>
 								

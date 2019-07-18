@@ -60,6 +60,7 @@ public class DonationServiceImpl implements DonationService
 		String insertPath3 = "없음";
 		
 //		logger.info("resource path : {}", resourcePath);
+		@SuppressWarnings("unused")
 		long currTime = 0;
 		
 		if(image1.getSize() != 0)
@@ -114,12 +115,11 @@ public class DonationServiceImpl implements DonationService
 		
 		int deleteResult = donationDAO.delete();
 		
-		if(1 <= deleteResult)
-		{
-			int insertResult = donationDAO.insert(dto);
+		logger.info("삭제한 데이터 수 : {}", deleteResult);
+		
+		int insertResult = donationDAO.insert(dto);
 			
-			logger.info("insertResult : {}", insertResult);
-		}
+		logger.info("insertResult : {}", insertResult);
 		
 		return "redirect: admin-donation";
 	}
@@ -147,12 +147,12 @@ public class DonationServiceImpl implements DonationService
 		}
 		
 		
-		if(left != null)
+		if(left.getSize() != 0)
 		{
 			String filePath = resourcePath + "/donation/left.jpg";
 			left.transferTo(new File(filePath));
 		}
-		if(right != null)
+		if(right.getSize() != 0)
 		{
 			String filePath = resourcePath + "/donation/right.jpg";
 			right.transferTo(new File(filePath));
