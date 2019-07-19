@@ -19,43 +19,13 @@
             <link rel="stylesheet" href="resources/css/aos.css">
             <link rel="stylesheet" href="resources/css/style.css">
             <style>
-                .topBackGround{
-                    height: 100px;
-                }
-                .nav-link{
-                    text-decoration: none;
-                    color: green;
-                }
-                .nav-link:hover{
-                    color: orange;
-                }
-                .my_page_nav.active{
-                    background-color: orange !important;
-                }
-                .my_page_info{
-                    text-align: center;
-                }
-                .nav_my_page_ul{
-                    border-bottom: 1px solid green ; 
-                }
-                .nav_my_page_ul>li{
-                    width: 16.6%;
-                    text-align: center;
-                }
-                /*점보트론 이미지*/
-                .jumbotron{
-                    background-color: white;
-                }
-                .jumbotron>img{
-                    width: 100%;
-                    max-height: 600px;
-                }
                 /*부트스트랩 모달시 패딩 없애주기.*/
                 .modal-open {padding-right: 0px !important;}
                 .readMsg{
                     color : gray;
                 }
             </style>
+            <jsp:include page="/WEB-INF/views/myPage/user/user_module/mypage_user_style.jsp" ></jsp:include><!-- user 마이페이지 스타일 -->
             <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
         </head>
         <body data-spy="scroll" data-target=".site-navbar-target"

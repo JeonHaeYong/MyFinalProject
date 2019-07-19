@@ -265,7 +265,7 @@ public class MemberController {
 	//-----------------------------마이페이지 	
 	//마이페이지 -> aop로 user정보랑 안읽은메세지 갯수 request에 담기
 	@RequestMapping("toMyPage")
-	public String toMyPage(HttpServletRequest request) {
+	public String toMyPage_loginCheck(HttpServletRequest request) {
 		MemberDTO dto = (MemberDTO)request.getAttribute("memberDTO");
 		int type= dto.getType();
 		System.out.println("관리자확인->" + type);
@@ -304,22 +304,22 @@ public class MemberController {
 	}
 
 	@RequestMapping("toMyPage_writeList")
-	public String toMyPage_writeList(HttpServletRequest request) {
+	public String toMyPage_writeList_loginCheck(HttpServletRequest request) {
 		return "myPage/user/user_myPage_writeList";
 	}
 
 	@RequestMapping("toMyPage_support")
-	public String toMyPage_support(HttpServletRequest request) {
+	public String toMyPage_support_loginCheck(HttpServletRequest request) {
 		return "myPage/user/user_myPage_support";
 	}
 
 	@RequestMapping("toMyPage_buyList")
-	public String toMyPage_buyList(HttpServletRequest request) {
+	public String toMyPage_buyList_loginCheck(HttpServletRequest request) {
 		return "myPage/user/user_myPage_buyList";
 	}
 
 	@RequestMapping("toMyPage_message")
-	public String toMyPage_message(HttpServletRequest request,String currentPage) {
+	public String toMyPage_message_loginCheck(HttpServletRequest request,String currentPage) {
 		if(currentPage==null) {
 			currentPage = "1";
 		}
