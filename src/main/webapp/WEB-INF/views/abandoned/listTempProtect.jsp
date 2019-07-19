@@ -1,3 +1,8 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -17,15 +22,20 @@
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
 
-
+<script>
+	$("#write").on("click",function(){
+		location.href="writeTempProtect";
+	})
+</script>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
    data-offset="300" id="home-section">
    <jsp:include page="/WEB-INF/views/module/menu.jsp" ></jsp:include>
-   <!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
-
-
-   <!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
+   <!-- -----ì¬ê¸°ê¹ì§ ê³ ì  Headerìëë¤----------------------------------------------------------------------------------------------------------- -->
+	<section class="site-section bg-light block-13">
+	<input type="button" id="write" value="글  작성">
+	</section>
+   <!-- ----Footerë¶ë¶ìëë¤^_^---------------------------------------------------------------------------------------------------------- -->
 
    <jsp:include page="/WEB-INF/views/module/footer.jsp" ></jsp:include>
    

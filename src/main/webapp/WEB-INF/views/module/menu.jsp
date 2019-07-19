@@ -28,7 +28,7 @@
 						<ul
 							class="site-menu main-menu js-clone-nav mr-0 pl-0 d-none d-lg-block">
 							<li><a href="toAbandoned?currentPage=1" class="nav-link">유기동물</a></li>
-							<li><a href="/toHospital?currentPage=1" class="nav-link">임시보호중</a></li>
+							<li><a href="?currentPage=1" class="nav-link">실종신고</a></li>
 							<li><a href="#trainers-section" class="nav-link">재회</a></li>
 							<li><a href="freeMarket?currentPage=1&category=all" class="nav-link">무료나눔</a></li>
 							<li><a href="/oxQuiz" class="nav-link">Fun</a></li>

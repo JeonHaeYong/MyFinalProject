@@ -30,25 +30,29 @@ public class AbandonedController {
 	@Autowired
 	TempProtectServiceImpl tempService;
 
-	@RequestMapping("tempProtect")
-	public String tempProtect(HttpServletRequest request, int currentPage, String from, String to, String species, String speciesKind, String sido, String sigungu, String shelter ) {
-		request.setAttribute("from", from);
-		request.setAttribute("to", to);
-		request.setAttribute("sido", sido);
-		request.setAttribute("sigungu", sigungu);
-		request.setAttribute("shelter", shelter);
-		request.setAttribute("species", species);
-		request.setAttribute("speciesKind", speciesKind);
-		try {
+	@RequestMapping("listTempProtect")
+	public String tempProtect() {
+//		request.setAttribute("from", from);
+//		request.setAttribute("to", to);
+//		request.setAttribute("sido", sido);
+//		request.setAttribute("sigungu", sigungu);
+//		request.setAttribute("shelter", shelter);
+//		request.setAttribute("species", species);
+//		request.setAttribute("speciesKind", speciesKind);
+//		try {
 //			List<TempProtectDTO> list = tempService.selectTempProtect(currentPage, from, to, species, speciesKind, sido, sigungu, shelter);
 //			Map<String, Integer> pageNavi = apiService.getNaviforTempProtect(currentPage);
 //			request.setAttribute("list", list);
 //			request.setAttribute("pageNavi", pageNavi);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 
-		return "listTempProtect";
+		return "abandoned/listTempProtect";
+	}
+	@RequestMapping("writeTempProtect")
+	public String writeTempProtect() {
+		return "abandoned/writeTempProtect";
 	}
 	@RequestMapping("detailAbandoned")
 	public String detailAbandoned(HttpServletRequest request, int seq) {
