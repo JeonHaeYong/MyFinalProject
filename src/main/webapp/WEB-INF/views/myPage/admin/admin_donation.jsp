@@ -99,13 +99,13 @@
 
 					<div class="row justify-content-center">
 						
-						<div class="col-12 col-md-12 col-lg-4 text-center my-1">
+						<div class="col-12 col-md-12 col-lg-2 text-center my-1">
 						
 							<label>후원 업체명</label>
 						
 						</div>
 						
-						<div class="col-12 col-md-12 col-lg-8 text-center my-1">
+						<div class="col-12 col-md-12 col-lg-10 text-center my-1">
 						
 							<input id="name_text" class="form-control" type="text">
 						
@@ -115,13 +115,93 @@
 					
 					<div class="row justify-content-center">
 						
-						<div class="col-12 col-md-12 col-lg-4 text-center my-1">
+						<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+						
+							<label>제목</label>
+						
+						</div>
+						
+						<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+						
+							<input id="title_text" class="form-control" type="text">
+						
+						</div>
+						
+					</div>
+					
+					<div class="row justify-content-center">
+						
+						<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+						
+							<label>설명</label>
+						
+						</div>
+						
+						<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+						
+							<textarea id="explanation_text" class="form-control"></textarea>
+						
+						</div>
+						
+					</div>
+					
+					<div class="row justify-content-center">
+						
+						<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+						
+							<label>사진1</label>
+						
+						</div>
+						
+						<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+						
+							<input id="image1_file" class="form-control" name="image1" type="file">
+						
+						</div>
+						
+					</div>
+					
+					<div class="row justify-content-center">
+						
+						<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+						
+							<label>사진2</label>
+						
+						</div>
+						
+						<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+						
+							<input id="image2_file" class="form-control" name="image2" type="file">
+						
+						</div>
+						
+					</div>
+					
+					<div class="row justify-content-center">
+						
+						<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+						
+							<label>사진3</label>
+						
+						</div>
+						
+						<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+						
+							<input id="image3_file" class="form-control" name="image3" type="file">
+						
+						</div>
+						
+					</div>
+					
+					<div class="row justify-content-center">
+						
+						<div class="col-12 col-md-12 col-lg-2 text-center my-1">
 						
 							<label>목표 금액</label>
 						
 						</div>
 						
-						<div class="col-12 col-md-12 col-lg-8 text-center my-1">
+						<div class="col-12 col-md-12 col-lg-10 text-center my-1">
 						
 							<input id="goalmoney_text" class="form-control" type="text">
 						
@@ -131,31 +211,27 @@
 					
 					<div class="row justify-content-center">
 						
-						<div class="col-12 col-md-12 col-lg-4 text-center my-1">
+						<div class="col-12 col-md-12 col-lg-2 text-center my-1">
 						
-							<label>기한 설정</label>
-						
-						</div>
-						
-						<div class="col-12 col-md-12 col-lg-8 text-center my-1">
-						
-							<input id="deadline_text" class="form-control" type="text">
+							<label>시작 날짜</label>
 						
 						</div>
-						
-					</div>
-					
-					<div class="row justify-content-center">
 						
 						<div class="col-12 col-md-12 col-lg-4 text-center my-1">
 						
-							<label>설명</label>
+							<input id="startdate_text" class="form-control" type="date">
 						
 						</div>
 						
-						<div class="col-12 col-md-12 col-lg-8 text-center my-1">
+						<div class="col-12 col-md-12 col-lg-2 text-center my-1">
 						
-							<input id="contents_text" class="form-control" type="text">
+							<label>종료 날짜</label>
+						
+						</div>
+						
+						<div class="col-12 col-md-12 col-lg-4 text-center my-1">
+						
+							<input id="enddate_text" class="form-control" type="date">
 						
 						</div>
 						
@@ -180,15 +256,58 @@
 			 
 			
 			<div class="row justify-content-center">
-				
+
 				<div class="col-12 col-md-12 col-lg-12 text-center my-5">
+				
+					<div class="row justify-content-center">
 						
-					<input id="search_btn" class="btn btn-warning" type="button" value="후원 업체 조회">
+						<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+								
+							<label>좌측 사진</label>
+								
+						</div>
+								
+						<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+								
+							<input id="left_file" class="form-control" name="left" type="file">
+								
+						</div>
+								
+					</div>
+					
+					<div class="row justify-content-center">
+								
+						<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+								
+							<label>우측 사진</label>
+								
+						</div>
+								
+						<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+								
+							<input id="right_file" class="form-control" name="right" type="file">
+								
+						</div>
+								
+					</div>
+					
+					<div class="row justify-content-center">
 						
+						<div class="col-12 col-md-12 col-lg-12 text-center my-5">
+						
+							<input id="image_change_btn" class="btn btn-warning" type="button" value="사진 변경">
+						
+						</div>
+						
+					</div>
+				
 				</div>
 				
 			</div>
-
+			
+			
+			
+			
 		</div>
 
 	</section>
@@ -212,6 +331,92 @@
 <script>
 	$(function()
     {
+		
+		$("#name_text").val("후원 업체 명");
+		$("#title_text").val("제목입니다");
+		$("#explanation_text").val("설명 설명");
+		$("#goalmoney_text").val("1000000");
+		$("#startdate_text").val("2019-07-01");
+		$("#enddate_text").val("2019-07-30");
+		
+		
+	    $("#submit_btn").on("click", function()
+		{
+	    	var $form = $('<form></form>');
+	        $form.attr('action', 'admin-donation-insert');
+	        $form.attr('method', 'POST');
+	        $form.attr('enctype', 'multipart/form-data');
+	        $form.appendTo('body');
+	         
+	        
+	        
+	        var $name = $('<input type="hidden" name="name">');
+	        $name.val($("#name_text").val());
+	        
+	        var $title = $('<input type="hidden" name="title">');
+	        $title.val($("#title_text").val());
+	        
+	        var $explanation = $('<input type="hidden" name="explanation">');
+	        $explanation.val($("#explanation_text").val().replace(/(?:\r\n|\r|\n)/g, "<br>"));
+	        
+			var $image1 = $("#image1_file");
+			var $image2 = $("#image2_file");
+			var $image3 = $("#image3_file");
+			
+// 			var check = true;
+// 			while(check)
+// 			{
+// 				if(($image1.val() == "") && ($image2.val() != ""))
+// 				{
+// 				}
+// 			}
+	        
+	        var $goalmoney = $('<input type="hidden" name="goalmoney">');
+	        $goalmoney.val($("#goalmoney_text").val());
+	        
+	        var $startdate = $('<input type="hidden" name="startdate">');
+	        $startdate.val($("#startdate_text").val());
+	        
+	        var $enddate = $('<input type="hidden" name="enddate">');
+	        $enddate.val($("#enddate_text").val());
+	        
+	        $form.append($name).append($title).append($explanation)
+	        .append($image1).append($image2).append($image3)
+	        .append($goalmoney).append($startdate).append($enddate);
+	        $form.submit();
+		});
+	    
+	    
+	    $("#image_change_btn").on("click", function()
+		{
+	    	var leftValue = $("#left_file").val();
+	    	var rightValue = $("#right_file").val();
+	    	
+	    	var $form = $('<form></form>');
+	        $form.attr('action', 'admin-donation-image');
+	        $form.attr('method', 'POST');
+	        $form.attr('enctype', 'multipart/form-data');
+	        $form.appendTo('body');
+	        
+	        if((leftValue != "") && (rightValue == ""))
+	        {
+	        	$form.append("#left_file");
+	        }
+	        else if((leftValue == "") && (rightValue != ""))
+	        {
+	        	$form.append($("#right_file"));
+	        }
+	        else if((leftValue != "") && (rightValue != ""))
+	        {
+	        	$form.append($("#left_file")).append($("#right_file"));
+	        }
+	        
+	        if((leftValue != "") || (rightValue != ""))
+	        {
+	        	$form.submit();
+	        }
+		});
+	    
 	    
     });
     

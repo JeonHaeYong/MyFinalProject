@@ -1,4 +1,4 @@
-package kh.spring.fin;
+/*package kh.spring.fin;
 
 import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kh.spring.dto.FileDTO;
+
 import kh.spring.dto.TrainingDTO;
 import kh.spring.service.TrainingService;
 
@@ -44,13 +44,13 @@ public class TrainingController {
 	}
 	@RequestMapping("writeProc.train")
 	public String insertTraining(FileDTO fdto, HttpServletRequest request) {
-		System.out.println("이미지: " + fdto.getImage() + "   제목 : " + fdto.getTitle() + "  글내용: " + fdto.getContent());
+		System.out.println("이미지: " + fdto.getFiles() + "   제목 : " + fdto.getTitle() + "  글내용: " + fdto.getContent());
 		String id = (String)session.getAttribute("id");
 		String ip = request.getRemoteAddr();
 		String date = new SimpleDateFormat("yyyyMMdd").format(new java.util.Date());
 		long time = System.currentTimeMillis();
 		
-		if(fdto.getImage() == null) { // 이미지가 없을 경우
+		if(fdto.getFiles() == null) { // 이미지가 없을 경우
 			System.out.println("이미지 없음");
 			TrainingDTO tdto = new TrainingDTO(0, fdto.getTitle(),fdto.getContent(), null, id, null, ip);
 			int result = 0;
@@ -85,3 +85,4 @@ public class TrainingController {
 		return "redirect:/toWriteForm";
 	}
 }
+*/
