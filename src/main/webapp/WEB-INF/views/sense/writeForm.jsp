@@ -44,12 +44,13 @@
               .write-section{ padding: 10px;;margin: 0px;padding: 0px; margin-top:70px; }
         /*---------------------------------------------------------------------------*/
         .button-box{text-align: right;}
-        .write-btn{background-color: #EC7357; border: none; font-size: 20px; color:white; border-radius: 5px;}
-        .write-btn:hover{font-weight: bold; background-color: #f7613e;}
+        .write-btn,.toList-btn{background-color: #EC7357; border: none; font-size: 20px; color:white; border-radius: 5px;}
+        .write-btn:hover,.toList-btn:hover{font-weight: bold; background-color: #f7613e;}
         .title-section{text-align: center; font-size: 20px; margin-bottom: 20px;}
         .title-section>div:first-child{font-size: 25px;}
         .title{width: 100%;}
         .content-section{margin-bottom: 20px;}
+        .note-editable img{height:200px; width:300px;}
         
     </style>
      <script>
@@ -62,7 +63,7 @@
                     lang:'ko-KR',
                     callbacks:{
                     	onImageUpload: function(files, editor, welEditable){
-                    		var data = new FormData();
+                    		var data = new FormData(document.getElementById("writeForm"));
                     		data.append("file",files[0]);
                     		$.ajax({
                     			url:"imageUpload.train",
@@ -70,7 +71,7 @@
                     			type:"post",
                     			cache:false,
                     			contentType:false,
-                    			enctype:"multipart/form-data",
+                    			enctype:'multipart/form-data',
                     			processData:false
                     		}).done(function(resp){
                     			console.log(resp);
@@ -83,8 +84,14 @@
                   //summernote -> textarea에 옮겨담기
                   var summernote = $("#summernote").summernote('code');
                 var contents = $("#contents").val(summernote);  
-                 $("#writeForm").submit();
+                if($(".title").val() != "" && $("#contnets").val() != ""){
+                	$("#writeForm").submit();
+                }else{alert("글과 내용을 입력해주세요.");}
+                 
               });
+              $(".toList-btn").on("click",function(){
+            	  location.href="toTrainingList?currentPage="+${currentPage};
+              })
           });
       
     </script>
@@ -115,12 +122,16 @@
                </div>
                <div class="row content-section">
                    <div class="col-12">
-                       <div id="summernote"></div>
+                       <div id="summernote" name="image"></div>
                        <textarea rows="" cols="" id="contents" name="content" hidden></textarea>
                    </div>
                </div>
               <div class="row button-box">
-                  <div class="col-12"><input type="button" class="write-btn" value="글쓰기"></div>
+                  <div class="col-12">
+                  	<input type="button" class="write-btn" value="글쓰기">
+                  	<input type="button" class="toList-btn" value="홈으로">
+                  </div>
+                  
               </div>
               </form>
             </div>
@@ -133,7 +144,7 @@
    <jsp:include page="/WEB-INF/views/module/footer.jsp" ></jsp:include>
  
    <script src="resources/js/jquery-ui.js"></script>
-   <script src="resources/js/umd/popper.min.js"></script>
+   <script src="resources/js/popper.min.js"></script>
    <script src="resources/js/bootstrap.min.js"></script>
    <script src="resources/js/owl.carousel.min.js"></script>
    <script src="resources/js/jquery.countdown.min.js"></script>

@@ -1,6 +1,8 @@
 package kh.spring.fin;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.Gson;
 
 import kh.spring.dto.FileDTO;
 import kh.spring.dto.TrainingDTO;
@@ -28,8 +33,17 @@ public class TrainingController {
 	public String toTrainingList(HttpServletRequest request) {
 		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		session.setAttribute("currentPage", currentPage);
-		
-		
+		List<TrainingDTO> list = new ArrayList<>();
+		int count = 0;
+		try {
+			list = ts.trainingPerPageService(currentPage);
+			count = ts.recordCountService();
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "redirect:/error.jsp";
+		}
+		request.setAttribute("list", list);
+		request.setAttribute("count", count);
 		return "sense/trainingList";
 	}
 	@RequestMapping("toWriteForm")
@@ -38,19 +52,20 @@ public class TrainingController {
 	}
 	@ResponseBody
 	@RequestMapping("imageUpload.train")//서버에 이미지 업로드
-	public String imageUpload(FileDTO fdto) {
-		 String imgPath = ts.imageUploadService(fdto);
+	public String imageUpload(MultipartFile files) {
+		System.out.println("이미지: " + files);
+		 String imgPath = ts.imageUploadService(files);
 		 return imgPath;
 	}
 	@RequestMapping("writeProc.train")
 	public String insertTraining(FileDTO fdto, HttpServletRequest request) {
-		System.out.println("이미지: " + fdto.getImage() + "   제목 : " + fdto.getTitle() + "  글내용: " + fdto.getContent());
+		System.out.println("이미지: " + fdto.getFiles() + "   제목 : " + fdto.getTitle() + "  글내용: " + fdto.getContent());
 		String id = (String)session.getAttribute("id");
 		String ip = request.getRemoteAddr();
 		String date = new SimpleDateFormat("yyyyMMdd").format(new java.util.Date());
 		long time = System.currentTimeMillis();
 		
-		if(fdto.getImage() == null) { // 이미지가 없을 경우
+		if(fdto.getFiles().getSize() == 0) { // 이미지가 없을 경우
 			System.out.println("이미지 없음");
 			TrainingDTO tdto = new TrainingDTO(0, fdto.getTitle(),fdto.getContent(), null, id, null, ip);
 			int result = 0;
@@ -58,7 +73,7 @@ public class TrainingController {
 				result = ts.NoImageService(tdto);
 			}catch(Exception e) {
 				e.printStackTrace();
-				//return "redirect:/error.jsp";
+				return "redirect:/error.jsp";
 			}
 		}else { // 이미지가 있을 경우
 			System.out.println("이미지 있음");
@@ -76,12 +91,30 @@ public class TrainingController {
 				result = ts.insertTrainingService(tdto);
 			}catch(Exception e) {
 				e.printStackTrace();
-				//return "redirect:/error.jsp";
+				return "redirect:/error.jsp";
 			}
 			request.setAttribute("result", result);
 		}
-		
-		//return "redirect:/toTrainingList?currentPage="+session.getAttribute("currentPage");
-		return "redirect:/toWriteForm";
+		return "redirect:/toTrainingList?currentPage="+session.getAttribute("currentPage");
 	}
+	@ResponseBody
+	@RequestMapping(value = "loadmore.train", produces = "text/plain;charset=UTF-8")
+	public String loadmore(HttpServletRequest request) {
+		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		session.setAttribute("currentPage", currentPage);
+		List<TrainingDTO> list = new ArrayList<>();
+		try {
+			list = ts.trainingPerPageService(currentPage);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "redirect:/error.jsp";
+		}
+		request.setAttribute("list", list);
+		Gson g = new Gson();
+		String moreList = g.toJson(list);
+		System.out.println(moreList);
+		return "{\"moreList\":"+moreList+"}";
+		
+	}
+	
 }
