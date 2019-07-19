@@ -1,6 +1,7 @@
 package kh.spring.fin;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -54,7 +55,7 @@ public class AbandonedController {
 		System.out.println(seq);
 		ApiAbandonedAnimalDTO dto = apiService.selectOneApiAbandonedAnimal(seq);
 		request.setAttribute("dto", dto);
-		return "detailAbandoned";
+		return "abandoned/detailAbandoned";
 	}
 	@RequestMapping(value="shelterAjax", produces="application/json;charset=utf-8")
 	@ResponseBody
@@ -69,12 +70,22 @@ public class AbandonedController {
 	}
 	
 	@RequestMapping("toAbandoned")
-	public String abandoned() {
-		return "abandoned";
+	public String abandoned(HttpServletRequest request, int currentPage) {
+
+		try {
+			List<ApiAbandonedAnimalDTO> list = apiService.selectAll(currentPage);
+			Map<String, Integer> pageNavi = apiService.getNaviforApiAbandonedAnimal(currentPage);
+			request.setAttribute("list", list);
+			request.setAttribute("pageNavi", pageNavi);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "abandoned/abandoned";
 	}
 	
 	@RequestMapping("select")
-	public String select(HttpServletRequest request, int currentPage, String from, String to, String species, String speciesKind, String sido, String sigungu, String shelter) {
+	public String select(HttpServletRequest request, int currentPage, String from, String to, String species,
+			String speciesKind, String sido, String sigungu, String shelter, String processState) {
 		System.out.println(currentPage);
 		System.out.println(from);
 		System.out.println(to);
@@ -86,6 +97,7 @@ public class AbandonedController {
 		request.setAttribute("shelter", shelter);
 		request.setAttribute("species", species);
 		request.setAttribute("speciesKind", speciesKind);
+		request.setAttribute("processState", processState);
 		System.out.println(sido);
 		System.out.println(sigungu);
 		System.out.println(shelter);
@@ -93,14 +105,14 @@ public class AbandonedController {
 		System.out.println(speciesKind);
 
 		try {
-			List<ApiAbandonedAnimalDTO> list = apiService.selectApiAbandonedAnimal(currentPage, from, to, species, speciesKind, sido, sigungu, shelter);
+			List<ApiAbandonedAnimalDTO> list = apiService.selectByCondition(currentPage, from, to, species, speciesKind, sido, sigungu, shelter, processState);
 			Map<String, Integer> pageNavi = apiService.getNaviforApiAbandonedAnimal(currentPage);
 			request.setAttribute("list", list);
 			request.setAttribute("pageNavi", pageNavi);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "abandoned";
+		return "abandoned/abandoned";
 
 	}
 

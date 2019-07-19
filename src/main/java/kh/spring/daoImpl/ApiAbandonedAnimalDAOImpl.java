@@ -35,14 +35,24 @@ public class ApiAbandonedAnimalDAOImpl implements ApiAbandonedAnimalDAO {
 	public ApiAbandonedAnimalDTO selectOneApiAbandonedAnimal(int seq) {
 		return sst.selectOne("ApiDAO.selectOneBySeq", seq);
 	}
-
-	public List<ApiAbandonedAnimalDTO> selectApiAbandonedAnimal(int currentPage, int startNum, int endNum, Date dateFrom,
-			Date dateTo, String species, String speciesKind, String sido, String sigungu, String shelter) {
+	
+	public List<ApiAbandonedAnimalDTO> selectAll(int currentPage, int startNum, int endNum, Date dateFrom,
+			Date dateTo, String processState){
+		Map<String,Object> hs = new HashMap<>();
+		hs.put("startNum", startNum);
+		hs.put("endNum", endNum);
+		hs.put("dateFrom", dateFrom);
+		hs.put("dateTo", dateTo);
+		hs.put("processState", processState);
+		
+		return sst.selectList("ApiDAO.selectAll", hs);
+	}
+	
+	public List<ApiAbandonedAnimalDTO> selectByCondition(int currentPage, int startNum, int endNum, Date dateFrom,
+			Date dateTo, String species, String speciesKind, String sido, String sigungu, String shelter, String processState) {
 		
 		System.out.println(dateFrom);
 		System.out.println(dateTo);
-
-		
 
 		Map<String,Object> hs = new HashMap<>();
 		hs.put("startNum", startNum);
@@ -53,8 +63,9 @@ public class ApiAbandonedAnimalDAOImpl implements ApiAbandonedAnimalDAO {
 		hs.put("shelter", shelter);
 		hs.put("species", "%"+species+"%");
 		hs.put("speciesKind", "%"+speciesKind+"%");
-	
-		return sst.selectList("ApiDAO.select", hs);
+		hs.put("processState", "%"+processState+"%");
+		
+		return sst.selectList("ApiDAO.selectByCondition", hs);
 	}//new Object[] {startNum, endNum, dateFrom, dateTo,sido, sigungu, shelter,species, speciesKind }
 
 	public int deleteAll() {
