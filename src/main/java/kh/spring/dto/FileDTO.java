@@ -3,6 +3,7 @@ package kh.spring.dto;
 import org.springframework.web.multipart.MultipartFile;
 
 public class FileDTO {
+	
 	private String title;
 	private String content;
 	private MultipartFile files;
@@ -34,4 +35,6 @@ public class FileDTO {
 	public void setFiles(MultipartFile files) {
 		this.files = files;
 	}
+	
+
 }

@@ -65,7 +65,9 @@ public class TrainingController {
 		String date = new SimpleDateFormat("yyyyMMdd").format(new java.util.Date());
 		long time = System.currentTimeMillis();
 		
+
 		if(fdto.getFiles().getSize() == 0) { // 이미지가 없을 경우
+
 			System.out.println("이미지 없음");
 			TrainingDTO tdto = new TrainingDTO(0, fdto.getTitle(),fdto.getContent(), null, id, null, ip);
 			int result = 0;

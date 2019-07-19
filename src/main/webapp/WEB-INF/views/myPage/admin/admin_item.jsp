@@ -19,31 +19,35 @@
 
 <style>
 
-	#container
-	{
-		margin-top: 5%;
-	}
+#container {
+	margin-top: 5%;
+}
+#mypage_link
+{
+	color: #EC7357 !important;
+	font-weight: 600 !important;
+}
 
-	#notice_link
-	{
-		color: #EC7357 !important;
-		font-weight: 600 !important;
-	}
+.my_buttons {
+	border-radius: 0px !important;
+	width: 100%;
+	height: 100%;
 	
-	#back_btn, #update_btn, #delete_btn
-	{
-		background-color: #EC7357 !important;
-	}
-	#back_btn:hover, #update_btn:hover, #delete_btn:hover
-	{
-		background-color: black !important;
-	}
+	background-color: #EC7357 !important;
+}
+.selected_my_buttons {
+	border-radius: 0px !important;
+	width: 100%;
+	height: 100%;
+	
+	background-color: black !important;
+}
 
-	
+
 </style>
 
 </head>
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
@@ -52,49 +56,51 @@
 	<section class="site-section bg-light block-13">
 
 		<div id="container" class="container">
+		
+			
+			
+			
+			
+			<div id="menu_row" class="row justify-content-center">
 
-			<div class="row justify-content-center mb-5">
-
-				<div class="col-8 col-md-8 col-lg-8 my-3">
-
-					<h3>${dto.title}</h3>
-
+				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
+					<a href="admin-member" class="btn btn-danger my_buttons">회원 관리</a>					
 				</div>
 				
-				<div class="col-2 col-md-2 col-lg-2 text-center my-3">
-
-					${dto.write_time}
-
+				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
+					<a href="#" class="btn btn-danger selected_my_buttons">무료 나눔 물품 승인</a>
 				</div>
 				
-				<div class="col-2 col-md-2 col-lg-2 text-center my-3">
-
-					${dto.view_count}
-
+				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
+					<a href="#" class="btn btn-danger my_buttons">무료 나눔 거래 내역</a>
+				</div>
+				
+				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
+					<a href="admin-donation" class="btn btn-danger my_buttons">월 별 후원금 및 전달 기관</a>
+				</div>
+				
+				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
+					<a href="#" class="btn btn-danger my_buttons">퀴즈 당첨자</a>
+				</div>
+				
+				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
+					<a href="admin-chart" class="btn btn-danger my_buttons">통계</a>
 				</div>
 
 			</div>
 			
-			<div class="row justify-content-center mt-5">
 			
-				<div class="col-12 col-md-12 col-lg-12 my-5">
+			
+			
+		
+			<div class="row justify-content-center">
 
-					${dto.contents}
+				<div class="col-12 col-md-12 col-lg-12 text-center my-5">
+
+					<a href="admin-item-insert">데이터 삽입</a>
 
 				</div>
-				
-			</div>
-			
-			<div class="row justify-content-center mt-5">
-			
-				<div class="col-12 col-md-12 col-lg-12 text-right my-5">
 
-					<input id="back_btn" class="btn btn-danger" type="button" value="돌아가기">
-					<input id="update_btn" class="btn btn-danger" type="button" value="수정하기">
-					<input id="delete_btn" class="btn btn-danger" type="button" value="삭제하기">
-				
-				</div>
-				
 			</div>
 
 		</div>
@@ -120,22 +126,7 @@
 <script>
 	$(function()
     {
-		$("#back_btn").on("click", function()
-		{
-// 			history.back();
-			location.href = "notice-view-page";
-		});
-		
-		$("#update_btn").on("click", function()
-		{
-			location.href = "notice-update-page?seq=${dto.seq}";
-		});
-		
-		$("#delete_btn").on("click", function()
-		{
-			location.href = "notice-delete-do?seq=${dto.seq}";
-		});
-		
+	    
     });
     
     onload = function()
