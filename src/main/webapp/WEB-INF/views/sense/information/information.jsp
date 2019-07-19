@@ -21,7 +21,8 @@
 <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
-
+<!--  로그인 style-->
+<jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
 
 <style>
 .jumbotron {
@@ -101,17 +102,61 @@ a[name="s-menu"]:hover {
 }
 
 /* -------------------infobox -----------------   */
+
 .infowrapper {
+font-family: 'Gamja Flower', cursive;
 	box-sizing: border-box;
 	height: 300px;
 	overflow: hidden;
-	border: 1px solid black;
+	border: 2px solid #754F4470;
 }
 
-.infoimg, .infotext {
-	border-bottom: 1px solid black;
-	height: 150px;
+.dtocol {
+	padding-top: 50px;
 }
+
+.infoimg, .infotext,.infoextra {
+
+	
+overflow: hidden;
+
+}
+.infoimg{
+margin-left:15px;
+margin-top:15px;
+margin-right:15px;
+box-sizing: border-box;
+height:70%;
+}
+.inforecommend{
+border-top:1px solid #754F4470;
+padding-left:5px;
+margin-top:2px;
+margin-left:15px;
+margin-right:15px;
+text-align:left;
+height:7%;
+box-sizing:border-box;
+overflow:hidden;
+}
+.infotext{
+
+font-size:18px;
+text-align:left;
+margin-left:15px;
+margin-right:15px;
+padding-left:5px;
+height:18%;
+margin-top:2px;
+}
+.infoimg>img {
+width:100%;
+	top: 0;
+	left: 0;
+	height: 100%;
+}
+
+
 </style>
 
 </head>
@@ -123,7 +168,9 @@ a[name="s-menu"]:hover {
 		<img src="/resources/images/dog_7.png">
 	</div>
 	<!--  body부분-->
- <div id="title"><h1>유용한 정보 </h1></div>
+	<div id="title">
+		<h1>유용한 정보</h1>
+	</div>
 
 	<div class="container">
 		<div class="row">
@@ -157,43 +204,50 @@ a[name="s-menu"]:hover {
 			<div class="col-1"></div>
 			<div class="col-lg-9 col-md-8 col-sm-12 col-12 info-box">
 				<!--정보   -->
-				<div class="row">
-					<div class="col-lg-3 col-md-3 col-sm-3">
+
+				<div class="row .infinite">
+					<c:forEach var="dto" items="${infodto}">
+						<div class="col-lg-4 col-md-6 col-sm-6 dtocol">
+							<div class=infowrapper>
+							
+								<div class=infoimg>${dto.image}</div>
+								<div class="inforecommend">♥</div>
+								<div class=infotext>${dto.title}</div>
+							</div>
+						</div>
+					</c:forEach>
+					<%-- <div class="  col-lg-3 col-md-3 col-sm-3">
 						<div class=infowrapper>
 							<div class=infoimg>이미지공간 입니다</div>
-							<div class=infotext>정보 작성해주세요</div>
+							<div class=infotext>${dto.title}<br>${dto.contents}</div>
 						</div>
-					</div>
-
+					</div> 
 					<div class="  col-lg-3 col-md-3 col-sm-3">
 						<div class=infowrapper>
 							<div class=infoimg>이미지공간 입니다</div>
-							<div class=infotext>정보 작성해주세요</div>
+							<div class=infotext>${dto.title}<br>${dto.contents}</div>
 						</div>
 					</div>
 					<div class="  col-lg-3 col-md-3 col-sm-3">
 						<div class=infowrapper>
 							<div class=infoimg>이미지공간 입니다</div>
-							<div class=infotext>정보 작성해주세요</div>
-						</div>
-					</div>
-					<div class="  col-lg-3 col-md-3 col-sm-3">
-						<div class=infowrapper>
-							<div class=infoimg>이미지공간 입니다</div>
-							<div class=infotext>정보 작성해주세요</div>
-						</div>
+							<div class=infotext>${dto.title}<br>${dto.contents}</div>
+						</div> --%>
 
 
-					</div>
 				</div>
-				<div class="row mt-5">
-				<div class="col-12">
-				<div ><input type="button" value="글쓰기" id="infowrite"> </div>
-				</div>
-				</div>
-			</div>	
 			</div>
-</div>
+		</div>
+		<div class="row mt-5" align="right">
+			<div class="col-12">
+				<div>
+					<input type="button" value="글쓰기" id="infowrite">
+				</div>
+			</div>
+		</div>
+
+	</div>
+	</div>
 
 
 	<!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
@@ -209,13 +263,16 @@ a[name="s-menu"]:hover {
 	<script src="resources/js/jquery.sticky.js"></script>
 	<script src="resources/js/isotope.pkgd.min.js"></script>
 	<script src="resources/js/main.js"></script>
-	
-	
+
+
 	<!--정보 스크립트 코드   -->
 	<script>
-	$("#infowrite").on("click",function(){
-		location.href="infowrite";
-	});
-	</script>
+	   document.getElementById("infowrite").onclick = function(){
+           location.href = "infowrite";
+       }
+	  </script>
+
+
+	
 </body>
 </html>

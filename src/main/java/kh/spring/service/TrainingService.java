@@ -1,4 +1,4 @@
-package kh.spring.service;
+/*package kh.spring.service;
 
 import kh.spring.dto.FileDTO;
 import kh.spring.dto.TrainingDTO;
@@ -8,3 +8,4 @@ public interface TrainingService {
 	public int insertTrainingService(TrainingDTO tdto);
 	public String imageUploadService(FileDTO fdto);
 }
+*/

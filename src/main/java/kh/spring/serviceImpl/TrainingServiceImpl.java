@@ -1,4 +1,4 @@
-package kh.spring.serviceImpl;
+/*package kh.spring.serviceImpl;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -47,7 +47,7 @@ public class TrainingServiceImpl implements TrainingService{
 			uploadPath.mkdirs();
 		}
 		try {
-			fdto.getImage().transferTo(new File(usersPath + "/" + time + "_tBoard_image.png"));
+			fdto.getFiles().transferTo(new File(usersPath + "/" + time + "_tBoard_image.png"));
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -58,3 +58,4 @@ public class TrainingServiceImpl implements TrainingService{
 	}
 
 }
+*/

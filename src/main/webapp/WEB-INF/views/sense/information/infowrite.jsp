@@ -33,6 +33,10 @@
 	rel="stylesheet">
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+
+<!--  module-->
+<jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
+
 <style>
 .jumbotron {
 	background-color: white;
@@ -127,30 +131,28 @@ a[name="s-menu"]:hover {
 
 <script>
 //파일 업로드        
-function sendFile(file,el){
-            data = new FormData();
-            data.append("file", file);
-//             alert(file);
-            $.ajax({
+function sendFile(files,editor){
+            var data = new FormData(document.getElementById("writeForm"));
+            data.append("files", files);
+             $.ajax({
                 data: data,
-                type: "POST",
-                url: "saveImageAjax.board",
+                type: "post",
+                url: "fileajax",
                 cache: false,
                 contentType: false,
                 processData: false,
                 enctype:"multipart/form-data",
-               success: function (data) {
-//                alert(data);
-               $(el).summernote('editor.insertImage', 'image'+data);
-//                $(".note-editable").append("<img src='image/"+data+"'>");
-                 }
-            });
-           };
+            }).done(function(resp){
+            	
+    		          $(".note-editable").append("<img src='"+resp+"' >");  
+            })
+}
+          
            
            
            
            
-            window.onload = function(){
+    window.onload = function(){
             //이전으로 버튼 
                 document.getElementById("tomainboard").onclick = function(){
                     location.href = "toBoard";
@@ -168,23 +170,30 @@ function sendFile(file,el){
                     if ($('#summernote').summernote('isEmpty')) {
                     alert('내용을 입력해주세요.');
                     return;       }
-                    
-				//summernote 작성이 완료된경우 
-               $('textarea[name="contents"]').val($('#summernote').summernote('code'));
-                    document.getElementById("writeForm").submit();    }
             
-                $('#summernote').summernote({
+				//summernote 작성이 완료된경우 
+            $('textarea[name="contents"]').val($('#summernote').summernote('code'));
+                    document.getElementById("writeForm").submit();   
+    }
+            $('#summernote').summernote({
                     placeholder: '내용을 입력해주세요.',
                     tabsize:2,
                     height: 500,
-                 /*    callbacks : {
+                  callbacks : {
                         onImageUpload: function(files, editor, welEditable) {
                             sendFile(files[0],this);
+                         
                         }
-                    } */
+                    } 
                 });
-            }
+    }   
         </script>
+
+<style>
+#smNote {
+	text-align: left;
+}
+</style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="300" id="home-section">
@@ -232,7 +241,8 @@ function sendFile(file,el){
 				<!--summernote body   -->
 
 				<form id="writeForm" action="writeformproc" method="post">
-					<textarea name="contents" style="display: none"></textarea> 
+					<textarea name="contents" style="display: none"></textarea>
+					
 					<div class="container">
 
 						<div class="row">
@@ -240,8 +250,8 @@ function sendFile(file,el){
 								<div class="input-group-prepend">
 									<span class="input-group-text">제목</span>
 								</div>
-								<input id="inputtitle" name="title" type="text" class="form-control"
-									placeholder="제목을 입력하세요">
+								<input id="inputtitle" name="title" type="text"
+									class="form-control" placeholder="제목을 입력하세요">
 							</div>
 						</div>
 						<div class="row">
@@ -249,7 +259,7 @@ function sendFile(file,el){
 							<div class="col-lg-12 col-md-12 d-md-block d-none">
 								<div id="smContents"></div>
 							</div>
-							
+
 							<div id="smNote" class="col-lg-12 col-md-12 col-sm-12">
 								<div id="summernote"></div>
 							</div>
@@ -282,11 +292,6 @@ function sendFile(file,el){
 	<script src="resources/js/main.js"></script>
 
 
-	<!--정보 스크립트 코드   -->
-	<script>
-	$("#infowrite").on("click",function(){
-		location.href="infowrite";
-	});
-	</script>
+
 </body>
 </html>

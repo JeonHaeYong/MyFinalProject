@@ -19,7 +19,7 @@
 	<!-- mypage이미지매칭 -->
 	<resources mapping="/mypage/**" location="/resources/images/mypage/" />
 	<resources mapping="/trainingBoard/**" location="/resources/trainingBoard/"/>
-
+<resources mapping="/info_board/**" location="/resources/info_board/"/>
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />

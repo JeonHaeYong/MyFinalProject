@@ -3,7 +3,10 @@
 <mapper namespace="InfoDAO">
 
 	<insert id="insertinfo">
-		insert into info_Board values(seq.nextval, #{title},
-		#{contents}, #{image}, #{writer},sysdate,#{ip})
+		insert into info_Board values(info_board_seq.nextval, #{title},
+		#{contents},#{image,jdbcType=VARCHAR},#{writer},sysdate,#{ip})
 	</insert>
+	<select id="selectall" resultType="kh.spring.dto.TrainingDTO">
+	select * from(SELECT seq,title,writer,writedate,image,RANK()OVER (ORDER BY seq DESC) RANK FROM info_Board order by writedate desc)where Rank between #{start} and #{end}
+	</select>
 </mapper>
