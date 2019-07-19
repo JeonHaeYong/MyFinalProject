@@ -3,18 +3,19 @@ package kh.spring.dto;
 import org.springframework.web.multipart.MultipartFile;
 
 public class FileDTO {
+	
 	private String title;
 	private String content;
-	private MultipartFile image;
+	private MultipartFile files;
 	public FileDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public FileDTO(String title, String content, MultipartFile image) {
+	public FileDTO(String title, String content, MultipartFile files) {
 		super();
 		this.title = title;
 		this.content = content;
-		this.image = image;
+		this.files = files;
 	}
 	public String getTitle() {
 		return title;
@@ -28,10 +29,12 @@ public class FileDTO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public MultipartFile getImage() {
-		return image;
+	public MultipartFile getFiles() {
+		return files;
 	}
-	public void setImage(MultipartFile image) {
-		this.image = image;
+	public void setFiles(MultipartFile files) {
+		this.files = files;
 	}
+	
+
 }

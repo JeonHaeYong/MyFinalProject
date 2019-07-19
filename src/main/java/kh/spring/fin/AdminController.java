@@ -14,12 +14,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import kh.spring.dto.BlackListDTO;
 import kh.spring.dto.QuizDTO;
 import kh.spring.service.QuizService;
 import kh.spring.serviceImpl.BlackListServiceImpl;
 import kh.spring.serviceImpl.ChartServiceImpl;
+import kh.spring.serviceImpl.DonationServiceImpl;
 
 @Controller
 public class AdminController
@@ -34,6 +36,8 @@ public class AdminController
 	BlackListServiceImpl blackService;
 	@Autowired
 	ChartServiceImpl chartService;
+	@Autowired
+	DonationServiceImpl donationService;
 	
 	//Member Start
 	@RequestMapping(value = "admin-member")
@@ -154,12 +158,62 @@ public class AdminController
 	
 	
 	//Donation Start
+	
 	@RequestMapping(value = "admin-donation")
 	public String donationPage()
 	{
 		return "myPage/admin/admin_donation";
 	}
+	@RequestMapping(value = "admin-donation-insert", method = RequestMethod.POST)
+	public Object addNewDonation(HttpServletRequest request,MultipartFile image1, MultipartFile image2, MultipartFile image3)
+	{
+		Object result = "error";
+		try
+		{
+			result = donationService.addNewDonation(request, image1, image2, image3);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	@RequestMapping(value = "admin-donation-image", method = RequestMethod.POST)
+	public Object changeLeftImage(MultipartFile left, MultipartFile right)
+	{
+		Object result = "error";
+		
+		try
+		{
+			result = donationService.changeImage(left, right);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 	//Donation End
+	
+	
+	
+	//Item Start
+	
+	@RequestMapping(value = "admin-item")
+	public String itemPage()
+	{
+		return "myPage/admin/admin_item";
+	}
+//	@RequestMapping(value = "admin-item-insert")
+//	public String insertItemDummy()
+//	{
+//		return "myPage/admin/admin_item";
+//	}
+	
+	//Item End
 	
 	
 	

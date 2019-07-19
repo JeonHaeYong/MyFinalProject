@@ -1,37 +1,39 @@
 package kh.spring.dto;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class ApiAbandonedAnimalDTO {
 	private int seq;
-	private Date noticeEdt;			// °ø°í Á¾·áÀÏ
-	private String popfile;			// µ¿¹° ÀÌ¹ÌÁö
-	private String processState;	// ÀÔ¾ç »óÅÂ
+	private Date noticeEdt;			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String popfile;			// ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½
+	private String processState;	// ï¿½Ô¾ï¿½ ï¿½ï¿½ï¿½ï¿½
 	private String sexCd;
-	private String neuterYn;		// Áß¼ºÈ­ ¿©ºÎ
+	private String neuterYn;		// ï¿½ß¼ï¿½È­ ï¿½ï¿½ï¿½ï¿½
 	private String specialMark;		// Æ¯Â¡
-	private String careNm;			// º¸È£¼Ò ÀÌ¸§
-	private String careTel;			// º¸È£¼Ò ÀüÈ­¹øÈ£
-	private String careAddr;		// º¸È£ Àå¼Ò
-	private String orgNm;			// °üÇÒ ±â°ü
-	private String chargeNm;		// ´ã´çÀÚ
-	private String officeTel;		// ´ã´çÀÚ ¿¬¶ôÃ³
-	private String noticeComment;	// Æ¯ÀÌ»çÇ×
-	private String desertionNo;		// À¯±â ¹øÈ£
-	private String thumbnail;		// ½æ³×ÀÏ ÀÌ¹ÌÁö
-	private Date happenDt;			// Á¢¼öÀÏ
-	private String happenPlace;		// ¹ß°ß Àå¼Ò
-	private String kindCd;			// Ç°Á¾
+	private String careNm;			// ï¿½ï¿½È£ï¿½ï¿½ ï¿½Ì¸ï¿½
+	private String careTel;			// ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½È£
+	private String careAddr;		// ï¿½ï¿½È£ ï¿½ï¿½ï¿½
+	private String orgNm;			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+	private String chargeNm;		// ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String officetel;		// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ã³
+	private String noticeComment;	// Æ¯ï¿½Ì»ï¿½ï¿½ï¿½
+	private String desertionNo;		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+	private String filename;		// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½
+	private Date happenDt;			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String happenPlace;		// ï¿½ß°ï¿½ ï¿½ï¿½ï¿½
+	private String kindCd;			// Ç°ï¿½ï¿½
 	private String colorCd;			
 	private String age;
 	private String weight;
-	private String noticeNo;		// °ø°í ¹øÈ£
-	private Date noticeSdt;			// °ø°í ½ÃÀÛÀÏ
+	private String noticeNo;		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+	private Date noticeSdt;			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	
+	
 	
 	public ApiAbandonedAnimalDTO() {}
 	public ApiAbandonedAnimalDTO(int seq, Date noticeEdt, String popfile, String processState, String sexCd,
 			String neuterYn, String specialMark, String careNm, String careTel, String careAddr, String orgNm,
-			String chargeNm, String officeTel, String noticeComment, String desertionNo, String thumbnail,
+			String chargeNm, String officetel, String noticeComment, String desertionNo, String filename,
 			Date happenDt, String happenPlace, String kindCd, String colorCd, String age, String weight, String noticeNo,
 			Date noticeSdt) {
 		this.seq = seq;
@@ -46,10 +48,10 @@ public class ApiAbandonedAnimalDTO {
 		this.careAddr = careAddr;
 		this.orgNm = orgNm;
 		this.chargeNm = chargeNm;
-		this.officeTel = officeTel;
+		this.officetel = officetel;
 		this.noticeComment = noticeComment;
 		this.desertionNo = desertionNo;
-		this.thumbnail = thumbnail;
+		this.filename = filename;
 		this.happenDt = happenDt;
 		this.happenPlace = happenPlace;
 		this.kindCd = kindCd;
@@ -131,11 +133,11 @@ public class ApiAbandonedAnimalDTO {
 	public void setChargeNm(String chargeNm) {
 		this.chargeNm = chargeNm;
 	}
-	public String getOfficeTel() {
-		return officeTel;
+	public String getOfficetel() {
+		return officetel;
 	}
-	public void setOfficeTel(String officeTel) {
-		this.officeTel = officeTel;
+	public void setOfficetel(String officetel) {
+		this.officetel = officetel;
 	}
 	public String getNoticeComment() {
 		return noticeComment;
@@ -149,11 +151,11 @@ public class ApiAbandonedAnimalDTO {
 	public void setDesertionNo(String desertionNo) {
 		this.desertionNo = desertionNo;
 	}
-	public String getThumbnail() {
-		return thumbnail;
+	public String getFilename() {
+		return filename;
 	}
-	public void setThumbnail(String thumbnail) {
-		this.thumbnail = thumbnail;
+	public void setFilename(String filename) {
+		this.filename = filename;
 	}
 	public Date getHappenDt() {
 		return happenDt;
