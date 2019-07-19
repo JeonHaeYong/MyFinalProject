@@ -28,7 +28,7 @@ public class MyPageUserInfoAdvice {
 			if(obj instanceof HttpServletRequest) {
 				request = (HttpServletRequest)obj;
 				break;
-			}
+			}   
 		}
 		String loginId = (String)request.getSession().getAttribute("id");
 		int msgYet = msgService.selectMsgYetReadCount(loginId);//안읽은 메세지가 몇개인지
@@ -36,6 +36,7 @@ public class MyPageUserInfoAdvice {
 		MemberDTO dto = mservice.selectOneMemberDTO_useMyPageAdvice(loginId);//로그인한 아이디의 정보
 		request.setAttribute("memberDTO", dto);
 		String methodName = pjp.getSignature().getName();
+		methodName = methodName.replaceAll("_loginCheck", "");
 		request.setAttribute("myPage", methodName);
 		Object retVal = null;
 		try {

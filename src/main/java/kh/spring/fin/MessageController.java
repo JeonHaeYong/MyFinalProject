@@ -57,8 +57,9 @@ public class MessageController {
 		return "redirect:toMyPage_message";
 	}
 
+	//쪽지함에서 page navi눌렀을때,
 	@ResponseBody
-	@RequestMapping("ClickMsgNavi")
+	@RequestMapping(value = "ClickMsgNavi" ,produces = "application/text; charset=utf8")
 	public String ClickMsgNavi(String category , String currentPage) {
 		String id = (String)session.getAttribute("id");
 		int page = Integer.parseInt(currentPage);
@@ -70,14 +71,14 @@ public class MessageController {
 		
 		String listStr = gson.toJson(list);
 		String naviStr = gson.toJson(navi);
-		System.out.println("listStr->"+listStr);
-		System.out.println("naviStr->"+naviStr);
+//		System.out.println("listStr->"+listStr);
+//		System.out.println("naviStr->"+naviStr);
 		
 		JsonObject object = new JsonObject();
 		object.addProperty("list", listStr);
 		object.addProperty("navi", naviStr);
 		String json = gson.toJson(object);
-		System.out.println(json);
+//		System.out.println(json);
 		return json;
 	}
 
