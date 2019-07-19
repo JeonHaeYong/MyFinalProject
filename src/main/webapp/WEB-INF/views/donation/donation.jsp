@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -28,6 +29,22 @@
 	color: #EC7357 !important;
 	font-weight: 600 !important;
 }
+
+#donation_btn
+{
+	background-color: #EC7357 !important;
+}
+
+#donation_btn:hover
+{
+	background-color: black !important;
+}
+
+.c-img
+{
+	width: 100% !important;
+	height: 300px !important;
+}
 </style>
 
 </head>
@@ -51,19 +68,38 @@
 
 
 						<div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
-							<div class="carousel-inner">
-								<div class="carousel-item active" data-interval="3000">
-									<img src="resources/images/dog_1.jpg" class="d-block w-100" alt="...">
-								</div>
-								<div class="carousel-item" data-interval="3000">
-									<img src="resources/images/dog_2.jpg" class="d-block w-100" alt="...">
-								</div>
-								<div class="carousel-item" data-interval="3000">
-									<img src="resources/images/dog_3.jpg" class="d-block w-100" alt="...">
-								</div>
+							<div id="carousel-inner" class="carousel-inner">
+								
+								<c:if test="${dto.image1 != '없음'}">
+									<div class="carousel-item" data-interval="3000">
+										<img src="${dto.image1}" class="d-block w-100 c-img" alt="...">
+									</div>
+								</c:if>
+								
+								<c:if test="${dto.image2 != '없음'}">
+									<div class="carousel-item" data-interval="3000">
+										<img src="${dto.image2}" class="d-block w-100 c-img" alt="...">
+									</div>
+								</c:if>
+								
+								<c:if test="${dto.image3 != '없음'}">
+									<div class="carousel-item" data-interval="3000">
+										<img src="${dto.image3}" class="d-block w-100 c-img" alt="...">
+									</div>
+								</c:if>
+								
+								<c:if test="${ ((dto.image1 == '없음') && (dto.image2 == '없음')) && (dto.image3 == '없음') }">
+									<div class="carousel-item" data-interval="3000">
+										<img src="resources/images/dog_1.jpg" class="d-block w-100 c-img" alt="...">
+									</div>
+								</c:if>
+								
 							</div>
-							<a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span>
-							</a> <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span>
+							<a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev"> 
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span>
+							</a> 
+							<a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next"> 
+								<span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span>
 							</a>
 						</div>
 
@@ -71,8 +107,8 @@
 
 					<div class="col-7 text-center">
 
-						<h3>큰글씨 큰글씨</h3>
-						<br> <br> 글씨글씨 글씨글씨<br> 글씨글씨 글씨글씨<br> 글씨글씨 글씨글씨<br>
+						<h3>${dto.title}</h3>
+						<br>${dto.explanation}
 
 					</div>
 
@@ -86,13 +122,13 @@
 				
 					<div class="col-12 col-lg-6 my-3 text-center">
 						
-						<img src="/resources/images/nmnb1.jpg" alt="사진이 없습니다." id="left_img" class="mx-5">
+						<img src="/resources/donation/left.jpg" alt="사진이 없습니다." id="left_img" class="mx-5">
 					
 					</div>
 					
 					<div class="col-12 col-lg-6 my-3 text-center">
 					
-						<img src="/resources/images/nmnb1.jpg" alt="사진이 없습니다." id="right_img" class="mx-5">
+						<img src="/resources/donation/right.jpg" alt="사진이 없습니다." id="right_img" class="mx-5">
 					
 					</div>
 				
@@ -102,7 +138,7 @@
 				
 					<div class="col-12 text-center">
 					
-						<input class="btn btn-info mt-5" type="button" value="후원">
+						<input id="donation_btn" class="btn btn-info mt-5" type="button" value="후원">
 						
 					</div>
 				
@@ -113,14 +149,14 @@
 			<div class="col-12 col-md-6 text-center my-5">
 
 				<img src="/resources/images/clock-64.png" alt="사진이 없습니다.">
-				<span id="last_time_span">3day 20 : 15 : 10</span>
+				<span id="last_time_span"></span>
 
 			</div>
 
 			<div class="col-12 col-md-6 text-center my-5">
 
 				<img src="/resources/images/pie-chart-64.png" alt="사진이 없습니다.">
-				<span>모금액 / 모금목표</span>
+				<span>${dto.currentmoney} / ${dto.goalmoney}</span>
 
 			</div>
 
@@ -157,8 +193,14 @@
 <script>
 	$(function()
     {
-	    CountDownTimer('07/30/2019', 'last_time_span'); //첫번째 인수로 넣은 날짜까지
-	    // 		CountDownTimer('01/01/2018 00:00 AM', 'newcountdown'); // 2018년 1월 1일까지, 시간을 표시하려면 01:00 AM과 같은 형식을 사용합니다.
+		
+		$("#carousel-inner div:first-child").addClass("active");
+		
+		var time = "${dto.enddate}";
+		var forTime = time.substring(5, 7)+"/"+time.substring(8, 10)+"/"+time.substring(0, 4);
+		
+	    CountDownTimer(forTime, 'last_time_span'); //첫번째 인수로 넣은 날짜까지
+// 		CountDownTimer('01/01/2018 00:00 AM', 'newcountdown'); // 2018년 1월 1일까지, 시간을 표시하려면 01:00 AM과 같은 형식을 사용합니다.
 	    
 	    function CountDownTimer(dt, id)
 	    {
@@ -198,6 +240,12 @@
 		    timer = setInterval(showRemaining, 1000);
 	    }
 	    // Source: stackoverflow
+	   
+	    
+	    $("img").on("error", function()
+		{
+	    	$(this).attr("src","resources/images/dog_1.jpg");
+		});
 	    
     });
     
