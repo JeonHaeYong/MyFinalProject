@@ -1,6 +1,8 @@
 
 package kh.spring.daoImpl;
 
+
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,8 +23,8 @@ public class ApiAbandonedAnimalDAOImpl implements ApiAbandonedAnimalDAO {
 
 	@Autowired
 	private SqlSessionTemplate sst;
-
-	public int writeApiAbandonedAnimal(ApiAbandonedAnimalDTO dto) {
+	
+	public int insertApi(ApiAbandonedAnimalDTO dto) {
 		return sst.insert("ApiDAO.insert", dto);
 	}
 
@@ -34,15 +36,31 @@ public class ApiAbandonedAnimalDAOImpl implements ApiAbandonedAnimalDAO {
 		return sst.selectOne("ApiDAO.selectOneBySeq", seq);
 	}
 
-	public List<ApiAbandonedAnimalDTO> selectAllApiAbandonedAnimal(int currentPage) {
+	public List<ApiAbandonedAnimalDTO> selectAllApiAbandonedAnimal(int currentPage,Date dateFrom,
+			Date dateTo, String species, String speciesKind, String sido, String sigungu, String shelter) {
 		int endNum = currentPage * recordCountPerPage;
 		int startNum = endNum - (recordCountPerPage - 1);
+//		System.out.println(dateFrom);
+//		System.out.println(dateTo);
+//		System.out.println(sido);
+//		System.out.println(sigungu);
+//		System.out.println(shelter);
+//		System.out.println(species);
+//		System.out.println(speciesKind);
+		Map<String,Object> hs = new HashMap<>();
+		hs.put("startNum", startNum);
+		hs.put("endNum", endNum);
+		hs.put("dateFrom", dateFrom);
+		hs.put("dateTo", dateTo);
+		hs.put("sidoSigungu", sido +" "+ sigungu);
+		hs.put("shelter", shelter);
+		hs.put("speciesNkind", species+" "+speciesKind);
+	
+		return sst.selectList("ApiDAO.selectAll", hs);
+	}//new Object[] {startNum, endNum, dateFrom, dateTo,sido, sigungu, shelter,species, speciesKind }
 
-		return sst.selectList("ApiDAO.selectAll", new Object[] { startNum, endNum });
-	}
-
-	public int deleteApiAbandonedAnimal(ApiAbandonedAnimalDTO dto) {
-		return sst.delete("ApiDAO.deleteBySeq", dto);
+	public int deleteAll() {
+		return sst.delete("ApiDAO.deleteAll");
 	}
 
 	public Map<String, Integer> getNaviForApiAbandonedAnimal(int currentPage){
@@ -98,5 +116,7 @@ public class ApiAbandonedAnimalDAOImpl implements ApiAbandonedAnimalDAO {
 
 		return pageNavi;
 	}
+
+
 
 }
