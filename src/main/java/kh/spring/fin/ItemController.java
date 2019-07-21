@@ -137,7 +137,10 @@ public class ItemController {
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
-		}	
+		}
+		dto.setName(dto.getName().replaceAll("<.?script>", ""));
+		dto.setCategory(dto.getCategory().replaceAll("<.?script>", ""));
+		dto.setContents(dto.getContents().replaceAll("<.?script>", ""));
 		dto.setSeller(id);
 		is.uploadItem(dto);
 		return "redirect:freeMarket?currentPage=1&category=all";

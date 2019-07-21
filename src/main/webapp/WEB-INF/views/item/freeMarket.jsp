@@ -179,7 +179,7 @@
 					</c:if>
 					<c:forEach var="dto" items="${itemList }">
 						<div class="col-lg-4 col-md-6 col-12 p-0">
-							<div class="card myCard" style="position: relative">
+							<div class="card myCard mb-3" style="position: relative">
 								<c:if test="${dto.soldout == 'y' }">
 									<span class="cardImg soldout">판매완료</span>
 								</c:if>
@@ -197,7 +197,8 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-12 d-flex justify-content-center" id="naviBox">
+			<div class="col-2"></div>
+			<div class="col-10 d-flex justify-content-center" id="naviBox">
 				<c:if test="${pageNavi.needPrev == 1 }">
 					<a class="navi" href="freeMarket?currentPage=${pageNavi.startNavi - 1}&category=${category}">&laquo;</a>
 				</c:if>
