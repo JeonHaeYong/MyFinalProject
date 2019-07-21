@@ -31,7 +31,7 @@
 							<li><a href="toAbandoned?currentPage=1" class="nav-link">유기동물</a></li>
 							<li><a href="?currentPage=1" class="nav-link">실종신고</a></li>
 
-							<li><a href="#trainers-section" class="nav-link">재회</a></li>
+							<li><a href="toReviewList" class="nav-link">재회</a></li>
 							<li><a href="freeMarket?currentPage=1&category=all" class="nav-link">무료나눔</a></li>
 							<li><a href="/oxQuiz" class="nav-link">Fun</a></li>
 							<li><a id="donation_link" href="donation" class="nav-link">후원하기</a></li>
