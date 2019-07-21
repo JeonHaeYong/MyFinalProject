@@ -22,6 +22,7 @@ import kh.spring.service.QuizService;
 import kh.spring.serviceImpl.BlackListServiceImpl;
 import kh.spring.serviceImpl.ChartServiceImpl;
 import kh.spring.serviceImpl.DonationServiceImpl;
+import kh.spring.serviceImpl.ItemServiceImpl;
 
 @Controller
 public class AdminController
@@ -38,6 +39,8 @@ public class AdminController
 	ChartServiceImpl chartService;
 	@Autowired
 	DonationServiceImpl donationService;
+	@Autowired
+	ItemServiceImpl itemService;
 	
 	//Member Start
 	@RequestMapping(value = "admin-member")
@@ -207,11 +210,56 @@ public class AdminController
 	{
 		return "myPage/admin/admin_item";
 	}
-//	@RequestMapping(value = "admin-item-insert")
-//	public String insertItemDummy()
-//	{
-//		return "myPage/admin/admin_item";
-//	}
+	@RequestMapping(value = "admin-item-insert")
+	public Object insertItemDummy()
+	{
+		Object result = "error";
+		
+		try
+		{
+			result = itemService.insertDummy();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	@ResponseBody
+	@RequestMapping(value = "admin-item-search", produces="application/json;charset=utf-8")
+	public Object itemSearch(String page)
+	{
+		Object result = "";
+		
+		try
+		{
+			result = itemService.selectForAdmin(page);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	@ResponseBody
+	@RequestMapping(value = "admin-item-permission")
+	public Object itemPermission(String items)
+	{
+		Object result = "";
+		
+		try
+		{
+			result = itemService.permissionItems(items);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 	
 	//Item End
 	
