@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="InfoDAO">
+
+	<insert id="insertinfo">
+		insert into info_Board values(info_board_seq.nextval, #{title},
+		#{contents},#{image,jdbcType=VARCHAR},#{writer},sysdate,#{ip})
+	</insert>
+	<select id="selectall" resultType="kh.spring.dto.TrainingDTO">
+	select * from(SELECT seq,title,writer,writedate,image,RANK()OVER (ORDER BY seq DESC) RANK FROM info_Board order by writedate desc)where Rank between #{start} and #{end}
+	</select>
+</mapper>

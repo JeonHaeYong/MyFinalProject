@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -33,30 +32,98 @@ import kh.spring.service.ApiAbandonedAnimalService;
 public class ApiAbandonedAnimalServiceImpl implements ApiAbandonedAnimalService{
 	@Autowired
 	private ApiAbandonedAnimalDAO dao;
+
+	public ApiAbandonedAnimalDTO selectOneApiAbandonedAnimal(int seq){
+		ApiAbandonedAnimalDTO dto = dao.selectOneApiAbandonedAnimal(seq);
+		if(dto.getSexCd().replace(" ", "").equals("M")) {
+			dto.setSexCd("수컷");
+		}else if(dto.getSexCd().replace(" ", "").equals("F")) {
+			dto.setSexCd("암컷");
+		}else {
+			dto.setSexCd("미상");
+		}
 	
-	
+		return dto;
+	}
+
 	public int deleteAll() {
 		int result = dao.deleteAll();
 		return result;
 	}
 	
+	@Override
+
+	public List<ApiAbandonedAnimalDTO> selectAll(int currentPage) {
+		
+		String from = "2019-01-01";
+		SimpleDateFormat sdf = new SimpleDateFormat ( "yyyy-MM-dd");
+		String to = sdf.format (System.currentTimeMillis());
+	
+		Date dateFrom = null;
+		Date dateTo = null;
+		try {
+			dateFrom = (Date) sdf.parse(from);
+			dateTo = (Date) sdf.parse(to);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		int recordCountPerPage = 12;
+		int endNum = currentPage *recordCountPerPage;
+		int startNum = endNum - (recordCountPerPage-1);
+		
+		String processState="보호중";
+
+		List<ApiAbandonedAnimalDTO> list = dao.selectAll(currentPage,
+				startNum, endNum, dateFrom, dateTo, processState);
+		
+		for(ApiAbandonedAnimalDTO dto : list) {
+			
+			if(dto.getSexCd().replace(" ", "").equals("M")) {
+				dto.setSexCd("수컷");
+			}else if(dto.getSexCd().replace(" ", "").equals("F")) {
+				dto.setSexCd("암컷");
+			}else {
+				dto.setSexCd("미상");
+			}
+			
+		}
+		
+		return list;
+	}
+
 	public Map<String, Integer> getNaviforApiAbandonedAnimal(int currentPage) {
 		Map<String, Integer> pageNavi = dao.getNaviForApiAbandonedAnimal(currentPage);
 		return pageNavi;
 	}
 
 	@Override
-	public List<ApiAbandonedAnimalDTO> selectApiAbandonedAnimal(int currentPage,String from,
-			String to, String species, String speciesKind, String sido, String sigungu, String shelter) {
-		if(shelter == null || shelter == "0") {
+	public List<ApiAbandonedAnimalDTO> selectByCondition(int currentPage,String from,
+			String to, String species, String speciesKind, String sido, String sigungu, String shelter, String processState) {
+		if(shelter == null || shelter.equals("")) {
 			shelter = "%";
 		}
-		if(species == null) {
+		if(species == null || species.equals("")) {
 			species = "%";
 		}
-		if(speciesKind == null) {
+		if(speciesKind == null || speciesKind.equals("")) {
 			speciesKind = "%";
 		}
+		if(sido == null || sido.equals("")) {
+			sido = "%";
+		}
+		if(sigungu == null || sigungu.equals("")) {
+			sigungu = "%";
+		}
+		if(processState.equals("전체")) {
+			processState = "%";
+		}
+	
+		System.out.println("보호소"+shelter);
+		System.out.println("축종"+species);
+		System.out.println("품종"+speciesKind);
+		System.out.println("시도"+sido);
+		System.out.println("시군구"+sigungu);
 		
 		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date dateFrom = null;
@@ -68,18 +135,31 @@ public class ApiAbandonedAnimalServiceImpl implements ApiAbandonedAnimalService{
 			
 			e.printStackTrace();
 		}
-		List<ApiAbandonedAnimalDTO> list = dao.selectAllApiAbandonedAnimal(currentPage, dateFrom, dateTo, species, speciesKind, sido, sigungu, shelter);
+		
+		System.out.println("현재페이지"+currentPage);
+		int recordCountPerPage = 12;
+		int endNum = currentPage *recordCountPerPage;
+		int startNum = endNum - (recordCountPerPage-1);
+		System.out.println("startNum"+startNum);
+		System.out.println("endNum"+endNum);
+		
+		List<ApiAbandonedAnimalDTO> list = dao.selectByCondition(currentPage,
+				startNum, endNum, dateFrom, dateTo, species, speciesKind, sido, sigungu, shelter, processState);
+		
 		for(ApiAbandonedAnimalDTO dto : list) {
-			System.out.println(dto.getSpecialMark());
+			
+			if(dto.getSexCd().replace(" ", "").equals("M")) {
+				dto.setSexCd("수컷");
+			}else if(dto.getSexCd().replace(" ", "").equals("F")) {
+				dto.setSexCd("암컷");
+			}else {
+				dto.setSexCd("미상");
+			}
+			
 		}
 		return list;
 	}
 
-	@Override
-	public ApiAbandonedAnimalDTO readOneApiAbandonedAnimal(int seq) {
-		ApiAbandonedAnimalDTO dto = dao.readOneApiAbandonedAnimal(seq);
-		return dto;	
-	}
 
 	@Override
 	public int apiAbandonedAnimalContentsSize() {
@@ -187,7 +267,6 @@ public class ApiAbandonedAnimalServiceImpl implements ApiAbandonedAnimalService{
 		
 		return "error";
 	}
-
 
 }	
 

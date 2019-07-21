@@ -2,16 +2,18 @@ package kh.spring.dto;
 
 public class QuizDTO {
 	private int seq;
-	private String quiz;	// ÄûÁî ³»¿ë
-	private String correct;	// Á¤´ä
+	private String quiz;	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	private String correct;	// ï¿½ï¿½ï¿½ï¿½
 	private int point;
+	private String explain;
 	
 	public QuizDTO() {}
-	public QuizDTO(int seq, String quiz, String correct, int point) {
+	public QuizDTO(int seq, String quiz, String correct, int point, String explain) {
 		this.seq = seq;
 		this.quiz = quiz;
 		this.correct = correct;
 		this.point = point;
+		this.explain = explain;
 	}
 	public int getSeq() {
 		return seq;
@@ -36,5 +38,11 @@ public class QuizDTO {
 	}
 	public void setPoint(int point) {
 		this.point = point;
+	}
+	public String getExplain() {
+		return explain;
+	}
+	public void setExplain(String explain) {
+		this.explain = explain;
 	}
 }

@@ -27,7 +27,7 @@ public class ApiAbandonedAnimalDTO {
 	private String weight;
 	private String noticeNo;		// ���� ��ȣ
 	private Date noticeSdt;			// ���� ������
-	
+
 	public ApiAbandonedAnimalDTO() {}
 	public ApiAbandonedAnimalDTO(int seq, Date noticeEdt, String popfile, String processState, String sexCd,
 			String neuterYn, String specialMark, String careNm, String careTel, String careAddr, String orgNm,
