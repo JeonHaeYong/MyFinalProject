@@ -13,4 +13,5 @@ public interface TrainingService {
 	public String imageUploadService(MultipartFile image);
 	public List<TrainingDTO> trainingPerPageService(int currentPage);
 	public int recordCountService();
+	
 }

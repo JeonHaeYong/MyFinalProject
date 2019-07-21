@@ -23,6 +23,7 @@
 	<mvc:resources mapping="/mypage/**" location="/resources/images/mypage/" />
 	<mvc:resources mapping="/trainingBoard/**" location="/resources/trainingBoard/" />
 	<mvc:resources mapping="/info_board/**" location="/resources/info_board/"/>
+	<mvc:resources mapping="/DisappearReport/**" location="/resources/DisappearReport/"></mvc:resources>
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -34,7 +35,7 @@
 	
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-		<beans:property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+		<beans:property name="url" value="jdbc:oracle:thin:@localhost:59161:xe"/>
 		<beans:property name="username" value="final"/>
 		<beans:property name="password" value="final"/>
 	</beans:bean>
