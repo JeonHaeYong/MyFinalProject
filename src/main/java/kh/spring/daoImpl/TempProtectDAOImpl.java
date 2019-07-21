@@ -42,8 +42,8 @@ public class TempProtectDAOImpl implements TempProtectDAO {
 		return sst.selectOne("TempProtectDAO.selectBySeq", seq);
 	}
 
-	public int writeTempProtect(TempProtectDTO dto) {
-		return sst.insert("TempProtectDAO.write", dto);
+	public int uploadTempProtect(TempProtectDTO dto) {
+		return sst.insert("TempProtectDAO.upload", dto);
 	}
 	
 	public List<TempProtectDTO> selectAllTempProtect(int currentPage){

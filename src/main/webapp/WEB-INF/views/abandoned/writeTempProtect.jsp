@@ -194,21 +194,21 @@
 			
 			for (var i = 1; i <= sidoArr.length; i++) {
 			
-				if (selectedItem == sidoCdArr[i - 1]) {
+				if (selectedItem == sidoArr[i - 1]) {
 					index = i - 1;
 					break;
 				}
 			}
 
 			sigungu_select.empty();
-			
+			console.log(index);
 			var length = sigunguArr[index].length;
 
 			var newOption = $("<option class='op_sigungu' value='0'>선택</option>");
 			sigungu_select.append(newOption);
 
 			for (var i = 1; i <= length; i++) {
-				newOption = $("<option class='op_sigungu' value='"+sigunguCdArr[index][i-1]+"'>"
+				newOption = $("<option class='op_sigungu' value='"+sigunguArr[index][i-1]+"'>"
 						+ sigunguArr[index][i - 1]
 						+ "</option>");
 				sigungu_select.append(newOption);
@@ -261,7 +261,7 @@
 						<a href="toAbandoned?currentPage=1">유기동물조회</a>
 					</div>
 					<div>
-						<a href="listTempProtect">임시보호중</a>
+						<a href="listTempProtect?currentPage=1">임시보호중</a>
 					</div>
 					<div>
 						<a href="">동물병원 조회</a>
@@ -295,22 +295,22 @@
 								<div class="col-lg-2 col-md-2">시도</div>
 								<div class="col-lg-4 col-md-4"><select id="sido_select" name="sido" required>
 											<option class="op_sido" value="0">선택</option>
-											<option class="op_sido" value="6110000">서울특별시</option>
-											<option class="op_sido" value="6260000">부산광역시</option>
-											<option class="op_sido" value="6270000">대구광역시</option>
-											<option class="op_sido" value="6280000">인천광역시</option>
-											<option class="op_sido" value="6290000">광주광역시</option>
-											<option class="op_sido" value="6300000">대전광역시</option>
-											<option class="op_sido" value="6310000">울산광역시</option>
-											<option class="op_sido" value="6410000">경기도</option>
-											<option class="op_sido" value="6420000">강원도</option>
-											<option class="op_sido" value="6430000">충청북도</option>
-											<option class="op_sido" value="6440000">충청남도</option>
-											<option class="op_sido" value="6450000">전라북도</option>
-											<option class="op_sido" value="6460000">전라남도</option>
-											<option class="op_sido" value="6470000">경상북도</option>
-											<option class="op_sido" value="6480000">경상남도</option>
-											<option class="op_sido" value="6500000">제주특별자치도</option>
+											<option class="op_sido" value="서울특별시">서울특별시</option>
+											<option class="op_sido" value="부산광역시">부산광역시</option>
+											<option class="op_sido" value="대구광역시">대구광역시</option>
+											<option class="op_sido" value="인천광역시">인천광역시</option>
+											<option class="op_sido" value="광주광역시">광주광역시</option>
+											<option class="op_sido" value="대전광역시">대전광역시</option>
+											<option class="op_sido" value="울산광역시">울산광역시</option>
+											<option class="op_sido" value="경기도">경기도</option>
+											<option class="op_sido" value="강원도">강원도</option>
+											<option class="op_sido" value="충청북도">충청북도</option>
+											<option class="op_sido" value="충청남도">충청남도</option>
+											<option class="op_sido" value="전라북도">전라북도</option>
+											<option class="op_sido" value="전라남도">전라남도</option>
+											<option class="op_sido" value="경상북도">경상북도</option>
+											<option class="op_sido" value="경상남도">경상남도</option>
+											<option class="op_sido" value="제주특별자치도">제주특별자치도</option>
 									</select></div>
 									<div class="col-lg-2 col-md-2">시군구</div>
 									<div class="col-lg-4 col-md-4"><select id="sigungu_select" name="sigungu" required>
@@ -321,15 +321,15 @@
 								<div class="col-lg-2 col-md-2">발견장소</div>
 								<div class="col-lg-4 col-md-4"><input type="text" name="place" required></div>
 									<div class="col-lg-2 col-md-2">발견날짜</div>
-									<div class="col-lg-4 col-md-4"><input type="date" name="lostDate" required></div>
+									<div class="col-lg-4 col-md-4"><input type="date" name="findDateString" required></div>
 							</div>
 							<div class="row">
 								<div class="col-lg-2 col-md-2">동물종류 및 품종</div>
 								<div class="col-lg-4 col-md-4"><input type="text" name="type"></div>
 									<div class="col-lg-2 col-md-2">성별</div>
 									<div class="col-lg-4 col-md-4"><select id="sex_select" name="sex">
-											<option class="op_sex" value="1">암컷</option>
-											<option class="op_sex" value="2">수컷</option>
+											<option class="op_sex" value="암컷">암컷</option>
+											<option class="op_sex" value="수컷">수컷</option>
 									</select></div>
 							</div>
 							<div class="row">
@@ -343,13 +343,13 @@
 							<div class="row">
 								<div class="col-lg-2 col-md-2">이미지</div>
 								<div class="col-lg-4 col-md-4"><input type="file"
-								id="img" name="imagePath"></div>
+								id="img" name="image"></div>
 									<div class="col-lg-2 col-md-2"></div>
 									<div class="col-lg-4 col-md-4"></div>
 							</div>
 							<div class="row">
 								<div class="col-lg-2 col-md-2"></div>
-								<div class="col-lg-4 col-md-4"><img src="" id="showImg" style="width:200px;height:150px"></div>
+								<div class="col-lg-4 col-md-4"><img id="showImg" style="width:200px;height:150px"></div>
 									<div class="col-lg-2 col-md-2"></div>
 									<div class="col-lg-4 col-md-4"></div>
 							</div>

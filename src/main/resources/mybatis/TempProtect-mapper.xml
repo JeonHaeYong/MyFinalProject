@@ -2,31 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="TempProtectDAO">
 	<delete id="delete">
-		delete from TempProtect where seq=#{seq}
+		delete from temp_protect where seq=#{seq}
 	</delete>
 	<insert id="modify">
-		update TempProtect set title=#{title}, writer=#{writer}, lostDate=#{lostDate},
-		 siDo=#{siDo}, siGunGu=#{siGunGu}, place=#{place}, type=#{type}, sex=#{sex},
-		 color=#{color}, age=#{age}, feat=#{feat}, imagePath=#{imagePath},email=#{email},
+		update temp_protect set title=#{title}, writer=#{writer}, findDate=#{findDate},
+		 sido=#{sido}, sigungu=#{sigungu}, place=#{place}, type=#{type}, sex=#{sex},
+		 color=#{color}, feat=#{feat}, imagePath=#{imagePath},email=#{email},
 		 phone=#{phone}, writeTime=#{writeTime} where seq=#{seq}
 	</insert>
 	<select id="select" resultType="int">
-		select count(*) from TempProtect
+		select count(*) from temp_protect
 	</select>
 	<select id="selectBySeq" resultType="kh.spring.dto.TempProtectDTO">
-		select * from TempProtect where seq=#{value}
+		select * from temp_protect where seq=#{value}
 	</select>
-	<insert id="write">
-		insert into TempProtect values(TempProtect_seq.nextval,#{title}, #{writer},=#{lostDate},
-		 #{siDo}, #{siGunGu}, #{place}, #{type}, #{sex},
-		#{color}, #{age}, #{feat}, #{imagePath}, #{email},
-		 #{phone}, #{writeTime} )
+	<insert id="upload">
+		insert into temp_protect values(temp_protect_seq.nextval,#{title}, #{writer}, #{findDate},
+		 #{sido}, #{sigungu}, #{place}, #{type}, #{sex},
+		#{color}, #{feat}, #{imagePath}, #{email},
+		 #{phone}, #{writeTime})
 	</insert>
 	<select id="selectList" resultType="kh.spring.dto.TempProtectDTO">
-		select * from (select row_number() over(order by seq desc) as rown, title, writer, lostDate,
-		 siDo, siGunGu, place, type, sex,
-		 color, age, feat, imagePath,email,
-		 phone, writeTime from TempProtect)"
+		select * from (select row_number() over(order by seq desc) as rown, title, writer, findDate,
+		 sido, sigungu, place, type, sex,
+		 color, feat, imagePath,email,
+		 phone, writeTime from temp_protect)"
 				+ " where rown between #{array[0]} and #{array[1]}
 	</select>
 </mapper>

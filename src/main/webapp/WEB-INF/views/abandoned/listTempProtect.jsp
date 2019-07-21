@@ -46,7 +46,7 @@
 						<a href="toAbandoned?currentPage=1">유기동물조회</a>
 					</div>
 					<div>
-						<a href="listTempProtect">임시보호중</a>
+						<a href="listTempProtect?currentPage=1">임시보호중</a>
 					</div>
 					<div>
 						<a href="">동물병원 조회</a>
@@ -61,7 +61,33 @@
 				</div>
 
 				<div class="col-lg-8 col-md-8 col-sm-12 col-12 row">
+					<c:forEach var="dto" items="${list}">
 
+						<div class="card myCard col-lg-4 col-md-4 col-sm-12">
+							<a href="detailTempProtect?seq=${dto.seq }"><img
+								src="${dto.imagePath }" class="card-img-top" alt="..."
+								style="width: 211px; height: 150px"></a>
+							<div class="card-body">
+
+								<p class="card-text">
+									<label class="title"><strong>제목</strong> </label><label
+										class="content">${dto.title}</label><br> <label
+										class="title"><strong>발견날짜 </strong> </label><label
+										class="content"><fmt:formatDate
+											value="${dto.findDate }" pattern="yyyy-MM-dd" /></label> <br>
+									<label class="title"><strong>시도 </strong></label><label
+										class="content">${dto.sido }</label><br> <label
+										class="title"><strong>시군구</strong></label><label
+										class="content">${dto.sigungu }</label><br> <label
+										class="title"><strong>발견 장소 </strong></label><label
+										class="content">${dto.place }</label><br> <label
+										class="title"><strong>품종 </strong></label><label
+										class="content">${dto.type }</label><br>
+								</p>
+							</div>
+						</div>
+
+					</c:forEach>
 					<input type="button" id="write" value="글  작성">
 				</div>
 			</div>

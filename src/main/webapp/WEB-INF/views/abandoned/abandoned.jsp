@@ -715,7 +715,7 @@ a:hover{
 						<a href="toAbandoned?currentPage=1">유기동물조회</a>
 					</div>
 					<div>
-						<a href="listTempProtect">임시보호중</a>
+						<a href="listTempProtect?currentPage=1">임시보호중</a>
 					</div>
 					<div>
 						<a href="">동물병원 조회</a>

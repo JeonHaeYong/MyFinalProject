@@ -3,9 +3,10 @@ package kh.spring.fin;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -41,39 +42,34 @@ public class AbandonedController {
 	TempProtectServiceImpl tempService;
 
 	@RequestMapping("uploadTempProtect")
-	public String uploadTempProtect(TempProtectDTO dto, String findDate, MultipartFile image) throws ParseException {
+	public String uploadTempProtect(TempProtectDTO dto, String findDateString, MultipartFile image) throws ParseException, IllegalStateException, IOException {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date lostDate = (Date) sdf.parse(findDate);
-		dto.setLostDate(lostDate);
+		Date findDate = (Date) sdf.parse(findDateString);
+		dto.setFindDate(findDate);
 
-		String uploadPath = session.getServletContext().getRealPath("/resources");
-		try {
-			image.transferTo(new File(uploadPath + "/" + System.currentTimeMillis()+"_"+dto.getImagePath()));
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+		String resourcePath = session.getServletContext().getRealPath("/resources");
+		String realPath = resourcePath + "/" + System.currentTimeMillis()+"_"+image.getOriginalFilename();
+		dto.setImagePath(realPath);
+		image.transferTo(new File(realPath));
 
+		dto.setWriter(session.getId());
+		Timestamp ts = new Timestamp(System.currentTimeMillis());
+		dto.setWriteTime(ts);
+		int result = tempService.uploadTempProtect(dto);
 		return "abandoned/listTempProtect";
 	}
 
 	@RequestMapping("listTempProtect")
-	public String tempProtect() {
-		//		request.setAttribute("from", from);
-		//		request.setAttribute("to", to);
-		//		request.setAttribute("sido", sido);
-		//		request.setAttribute("sigungu", sigungu);
-		//		request.setAttribute("shelter", shelter);
-		//		request.setAttribute("species", species);
-		//		request.setAttribute("speciesKind", speciesKind);
-		//		try {
-		//			List<TempProtectDTO> list = tempService.selectTempProtect(currentPage, from, to, species, speciesKind, sido, sigungu, shelter);
-		//			Map<String, Integer> pageNavi = apiService.getNaviforTempProtect(currentPage);
-		//			request.setAttribute("list", list);
-		//			request.setAttribute("pageNavi", pageNavi);
-		//		} catch (Exception e) {
-		//			e.printStackTrace();
-		//		}
+	public String tempProtect(HttpServletRequest request, int currentPage ) {
+		try {
+			List<TempProtectDTO> list = tempService.selectAllTempProtect(currentPage);
+			Map<String, Integer> pageNavi = tempService.getNaviForTempProtect(currentPage);
+			request.setAttribute("list", list);
+			request.setAttribute("pageNavi", pageNavi);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		return "abandoned/listTempProtect";
 	}
