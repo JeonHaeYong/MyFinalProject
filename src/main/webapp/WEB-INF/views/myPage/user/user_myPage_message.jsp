@@ -39,6 +39,12 @@
                     .page-link{
                     	color : #754F44;
                     }
+                    .msg_box_nav{
+                    	color : #754F44 !important;
+                    }
+                    .msg_box_nav.active{
+                    	color : #EC7357 !important;
+                    }
                 </style>
                 <jsp:include page="/WEB-INF/views/myPage/user/user_module/mypage_user_style.jsp" ></jsp:include><!-- user 마이페이지 스타일 -->
                 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
@@ -57,8 +63,8 @@
                                 <div class="col-12">
                                     <nav>
                                         <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
-                                            <a class="nav-item nav-link active" id="nav-inbox-tab" data-toggle="tab" href="#nav-inbox" role="tab" aria-controls="nav-inbox" aria-selected="true">받은 쪽지함</a>
-                                            <a class="nav-item nav-link" id="nav-sentbox-tab" data-toggle="tab" href="#nav-sentbox" role="tab" aria-controls="nav-sentbox" aria-selected="false">보낸 쪽지함</a>
+                                            <a class="nav-item nav-link active msg_box_nav" id="nav-inbox-tab" data-toggle="tab" href="#nav-inbox" role="tab" aria-controls="nav-inbox" aria-selected="true">받은 쪽지함</a>
+                                            <a class="nav-item nav-link msg_box_nav" id="nav-sentbox-tab" data-toggle="tab" href="#nav-sentbox" role="tab" aria-controls="nav-sentbox" aria-selected="false">보낸 쪽지함</a>
                                         </div>
                                     </nav>
                                     <div class="tab-content" id="nav-tabContent">
@@ -164,6 +170,13 @@
                                                 <div class="col-3">보낸날짜</div>
                                                 <div class="col-1">Read</div>
                                             </div>
+                                            <c:if test="${sentList.size()==0 }">
+                                            	<div class="row">
+                                            		<div class="col-12 text-center">
+                                            			보낸 쪽지가 없습니다.
+                                            		</div>
+                                            	</div>
+                                            </c:if>
                                             <form id="sentMsg_delete_form" action="deleteMsg" method="post">
                                             <c:forEach var="s_list" items="${sentList }" varStatus="status">
                                             <!-- 보낸쪽지함 내용들 -->
@@ -310,6 +323,7 @@
                     //alert(recipient + " : " + content);
                     if("${memberDTO.id}"==recipient){
                     	alert("쪽지는 본인에게 쓸수없습니다.");
+                    	$("#recipient-name").focus();
                     	return false;
                     }
                     $.ajax({

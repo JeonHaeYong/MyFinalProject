@@ -8,7 +8,7 @@ import org.w3c.dom.Element;
 import kh.spring.dto.TempProtectDTO;
 
 public interface TempProtectService {
-	public int writeTempProtect(TempProtectDTO dto);
+	public int uploadTempProtect(TempProtectDTO dto);
 	public List<TempProtectDTO> selectAllTempProtect(int currentPage);
 	public TempProtectDTO readOneTempProtect(int seq);
 	public int deleteTempProtect(TempProtectDTO dto);

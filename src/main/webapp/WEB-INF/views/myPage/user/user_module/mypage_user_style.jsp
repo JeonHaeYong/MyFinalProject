@@ -7,9 +7,11 @@ src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Binggrae-B
 font-weight: normal; font-style: normal; }
 @font-face { font-family: 'LotteMartDream'; font-style: normal; font-weight: 400; 
 src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff') format('woff'); } @font-face { font-family: 'LotteMartDream'; font-style: normal; font-weight: 700; src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff') format('woff'); } @font-face { font-family: 'LotteMartDream'; font-style: normal; font-weight: 300; src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff') format('woff'); } .lottemartdream * { font-family: 'LotteMartDream', sans-serif; }
-body{
-	font-family: LotteMartDream;
-}
+/* body{ */
+/* 	font-family: LotteMartDream; */
+/* } */
+             	body *{ font-family: 'Gamja Flower', cursive; font-size: 22px;}
+             	::placeholder{font-family: 'Gamja Flower', cursive;}
                 .topBackGround{
                     height: 100px;
                 }

@@ -61,6 +61,7 @@ public class ApiAbandonedAnimalDAOImpl implements ApiAbandonedAnimalDAO {
 		hs.put("dateTo", dateTo);
 		hs.put("sidoSigungu", sido +" "+ sigungu);
 		hs.put("shelter", shelter);
+
 		hs.put("species", "%"+species+"%");
 		hs.put("speciesKind", "%"+speciesKind+"%");
 		hs.put("processState", "%"+processState+"%");

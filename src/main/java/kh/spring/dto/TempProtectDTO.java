@@ -1,47 +1,47 @@
 
 package kh.spring.dto;
 
-import java.sql.Date;
+
 import java.sql.Timestamp;
+import java.util.Date;
 
 public class TempProtectDTO {
 	private int seq;
 	private String title;
-	private String writer;
-	private Date lostDate;
-	private String siDo;
-	private String siGunGu;
+	private Date findDate;
+	private String sido;
+	private String sigungu;
 	private String place;
 	private String type;
 	private String sex;
 	private String color;
-	private String age;
 	private String feat;
 	private String imagePath;
 	private String email;
 	private String phone;
+	private String writer;
 	private Timestamp writeTime;
-	
-	public TempProtectDTO() {}
-	public TempProtectDTO(int seq, String title, String writer, Date lostDate, String siDo, String siGunGu,
-			String place, String type, String sex, String color, String age, String feat, String imagePath,
-			String email, String phone, Timestamp writeTime) {
+	public TempProtectDTO() {
+		super();
+	}
+	public TempProtectDTO(int seq, String title, Date findDate, String sido, String sigungu, String place, String type,
+			String sex, String color, String feat, String imagePath, String email, String phone, String writer,
+			Timestamp writeTime) {
 		super();
 		this.seq = seq;
 		this.title = title;
-		this.writer = writer;
-		this.lostDate = lostDate;
-		this.siDo = siDo;
-		this.siGunGu = siGunGu;
+		this.findDate = findDate;
+		this.sido = sido;
+		this.sigungu = sigungu;
 		this.place = place;
 		this.type = type;
 		this.sex = sex;
 		this.color = color;
-		this.age = age;
 		this.feat = feat;
 		this.imagePath = imagePath;
 		this.email = email;
 		this.phone = phone;
+		this.writer = writer;
 		this.writeTime = writeTime;
 	}
 	public int getSeq() {
@@ -56,29 +56,23 @@ public class TempProtectDTO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getWriter() {
-		return writer;
+	public Date getFindDate() {
+		return findDate;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setFindDate(Date findDate) {
+		this.findDate = findDate;
 	}
-	public Date getLostDate() {
-		return lostDate;
+	public String getSido() {
+		return sido;
 	}
-	public void setLostDate(Date lostDate) {
-		this.lostDate = lostDate;
+	public void setSido(String sido) {
+		this.sido = sido;
 	}
-	public String getSiDo() {
-		return siDo;
+	public String getSigungu() {
+		return sigungu;
 	}
-	public void setSiDo(String siDo) {
-		this.siDo = siDo;
-	}
-	public String getSiGunGu() {
-		return siGunGu;
-	}
-	public void setSiGunGu(String siGunGu) {
-		this.siGunGu = siGunGu;
+	public void setSigungu(String sigungu) {
+		this.sigungu = sigungu;
 	}
 	public String getPlace() {
 		return place;
@@ -104,12 +98,6 @@ public class TempProtectDTO {
 	public void setColor(String color) {
 		this.color = color;
 	}
-	public String getAge() {
-		return age;
-	}
-	public void setAge(String age) {
-		this.age = age;
-	}
 	public String getFeat() {
 		return feat;
 	}
@@ -134,10 +122,21 @@ public class TempProtectDTO {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
 	public Timestamp getWriteTime() {
 		return writeTime;
 	}
 	public void setWriteTime(Timestamp writeTime) {
 		this.writeTime = writeTime;
-	}	
+	}
+
+	
+
+
+
 }

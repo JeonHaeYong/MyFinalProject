@@ -72,7 +72,10 @@ public class TrainingController {
 			TrainingDTO tdto = new TrainingDTO(0, fdto.getTitle(),fdto.getContent(), null, id, null, ip);
 			int result = 0;
 			try {
-				result = ts.NoImageService(tdto);
+				for(int i =0; i< 30 ; i++) {
+					tdto.setTitle("훈련"+i);
+					result = ts.NoImageService(tdto);
+				}
 			}catch(Exception e) {
 				e.printStackTrace();
 				return "redirect:/error.jsp";

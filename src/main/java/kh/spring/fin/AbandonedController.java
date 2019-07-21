@@ -1,26 +1,37 @@
 package kh.spring.fin;
 
+
+import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.SAXException;
 
 import kh.spring.daoImpl.ApiAbandonedAnimalDAOImpl;
 import kh.spring.dto.ApiAbandonedAnimalDTO;
+import kh.spring.dto.TempProtectDTO;
 import kh.spring.serviceImpl.ApiAbandonedAnimalServiceImpl;
 import kh.spring.serviceImpl.TempProtectServiceImpl;
 
 @Controller
 public class AbandonedController {
+	@Autowired
+	private HttpSession session;
+
 	@Autowired
 	ApiAbandonedAnimalDAOImpl dao;
 
@@ -30,23 +41,35 @@ public class AbandonedController {
 	@Autowired
 	TempProtectServiceImpl tempService;
 
+	@RequestMapping("uploadTempProtect")
+	public String uploadTempProtect(TempProtectDTO dto, String findDateString, MultipartFile image) throws ParseException, IllegalStateException, IOException {
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date findDate = (Date) sdf.parse(findDateString);
+		dto.setFindDate(findDate);
+
+		String resourcePath = session.getServletContext().getRealPath("/resources");
+		String realPath = resourcePath + "/" + System.currentTimeMillis()+"_"+image.getOriginalFilename();
+		dto.setImagePath(realPath);
+		image.transferTo(new File(realPath));
+
+		dto.setWriter(session.getId());
+		Timestamp ts = new Timestamp(System.currentTimeMillis());
+		dto.setWriteTime(ts);
+		int result = tempService.uploadTempProtect(dto);
+		return "abandoned/listTempProtect";
+	}
+
 	@RequestMapping("listTempProtect")
-	public String tempProtect() {
-//		request.setAttribute("from", from);
-//		request.setAttribute("to", to);
-//		request.setAttribute("sido", sido);
-//		request.setAttribute("sigungu", sigungu);
-//		request.setAttribute("shelter", shelter);
-//		request.setAttribute("species", species);
-//		request.setAttribute("speciesKind", speciesKind);
-//		try {
-//			List<TempProtectDTO> list = tempService.selectTempProtect(currentPage, from, to, species, speciesKind, sido, sigungu, shelter);
-//			Map<String, Integer> pageNavi = apiService.getNaviforTempProtect(currentPage);
-//			request.setAttribute("list", list);
-//			request.setAttribute("pageNavi", pageNavi);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+	public String tempProtect(HttpServletRequest request, int currentPage ) {
+		try {
+			List<TempProtectDTO> list = tempService.selectAllTempProtect(currentPage);
+			Map<String, Integer> pageNavi = tempService.getNaviForTempProtect(currentPage);
+			request.setAttribute("list", list);
+			request.setAttribute("pageNavi", pageNavi);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		return "abandoned/listTempProtect";
 	}
@@ -72,7 +95,7 @@ public class AbandonedController {
 		}
 		return null;
 	}
-	
+
 	@RequestMapping("toAbandoned")
 	public String abandoned(HttpServletRequest request, int currentPage) {
 
@@ -84,9 +107,10 @@ public class AbandonedController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 		return "abandoned/abandoned";
 	}
-	
+
 	@RequestMapping("select")
 	public String select(HttpServletRequest request, int currentPage, String from, String to, String species,
 			String speciesKind, String sido, String sigungu, String shelter, String processState) {
@@ -332,7 +356,6 @@ public class AbandonedController {
 	//
 	//		} return "abandoned";
 	//	}
-
 
 }
 

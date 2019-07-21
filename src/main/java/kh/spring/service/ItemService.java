@@ -15,4 +15,8 @@ public interface ItemService {
 	public int itemContentsSize();
 	public int itemContentsSizeByCategory(String category);
 	public Map<String, Integer> getNaviforItem(int currentPage, String category);
+	
+	public Object insertDummy() throws Exception;
+	public String selectForAdmin(String page) throws Exception;
+	public String permissionItems(String items) throws Exception;
 }

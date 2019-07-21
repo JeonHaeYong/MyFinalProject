@@ -17,4 +17,5 @@ public interface ApiAbandonedAnimalService {
 	public Map<String, Integer> getNaviforApiAbandonedAnimal(int currentPage);
 	public String getTagValue(String tag, Element eElement);
 	public List<ApiAbandonedAnimalDTO> selectAll(int currentPage);
+
 }

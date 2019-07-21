@@ -32,7 +32,7 @@ import kh.spring.service.ApiAbandonedAnimalService;
 public class ApiAbandonedAnimalServiceImpl implements ApiAbandonedAnimalService{
 	@Autowired
 	private ApiAbandonedAnimalDAO dao;
-	
+
 	public ApiAbandonedAnimalDTO selectOneApiAbandonedAnimal(int seq){
 		ApiAbandonedAnimalDTO dto = dao.selectOneApiAbandonedAnimal(seq);
 		if(dto.getSexCd().replace(" ", "").equals("M")) {
@@ -52,6 +52,7 @@ public class ApiAbandonedAnimalServiceImpl implements ApiAbandonedAnimalService{
 	}
 	
 	@Override
+
 	public List<ApiAbandonedAnimalDTO> selectAll(int currentPage) {
 		
 		String from = "2019-01-01";
@@ -266,8 +267,6 @@ public class ApiAbandonedAnimalServiceImpl implements ApiAbandonedAnimalService{
 		
 		return "error";
 	}
-
-
 
 
 }	

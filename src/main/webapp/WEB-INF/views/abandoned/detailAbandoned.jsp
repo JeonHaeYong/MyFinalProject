@@ -66,10 +66,10 @@ td {
 					<!--작은 메뉴바-->
 					<div class="menu">MENU</div>
 					<div>
-						<a href="tempProtect">임시보호중</a>
+						<a href="toAbandoned?currentPage=1">유기동물조회</a>
 					</div>
 					<div>
-						<a href="select">유기동물조회</a>
+						<a href="listTempProtect?=currentPage=1">임시보호중</a>
 					</div>
 					<div>
 						<a href="">동물병원 조회</a>

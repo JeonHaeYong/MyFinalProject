@@ -184,6 +184,63 @@
 				// 제주특별자치도 6500000	
 				, [ "6520000", "6510000" ] ];
 
+		
+		function sidoSelected(){
+// 			if($("#sido_select").val() != 0)
+			// 			{
+			var selectedItem = $("#sido_select").val();
+			var sigungu_select = $("#sigungu_select");
+			var index;
+			
+			for (var i = 1; i <= sidoArr.length; i++) {
+			
+				if (selectedItem == sidoArr[i - 1]) {
+					index = i - 1;
+					break;
+				}
+			}
+
+			sigungu_select.empty();
+			console.log(index);
+			var length = sigunguArr[index].length;
+
+			var newOption = $("<option class='op_sigungu' value='0'>선택</option>");
+			sigungu_select.append(newOption);
+
+			for (var i = 1; i <= length; i++) {
+				newOption = $("<option class='op_sigungu' value='"+sigunguArr[index][i-1]+"'>"
+						+ sigunguArr[index][i - 1]
+						+ "</option>");
+				sigungu_select.append(newOption);
+			}
+			
+		}
+		
+		$("#sido_select")
+		.on(
+				"change",
+				function() {
+					sidoSelected();
+				});
+		
+		function readURL(input) {
+			 
+		    if (input.files && input.files[0]) {
+		        var reader = new FileReader();
+		 
+		        reader.onload = function (e) {
+		            $("#showImg").attr("src", e.target.result);
+		        }
+		 
+		        reader.readAsDataURL(input.files[0]);
+		    }
+		}
+		
+		$("#img").change(function(){
+			readURL(this);
+		});
+		
+		
 	})
 </script>
 </head>
@@ -201,10 +258,10 @@
 					<!--작은 메뉴바-->
 					<div class="menu">MENU</div>
 					<div>
-						<a href="select">유기동물조회</a>
+						<a href="toAbandoned?currentPage=1">유기동물조회</a>
 					</div>
 					<div>
-						<a href="tempProtect">임시보호중</a>
+						<a href="listTempProtect?currentPage=1">임시보호중</a>
 					</div>
 					<div>
 						<a href="">동물병원 조회</a>
@@ -220,72 +277,116 @@
 
 				<div class="col-lg-8 col-md-8 col-sm-12 col-12 row">
 
-					<div style="margin: auto;">
+					<div style="margin: auto; margin-bottom:20px;">
 						<h2>임시보호중</h2>
 					</div>
-					<div>**이 공간은 개인이 길거리에 유기되거나 실종된 동물을 발견하여 동물의 주인을 찾아주기 위해 정보를
-						올리는 공간입니다. 유기되거나 실종된 동물을 발견하신 분은 연락처를 남겨주시고 가능한 빠른 시일내에 가까운 지역의
+					<div>**이 공간은, 길거리에 유기되거나 실종된 동물을 발견하여 임시보호하고 있는 경우 동물의 주인을
+						찾아주기 위해 글을 올리는 공간입니다. 임시보호중인 분은 연락처를 남겨주시고 가능한 빠른 시일내에 가까운 지역의
 						유기실종동물 보호센터에 맡겨주시기 바랍니다.</div>
-					<div id="formWrapper">
-						<form action="select" method="get">
-							  제목<input type="text" name="title">  
-							    시도 <select
-								id="sido_select" name="sido">
-								<option class="op_sido" value="0">전체</option>
-								<option class="op_sido" value="6110000">서울특별시</option>
-								<option class="op_sido" value="6260000">부산광역시</option>
-								<option class="op_sido" value="6270000">대구광역시</option>
-								<option class="op_sido" value="6280000">인천광역시</option>
-								<option class="op_sido" value="6290000">광주광역시</option>
-								<option class="op_sido" value="6300000">대전광역시</option>
-								<option class="op_sido" value="6310000">울산광역시</option>
-								<option class="op_sido" value="6410000">경기도</option>
-								<option class="op_sido" value="6420000">강원도</option>
-								<option class="op_sido" value="6430000">충청북도</option>
-								<option class="op_sido" value="6440000">충청남도</option>
-								<option class="op_sido" value="6450000">전라북도</option>
-								<option class="op_sido" value="6460000">전라남도</option>
-								<option class="op_sido" value="6470000">경상북도</option>
-								<option class="op_sido" value="6480000">경상남도</option>
-								<option class="op_sido" value="6500000">제주특별자치도</option>
-							</select> 시군구 <select id="sigungu_select" name="sigungu">
-								<option class="op_sigungu" value="0">전체</option>
-							</select> 
-							발견장소<input type="text" name="place">
-							발견날짜<input type="date" name="lostDate">
-							동물종류 및 품종<input type="text" name="type">
-							성별<select id="sex_select" name="sex">
-								<option class="op_sex" value="1">암컷</option>
-								<option class="op_sex" value="2">수컷</option>
-							</select>
-							색깔<input type="text" name="color">
-							특징<input type="text" name="feat">
-							이미지<input type="file" name="imagePath">
-							이메일<input type="email" name="email">
-							전화번호<input type="phone" name="phone">
-							
-							<input	id="btnUpload" type="submit" value="완료">
-							<!-- 						<input id="btnSearch" type="submit" value="insert"> -->
+					
+					<div id="formWrapper" style="margin-top:20px;">
+						<form action="uploadTempProtect" method="post" enctype="multipart/form-data">
+							<div class="row">
+								<div class="col-lg-2 col-md-2">제목</div>
+								<div class="col-lg-10 col-md-10"><input type="text" name="title"
+										style="width: 400px" required></div>
+							</div>
+							<div class="row">
+								<div class="col-lg-2 col-md-2">시도</div>
+								<div class="col-lg-4 col-md-4"><select id="sido_select" name="sido" required>
+											<option class="op_sido" value="0">선택</option>
+											<option class="op_sido" value="서울특별시">서울특별시</option>
+											<option class="op_sido" value="부산광역시">부산광역시</option>
+											<option class="op_sido" value="대구광역시">대구광역시</option>
+											<option class="op_sido" value="인천광역시">인천광역시</option>
+											<option class="op_sido" value="광주광역시">광주광역시</option>
+											<option class="op_sido" value="대전광역시">대전광역시</option>
+											<option class="op_sido" value="울산광역시">울산광역시</option>
+											<option class="op_sido" value="경기도">경기도</option>
+											<option class="op_sido" value="강원도">강원도</option>
+											<option class="op_sido" value="충청북도">충청북도</option>
+											<option class="op_sido" value="충청남도">충청남도</option>
+											<option class="op_sido" value="전라북도">전라북도</option>
+											<option class="op_sido" value="전라남도">전라남도</option>
+											<option class="op_sido" value="경상북도">경상북도</option>
+											<option class="op_sido" value="경상남도">경상남도</option>
+											<option class="op_sido" value="제주특별자치도">제주특별자치도</option>
+									</select></div>
+									<div class="col-lg-2 col-md-2">시군구</div>
+									<div class="col-lg-4 col-md-4"><select id="sigungu_select" name="sigungu" required>
+											<option class="op_sigungu" value="0">선택</option>
+									</select></div>
+							</div>
+							<div class="row">
+								<div class="col-lg-2 col-md-2">발견장소</div>
+								<div class="col-lg-4 col-md-4"><input type="text" name="place" required></div>
+									<div class="col-lg-2 col-md-2">발견날짜</div>
+									<div class="col-lg-4 col-md-4"><input type="date" name="findDateString" required></div>
+							</div>
+							<div class="row">
+								<div class="col-lg-2 col-md-2">동물종류 및 품종</div>
+								<div class="col-lg-4 col-md-4"><input type="text" name="type"></div>
+									<div class="col-lg-2 col-md-2">성별</div>
+									<div class="col-lg-4 col-md-4"><select id="sex_select" name="sex">
+											<option class="op_sex" value="암컷">암컷</option>
+											<option class="op_sex" value="수컷">수컷</option>
+									</select></div>
+							</div>
+							<div class="row">
+								<div class="col-lg-2 col-md-2">색깔</div>
+								<div class="col-lg-4 col-md-4"><input
+								type="text" name="color"></div>
+									<div class="col-lg-2 col-md-2">특징</div>
+									<div class="col-lg-4 col-md-4"><input type="text"
+								name="feat"></div>
+							</div>
+							<div class="row">
+								<div class="col-lg-2 col-md-2">이미지</div>
+								<div class="col-lg-4 col-md-4"><input type="file"
+								id="img" name="image"></div>
+									<div class="col-lg-2 col-md-2"></div>
+									<div class="col-lg-4 col-md-4"></div>
+							</div>
+							<div class="row">
+								<div class="col-lg-2 col-md-2"></div>
+								<div class="col-lg-4 col-md-4"><img id="showImg" style="width:200px;height:150px"></div>
+									<div class="col-lg-2 col-md-2"></div>
+									<div class="col-lg-4 col-md-4"></div>
+							</div>
+							<div class="row">
+								<div class="col-lg-2 col-md-2">이메일</div>
+								<div class="col-lg-4 col-md-4"><input type="email"
+								name="email"></div>
+									<div class="col-lg-2 col-md-2">전화번호</div>
+									<div class="col-lg-4 col-md-4"><input type="phone"
+								name="phone"></div>
+							</div>
+							<div class="row">
+								<input id="btnUpload" type="submit"
+								value="완료">
+							</div>
+						
 						</form>
 					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
+	<!-- ----Footerë¶ë¶ìëë¤^_^---------------------------------------------------------------------------------------------------------- -->
 
-					<!-- ----Footerë¶ë¶ìëë¤^_^---------------------------------------------------------------------------------------------------------- -->
-
-					<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
+	<script src="resources/js/jquery-ui.js"></script>
+	<script src="resources/js/popper.min.js"></script>
+	<script src="resources/js/bootstrap.min.js"></script>
+	<script src="resources/js/owl.carousel.min.js"></script>
+	<script src="resources/js/jquery.countdown.min.js"></script>
+	<script src="resources/js/jquery.easing.1.3.js"></script>
+	<script src="resources/js/aos.js"></script>
+	<script src="resources/js/jquery.fancybox.min.js"></script>
+	<script src="resources/js/jquery.sticky.js"></script>
+	<script src="resources/js/isotope.pkgd.min.js"></script>
+	<script src="resources/js/main.js"></script>
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script src="resources/js/jquery-ui.js"></script>
-<script src="resources/js/popper.min.js"></script>
-<script src="resources/js/bootstrap.min.js"></script>
-<script src="resources/js/owl.carousel.min.js"></script>
-<script src="resources/js/jquery.countdown.min.js"></script>
-<script src="resources/js/jquery.easing.1.3.js"></script>
-<script src="resources/js/aos.js"></script>
-<script src="resources/js/jquery.fancybox.min.js"></script>
-<script src="resources/js/jquery.sticky.js"></script>
-<script src="resources/js/isotope.pkgd.min.js"></script>
 
-
-<script src="resources/js/main.js"></script>
 </html>
