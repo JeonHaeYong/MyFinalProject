@@ -119,4 +119,29 @@ public class ItemDAOImpl implements ItemDAO{
 	}
 
 
+	@Override
+	public List<ItemDTO> selectForAdmin(int start, int end) throws Exception
+	{
+		Map<String, Integer> page = new HashMap<>();
+		page.put("start", start);
+		page.put("end", end);
+		
+		return sst.selectList("ItemDAO.selectForAdmin", page);
+	}
+
+
+	@Override
+	public int selectCountForAdmin() throws Exception
+	{
+		return sst.selectOne("ItemDAO.selectCountForAdmin");
+	}
+
+
+	@Override
+	public int updatePermissionBySeq(int seq) throws Exception
+	{
+		return sst.update("ItemDAO.updatePermissionBySeq", seq);
+	}
+
+
 }
