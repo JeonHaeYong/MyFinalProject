@@ -7,8 +7,8 @@ import kh.spring.dto.ReviewDTO;
 
 public interface ReviewService {
 	public int insertReviewService(ReviewDTO dto);
-	public List<ReviewDTO> selectAllReviewService();
+	public List<ReviewDTO> selectAllReviewByCurrentpage(String currentPage);
 	public int deleteReviewService(int seq);
 	public List<ReviewDTO> selectReviewPerPageService(int start, int end);
-	public Map<String, Integer> getNaviForReviewService(int currentPage);
+	public List<String> getNaviForReviewList(int currentPage);
 }

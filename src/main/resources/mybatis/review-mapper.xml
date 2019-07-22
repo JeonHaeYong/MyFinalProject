@@ -3,11 +3,12 @@
 <mapper namespace="ReviewDAO">
 	
 	<insert id="insertReview">
-		insert into review values(review_seq.nextval, #{title}, #{writer}, #{image_path1}, #{image_path2}, #{image_path3}, #{contents}, default, 0, 0, #{type})
+		insert into review values(review_seq.nextval, #{title}, #{writer}, #{image_path1,jdbcType=VARCHAR}, #{image_path2,jdbcType=VARCHAR}, #{image_path3,jdbcType=VARCHAR}, #{contents}, default, 0, 0, #{type,jdbcType=VARCHAR})
 	</insert>
 	
-	<select id="selectAllReview" resultType="kh.spring.dto.ReviewDTO">
-		select * from review
+	<select id="selectAllReviewByCurrentpage" resultType="kh.spring.dto.ReviewDTO">
+		select * from (select row_number() over(order by seq desc) as rown, review.* 
+		from review) where rown between #{start} and #{end}
 	</select>
 	
 	<update id="modifyReview">

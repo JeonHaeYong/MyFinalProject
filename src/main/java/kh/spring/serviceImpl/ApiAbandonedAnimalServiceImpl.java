@@ -32,7 +32,7 @@ import kh.spring.service.ApiAbandonedAnimalService;
 public class ApiAbandonedAnimalServiceImpl implements ApiAbandonedAnimalService{
 	@Autowired
 	private ApiAbandonedAnimalDAO dao;
-	
+
 	public ApiAbandonedAnimalDTO selectOneApiAbandonedAnimal(int seq){
 		ApiAbandonedAnimalDTO dto = dao.selectOneApiAbandonedAnimal(seq);
 		if(dto.getSexCd().replace(" ", "").equals("M")) {
@@ -51,14 +51,55 @@ public class ApiAbandonedAnimalServiceImpl implements ApiAbandonedAnimalService{
 		return result;
 	}
 	
+	@Override
+
+	public List<ApiAbandonedAnimalDTO> selectAll(int currentPage) {
+		
+		String from = "2019-01-01";
+		SimpleDateFormat sdf = new SimpleDateFormat ( "yyyy-MM-dd");
+		String to = sdf.format (System.currentTimeMillis());
+	
+		Date dateFrom = null;
+		Date dateTo = null;
+		try {
+			dateFrom = (Date) sdf.parse(from);
+			dateTo = (Date) sdf.parse(to);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		int recordCountPerPage = 12;
+		int endNum = currentPage *recordCountPerPage;
+		int startNum = endNum - (recordCountPerPage-1);
+		
+		String processState="보호중";
+
+		List<ApiAbandonedAnimalDTO> list = dao.selectAll(currentPage,
+				startNum, endNum, dateFrom, dateTo, processState);
+		
+		for(ApiAbandonedAnimalDTO dto : list) {
+			
+			if(dto.getSexCd().replace(" ", "").equals("M")) {
+				dto.setSexCd("수컷");
+			}else if(dto.getSexCd().replace(" ", "").equals("F")) {
+				dto.setSexCd("암컷");
+			}else {
+				dto.setSexCd("미상");
+			}
+			
+		}
+		
+		return list;
+	}
+
 	public Map<String, Integer> getNaviforApiAbandonedAnimal(int currentPage) {
 		Map<String, Integer> pageNavi = dao.getNaviForApiAbandonedAnimal(currentPage);
 		return pageNavi;
 	}
 
 	@Override
-	public List<ApiAbandonedAnimalDTO> selectApiAbandonedAnimal(int currentPage,String from,
-			String to, String species, String speciesKind, String sido, String sigungu, String shelter) {
+	public List<ApiAbandonedAnimalDTO> selectByCondition(int currentPage,String from,
+			String to, String species, String speciesKind, String sido, String sigungu, String shelter, String processState) {
 		if(shelter == null || shelter.equals("")) {
 			shelter = "%";
 		}
@@ -74,7 +115,9 @@ public class ApiAbandonedAnimalServiceImpl implements ApiAbandonedAnimalService{
 		if(sigungu == null || sigungu.equals("")) {
 			sigungu = "%";
 		}
-		
+		if(processState.equals("전체")) {
+			processState = "%";
+		}
 	
 		System.out.println("보호소"+shelter);
 		System.out.println("축종"+species);
@@ -100,8 +143,8 @@ public class ApiAbandonedAnimalServiceImpl implements ApiAbandonedAnimalService{
 		System.out.println("startNum"+startNum);
 		System.out.println("endNum"+endNum);
 		
-		List<ApiAbandonedAnimalDTO> list = dao.selectApiAbandonedAnimal(currentPage,
-				startNum, endNum, dateFrom, dateTo, species, speciesKind, sido, sigungu, shelter);
+		List<ApiAbandonedAnimalDTO> list = dao.selectByCondition(currentPage,
+				startNum, endNum, dateFrom, dateTo, species, speciesKind, sido, sigungu, shelter, processState);
 		
 		for(ApiAbandonedAnimalDTO dto : list) {
 			
@@ -224,7 +267,6 @@ public class ApiAbandonedAnimalServiceImpl implements ApiAbandonedAnimalService{
 		
 		return "error";
 	}
-
 
 
 }	

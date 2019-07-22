@@ -39,11 +39,13 @@ public class SchedulerApiToDB {
 
 	// 초 분 시 일 월 요일
 	@Transactional
-	@Scheduled(cron="01 00 00 * * *")
+
+	@Scheduled(cron="50 33 14 21 7 *")
+
 	public void updateApi() throws Exception {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		
+
 		dao.deleteAll();	// 기존 DB 데이터 모두 지우기
 		dao.dropSeq();
 		

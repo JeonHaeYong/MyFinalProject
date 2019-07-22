@@ -21,42 +21,13 @@
                 <link rel="stylesheet" href="resources/css/aos.css">
                 <link rel="stylesheet" href="resources/css/style.css">
                 <style>
-                    .topBackGround{
-                        height: 100px;
-                    }
-                    .nav-link{
-                        text-decoration: none;
-                        color: green;
-                    }
-                    .nav-link:hover{
-                        color: orange;
-                    }
-                    .my_page_nav.active{
-                        background-color: orange !important;
-                    }
-                    .my_page_info{
-                        text-align: center;
-                    }
-                    .nav_my_page_ul{
-                        border-bottom: 1px solid green ; 
-                    }
-                    .nav_my_page_ul>li{
-                        width: 16.6%;
-                        text-align: center;
-                    }
-                    /*점보트론 이미지*/
-                .jumbotron{
-                	background-color: white;
-                }
-                .jumbotron>img{
-                    width: 100%;
-                    max-height: 600px;
-                }
+                /*                     #FBFFB9 1번, #FDD692 2번, #EC7357 3번, #754F44 4번, */
                     /*부트스트랩 모달시 패딩 없애주기.*/
-                    .modal-open {padding-right: 0px !important;}
+                    .modal-open{padding-right: 0px !important;}
                     .readMsg{
                     	color : gray;
                     }
+                    /*쪽지함 클릭시 글색깔 */
                     /*쪽지함 마다 다르게 스타일주기*/
                     .sent_msg_click{
                     	color : royalblue;
@@ -64,12 +35,22 @@
                     .s_list_row:hover,.r_list_row:hover{
                     	background-color: rgba(128, 128, 128, 0.06);
                     }
-                    
+                    /*쪽지함 navi*/
+                    .page-link{
+                    	color : #754F44;
+                    }
+                    .msg_box_nav{
+                    	color : #754F44 !important;
+                    }
+                    .msg_box_nav.active{
+                    	color : #EC7357 !important;
+                    }
                 </style>
+                <jsp:include page="/WEB-INF/views/myPage/user/user_module/mypage_user_style.jsp" ></jsp:include><!-- user 마이페이지 스타일 -->
                 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
             </head>
             <body data-spy="scroll" data-target=".site-navbar-target"
-                  data-offset="300" id="home-section">
+                  data-offset="300" id="home-section" class="p-0">
                 <jsp:include page="/WEB-INF/views/module/menu.jsp" ></jsp:include>
                 <!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
                 <jsp:include page="/WEB-INF/views/myPage/user/user_module/top_menu_info.jsp"></jsp:include>
@@ -82,8 +63,8 @@
                                 <div class="col-12">
                                     <nav>
                                         <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
-                                            <a class="nav-item nav-link active" id="nav-inbox-tab" data-toggle="tab" href="#nav-inbox" role="tab" aria-controls="nav-inbox" aria-selected="true">받은 쪽지함</a>
-                                            <a class="nav-item nav-link" id="nav-sentbox-tab" data-toggle="tab" href="#nav-sentbox" role="tab" aria-controls="nav-sentbox" aria-selected="false">보낸 쪽지함</a>
+                                            <a class="nav-item nav-link active msg_box_nav" id="nav-inbox-tab" data-toggle="tab" href="#nav-inbox" role="tab" aria-controls="nav-inbox" aria-selected="true">받은 쪽지함</a>
+                                            <a class="nav-item nav-link msg_box_nav" id="nav-sentbox-tab" data-toggle="tab" href="#nav-sentbox" role="tab" aria-controls="nav-sentbox" aria-selected="false">보낸 쪽지함</a>
                                         </div>
                                     </nav>
                                     <div class="tab-content" id="nav-tabContent">
@@ -123,10 +104,10 @@
                                                     <div class="col-2 text-truncate">${r_list.sender }</div>
                                                     <div class="col-5 r_click_parent text-truncate">
                                                     	<c:if test="${r_list.readOk =='N'}">
-                                                    		<a class="received_msg_click text-decoration-none" href="#" seq="${r_list.seq }" data-toggle="modal" data-target="#r_msg_modal" value="${r_list.sender }">${r_list.contents }</a>
+                                                    		<a class="received_msg_click text-decoration-none" href="#" seq="${r_list.seq }" data-toggle="modal" data-target="#received_msg_modal" value="${r_list.sender }">${r_list.contents }</a>
                                                     	</c:if>
                                                     	<c:if test="${r_list.readOk =='Y'}">
-                                                    		<a class="received_msg_click text-decoration-none readMsg" href="#" seq="${r_list.seq }" data-toggle="modal" data-target="#r_msg_modal" value="${r_list.sender }">${r_list.contents }</a>
+                                                    		<a class="received_msg_click text-decoration-none readMsg" href="#" seq="${r_list.seq }" data-toggle="modal" data-target="#received_msg_modal" value="${r_list.sender }">${r_list.contents }</a>
                                                     	</c:if>
                                                     </div>
                                                     <div class="col-3">${r_list.message_date }</div>
@@ -136,7 +117,7 @@
                                             <!-- 받은쪽지함 내용들 -->
                                             </form>
                                             <!-- 받은쪽지클릭하면 내용띄워주기 -->
-                                            <div class="modal fade p-0" id="r_msg_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal fade p-0" id="received_msg_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -147,15 +128,15 @@
                                                         </div>
                                                         <div class="modal-body">
                                                         	<div class="container-fluid">
-                                                        	<div id="r_sender_modal">보낸사람 : </div>
+                                                        	<div id="r_sender_modal" sender="">보낸사람 : </div>
                                                             <div>
-                                                            	<textarea class="border-0" id="r_contents_modal" rows="8" cols="50" style="resize:none;" readonly></textarea>
+                                                            	<textarea class="border-0" id="r_contents_modal" rows="8" cols="45" style="resize:none;" readonly></textarea>
                                                             </div>
                                                         	</div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                                            <button id="received_msg_close_btn" type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                                                            <button id="reply_msg_btn" type="button" class="btn btn-primary">답장 보내기</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -189,6 +170,13 @@
                                                 <div class="col-3">보낸날짜</div>
                                                 <div class="col-1">Read</div>
                                             </div>
+                                            <c:if test="${sentList.size()==0 }">
+                                            	<div class="row">
+                                            		<div class="col-12 text-center">
+                                            			보낸 쪽지가 없습니다.
+                                            		</div>
+                                            	</div>
+                                            </c:if>
                                             <form id="sentMsg_delete_form" action="deleteMsg" method="post">
                                             <c:forEach var="s_list" items="${sentList }" varStatus="status">
                                             <!-- 보낸쪽지함 내용들 -->
@@ -223,12 +211,12 @@
                                                         	<div class="container-fluid">
                                                         	<div id="s_recipient_modal">받은사람:</div>
                                                             <div>
-                                                            	<textarea class="border-0" id="s_contents_modal" rows="8" cols="50" style="resize:none;" readonly></textarea>
+                                                            	<textarea class="border-0" id="s_contents_modal" rows="8" cols="45" style="resize:none;" readonly></textarea>
                                                             </div>
                                                         	</div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -261,7 +249,7 @@
                 <div class="row">
                     <div class="col-12 text-center">
                     	<button type="button" class="btn btn-outline-warning rounded" id="selectMsg_delete">선택 삭제하기</button>
-                        <button type="button" class="btn btn-outline-warning rounded" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">쪽지보내기</button>
+                        <button id="sendMsg_btn"type="button" class="btn btn-outline-warning rounded" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">쪽지보내기</button>
                     </div>
                     <div class="modal fade text-left" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -287,8 +275,8 @@
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button id="msg_close_btn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button id="msg_send_btn" type="button" class="btn btn-primary">Send message</button>
+                                    <button id="msg_close_btn" type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                                    <button id="msg_send_btn" type="button" class="btn btn-primary">쪽지 보내기</button>
                                 </div>
                             </div>
                         </div>
@@ -335,6 +323,7 @@
                     //alert(recipient + " : " + content);
                     if("${memberDTO.id}"==recipient){
                     	alert("쪽지는 본인에게 쓸수없습니다.");
+                    	$("#recipient-name").focus();
                     	return false;
                     }
                     $.ajax({
@@ -399,13 +388,13 @@
 					var check = $(".sent_check");
 					partChecked(all,check);
                 });
-                
-                $(".received_msg_click").on("click" , function(){
+                $(document).on("click" ,".received_msg_click", function(){
                 	$("#r_sender_modal").html("");
                 	$("#r_contents_modal").html("");
                 	var contents = $(this).text();
                 	var sender = $(this).attr("value");
                 	$("#r_sender_modal").append("보낸사람 : "+sender+"<hr>");
+                	$("#r_sender_modal").prop("sender",sender);
                 	$("#r_contents_modal").append(contents);
                 	var readOk = $(this).parent(".r_click_parent").siblings(".r_readOk").text();
                 	var readOkModi = $(this).parent(".r_click_parent").siblings(".r_readOk");
@@ -429,7 +418,7 @@
                 		});
                 	}
                 });
-                $(".sent_msg_click").on("click" , function(){
+                $(document).on("click" ,".sent_msg_click", function(){
                 	$("#s_recipient_modal").html("");
                 	$("#s_contents_modal").html("");
                 	var contents = $(this).text();
@@ -451,7 +440,8 @@
                 	}
                 	$(".selectedBox.active>form").submit();
                 });
-                $(".navi_click_a").on("click",function(){
+                //쪽지함 navi 클릭했을때,
+                $(document).on("click",".navi_click_a",function(){
                 	var category = $(this).attr("value");
                 	var currentPage = $(this).text();
                 	//리스트랑 navi 가져오기.
@@ -464,14 +454,60 @@
                 			currentPage : currentPage
                 		}
                 	}).done(function(resp){
-                		console.log("ajax완료");
-                		console.log(resp.list);
-                		console.log(resp.navi);
+                		var lists = JSON.parse(resp.list);
+                		var type = "";
+                		if(category=="recipient"){
+                			$("#receivedMsg_delete_form").html("");
+                		}else{
+                			$("#sentMsg_delete_form").html("");
+                		}
+                		for(var i=0; i<lists.length ; i++){
+                			if(category=="recipient"){//받은쪽지함
+                				var msgList = $("<div class='row r_list_row'></div>");
+                				var msgCheck = $("<div class='col-1'><div class='custom-control custom-checkbox'>"+
+                				"<input type='checkbox' class='custom-control-input received_check' id='r_"+i+"' name='msgSeq' value='"+lists[i].seq+"'>"
+                				+"<label class='custom-control-label' for='r_"+i+"'></label></div></div>");
+                				msgList.append(msgCheck);
+                				msgList.append("<div class='col-2 text-truncate'>"+lists[i].sender+"</div>");
+                				var readOkY = "";
+    							if(lists[i].readOk=="Y"){
+    								readOkY = "readMsg";
+    							}
+    							var msgReadOk = $("<div class='col-5 r_click_parent text-truncate'></div>");
+    							msgReadOk.append("<a class='received_msg_click text-decoration-none "+readOkY+"' href='#' "+
+    									"seq='"+lists[i].seq+"' data-toggle='modal' data-target='#received_msg_modal' value='"+lists[i].sender+"'>"+lists[i].contents+"</a>");
+    							msgList.append(msgReadOk);
+    						    msgList.append("<div class='col-3'>"+lists[i].message_date+"</div><div class='col-1 r_readOk'>"+lists[i].readOk+"</div>");
+    						    $("#receivedMsg_delete_form").append(msgList);
+    						    //네비게이터도 바꾸기.
+    						    //navi게이터
+                			}else{//보낸쪽지함
+                				var msgList = $("<div class='row s_list_row'></div>");
+                				var msgCheck = $("<div class='col-1'><div class='custom-control custom-checkbox'>"+
+                        				"<input type='checkbox' class='custom-control-input sent_check' id='s_"+i+"' name='msgSeq' value='"+lists[i].seq+"'>"
+                        				+"<label class='custom-control-label' for='s_"+i+"'></label></div></div>");
+                				msgList.append(msgCheck);
+                				msgList.append("<div class='col-2 text-truncate'>"+lists[i].recipient+"</div>");
+                				var msgReadOk = $("<div class='col-5 s_click_parent text-truncate'></div>");
+                				msgReadOk.append("<a class='sent_msg_click text-decoration-none "+readOkY+"' href='#' "+
+    									"seq='"+lists[i].seq+"' data-toggle='modal' data-target='#s_msg_modal' value='"+lists[i].recipient+"'>"+lists[i].contents+"</a>");
+                				msgList.append(msgReadOk);
+    						    msgList.append("<div class='col-3'>"+lists[i].message_date+"</div><div class='col-1 s_readOk'>"+lists[i].readOk+"</div>");
+    						    $("#sentMsg_delete_form").append(msgList);
+    						  //네비게이터도 바꾸기.
+                			}
+                		}
                 	}).fail(function(a,b,c){
-                		alert(a);
-                		alert(b);
-                		alert(c);
-                	})
-                })
+                		location.href="error";
+                	});
+                });
+              //---/쪽지함 navi
+              //답장하기 버튼 눌렀을때,
+              $("#reply_msg_btn").on("click",function(){
+            	  var recipient_name = $("#r_sender_modal").prop("sender");
+            	  $('#received_msg_close_btn').trigger("click");
+            	  $("#recipient-name").val(recipient_name);
+            	  $("#sendMsg_btn").trigger("click");
+              });
             </script>
         </html>

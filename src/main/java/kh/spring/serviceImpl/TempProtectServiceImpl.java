@@ -45,8 +45,8 @@ public class TempProtectServiceImpl implements TempProtectService{
 	}
 
 
-	public int writeTempProtect(TempProtectDTO dto) {
-		int result = tpdao.writeTempProtect(dto);
+	public int uploadTempProtect(TempProtectDTO dto) {
+		int result = tpdao.uploadTempProtect(dto);
 		return result;
 	}
 

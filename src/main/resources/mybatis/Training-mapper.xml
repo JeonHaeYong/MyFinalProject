@@ -7,4 +7,10 @@
 	<insert id="insertTraining"> <!-- 이미지 있는 글 등록 -->
 		insert into training_board values(training_seq.nextval, #{title}, #{contents}, #{image}, #{writer}, default, #{ip})
 	</insert>
+	<select id="trainingPerPage" resultType="kh.spring.dto.TrainingDTO">
+		select * from (select row_number()over(order by seq desc) as rown, training_board.* from training_board) where rown between #{start} and #{end}
+	</select>
+	<select id="recordCount" resultType="Integer">
+		select count(*)as count from training_board
+	</select>
 </mapper>
