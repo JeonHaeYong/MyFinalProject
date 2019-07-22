@@ -14,6 +14,7 @@ public class ReviewDTO {
 	private Timestamp write_date;
 	private int view_count;
 	private int likes;
+	private int comments;
 	
 	private String formed_date;
 	
@@ -120,6 +121,14 @@ public class ReviewDTO {
 	
 	public String getFormed_date() {
 		return this.getFormedTime();
+	}
+	
+	public int getComments() {
+		return comments;
+	}
+
+	public void setComments(int comments) {
+		this.comments = comments;
 	}
 
 	/**

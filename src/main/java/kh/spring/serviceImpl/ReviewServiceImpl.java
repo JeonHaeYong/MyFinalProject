@@ -138,6 +138,10 @@ public class ReviewServiceImpl implements ReviewService {
 	public ReviewDTO selectReviewBySeq(int seq) {
 		return rdao.selectReviewBySeq(seq);
 	}
+	@Override
+	public int updateViewCount(int seq) {
+		return rdao.updateViewCount(seq);
+	}
 
 	
 }

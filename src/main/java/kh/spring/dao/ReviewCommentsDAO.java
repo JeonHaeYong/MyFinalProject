@@ -9,7 +9,8 @@ public interface ReviewCommentsDAO {
 	public int insertReviewComment(ReviewCommentsDTO dto);
 	public int modifyReviewComment(ReviewCommentsDTO dto);
 	public int deleteReviewComment(int seq);
-	public List<ReviewCommentsDTO> selectAllReviewComments();
+	public List<ReviewCommentsDTO> selectAllReviewCommentsByReviewSeq(int seq , int start, int end , String loginId);
 	public List<ReviewCommentsDTO> selectReviewCommentsPerPage(int start, int end);
 	public Map<String, Integer> getNaviForReviewComments(int commentPage);
+	public int selectReviewCommentsCountByReviewSeq(int reviewSeq);
 }

@@ -239,7 +239,7 @@ public class MemberServiceImpl implements MemberService {
 	
 //이메일 인증하기 
 	@Override
-	@Transactional
+	@Transactional("txManager")
 	public boolean create(String email)  {
 
 		// 임의의 authkey 생성
@@ -266,7 +266,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 	//메일로 임시 비밀번호 보내기 
 	@Override
-	@Transactional
+	@Transactional("txManager")
 	public boolean newPw(String email)  {
 
 		// 임의의 authkey 생성
@@ -294,7 +294,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 	//이메일로 아이디 보내기 
 		@Override
-		@Transactional
+		@Transactional("txManager")
 		public boolean FindIdbyemail(String email,String id)  {
 
 			// mail 작성 관련 

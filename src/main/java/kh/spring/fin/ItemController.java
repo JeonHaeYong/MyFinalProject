@@ -38,7 +38,7 @@ public class ItemController {
 		request.setAttribute("category", category);
 		
 		String id = (String)request.getSession().getAttribute("id");
-		if(!id.isEmpty()) {
+		if(id!=null) {
 			request.setAttribute("cartCount", cs.getCartCount(id));
 		}
 		return "item/freeMarket";

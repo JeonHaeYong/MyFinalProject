@@ -12,4 +12,5 @@ public interface ReviewService {
 	public List<ReviewDTO> selectReviewPerPageService(int start, int end);
 	public List<String> getNaviForReviewList(int currentPage);
 	public ReviewDTO selectReviewBySeq(int seq);
+	public int updateViewCount(int seq);
 }

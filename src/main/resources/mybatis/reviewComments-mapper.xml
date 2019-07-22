@@ -14,4 +14,20 @@
 		delete from review_comments where review_seq=#{value}
 	</delete>
 	
+	<select id="selectAllReviewCommentsByReviewSeq" resultType="kh.spring.dto.ReviewCommentsDTO">
+		select * from 
+		<choose>
+			<when test="id==null">
+				(select row_number() over(order by write_date desc) rown, review_comments.* from review_comments where review_seq = #{seq}) 
+			</when>
+			<otherwise>
+				(select row_number() over(order by rc.write_date desc) rown, rc.* , rcl.ID as likeOk 
+				from review_comments rc , (select * from review_comments_likes where id=#{id}) rcl where rc.seq = rcl.R_COMMENTS_SEQ(+) and rc.review_seq = #{seq}) 
+			</otherwise>
+		</choose>
+		 where rown between #{start} and #{end}
+	</select>
+	<select id="selectReviewCommentsCountByReviewSeq" resultType="int">
+		select count(*) from review_comments where review_seq = #{reviewSeq}
+	</select>
 </mapper>
