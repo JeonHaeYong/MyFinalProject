@@ -15,33 +15,35 @@
 	</select>
 	
 	<select id="getItemCount" resultType="int">
-		select count(*) from item
+		select count(*) from item where permission = 'y'
 	</select>
 	
 	<select id="getItemCountByCategory" resultType="int">
-		select count(*) from item where category=#{value}
+		select count(*) from item where category=#{value} and permission = 'y'
 	</select>
 	
 	<select id="selectItemPerPage" resultType="kh.spring.dto.ItemDTO">
-		select * from (select row_number() over(order by seq desc) as rown, item.* from item) where rown between #{start} and #{end}
+		select * from (select row_number() over(order by seq desc) as rown, item.* from item where permission = 'y') where rown between #{start} and #{end}
 	</select>
 	
 	<select id="selectItemPerPageByCategory" resultType="kh.spring.dto.ItemDTO">
-		select * from (select row_number() over(order by seq desc) as rown, item.* from item where category=#{category}) where rown between #{start} and #{end}
+		select * from (select row_number() over(order by seq desc) as rown, item.* from item where category=#{category} and permission = 'y') where rown between #{start} and #{end}
 	</select>
 	
 	<select id="selectItemForPayment" resultType="kh.spring.dto.ItemDTO">
-		select * from item where seq in 
+		select c.seq as cart_seq, i.* from cart c, item i where c.item_seq = i.seq and c.seq in 
 		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
 			#{item}
 		</foreach>
 	</select>
 	
-<!-- 	<insert id="modify"> -->
-<!-- 		update item set name=#{name}, contents=#{contents}, price=#{price}, -->
-<!-- 		seller=#{seller}, date=#{date}, permission=#{permission}, -->
-<!-- 		imagePath=#{imagePath} -->
-<!-- 	</insert> -->
+	<select id="selectItemByOrderNum" resultType="kh.spring.dto.ItemDTO">
+		select i.* from payment p, item i where p.item_seq = i.seq and ordernumber = #{value}
+	</select>
+	
+	<update id="updateSoldOut">
+		update item set soldout = 'y' where seq=#{value}
+	</update>
 
 	<select id="selectForAdmin" resultType="kh.spring.dto.ItemDTO">
 		select * 

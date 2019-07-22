@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PaymentDAO">
+
+	<insert id="insertPayment">
+		insert into payment values(payment_seq.nextval, #{item_seq}, #{item_name}, #{buyer}, #{name},
+		#{email}, #{phone}, #{zipcode}, #{address1}, #{address2}, #{seller}, #{type}, #{orderNumber}, default)
+	</insert>
+	
+	<select id="selectAllPayment" resultType="kh.spring.dto.PaymentDTO">
+		select * from payment
+	</select>
+	
+	<select id="selectPaymentById" resultType="kh.spring.dto.PaymentDTO">
+		select * from payment where buyer=#{value}
+	</select>
+	
+	<select id="selectPaymentByOrderNum" resultType="kh.spring.dto.PaymentDTO">
+		select * from payment where ordernumber = #{value}
+	</select>
+	
+	<select id="selectPaymentForBuyList" resultType="kh.spring.dto.PaymentDTO">
+		select i.price as item_price, p.* from payment p, item i where p.item_seq = i.seq and buyer=#{value}
+	</select>
+	
+	<select id="selectPaymentPerPageForBuyList" resultType="kh.spring.dto.PaymentDTO">
+		select * from (
+		select row_number() over(order by p.seq desc) as rown, i.price as item_price, p.* 
+		from payment p, item i 
+		where p.item_seq = i.seq and buyer=#{id}) 
+		where rown between #{start} and #{end}
+	</select>
+	
+	<select id="getPaymentTotalCountById" resultType="int">
+		select count(*) from payment p, item i where p.item_seq = i.seq and buyer=#{value}
+	</select>
+	
+</mapper>

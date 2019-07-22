@@ -529,7 +529,7 @@ body:after {
           padding-left: 15px !important; }
 
 .sticky-wrapper {
-  /* position: absolute; */
+  position: absolute;
   z-index: 100;
   width: 100%; }
   .sticky-wrapper .site-navbar {

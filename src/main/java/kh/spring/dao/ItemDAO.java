@@ -12,6 +12,8 @@ public interface ItemDAO {
 	public int modifyItem(ItemDTO dto);
 	public List<ItemDTO> selectItemPerPage(int start, int end);
 	public List<ItemDTO> selectItemPerPageByCategory(String category, int start, int end);
+	public List<ItemDTO> selectItemByOrderNum(String orderNumber);
+	public int updateSoldOut(int seq);
 	public int itemContentsSize();
 	public int itemContentsSizeByCategory(String category);
 	public Map<String, Integer> getNaviforItem(int currentPage, int recordTotalCount);

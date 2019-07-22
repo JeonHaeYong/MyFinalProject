@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Report Form</title>
+<title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"rel="stylesheet">
 <link rel="stylesheet" href="resources/fonts/icomoon/style.css">
@@ -18,19 +19,18 @@
 <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
+<!--  module-->
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
-
-  <style>
-  
-   			#title{width: 100%; text-align: center; margin: auto; margin-bottom: 50px; margin-top: 150px;}
+<style>
+	.empty{width: 100%; text-align: center; margin: auto; margin-bottom: 50px; height:50px;}
+	#title{width: 100%; text-align: center; margin: auto; margin-bottom: 50px;}
+	h1{ font-family: 'Gamja Flower', cursive;}
         .aa{ width: 500px; height: 870px; margin: auto; box-sizing: border-box; margin-bottom: 100px;overflow: hidden;}
-       
-       
         /*기본 정보 */
-        .basic,.animal{background-color:#EC7357; text-align: center; font-size:30px; color: white; font-weight: bold;}
+        .basic,.animal{background-color:#EC7357; text-align: center; font-size:30px; color: white; font-weight: bold; font-family: 'Gamja Flower', cursive; }
         .basic-info{height:300px; width: 100%; }
         .basic-info>div{height: 100%; float: left;}
-        .basic-info .title{width: 150px;}
+        .basic-info .title{width: 150px; font-family: 'Gamja Flower', cursive; }
         .basic-info .title div{height:70px; width: 100%; font-weight: bold;font-size: 20px; padding-top:35px; text-align: center;}
         .basic-info .input-box{width: 350px;   height: 100%;}
         .basic-info .input-box div{height:70px; width: 100%; padding-top:30px; text-align: left;}
@@ -38,38 +38,45 @@
         /*동물정보*/
         .animal-info{height:350px; width: 100%; }
         .animal-info>div{height: 100%; float: left;}
-        .animal-info .title{width: 150px; height: 100%;}
+        .animal-info .title{width: 150px; height: 100%; font-family: 'Gamja Flower', cursive; }
         .animal-info .title div{height:55px; width: 100%; font-weight: bold;font-size: 20px; padding-top:20px; text-align: center;}
         .animal-info .input-box{width: 350px;  height: 100%;}
         .animal-info .input-box div{height: 55px; width: 100%; padding-top:20px;  }
         .check{float: left; width: 100px;}
         input[type="text"]{width: 300px;}
-        input[type="button"]{background-color:#EC7357; border: none; color: white; font-size: 20px; font-weight: bold; border-radius: 10px; margin-right: 10px; width: 70px;}
         
         /*footer 부분*/
         #footer{text-align: center; width: 100%; margin-top:50px;}
-         input[type="button"]:hover{background-color:#b3543e; }  
-    </style>
-    <script>
-    	$(function(){
+        .btns{background-color:#EC7357; border: none; color: white; font-size: 20px; font-weight: bold; border-radius: 10px; margin-right: 10px; width: 70px; font-family: 'Gamja Flower', cursive;}
+        .btns:hover{background-color:#b3543e; }  
+</style>
+<script>
+ 	$(function(){
     		$(".toList-btn").on("click",function(){
-    			//location.href="toDisappearList?currentPage="+${currentPage};
+    			location.href="toDisappearList?currentPage=${currentPage}";
     		});
     		$(".insert-btn").on("click",function(){
-    			var date = $("#disappearDate").val();
-    			alert(date);
-    			$("#reportForm").submit();
+    			if($("#disappearDate").val() !=""&& $(".disappearArea").val() !=""&& $(".tel").val() !=""&& $('input:radio[name=gender]').is(':checked')==true
+    					&& $('input:checkbox[name=neuter]').is(':checked')==true && $(".furColor").val()!="" && $(".feature").val()!=""&&$(".image").val()!=""){
+    				$("#reportForm").submit();
+    			}else{alert("기타사항을 제외하고 모두 입력해주세요.");}
+    		
+    			
     		});
     	});
     </script>
 </head>
  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
    <jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
-<!-------여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
+<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
+<div class="px-0 pb-0 empty"></div>
  <div id="title"><h1>실종 신고</h1></div>
-<div id="wrapper" class="aa">
-     
-        <form action="insertProc.dis" method="post" id="reportForm" enctype="multipart/form-data">
+
+<div class="container">
+	<div class="row">
+		<div class="col-12">
+			<div id="wrapper" class="aa">
+				<form action="insertProc.dis" method="post" id="reportForm" enctype="multipart/form-data">
         <input type="hidden" name="seq" value="0">
         <div class="basic">기본정보</div>
         <div class="basic-info">
@@ -94,8 +101,8 @@
                         <option value="충청남도">충청남도</option><option value="충청북도">충청북도</option>
                     </select>
                 </div>
-                <div><input type="text" name="disappearArea"></div>
-                <div><input type="text" name="tel"></div>
+                <div><input type="text" name="disappearArea" class="disappearArea"></div>
+                <div><input type="text" name="tel" class="tel"></div>
             </div>
         </div>
         
@@ -117,29 +124,31 @@
                     </select>
                 </div>
                 <div>
-                    <span class="check"><input type="radio" name="gender" value="m">수컷</span>
-                    <span class="check"><input type="radio" name="gender" value="f">암컷</span>
-                    <span class="check"><input type="checkbox" name="neuter" value="y">중성화완료</span>
+                    <span class="check"><input type="radio" name="gender" value="남">수컷</span>
+                    <span class="check"><input type="radio" name="gender" value="여">암컷</span>
+                    <span class="check"><input type="checkbox" name="neuter" value="O">중성화완료</span>
                 </div>
                 <div><select name="age" id="age" >
                         <option value="나이모름">나이 모름</option><option value="1-5살">1-5살</option><option value="6-10살">6-10살</option> <option value="10-15살">10-15살</option>
                         <option value="16-20살">16-20살</option><option value="21이">21살이상</option>
                     </select>
                     </div>
-                <div><input type="text" placeholder="털색을 설명해주세요" class="furColor" name="furColor"></div>
-                <div><input type="text" placeholder="눈에 띄는 특징을 적어주세요" class="feature" name="feature"></div>
+                <div><input type="text" placeholder="털색을 설명해주세요" class="furColor" name="furColor" class="notnull"></div>
+                <div><input type="text" placeholder="눈에 띄는 특징을 적어주세요" class="feature" name="feature" class="notnull"></div>
                 <div><input type="text" placeholder="기타사항을 입력해주세요" class="et" name="et"></div>
-                <div><input type="file" name="image"></div>
+                <div><input type="file" name="image" class="image"></div>
             </div>
         </div>
         
         <div id="footer">
-            <input type="button" class="insert-btn" value="등록">
-            <input type="button" class="toList-btn" value="취소">
+            <input type="button" class="insert-btn btns" value="등록">
+            <input type="button" class="toList-btn btns" value="취소">
         </div>
         </form>
-    </div>
-
+			</div>
+		</div>
+	</div>
+</div>
 
 <!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
    <jsp:include page="/WEB-INF/views/module/footer.jsp" ></jsp:include>

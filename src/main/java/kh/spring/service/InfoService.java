@@ -6,8 +6,18 @@ import java.util.List;
 import kh.spring.dto.TrainingDTO;
 
 public interface InfoService {
-	int Infoinsert(TrainingDTO tdto) throws Exception;
+	public int Infoinsert(TrainingDTO tdto) throws Exception;
 
-	List<TrainingDTO> selectAll(int currentpage) throws Exception;
+	public List<TrainingDTO> selectAll(int currentpage) throws Exception;
+
+	public TrainingDTO detail_info(int seq) throws Exception;
+
+	public int update_info(TrainingDTO dto) throws Exception;
+
+	public String getNavi(int currentPage) throws Exception;
+
+	public int boardselcount() throws Exception;
+
+	public int deleteinfo(int seq)throws Exception;
 
 }

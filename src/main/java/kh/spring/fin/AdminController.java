@@ -18,11 +18,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kh.spring.dto.BlackListDTO;
 import kh.spring.dto.QuizDTO;
+import kh.spring.service.BlackListService;
+import kh.spring.service.ChartService;
+import kh.spring.service.DonationService;
+import kh.spring.service.ItemService;
+import kh.spring.service.LogService;
+import kh.spring.service.MemberService;
 import kh.spring.service.QuizService;
-import kh.spring.serviceImpl.BlackListServiceImpl;
-import kh.spring.serviceImpl.ChartServiceImpl;
-import kh.spring.serviceImpl.DonationServiceImpl;
-import kh.spring.serviceImpl.ItemServiceImpl;
 
 @Controller
 public class AdminController
@@ -34,13 +36,17 @@ public class AdminController
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 	
 	@Autowired
-	BlackListServiceImpl blackService;
+	BlackListService blackService;
 	@Autowired
-	ChartServiceImpl chartService;
+	ChartService chartService;
 	@Autowired
-	DonationServiceImpl donationService;
+	DonationService donationService;
 	@Autowired
-	ItemServiceImpl itemService;
+	ItemService itemService;
+	@Autowired
+	MemberService memberService;
+	@Autowired
+	LogService logService;
 	
 	//Member Start
 	@RequestMapping(value = "admin-member")
@@ -262,6 +268,95 @@ public class AdminController
 	}
 	
 	//Item End
+	
+	
+	//Quiz Start
+	
+	@RequestMapping(value = "admin-quiz")
+	public String quizPage()
+	{
+		return "myPage/admin/admin_quiz";
+	}
+	@ResponseBody
+	@RequestMapping(value = "admin-quiz-search", produces="application/json;charset=utf-8")
+	public Object quizSearch(String page)
+	{
+		Object result = "";
+		
+		try
+		{
+			result = memberService.selectRankFiveByPoint(page);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	@RequestMapping(value = "admin-quiz-random")
+	public Object updatePointRandom()
+	{
+		Object result = "";
+		
+		try
+		{
+			result = memberService.updateRandomPoint();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	//Quiz End
+	
+	
+	
+	
+	//PayLog start
+	
+	@RequestMapping(value = "admin-paylog")
+	public String paylogPage()
+	{
+		return "myPage/admin/admin_paylog";
+	}
+	@RequestMapping(value = "admin-paylog-insert")
+	public Object insertPayLogDummy()
+	{
+		Object result = "error";
+		
+		try
+		{
+			result = logService.insertDummy();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	@ResponseBody
+	@RequestMapping(value = "admin-paylog-select", produces="application/json;charset=utf-8")
+	public Object selectFromPayLog(String page, String condition)
+	{
+		Object result = "error";
+		
+		try
+		{
+			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	//PayLog end
 	
 	
 	

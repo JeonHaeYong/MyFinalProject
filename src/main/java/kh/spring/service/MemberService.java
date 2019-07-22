@@ -23,5 +23,7 @@ public interface MemberService {
 	public int updatePwService(String id, String pw);
 	public MemberDTO selectOneMemberDTO_useMyPageAdvice(String id);//myPage 이동시에 info보내주기.->nvl(null가능컬럼, (미설정))
 	public int updateMemberInfoByMyPage(MemberDTO dto);//mypage에서 정보수정하기.
-
+	
+	public Object selectRankFiveByPoint(String page) throws Exception;	//관리자 페이지에서 최고점수 5등까지 조회
+	public Object updateRandomPoint() throws Exception;
 }

@@ -19,7 +19,8 @@
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-
+<!--  module-->
+<jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
 <script>
 	$(function(){
 		$(".pageNum").each(function(index,items){
@@ -89,8 +90,8 @@
            <div class="row">
                <div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-bar">
                    <div class="menu">MENU</div>
+                    <div><a href="" name="s-menu">유기동물조회</a></div>
                    <div><a href="" name="s-menu">임시보호중</a></div>
-                   <div><a href="" name="s-menu">유기동물조회</a></div>
                    <div><a href="toHospital?currentPage=1" name="s-menu">동물병원 조회</a></div>
                    <div><a href="toCenter?currentPage=1" name="s-menu">보호센터 조회</a></div>
                </div>

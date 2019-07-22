@@ -11,7 +11,7 @@
 		#{phone,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR}, #{address1,jdbcType=VARCHAR}, #{address2,jdbcType=VARCHAR}, #{type,jdbcType=NUMERIC}, 0)
 	</insert>
 	<select id="selectAllMembers" resultType="kh.spring.dto.MemberDTO">
-		select * from member where;
+		select * from member;
 	</select>
 	
 	<select id="isLoginOk" resultType="int">
@@ -83,4 +83,30 @@
 			</if>
 		where id=#{id}
 	</update>
+	
+	<!-- used in admin-quiz -->
+	<select id="selectRankFiveByPoint" resultType="kh.spring.dto.MemberDTO">
+		select * 
+		from (select rank() over(order by point desc) as rank
+		        , row_number() over(order by point desc) as rown
+		        , member.id,  member.point 
+		        from member) 
+		where (rank between 1 and 5) and (rown between #{array[0]} and #{array[1]})
+	</select>
+	<select id="selectCountRankFiveByPoint" resultType="java.lang.Integer">
+		select count(*) from 
+		    (select rank() over(order by point desc) as rank 
+		     from member) 
+		where (rank between 1 and 5)
+	</select>
+	<select id="selectCount" resultType="java.lang.Integer">
+		select count(*) from member
+	</select>
+	<update id="updatePointRandom">
+		update member set point = #{point}
+		where id = (select id 
+					from (select row_number() over(order by id asc) as rown , member.* from member) 
+					where rown = #{index})
+	</update>
+	
 </mapper>

@@ -29,9 +29,12 @@ public class InformationController {
 	@RequestMapping("information_t")
 	public String informaition_t(String currentPage) {
 		try {
+			String navi = service.getNavi(Integer.parseInt(currentPage));
 			session.setAttribute("currentPage", currentPage);
 			List<TrainingDTO> tdto=service.selectAll(Integer.parseInt(currentPage));
+	
 			request.setAttribute("infodto", tdto);
+			request.setAttribute("navi", navi);
 			return "sense/information/information";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -97,8 +100,74 @@ public class InformationController {
 		return imagePath;
 	}
 	
-
-
 	
+	@RequestMapping("detail_info")
+	public String detailinfo(HttpServletRequest request, int seq) {
+		try {
+			request.setAttribute("dto", service.detail_info(seq));
+			
+			return "sense/information/detail_info";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	return "error";
+	}
+@RequestMapping("updatewrite")
+public String updatewrite(HttpServletRequest request,int seq) {
+	
+	try {
+		request.setAttribute("dto", service.detail_info(seq));
+	} catch (Exception e) {
+		
+		e.printStackTrace();
+	}
+return "sense/information/update";}
+
+@RequestMapping("uploadformproc")
+public String upload(TrainingDTO tdto)
+{
+	System.out.println(tdto.getTitle()+tdto.getContents());
+	try {
+		tdto.setWriter("관리자");
+		tdto.setIp(request.getRemoteAddr());
+	
+		Pattern p=Pattern.compile("<img src=\"(.+?)\">");
+		Matcher m=p.matcher(tdto.getContents());
+		if(m.find()==true) {
+		tdto.setImage(m.group(0));
+		}
+		else {
+			tdto.setImage("null");
+		}
+		int result=service.update_info(tdto);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	System.out.println(tdto);
+
+	return "redirect:/information_t?currentPage=1";
+	}
+
+@RequestMapping("delinfo")
+public String delinfo(HttpServletRequest request) {
+	String[] check = request.getParameterValues("check");
+	int[]seq=new int[check.length];
+	for(int i=0;i<check.length;)
+	{
+		seq[i]=Integer.parseInt(check[i]);
+		System.out.println(seq[i]);
+		
+		try {
+			if(service.deleteinfo(seq[i])>0) {
+			i++;}
+			else {
+				i--;
+			}
+		}catch(Exception e) {e.printStackTrace();}
+	}
+	
+	return "redirect:/information_t?currentPage=1";
+}
 	
 }

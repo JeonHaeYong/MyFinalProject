@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kh.spring.dto.ItemDTO;
+import kh.spring.service.CartService;
 import kh.spring.service.ItemService;
 
 @Controller
@@ -18,33 +19,57 @@ public class ItemController {
 
 	@Autowired
 	private ItemService is;
+	
+	@Autowired
+	private CartService cs;
 
 	@RequestMapping("freeMarket")
-	public String freeMarket(HttpServletRequest request, int currentPage, String category) {
-		if(category.equals("all")) {
-			request.setAttribute("itemList", is.selectItemPerPage(currentPage));
-		}else {
-			request.setAttribute("itemList", is.selectItemPerPageByCategory(currentPage, category));
+	public String freeMarket(HttpServletRequest request, String currentPage, String category) {
+		if(currentPage == null) {
+			currentPage = "1";
 		}
-		request.setAttribute("pageNavi", is.getNaviforItem(currentPage, category));
+		if(category == null || category.equals("all")) {
+			category = "all";
+			request.setAttribute("itemList", is.selectItemPerPage(Integer.parseInt(currentPage)));
+		}else {
+			request.setAttribute("itemList", is.selectItemPerPageByCategory(Integer.parseInt(currentPage), category));
+		}
+		request.setAttribute("pageNavi", is.getNaviforItem(Integer.parseInt(currentPage), category));
 		request.setAttribute("category", category);
+		
+		String id = (String)request.getSession().getAttribute("id");
+		if(id != null) {
+			request.setAttribute("cartCount", cs.getCartCount(id));
+		}
 		return "item/freeMarket";
 	}
 
 	@RequestMapping("item")
-	public String readOneItem(HttpServletRequest request, int seq) {
+	public String readOneItem(HttpServletRequest request, String currentPage, String category, int seq) {
+		if(currentPage == null) {
+			currentPage = "1";
+		}
+		if(category == null) {
+			category = "all";
+		}
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("category", category);
 		request.setAttribute("item", is.readOneItem(seq));
+		String id = (String)request.getSession().getAttribute("id");
+		if(id != null) {
+			request.setAttribute("cartCount", cs.getCartCount(id));
+		}
 		return "item/item";
 	}
 
 	@RequestMapping("addItem")
-	public String addItem() {
+	public String addItem_loginCheck(HttpServletRequest request) {
 		return "item/addItem";
 	}
 
 	@ResponseBody
 	@RequestMapping("imageUpload")
-	public String imageUploadLogin(HttpServletRequest request, MultipartFile image) {
+	public String imageUpload_loginCheck(HttpServletRequest request, MultipartFile image) {
 		String id = (String)request.getSession().getAttribute("id");
 		System.out.println(id);
 		String resourcePath = request.getSession().getServletContext().getRealPath("/resources");
@@ -79,7 +104,7 @@ public class ItemController {
 	 */
 	@ResponseBody
 	@RequestMapping("deleteImage")
-	public String deleteImageLogin(HttpServletRequest request, String imagePath) {
+	public String deleteImage_loginCheck(HttpServletRequest request, String imagePath) {
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
@@ -111,7 +136,7 @@ public class ItemController {
 	 * @return 무료나눔 페이지로 이동
 	 */
 	@RequestMapping("/addItemProc")
-	public String joinProc(HttpServletRequest request, ItemDTO dto, MultipartFile image1, MultipartFile image2, MultipartFile image3) {
+	public String addItemProc_loginCheck(HttpServletRequest request, ItemDTO dto, MultipartFile image1, MultipartFile image2, MultipartFile image3) {
 		String id = (String)request.getSession().getAttribute("id");
 		String resourcePath = request.getSession().getServletContext().getRealPath("/resources");
 		System.out.println(resourcePath);
@@ -136,7 +161,10 @@ public class ItemController {
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
-		}	
+		}
+		dto.setName(dto.getName().replaceAll("<.?script>", ""));
+		dto.setCategory(dto.getCategory().replaceAll("<.?script>", ""));
+		dto.setContents(dto.getContents().replaceAll("<.?script>", ""));
 		dto.setSeller(id);
 		is.uploadItem(dto);
 		return "redirect:freeMarket?currentPage=1&category=all";

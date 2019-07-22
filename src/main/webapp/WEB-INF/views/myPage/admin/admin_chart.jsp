@@ -67,6 +67,29 @@
 	color: #EC7357 !important;
 	font-weight: 600 !important;
 }
+
+
+
+
+.selected_menu_btns {
+	border-radius: 0px !important;
+	width: 100%;
+	height: 100%;
+	color: white !important;
+	background-color: #9c2c2c !important;
+}
+.menu_btns{
+	border-radius: 0px !important;
+	width: 100%;
+	height: 100%;
+}
+.menu_btns:hover{
+	color: white !important;
+	background-color: #9c2c2c !important;
+}
+
+
+
 </style>
 
 </head>
@@ -79,35 +102,45 @@
 	<section class="site-section bg-light block-13">
 
 	<div id="container" class="container">
-
+		
+		
+		
+		
+		
+		
 		<div id="menu_row" class="row justify-content-center">
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="admin-member" class="btn btn-danger my_buttons">회원 관리</a>
+				<a href="admin-member" class="btn menu_btns">회원 관리</a>
 			</div>
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="#" class="btn btn-danger my_buttons">무료 나눔 물품 승인</a>
+				<a href="admin-item" class="btn menu_btns">무료 나눔 물품 승인</a>
 			</div>
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="#" class="btn btn-danger my_buttons">무료 나눔 거래 내역</a>
+				<a href="admin-paylog" class="btn menu_btns">무료 나눔 거래 내역</a>
 			</div>
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="admin-donation" class="btn btn-danger my_buttons">월 별 후원금 및 전달 기관</a>
+				<a href="admin-donation" class="btn menu_btns">월 별 후원금 및 전달 기관</a>
 			</div>
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="#" class="btn btn-danger my_buttons">퀴즈 당첨자</a>
+				<a href="admin-quiz" class="btn menu_btns">퀴즈 당첨자</a>
 			</div>
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="admin-chart" class="btn btn-danger selected_my_buttons">통계</a>
+				<a href="admin-chart" class="btn selected_menu_btns">통계</a>
 			</div>
 
 		</div>
-
+		
+		
+		
+		
+		
+		
 		<div class="row justify-content-center mt-5">
 
 			<div id="recent_chart_div" class="col-6 text-center my-3 chart_col">1번 영역</div>

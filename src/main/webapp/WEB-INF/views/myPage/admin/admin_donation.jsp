@@ -19,7 +19,8 @@
 
 <style>
 
-#container {
+#container
+{
 	margin-top: 5%;
 }
 #mypage_link
@@ -28,19 +29,32 @@
 	font-weight: 600 !important;
 }
 
-.my_buttons {
+
+
+.selected_menu_btns {
 	border-radius: 0px !important;
 	width: 100%;
 	height: 100%;
-	
-	background-color: #EC7357 !important;
+	color: white !important;
+	background-color: #9c2c2c !important;
 }
-.selected_my_buttons {
+.menu_btns{
 	border-radius: 0px !important;
 	width: 100%;
 	height: 100%;
-	
-	background-color: black !important;
+}
+.menu_btns:hover{
+	color: white !important;
+	background-color: #9c2c2c !important;
+}
+
+
+.my_buttons {
+	background-color: #EC7357;
+	color: white !important;
+}
+.my_buttons:hover{
+	background-color: #9c2c2c !important;
 }
 
 
@@ -64,29 +78,29 @@
 			<div id="menu_row" class="row justify-content-center">
 
 				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="admin-member" class="btn btn-danger my_buttons">회원 관리</a>					
+					<a href="admin-member" class="btn menu_btns">회원 관리</a>
 				</div>
-				
+	
 				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="#" class="btn btn-danger my_buttons">무료 나눔 물품 승인</a>
+					<a href="admin-item" class="btn menu_btns">무료 나눔 물품 승인</a>
 				</div>
-				
+	
 				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="#" class="btn btn-danger my_buttons">무료 나눔 거래 내역</a>
+					<a href="admin-paylog" class="btn menu_btns">무료 나눔 거래 내역</a>
 				</div>
-				
+	
 				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="admin-donation" class="btn btn-danger selected_my_buttons">월 별 후원금 및 전달 기관</a>
+					<a href="admin-donation" class="btn selected_menu_btns">월 별 후원금 및 전달 기관</a>
 				</div>
-				
+	
 				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="#" class="btn btn-danger my_buttons">퀴즈 당첨자</a>
+					<a href="admin-quiz" class="btn menu_btns">퀴즈 당첨자</a>
 				</div>
-				
+	
 				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="admin-chart" class="btn btn-danger my_buttons">통계</a>
+					<a href="admin-chart" class="btn menu_btns">통계</a>
 				</div>
-
+	
 			</div>
 			
 			
@@ -98,6 +112,12 @@
 				<div class="col-12 col-md-12 col-lg-12 text-center my-5">
 
 					<div class="row justify-content-center">
+						
+						<div class="col-12 col-md-12 col-lg-12 text-center my-3">
+						
+							<h2>후원 업체 변경</h2>
+						
+						</div>
 						
 						<div class="col-12 col-md-12 col-lg-2 text-center my-1">
 						
@@ -241,7 +261,7 @@
 						
 						<div class="col-12 col-md-12 col-lg-12 text-center my-5">
 						
-							<input id="submit_btn" class="btn btn-warning" type="button" value="후원 업체 등록">
+							<input id="submit_btn" class="btn my_buttons" type="button" value="후원 업체 등록">
 						
 						</div>
 						
@@ -255,11 +275,18 @@
 			
 			 
 			
+			
 			<div class="row justify-content-center">
-
+				
 				<div class="col-12 col-md-12 col-lg-12 text-center my-5">
 				
 					<div class="row justify-content-center">
+						
+						<div class="col-12 col-md-12 col-lg-12 text-center my-3">
+						
+							<h2>사진 변경</h2>
+								
+						</div>
 						
 						<div class="col-12 col-md-12 col-lg-2 text-center my-1">
 								
@@ -295,7 +322,7 @@
 						
 						<div class="col-12 col-md-12 col-lg-12 text-center my-5">
 						
-							<input id="image_change_btn" class="btn btn-warning" type="button" value="사진 변경">
+							<input id="image_change_btn" class="btn my_buttons" type="button" value="사진 변경">
 						
 						</div>
 						

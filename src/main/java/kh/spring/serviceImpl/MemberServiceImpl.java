@@ -1,26 +1,25 @@
 package kh.spring.serviceImpl;
 
-import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.mail.Session;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import kh.spring.dao.BlackListDAO;
 import kh.spring.dao.MemberDAO;
 
 
 import kh.spring.dto.BlackListDTO;
-
+import kh.spring.dto.ItemDTO;
 import kh.spring.dto.MemberDTO;
 import kh.spring.mail.MailHandler;
 import kh.spring.mail.TempKey;
@@ -104,6 +103,120 @@ public class MemberServiceImpl implements MemberService {
 	{
 		return mdao.selectCountByLikeId(id);
 	}
+	
+	//관리자 페이지 퀴즈 점수 최대 5등까지 조회
+	@Override
+	public Object selectRankFiveByPoint(String page) throws Exception
+	{
+		System.out.println("검색한 페이지 : " + page);
+		
+		if((page == null) || (page.equals("")))
+		{
+			page = "1";
+		}
+		
+		int currentPage = Integer.parseInt(page);
+		int recordCountPerPage = 10;
+		int naviCountPerPage = 5;
+		int recordTotalCount = mdao.selectCountRankFiveByPoint();
+		int pageTotalCount;
+		boolean needPrev = true;
+		boolean needNext = true;
+		
+		int start = currentPage * recordCountPerPage - recordCountPerPage + 1;
+		int end = currentPage * recordCountPerPage;
+		
+		List<MemberDTO> list = mdao.selectRankFiveByPoint(start, end);
+		
+		JsonObject outerjo = new JsonObject();
+		JsonArray ja = new JsonArray();
+		
+		for(int i = 1 ; i <= list.size() ; i++)
+		{
+			JsonObject jo = new JsonObject();
+			
+			int point = list.get(i-1).getPoint();
+			String id = list.get(i-1).getId();
+			
+			jo.addProperty("point", point);
+			jo.addProperty("id", id);
+			ja.add(jo);
+		}
+		outerjo.add("array", ja);
+		
+		if( recordTotalCount % recordCountPerPage == 0)
+		{
+			pageTotalCount = recordTotalCount / recordCountPerPage;
+		}
+		else
+		{
+			pageTotalCount = recordTotalCount / recordCountPerPage + 1;
+		}
+
+		if(currentPage < 1)
+		{
+			currentPage = 1;
+		}
+		else if(currentPage > pageTotalCount)
+		{
+			currentPage = pageTotalCount;
+		}
+		
+		int startNavi = (currentPage - 1) / naviCountPerPage * naviCountPerPage + 1;
+		int endNavi = startNavi + naviCountPerPage - 1;
+		if(endNavi > pageTotalCount)
+		{
+			endNavi = pageTotalCount;
+		}
+		
+		if(startNavi == 1)
+		{
+			needPrev = false;
+		}
+		if(endNavi == pageTotalCount)
+		{
+			needNext = false;
+		}
+		
+		outerjo.addProperty("seq", start-1);
+		outerjo.addProperty("currentPage", currentPage);
+		outerjo.addProperty("needPrev", needPrev);
+		outerjo.addProperty("needNext", needNext);
+		outerjo.addProperty("startNavi", startNavi);
+		outerjo.addProperty("endNavi", endNavi);
+
+		
+		return new Gson().toJson(outerjo);
+	}
+	
+	//포인트 랜덤하게 변경
+	@Override
+	public Object updateRandomPoint() throws Exception
+	{
+		int size = mdao.selectCount();
+		for(int i = 1 ; i <= size ; i++)
+		{
+			System.out.println("i : " + i);
+			
+			HashMap<String, Integer> param = new HashMap<>();
+			
+			int point = (int) ( Math.random() * 1000 + 1 );
+			
+			param.put("point", point);
+			param.put("index", i);
+			
+			int updateResult = mdao.updatePointRandom(param);
+			if(updateResult != 1)
+			{
+				System.out.println("업데이트 안됨");
+				return "error";
+			}
+		}
+		System.out.println("변경된 행 : " + size);
+		
+		return "redirect: admin-quiz";
+	}
+	
 	//네이버 회원가입
 	@Override
 	public int insertNaverJoin(MemberDTO dto) {
@@ -126,7 +239,7 @@ public class MemberServiceImpl implements MemberService {
 	
 //이메일 인증하기 
 	@Override
-	@Transactional
+	@Transactional("txManager")
 	public boolean create(String email)  {
 
 		// 임의의 authkey 생성
@@ -153,7 +266,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 	//메일로 임시 비밀번호 보내기 
 	@Override
-	@Transactional
+	@Transactional("txManager")
 	public boolean newPw(String email)  {
 
 		// 임의의 authkey 생성
@@ -181,7 +294,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 	//이메일로 아이디 보내기 
 		@Override
-		@Transactional
+		@Transactional("txManager")
 		public boolean FindIdbyemail(String email,String id)  {
 
 			// mail 작성 관련 
@@ -253,6 +366,8 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return mdao.updateMemberInfoByMyPage(dto);
 	}
+
+
 }
 
 

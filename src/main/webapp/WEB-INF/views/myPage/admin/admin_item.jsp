@@ -18,28 +18,52 @@
 <link rel="stylesheet" href="resources/css/style.css">
 
 <style>
-#container {
+#container
+{
 	margin-top: 5%;
 }
-
-#mypage_link {
+#mypage_link
+{
 	color: #EC7357 !important;
 	font-weight: 600 !important;
 }
+
+
+
+.selected_menu_btns {
+	border-radius: 0px !important;
+	width: 100%;
+	height: 100%;
+	color: white !important;
+	background-color: #9c2c2c !important;
+}
+.menu_btns{
+	border-radius: 0px !important;
+	width: 100%;
+	height: 100%;
+}
+.menu_btns:hover{
+	color: white !important;
+	background-color: #9c2c2c !important;
+}
+
 
 .my_buttons {
 	border-radius: 0px !important;
 	width: 100%;
 	height: 100%;
-	background-color: #EC7357 !important;
+	background-color: #EC7357;
+	color: white !important;
+}
+.my_buttons:hover{
+	background-color: #9c2c2c !important;
 }
 
-.selected_my_buttons {
-	border-radius: 0px !important;
-	width: 100%;
-	height: 100%;
-	background-color: black !important;
+.selected_btn{
+	color: #EC7357 !important;
+	font-weight: 600 !important;
 }
+
 </style>
 
 </head>
@@ -60,27 +84,27 @@
 		<div id="menu_row" class="row justify-content-center">
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="admin-member" class="btn btn-danger my_buttons">회원 관리</a>
+				<a href="admin-member" class="btn menu_btns">회원 관리</a>
 			</div>
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="#" class="btn btn-danger selected_my_buttons">무료 나눔 물품 승인</a>
+				<a href="admin-item" class="btn selected_menu_btns">무료 나눔 물품 승인</a>
 			</div>
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="#" class="btn btn-danger my_buttons">무료 나눔 거래 내역</a>
+				<a href="admin-paylog" class="btn menu_btns">무료 나눔 거래 내역</a>
 			</div>
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="admin-donation" class="btn btn-danger my_buttons">월 별 후원금 및 전달 기관</a>
+				<a href="admin-donation" class="btn menu_btns">월 별 후원금 및 전달 기관</a>
 			</div>
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="#" class="btn btn-danger my_buttons">퀴즈 당첨자</a>
+				<a href="admin-quiz" class="btn menu_btns">퀴즈 당첨자</a>
 			</div>
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="admin-chart" class="btn btn-danger my_buttons">통계</a>
+				<a href="admin-chart" class="btn menu_btns">통계</a>
 			</div>
 
 		</div>
@@ -94,29 +118,16 @@
 
 			<div class="col-12">
 
-				<div class="row justify-content-center">
-
-					<div class="col-8 col-md-8 col-lg-6 text-center my-auto">
-
-						<input id="search_text" class="form-control" type="text">
-
-					</div>
-
-					<div class="col-4 col-md-4 col-lg-2 text-center my-auto">
-
-						<input id="search_btn" class="btn btn-info my_buttons" name="1" type="button" value="검색">
-
-					</div>
-
-				</div>
-				
-				
 				<div class="row justify-content-center mt-5">
-					<div class="col-6 col-md-6 col-lg-2 text-center my-1">판매 등록 번호</div>
-					<div class="col-4 col-md-4 col-lg-3 text-center my-1">상품 명</div>
-					<div class="col-4 col-md-4 col-lg-2 text-center my-1">상품 가격</div>
-					<div class="col-4 col-md-4 col-lg-3 text-center my-1">판매자</div>
-					<div class="col-2 col-md-2 col-lg-2 text-center my-1"><input id="permission_all_btn" type="checkbox">모두 체크</div>
+				
+					<div class="col-6 col-md-6 col-lg-2 text-center my-1"><h3>등록 번호</h3></div>
+					<div class="col-4 col-md-4 col-lg-3 text-center my-1"><h3>상품 명</h3></div>
+					<div class="col-4 col-md-4 col-lg-2 text-center my-1"><h3>상품 가격</h3></div>
+					<div class="col-4 col-md-4 col-lg-3 text-center my-1"><h3>판매자</h3></div>
+					<div class="col-2 col-md-2 col-lg-2 text-center my-1">
+						<input id="permission_all_btn" type="checkbox">모두 체크
+					</div>
+					
 				</div>
 				
 				
@@ -130,11 +141,18 @@
 
 				<div class="row justify-content-center">
 
-					<div class="col-8 col-md-8 col-lg-6 text-center my-5"></div>
-
+					<div class="col-8 col-md-8 col-lg-4 text-left my-5"></div>
+					<div class="col-8 col-md-8 col-lg-4 text-left my-5"></div>
+					
+					<div class="col-8 col-md-8 col-lg-2 text-center my-5">
+					
+<!-- 						<input id="search_btn" class="btn my_buttons" name="1" type="button" value="검색"> -->
+					
+					</div>
+					
 					<div class="col-4 col-md-4 col-lg-2 text-center my-5">
 
-						<input id="reg_btn" class="btn btn-danger my_buttons" type="button" value="등록하기">
+						<input id="reg_btn" class="btn my_buttons" type="button" value="등록하기">
 
 					</div>
 
@@ -181,6 +199,8 @@
 <script>
 	$(function()
     {
+		myAjax("1");
+		
 		$(document).on("click", "#permission_all_btn", function()
 		{
 			$("#search_result_div input[type=checkbox]").prop("checked", true);
@@ -225,6 +245,7 @@
 		
 		$(document).on("click", "#search_btn,.navi_btns", function()
 		{
+			$("#permission_all_btn").prop("checked", false);
 			myAjax(this.name);
 		})
 		
@@ -263,29 +284,40 @@
 	    		
 	    		if(response.needPrev)
 	    		{
-	    			var $prevBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="이전" name="'+(response.startNavi-1)+'">');
+// 	    			var $prevBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value=" < " name="'+(response.startNavi-1)+'">');
+					var $prevBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value=" < " name="'+(response.startNavi-1)+'">');
+
 	    			$naviRow.append($prevBtn);
 	    		}
 	    		
 	    		for(var i = response.startNavi ; i <= response.endNavi ; i++)
 	    		{
 	    			
-	    			if(i == response.currentPage)
+// 	    			if(i == response.currentPage)
+// 	    			{
+// 		    			var $naviBtn = $('<input class="btn btn-danger selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+// 	    			}
+// 	    			else
+// 	    			{
+// 		    			var $naviBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+// 	    			}
+				
+					if(i == response.currentPage)
 	    			{
-		    			var $naviBtn = $('<input class="btn btn-danger selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
-
+		    			var $naviBtn = $('<input class="btn btn-link selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
 	    			}
 	    			else
 	    			{
-		    			var $naviBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
-
+		    			var $naviBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
 	    			}
+
 	    			$naviRow.append($naviBtn);
 	    		}
 	    		
 	    		if(response.needNext)
 	    		{
-	    			var $nextBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="이후" name="'+(response.endNavi+1)+'">');
+// 	    			var $nextBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value=" > " name="'+(response.endNavi+1)+'">');
+	    			var $nextBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value=" > " name="'+(response.endNavi+1)+'">');
 	    			$naviRow.append($nextBtn);
 	    		}
 	    		

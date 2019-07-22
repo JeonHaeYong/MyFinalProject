@@ -10,5 +10,5 @@ public interface CartDAO {
 	public int isExist(CartDTO dto);
 	public List<ItemDTO> selectCartPerPage(String id);
 	public int getCartCount(String id);
-	public int deleteCart(int item_seq, String id);
+	public int deleteCart(String[] seqs);
 }
