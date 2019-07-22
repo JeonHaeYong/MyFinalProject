@@ -21,7 +21,20 @@
 <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
-<!--  로그인 style-->
+
+<!-- summernote-->
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css"
+	rel="stylesheet">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+
+<!--  module-->
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
 
 <style>
@@ -102,63 +115,82 @@ a[name="s-menu"]:hover {
 }
 
 /* -------------------infobox -----------------   */
-
 .infowrapper {
-font-family: 'Gamja Flower', cursive;
 	box-sizing: border-box;
 	height: 300px;
 	overflow: hidden;
-	border: 2px solid #754F4470;
+	border: 1px solid black;
 }
 
-.dtocol {
-	padding-top: 50px;
+.infoimg, .infotext {
+	border-bottom: 1px solid black;
+	height: 150px;
 }
-
-.infoimg, .infotext,.infoextra {
-
-	
-overflow: hidden;
-
-}
-.infoimg{
-margin-left:15px;
-margin-top:15px;
-margin-right:15px;
-box-sizing: border-box;
-height:70%;
-}
-.inforecommend{
-border-top:1px solid #754F4470;
-padding-left:5px;
-margin-top:2px;
-margin-left:15px;
-margin-right:15px;
-text-align:left;
-height:7%;
-box-sizing:border-box;
-overflow:hidden;
-}
-.infotext{
-
-font-size:18px;
-text-align:left;
-margin-left:15px;
-margin-right:15px;
-padding-left:5px;
-height:18%;
-margin-top:2px;
-}
-.infoimg>img {
-width:100%;
-	top: 0;
-	left: 0;
-	height: 100%;
-}
-
-
 </style>
+<!--  summernote script-->
 
+<script>
+//파일 업로드        
+function sendFile(files,editor){
+            var data = new FormData(document.getElementById("writeForm"));
+            data.append("files", files);
+             $.ajax({
+                data: data,
+                type: "post",
+                url: "fileajax",
+                cache: false,
+                contentType: false,
+                processData: false,
+                enctype:"multipart/form-data",
+            }).done(function(resp){
+            	
+    		          $(".note-editable").append("<img src='"+resp+"' >");  
+            })
+}
+      
+           
+    window.onload = function(){
+            //이전으로 버튼 
+                document.getElementById("tomainboard").onclick = function(){
+                    location.href = "toBoard";
+                }
+            //작성 완료 보튼 
+                document.getElementById("uploadwritebtn").onclick = function(){
+                //제목을 입력하지 않았을 경우     
+            	var inputtitle= $("#inputtitle");              
+                    if(inputtitle.val()==""){
+                        alert("제목을 입력해주세요.");
+                        inputtitle.focus();
+                        return;   }
+                    
+                    //summernote가 비어있을 경우 
+                    if ($('#summernote').summernote('isEmpty')) {
+                    alert('내용을 입력해주세요.');
+                    return;       }
+            
+				//summernote 작성이 완료된경우 
+            $('textarea[name="contents"]').val($('#summernote').summernote('code'));
+                    document.getElementById("uploadForm").submit();   
+    }
+            $('#summernote').summernote({
+                    placeholder: '내용을 입력해주세요.',
+                    tabsize:2,
+                    height: 500,
+                  callbacks : {
+                        onImageUpload: function(files, editor, welEditable) {
+                            sendFile(files[0],this);
+                         
+                        }
+                    } 
+                });
+    }   
+        </script>
+
+<style>
+#smNote {
+	text-align: left;
+}
+</style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="300" id="home-section">
@@ -203,33 +235,43 @@ width:100%;
 			</div>
 			<div class="col-1"></div>
 			<div class="col-lg-9 col-md-8 col-sm-12 col-12 info-box">
-				<!--정보   -->
+				<!--summernote body   -->
 
-				<div class="row .infinite">
-					<c:forEach var="dto" items="${infodto}">
-						<div class="col-lg-4 col-md-6 col-sm-6 dtocol">
-							<div class=infowrapper>
-							
-								<div class=infoimg><a href="detail?seq=${dto.seq }"class="detail">${dto.image}</a></div>
-								<div class="inforecommend">♥</div>
-								<div class=infotext>${dto.title}</div>
+				<form id="uploadForm" action="uploadformproc" method="post">
+				<input type="hidden" name="seq" value="${dto.seq}">
+					<textarea name="contents" style="display:none" >${dto.contents}</textarea>
+					
+					<div class="container">
+
+						<div class="row">
+							<div class="input-group col-lg-12 col-md-12 col-sm-12 mb-2">
+								<div class="input-group-prepend">
+									<span class="input-group-text">제목</span>
+								</div>
+								<input id="inputtitle" name="title" type="text"
+									class="form-control" placeholder="${dto.title }">
 							</div>
 						</div>
-					</c:forEach>
-					
+						<div class="row">
 
-				</div>
+							<div class="col-lg-12 col-md-12 d-md-block d-none">
+								<div id="smContents"></div>
+							</div>
+
+							<div id="smNote" class="col-lg-12 col-md-12 col-sm-12">
+								<div id="summernote"></div>
+							</div>
+						</div>
+						<div class="row p-1">
+							<div class="col-lg-12 col-md-12 col-sm-12">
+								<button id="uploadwritebtn" type="button" class="btn">작성완료</button>
+								<button id="tomainboard" type="button" class="btn">글목록으로</button>
+							</div>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
-		<div class="row mt-5" align="right">
-			<div class="col-12">
-				<div>
-					<input type="button" value="글쓰기" id="infowrite">
-				</div>
-			</div>
-		</div>
-
-	</div>
 	</div>
 
 
@@ -247,15 +289,9 @@ width:100%;
 	<script src="resources/js/isotope.pkgd.min.js"></script>
 	<script src="resources/js/main.js"></script>
 
+<script>
+$("#summernote").html($('textarea[name="contents"]').val());
+</script>
 
-	<!--정보 스크립트 코드   -->
-	<script>
-	   document.getElementById("infowrite").onclick = function(){
-           location.href = "infowrite";
-       }
-	  </script>
-
-
-	
 </body>
 </html>
