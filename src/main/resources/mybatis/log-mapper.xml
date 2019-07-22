@@ -6,5 +6,15 @@
 		insert into pay_log values(pay_log_seq.nextval, #{buyer}, #{name}, #{price}, #{seller}, default)
 	</insert>
 
-
+	<select id="selectAllPayLogByLikeBuyer" resultType="kh.spring.dto.PayLogDTO">
+		select * 
+		from (select row_number() over(order by seq desc) as rown, pay_log.* 
+				from pay_log where buyer like #{keyword})
+		where (rown between #{start} and #{end})
+	</select>
+	<select id="selectCountPayLogByLikeBuyer" resultType="java.lang.Integer">
+		select count(*) from pay_log where buyer like #{keyword}
+	</select>
+	
+	
 </mapper>

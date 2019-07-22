@@ -339,14 +339,14 @@ public class AdminController
 		return result;
 	}
 	@ResponseBody
-	@RequestMapping(value = "admin-paylog-select", produces="application/json;charset=utf-8")
-	public Object selectFromPayLog(String page, String condition)
+	@RequestMapping(value = "admin-paylog-search", produces="application/json;charset=utf-8")
+	public Object selectFromPayLog(String page, String condition, String keyword)
 	{
 		Object result = "error";
 		
 		try
 		{
-			
+			result = logService.selectPayLog(page, condition, keyword);
 		}
 		catch(Exception e)
 		{

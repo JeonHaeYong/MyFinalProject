@@ -216,11 +216,15 @@ font-weight:bold;
 			changeTypeDate();
 		});
 	    
-		$(document).on("click", "#search_btn,.navi_btns", function()
+		$(document).on("click", "#search_btn", function()
+		{
+			keyword = $("#search_text").val();
+			search(this.name);
+		})
+		$(document).on("click", ".navi_btns", function()
 		{
 			search(this.name);
 		})
-		
 		
 		function changeTypeDate()
 		{
@@ -239,6 +243,8 @@ font-weight:bold;
 			
 		}
 		
+		
+		var keyword;
 		function search(btnName)
 		{
 			$.ajax
@@ -249,6 +255,7 @@ font-weight:bold;
 	    		data:
 	    		{
 	    			page: btnName
+	    			,keyword: keyword
 	    			,condition: $("#condition_select").val()
 	    		}
 	    	})
@@ -257,16 +264,27 @@ font-weight:bold;
 	    		
 	    		$("#search_result_div").empty();
 	    		
+	    		var $menu_row = $('<div class="row justify-content-center my-3 id_row"></div>');
+    			var $menu_seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-3"><h3>번호</h3></div>');
+    			var $menu_buyerCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-3"><h3>구매자</h3></div>');
+    			var $menu_nameCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>상품명</h3></div>');
+    			var $menu_priceCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>가격</h3></div>');
+    			var $menu_sellerCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>판매자</h3></div>');
+    			var $menu_timeCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>날짜</h3></div>');
+    			$menu_row.append($menu_seqCol).append($menu_buyerCol).append($menu_nameCol).append($menu_priceCol).append($menu_sellerCol).append($menu_timeCol);
+    			$("#search_result_div").append($menu_row);
+	    		
 	    		var array = response.array;
 	    		for(var i = 1 ; i <= array.length ; i++)
 	    		{
 					var $row = $('<div class="row justify-content-center my-1 id_row"></div>');
 	    			var $seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].seq+'</div>');
-	    			var $nameCol = $('<div class="col-4 col-md-4 col-lg-3 text-center my-1">'+array[i-1].name+'</div>');
+	    			var $buyerCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].buyer+'</div>');
+	    			var $nameCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].name+'</div>');
 	    			var $priceCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].price+'</div>');
-	    			var $sellerCol = $('<div class="col-4 col-md-4 col-lg-3 text-center my-1">'+array[i-1].seller+'</div>');
-	    			var $checkCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1"><input class="permission_check" name="'+array[i-1].seq+'" type="checkbox">'+'거래 승인'+'</div>');
-	    			$row.append($seqCol).append($nameCol).append($priceCol).append($sellerCol).append($checkCol);
+	    			var $sellerCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].seller+'</div>');
+	    			var $timeCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].time+'</div>');
+	    			$row.append($seqCol).append($buyerCol).append($nameCol).append($priceCol).append($sellerCol).append($timeCol);
 	    			$("#search_result_div").append($row);
 	    		}
 	    		
