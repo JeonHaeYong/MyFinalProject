@@ -142,6 +142,7 @@
 				right: 53px;
 				width: 20px;
 				height: 20px;
+				cursor: pointer;
 			}
         </style>
     </head>
@@ -249,9 +250,7 @@
 				</div>
 	    	</div>
 	    	<div class="toCart">
-	    		<c:if test="${cartCount != 0 }">
-	    			<span class="badge badge-danger cartBadge">${cartCount }</span>
-	    		</c:if>
+	    		<span class="badge badge-danger cartBadge"><c:if test="${cartCount != 0 }">${cartCount }</c:if></span>
 	    		<a href="toMyPage_cart"><img alt="" src="/resources/images/item/cart.png" id="cartImg"></a>
 	    	</div>
 	    </div>
@@ -283,7 +282,7 @@
                 	$("#addCart").css("background-color", "#ec735750");
                 }
             });
-            
+           
             $("#addCart").on("click", function(){
             	if(${sessionScope.id == null}){
             		alert("로그인 후 이용하실 수 있습니다.");
@@ -297,7 +296,7 @@
                 	}).done(function(resp){
                 		if(resp == "1"){
                 			if(confirm("장바구니에 담았습니다. 장바구니로 이동할까요?")){
-                				location.href = "toMyPage_cart?currentPage=1";
+                				location.href = "toMyPage_cart";
                 			}else{
                 				$.ajax({
                 					url: "getCartCount"
@@ -315,7 +314,7 @@
             	}
 			});
             
-            $("#goCart").on("click", function(e){
+            function goCart(e){
             	e.preventDefault();
             	if(${sessionScope.id == null}){
             		alert("로그인 후 이용하실 수 있습니다.");
@@ -323,6 +322,14 @@
             	}else{
             		location.href = "toMyPage_cart";
             	}
+            }
+            
+            $(".cartBadge").on("click", function(e){
+            	goCart(e);
+            })
+            
+            $("#goCart").on("click", function(e){
+            	goCart(e);
             });
             
             var menu = $(".fixedMenu");

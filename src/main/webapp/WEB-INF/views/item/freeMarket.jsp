@@ -54,7 +54,7 @@
  		height: 265px;
 	}
 	.itemName{
-		height: 60px;
+		height: 58px;
 	}
 	.detail{
 		text-decoration: none;
@@ -62,6 +62,10 @@
 	}
 	.detail:hover{
 		font-weight: bold;
+	}
+	.price{
+		text-align: right;
+		font-size: 25px;
 	}
 	
     .navi{
@@ -129,6 +133,7 @@
 		right: 53px;
 		width: 20px;
 		height: 20px;
+		cursor: pointer;
 	}
 </style>
 </head>
@@ -142,11 +147,11 @@
 	</div>
 	<div class="container container-contents" id="conta">
 		<div class="row m-3">
-			<div class="col-2"></div>
-			<div class="col-10 align-self-center text-center">
+			<div class="col-2 d-md-block d-none"></div>
+			<div class="col-lg-10 col-12 align-self-center text-center">
 				<div class="card">
 					<div class="card-header explainHeader">
-						<h3>무료나눔과 기부를 함께</h3>
+						<h3 class="m-0">무료나눔과 기부를 함께</h3>
 					</div>
 					<div class="card-body">
 						<blockquote class="blockquote mb-0">
@@ -184,7 +189,7 @@
 											<c:if test="${dto.soldout == 'y' }">[판매완료] </c:if>${dto.name }
 										</a></h4>
 									</div>
-									<p class="card-text">${dto.price } 원</p>
+									<p class="card-text price">${dto.price } 원</p>
 								</div>
 							</div>
 						</div>

@@ -191,8 +191,24 @@
 			var name = $("#name").val();
 			name = name.replace(/<.?script>/g, "/");
 			
+			var nameByte = 0;
+			for(var i = 0; i < name.length; i++){
+				if(escape($("#name").val().charAt(i)).indexOf("%u") != -1){
+					nameByte += 3;
+				}else{
+					nameByte++;
+				}
+			}
+			console.log(nameByte);
+			if(nameByte > 50){
+				alert("상품명은 50Byte까지만 입력 가능합니다.\n(한글 3Byte, 나머지 문자는 1Byte)");
+				$("#name").val("").focus();
+				return;
+			}
+			
 			var price = $("#price").val();
 			var regex = /^[0-9]{1,6}$/
+			var regexPrice = parseInt(regex.exec(price));
 			
 			var category = $("#selectCategory option:selected").val();
 			
@@ -209,8 +225,8 @@
 				alert("상품명을 입력해주세요.");
 				$("#name").focus();
 				return;
-			}else if(price == "" || regex.exec(price) == null){
-				alert("금액을 숫자로 입력해주세요.");
+			}else if(price == "" || regexPrice > 100000 || regexPrice < 0 || isNaN(regexPrice)){
+				alert("금액을 100,000원 이하 숫자로 입력해주세요.");
 				$("#price").val("").focus();
 				return;
 			}else if(category == "none" || category == ""){
