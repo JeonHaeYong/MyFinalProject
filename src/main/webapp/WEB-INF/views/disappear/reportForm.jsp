@@ -27,7 +27,7 @@
 	h1{ font-family: 'Gamja Flower', cursive;}
         .aa{ width: 500px; height: 870px; margin: auto; box-sizing: border-box; margin-bottom: 100px;overflow: hidden;}
         /*기본 정보 */
-        .basic,.animal{background-color:#EC7357; text-align: center; font-size:30px; color: white; font-weight: bold; font-family: 'Gamja Flower', cursive; }
+        .basic,.animal{background-color:#FDD692; text-align: center; font-size:30px; color: #754F44; font-weight: bold; font-family: 'Gamja Flower', cursive; border-radius:30px;}
         .basic-info{height:300px; width: 100%; }
         .basic-info>div{height: 100%; float: left;}
         .basic-info .title{width: 150px; font-family: 'Gamja Flower', cursive; }
@@ -47,8 +47,8 @@
         
         /*footer 부분*/
         #footer{text-align: center; width: 100%; margin-top:50px;}
-        .btns{background-color:#EC7357; border: none; color: white; font-size: 20px; font-weight: bold; border-radius: 10px; margin-right: 10px; width: 70px; font-family: 'Gamja Flower', cursive;}
-        .btns:hover{background-color:#b3543e; }  
+        .btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44; font-size:20px;}
+		.btn:hover{background-color:#FDD692; font-weight:bold; color:#754F44;}
 </style>
 <script>
  	$(function(){
@@ -141,8 +141,8 @@
         </div>
         
         <div id="footer">
-            <input type="button" class="insert-btn btns" value="등록">
-            <input type="button" class="toList-btn btns" value="취소">
+            <input type="button" class="insert-btn btn" value="등록">
+            <input type="button" class="toList-btn btn" value="취소">
         </div>
         </form>
 			</div>

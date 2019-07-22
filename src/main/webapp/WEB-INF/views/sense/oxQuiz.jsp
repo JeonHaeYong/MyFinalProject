@@ -51,7 +51,7 @@
             
             .quiz{display:none;}
             #quiz1{display: block;}
-            .menu-box{width: 200px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px; margin-top: 50px;}
+            .menu-box{width: 200px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px; margin-top: 50px; margin-bottom:50px;}
             .menu-box>div{height: 35px;}
             .menu-box>div:first-child{font-weight: bold; border-bottom: 1px solid #754F44; line-height: 33px; color:#B45F04; font-size:40px;}
             .menu-box>div:not(.s-menu):hover{background-color: #FBFFB950;}
@@ -75,7 +75,7 @@
         </style>
 <script>
 	$(function(){
-	
+		console.log(${type});
 		$(".result-box").hide();
 		var quizNum = 1;
 		var corr = new Array(); //선택한 답 목록
@@ -106,7 +106,7 @@
 					
 					 $(".quiz-box").append($(".result-box").html()).css("font-family","'Gamja Flower', cursive");
 					$(".corrCount").append("맞은 갯수: " + resp.answer.length);
-					$(".getPoint").append("획득 포인트: " + resp.point);
+					$(".getPoint").append("획득 포인트: " + resp.getPoint);
 					//틀린문제
 					var incorr = "<c:forEach var='i' begin='0' end='10' varStatus='status' ><div class='col-5 wrong-q${status.index}'></div><div class='col-2 answer${status.index}'></div><div class='col-5 ex${status.index}'></div></c:forEach>";
 					$(".wrong").append(incorr);	
@@ -138,7 +138,6 @@
 			if(${id == null}){
 				alert("로그인을 해주세요~!");
 				$(".login-btn").trigger("click");
-				
 			}else{
 				$(".question").show();
 				$(".start").hide();
