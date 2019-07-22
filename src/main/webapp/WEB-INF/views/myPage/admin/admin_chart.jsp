@@ -127,7 +127,7 @@
 			</div>
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="#" class="btn menu_btns">퀴즈 당첨자</a>
+				<a href="admin-quiz" class="btn menu_btns">퀴즈 당첨자</a>
 			</div>
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
