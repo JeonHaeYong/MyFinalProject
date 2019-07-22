@@ -254,6 +254,10 @@
 	    	$(this).attr("src","resources/images/dog_1.jpg");
 		});
 	    
+	    $("#donation_btn").on("click", function(){
+	    	location.href = "donationForm";
+	    });
+	    
     });
     
     onload = function()
