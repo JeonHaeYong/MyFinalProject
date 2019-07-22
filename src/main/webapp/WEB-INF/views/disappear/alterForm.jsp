@@ -49,6 +49,9 @@
 </style>
 <script>
  	$(function(){
+ 			
+
+
     		$(".toList-btn").on("click",function(){
     			location.href="toDisappearList?currentPage=${currentPage}";
     		});
@@ -70,7 +73,7 @@
 		<div class="col-12">
 			<div id="wrapper" class="aa">
 	<form action="alterProc.dis" method="post" id="reportForm" enctype="multipart/form-data">
-        <input type="hidden" name="seq" value="${content.seq }">
+        <input type="hidden" name="seq" class="seq" value="${content.seq }">
         <div class="basic">기본정보</div>
         <div class="basic-info">
             <div class="title">
@@ -143,7 +146,7 @@
 	</div>
 </div>
 <script>
-	
+	$("#disappearDate").val('${content.disDate}');
 	$("#areaList option[value='${content.areaList}']").attr("selected", true);
 	$(".disappearArea").val('${content.disappearArea}');
 	$(".tel").val('${content.tel}');
