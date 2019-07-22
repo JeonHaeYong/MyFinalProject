@@ -13,7 +13,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import kh.spring.daoImpl.NoticeDAOImpl;
+import kh.spring.dao.NoticeDAO;
 import kh.spring.dto.NoticeDTO;
 import kh.spring.service.NoticeService;
 
@@ -23,7 +23,7 @@ public class NoticeServiceImpl implements NoticeService
 	private static final Logger logger = LoggerFactory.getLogger(NoticeServiceImpl.class);
 	
 	@Autowired
-	NoticeDAOImpl noticeDAO;
+	NoticeDAO noticeDAO;
 	
 	@Override
 	public String insert(NoticeDTO dto) throws Exception
