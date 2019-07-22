@@ -1,6 +1,7 @@
 package kh.spring.dto;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 public class ReviewDTO {
 	private int seq;
@@ -13,12 +14,14 @@ public class ReviewDTO {
 	private Timestamp write_date;
 	private int view_count;
 	private int likes;
-	private String type;	// ��ȸ�ı� or �о��ı�
+	
+	private String formed_date;
 	
 	public ReviewDTO() {}
 
 	public ReviewDTO(int seq, String title, String writer, String image_path1, String image_path2, String image_path3,
-			String contents, Timestamp write_date, int view_count, int likes, String type) {
+			String contents, Timestamp write_date, int view_count, int likes) {
+		super();
 		this.seq = seq;
 		this.title = title;
 		this.writer = writer;
@@ -29,7 +32,9 @@ public class ReviewDTO {
 		this.write_date = write_date;
 		this.view_count = view_count;
 		this.likes = likes;
-		this.type = type;
+		if(write_date!=null) {
+			this.formed_date = this.getFormedTime();
+		}
 	}
 
 	public int getSeq() {
@@ -111,13 +116,36 @@ public class ReviewDTO {
 	public void setLikes(int likes) {
 		this.likes = likes;
 	}
-
-	public String getType() {
-		return type;
+	
+	
+	public String getFormed_date() {
+		return this.getFormedTime();
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	/**
+	 * 게시글 작성 시간 세밀하게 표시하기
+	 * @return
+	 */
+	public String getFormedTime() {
+		long currentTime = System.currentTimeMillis();
+		long writeTime = this.write_date.getTime();
+		
+		if(currentTime - writeTime <= (1000*60)) { //초단위
+			long time = currentTime - writeTime;
+			return time/1000 + " 초 전";
+		}else if(currentTime - writeTime < (1000* 60 * 60)) { //분단위
+			long time = currentTime - writeTime;
+			return time/1000/60 + " 분 전";
+		}else if(currentTime - writeTime < (1000* 60 * 60* 24)) { //시간 단위
+			long time = currentTime - writeTime;
+			return time/1000/60/60+ " 시간 전";
+		}else {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm"); //24시간 이상되면
+			return sdf.format(writeTime);
+		}
 	}
+
+
+
 	
 }

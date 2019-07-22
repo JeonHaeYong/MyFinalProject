@@ -134,6 +134,10 @@ public class ReviewServiceImpl implements ReviewService {
 	public List<ReviewDTO> selectReviewPerPageService(int start, int end) {
 		return null;
 	}
+	@Override
+	public ReviewDTO selectReviewBySeq(int seq) {
+		return rdao.selectReviewBySeq(seq);
+	}
 
 	
 }

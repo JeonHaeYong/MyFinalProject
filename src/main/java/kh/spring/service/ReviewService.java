@@ -11,4 +11,5 @@ public interface ReviewService {
 	public int deleteReviewService(int seq);
 	public List<ReviewDTO> selectReviewPerPageService(int start, int end);
 	public List<String> getNaviForReviewList(int currentPage);
+	public ReviewDTO selectReviewBySeq(int seq);
 }
