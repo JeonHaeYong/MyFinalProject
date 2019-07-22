@@ -10,12 +10,9 @@ import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 import kh.spring.dao.ItemDAO;
-import kh.spring.dto.BlackListDTO;
 import kh.spring.dto.ItemDTO;
-import kh.spring.dto.MemberDTO;
 import kh.spring.service.ItemService;
 
 @Service
@@ -204,12 +201,6 @@ public class ItemServiceImpl implements ItemService{
 		outerjo.addProperty("startNavi", startNavi);
 		outerjo.addProperty("endNavi", endNavi);
 
-		
-		
-		
-		
-		
-		
 		
 		return new Gson().toJson(outerjo);
 	}
