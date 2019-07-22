@@ -44,7 +44,7 @@
 		color: white;
 	}
 </style>
-</head>http://localhost/resources/images/payment.jpg
+</head>
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="300" id="home-section">
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>

@@ -59,6 +59,9 @@
 						<span class="input-group-text">상품명</span>
 					</div>
 					<input type="text" class="form-control" name="name" id="name" placeholder="상품 이름을 입력해주세요">
+					<div class="input-group-append">
+					    <span class="input-group-text byteCheck">0/50</span>
+					</div>
 				</div>
 				<div class="col-md-7 col-12 input-group mb-3">
 		 			<div class="input-group-prepend">
@@ -176,6 +179,23 @@
 			});
 		}
 		
+		$("#name").on("input", function(){
+			var name = $("#name").val();
+			var nameByte = 0;
+			for(var i = 0; i < name.length; i++){
+				if(escape($("#name").val().charAt(i)).indexOf("%u") != -1){
+					nameByte += 3;
+				}else{
+					nameByte++;
+				}
+			}
+			console.log(nameByte);
+			if(nameByte > 50){
+				alert("상품명은 50Byte까지만 입력 가능합니다.\n(한글 3Byte, 나머지 문자는 1Byte)");
+			}
+			$(".byteCheck").text(nameByte + "/50");
+		});
+		
 		$(".inputFile").change(function(){
 			var label = "#" + $(this).attr("labelId");
 			$(label).text(this.value.split("\\").pop());
@@ -190,21 +210,6 @@
 			$("#submitContents").val($(".note-editable").html());
 			var name = $("#name").val();
 			name = name.replace(/<.?script>/g, "/");
-			
-			var nameByte = 0;
-			for(var i = 0; i < name.length; i++){
-				if(escape($("#name").val().charAt(i)).indexOf("%u") != -1){
-					nameByte += 3;
-				}else{
-					nameByte++;
-				}
-			}
-			console.log(nameByte);
-			if(nameByte > 50){
-				alert("상품명은 50Byte까지만 입력 가능합니다.\n(한글 3Byte, 나머지 문자는 1Byte)");
-				$("#name").val("").focus();
-				return;
-			}
 			
 			var price = $("#price").val();
 			var regex = /^[0-9]{1,6}$/

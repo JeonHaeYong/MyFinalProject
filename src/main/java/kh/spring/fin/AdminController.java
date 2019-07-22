@@ -18,12 +18,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kh.spring.dto.BlackListDTO;
 import kh.spring.dto.QuizDTO;
+import kh.spring.service.BlackListService;
+import kh.spring.service.ChartService;
+import kh.spring.service.DonationService;
+import kh.spring.service.ItemService;
+import kh.spring.service.MemberService;
 import kh.spring.service.QuizService;
-import kh.spring.serviceImpl.BlackListServiceImpl;
-import kh.spring.serviceImpl.ChartServiceImpl;
-import kh.spring.serviceImpl.DonationServiceImpl;
-import kh.spring.serviceImpl.ItemServiceImpl;
-import kh.spring.serviceImpl.MemberServiceImpl;
 
 @Controller
 public class AdminController
@@ -35,15 +35,15 @@ public class AdminController
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 	
 	@Autowired
-	BlackListServiceImpl blackService;
+	BlackListService blackService;
 	@Autowired
-	ChartServiceImpl chartService;
+	ChartService chartService;
 	@Autowired
-	DonationServiceImpl donationService;
+	DonationService donationService;
 	@Autowired
-	ItemServiceImpl itemService;
+	ItemService itemService;
 	@Autowired
-	MemberServiceImpl memberService;
+	MemberService memberService;
 	
 	//Member Start
 	@RequestMapping(value = "admin-member")
