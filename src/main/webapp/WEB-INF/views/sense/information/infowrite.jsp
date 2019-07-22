@@ -273,7 +273,7 @@ function sendFile(files,editor){
     window.onload = function(){
             //이전으로 버튼 
                 document.getElementById("tomainboard").onclick = function(){
-                    location.href = "toBoard";
+                    location.href = "information_t?currentPage=1";
                 }
             //작성 완료 보튼 
                 document.getElementById("infowritebtn").onclick = function(){

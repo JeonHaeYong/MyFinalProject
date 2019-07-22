@@ -18,4 +18,6 @@ public interface InfoService {
 
 	public int boardselcount() throws Exception;
 
+	public int deleteinfo(int seq)throws Exception;
+
 }

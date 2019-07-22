@@ -31,8 +31,9 @@ public class InfoServiceImpl implements InfoService{
 	}
 	@Override
 	public TrainingDTO detail_info(int seq)throws Exception{
-		
-		return dao.detail_info(seq);
+		 TrainingDTO dto=dao.detail_info(seq);
+	System.out.println(dto.getWriter()+dto.getSeq()+dto.getWriteDate());
+		 return dao.detail_info(seq);
 	}
 	
 	@Override
@@ -96,5 +97,10 @@ public class InfoServiceImpl implements InfoService{
 	public int boardselcount()throws Exception{
 		
 		return dao.boardselCount();
+	}
+	@Override
+	public int deleteinfo(int seq) throws Exception {
+	
+		return dao.deleteinfo(seq);
 	}
 }

@@ -45,4 +45,9 @@ public class InfoDAOImpl implements InfoDAO{
 	public int boardselCount()throws Exception{
 		return sst.selectOne("InfoDAO.bordcount");
 	}
+	
+	public int deleteinfo(int seq)throws Exception{
+		
+		return sst.delete("InfoDAO.delinfo", seq);
+	}
 }

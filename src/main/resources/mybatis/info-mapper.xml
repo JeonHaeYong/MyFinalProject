@@ -9,7 +9,7 @@
 	<select id="selectall" resultType="kh.spring.dto.TrainingDTO">
 	select * from(SELECT seq,title,writer,writeDate,image,RANK()OVER (ORDER BY seq DESC) RANK FROM info_Board order by writeDate desc)where Rank between #{start} and #{end}
 	</select>
-	<select id="selectdetail" resultType="kh.spring.dto.TrainingDTO">
+	<select id="selectdetail" resultType="kh.spring.dto.TrainingDTO" >
 	select * from info_Board where seq=#{seq}
 	</select>
 	<update id="updateinfo">
@@ -19,4 +19,7 @@
 	<select resultType="Integer" id="bordcount">
 	select count(*) from info_Board
 	</select>
+	<delete id="delinfo">
+	delete from info_Board where seq=#{seq}
+	</delete>
 </mapper>

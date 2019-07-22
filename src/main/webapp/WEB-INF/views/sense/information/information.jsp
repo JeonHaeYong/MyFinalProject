@@ -114,12 +114,14 @@ a[name="s-menu"]:hover {
 	padding-top: 50px;
 }
 
-.infoimg, .infotext, .infoextra,infoseq {
+.infoimg, .infotext, .infoextra, infoseq {
 	overflow: hidden;
 }
-.infoseq{
-border-bottom: 1px solid #754F4470;
+
+.infoseq {
+	border-bottom: 1px solid #754F4470;
 }
+
 .infoimg {
 	margin-left: 10px;
 	margin-top: 2px;
@@ -142,7 +144,7 @@ border-bottom: 1px solid #754F4470;
 	border-top: 1px solid #754F4470;
 	margin-top: 2px;
 	font-size: 20px;
-	line-height:50px;
+	line-height: 50px;
 	text-align: center;
 	margin-left: 15px;
 	margin-right: 15px;
@@ -158,14 +160,14 @@ border-bottom: 1px solid #754F4470;
 	height: 100% !important;
 }
 
-#infowrite {
+#infowrite, #infodel {
 	border: 0;
 	background-color: #FDD69270;
 	color: #754F44;
 	font-family: 'Gamja Flower', cursive;
 }
 
-#infowrite:hover {
+#infowrite:hover, #infodel:hover {
 	background-color: #FDD692;
 	font-weight: bold;
 }
@@ -216,32 +218,57 @@ border-bottom: 1px solid #754F4470;
 			<div class="col-1"></div>
 			<div class="col-lg-9 col-md-8 col-sm-12 col-12 info-box">
 				<!--정보   -->
+				<form action="delinfo" method="post" id="delform">
+					<div class="row .infinite">
 
-				<div class="row .infinite">
+						<c:forEach var="dto" items="${infodto}">
 
-					<c:forEach var="dto" items="${infodto}">
+							<div class="col-lg-4 col-md-6 col-sm-6 dtocol">
 
-						<div class="col-lg-4 col-md-6 col-sm-6 dtocol">
-							<div class=infowrapper>
-								<div class=infoseq>NO.${dto.seq }</div>
-								<div class=infoimg>
-									<a href="detail?seq=${dto.seq}" class="detail">${dto.image}</a>
+								<div class=infowrapper>
+
+									<div class=infoseq>
+										<c:if test="${id eq 'admin1234'}">
+											<input type=checkbox value="${dto.seq}" name="check">
+										</c:if>
+										NO.${dto.seq }
+									</div>
+
+									<div class=infoimg>
+										<a href="detail_info?seq=${dto.seq}" class="detail">${dto.image}</a>
+									</div>
+									<div class=infotext>${dto.title}</div>
+									<div class="inforecommend">${dto.writeDate}</div>
 								</div>
-								<div class=infotext>${dto.title}</div>
-								<div class="inforecommend">${dto.writeDate}</div>
+
 							</div>
-						</div>
-					</c:forEach>
+						</c:forEach>
 
 
-				</div>
+					</div>
+				</form>
 			</div>
 		</div>
 		<div class="row mt-5" align="right">
 			<div class="col-12">
 				<div>
-					<div id="navi">${navi}</div>
-					<button id="infowrite" class="btn">글쓰기</button>
+					<div id="navi" align="center">${navi}</div>
+					<c:if test="${id eq 'admin1234'}">
+						<button id="infowrite" class="btn">글쓰기</button>
+						<button id="infodel" class="btn">글삭제</button>
+						<script>
+							document.getElementById("infowrite").onclick = function() {
+								location.href = "infowrite";
+							}
+						
+							document.getElementById("infodel").onclick = function() {
+									$("#delform").submit();
+								
+						
+							}
+						</script>
+
+					</c:if>
 				</div>
 			</div>
 		</div>
@@ -266,11 +293,6 @@ border-bottom: 1px solid #754F4470;
 
 
 	<!--정보 스크립트 코드   -->
-	<script>
-		document.getElementById("infowrite").onclick = function() {
-			location.href = "infowrite";
-		}
-	</script>
 
 
 

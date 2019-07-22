@@ -11,5 +11,6 @@ public interface InfoDAO {
 	public TrainingDTO detail_info(int seq) throws Exception;
 	public int update_info(TrainingDTO dto) throws Exception;
 	public int boardselCount() throws Exception;
+	public int deleteinfo(int seq) throws Exception;
 
 }
