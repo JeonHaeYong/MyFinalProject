@@ -1,8 +1,6 @@
 package kh.spring.daoImpl;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,11 +37,8 @@ public class CartDAOImpl implements CartDAO {
 	}
 
 	@Override
-	public int deleteCart(int item_seq, String id) {
-		Map<String, String> param = new HashMap<>();
-		param.put("item_seq", item_seq+"");
-		param.put("id", id);
-		return sst.delete("CartDAO.deleteCart", param);
+	public int deleteCart(String[] seqs) {
+		return sst.delete("CartDAO.deleteCart", seqs);
 	}
 	
 }

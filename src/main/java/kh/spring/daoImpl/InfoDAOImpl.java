@@ -29,7 +29,7 @@ public class InfoDAOImpl implements InfoDAO{
 			map.put( "start",  String.valueOf(start) );
 			map.put( "end", String.valueOf( end) );
 			List<TrainingDTO> list=	sst.selectList("InfoDAO.selectall",map);
-					return sst.selectList("InfoDAO.selectall",map);
+				return sst.selectList("InfoDAO.selectall",map);
 	}
 	@Override
 	public TrainingDTO detail_info(int seq)throws Exception{

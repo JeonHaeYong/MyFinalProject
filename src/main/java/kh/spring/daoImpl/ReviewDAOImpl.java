@@ -58,4 +58,10 @@ public class ReviewDAOImpl implements ReviewDAO {
 		return sst.selectList("ReviewDAO.selectAllReviewByCurrentpage",map);
 	}
 
+
+	@Override
+	public ReviewDTO selectReviewBySeq(int seq) {
+		return sst.selectOne("ReviewDAO.selectReviewBySeq",seq);
+	}
+
 }

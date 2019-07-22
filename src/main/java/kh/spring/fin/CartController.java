@@ -18,7 +18,7 @@ public class CartController {
 	
 	@ResponseBody
 	@RequestMapping("addCart")
-	public String addCart(HttpServletRequest request, int item_seq) {
+	public String addCart_loginCheck(HttpServletRequest request, int item_seq) {
 		CartDTO dto = new CartDTO();
 		dto.setId((String)request.getSession().getAttribute("id"));
 		dto.setItem_seq(item_seq);
@@ -27,7 +27,7 @@ public class CartController {
 	}
 	
 	@RequestMapping("toMyPage_cart")
-	public String toMyPage_cart(HttpServletRequest request) {
+	public String toMyPage_cart_loginCheck(HttpServletRequest request) {
 		String id = (String)request.getSession().getAttribute("id");
 		request.setAttribute("list", cs.selectCartPerPage(id));
 		return "myPage/user/user_myPage_cart";
@@ -35,8 +35,11 @@ public class CartController {
 	
 	@ResponseBody
 	@RequestMapping("deleteCart")
-	public String deleteCart(HttpServletRequest request, int item_seq) {
-		cs.deleteCartService(item_seq, (String)request.getSession().getAttribute("id"));
+	public String deleteCart_loginCheck(HttpServletRequest request, String[] seqs) {
+		for(int i = 0; i < seqs.length; i++) {
+			System.out.println(seqs[i]);
+		}
+		cs.deleteCartService(seqs);
 		return null;
 	}
 }
