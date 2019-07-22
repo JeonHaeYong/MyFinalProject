@@ -46,6 +46,7 @@ public class DisappearReportServiceImpl implements DisappearReportService{
 			uploadPath.mkdirs();
 		}
 		try {
+			image.transferTo(new File(usersPath + "/" + time + "_disappear_image.png"));
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -60,5 +61,17 @@ public class DisappearReportServiceImpl implements DisappearReportService{
 	@Override
 	public String getNaviService (int currentPage) {
 		return drdao.getNavi(currentPage);
+	}
+	@Override
+	public DisappearReportDTO toReportContentService(int seq) {
+		return drdao.toReportContent(seq);
+	}
+	@Override
+	public int updateNoimageService(DisappearReportDTO drdto) {
+		return drdao.insertNoImage(drdto);
+	}
+	@Override
+	public int updateService(DisappearReportDTO drdto) {
+		return drdao.insert(drdto);
 	}
 }

@@ -23,14 +23,14 @@ public class DisappearReportDAOImpl implements DisappearReportDAO{
 	@Override
 	public int insertNoImage(DisappearReportDTO drdto) {
 		if(drdto.getNeuter() == null) {
-			drdto.setNeuter("n");
+			drdto.setNeuter("X");
 		}
 		return sst.insert("DisappearReportDAO.insertNoImage", drdto);
 	}
 	@Override
 	public int insert(DisappearReportDTO drdto) {
 		if(drdto.getNeuter() == null) {
-			drdto.setNeuter("n");
+			drdto.setNeuter("X");
 		}
 		return sst.insert("DisappearReportDAO.insert", drdto);
 	}
@@ -41,8 +41,8 @@ public class DisappearReportDAOImpl implements DisappearReportDAO{
 	@Override
 	public List<DisappearReportDTO> selectPerPage(int currentPage){
 		Map<String, Integer> hs = new HashMap<>();
-		int start = currentPage * recordCountPerPage;
-		int end = start - 5;
+		int end = currentPage * recordCountPerPage;
+		int start = end - 5;
 		hs.put("start", start);
 		hs.put("end", end);
 		return sst.selectList("DisappearReportDAO.selectPerPage", hs);
@@ -91,6 +91,17 @@ public class DisappearReportDAOImpl implements DisappearReportDAO{
 				}
 				return sb.toString();
 	}
-	
+	@Override
+	public DisappearReportDTO toReportContent(int seq) {
+		return sst.selectOne("DisappearReportDAO.ReportContent", seq);
+	}
+	@Override 
+	public int updateNoImage(DisappearReportDTO drdto) {
+		return sst.update("DisappearReportDAO.updateNoImage",drdto);
+	}
+	@Override
+	public int update(DisappearReportDTO drdto) {
+		return sst.update("DisappearReportDAO.update",drdto);
+	}
 	
 }

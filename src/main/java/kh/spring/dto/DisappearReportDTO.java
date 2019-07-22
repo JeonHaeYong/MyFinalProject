@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class DisappearReportDTO {
 	private int seq;
-	private Date disappearDate;
+	private Date disDate;
 	private String areaList;
 	private String disappearArea;
 	private String tel;
@@ -25,11 +25,11 @@ public class DisappearReportDTO {
 	public void setSeq(int seq) {
 		this.seq = seq;
 	}
-	public Date getDisappearDate() {
-		return disappearDate;
+	public Date getDisDate() {
+		return disDate;
 	}
-	public void setDisappearDate(Date disappearDate) {
-		this.disappearDate = disappearDate;
+	public void setDisDate(Date disDate) {
+		this.disDate = disDate;
 	}
 	public String getAreaList() {
 		return areaList;
@@ -115,12 +115,12 @@ public class DisappearReportDTO {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	public DisappearReportDTO(int seq, Date disappearDate, String areaList, String disappearArea, String tel,
+	public DisappearReportDTO(int seq, Date disDate, String areaList, String disappearArea, String tel,
 			String kind, String gender, String neuter, String age, String furColor, String feature, String et,
 			String image, String writer, String writeDate, String ip) {
 		super();
 		this.seq = seq;
-		this.disappearDate = disappearDate;
+		this.disDate = disDate;
 		this.areaList = areaList;
 		this.disappearArea = disappearArea;
 		this.tel = tel;
