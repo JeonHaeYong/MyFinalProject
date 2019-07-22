@@ -7,9 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<link
-	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
-	rel="stylesheet">
+<linkhref="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"rel="stylesheet">
 <link rel="stylesheet" href="resources/fonts/icomoon/style.css">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="resources/css/jquery-ui.css">
@@ -23,7 +21,7 @@
 <link rel="stylesheet" href="resources/css/style.css">
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
 <style>
-	/* -------------------infobox -----------------   */
+	/* -------------------infobox -----------------*/
   #title{text-align: center;}
     .disappearList{width: 80%; margin: auto;}
 .infowrapper {
@@ -49,7 +47,7 @@ margin-left:15px;
 margin-top:15px;
 margin-right:15px;
 box-sizing: border-box;
-height:60%;
+height:50%;
 }
 .inforecommend{
 border-top:1px solid #754F4470;
@@ -69,7 +67,7 @@ text-align:left;
 margin-left:15px;
 margin-right:15px;
 padding-left:5px;
-height:18%;
+height:15%;
 margin-top:2px;
 }
 .infoimg>img {
@@ -78,13 +76,17 @@ width:100%;
 	left: 0;
 	height: 100%;
 }
-.writeInfo>div{float: left; height: 15%;}
+.writeInfo>div{float: left; height:15%;}
+.petInfo>div{float: left; heigth:15%; margin-left:15px;}
 .writer{margin-left: 20px;}
 .writeDate{margin-left: 100px;}
 .footer{text-align:right; margin-right:120px; margin-bottom: 30px;}
 .write-btn{background-color: #EC7357; color:white; border-style: none; border-radius:5px;}
 .write-btn:hover{background-color:#f0522e; font-weight:bold; }
-
+.thumbnail{width:100%; height:100%;}
+.navi-section{text-align: center; margin-top:20px; font-family: 'Gamja Flower', cursive; font-size:25px;}
+.pageNum{text-decoration-line: none; color:#754F44; font-size:25px;}
+.pageNum:hover{font-weight:bold; text-decoration-line: none;}
 
 </style>
 <script>
@@ -92,6 +94,12 @@ width:100%;
 		$(".write-btn").on("click",function(){
 			location.href="toReportForm";
 		});
+		$(".pageNum").each(function(index,items){
+			if($(this).text() == ${currentPage}){
+				$(this).css("color","#FDD692");
+				$(this).css("font-weight","bold");
+			}
+		})
 	});
 </script>
 </head>
@@ -102,19 +110,24 @@ width:100%;
 	<div id="title"><h1>잠시 길 잃은 동물들</h1></div>
 	<div class="containier ">
 		<div class="row disappearList">
-		<%-- <c:forEach var="list" items="${list }"> --%>
+		  <c:forEach var="list" items="${list }"> 
 			<div class="col-lg-4 col-md-6 col-sm-6 dtocol">
 				<div class="infowrapper">
-					<div class="infoimg">이미</div>
+					<div class="infoimg"><a href="toReportContent?seq=${list.seq }"><img src='${list.image }' class="thumbnail"></a></div>
 				    <div class="inforecommend">♥</div>
-                    <div class="infotext">제목</div>
+                   <div class="infotext">${list.kind }</div>
+                    <div class="petInfo">
+                    	<div>${list.gender} </div>
+                    	<div>${list.age }</div>
+                    	<div>${list.furColor }</div>
+                    </div><br>
                     <div class="writeInfo">
-                    <div class="writer"> 작성자</div>
-                    <div class="writeDate">작성날짜</div>
+                    	<div class="writer">${list.writer }</div>
+                    	<div class="writeDate">${list.writeDate }</div>
                     </div>
 				</div>
 			</div>
-			<%-- </c:forEach> --%>
+			  </c:forEach>
 			
 			
 		</div>

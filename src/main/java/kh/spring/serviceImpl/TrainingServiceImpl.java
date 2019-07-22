@@ -45,6 +45,7 @@ public class TrainingServiceImpl implements TrainingService{
 			uploadPath.mkdirs();
 		}
 		try {
+			files.transferTo(new File(usersPath + "/" + time + "_tBoard_image.png"));
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
