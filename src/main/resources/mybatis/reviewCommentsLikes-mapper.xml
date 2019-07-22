@@ -4,4 +4,10 @@
 	<insert id="insertReviewCommentsLike">
 		insert into review_comments_likes values(review_comments_likes_seq.nextval , #{r_comments_seq},#{id})
 	</insert>
+	<delete id="deleteReviewCommentsLike">
+		delete review_comments_likes where id=#{id} and r_comments_seq = #{r_comments_seq}
+	</delete>
+	<delete id="deleteReviewCommentLiked">
+		delete review_comments_likes where r_comments_seq = #{seq}
+	</delete>
 </mapper>

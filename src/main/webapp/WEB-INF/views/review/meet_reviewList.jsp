@@ -102,9 +102,10 @@
                                 <div class="col-12">
                                     <ul class="pagination justify-content-center">
                                         <c:forEach var="navi" items="${navi }">
-                                            <li class="page-item">
-                                                <form>
-                                                    <a class="navi_click_a page-link text-decoration-none" href="#receivedBox">${navi }</a>
+                                            <li class="page-item review_page_navi" value="${navi }">
+                                                <form action="toReviewList" method="post">
+                                                	<input type="hidden" value="${navi }" name="currentPage">
+                                                    <a class="navi_click_a page-link text-decoration-none" href="javascript:void(0)" onclick="reviewNaviClick(this);">${navi }</a>
                                                 </form>
                                             </li>
                                         </c:forEach>
@@ -138,6 +139,18 @@
             <script>
             	function reviewListForm(param){
             		$(param).parents("form").submit();
+            	}
+            	function reviewNaviClick(param){
+            		var navi = $(param).text();
+            		if(navi=="<이전"){
+            			var page  = $(param).parents(".review_page_navi").next().attr("value");
+            			navi = parseInt(page) - 1 ;
+            		}else if(navi=="다음>"){
+            			var page  = $(param).parents(".review_page_navi").prev().attr("value");
+            			navi = parseInt(page) + 1 ;
+            		}
+            		$(param).prev().val(navi);
+            		$(param).parent().submit();
             	}
             </script>
         </html>

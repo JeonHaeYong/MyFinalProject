@@ -92,4 +92,10 @@ public class ReviewController {
 		request.setAttribute("reply_navi", reply_navi);
 		return "review/review_detail";
 	}
+	//글 삭제하기.
+	@RequestMapping("deleteReview")
+	public String deleteReview(String seq) {
+		rservice.deleteReviewService(Integer.parseInt(seq));
+		return "redirect:toReviewList";
+	}
 }

@@ -184,11 +184,14 @@
             var PwInputCount = 0;//pw변경시 현재비밀번호 틀리는 숫자 카운트
             $(".modify_bot_part.hide").hide();
             $(".gender_radio.hide").hide();
-            $(".gender_radio_input").each(function(i,item){
-            	if($("#my_gender").val()==$(item).val()){
-            		$(item).prop("checked",true);
-            	}
-            });
+            function genderCheck(){
+            	$(".gender_radio_input").each(function(i,item){
+                	if($("#my_gender").val()==$(item).val()){
+                		$(item).prop("checked",true);
+                	}
+                });
+            }
+            genderCheck();
             $("#change_pw_btn").on("click",function(){
                 var currPw = $("#currPw").val();
                 var pw1 = $("#changePw1").val();
@@ -269,6 +272,7 @@
                 $(".modify_info_input,.addr_info_input").css("background-color","inherit");
                 //성별 radio없애기.
                 $(".gender_radio").toggle();
+                genderCheck();//성별 체크해두기.
                 //버튼 토글
                 $(".modify_bot_part").toggle();
                 $(".modify_bot_part").addClass("d-flex");

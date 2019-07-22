@@ -30,4 +30,16 @@
 	<select id="selectReviewCommentsCountByReviewSeq" resultType="int">
 		select count(*) from review_comments where review_seq = #{reviewSeq}
 	</select>
+	<update id="updateReviewCommentsLike">
+		update review_comments set likes = likes + 1 where seq = #{seq}
+	</update>
+	<update id="updateReviewCommentsLikeMinus">
+		update review_comments set likes = likes - 1 where seq = #{seq}
+	</update>
+	<select id="selectReviewCommentsSeqCurrVal" resultType="int">
+		select review_comments_seq.currval from dual
+	</select>
+	<select id="selectReviewCommentsBySeq" resultType="kh.spring.dto.ReviewCommentsDTO">
+		select * from review_comments where seq = #{seq}
+	</select>
 </mapper>

@@ -5,18 +5,22 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kh.spring.dao.ReviewCommentsDAO;
+import kh.spring.dao.ReviewCommentsLikesDAO;
 import kh.spring.dto.ReviewCommentsDTO;
+import kh.spring.dto.ReviewCommentsLikesDTO;
 import kh.spring.service.ReviewCommentsService;
 import kh.spring.statics.ReviewCommentsStatics;
-import kh.spring.statics.ReviewStatics;
 
 @Service
 public class ReviewCommentsServiceImpl implements ReviewCommentsService {
 	
 	@Autowired
 	private ReviewCommentsDAO rcdao;
+	@Autowired
+	private ReviewCommentsLikesDAO rcl_dao;
 
 	@Override
 	public int insertReviewCommentService(ReviewCommentsDTO dto) {
@@ -117,6 +121,37 @@ public class ReviewCommentsServiceImpl implements ReviewCommentsService {
 			list.add("다음>");
 		}
 		return list;
+	}
+
+	@Override
+	@Transactional("txManager")
+	public int reviewCommentsLikeClick(ReviewCommentsLikesDTO dto) {
+		//insert -> 누른사람 / 몇번seq의 댓글에 좋아요누른건지 // 몇번seq의 댓글의  dto의 좋아요 수 update 
+		//해당 댓글의 좋아요 수 +1
+		int seq = dto.getR_comments_seq();
+		int result = rcdao.updateReviewCommentsLike(seq);
+		//ReviewCommentsLikes table에 dto insert 하기.
+		int rclResult = rcl_dao.insertReviewCommentsLike(dto);
+		return result+rclResult;
+	}
+
+	@Override
+	@Transactional("txManager")
+	public int reviewCommentsLikeCancel(ReviewCommentsLikesDTO dto) {
+		//해당 댓글의 좋아요 수 -1
+		int seq = dto.getR_comments_seq();
+		int result = rcdao.updateReviewCommentsLikeMinus(seq);
+		//ReviewCommentsLikes table에 dto delete 하기.
+		int rclResult = rcl_dao.deleteReviewCommentsLike(dto);
+		return result+rclResult;
+	}
+
+	@Override
+	public ReviewCommentsDTO selectReviewCommentsDTOByCurrValSeq() {
+		//현재 seq를 구한다.
+		int currval = rcdao.selectReviewCommentsSeqCurrVal();
+		//현재 seq에 맞는 dto를 리턴한다.
+		return rcdao.selectReviewCommentsBySeq(currval);
 	}
 	
 }

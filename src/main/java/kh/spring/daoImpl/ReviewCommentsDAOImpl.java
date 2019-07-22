@@ -61,4 +61,24 @@ public class ReviewCommentsDAOImpl implements ReviewCommentsDAO {
 		return sst.selectOne("ReviewCommentsDAO.selectReviewCommentsCountByReviewSeq",reviewSeq);
 	}
 
+	@Override
+	public int updateReviewCommentsLike(int seq) {//댓글좋아요수 + 1
+		return sst.update("ReviewCommentsDAO.updateReviewCommentsLike",seq);
+	}
+
+	@Override
+	public int updateReviewCommentsLikeMinus(int seq) {
+		return sst.update("ReviewCommentsDAO.updateReviewCommentsLikeMinus",seq);
+	}
+
+	@Override
+	public int selectReviewCommentsSeqCurrVal() {
+		return sst.selectOne("ReviewCommentsDAO.selectReviewCommentsSeqCurrVal");
+	}
+
+	@Override
+	public ReviewCommentsDTO selectReviewCommentsBySeq(int seq) {
+		return sst.selectOne("ReviewCommentsDAO.selectReviewCommentsBySeq",seq);
+	}
+
 }

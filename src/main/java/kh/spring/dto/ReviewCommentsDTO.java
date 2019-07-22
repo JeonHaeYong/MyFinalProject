@@ -4,13 +4,13 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
 public class ReviewCommentsDTO {
-	private int seq;				// ��� ��ȣ
-	private int review_seq;			// �ش� �� ��ȣ
+	private int seq;				// 댓글 seq
+	private int review_seq;			// 해당 댓글이 달린 review 글의 seq
 	private String writer;
 	private String contents;
 	private Timestamp write_date;
-	private int likes;				// ���ƿ�
-	private int dislike;			// �Ⱦ��
+	private int likes;				// 좋아요 수
+	private int dislike;			// 싫어요 수
 	
 	private String likeOk; //조회하는 사람이 좋아요 했는지..
 	
