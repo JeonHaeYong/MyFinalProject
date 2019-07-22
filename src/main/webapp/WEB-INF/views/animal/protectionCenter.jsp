@@ -20,6 +20,8 @@
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<!--  module-->
+<jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
 <script>
 	$(function(){
 		$(".pageNum").each(function(index,items){

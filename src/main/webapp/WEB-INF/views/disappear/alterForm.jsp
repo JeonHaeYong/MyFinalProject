@@ -19,15 +19,18 @@
 <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
+<!--  module-->
+<jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
 <style>
 	.empty{width: 100%; text-align: center; margin: auto; margin-bottom: 50px; height:50px;}
 	#title{width: 100%; text-align: center; margin: auto; margin-bottom: 50px;}
+	h1{ font-family: 'Gamja Flower', cursive;}
         .aa{ width: 500px; height: 870px; margin: auto; box-sizing: border-box; margin-bottom: 100px;overflow: hidden;}
         /*기본 정보 */
-        .basic,.animal{background-color:#EC7357; text-align: center; font-size:30px; color: white; font-weight: bold;}
+        .basic,.animal{background-color:#EC7357; text-align: center; font-size:30px; color: white; font-weight: bold; font-family: 'Gamja Flower', cursive; }
         .basic-info{height:300px; width: 100%; }
         .basic-info>div{height: 100%; float: left;}
-        .basic-info .title{width: 150px;}
+        .basic-info .title{width: 150px; font-family: 'Gamja Flower', cursive; }
         .basic-info .title div{height:70px; width: 100%; font-weight: bold;font-size: 20px; padding-top:35px; text-align: center;}
         .basic-info .input-box{width: 350px;   height: 100%;}
         .basic-info .input-box div{height:70px; width: 100%; padding-top:30px; text-align: left;}
@@ -35,17 +38,18 @@
         /*동물정보*/
         .animal-info{height:350px; width: 100%; }
         .animal-info>div{height: 100%; float: left;}
-        .animal-info .title{width: 150px; height: 100%;}
+        .animal-info .title{width: 150px; height: 100%; font-family: 'Gamja Flower', cursive; }
         .animal-info .title div{height:55px; width: 100%; font-weight: bold;font-size: 20px; padding-top:20px; text-align: center;}
         .animal-info .input-box{width: 350px;  height: 100%;}
         .animal-info .input-box div{height: 55px; width: 100%; padding-top:20px;  }
         .check{float: left; width: 100px;}
         input[type="text"]{width: 300px;}
-        input[type="button"]{background-color:#EC7357; border: none; color: white; font-size: 20px; font-weight: bold; border-radius: 10px; margin-right: 10px; width: 70px;}
+      
         
         /*footer 부분*/
         #footer{text-align: center; width: 100%; margin-top:50px;}
-         input[type="button"]:hover{background-color:#b3543e; }  
+         .btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44;}
+		.btn:hover{background-color:#FDD692; font-weight:bold;}
 </style>
 <script>
  	$(function(){
@@ -56,8 +60,10 @@
     			location.href="toDisappearList?currentPage=${currentPage}";
     		});
     		$(".alter-btn").on("click",function(){
-    			alert($("#disappearDate").val());
-    			$("#reportForm").submit();
+    			if($("#disappearDate").val() !=""&& $(".disappearArea").val() !=""&& $(".tel").val() !=""&& $('input:radio[name=gender]').is(':checked')==true
+    					&& $('input:checkbox[name=neuter]').is(':checked')==true && $(".furColor").val()!="" && $(".feature").val()!=""){
+    				$("#reportForm").submit();
+    			}else{alert("기타사항을 제외하고 모두 입력해주세요.");}
     		});
     	});
     </script>
@@ -137,8 +143,8 @@
         </div>
         
         <div id="footer">
-            <input type="button" class="alter-btn" value="수정">
-            <input type="button" class="toList-btn" value="취소">
+            <input type="button" class="alter-btn btn" value="수정">
+            <input type="button" class="toList-btn btn" value="취소">
         </div>
         </form>
 			</div>
