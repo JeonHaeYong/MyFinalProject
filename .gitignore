@@ -28,6 +28,7 @@ target/
 .project
 spring-*/src/main/java/META-INF/MANIFEST.MF
 MANIFEST.MF
+target/*
 
 # IDEA artifacts and output dirs
 *.iml
