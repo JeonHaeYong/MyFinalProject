@@ -5,7 +5,7 @@
     <html>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title>Insert title here</title>
+            <title>마이페이지 - 장바구니</title>
             <link
                   href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
                   rel="stylesheet">

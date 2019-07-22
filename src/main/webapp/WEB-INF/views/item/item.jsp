@@ -86,6 +86,63 @@
 			.contents img{
 				max-width: 100%;
 			}
+			.fixedMenu{
+		 		position: absolute; 
+				width: 150px;
+				height: 200px;
+		 		top: 790px;
+				right: 0px;
+				border: none;
+				text-align: center;
+				background-color: #00000030;
+				font-family: 'Gamja Flower';
+				font-weight: bold !important;
+				z-index: 100;
+			}
+			#cartImg{
+				width: 50%;
+			}
+		 	.fixedMenu div{
+		 		margin: 10px;
+		 	}
+		 	.addBtn{
+		 		background-color: #ec7357;
+		 		color: white;
+		 		font-weight: bold !important;
+		 	}
+		 	.addBtn:hover, #searchBtn:hover{
+		 		background-color: #cf654c;
+		 		color: white;
+		 		font-weight: bold !important;
+		 		cursor: pointer;
+		 	}
+		 	.cartAddBtn{
+		 		background-color: #ec7357;
+		 		color: white;
+		 		width: 30px;
+		 		height:25px;
+		 		padding: 0px;
+		 	}
+		 	#searchForm{
+		 		width: 96px;
+		 	}
+		 	#select{
+		 		font-size: 18px;
+		 	}
+		 	.op{
+		 		font-size: 20px;
+		 	}
+			#searchBtn{
+				background-color: #ec7357;
+				border-radius: 5px 10px 10px 5px;
+				width: 38px;
+			}
+			.cartBadge{
+				position: absolute;
+				right: 53px;
+				width: 20px;
+				height: 20px;
+			}
         </style>
     </head>
     <body data-spy="scroll" data-target=".site-navbar-target"
@@ -171,6 +228,33 @@
             	</div>
             </div>
         </div>
+        
+        <div class="fixedMenu">
+	    	<div class="btnBox">
+				<a class="btn addBtn" href="addItem">나눔신청</a>
+	    	</div>
+	    	<div class="input-group selectBox">
+	    		<form action="freeMarket" id="searchForm">
+	    			<input type="hidden" name="currentPage" value="1">
+					<select class="custom-select" id="select" name="category">
+						<option class="op" selected value="all">전체</option>
+						<option class="op" value="food">사료&amp;간식</option>
+						<option class="op" value="toy">장난감</option>
+						<option class="op" value="clothing">의류</option>
+						<option class="op" value="etc">기타</option>
+					</select>
+				</form>
+				<div class="input-group-append m-0">
+					<a id="searchBtn"><img alt="검색" src="/resources/images/item/searchIcon.png"></a>
+				</div>
+	    	</div>
+	    	<div class="toCart">
+	    		<c:if test="${cartCount != 0 }">
+	    			<span class="badge badge-danger cartBadge">${cartCount }</span>
+	    		</c:if>
+	    		<a href="toMyPage_cart"><img alt="" src="/resources/images/item/cart.png" id="cartImg"></a>
+	    	</div>
+	    </div>
 
         <!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
 
@@ -214,6 +298,12 @@
                 		if(resp == "1"){
                 			if(confirm("장바구니에 담았습니다. 장바구니로 이동할까요?")){
                 				location.href = "toMyPage_cart?currentPage=1";
+                			}else{
+                				$.ajax({
+                					url: "getCartCount"
+                				}).done(function(resp){
+                					$(".cartBadge").text(resp);
+                				});
                 			}
                 		}else if(resp == "-1"){
                 			alert("장바구니에 이미 존재하는 상품입니다.");
@@ -234,6 +324,20 @@
             		location.href = "toMyPage_cart";
             	}
             });
+            
+            var menu = $(".fixedMenu");
+			var menuOffset = $(".fixedMenu").offset();
+			$(window).scroll(function(){
+				if($(this).scrollTop() >= 400){
+					menu.css("position", "fixed").css("top", "325px");
+				}else{
+					menu.css("position", "absolute").css("top", "720px");
+				}
+			});
+			
+			$("#searchBtn").on("click", function(){
+				$("#searchForm").submit();
+			});
             
         </script>
 </html>

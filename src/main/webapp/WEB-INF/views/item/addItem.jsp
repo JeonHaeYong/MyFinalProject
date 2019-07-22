@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>나눔 신청</title>
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
 	rel="stylesheet">
@@ -58,7 +58,7 @@
 		 			<div class="input-group-prepend">
 						<span class="input-group-text">상품명</span>
 					</div>
-					<input type="text" class="form-control" name="name" id="name" placeholder="Name">
+					<input type="text" class="form-control" name="name" id="name" placeholder="상품 이름을 입력해주세요">
 				</div>
 				<div class="col-md-7 col-12 input-group mb-3">
 		 			<div class="input-group-prepend">

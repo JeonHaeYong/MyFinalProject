@@ -68,6 +68,7 @@
     	color: #754F44;
 		text-decoration: none;
 		margin: 0px 5px;
+		font-size: 25px;
 	}
 	.navi:hover{
 		font-weight: bold;
@@ -122,6 +123,12 @@
 		background-color: #ec7357;
 		border-radius: 5px 10px 10px 5px;
 		width: 38px;
+	}
+	.cartBadge{
+		position: absolute;
+		right: 53px;
+		width: 20px;
+		height: 20px;
 	}
 </style>
 </head>
@@ -185,7 +192,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row mb-3">
 			<div class="col-2"></div>
 			<div class="col-10 d-flex justify-content-center" id="naviBox">
 				<c:if test="${pageNavi.needPrev == 1 }">
@@ -227,6 +234,9 @@
 			</div>
     	</div>
     	<div class="toCart">
+    		<c:if test="${cartCount != 0 }">
+    			<span class="badge badge-danger cartBadge">${cartCount }</span>
+    		</c:if>
     		<a href="toMyPage_cart"><img alt="" src="/resources/images/item/cart.png" id="cartImg"></a>
     	</div>
     </div>
@@ -269,7 +279,7 @@
 			
 			$(".cardImg").each(function(i, item){
 				if($(item).attr("soldout") == 'y'){
-					$(this).css("filter", "brightness(80%)");
+					$(this).css("filter", "brightness(60%)");
 				}
 			})
 			
@@ -277,7 +287,7 @@
 			var menuOffset = $(".fixedMenu").offset();
 			$(window).scroll(function(){
 				if($(this).scrollTop() >= 400){
-					menu.css("position", "fixed").css("top", "360px");
+					menu.css("position", "fixed").css("top", "325px");
 				}else{
 					menu.css("position", "absolute").css("top", "720px");
 				}

@@ -15,19 +15,19 @@
 	</select>
 	
 	<select id="getItemCount" resultType="int">
-		select count(*) from item
+		select count(*) from item where permission = 'y'
 	</select>
 	
 	<select id="getItemCountByCategory" resultType="int">
-		select count(*) from item where category=#{value}
+		select count(*) from item where category=#{value} and permission = 'y'
 	</select>
 	
 	<select id="selectItemPerPage" resultType="kh.spring.dto.ItemDTO">
-		select * from (select row_number() over(order by seq desc) as rown, item.* from item) where rown between #{start} and #{end}
+		select * from (select row_number() over(order by seq desc) as rown, item.* from item where permission = 'y') where rown between #{start} and #{end}
 	</select>
 	
 	<select id="selectItemPerPageByCategory" resultType="kh.spring.dto.ItemDTO">
-		select * from (select row_number() over(order by seq desc) as rown, item.* from item where category=#{category}) where rown between #{start} and #{end}
+		select * from (select row_number() over(order by seq desc) as rown, item.* from item where category=#{category} and permission = 'y') where rown between #{start} and #{end}
 	</select>
 	
 	<select id="selectItemForPayment" resultType="kh.spring.dto.ItemDTO">
