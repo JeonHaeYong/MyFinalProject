@@ -50,18 +50,8 @@
 		width: 90%;
 		margin: auto;
 	}
-	.soldout{
-		background-color:#00000050;
-		z-index:100 !important;
-		position:relative;
-		color: white;
-		text-align: center;
-		line-height: 265px;
-		font-size: 25px;
-	}
 	.cardImg{
  		height: 265px;
- 		z-index: 1;
 	}
 	.itemName{
 		height: 60px;
@@ -143,7 +133,7 @@
 	<div class="jumbotron myJumbo pr-0 pl-0 pb-2">
 		<img src="/resources/images/item/freemarketImage.jpg" id="jumboImg">
 	</div>
-	<div class="container container-contents">
+	<div class="container container-contents" id="conta">
 		<div class="row m-3">
 			<div class="col-2"></div>
 			<div class="col-10 align-self-center text-center">
@@ -179,14 +169,13 @@
 					</c:if>
 					<c:forEach var="dto" items="${itemList }">
 						<div class="col-lg-4 col-md-6 col-12 p-0">
-							<div class="card myCard" style="position: relative">
-								<c:if test="${dto.soldout == 'y' }">
-									<span class="cardImg soldout">판매완료</span>
-								</c:if>
+							<div class="card myCard">
 								<img class="card-img-top cardImg" src="${dto.imagePath1 }" alt="Card image" soldout="${dto.soldout }">
 								<div class="card-body">
 									<div class="itemName text-wrap text-truncate">
-										<h4 class="card-title"><a href="item?currentPage=${pageNavi.currentPage }&category=${category }&seq=${dto.seq }" class="detail">${dto.name }</a></h4>
+										<h4 class="card-title"><a href="item?currentPage=${pageNavi.currentPage }&category=${category }&seq=${dto.seq }" class="detail">
+											<c:if test="${dto.soldout == 'y' }">[판매완료]</c:if>${dto.name }
+										</a></h4>
 									</div>
 									<p class="card-text">${dto.price } 원</p>
 								</div>
@@ -279,7 +268,7 @@
 			
 			$(".cardImg").each(function(i, item){
 				if($(item).attr("soldout") == 'y'){
-					$(this).css("position", "absolute");
+					$(this).css("filter", "brightness(80%)");
 				}
 			})
 			
@@ -287,7 +276,7 @@
 			var menuOffset = $(".fixedMenu").offset();
 			$(window).scroll(function(){
 				if($(this).scrollTop() >= 400){
-					menu.css("position", "fixed").css("top", "400px");
+					menu.css("position", "fixed").css("top", "360px");
 				}else{
 					menu.css("position", "absolute").css("top", "720px");
 				}
