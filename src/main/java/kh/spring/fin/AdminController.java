@@ -23,6 +23,7 @@ import kh.spring.serviceImpl.BlackListServiceImpl;
 import kh.spring.serviceImpl.ChartServiceImpl;
 import kh.spring.serviceImpl.DonationServiceImpl;
 import kh.spring.serviceImpl.ItemServiceImpl;
+import kh.spring.serviceImpl.MemberServiceImpl;
 
 @Controller
 public class AdminController
@@ -41,6 +42,8 @@ public class AdminController
 	DonationServiceImpl donationService;
 	@Autowired
 	ItemServiceImpl itemService;
+	@Autowired
+	MemberServiceImpl memberService;
 	
 	//Member Start
 	@RequestMapping(value = "admin-member")
@@ -262,6 +265,49 @@ public class AdminController
 	}
 	
 	//Item End
+	
+	
+	//Quiz Start
+	
+	@RequestMapping(value = "admin-quiz")
+	public String quizPage()
+	{
+		return "myPage/admin/admin_quiz";
+	}
+	@ResponseBody
+	@RequestMapping(value = "admin-quiz-search", produces="application/json;charset=utf-8")
+	public Object quizSearch(String page)
+	{
+		Object result = "";
+		
+		try
+		{
+			result = memberService.selectRankFiveByPoint(page);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	@RequestMapping(value = "admin-quiz-random")
+	public Object updatePointRandom()
+	{
+		Object result = "";
+		
+		try
+		{
+			result = memberService.updateRandomPoint();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	//Quiz End
 	
 	
 	

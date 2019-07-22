@@ -56,6 +56,16 @@ public class ItemDAOImpl implements ItemDAO{
 		param.put("end", end+"");
 		return sst.selectList("ItemDAO.selectItemPerPageByCategory", param);
 	}
+	
+	@Override
+	public List<ItemDTO> selectItemByOrderNum(String orderNumber) {
+		return sst.selectList("ItemDAO.selectItemByOrderNum", orderNumber);
+	}
+	
+	@Override
+	public int updateSoldOut(int seq) {
+		return sst.update("ItemDAO.updateSoldOut", seq);
+	}
 
 	public int itemContentsSize() {
 		return sst.selectOne("ItemDAO.getItemCount");

@@ -11,7 +11,7 @@
 	</select>
 	
 	<select id="selectCartPerPage" resultType="kh.spring.dto.ItemDTO">
-		select row_number() over(order by i.seq desc) as rown, i.* from cart c, item i where c.item_seq = i.seq and id=#{id}
+		select row_number() over(order by i.seq desc) as rown, i.*, c.seq as cart_seq from cart c, item i where c.item_seq = i.seq and id=#{id}
 	</select>
 	
 	<select id="getCartCount" resultType="int">
@@ -19,7 +19,10 @@
 	</select>
 	
 	<delete id="deleteCart">
-		delete from cart where item_seq=#{item_seq} and id=#{id}
+		delete from cart where seq in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach>
 	</delete>
 	
 	

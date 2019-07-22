@@ -88,7 +88,7 @@
 			</div>
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="admin-item" class="btn selected_menu_btns">무료 나눔 물품 승인</a>
+				<a href="admin-item" class="btn menu_btns">무료 나눔 물품 승인</a>
 			</div>
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
@@ -100,7 +100,7 @@
 			</div>
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="admin-quiz" class="btn menu_btns">퀴즈 당첨자</a>
+				<a href="admin-quiz" class="btn selected_menu_btns">퀴즈 당첨자</a>
 			</div>
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
@@ -119,14 +119,10 @@
 			<div class="col-12">
 
 				<div class="row justify-content-center mt-5">
-				
-					<div class="col-6 col-md-6 col-lg-2 text-center my-1"><h3>등록 번호</h3></div>
-					<div class="col-4 col-md-4 col-lg-3 text-center my-1"><h3>상품 명</h3></div>
-					<div class="col-4 col-md-4 col-lg-2 text-center my-1"><h3>상품 가격</h3></div>
-					<div class="col-4 col-md-4 col-lg-3 text-center my-1"><h3>판매자</h3></div>
-					<div class="col-2 col-md-2 col-lg-2 text-center my-1">
-						<input id="permission_all_btn" type="checkbox">모두 체크
-					</div>
+					
+					<div class="col-6 col-md-6 col-lg-4 text-center my-1"><h3>번호</h3></div>
+					<div class="col-6 col-md-6 col-lg-4 text-center my-1"><h3>포인트</h3></div>
+					<div class="col-4 col-md-4 col-lg-4 text-center my-1"><h3>아이디</h3></div>
 					
 				</div>
 				
@@ -134,27 +130,6 @@
 				<div class="row justify-content-center my-1">
 
 					<div id="search_result_div" class="col-12 col-md-12 col-lg-12 text-center my-1"></div>
-
-				</div>
-
-
-
-				<div class="row justify-content-center">
-
-					<div class="col-8 col-md-8 col-lg-4 text-left my-5"></div>
-					<div class="col-8 col-md-8 col-lg-4 text-left my-5"></div>
-					
-					<div class="col-8 col-md-8 col-lg-2 text-center my-5">
-					
-<!-- 						<input id="search_btn" class="btn my_buttons" name="1" type="button" value="검색"> -->
-					
-					</div>
-					
-					<div class="col-4 col-md-4 col-lg-2 text-center my-5">
-
-						<input id="reg_btn" class="btn my_buttons" type="button" value="등록하기">
-
-					</div>
 
 				</div>
 
@@ -170,7 +145,7 @@
 
 			<div class="col-12 col-md-12 col-lg-12 text-center my-5">
 
-				<a href="admin-item-insert">데이터 삽입</a>
+				<a href="admin-quiz-random">데이터 업데이트</a>
 
 			</div>
 
@@ -201,51 +176,8 @@
     {
 		myAjax("1");
 		
-		$(document).on("click", "#permission_all_btn", function()
-		{
-			$("#search_result_div input[type=checkbox]").prop("checked", true);
-		})
-		
-		$("#reg_btn").on("click", function()
-		{
-			var $check = $(".permission_check");
-			var seq = "";
-			
-	    	for(var i = 1 ; i <= $check.length ; i++)
-	    	{
-	    		if($check.eq(i-1).prop("checked") == true)
-	    		{
-	    			seq = seq + " " + $check.eq(i-1).attr("name");
-	    		}
-	    	}
-			
-			$.ajax
-	    	({
-	    		url: "admin-item-permission",
-	    		type: "POST",
-	    		data:
-	    		{
-	    			items: seq
-	    		}
-	    	})
-	    	.done(function(response)
-	    	{
-	    		if(response == "Y")
-	    		{
-	    			alert("성공");
-	    			myAjax("1");
-	    			$("#permission_all_btn").prop("checked", false);
-	    		}
-	    		else
-	    		{
-	    			alert("실패");
-	    		}
-	    	});
-		})
-		
 		$(document).on("click", "#search_btn,.navi_btns", function()
 		{
-			$("#permission_all_btn").prop("checked", false);
 			myAjax(this.name);
 		})
 		
@@ -253,7 +185,7 @@
 		{
 			$.ajax
 	    	({
-	    		url: "admin-item-search",
+	    		url: "admin-quiz-search",
 	    		type: "POST",
 	    		dataType: "JSON",
 	    		data:
@@ -271,12 +203,10 @@
 	    		for(var i = 1 ; i <= array.length ; i++)
 	    		{
 					var $row = $('<div class="row justify-content-center my-1 id_row"></div>');
-	    			var $seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].seq+'</div>');
-	    			var $nameCol = $('<div class="col-4 col-md-4 col-lg-3 text-center my-1">'+array[i-1].name+'</div>');
-	    			var $priceCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].price+'</div>');
-	    			var $sellerCol = $('<div class="col-4 col-md-4 col-lg-3 text-center my-1">'+array[i-1].seller+'</div>');
-	    			var $checkCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1"><input class="permission_check" name="'+array[i-1].seq+'" type="checkbox">'+'거래 승인'+'</div>');
-	    			$row.append($seqCol).append($nameCol).append($priceCol).append($sellerCol).append($checkCol);
+					var $seqCol = $('<div class="col-6 col-md-6 col-lg-4 text-center my-1">'+(response.seq*1+i)+'</div>');
+	    			var $pointCol = $('<div class="col-6 col-md-6 col-lg-4 text-center my-1">'+array[i-1].point+'</div>');
+	    			var $idCol = $('<div class="col-6 col-md-6 col-lg-4 text-center my-1">'+array[i-1].id+'</div>');
+	    			$row.append($seqCol).append($pointCol).append($idCol);
 	    			$("#search_result_div").append($row);
 	    		}
 	    		

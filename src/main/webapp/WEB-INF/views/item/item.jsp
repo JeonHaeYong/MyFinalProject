@@ -20,6 +20,7 @@
         <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
         <link rel="stylesheet" href="resources/css/aos.css">
         <link rel="stylesheet" href="resources/css/style.css">
+        <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
         <style>
             .myJumbo{
                 background-color: white;
@@ -30,6 +31,7 @@
             }
             .itemImage{
                 width: 100%;
+                height: 500px;
             }
             .itemInfoRow{
             	position: relative;
@@ -49,6 +51,13 @@
             .cell{
             	display: inline-block;
             	width: 80%;
+            }
+            #soldout{
+            	color: white;
+            	background-color: #bf5e47;
+            }
+            #soldout:hover{
+            	
             }
             .cartBtn{
 				background-color: #ec7357;
@@ -136,37 +145,30 @@
 	                		<p><span class="column">Date</span><span class="cell">${item.fomredDate }</span></p>
 	                	</div>
 	                	<div class="col-12 align-self-center text-center">
-	                		<a class="btn cartBtn" id="addCart" href="">장바구니 담기</a>
+	                		<c:choose>
+	                			<c:when test="${item.soldout == 'y' }">
+	                				<a class="btn cartBtn" id="soldout" disabled>판매완료 상품</a>
+	                			</c:when>
+	                			<c:otherwise>
+	                				<a class="btn cartBtn" id="addCart" href="">장바구니 담기</a>
+	                			</c:otherwise>
+	                		</c:choose>
 	                		<a class="btn cartBtn" id="goCart" href="">장바구니 가기</a>
 	                	</div>
                 	</div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row m-3">
             	<div class="col-12">
             		<div class="contents">
             			${item.contents }
             		</div>
             	</div>
             </div>
-            <div class="row">
-                <div class="col-12 d-flex justify-content-center" id="naviBox">
-                    <c:if test="${pageNavi.needPrev == 1 }">
-                        <a class="btn myBtn" href="freeMarket?currentPage=${pageNavi.startNavi - 1}">&laquo;</a>
-                    </c:if>
-                    <c:if test="${pageNavi.currentPage > pageNavi.startNavi }">
-                        <a class="btn myBtn" href="freeMarket?currentPage=${pageNavi.currentPage - 1}">&lt;</a>
-                    </c:if>
-                    <c:forEach var="i" begin="${pageNavi.startNavi}" end="${pageNavi.endNavi}">
-                        <a class="btn myBtn" href="freeMarket?currentPage=${i }" class="pageNum">${i}</a>
-                    </c:forEach>
-                    <c:if test="${pageNavi.currentPage < pageNavi.pageTotalCount }">
-                        <a class="btn myBtn" href="freeMarket?currentPage=${pageNavi.currentPage + 1}">&gt;</a>
-                    </c:if>
-                    <c:if test="${pageNavi.needNext == 1 }">
-                        <a class="btn myBtn" href="freeMarket?currentPage=${pageNavi.endNavi + 1}">&raquo;</a>
-                    </c:if>
-                </div>
+            <div class="row m-3">
+            	<div class="col-12 d-flex justify-content-end">
+            		<a class="btn cartBtn" href="freeMarket?currentPage=${currentPage }&category=${category}">목록으로</a> 
+            	</div>
             </div>
         </div>
 

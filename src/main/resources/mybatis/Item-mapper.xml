@@ -31,17 +31,19 @@
 	</select>
 	
 	<select id="selectItemForPayment" resultType="kh.spring.dto.ItemDTO">
-		select * from item where seq in 
+		select c.seq as cart_seq, i.* from cart c, item i where c.item_seq = i.seq and c.seq in 
 		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
 			#{item}
 		</foreach>
 	</select>
 	
-<!-- 	<insert id="modify"> -->
-<!-- 		update item set name=#{name}, contents=#{contents}, price=#{price}, -->
-<!-- 		seller=#{seller}, date=#{date}, permission=#{permission}, -->
-<!-- 		imagePath=#{imagePath} -->
-<!-- 	</insert> -->
+	<select id="selectItemByOrderNum" resultType="kh.spring.dto.ItemDTO">
+		select i.* from payment p, item i where p.item_seq = i.seq and ordernumber = #{value}
+	</select>
+	
+	<update id="updateSoldOut">
+		update item set soldout = 'y' where seq=#{value}
+	</update>
 
 	<select id="selectForAdmin" resultType="kh.spring.dto.ItemDTO">
 		select * 
