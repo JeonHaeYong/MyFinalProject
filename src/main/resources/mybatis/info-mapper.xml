@@ -4,16 +4,19 @@
 
 	<insert id="insertinfo">
 		insert into info_Board values(info_board_seq.nextval, #{title},
-		#{contents},#{image,jdbcType=VARCHAR},#{writer},sysdate,#{ip})
+		#{contents},#{image,jdbcType=VARCHAR},#{writer},default,#{ip})
 	</insert>
 	<select id="selectall" resultType="kh.spring.dto.TrainingDTO">
-	select * from(SELECT seq,title,writer,writedate,image,RANK()OVER (ORDER BY seq DESC) RANK FROM info_Board order by writedate desc)where Rank between #{start} and #{end}
+	select * from(SELECT seq,title,writer,writeDate,image,RANK()OVER (ORDER BY seq DESC) RANK FROM info_Board order by writeDate desc)where Rank between #{start} and #{end}
 	</select>
 	<select id="selectdetail" resultType="kh.spring.dto.TrainingDTO">
 	select * from info_Board where seq=#{seq}
 	</select>
 	<update id="updateinfo">
-	update info_Board set title=#{title},writedate=sysdate,contents=#{contents,jdbcType=VARCHAR},
+	update info_Board set title=#{title},writeDate=default,contents=#{contents,jdbcType=VARCHAR},
 	image=#{image,jdbcType=VARCHAR} where seq=#{seq}
 	</update>
+	<select resultType="Integer" id="bordcount">
+	select count(*) from info_Board
+	</select>
 </mapper>

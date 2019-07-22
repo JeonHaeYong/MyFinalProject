@@ -103,6 +103,30 @@ a[name="s-menu"]:hover {
 
 /* -------------------infobox -----------------   */
 
+.infowrapper{
+font-family: 'Gamja Flower', cursive;
+box-sizing:border-box;
+}
+.infotitle{
+font-size:30px;
+border-bottom: 1px solid #754F4470;
+text-align:left;
+padding-left:40px;
+}
+.infodate{
+margin-top:2px;
+text-align:right;
+}
+/*btn  */
+#updatewrite{
+font-family: 'Gamja Flower', cursive;
+background-color:#FDD69270;
+color:#754F44;
+}
+#updatewrite:hover{
+background-color:#FDD692;
+font-weight:bold;
+}
 
 </style>
 
@@ -156,8 +180,8 @@ a[name="s-menu"]:hover {
 				
 						<div class="col-lg-12 col-md-12 col-sm-12 dtocol">
 							<div class=infowrapper>
-								<div class=infotext>${dto.title}</div>
-								<div class="inforecommend">♥</div>
+								<div class=infotitle> No ${dto.seq}. ${dto.title}</div>
+								<div class="infodate">${dto.writeDate}</div>
 								<div class=infotext>${dto.contents}</div>
 							</div>
 						</div>
@@ -170,7 +194,7 @@ a[name="s-menu"]:hover {
 		<div class="row mt-5" align="right">
 			<div class="col-12">
 				<div>
-					<input type="button" value="수정" id="updatewrite">
+					<button id="updatewrite" class="btn">글수정</button>
 				</div>
 			</div>
 		</div>

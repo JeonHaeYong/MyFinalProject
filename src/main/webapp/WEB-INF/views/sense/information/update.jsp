@@ -126,6 +126,20 @@ a[name="s-menu"]:hover {
 	border-bottom: 1px solid black;
 	height: 150px;
 }
+#smNote {
+	text-align: left;
+}
+
+/*btn  */
+#uploadwritebtn,#tomainboard{
+font-family: 'Gamja Flower', cursive;
+background-color:#FDD69270;
+color:#754F44;
+}
+#uploadwritebtn:hover,#tomainboard:horver{
+background-color:#FDD692;
+font-weight:bold;
+}
 </style>
 <!--  summernote script-->
 
@@ -186,11 +200,7 @@ function sendFile(files,editor){
     }   
         </script>
 
-<style>
-#smNote {
-	text-align: left;
-}
-</style>
+
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="300" id="home-section">
@@ -249,7 +259,7 @@ function sendFile(files,editor){
 									<span class="input-group-text">제목</span>
 								</div>
 								<input id="inputtitle" name="title" type="text"
-									class="form-control" placeholder="${dto.title }">
+									class="form-control" value="${dto.title }" maxlength="20">
 							</div>
 						</div>
 						<div class="row">
@@ -262,10 +272,10 @@ function sendFile(files,editor){
 								<div id="summernote"></div>
 							</div>
 						</div>
-						<div class="row p-1">
+						<div class="row m-5">
 							<div class="col-lg-12 col-md-12 col-sm-12">
-								<button id="uploadwritebtn" type="button" class="btn">작성완료</button>
-								<button id="tomainboard" type="button" class="btn">글목록으로</button>
+								<button id="uploadwritebtn" class="btn">작성완료</button>
+								<button id="tomainboard"  class="btn">글목록으로</button>
 							</div>
 						</div>
 					</div>

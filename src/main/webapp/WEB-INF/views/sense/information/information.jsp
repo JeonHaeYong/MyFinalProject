@@ -57,7 +57,7 @@ h3, h1 {
 	padding: 10px;
 	text-align: center;
 	margin: 0px;
-	margin-top: 45px;
+	margin-top: 25px;
 	padding: 0px;
 }
 
@@ -102,9 +102,8 @@ a[name="s-menu"]:hover {
 }
 
 /* -------------------infobox -----------------   */
-
 .infowrapper {
-font-family: 'Gamja Flower', cursive;
+	font-family: 'Gamja Flower', cursive;
 	box-sizing: border-box;
 	height: 300px;
 	overflow: hidden;
@@ -115,48 +114,61 @@ font-family: 'Gamja Flower', cursive;
 	padding-top: 50px;
 }
 
-.infoimg, .infotext,.infoextra {
+.infoimg, .infotext, .infoextra,infoseq {
+	overflow: hidden;
+}
+.infoseq{
+border-bottom: 1px solid #754F4470;
+}
+.infoimg {
+	margin-left: 10px;
+	margin-top: 2px;
+	margin-right: 10px;
+	box-sizing: border-box;
+	height: 70%;
+}
 
-	
-overflow: hidden;
+.inforecommend {
+	padding-left: 5px;
+	margin-left: 15px;
+	margin-right: 15px;
+	text-align: left;
+	height: 7%;
+	box-sizing: border-box;
+	overflow: hidden;
+}
 
+.infotext {
+	border-top: 1px solid #754F4470;
+	margin-top: 2px;
+	font-size: 20px;
+	line-height:50px;
+	text-align: center;
+	margin-left: 15px;
+	margin-right: 15px;
+	padding-left: 5px;
+	height: 18%;
+	margin-top: 2px;
 }
-.infoimg{
-margin-left:15px;
-margin-top:15px;
-margin-right:15px;
-box-sizing: border-box;
-height:70%;
-}
-.inforecommend{
-border-top:1px solid #754F4470;
-padding-left:5px;
-margin-top:2px;
-margin-left:15px;
-margin-right:15px;
-text-align:left;
-height:7%;
-box-sizing:border-box;
-overflow:hidden;
-}
-.infotext{
 
-font-size:18px;
-text-align:left;
-margin-left:15px;
-margin-right:15px;
-padding-left:5px;
-height:18%;
-margin-top:2px;
-}
-.infoimg>img {
-width:100%;
+.infoimg>a>img {
+	width: 100% !important;
 	top: 0;
 	left: 0;
-	height: 100%;
+	height: 100% !important;
 }
 
+#infowrite {
+	border: 0;
+	background-color: #FDD69270;
+	color: #754F44;
+	font-family: 'Gamja Flower', cursive;
+}
 
+#infowrite:hover {
+	background-color: #FDD692;
+	font-weight: bold;
+}
 </style>
 
 </head>
@@ -206,17 +218,21 @@ width:100%;
 				<!--정보   -->
 
 				<div class="row .infinite">
+
 					<c:forEach var="dto" items="${infodto}">
+
 						<div class="col-lg-4 col-md-6 col-sm-6 dtocol">
 							<div class=infowrapper>
-							
-								<div class=infoimg><a href="detail?seq=${dto.seq }"class="detail">${dto.image}</a></div>
-								<div class="inforecommend">♥</div>
+								<div class=infoseq>NO.${dto.seq }</div>
+								<div class=infoimg>
+									<a href="detail?seq=${dto.seq}" class="detail">${dto.image}</a>
+								</div>
 								<div class=infotext>${dto.title}</div>
+								<div class="inforecommend">${dto.writeDate}</div>
 							</div>
 						</div>
 					</c:forEach>
-					
+
 
 				</div>
 			</div>
@@ -224,7 +240,8 @@ width:100%;
 		<div class="row mt-5" align="right">
 			<div class="col-12">
 				<div>
-					<input type="button" value="글쓰기" id="infowrite">
+					<div id="navi">${navi}</div>
+					<button id="infowrite" class="btn">글쓰기</button>
 				</div>
 			</div>
 		</div>
@@ -250,12 +267,12 @@ width:100%;
 
 	<!--정보 스크립트 코드   -->
 	<script>
-	   document.getElementById("infowrite").onclick = function(){
-           location.href = "infowrite";
-       }
-	  </script>
+		document.getElementById("infowrite").onclick = function() {
+			location.href = "infowrite";
+		}
+	</script>
 
 
-	
+
 </body>
 </html>

@@ -29,9 +29,12 @@ public class InformationController {
 	@RequestMapping("information_t")
 	public String informaition_t(String currentPage) {
 		try {
+			String navi = service.getNavi(Integer.parseInt(currentPage));
 			session.setAttribute("currentPage", currentPage);
 			List<TrainingDTO> tdto=service.selectAll(Integer.parseInt(currentPage));
+	
 			request.setAttribute("infodto", tdto);
+			request.setAttribute("navi", navi);
 			return "sense/information/information";
 		} catch (Exception e) {
 			e.printStackTrace();

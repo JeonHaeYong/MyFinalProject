@@ -14,4 +14,8 @@ public interface InfoService {
 
 	public int update_info(TrainingDTO dto) throws Exception;
 
+	public String getNavi(int currentPage) throws Exception;
+
+	public int boardselcount() throws Exception;
+
 }
