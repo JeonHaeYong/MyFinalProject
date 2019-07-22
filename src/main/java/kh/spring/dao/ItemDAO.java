@@ -17,4 +17,8 @@ public interface ItemDAO {
 	public int itemContentsSize();
 	public int itemContentsSizeByCategory(String category);
 	public Map<String, Integer> getNaviforItem(int currentPage, int recordTotalCount);
+	
+	public List<ItemDTO> selectForAdmin(int start, int end) throws Exception;
+	public int selectCountForAdmin() throws Exception;
+	public int updatePermissionBySeq(int seq) throws Exception;
 }

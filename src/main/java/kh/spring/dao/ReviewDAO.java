@@ -7,10 +7,9 @@ import kh.spring.dto.ReviewDTO;
 
 public interface ReviewDAO {
 	public int insertReview(ReviewDTO dto);
-	public List<ReviewDTO> selectAllReview();
+	public List<ReviewDTO> selectAllReviewByCurrentpage(int start, int end);
 	public int modifyReview(ReviewDTO dto);
 	public int deleteReview(int seq);
 	public List<ReviewDTO> selectReviewPerPage(int start, int end);
 	public int getReviewCount();
-	public Map<String, Integer> getNaviForReview(int currentPage);
 }

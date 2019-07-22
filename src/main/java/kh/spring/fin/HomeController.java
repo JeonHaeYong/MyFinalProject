@@ -1,22 +1,26 @@
 package kh.spring.fin;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.xml.parsers.ParserConfigurationException;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.xml.sax.SAXException;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import kh.spring.dto.ApiAbandonedAnimalDTO;
+import kh.spring.serviceImpl.ApiAbandonedAnimalServiceImpl;
 
 import kh.spring.loginapi.NaverLoginBO;
-import kh.spring.loginapi.kakao_restapi;
-
-
-
-
 
 @Controller
 public class HomeController {
@@ -36,5 +40,7 @@ public class HomeController {
 		session.setAttribute("url", naverAuthUrl);
 		return "index";
 	}
+
+
 
 }

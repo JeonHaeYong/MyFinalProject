@@ -60,6 +60,17 @@ public class ItemController {
 		String id = (String)request.getSession().getAttribute("id");
 		System.out.println(id);
 		String resourcePath = request.getSession().getServletContext().getRealPath("/resources");
+		
+		File folder = new File(resourcePath + "/" + id);
+		
+		System.out.println(folder);
+		System.out.println(folder.exists());
+		
+		if(!(folder.exists()))
+		{
+			System.out.println(folder.mkdirs());
+		}
+		
 		System.out.println(resourcePath);
 		long currTime = System.currentTimeMillis();
 		String imagePath = "/resources/" + id + "/" + currTime + "_board_image.png";

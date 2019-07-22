@@ -20,17 +20,16 @@
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
- <!--구글폰트-->
-        <link href="https://fonts.googleapis.com/css?family=Gamja+Flower&display=swap&subset=korean" rel="stylesheet">
  <style>
 	
-            .bigImg{width: 100%; height: 700px;}
+            .jumbotron{background-color:white;}
+     		.jumbotron>img{width:100%; height: 700px;}
             #title{width: 100%; text-align: center; margin: auto; margin-bottom: 50px;}
             h3,h1{ font-family:'Gamja Flower', cursive;}
             .container{min-width: 400px;box-sizing: border-box;margin-bottom:100px; font-family: 'Gamja Flower', cursive;}
             .menu-box{width: 150px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px; margin-top: 50px;}
             .menu-box>div{height: 35px;}
-            .menu-box>div:first-child{font-weight: bold; border-bottom: 1px solid #754F44; line-height: 33px;}
+            .menu-box>div:first-child{font-weight: bold; border-bottom: 1px solid #754F44; line-height: 33px; color:#B45F04; font-size:40px;}
             .menu-box>div:not(.s-menu):hover{background-color: #FBFFB950;}
             .menu-row{text-align: -webkit-center;}
             a[name="s-menu"]{color: #754F44; text-decoration-line: none;}
@@ -88,7 +87,9 @@
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
    <jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 <!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
-      <img class="bigImg" src="/resources/images/dog_7.png">
+      <div class="jumbotron px-0 pb-0">
+      	<img class="bigImg" src="/resources/images/dog_7.png">
+      </div>
   			<div id="title"><h1>관리자 페이지 - OX Quiz</h1></div>         
  <div class="container">
          	<div class="row">

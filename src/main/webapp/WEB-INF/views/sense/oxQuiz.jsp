@@ -20,10 +20,11 @@
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
 
- <!--구글폰트-->
-        <link href="https://fonts.googleapis.com/css?family=Gamja+Flower&display=swap&subset=korean" rel="stylesheet">
+
  <style>
-            .bigImg{width: 100%; height: 700px;}
+           
+     		.jumbotron{background-color:white;}
+     		.jumbotron>img{width:100%; height: 700px;}
             #title{width: 100%; text-align: center; margin: auto; margin-bottom: 50px;}
             h3,h1{ font-family:'Gamja Flower', cursive;}
             .container{
@@ -48,7 +49,7 @@
             #quiz1{display: block;}
             .menu-box{width: 150px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px; margin-top: 50px;}
             .menu-box>div{height: 35px;}
-            .menu-box>div:first-child{font-weight: bold; border-bottom: 1px solid #754F44; line-height: 33px;}
+            .menu-box>div:first-child{font-weight: bold; border-bottom: 1px solid #754F44; line-height: 33px; color:#B45F04; font-size:40px;}
             .menu-box>div:not(.s-menu):hover{background-color: #FBFFB950;}
             .menu-row{text-align: -webkit-center;}
             a[name="s-menu"]{color: #754F44; text-decoration-line: none;}
@@ -136,7 +137,9 @@
  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
    <jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 <!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
-      <img class="bigImg" src="/resources/images/dog_7.png">
+      <div class="jumbotron px-0 pb-0">
+     	<img  src="/resources/images/dog_7.png">
+      </div>
         <div id="title"><h1>나는 얼마나 잘 알고 있을까??</h1></div>
 
         <div class="container">
@@ -145,15 +148,17 @@
                     <div class="row menu-box">
                         <div class="col-12 s-menu">M E N U</div>
                         <div class="col-12 "><a name="s-menu" href="oxQuiz">OX QUIZ</a></div>
-                        <div class="col-12"><a name="s-menu" href="">반려동물 상식</a></div>
-                         <c:choose>
+                          <div class="col-12"><a name="s-menu" href="information_t?currentPage=1">반려동물 정보</a></div>
+                          <div class="col-12"><a name="s-menu" href="toTrainingList?currentPage=1">반려동물 훈련 정보</a></div>
+
+                          <c:choose>
                         	<c:when test="${type == 4}">
                         		<div class="col-12"><a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a></div> <!-- 관리자만 볼 수 있게! -->
                         	</c:when>
                         	<c:otherwise>
                         		 <div class="col-12" hidden><a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a></div> 
                         	</c:otherwise>
-                        </c:choose>
+                        </c:choose> 
                     </div>
                 </div>
                 <div class="col-1"></div>

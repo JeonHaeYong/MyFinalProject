@@ -83,14 +83,12 @@ public class MessageServiceImpl implements MessageService{
 	 */
 	@Override
 	public List<String> getNaviforMsg(int currentPage,String type,String id){
-		System.out.println(currentPage+":"+type+":"+id);
 		//0.현재 내가 보고있는 페이지가 몇 페이지 인지
 
 		//네비게이터 제작을 위한 3step
 		//1. DB의 게시판테이블의 전체 레코드 갯수(글 갯수)가 몇개인지
 		//-> select count(*) from board
 		int recordTotalCount=this.getMsgAllCount(type, id);
-		System.out.println("aaa"+recordTotalCount);
 //		if(listSize==-1) {
 //			recordTotalCount = this.getBoardCount();s
 ////			System.out.println(recordTotalCount+":recordTotalCount");

@@ -44,5 +44,20 @@
 	<update id="updateSoldOut">
 		update item set soldout = 'y' where seq=#{value}
 	</update>
+
+	<select id="selectForAdmin" resultType="kh.spring.dto.ItemDTO">
+		select * 
+		from (select row_number() over(order by seq desc) as rown, item.* from item where (permission = 'n'))
+		where (rown between #{start} and #{end})
+		   
+	</select>
+	
+	<select id="selectCountForAdmin" resultType="java.lang.Integer">
+		select count(*) from item where (permission = 'n')
+	</select>
+	
+	<update id="updatePermissionBySeq">
+		update item set permission = 'y' where seq = #{value}
+	</update>
 	
 </mapper>

@@ -82,6 +82,14 @@ public class MemberDAOImpl implements MemberDAO {
 	public int deleteMember(String id) {
 		return sst.delete("MemberDAO.deleteMember", id);
 	}
+	@Override
+	public int updatePw(String id, String pw) {
+		Map<String,String> hs = new HashMap<>();
+		String password = this.testSHA256(pw);
+		hs.put("id", id);
+		hs.put("pw", password);
+		return sst.update("MemberDAO.updatePw",hs);
+	}
 
 	@Override
 	public String testSHA256(String str){
@@ -101,16 +109,30 @@ public class MemberDAOImpl implements MemberDAO {
 		}
 		return SHA;
 	}
-
-	
-	
-	
-	
 	//퀴즈에서 씀!!
 	@Override
 	public List<MemberDTO> memberPoint() {
 		return sst.selectList("MemberDAO.memberPoint");
 	}
 	
-
+//아이디 찾기 
+	@Override
+	public String findID(String name,String birthday) {
+		Map<String,String>map=new HashMap<>();
+		map.put("birthday",birthday);
+		map.put("name", name);
+		return sst.selectOne("MemberDAO.idFind",map);
+	}
+	//로그인id 의 member정보 null은 미설정으로 나오도록 하기.
+	@Override
+	public MemberDTO selectOneMemberDTO_useMyPageAdvice(String id) {
+		return sst.selectOne("MemberDAO.selectOneMemberDTO_useMyPageAdvice",id);
+	}
+	
+	//mypage에서 정보수정시, 입력한 정보에 맞게 update해주기.
+	@Override
+	public int updateMemberInfoByMyPage(MemberDTO dto) {
+		return sst.update("MemberDAO.updateMemberInfoByMyPage",dto);
+	}
+	
 }
