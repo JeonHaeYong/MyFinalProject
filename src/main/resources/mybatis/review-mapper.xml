@@ -3,7 +3,7 @@
 <mapper namespace="ReviewDAO">
 	
 	<insert id="insertReview">
-		insert into review values(review_seq.nextval, #{title}, #{writer}, #{image_path1,jdbcType=VARCHAR}, #{image_path2,jdbcType=VARCHAR}, #{image_path3,jdbcType=VARCHAR}, #{contents}, default, 0, 0, #{type,jdbcType=VARCHAR})
+		insert into review values(review_seq.nextval, #{title}, #{writer}, #{image_path1,jdbcType=VARCHAR}, #{image_path2,jdbcType=VARCHAR}, #{image_path3,jdbcType=VARCHAR}, #{contents}, default, default, default )
 	</insert>
 	
 	<select id="selectAllReviewByCurrentpage" resultType="kh.spring.dto.ReviewDTO">
@@ -21,6 +21,9 @@
 	
 	<select id="getReviewCount" resultType="int">
 		select count(*) from review
+	</select>
+	<select id="selectReviewBySeq" resultType="kh.spring.dto.ReviewDTO">
+		select * from review where seq = #{seq}
 	</select>
 	
 </mapper>

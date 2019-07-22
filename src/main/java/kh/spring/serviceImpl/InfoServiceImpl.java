@@ -30,5 +30,15 @@ public class InfoServiceImpl implements InfoService{
 		int start= end-(cgf.recordCountPerPage-1);
 		return dao.selectall(start,end);
 	}
+	@Override
+	public TrainingDTO detail_info(int seq)throws Exception{
+		
+		return dao.detail_info(seq);
+	}
 	
+	@Override
+	public int update_info(TrainingDTO dto)throws Exception{
+		
+		return dao.update_info(dto);
+	}
 }

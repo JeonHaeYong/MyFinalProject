@@ -10,7 +10,7 @@ src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/Lo
 /* body{ */
 /* 	font-family: LotteMartDream; */
 /* } */
-             	body *{ font-family: 'Gamja Flower', cursive; font-size: 22px;}
+             	body *{ font-family: 'Gamja Flower' !important; font-size: 22px;}
              	::placeholder{font-family: 'Gamja Flower', cursive;}
                 .topBackGround{
                     height: 100px;

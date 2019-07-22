@@ -5,7 +5,7 @@
     <html>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title>Insert title here</title>
+            <title>마이페이지 - 장바구니</title>
             <link
                   href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
                   rel="stylesheet">
@@ -20,25 +20,34 @@
             <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
             <link rel="stylesheet" href="resources/css/aos.css">
             <link rel="stylesheet" href="resources/css/style.css">
+            <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
             <style>
                 .itemImage{
+                	width: 100%;
                 	height: 100%;
+                }
+                .cardText{
+                	font-size: 20px;
+                	color: #754F44;
+                }
+                .cardTextSmall{
+                	font-size: 15px;
+                	color: #754F44;
                 }
                 .itemName{
                 	text-decoration: none;
-                	color: grey;
                 }
                 .itemName:hover{
                 	text-decoration: underline;
                 	color: #ec7357;
                 }
-                #delBtn{
+                #delBtn, #soldoutDelBtn{
                 	padding: 5px;
                 	margin-bottom: 5px;
                 	border-color: grey;
                 	font-size: 15px;
                 }
-                #delBtn:hover{
+                #delBtn:hover, #soldoutDelBtn:hover{
                 	border-color: #ec7357;
                 	background-color: #ec7357;
                 	color: white;
@@ -60,12 +69,14 @@
                                             <div class="col-12"> </div>
                                         </div>
                                         <div class="row cart_contents">
-                                        	<div class="col-12 d-flex justify-content-left custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" id="allCheck">
-												<label class="custom-control-label" for="allCheck">전체선택</label>
-											</div>
+                                        	<c:if test="${list.size() != 0 }">
+	                                        	<div class="col-12 d-flex justify-content-left custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input" id="allCheck">
+													<label class="custom-control-label" for="allCheck">전체선택</label>
+												</div>
+											</c:if>
 											<c:if test="${list.size() == 0 }">
-												<div class="col-12 d-flex justify-content-center">
+												<div class="col-12 d-flex justify-content-center mt-3">
                                         			<h4>장바구니가 비어있습니다.</h4>
                                         		</div>
 											</c:if>
@@ -73,19 +84,20 @@
 	                                        	<c:forEach var="dto" items="${list }" varStatus="status">
 		                                            <div class="col-lg-6 col-12 d-flex justify-content-center">
 														<div class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input itemCheck" id="customCheck${status.count }" name="items" value="${dto.seq }">
+															<input type="hidden" class="soldoutCheck" value="${dto.soldout }" seq="${dto.cart_seq }">
+															<input type="checkbox" class="custom-control-input itemCheck" id="customCheck${status.count }" name="items" value="${dto.cart_seq }">
 															<label class="custom-control-label" for="customCheck${status.count }"></label>
 														</div>
-		                                                <div class="card mb-3" style="width: 90%;">
+		                                                <div class="card mb-3">
 		                                                    <div class="row no-gutters">
-		                                                        <div class="col-md-4">
-		                                                            <img src="${dto.imagePath1 }" class="card-img itemImage">
+		                                                        <div class="col-md-5">
+		                                                            <img src="${dto.imagePath1 }" class="card-img itemImage" soldout="${dto.soldout }">
 		                                                        </div>
-		                                                        <div class="col-md-8">
-		                                                            <div class="card-body">
-		                                                                <h5 class="card-title">상품명 : <a class="itemName" href="item?seq=${dto.seq }">${dto.name }</a></h5>
-		                                                                <p class="card-text">금액 : ${dto.price }</p>
-		                                                                <p class="card-text"><small class="text-muted">판매자 : ${dto.seller }</small></p>
+		                                                        <div class="col-md-7">
+		                                                            <div class="card-body myCardBody text-truncate">
+		                                                                <p class="card-title cardText">상품명 : <a class="itemName cardText" href="item?seq=${dto.seq }">${dto.name }</a></p>
+		                                                                <p class="card-text cardText">금액 : ${dto.price }</p>
+		                                                                <p class="card-text cardTextSmall">판매자 : ${dto.seller }</p>
 		                                                            </div>
 		                                                        </div>
 		                                                    </div>
@@ -95,6 +107,7 @@
                                             </form>
                                             <div class="col-12 d-flex justify-content-left">
                                             	<input type="button" class="btn rounded" id="delBtn" value="선택 상품 삭제하기">
+                                            	<input type="button" class="btn rounded" id="soldoutDelBtn" value="판매완료 상품 삭제하기">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -126,6 +139,12 @@
         <script src="resources/js/main.js"></script>
         
         <script>
+        	$(".itemImage").each(function(i, item){
+        		if($(item).attr("soldout") == 'y'){
+        			$(this).css("filter", "brightness(60%)");
+        			
+        		}
+        	});
       		var count = 0;
         	$("#allCheck").on("change", function(){
         		if($("#allCheck").prop("checked")){
@@ -142,6 +161,10 @@
         			if(!($(item).prop("checked"))){
         				allChecked = false;
         			}else{
+        				if($(this).prev().val() == 'y'){
+        					alert("판매완료된 상품입니다.");
+        					$(this).prop("checked", false);
+        				}
         				count++;
         			}
         		});
@@ -154,30 +177,67 @@
         	});
         	
         	$("#delBtn").on("click", function(){
-        		console.log(count);
         		if($(".itemCheck").length == 0 || count == 0){
         			alert("삭제할 상품이 없습니다. 다시 선택해주세요.");
         		}else{
+        			var checkedItem = new Array();
+        			var index = 0;
         			$(".itemCheck").each(function(i, item){
             			if($(item).prop("checked")){
-            				$.ajax({
-                    			url: "deleteCart",
-                    			data: {
-                    				item_seq: $(item).attr("seq")
-                    			}
-                    		});
+            				checkedItem[index] = $(this).val();
+            				index++;
             			}
             		});
-            		window.location.reload();
+        			jQuery.ajaxSettings.traditional = true; 
+        			$.ajax({
+            			url: "deleteCart",
+            			type: "post",
+            			data: {
+            				"seqs": checkedItem
+            			}
+            		}).done(function(resp){
+            			window.location.reload();
+            		});
         		}
         	});
         	
+        	$("#soldoutDelBtn").on("click", function(){
+        		var soldoutItem = new Array();
+    			var index = 0;
+    			$(".soldoutCheck").each(function(i, item){
+        			if($(item).val() == 'y'){
+        				soldoutItem[index] = $(this).attr("seq");
+        				index++;
+        			}
+        		});
+    			jQuery.ajaxSettings.traditional = true; 
+    			$.ajax({
+        			url: "deleteCart",
+        			type: "post",
+        			data: {
+        				"seqs": soldoutItem
+        			}
+        		}).done(function(resp){
+        			window.location.reload();
+        		});
+        	});
+        	
         	$("#allPayBtn").on("click", function(){
-        		$("#allCheck").click();
+        		if(!$("#allCheck").prop("checked")){
+        			$("#allCheck").click();
+        		}
+        		if($(".itemCheck").length == 0 || count == 0){
+        			alert("장바구니에 상품이 없습니다.");
+        			return;
+        		}
         		$("#itemCheckForm").submit();
         	});
         	
         	$("#payBtn").on("click", function(){
+        		if($(".itemCheck").length == 0 || count == 0){
+        			alert("선택하신 상품이 없습니다. 다시 선택해주세요.");
+        			return;
+        		}
         		$("#itemCheckForm").submit();
         	});
         	

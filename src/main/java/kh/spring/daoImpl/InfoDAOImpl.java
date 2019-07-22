@@ -30,5 +30,14 @@ public class InfoDAOImpl implements InfoDAO{
 			map.put( "end", String.valueOf( end) );
 		return sst.selectList("InfoDAO.selectall",map);
 	}
-	
+	@Override
+	public TrainingDTO detail_info(int seq)throws Exception{
+		
+		return sst.selectOne("InfoDAO.selectdetail", seq);
+	}
+	@Override 
+	public int update_info(TrainingDTO dto)throws Exception{
+		
+	return sst.update("InfoDAO.updateinfo",dto);
+	}
 }

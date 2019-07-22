@@ -30,20 +30,27 @@
 	font-weight: 600 !important;
 }
 
-#donation_btn
-{
-	background-color: #EC7357 !important;
-}
-
-#donation_btn:hover
-{
-	background-color: black !important;
-}
-
 .c-img
 {
 	width: 100% !important;
-	height: 300px !important;
+	height: 500px;
+	min-height: 300px;
+}
+
+#left_img, #right_img{
+	width: 100%;
+	height: 300px;
+}
+
+.my_buttons {
+/* 	border-radius: 0px !important; */
+/* 	width: 100%; */
+/* 	height: 100%; */
+	background-color: #EC7357;
+	color: white !important;
+}
+.my_buttons:hover{
+	background-color: #9c2c2c !important;
 }
 </style>
 
@@ -60,11 +67,11 @@
 
 		<div class="row justify-content-center">
 
-			<div class="col-12 col-lg-6 my-5">
+			<div class="col-12 col-lg-12 my-5">
 
 				<div class="row justify-content-center">
 
-					<div class="col-5 text-center">
+					<div class="col-8 text-center">
 
 
 						<div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
@@ -105,9 +112,9 @@
 
 					</div>
 
-					<div class="col-7 text-center">
+					<div class="col-4 text-center">
 
-						<h3>${dto.title}</h3>
+						<h2>${dto.title}</h2>
 						<br>${dto.explanation}
 
 					</div>
@@ -138,7 +145,7 @@
 				
 					<div class="col-12 text-center">
 					
-						<input id="donation_btn" class="btn btn-info mt-5" type="button" value="후원">
+						<input id="donation_btn" class="btn my_buttons mt-5" type="button" value="후원">
 						
 					</div>
 				

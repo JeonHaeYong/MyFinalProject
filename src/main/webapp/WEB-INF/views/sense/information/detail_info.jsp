@@ -103,59 +103,6 @@ a[name="s-menu"]:hover {
 
 /* -------------------infobox -----------------   */
 
-.infowrapper {
-font-family: 'Gamja Flower', cursive;
-	box-sizing: border-box;
-	height: 300px;
-	overflow: hidden;
-	border: 2px solid #754F4470;
-}
-
-.dtocol {
-	padding-top: 50px;
-}
-
-.infoimg, .infotext,.infoextra {
-
-	
-overflow: hidden;
-
-}
-.infoimg{
-margin-left:15px;
-margin-top:15px;
-margin-right:15px;
-box-sizing: border-box;
-height:70%;
-}
-.inforecommend{
-border-top:1px solid #754F4470;
-padding-left:5px;
-margin-top:2px;
-margin-left:15px;
-margin-right:15px;
-text-align:left;
-height:7%;
-box-sizing:border-box;
-overflow:hidden;
-}
-.infotext{
-
-font-size:18px;
-text-align:left;
-margin-left:15px;
-margin-right:15px;
-padding-left:5px;
-height:18%;
-margin-top:2px;
-}
-.infoimg>img {
-width:100%;
-	top: 0;
-	left: 0;
-	height: 100%;
-}
-
 
 </style>
 
@@ -206,17 +153,16 @@ width:100%;
 				<!--정보   -->
 
 				<div class="row .infinite">
-					<c:forEach var="dto" items="${infodto}">
-						<div class="col-lg-4 col-md-6 col-sm-6 dtocol">
+				
+						<div class="col-lg-12 col-md-12 col-sm-12 dtocol">
 							<div class=infowrapper>
-							
-								<div class=infoimg><a href="detail?seq=${dto.seq }"class="detail">${dto.image}</a></div>
-								<div class="inforecommend">♥</div>
 								<div class=infotext>${dto.title}</div>
+								<div class="inforecommend">♥</div>
+								<div class=infotext>${dto.contents}</div>
 							</div>
 						</div>
-					</c:forEach>
-					
+				
+
 
 				</div>
 			</div>
@@ -224,7 +170,7 @@ width:100%;
 		<div class="row mt-5" align="right">
 			<div class="col-12">
 				<div>
-					<input type="button" value="글쓰기" id="infowrite">
+					<input type="button" value="수정" id="updatewrite">
 				</div>
 			</div>
 		</div>
@@ -250,8 +196,8 @@ width:100%;
 
 	<!--정보 스크립트 코드   -->
 	<script>
-	   document.getElementById("infowrite").onclick = function(){
-           location.href = "infowrite";
+	   document.getElementById("updatewrite").onclick = function(){
+           location.href = "updatewrite?seq=${dto.seq}";
        }
 	  </script>
 

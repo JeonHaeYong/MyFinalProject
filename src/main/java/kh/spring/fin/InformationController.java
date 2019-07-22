@@ -97,8 +97,54 @@ public class InformationController {
 		return imagePath;
 	}
 	
+	//detail
+	@RequestMapping("detail")
+	public String detailinfo(HttpServletRequest request, int seq) {
+		try {
+			request.setAttribute("dto", service.detail_info(seq));
+			
+			return "sense/information/detail_info";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	return "error";
+	}
+@RequestMapping("updatewrite")
+public String updatewrite(HttpServletRequest request,int seq) {
+	
+	try {
+		request.setAttribute("dto", service.detail_info(seq));
+	} catch (Exception e) {
+		
+		e.printStackTrace();
+	}
+return "sense/information/update";}
 
+@RequestMapping("uploadformproc")
+public String upload(TrainingDTO tdto)
+{
+	System.out.println(tdto.getTitle()+tdto.getContents());
+	try {
+		tdto.setWriter("관리자");
+		tdto.setIp(request.getRemoteAddr());
+	
+		Pattern p=Pattern.compile("<img src=\"(.+?)\">");
+		Matcher m=p.matcher(tdto.getContents());
+		if(m.find()==true) {
+		tdto.setImage(m.group(0));
+		}
+		else {
+			tdto.setImage("null");
+		}
+		int result=service.update_info(tdto);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	System.out.println(tdto);
 
+	return "redirect:/information_t?currentPage=1";
+	}
 	
 	
 }

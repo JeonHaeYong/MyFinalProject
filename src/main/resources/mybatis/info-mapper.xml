@@ -9,4 +9,11 @@
 	<select id="selectall" resultType="kh.spring.dto.TrainingDTO">
 	select * from(SELECT seq,title,writer,writedate,image,RANK()OVER (ORDER BY seq DESC) RANK FROM info_Board order by writedate desc)where Rank between #{start} and #{end}
 	</select>
+	<select id="selectdetail" resultType="kh.spring.dto.TrainingDTO">
+	select * from info_Board where seq=#{seq}
+	</select>
+	<update id="updateinfo">
+	update info_Board set title=#{title},writedate=sysdate,contents=#{contents,jdbcType=VARCHAR},
+	image=#{image,jdbcType=VARCHAR} where seq=#{seq}
+	</update>
 </mapper>

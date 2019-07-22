@@ -20,6 +20,7 @@
         <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
         <link rel="stylesheet" href="resources/css/aos.css">
         <link rel="stylesheet" href="resources/css/style.css">
+        <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
         <style>
             .myJumbo{
                 background-color: white;
@@ -30,6 +31,7 @@
             }
             .itemImage{
                 width: 100%;
+                height: 500px;
             }
             .itemInfoRow{
             	position: relative;
@@ -49,6 +51,13 @@
             .cell{
             	display: inline-block;
             	width: 80%;
+            }
+            #soldout{
+            	color: white;
+            	background-color: #bf5e47;
+            }
+            #soldout:hover{
+            	
             }
             .cartBtn{
 				background-color: #ec7357;
@@ -76,6 +85,64 @@
 			}
 			.contents img{
 				max-width: 100%;
+			}
+			.fixedMenu{
+		 		position: absolute; 
+				width: 150px;
+				height: 200px;
+		 		top: 790px;
+				right: 0px;
+				border: none;
+				text-align: center;
+				background-color: #00000030;
+				font-family: 'Gamja Flower';
+				font-weight: bold !important;
+				z-index: 100;
+			}
+			#cartImg{
+				width: 50%;
+			}
+		 	.fixedMenu div{
+		 		margin: 10px;
+		 	}
+		 	.addBtn{
+		 		background-color: #ec7357;
+		 		color: white;
+		 		font-weight: bold !important;
+		 	}
+		 	.addBtn:hover, #searchBtn:hover{
+		 		background-color: #cf654c;
+		 		color: white;
+		 		font-weight: bold !important;
+		 		cursor: pointer;
+		 	}
+		 	.cartAddBtn{
+		 		background-color: #ec7357;
+		 		color: white;
+		 		width: 30px;
+		 		height:25px;
+		 		padding: 0px;
+		 	}
+		 	#searchForm{
+		 		width: 96px;
+		 	}
+		 	#select{
+		 		font-size: 18px;
+		 	}
+		 	.op{
+		 		font-size: 20px;
+		 	}
+			#searchBtn{
+				background-color: #ec7357;
+				border-radius: 5px 10px 10px 5px;
+				width: 38px;
+			}
+			.cartBadge{
+				position: absolute;
+				right: 53px;
+				width: 20px;
+				height: 20px;
+				cursor: pointer;
 			}
         </style>
     </head>
@@ -136,39 +203,57 @@
 	                		<p><span class="column">Date</span><span class="cell">${item.fomredDate }</span></p>
 	                	</div>
 	                	<div class="col-12 align-self-center text-center">
-	                		<a class="btn cartBtn" id="addCart" href="">장바구니 담기</a>
+	                		<c:choose>
+	                			<c:when test="${item.soldout == 'y' }">
+	                				<a class="btn cartBtn" id="soldout" disabled>판매완료 상품</a>
+	                			</c:when>
+	                			<c:otherwise>
+	                				<a class="btn cartBtn" id="addCart" href="">장바구니 담기</a>
+	                			</c:otherwise>
+	                		</c:choose>
 	                		<a class="btn cartBtn" id="goCart" href="">장바구니 가기</a>
 	                	</div>
                 	</div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row m-3">
             	<div class="col-12">
             		<div class="contents">
             			${item.contents }
             		</div>
             	</div>
             </div>
-            <div class="row">
-                <div class="col-12 d-flex justify-content-center" id="naviBox">
-                    <c:if test="${pageNavi.needPrev == 1 }">
-                        <a class="btn myBtn" href="freeMarket?currentPage=${pageNavi.startNavi - 1}">&laquo;</a>
-                    </c:if>
-                    <c:if test="${pageNavi.currentPage > pageNavi.startNavi }">
-                        <a class="btn myBtn" href="freeMarket?currentPage=${pageNavi.currentPage - 1}">&lt;</a>
-                    </c:if>
-                    <c:forEach var="i" begin="${pageNavi.startNavi}" end="${pageNavi.endNavi}">
-                        <a class="btn myBtn" href="freeMarket?currentPage=${i }" class="pageNum">${i}</a>
-                    </c:forEach>
-                    <c:if test="${pageNavi.currentPage < pageNavi.pageTotalCount }">
-                        <a class="btn myBtn" href="freeMarket?currentPage=${pageNavi.currentPage + 1}">&gt;</a>
-                    </c:if>
-                    <c:if test="${pageNavi.needNext == 1 }">
-                        <a class="btn myBtn" href="freeMarket?currentPage=${pageNavi.endNavi + 1}">&raquo;</a>
-                    </c:if>
-                </div>
+            <div class="row m-3">
+            	<div class="col-12 d-flex justify-content-end">
+            		<a class="btn cartBtn" href="freeMarket?currentPage=${currentPage }&category=${category}">목록으로</a> 
+            	</div>
             </div>
         </div>
+        
+        <div class="fixedMenu">
+	    	<div class="btnBox">
+				<a class="btn addBtn" href="addItem">나눔신청</a>
+	    	</div>
+	    	<div class="input-group selectBox">
+	    		<form action="freeMarket" id="searchForm">
+	    			<input type="hidden" name="currentPage" value="1">
+					<select class="custom-select" id="select" name="category">
+						<option class="op" selected value="all">전체</option>
+						<option class="op" value="food">사료&amp;간식</option>
+						<option class="op" value="toy">장난감</option>
+						<option class="op" value="clothing">의류</option>
+						<option class="op" value="etc">기타</option>
+					</select>
+				</form>
+				<div class="input-group-append m-0">
+					<a id="searchBtn"><img alt="검색" src="/resources/images/item/searchIcon.png"></a>
+				</div>
+	    	</div>
+	    	<div class="toCart">
+	    		<span class="badge badge-danger cartBadge"><c:if test="${cartCount != 0 }">${cartCount }</c:if></span>
+	    		<a href="toMyPage_cart"><img alt="" src="/resources/images/item/cart.png" id="cartImg"></a>
+	    	</div>
+	    </div>
 
         <!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
 
@@ -197,7 +282,7 @@
                 	$("#addCart").css("background-color", "#ec735750");
                 }
             });
-            
+           
             $("#addCart").on("click", function(){
             	if(${sessionScope.id == null}){
             		alert("로그인 후 이용하실 수 있습니다.");
@@ -211,7 +296,13 @@
                 	}).done(function(resp){
                 		if(resp == "1"){
                 			if(confirm("장바구니에 담았습니다. 장바구니로 이동할까요?")){
-                				location.href = "toMyPage_cart?currentPage=1";
+                				location.href = "toMyPage_cart";
+                			}else{
+                				$.ajax({
+                					url: "getCartCount"
+                				}).done(function(resp){
+                					$(".cartBadge").text(resp);
+                				});
                 			}
                 		}else if(resp == "-1"){
                 			alert("장바구니에 이미 존재하는 상품입니다.");
@@ -223,7 +314,7 @@
             	}
 			});
             
-            $("#goCart").on("click", function(e){
+            function goCart(e){
             	e.preventDefault();
             	if(${sessionScope.id == null}){
             		alert("로그인 후 이용하실 수 있습니다.");
@@ -231,7 +322,29 @@
             	}else{
             		location.href = "toMyPage_cart";
             	}
+            }
+            
+            $(".cartBadge").on("click", function(e){
+            	goCart(e);
+            })
+            
+            $("#goCart").on("click", function(e){
+            	goCart(e);
             });
+            
+            var menu = $(".fixedMenu");
+			var menuOffset = $(".fixedMenu").offset();
+			$(window).scroll(function(){
+				if($(this).scrollTop() >= 400){
+					menu.css("position", "fixed").css("top", "325px");
+				}else{
+					menu.css("position", "absolute").css("top", "720px");
+				}
+			});
+			
+			$("#searchBtn").on("click", function(){
+				$("#searchForm").submit();
+			});
             
         </script>
 </html>
