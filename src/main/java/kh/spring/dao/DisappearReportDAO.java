@@ -10,4 +10,7 @@ public interface DisappearReportDAO {
 	public List<DisappearReportDTO> selectPerPage(int currentPage);
 	public int recordAllCount();
 	public String getNavi(int currentPage);
+	public DisappearReportDTO toReportContent(int seq);
+	public int updateNoImage(DisappearReportDTO drdto);
+	public int update(DisappearReportDTO drdto);
 }

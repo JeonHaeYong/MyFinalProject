@@ -42,4 +42,11 @@ public class CartController {
 		cs.deleteCartService(seqs);
 		return null;
 	}
+	
+	@ResponseBody
+	@RequestMapping("getCartCount")
+	public int getCartCount_loginCheck(HttpServletRequest request) {
+		String id = (String)request.getSession().getAttribute("id");
+		return cs.getCartCount(id);
+	}
 }

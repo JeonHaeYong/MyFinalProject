@@ -12,4 +12,7 @@ public interface DisappearReportService {
 	public String imageUploadService(MultipartFile image);
 	public List<DisappearReportDTO> selectPerPageService(int currentPage);
 	public String getNaviService (int currentPage);
+	public DisappearReportDTO toReportContentService(int seq);
+	public int updateNoimageService(DisappearReportDTO drdto);
+	public int updateService(DisappearReportDTO drdto);
 }

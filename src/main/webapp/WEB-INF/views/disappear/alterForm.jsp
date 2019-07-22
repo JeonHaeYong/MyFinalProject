@@ -49,11 +49,14 @@
 </style>
 <script>
  	$(function(){
+ 			
+
+
     		$(".toList-btn").on("click",function(){
-    			//location.href="toDisappearList?currentPage="+${currentPage};
+    			location.href="toDisappearList?currentPage=${currentPage}";
     		});
-    		$(".insert-btn").on("click",function(){
-    			
+    		$(".alter-btn").on("click",function(){
+    			alert($("#disappearDate").val());
     			$("#reportForm").submit();
     		});
     	});
@@ -69,8 +72,8 @@
 	<div class="row">
 		<div class="col-12">
 			<div id="wrapper" class="aa">
-				<form action="insertProc.dis" method="post" id="reportForm" enctype="multipart/form-data">
-        <input type="hidden" name="seq" value="0">
+	<form action="alterProc.dis" method="post" id="reportForm" enctype="multipart/form-data">
+        <input type="hidden" name="seq" class="seq" value="${content.seq }">
         <div class="basic">기본정보</div>
         <div class="basic-info">
             <div class="title">
@@ -94,8 +97,8 @@
                         <option value="충청남도">충청남도</option><option value="충청북도">충청북도</option>
                     </select>
                 </div>
-                <div><input type="text" name="disappearArea"></div>
-                <div><input type="text" name="tel"></div>
+                <div><input type="text" name="disappearArea" class="disappearArea"></div>
+                <div><input type="text" name="tel" class="tel"></div>
             </div>
         </div>
         
@@ -117,8 +120,8 @@
                     </select>
                 </div>
                 <div>
-                    <span class="check"><input type="radio" name="gender" value="남">수컷</span>
-                    <span class="check"><input type="radio" name="gender" value="여">암컷</span>
+                    <span class="check"><input type="radio" name="gender" value="남" class="radio">수컷</span>
+                    <span class="check"><input type="radio" name="gender" value="여" class="radio">암컷</span>
                     <span class="check"><input type="checkbox" name="neuter" value="O">중성화완료</span>
                 </div>
                 <div><select name="age" id="age" >
@@ -134,7 +137,7 @@
         </div>
         
         <div id="footer">
-            <input type="button" class="insert-btn" value="등록">
+            <input type="button" class="alter-btn" value="수정">
             <input type="button" class="toList-btn" value="취소">
         </div>
         </form>
@@ -142,6 +145,19 @@
 		</div>
 	</div>
 </div>
+<script>
+	$("#disappearDate").val('${content.disDate}');
+	$("#areaList option[value='${content.areaList}']").attr("selected", true);
+	$(".disappearArea").val('${content.disappearArea}');
+	$(".tel").val('${content.tel}');
+	$("#kind").val('${content.kind}');
+	$("input:radio[name=gender][value=" + '<c:out value="${content.gender}"/>' + "]").attr("checked",true);
+	$("input:checkbox[name=neuter][value="+'<c:out value="${content.neuter}"/>'+"]").attr("checked",true);
+	$("#age").val('${content.age}');
+	$(".furColor").val('${content.furColor}');
+	$(".feature").val('${content.feature}');
+	$(".et").val('${content.et}');
+</script>
 
 <!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
    <jsp:include page="/WEB-INF/views/module/footer.jsp" ></jsp:include>
