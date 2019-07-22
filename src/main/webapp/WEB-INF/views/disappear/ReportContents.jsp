@@ -60,7 +60,10 @@
     			location.href="toAlterForm?seq=${content.seq}";
     		});
     		$(".delete-btn").on("click",function(){
+    			var result = confirm("정말로 삭제하시겠습니까?");
+            	if(result == true){
     			location.href="deleteProc.dis?seq=${content.seq}";
+            	}
     		});
     	});
     </script>

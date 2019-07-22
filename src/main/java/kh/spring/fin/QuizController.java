@@ -32,6 +32,8 @@ public class QuizController {
 	
 	@RequestMapping("oxQuiz")
 	public String oxQuiz(HttpServletRequest request) {
+		//지울코드!!!!!!!!!!!!바ㅛㅗ희
+		session.setAttribute("type", 4);
 		List<QuizDTO> list = qs.selectRandQuizService();
 		System.out.println("문제 개수:"+list.size());
 		session.setAttribute("list", list); // 랜덤으로 뽑은 문제목록 세션에 담기
@@ -54,17 +56,21 @@ public class QuizController {
 		List<Integer> answer = new ArrayList<>();
 		List<QuizDTO> wrong = new ArrayList<>(); //틀린문제 리스트 
 		int point = 0;
+		int minusPoint = 0;
 		for(int i = 0; i < 10; i++) {
 			if(list.get(i).getCorrect().equals(corr[i])) { //i번째 문제의 답이랑 내가 선택한 거 랑 같으면
 				answer.add(i+1); //i = 0 이면 문제는 1번  맞춘 문제 번호를 리스트에 담아
 				point += list.get(i).getPoint(); //i번째 문제의 포인터를 누적
 			}else{
 				wrong.add(list.get(i)); // 틀린문제 
+				minusPoint += list.get(i).getPoint();
 			}
 		}
 		List<MemberDTO> rankList = new ArrayList<>();
+		int getPoint = point - minusPoint;
+		System.out.println(getPoint +" = "+ point +" - "+ minusPoint);
 		try {
-			qs.updatePointService(point, id); // 포인트 업데이트
+			qs.updatePointService(getPoint, id); // 포인트 업데이트
 			rankList = ms.memberPointService();// 포인트 순으로 멤버 리스트 출력
 		}catch(Exception e) {e.printStackTrace();}
 		
@@ -73,7 +79,7 @@ public class QuizController {
 		String wrongList = g.toJson(wrong);
 		request.setAttribute("size", wrong.size());
 		
-		String data =  "{\"answer\":" + answer +",\"wrongList\":" + wrongList + ",\"point\":" + point + ",\"rankList\":"+rank+"}";
+		String data =  "{\"answer\":" + answer +",\"wrongList\":" + wrongList + ",\"getPoint\":" + getPoint + ",\"rankList\":"+rank+"}";
 		System.out.println(data);
 		return data;
 	}
