@@ -41,6 +41,13 @@ public class AbandonedController {
 	@Autowired
 	TempProtectServiceImpl tempService;
 
+	@RequestMapping("detailTempProtect")
+	public String detailTempProtect(HttpServletRequest request, int seq) {
+		System.out.println(seq);
+		TempProtectDTO dto = tempService.selectOneTempProtect(seq);
+		request.setAttribute("dto", dto);
+		return "abandoned/detailTempProtect";
+	}
 	@RequestMapping("uploadTempProtect")
 	public String uploadTempProtect(TempProtectDTO dto, String findDateString, MultipartFile image) throws ParseException, IllegalStateException, IOException {
 
@@ -48,29 +55,35 @@ public class AbandonedController {
 		Date findDate = (Date) sdf.parse(findDateString);
 		dto.setFindDate(findDate);
 
-		String resourcePath = session.getServletContext().getRealPath("/resources");
-		String realPath = resourcePath + "/" + System.currentTimeMillis()+"_"+image.getOriginalFilename();
-		dto.setImagePath(realPath);
+		String resourcePath = session.getServletContext().getRealPath("/resources/images/tempProtect/");
+		long time = System.currentTimeMillis();
+		String realPath = resourcePath + "/" + time +"_"+image.getOriginalFilename();
 		image.transferTo(new File(realPath));
+		System.out.println(realPath);
+		String imagePath = "resources/images/tempProtect/" + time +"_"+image.getOriginalFilename();
+		dto.setImagePath(imagePath);
 
-		dto.setWriter(session.getId());
-		Timestamp ts = new Timestamp(System.currentTimeMillis());
+
+		dto.setWriter((String)session.getAttribute("id"));
+		Timestamp ts = new Timestamp(time);
 		dto.setWriteTime(ts);
 		int result = tempService.uploadTempProtect(dto);
+
 		return "abandoned/listTempProtect";
 	}
 
 	@RequestMapping("listTempProtect")
 	public String tempProtect(HttpServletRequest request, int currentPage ) {
-		try {
-			List<TempProtectDTO> list = tempService.selectAllTempProtect(currentPage);
-			Map<String, Integer> pageNavi = tempService.getNaviForTempProtect(currentPage);
-			request.setAttribute("list", list);
-			request.setAttribute("pageNavi", pageNavi);
-		} catch (Exception e) {
-			e.printStackTrace();
+
+		request.setAttribute("loginId", session.getAttribute("id"));
+		List<TempProtectDTO> list = tempService.selectAllTempProtect(currentPage);
+		Map<String, Integer> pageNavi = tempService.getNaviForTempProtect(currentPage);
+		for(TempProtectDTO dto : list) {
+			System.out.println(dto.getSeq());
 		}
 
+		request.setAttribute("list", list);
+		request.setAttribute("pageNavi", pageNavi);
 		return "abandoned/listTempProtect";
 	}
 	@RequestMapping("writeTempProtect")
@@ -104,6 +117,10 @@ public class AbandonedController {
 			Map<String, Integer> pageNavi = apiService.getNaviforApiAbandonedAnimal(currentPage);
 			request.setAttribute("list", list);
 			request.setAttribute("pageNavi", pageNavi);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date today = new Date();
+			String todayStr = sdf.format(today);
+			request.setAttribute("todayStr", todayStr);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -136,6 +153,7 @@ public class AbandonedController {
 			List<ApiAbandonedAnimalDTO> list = apiService.selectByCondition(currentPage, from, to, species, speciesKind, sido, sigungu, shelter, processState);
 			Map<String, Integer> pageNavi = apiService.getNaviforApiAbandonedAnimal(currentPage);
 			request.setAttribute("list", list);
+			request.setAttribute("listsize", list.size());
 			request.setAttribute("pageNavi", pageNavi);
 		} catch (Exception e) {
 			e.printStackTrace();

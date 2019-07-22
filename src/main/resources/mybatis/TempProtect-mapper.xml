@@ -23,7 +23,7 @@
 		 #{phone}, #{writeTime})
 	</insert>
 	<select id="selectList" resultType="kh.spring.dto.TempProtectDTO">
-		select * from (select row_number() over(order by seq desc) as rown, title, writer, findDate,
+		select * from (select row_number() over(order by seq desc) as rown, seq, title, writer, findDate,
 		 sido, sigungu, place, type, sex,
 		 color, feat, imagePath,email,
 		 phone, writeTime from temp_protect)"

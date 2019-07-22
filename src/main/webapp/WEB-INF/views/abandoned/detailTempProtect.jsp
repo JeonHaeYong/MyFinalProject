@@ -23,10 +23,6 @@
 <link rel="stylesheet" href="resources/css/style.css">
 
 <style>
-body{
-	color:#754F44;
-	font-weight:600;
-}
 table {
 	width: 760px;
 }
@@ -53,14 +49,12 @@ td {
 #toList {
 	text-align: center;
 }
+
 #btnToList {
 	background-color: #EC7357;
 	color: white;
 	border-radius: 5px;
 	padding: 5px 10px;
-}
-#btnToList:hover{
-	font-weight:600;
 }
 </style>
 
@@ -95,95 +89,65 @@ td {
 				<div class="col-1">
 					<!--메뉴바랑 리스트 사이 빈 공간-->
 				</div>
-				<div class="col-lg-8 col-md-8 col-sm-12 col-12 row">
+				<div class="col-lg-9 col-md-9 col-sm-12 col-12 row">
 					<div id="animalPhoto">
-						<img src="${dto.popfile }" style="width: 200px; height: 150px">
+						<img src="" style="width: 200px; height: 150px">
 					</div>
-					<div>「동물보호법」 제17조, 같은 법 시행령 제7조 및 같은 법 시행규칙 제20조에 따라 구조된 동물의
-								보호상황을 아래와 같이 공고합니다.
-					</div>			
+
 					<table class="table">
 						<tbody>
 							<tr>
-								<th scope="row" style="width: 18%">공고번호</th>
-								<td>${dto.noticeNo }</td>
+							</tr>
+
+							<tr>
+								<th scope="row" style="width: 18%">제목</th>
+								<td>${dto.title }</td>
 							</tr>
 							<tr>
-								<th scope="row">품종</th>
-								<td>${dto.kindCd }</td>
+								<th scope="row">시도</th>
+								<td>${dto.sido }</td>
 							</tr>
 							<tr>
-								<th scope="row">색상</th>
-								<td>${dto.colorCd }</td>
+								<th scope="row">시군구</th>
+								<td>${dto.sigungu }</td>
 							</tr>
 							<tr>
-								<th scope="row">성별</th>
-								<td>${dto.sexCd }</td>
+								<th scope="row">발견 장소</th>
+								<td>${dto.place }</td>
 							</tr>
 							<tr>
-								<th scope="row">중성화 여부</th>
-								<td>${dto.neuterYn }</td>
-							</tr>
-							<tr>
-								<th scope="row">나이/체중</th>
-								<td>${dto.age }/ ${dto.weight }</td>
-							</tr>
-							<tr>
-								<th scope="row">접수일시</th>
-								<td><fmt:formatDate value="${dto.happenDt }"
+								<th scope="row">발견 날짜</th>
+								<td><fmt:formatDate value="${dto.findDate }"
 										pattern="yyyy-MM-dd" /></td>
 							</tr>
 							<tr>
-								<th scope="row">발생장소</th>
-								<td>${dto.happenPlace }</td>
+								<th scope="row">품종</th>
+								<td>${dto.type }</td>
+							</tr>
+							<tr>
+								<th scope="row">성별</th>
+								<td>${dto.sex }</td>
+							</tr>
+							<tr>
+								<th scope="row">색깔</th>
+								<td>${dto.color }</td>
 							</tr>
 							<tr>
 								<th scope="row">특징</th>
-								<td>${dto.specialMark }</td>
+								<td>${dto.feat }</td>
 							</tr>
 							<tr>
-								<th scope="row">공고기한</th>
-								<td><fmt:formatDate value="${dto.noticeSdt }"
-										pattern="yyyy-MM-dd" /> ~ <fmt:formatDate
-										value="${dto.noticeEdt }" pattern="yyyy-MM-dd" /></td>
-							</tr>
-							<tr>
-								<th></th>
-								<td>** 유기동물 문의는 보호센터에 연락하시기 바랍니다.</td>
-							</tr>
-							<tr>
-								<th scope="row">보호센터이름</th>
-								<td width="46%">${dto.careNm }</td>
-								<th width="18%" scope="row">전화번호</th>
-								<td width="18%">${dto.careTel }</td>
-							</tr>
-							<tr>
-								<th scope="row">보호장소</th>
-								<td>${dto.careAddr }</td>
-							</tr>
-							<tr>
-								<th scope="row">관할기관</th>
-								<td>${dto.orgNm }</td>
-							</tr>
-							<tr>
-								<th scope="row">담당자</th>
-								<td>${dto.chargeNm }</td>
 								<th scope="row">연락처</th>
-								<td>${dto.officetel }</td>
+								<td>${dto.phone }</td>
 							</tr>
-							<tr>
-								<th scope="row">특이사항</th>
-								<td>${dto.noticeComment }</td>
-							</tr>
+
 						</tbody>
 					</table>
-					상기 동물을 분실하신 소유주께서는 보호센터로 문의하시어 동물을 찾아가시기 바라며, 동물보호 법 제17조의 규정에 따른
-					공고가 있는 날부터 10일이 경과하여도 소유자 등을 알 수 없는 경우에는 유실물법 제12조 및 민법 제253조의 규정에
-					불구하고 해당 시,군,구 자치구가 그 동물의 소유권을 취득하게 됩니다.
-					<!-- 				<div style="text-align:center; margin:0 auto;"><a href="javascript:history.back();">목록</a></div> -->
-					<div style="margin:auto"><button id="btnToList" class="btn btn-sm" type="button" onclick="goBack();">목록</button></div>
+					<div style="margin:auto">
+						<button type="button" id="btnToList" class="btn btn-sm"
+							onclick="goBack();">목록</button>
+					</div>
 				</div>
-
 			</div>
 	</section>
 
