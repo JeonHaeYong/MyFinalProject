@@ -74,6 +74,7 @@
 							</div>
 							<div class="col-8">
 								<div class="card-body">
+									<input type="hidden" class="soldoutCheck" value="${dto.soldout }">
 									<h5 class="card-title">상품명 : ${dto.name }</h5>
 									<p class="card-text">금액 : ${dto.price }원</p>
 									<p class="card-text"><small class="text-muted">판매자 : ${dto.seller }</small></p>
@@ -169,6 +170,14 @@
 	<!--우편번호  -->
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<script>
+		
+		$(".soldoutCheck").each(function(i, item){
+			if($(item).val() == 'y'){
+				alert("판매완료된 상품은 결제하실 수 없습니다. 다시 확인해주세요.");
+				location.href = "toMyPage_cart";
+			}
+		})
+		
 		document.getElementById("searchBtn").onclick = searchAddress;
 		function searchAddress() {
 			new daum.Postcode({

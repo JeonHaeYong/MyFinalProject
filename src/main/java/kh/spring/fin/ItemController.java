@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kh.spring.dto.ItemDTO;
+import kh.spring.service.CartService;
 import kh.spring.service.ItemService;
 
 @Controller
@@ -18,6 +19,9 @@ public class ItemController {
 
 	@Autowired
 	private ItemService is;
+	
+	@Autowired
+	private CartService cs;
 
 	@RequestMapping("freeMarket")
 	public String freeMarket(HttpServletRequest request, String currentPage, String category) {
@@ -32,6 +36,11 @@ public class ItemController {
 		}
 		request.setAttribute("pageNavi", is.getNaviforItem(Integer.parseInt(currentPage), category));
 		request.setAttribute("category", category);
+		
+		String id = (String)request.getSession().getAttribute("id");
+		if(!id.isEmpty()) {
+			request.setAttribute("cartCount", cs.getCartCount(id));
+		}
 		return "item/freeMarket";
 	}
 
@@ -148,7 +157,10 @@ public class ItemController {
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
-		}	
+		}
+		dto.setName(dto.getName().replaceAll("<.?script>", ""));
+		dto.setCategory(dto.getCategory().replaceAll("<.?script>", ""));
+		dto.setContents(dto.getContents().replaceAll("<.?script>", ""));
 		dto.setSeller(id);
 		is.uploadItem(dto);
 		return "redirect:freeMarket?currentPage=1&category=all";

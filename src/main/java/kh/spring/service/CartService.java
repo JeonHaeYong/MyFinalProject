@@ -9,4 +9,5 @@ public interface CartService {
 	public int insertCartService(CartDTO dto);
 	public List<ItemDTO> selectCartPerPage(String id);
 	public int deleteCartService(String[] seqs);
+	public int getCartCount(String id);
 }

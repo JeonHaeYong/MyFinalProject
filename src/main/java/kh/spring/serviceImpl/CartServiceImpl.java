@@ -43,4 +43,9 @@ public class CartServiceImpl implements CartService {
 	public int deleteCartService(String[] seqs) {
 		return cdao.deleteCart(seqs);
 	}
+
+	@Override
+	public int getCartCount(String id) {
+		return cdao.getCartCount(id);
+	}
 }

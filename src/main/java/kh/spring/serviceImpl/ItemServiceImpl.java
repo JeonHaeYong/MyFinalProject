@@ -55,11 +55,6 @@ public class ItemServiceImpl implements ItemService{
 	}
 
 	@Override
-	public int modifyItem(ItemDTO dto) {
-		return itemDao.modifyItem(dto);
-	}
-
-	@Override
 	public int itemContentsSize() {
 		return itemDao.itemContentsSize();
 	}

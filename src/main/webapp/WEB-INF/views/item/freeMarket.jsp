@@ -169,12 +169,12 @@
 					</c:if>
 					<c:forEach var="dto" items="${itemList }">
 						<div class="col-lg-4 col-md-6 col-12 p-0">
-							<div class="card myCard">
+							<div class="card myCard mb-3">
 								<img class="card-img-top cardImg" src="${dto.imagePath1 }" alt="Card image" soldout="${dto.soldout }">
 								<div class="card-body">
 									<div class="itemName text-wrap text-truncate">
 										<h4 class="card-title"><a href="item?currentPage=${pageNavi.currentPage }&category=${category }&seq=${dto.seq }" class="detail">
-											<c:if test="${dto.soldout == 'y' }">[판매완료]</c:if>${dto.name }
+											<c:if test="${dto.soldout == 'y' }">[판매완료] </c:if>${dto.name }
 										</a></h4>
 									</div>
 									<p class="card-text">${dto.price } 원</p>
@@ -186,7 +186,8 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-12 d-flex justify-content-center" id="naviBox">
+			<div class="col-2"></div>
+			<div class="col-10 d-flex justify-content-center" id="naviBox">
 				<c:if test="${pageNavi.needPrev == 1 }">
 					<a class="navi" href="freeMarket?currentPage=${pageNavi.startNavi - 1}&category=${category}">&laquo;</a>
 				</c:if>

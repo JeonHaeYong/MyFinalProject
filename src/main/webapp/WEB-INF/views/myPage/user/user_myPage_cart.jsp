@@ -23,23 +23,31 @@
             <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
             <style>
                 .itemImage{
+                	width: 100%;
                 	height: 100%;
+                }
+                .cardText{
+                	font-size: 20px;
+                	color: #754F44;
+                }
+                .cardTextSmall{
+                	font-size: 15px;
+                	color: #754F44;
                 }
                 .itemName{
                 	text-decoration: none;
-                	color: grey;
                 }
                 .itemName:hover{
                 	text-decoration: underline;
                 	color: #ec7357;
                 }
-                #delBtn{
+                #delBtn, #soldoutDelBtn{
                 	padding: 5px;
                 	margin-bottom: 5px;
                 	border-color: grey;
                 	font-size: 15px;
                 }
-                #delBtn:hover{
+                #delBtn:hover, #soldoutDelBtn:hover{
                 	border-color: #ec7357;
                 	background-color: #ec7357;
                 	color: white;
@@ -76,19 +84,20 @@
 	                                        	<c:forEach var="dto" items="${list }" varStatus="status">
 		                                            <div class="col-lg-6 col-12 d-flex justify-content-center">
 														<div class="custom-control custom-checkbox">
+															<input type="hidden" class="soldoutCheck" value="${dto.soldout }" seq="${dto.cart_seq }">
 															<input type="checkbox" class="custom-control-input itemCheck" id="customCheck${status.count }" name="items" value="${dto.cart_seq }">
 															<label class="custom-control-label" for="customCheck${status.count }"></label>
 														</div>
-		                                                <div class="card mb-3" style="width: 80%;">
+		                                                <div class="card mb-3">
 		                                                    <div class="row no-gutters">
-		                                                        <div class="col-md-4">
-		                                                            <img src="${dto.imagePath1 }" class="card-img itemImage">
+		                                                        <div class="col-md-5">
+		                                                            <img src="${dto.imagePath1 }" class="card-img itemImage" soldout="${dto.soldout }">
 		                                                        </div>
-		                                                        <div class="col-md-8">
-		                                                            <div class="card-body">
-		                                                                <h5 class="card-title">상품명 : <a class="itemName" href="item?seq=${dto.seq }">${dto.name }</a></h5>
-		                                                                <p class="card-text">금액 : ${dto.price }</p>
-		                                                                <p class="card-text"><small class="text-muted">판매자 : ${dto.seller }</small></p>
+		                                                        <div class="col-md-7">
+		                                                            <div class="card-body myCardBody text-truncate">
+		                                                                <p class="card-title cardText">상품명 : <a class="itemName cardText" href="item?seq=${dto.seq }">${dto.name }</a></p>
+		                                                                <p class="card-text cardText">금액 : ${dto.price }</p>
+		                                                                <p class="card-text cardTextSmall">판매자 : ${dto.seller }</p>
 		                                                            </div>
 		                                                        </div>
 		                                                    </div>
@@ -98,6 +107,7 @@
                                             </form>
                                             <div class="col-12 d-flex justify-content-left">
                                             	<input type="button" class="btn rounded" id="delBtn" value="선택 상품 삭제하기">
+                                            	<input type="button" class="btn rounded" id="soldoutDelBtn" value="판매완료 상품 삭제하기">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -129,6 +139,12 @@
         <script src="resources/js/main.js"></script>
         
         <script>
+        	$(".itemImage").each(function(i, item){
+        		if($(item).attr("soldout") == 'y'){
+        			$(this).css("filter", "brightness(60%)");
+        			
+        		}
+        	});
       		var count = 0;
         	$("#allCheck").on("change", function(){
         		if($("#allCheck").prop("checked")){
@@ -145,6 +161,10 @@
         			if(!($(item).prop("checked"))){
         				allChecked = false;
         			}else{
+        				if($(this).prev().val() == 'y'){
+        					alert("판매완료된 상품입니다.");
+        					$(this).prop("checked", false);
+        				}
         				count++;
         			}
         		});
@@ -179,6 +199,27 @@
             			window.location.reload();
             		});
         		}
+        	});
+        	
+        	$("#soldoutDelBtn").on("click", function(){
+        		var soldoutItem = new Array();
+    			var index = 0;
+    			$(".soldoutCheck").each(function(i, item){
+        			if($(item).val() == 'y'){
+        				soldoutItem[index] = $(this).attr("seq");
+        				index++;
+        			}
+        		});
+    			jQuery.ajaxSettings.traditional = true; 
+    			$.ajax({
+        			url: "deleteCart",
+        			type: "post",
+        			data: {
+        				"seqs": soldoutItem
+        			}
+        		}).done(function(resp){
+        			window.location.reload();
+        		});
         	});
         	
         	$("#allPayBtn").on("click", function(){
