@@ -50,6 +50,28 @@ public class MemberDAOImpl implements MemberDAO {
 	{
 		return sst.selectOne("MemberDAO.selectCountByLikeId","%"+id+"%");
 	}
+	//관리자 페이지에서 조회용
+	@Override
+	public List<MemberDTO> selectRankFiveByPoint(int start, int end) throws Exception
+	{
+		return sst.selectList("MemberDAO.selectRankFiveByPoint", new Object[] {start, end});
+	}
+	@Override
+	public int selectCountRankFiveByPoint() throws Exception
+	{
+		return sst.selectOne("MemberDAO.selectCountRankFiveByPoint");
+	}
+	@Override
+	public int selectCount() throws Exception
+	{
+		return sst.selectOne("MemberDAO.selectCount");
+	}
+	@Override
+	public int updatePointRandom(HashMap<String, Integer> param) throws Exception
+	{
+		return sst.update("MemberDAO.updatePointRandom", param);
+	}
+	
 	@Override
 	public List<MemberDTO> selectAllMembers() {
 		return sst.selectList("MemberDAO.selectAllMembers");
@@ -134,5 +156,6 @@ public class MemberDAOImpl implements MemberDAO {
 	public int updateMemberInfoByMyPage(MemberDTO dto) {
 		return sst.update("MemberDAO.updateMemberInfoByMyPage",dto);
 	}
+	
 	
 }
