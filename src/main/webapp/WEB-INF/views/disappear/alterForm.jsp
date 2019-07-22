@@ -44,24 +44,26 @@
         .animal-info .input-box div{height: 55px; width: 100%; padding-top:20px;  }
         .check{float: left; width: 100px;}
         input[type="text"]{width: 300px;}
+      
         
         /*footer 부분*/
         #footer{text-align: center; width: 100%; margin-top:50px;}
-        .btns{background-color:#EC7357; border: none; color: white; font-size: 20px; font-weight: bold; border-radius: 10px; margin-right: 10px; width: 70px; font-family: 'Gamja Flower', cursive;}
-        .btns:hover{background-color:#b3543e; }  
+         .btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44;}
+		.btn:hover{background-color:#FDD692; font-weight:bold;}
 </style>
 <script>
  	$(function(){
+ 			
+
+
     		$(".toList-btn").on("click",function(){
     			location.href="toDisappearList?currentPage=${currentPage}";
     		});
-    		$(".insert-btn").on("click",function(){
+    		$(".alter-btn").on("click",function(){
     			if($("#disappearDate").val() !=""&& $(".disappearArea").val() !=""&& $(".tel").val() !=""&& $('input:radio[name=gender]').is(':checked')==true
-    					&& $('input:checkbox[name=neuter]').is(':checked')==true && $(".furColor").val()!="" && $(".feature").val()!=""&&$(".image").val()!=""){
+    					&& $('input:checkbox[name=neuter]').is(':checked')==true && $(".furColor").val()!="" && $(".feature").val()!=""){
     				$("#reportForm").submit();
     			}else{alert("기타사항을 제외하고 모두 입력해주세요.");}
-    		
-    			
     		});
     	});
     </script>
@@ -76,8 +78,8 @@
 	<div class="row">
 		<div class="col-12">
 			<div id="wrapper" class="aa">
-				<form action="insertProc.dis" method="post" id="reportForm" enctype="multipart/form-data">
-        <input type="hidden" name="seq" value="0">
+	<form action="alterProc.dis" method="post" id="reportForm" enctype="multipart/form-data">
+        <input type="hidden" name="seq" class="seq" value="${content.seq }">
         <div class="basic">기본정보</div>
         <div class="basic-info">
             <div class="title">
@@ -124,8 +126,8 @@
                     </select>
                 </div>
                 <div>
-                    <span class="check"><input type="radio" name="gender" value="남">수컷</span>
-                    <span class="check"><input type="radio" name="gender" value="여">암컷</span>
+                    <span class="check"><input type="radio" name="gender" value="남" class="radio">수컷</span>
+                    <span class="check"><input type="radio" name="gender" value="여" class="radio">암컷</span>
                     <span class="check"><input type="checkbox" name="neuter" value="O">중성화완료</span>
                 </div>
                 <div><select name="age" id="age" >
@@ -133,22 +135,35 @@
                         <option value="16-20살">16-20살</option><option value="21이">21살이상</option>
                     </select>
                     </div>
-                <div><input type="text" placeholder="털색을 설명해주세요" class="furColor" name="furColor" class="notnull"></div>
-                <div><input type="text" placeholder="눈에 띄는 특징을 적어주세요" class="feature" name="feature" class="notnull"></div>
+                <div><input type="text" placeholder="털색을 설명해주세요" class="furColor" name="furColor"></div>
+                <div><input type="text" placeholder="눈에 띄는 특징을 적어주세요" class="feature" name="feature"></div>
                 <div><input type="text" placeholder="기타사항을 입력해주세요" class="et" name="et"></div>
-                <div><input type="file" name="image" class="image"></div>
+                <div><input type="file" name="image"></div>
             </div>
         </div>
         
         <div id="footer">
-            <input type="button" class="insert-btn btns" value="등록">
-            <input type="button" class="toList-btn btns" value="취소">
+            <input type="button" class="alter-btn btn" value="수정">
+            <input type="button" class="toList-btn btn" value="취소">
         </div>
         </form>
 			</div>
 		</div>
 	</div>
 </div>
+<script>
+	$("#disappearDate").val('${content.disDate}');
+	$("#areaList option[value='${content.areaList}']").attr("selected", true);
+	$(".disappearArea").val('${content.disappearArea}');
+	$(".tel").val('${content.tel}');
+	$("#kind").val('${content.kind}');
+	$("input:radio[name=gender][value=" + '<c:out value="${content.gender}"/>' + "]").attr("checked",true);
+	$("input:checkbox[name=neuter][value="+'<c:out value="${content.neuter}"/>'+"]").attr("checked",true);
+	$("#age").val('${content.age}');
+	$(".furColor").val('${content.furColor}');
+	$(".feature").val('${content.feature}');
+	$(".et").val('${content.et}');
+</script>
 
 <!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
    <jsp:include page="/WEB-INF/views/module/footer.jsp" ></jsp:include>

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import kh.spring.dao.ReviewCommentsLikesDAO;
 import kh.spring.dto.ReviewCommentsLikesDTO;
 
-public class ReviewCommentsLikesDTOImpl implements ReviewCommentsLikesDAO{
+public class ReviewCommentsLikesDAOImpl implements ReviewCommentsLikesDAO{
 	
 	@Autowired
 	private SqlSessionTemplate sst;

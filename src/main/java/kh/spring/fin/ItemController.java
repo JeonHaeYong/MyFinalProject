@@ -38,7 +38,7 @@ public class ItemController {
 		request.setAttribute("category", category);
 		
 		String id = (String)request.getSession().getAttribute("id");
-		if(id!=null) {
+		if(id != null) {
 			request.setAttribute("cartCount", cs.getCartCount(id));
 		}
 		return "item/freeMarket";
@@ -55,17 +55,21 @@ public class ItemController {
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("category", category);
 		request.setAttribute("item", is.readOneItem(seq));
+		String id = (String)request.getSession().getAttribute("id");
+		if(id != null) {
+			request.setAttribute("cartCount", cs.getCartCount(id));
+		}
 		return "item/item";
 	}
 
 	@RequestMapping("addItem")
-	public String addItem() {
+	public String addItem_loginCheck(HttpServletRequest request) {
 		return "item/addItem";
 	}
 
 	@ResponseBody
 	@RequestMapping("imageUpload")
-	public String imageUploadLogin(HttpServletRequest request, MultipartFile image) {
+	public String imageUpload_loginCheck(HttpServletRequest request, MultipartFile image) {
 		String id = (String)request.getSession().getAttribute("id");
 		System.out.println(id);
 		String resourcePath = request.getSession().getServletContext().getRealPath("/resources");
@@ -100,7 +104,7 @@ public class ItemController {
 	 */
 	@ResponseBody
 	@RequestMapping("deleteImage")
-	public String deleteImageLogin(HttpServletRequest request, String imagePath) {
+	public String deleteImage_loginCheck(HttpServletRequest request, String imagePath) {
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
@@ -132,7 +136,7 @@ public class ItemController {
 	 * @return 무료나눔 페이지로 이동
 	 */
 	@RequestMapping("/addItemProc")
-	public String joinProc(HttpServletRequest request, ItemDTO dto, MultipartFile image1, MultipartFile image2, MultipartFile image3) {
+	public String addItemProc_loginCheck(HttpServletRequest request, ItemDTO dto, MultipartFile image1, MultipartFile image2, MultipartFile image3) {
 		String id = (String)request.getSession().getAttribute("id");
 		String resourcePath = request.getSession().getServletContext().getRealPath("/resources");
 		System.out.println(resourcePath);

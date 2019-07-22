@@ -8,7 +8,7 @@ import kh.spring.dto.TempProtectDTO;
 public interface TempProtectDAO {
 	public int uploadTempProtect(TempProtectDTO dto);
 	public List<TempProtectDTO> selectAllTempProtect(int currentPage);
-	public TempProtectDTO readOneTempProtect(int seq);
+	public TempProtectDTO selectOneTempProtect(int seq);
 	public int deleteTempProtect(TempProtectDTO dto);
 	public int modifyTempProtect(TempProtectDTO dto);
 	public int tempProtectContentsSize();

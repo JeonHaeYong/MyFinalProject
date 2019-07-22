@@ -29,9 +29,12 @@ public class InformationController {
 	@RequestMapping("information_t")
 	public String informaition_t(String currentPage) {
 		try {
+			String navi = service.getNavi(Integer.parseInt(currentPage));
 			session.setAttribute("currentPage", currentPage);
 			List<TrainingDTO> tdto=service.selectAll(Integer.parseInt(currentPage));
+	
 			request.setAttribute("infodto", tdto);
+			request.setAttribute("navi", navi);
 			return "sense/information/information";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -97,8 +100,8 @@ public class InformationController {
 		return imagePath;
 	}
 	
-	//detail
-	@RequestMapping("detail")
+	
+	@RequestMapping("detail_info")
 	public String detailinfo(HttpServletRequest request, int seq) {
 		try {
 			request.setAttribute("dto", service.detail_info(seq));
@@ -145,6 +148,26 @@ public String upload(TrainingDTO tdto)
 
 	return "redirect:/information_t?currentPage=1";
 	}
+
+@RequestMapping("delinfo")
+public String delinfo(HttpServletRequest request) {
+	String[] check = request.getParameterValues("check");
+	int[]seq=new int[check.length];
+	for(int i=0;i<check.length;)
+	{
+		seq[i]=Integer.parseInt(check[i]);
+		System.out.println(seq[i]);
+		
+		try {
+			if(service.deleteinfo(seq[i])>0) {
+			i++;}
+			else {
+				i--;
+			}
+		}catch(Exception e) {e.printStackTrace();}
+	}
 	
+	return "redirect:/information_t?currentPage=1";
+}
 	
 }

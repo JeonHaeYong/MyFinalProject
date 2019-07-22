@@ -51,5 +51,6 @@ font-family:'Gamja Flower', cursive;
 .modal-header{
 padding-bottom:0px;
 }
+.modal-open{padding-right: 0px !important;}
 </style>
 <link href="https://fonts.googleapis.com/css?family=Gamja+Flower&display=swap&subset=korean" rel="stylesheet">

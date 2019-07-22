@@ -86,7 +86,7 @@
 				</div>
 	
 				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="#" class="btn menu_btns">무료 나눔 거래 내역</a>
+					<a href="admin-paylog" class="btn menu_btns">무료 나눔 거래 내역</a>
 				</div>
 	
 				<div class="col-6 col-md-4 col-lg-2 text-center px-1">

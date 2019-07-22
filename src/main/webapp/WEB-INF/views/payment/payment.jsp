@@ -100,6 +100,7 @@
 						<input type="hidden" name="list[${status.index }].cart_seq" value="${dto.cart_seq }">
 						<input type="hidden" name="list[${status.index }].name" value="${dto.name }">
 						<input type="hidden" name="list[${status.index }].seller" value="${dto.seller }">
+						<input type="hidden" name="list[${status.index }].price" value="${dto.price }">
 					</c:forEach>
 					<input type="hidden" name="orderNumber" id="orderNumber">
 					<div class="form-group">
@@ -225,7 +226,6 @@
 			}
 			
 			var orderNum = new Date().getTime();
-			alert(orderNum);
 			$("#orderNumber").val(orderNum);
 			
 			$("#payForm").submit();

@@ -102,11 +102,11 @@
                                 <!-- 댓글 목록 보여주기 -->
                                 <c:forEach var="list" items="${replyList }">
                                     <div class="col-12 border-bottom">
-                                        <div class="text-bold">${list.writer }</div>
+                                        <div class="font-weight-bold">${list.writer }</div>
                                         <div class="">${list.contents }</div>
                                         <div class="d-flex justify-content-between">
                                         	<span>${list.formed_date }</span>
-                                        	<span class="likeOk_check" value="${list.likeOk}">
+                                        	<span class="likeOk_check" value="${list.likeOk}" seq="${list.seq }" writer="${list.writer }">
                                         		<span class="mr-2">${list.likes }</span>
                                         		<a class="click_like_btn likeOk_n" href="javascript:void(0)" onclick="clickLikeImg(this);"><img src="review/like_1.png" style="width:25px;"></a>
                                         		<a class="click_like_btn likeOk_y" href="javascript:void(0)" onclick="clickLikeImg(this);"><img src="review/like_2.png" style="width:25px;"></a>
@@ -180,9 +180,32 @@
                 });
                 //좋아요클릭했을때,
                 function clickLikeImg(param){
+                	var id = "${id}";
+                	var writer = $(param).parents(".likeOk_check").attr("writer");
                 	if(${id==null}){//아직 로그인을 하지 않았다면,
-                		alert("좋아요 버튼은 로그인 한 사람들만 가능합니다.");
+                		alert("좋아요 기능은 로그인 한 사람만 가능합니다.");
                 		return false;
+                	}
+//                 	else if(id==writer){
+//                 		alert("본인의 댓글에 '좋아요'를 누를수 없습니다.");
+//                 		return false;
+//                 	}
+                	
+                	// insert 누른사람 / 몇번seq의 댓글에 좋아요누른건지(리뷰코멘트라이크 테이블) //// 몇번seq의 댓글의  dto의 좋아요 수 update (리뷰코멘트)
+                	var reply_seq = $(param).parents(".likeOk_check").attr("seq");
+                	if($(param).hasClass("likeOk_y") == true){ //만약 해당댓글에 이미 좋아요를 눌렀다면, 좋아요 취소
+                		
+                	}else{	//만약 해당댓글에 좋아요를 누르지 않았다면, 좋아요하기
+						$.ajax({
+							url : "reviewCommentsLikeClick",
+							type : "post",
+							data : {
+								id : id,
+								r_comments_seq : reply_seq
+							}
+						}).done(function(resp){
+							console.log(resp);
+						})
                 	}
                 	$(param).toggle();
                 	$(param).siblings(".click_like_btn").toggle();

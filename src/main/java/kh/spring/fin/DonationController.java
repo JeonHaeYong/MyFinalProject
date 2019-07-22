@@ -5,13 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import kh.spring.serviceImpl.DonationServiceImpl;
+import kh.spring.service.DonationService;
 
 @Controller
 public class DonationController
 {
 	@Autowired
-	DonationServiceImpl donationService;
+	DonationService donationService;
 	
 	@RequestMapping(value = "donation", method = RequestMethod.GET)
 	public Object donationPage()

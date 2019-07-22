@@ -11,11 +11,12 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import kh.spring.daoImpl.BlackListDAOImpl;
+import kh.spring.dao.BlackListDAO;
 import kh.spring.dto.BlackListDTO;
 import kh.spring.dto.MemberDTO;
 import kh.spring.fin.AdminController;
 import kh.spring.service.BlackListService;
+import kh.spring.service.MemberService;
 
 @Service
 public class BlackListServiceImpl implements BlackListService
@@ -23,9 +24,9 @@ public class BlackListServiceImpl implements BlackListService
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 	
 	@Autowired
-	MemberServiceImpl ms;
+	MemberService ms;
 	@Autowired
-	BlackListDAOImpl blacklistDAO;
+	BlackListDAO blacklistDAO;
 	
 	@Override
 	public void insert(BlackListDTO dto) throws Exception

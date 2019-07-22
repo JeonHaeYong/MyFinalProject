@@ -18,7 +18,7 @@ import kh.spring.dto.TempProtectDTO;
 public class TempProtectDAOImpl implements TempProtectDAO {
 
 	// 한 페이지에 몇 개의 글이 보이게 할 것인지
-	public static int recordCountPerPage = 15;
+	public static int recordCountPerPage = 12;
 	// 한 페이지에 네비게이터가 총 몇 개가 보이게 할 것인지
 	public static int naviCountPerPage = 5;
 	
@@ -38,7 +38,7 @@ public class TempProtectDAOImpl implements TempProtectDAO {
 		return sst.selectOne("TempProtectDAO.select");
 	}
 	@Override
-	public TempProtectDTO readOneTempProtect(int seq) {
+	public TempProtectDTO selectOneTempProtect(int seq) {
 		return sst.selectOne("TempProtectDAO.selectBySeq", seq);
 	}
 
