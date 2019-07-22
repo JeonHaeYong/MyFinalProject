@@ -6,4 +6,5 @@
 		insert into pay_log values(pay_log_seq.nextval, #{buyer}, #{name}, #{price}, #{seller}, default)
 	</insert>
 
+
 </mapper>

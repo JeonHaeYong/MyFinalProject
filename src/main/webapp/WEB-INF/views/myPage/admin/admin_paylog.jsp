@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="resources/css/style.css">
 
 <style>
+
 #container
 {
 	margin-top: 5%;
@@ -67,116 +68,117 @@
 </style>
 
 </head>
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 
+<!-- <div class="row justify-content-center"></div> -->
+<!-- <div class="col-12 col-md-12 col-lg-12 text-center my-5"></div> -->
+<!-- <div class="row justify-content-center"> -->
+<!-- 	<div class="col-12 col-md-12 col-lg-12 text-center my-5"> -->
+<!-- 	</div> -->
+<!-- </div> -->
 
 	<section class="site-section bg-light block-13">
 
-	<div id="container" class="container">
+		<div id="container" class="container">
+			
+			
+			
+			
+			
+			
+			<div id="menu_row" class="row justify-content-center">
 
-
-
-
-
-		<div id="menu_row" class="row justify-content-center">
-
-			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="admin-member" class="btn menu_btns">회원 관리</a>
+				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
+					<a href="admin-member" class="btn menu_btns">회원 관리</a>
+				</div>
+	
+				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
+					<a href="admin-item" class="btn menu_btns">무료 나눔 물품 승인</a>
+				</div>
+	
+				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
+					<a href="admin-paylog" class="btn selected_menu_btns">무료 나눔 거래 내역</a>
+				</div>
+	
+				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
+					<a href="admin-donation" class="btn menu_btns">월 별 후원금 및 전달 기관</a>
+				</div>
+	
+				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
+					<a href="admin-quiz" class="btn menu_btns">퀴즈 당첨자</a>
+				</div>
+	
+				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
+					<a href="admin-chart" class="btn menu_btns">통계</a>
+				</div>
+	
 			</div>
-
-			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="admin-item" class="btn selected_menu_btns">무료 나눔 물품 승인</a>
-			</div>
-
-			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="admin-paylog" class="btn menu_btns">무료 나눔 거래 내역</a>
-			</div>
-
-			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="admin-donation" class="btn menu_btns">월 별 후원금 및 전달 기관</a>
-			</div>
-
-			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="admin-quiz" class="btn menu_btns">퀴즈 당첨자</a>
-			</div>
-
-			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="admin-chart" class="btn menu_btns">통계</a>
-			</div>
-
-		</div>
-
-
-
-
-
-
-		<div id="contents_row" class="row justify-content-center mt-5">
-
-			<div class="col-12">
-
-				<div class="row justify-content-center mt-5">
+			
+			
+			
+			
+			
+			
+			<div id="contents_row" class="row justify-content-center mt-5">
+			
+				<div class="col-12">
 				
-					<div class="col-6 col-md-6 col-lg-2 text-center my-1"><h3>등록 번호</h3></div>
-					<div class="col-4 col-md-4 col-lg-3 text-center my-1"><h3>상품 명</h3></div>
-					<div class="col-4 col-md-4 col-lg-2 text-center my-1"><h3>상품 가격</h3></div>
-					<div class="col-4 col-md-4 col-lg-3 text-center my-1"><h3>판매자</h3></div>
-					<div class="col-2 col-md-2 col-lg-2 text-center my-1">
-						<input id="permission_all_btn" type="checkbox">모두 체크
+					<div class="row justify-content-center">
+						
+						<div class="col-8 col-md-8 col-lg-2 text-center my-auto">
+							
+							<select id="condition_select">
+								<option value="buyer-like">구매자</option>
+								<option value="seller-like">판매자</option>
+								<option value="buyer-equal">구매자(정확한 아이디)</option>
+								<option value="seller-equal">판매자(정확한 아이디)</option>
+								<option value="date">날짜</option>
+							</select>
+							
+						</div>
+						
+						<div class="col-8 col-md-8 col-lg-8 text-center my-auto">
+							
+							<input id="search_text" class="form-control" type="text" placeholder="검색할 키워드를 입력하세요(없을 시 전체)">
+							
+						</div>
+						
+						<div class="col-4 col-md-4 col-lg-2 text-center my-auto">
+							
+							<input id="search_btn" class="btn my_buttons" name="1" type="button" value="검색">
+							
+						</div>
+						
+					</div>
+					
+					<div class="row justify-content-center mt-5">
+						
+						<div id="search_result_div" class="col-12 col-md-12 col-lg-12 text-center my-1"></div>
+						
+					</div>
+					
+					
+					
+					
+					
+					<div class="row justify-content-center">
+						
+						<div class="col-12 text-center my-5">
+							
+							<a href="admin-paylog-insert">데이터 입력</a>
+							
+						</div>
+						
 					</div>
 					
 				</div>
 				
-				
-				<div class="row justify-content-center my-1">
-
-					<div id="search_result_div" class="col-12 col-md-12 col-lg-12 text-center my-1"></div>
-
-				</div>
-
-
-
-				<div class="row justify-content-center">
-
-					<div class="col-8 col-md-8 col-lg-4 text-left my-5"></div>
-					<div class="col-8 col-md-8 col-lg-4 text-left my-5"></div>
-					
-					<div class="col-8 col-md-8 col-lg-2 text-center my-5">
-					
-<!-- 						<input id="search_btn" class="btn my_buttons" name="1" type="button" value="검색"> -->
-					
-					</div>
-					
-					<div class="col-4 col-md-4 col-lg-2 text-center my-5">
-
-						<input id="reg_btn" class="btn my_buttons" type="button" value="등록하기">
-
-					</div>
-
-				</div>
-
 			</div>
 
 		</div>
-
-
-
-
-
-		<div class="row justify-content-center">
-
-			<div class="col-12 col-md-12 col-lg-12 text-center my-5">
-
-				<a href="admin-item-insert">데이터 삽입</a>
-
-			</div>
-
-		</div>
-
-	</div>
 
 	</section>
 
@@ -199,75 +201,53 @@
 <script>
 	$(function()
     {
-		myAjax("1");
-		
-		$(document).on("click", "#permission_all_btn", function()
+		$("#condition_select").on("change", function()
 		{
-			$("#search_result_div input[type=checkbox]").prop("checked", true);
-		})
-		
-		$("#reg_btn").on("click", function()
-		{
-			var $check = $(".permission_check");
-			var seq = "";
-			
-	    	for(var i = 1 ; i <= $check.length ; i++)
-	    	{
-	    		if($check.eq(i-1).prop("checked") == true)
-	    		{
-	    			seq = seq + " " + $check.eq(i-1).attr("name");
-	    		}
-	    	}
-			
-			$.ajax
-	    	({
-	    		url: "admin-item-permission",
-	    		type: "POST",
-	    		data:
-	    		{
-	    			items: seq
-	    		}
-	    	})
-	    	.done(function(response)
-	    	{
-	    		if(response == "Y")
-	    		{
-	    			alert("성공");
-	    			myAjax("1");
-	    			$("#permission_all_btn").prop("checked", false);
-	    		}
-	    		else
-	    		{
-	    			alert("실패");
-	    		}
-	    	});
-		})
-		
+			changeTypeDate();
+		});
+	    
 		$(document).on("click", "#search_btn,.navi_btns", function()
 		{
-			$("#permission_all_btn").prop("checked", false);
-			myAjax(this.name);
+			search(this.name);
 		})
 		
-		function myAjax(btnName)
+		
+		function changeTypeDate()
+		{
+			
+			$("#search_text").val("");
+			
+			if($("#condition_select").val() == "date")
+			{
+				$("#search_text").attr("type", "date");
+			}
+			else
+			{
+				$("#search_text").attr("type", "text");
+			}
+			
+			
+		}
+		
+		function search(btnName)
 		{
 			$.ajax
 	    	({
-	    		url: "admin-item-search",
+	    		url: "admin-paylog-search",
 	    		type: "POST",
 	    		dataType: "JSON",
 	    		data:
 	    		{
 	    			page: btnName
+	    			,condition: $("#condition_select").val()
 	    		}
 	    	})
 	    	.done(function(response)
 	    	{
 	    		
-	    		var array = response.array;
-	    		
 	    		$("#search_result_div").empty();
 	    		
+	    		var array = response.array;
 	    		for(var i = 1 ; i <= array.length ; i++)
 	    		{
 					var $row = $('<div class="row justify-content-center my-1 id_row"></div>');
@@ -328,10 +308,12 @@
 	    	.fail(function()
 	    	{
 	    		alert("error");
-	    	});
+	    	});			
 		}
-    })
+    });
     
+	
+	
     onload = function()
     {
 		
