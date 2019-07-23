@@ -65,6 +65,12 @@ color:#754F44;
 background-color:#FDD692;
 font-weight:bold;
 }
+.selected_btn{
+font-family: 'Gamja Flower', cursive !important;
+color:#754F44;
+background-color:#FDD692;
+font-weight:bold;
+}
 
 
 </style>
@@ -168,7 +174,7 @@ font-weight:bold;
 						
 						<div class="col-12 col-md-12 col-lg-10 text-center my-1">
 						
-							<textarea id="explanation_text" class="form-control"></textarea>
+							<textarea id="explanation_text" class="form-control" rows="5"></textarea>
 						
 						</div>
 						
@@ -384,7 +390,7 @@ font-weight:bold;
 						
 						<div class="col-12 col-md-12 col-lg-10 text-center my-1">
 						
-							<textarea id="select_explanation_text" class="form-control"></textarea>
+							<textarea id="select_explanation_text" class="form-control" rows="5"></textarea>
 						
 						</div>
 						
@@ -532,10 +538,21 @@ font-weight:bold;
 					
 					<div class="row justify-content-center">
 						
-						<div class="col-12 col-md-12 col-lg-12 text-center my-5">
+						<div id="search_result_div" class="col-12 col-md-12 col-lg-12 text-center my-3">
 						
-							<input id="select_submit_btn" class="btn my_buttons" type="button" value="등록 정보 변경">
 						
+						</div>
+						
+						<div class="col-12 col-md-12 col-lg-12 text-center my-3">
+						
+							<input id="update_btn" class="btn my_buttons" type="button" value="등록 정보 변경">
+						
+						</div>
+						
+						<div class="col-12 col-md-12 col-lg-12 text-center my-3">
+								
+							<input id="search_btn" class="btn my_buttons" name="1" type="button" value="검색">
+								
 						</div>
 						
 					</div>
@@ -543,57 +560,6 @@ font-weight:bold;
 				</div>
 
 			</div>
-			
-			
-			<div class="row justify-content-center">
-						
-				<div id="search_result_div" class="col-12 col-md-12 col-lg-12 text-center my-5">
-						
-						
-				</div>
-				
-				<div class="col-12 col-md-12 col-lg-12 text-center my-5">
-						
-					<input id="search_btn" class="btn my_buttons" name="1" type="button" value="검색">
-						
-				</div>
-				
-			</div>
-			
-			 
-			
-			
-<!-- 			<div class="row justify-content-center"> -->
-<!-- 				<div class="col-12 col-md-12 col-lg-12 text-center my-5"> -->
-<!-- 					<div class="row justify-content-center"> -->
-<!-- 						<div class="col-12 col-md-12 col-lg-12 text-center my-3"> -->
-<!-- 							<h2>사진 변경</h2> -->
-<!-- 						</div> -->
-<!-- 						<div class="col-12 col-md-12 col-lg-2 text-center my-1"> -->
-<!-- 							<label>좌측 사진</label> -->
-<!-- 						</div> -->
-<!-- 						<div class="col-12 col-md-12 col-lg-10 text-center my-1"> -->
-<!-- 							<input id="left_file" class="form-control" name="left" type="file"> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 					<div class="row justify-content-center"> -->
-<!-- 						<div class="col-12 col-md-12 col-lg-2 text-center my-1"> -->
-<!-- 							<label>우측 사진</label> -->
-<!-- 						</div> -->
-<!-- 						<div class="col-12 col-md-12 col-lg-10 text-center my-1"> -->
-<!-- 							<input id="right_file" class="form-control" name="right" type="file"> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 					<div class="row justify-content-center"> -->
-<!-- 						<div class="col-12 col-md-12 col-lg-12 text-center my-5"> -->
-<!-- 							<input id="image_change_btn" class="btn my_buttons" type="button" value="사진 변경"> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-			
-			
-			
 			
 		</div>
 
@@ -674,6 +640,57 @@ font-weight:bold;
 	    
 	    $(document).on("click", "#search_btn, .navi_btns", function()
 		{
+	    	myAjax(this.name);	    	
+		});
+	    
+	    $("#update_btn").on("click", function()
+		{
+	    	var $form = $('<form></form>');
+	        $form.attr('action', 'admin-donation-update');
+	        $form.attr('method', 'POST');
+	        $form.attr('enctype', 'multipart/form-data');
+	        $form.appendTo('body');
+	         
+	        
+	        var $seq = $('<input type="hidden" name="seq">');
+	        $seq.val($("#select_seq_text").val());
+	        
+	        var $name = $('<input type="hidden" name="name">');
+	        $name.val($("#select_name_text").val());
+	        
+	        var $title = $('<input type="hidden" name="title">');
+	        $title.val($("#select_title_text").val());
+	        
+	        var $explanation = $('<input type="hidden" name="explanation">');
+	        $explanation.val($("#select_explanation_text").val().replace(/(?:\r\n|\r|\n)/g, "<br>"));
+	        
+			var $image1 = $("#select_image1_file");
+			var $image2 = $("#select_image2_file");
+			var $image3 = $("#select_image3_file");
+			
+			var $left = $("#select_left_file");
+			var $right = $("#select_right_file");
+
+	        
+	        var $goalmoney = $('<input type="hidden" name="goalmoney">');
+	        $goalmoney.val($("#select_goalmoney_text").val());
+	        
+	        var $startdate = $('<input type="hidden" name="startdate">');
+	        $startdate.val($("#select_startdate_text").val());
+	        
+	        var $enddate = $('<input type="hidden" name="enddate">');
+	        $enddate.val($("#enddate_text").val());
+	        
+	        $form.append($seq).append($name).append($title).append($explanation)
+	        .append($image1).append($image2).append($image3)
+	        .append($goalmoney).append($startdate).append($enddate)
+	        .append($left).append($right);
+	        
+	        $form.submit();
+		});
+	    
+	    function myAjax(btnName)
+	    {
 	    	$.ajax
 	    	({
 	    		url: "admin-donation-search",
@@ -681,7 +698,7 @@ font-weight:bold;
 	    		dataType: "JSON",
 	    		data:
 	    		{
-	    			page: this.name
+	    			page: btnName
 	    		}
 	    	})
 	    	.done(function(response)
@@ -736,9 +753,8 @@ font-weight:bold;
 	    	.fail(function()
 	    	{
 	    		alert("error");
-	    	});	    	
-		});
-	    
+	    	});
+	    }
 	    
     });
     
