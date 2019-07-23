@@ -108,12 +108,12 @@
                                         	<div class="font-weight-bold">${list.writer }</div>
                                         	<c:if test="${id==list.writer }">
                                         		<div>
-                                        			<a role="btn" class="btn btn-outline-warning rounded p-1" href="javascript:void(0)" onclick="">수정</a>
+                                        			<a role="btn" class="btn btn-outline-warning rounded p-1" href="javascript:void(0)" onclick="modifyReply(this);">수정</a>
                                         			<a role="btn" class="btn btn-outline-warning rounded p-1" href="javascript:void(0)" onclick="">삭제</a>
                                         		</div>
                                         	</c:if>
                                         </div>
-                                        <div class="">${list.contents }</div>
+                                        <div class=""><input class="reply_contents" type="text" readonly value="${list.contents }"></div>
                                         <div class="d-flex justify-content-between">
                                         	<span>${list.formed_date }</span>
                                         	<span class="likeOk_check" value="${list.likeOk}" seq="${list.seq }" writer="${list.writer }">
@@ -288,7 +288,7 @@
                 	$(form).submit();
                 });
               //댓글수정
-               function modifyReply(){
+               function modifyReply(param){
             	  
               };
             </script>

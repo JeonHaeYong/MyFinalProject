@@ -6,7 +6,7 @@
     <section id="wrapper" class="mb-5">
         <div class="container">
             <div class="row">
-                <div class="col-4 p-2">
+                <div class="col-3 p-2">
                     <div class="my_page_empty invisible">
                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                             <li class="nav-item">
@@ -15,8 +15,8 @@
                         </ul>
                     </div>
                     <div class="my_page_info">
-                        <div>
-                            <a href="javascript:void(0)" onclick="changeProfileImg();"><img src="/resources/images/dog_1.jpg" class="rounded-circle" style="width: 100px; height: 100px;"></a>
+                        <div class="img_wrapper">
+                            <a class="img_anchor" href="javascript:void(0)" onclick="changeProfileImg();"><img src="/resources/images/dog_1.jpg" class="rounded-circle" style="width: 200px; height: 200px;"></a>
                         </div>
                         <div>
                             ${memberDTO.name }님                                </div>
@@ -45,39 +45,41 @@
                                 </div>
                                 <div class="modal-body">
                                     <!-- 파일 업로드 -->
-                                    <div class="form-group">
-                                        <div class="filebox preview-image">
-                                            <input class="upload-name text-truncate" value="파일선택" disabled="disabled">
-                                            <label for="input-file">업로드</label> 
-                                            <input type="file" id="input-file" class="upload-hidden" name="image">
-                                        </div>
-                                    </div>
+                                    <form id="changeProfileImg_form" action="changeProfileImg" method="post">
+	                                    <div class="form-group profile_upload_part">
+	                                        <div class="filebox preview-image">
+	                                            <input class="upload-name text-truncate" value="파일선택" disabled="disabled">
+	                                            <label for="input-file">업로드</label> 
+	                                            <input type="file" id="input-file" class="upload-hidden" name="image">
+	                                        </div>
+	                                    </div>
                                     <!-- /파일 업로드 -->
                                     <!-- 이미지변경 -->
-                                    <div class="d-flex justify-content-around">
+                                    <div class="justify-content-around profile_upload_part hide">
                                         <div class="d-flex">
                                             <div>변경전</div>
-                                            <img src="/resources/images/dog_1.jpg" class="rounded-circle" style="width: 100px; height: 100px;">
+                                            <img src="/resources/images/dog_1.jpg" class="rounded-circle" style="width: 110px; height: 110px;">
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <img src="/mypage/right-arrow.png" class="rounded-circle" style="width: 80px; height: 80px;">
                                         </div>
-                                        <div class="d-flex" class="changeAfterImg">
+                                        <div class="d-flex changeAfterImg">
                                             <div>변경후</div>
-                                            
+                                            <img src="tmp" class="upload-display">
                                         </div>
                                     </div>
+                                    </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                                    <button type="button" class="btn btn-primary changeImg_btn">변경하기</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- /Modal -->
                 </div>
-                <div class="col-8">
+                <div class="col-9">
                     <!-- 마이페이지 상단메뉴 -->
                     <ul class="nav nav_my_page_ul nav-pills mb-3" id="pills-tab" role="tablist">
                         <li class="nav-item">

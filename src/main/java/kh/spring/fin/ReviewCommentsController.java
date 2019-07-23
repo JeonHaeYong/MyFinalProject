@@ -29,6 +29,7 @@ public class ReviewCommentsController {
 		}
 		int result = rcService.insertReviewCommentService(dto);
 		if(result!=1) {
+			System.out.println("result--->>"+result);
 			return "redirect:error";
 		}
 		int seq = dto.getReview_seq();
@@ -72,6 +73,6 @@ public class ReviewCommentsController {
 		List<String> reply_navi = rcService.getNaviForReviewCommentsList(seq, currentPage);
 		request.setAttribute("replyList", list);
 		request.setAttribute("reply_navi", reply_navi);
-		return "review/reply_templet";
+		return "review/reply_template";
 	}
 }
