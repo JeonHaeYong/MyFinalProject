@@ -1,23 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="InfoDAO">
-
+	<!--글쓰기   -->
 	<insert id="insertinfo">
-		insert into info_Board values(info_board_seq.nextval, #{title},
-		#{contents},#{image,jdbcType=VARCHAR},#{writer},default,#{ip})
+		insert into info_Board values(info_board_seq.nextval,#{type,jdbcType=VARCHAR},#{title,jdbcType=VARCHAR},
+		#{contents,jdbcType=VARCHAR},#{image,jdbcType=VARCHAR},#{writer,jdbcType=VARCHAR},default)
 	</insert>
-	<select id="selectall" resultType="kh.spring.dto.TrainingDTO">
-	select * from(SELECT seq,title,writer,writeDate,image,RANK()OVER (ORDER BY seq DESC) RANK FROM info_Board order by writeDate desc)where Rank between #{start} and #{end}
+	<!--글 보이기/정보값만    -->
+	<select id="selectall" resultType="kh.spring.dto.InfomaitionDTO">
+	select * from(SELECT seq,type,title,writer,writeDate,image,RANK()OVER (ORDER BY seq DESC) RANK FROM info_Board where type='info' order by writeDate desc)where Rank between #{start} and #{end}
 	</select>
-	<select id="selectdetail" resultType="kh.spring.dto.TrainingDTO" >
+	<!--훈련정보값만  -->
+	<select id="selectalltraining" resultType="kh.spring.dto.InfomaitionDTO">
+	select * from(SELECT seq,type,title,writer,writeDate,image,RANK()OVER (ORDER BY seq DESC) RANK FROM info_Board where type='training' order by writeDate desc)where Rank between #{start} and #{end}
+	</select>
+	
+	
+	
+	<select id="selectdetail" resultType="kh.spring.dto.InfomaitionDTO" >
 	select * from info_Board where seq=#{seq}
 	</select>
 	<update id="updateinfo">
 	update info_Board set title=#{title},writeDate=default,contents=#{contents,jdbcType=VARCHAR},
 	image=#{image,jdbcType=VARCHAR} where seq=#{seq}
 	</update>
-	<select resultType="Integer" id="bordcount">
-	select count(*) from info_Board
+	<!-- 정보 -->
+	<select resultType="Integer" id="bordcount_info">
+	select count(*) from info_Board where type='info'
+	</select>
+	<!--  훈련-->
+		<select resultType="Integer" id="bordcount_training">
+	select count(*) from info_Board where type='training'
 	</select>
 	<delete id="delinfo">
 	delete from info_Board where seq=#{seq}

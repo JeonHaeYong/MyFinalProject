@@ -22,6 +22,7 @@
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
 <script>
 	$(function() {
 		$("#write").on("click", function() {
@@ -92,6 +93,42 @@ a:hover {
 .naviBtn:hover {
 	font-weight: 600;
 }
+
+.menu-row {
+	text-align: -webkit-center;
+}
+
+.s-menu1>a {
+	text-decoration: none;
+	color: black;
+	font-size: 20px;
+	font-family: 'Gamja Flower', cursive;
+}
+
+.s-menu1:hover {
+	background-color: #F3F78130;
+}
+
+.s-menu1 {
+	padding-top: 10px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.s-menu {
+	color: #B45F04;
+	border-bottom: 2px solid black;
+}
+
+.menu-box {
+	width: 150px;
+	height: 100px;
+	padding-bottom: 120px;
+	margin-bottom: 150px;
+}
+#dataNotExist {
+	text-align: center;
+}
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -106,16 +143,16 @@ a:hover {
 				<div class="col-lg-2 col-md-2 col-sm-12 col-12 menu-bar">
 					<!--작은 메뉴바-->
 					<div class="menu">MENU</div>
-					<div>
+					<div class="s-menu1">
 						<a href="toAbandoned?currentPage=1">유기동물조회</a>
 					</div>
-					<div>
+					<div class="s-menu1">
 						<a href="listTempProtect?currentPage=1">임시보호중</a>
 					</div>
-					<div>
+					<div class="s-menu1">
 						<a href="">동물병원 조회</a>
 					</div>
-					<div>
+					<div class="s-menu1">
 						<a href="">보호센터 조회</a>
 					</div>
 				</div>
@@ -128,48 +165,53 @@ a:hover {
 					<div class="text-center" style="margin: auto; margin-bottom: 40px;">
 						<h2>임시보호중</h2>
 					</div>
-					<div style="font-weight: 600; margin-bottom: 20px;">** 잃어버린 반려동물을
-						찾아서 임시보호중인 분께 연락해 보세요.<br>
-						** 길거리에 유기되거나 실종된 반려동물을 임시보호하고 계신 분은 글 작성 버튼을 통해 정보를 올려주세요.
+					<div style="font-weight: 600; margin-bottom: 20px;">
+						** 잃어버린 반려동물을 찾아서 임시보호중인 분께 연락해 보세요.<br> ** 길거리에 유기되거나 실종된
+						반려동물을 임시보호하고 계신 분은 글 작성 버튼을 통해 정보를 올려주세요.
 					</div>
-					<div class="text-right" style="margin-botom:20px;">
-					<button type="button" id="write" class="btn btn-sm">글 작성</button>
+					<div class="text-right" style="margin-botom: 20px;">
+						<button type="button" id="write" class="btn btn-sm">글 작성</button>
 					</div>
 				</div>
-				
+
 			</div>
 
 			<div class="row">
 				<div class="col-lg-2 col-md-2 col-sm-12 col-12 menu-bar"></div>
 				<div class="col-1"></div>
 				<div class="col-lg-9 col-md-9 col-sm-12 col-12">
-					<div class="row justify-content-center">
-						<c:forEach var="dto" items="${list}">
+					<div class="row">
+						<c:if test="${list != null }">
+							<c:forEach var="dto" items="${list}">
 
-							<div class="card myCard col-lg-4 col-md-4 col-sm-12">
-								<a href="detailTempProtect?seq=${dto.seq }"><img src=""
-									class="card-img-top" alt="..."
-									style="width: 211px; height: 150px; margin-bottom: 10px"></a>
-								<div class="card-body">
+								<div class="card myCard col-lg-4 col-md-4 col-sm-12">
+									<a href="detailTempProtect?seq=${dto.seq }"><img src="${dto.imagePath }"
+										class="card-img-top" alt="..."
+										style="width: 211px; height: 150px; margin-bottom: 10px"></a>
+									<div class="card-body">
 
-									<p class="card-text">
-										<label class="title"><strong>제목</strong> </label><label
-											class="content">${dto.title}</label><br> <label
-											class="title"><strong>시도 </strong> </label><label
-											class="content">${dto.sido }</label> <label class="title"><strong>시군구
-										</strong></label><label class="content">${dto.sigungu }</label><br> <label
-											class="title"><strong>발견 장소</strong></label><label
-											class="content">${dto.place }</label><br> <label
-											class="title"><strong>발견 날짜 </strong></label><label
-											class="content"><fmt:formatDate
-												value="${dto.findDate }" pattern="yyyy-MM-dd" /></label><br> <label
-											class="title"><strong>품종 </strong></label><label
-											class="content">${dto.type }</label><br>
-									</p>
+										<p class="card-text">
+											<label class="title"><strong>제목</strong> </label><label
+												class="content">${dto.title}</label><br> <label
+												class="title"><strong>시도 </strong> </label><label
+												class="content">${dto.sido }</label> <label class="title"><strong>시군구
+											</strong></label><label class="content">${dto.sigungu }</label><br> <label
+												class="title"><strong>발견 장소</strong></label><label
+												class="content">${dto.place }</label><br> <label
+												class="title"><strong>발견 날짜 </strong></label><label
+												class="content"><fmt:formatDate
+													value="${dto.findDate }" pattern="yyyy-MM-dd" /></label><br>
+											<label class="title"><strong>품종 </strong></label><label
+												class="content">${dto.type }</label><br>
+										</p>
+									</div>
 								</div>
-							</div>
 
-						</c:forEach>
+							</c:forEach>
+						</c:if>
+						<c:if test="${listsize == 0 }">
+							<div id="dataNotExist">해당 데이터가 존재하지 않습니다.</div>
+						</c:if>
 					</div>
 					<div id="naviBox" style="margin: auto" class="text-center">
 						<c:if test="${pageNavi.needPrev == 1 }">
@@ -223,6 +265,7 @@ a:hover {
 	<script src="resources/js/main.js"></script>
 </body>
 <script>
+	console.log(${listsize})
 	$(".naviBtn").on("click", function() {
 		var currPage = $(this).attr("currPage");
 		location.href = "listTempProtect?currentPage=" + currPage;

@@ -210,58 +210,65 @@ font-weight:bold;
 	    		
 	    		$("#search_result_div").empty();
 	    		
-	    		for(var i = 1 ; i <= array.length ; i++)
+	    		if(array.length != 0)
 	    		{
-					var $row = $('<div class="row justify-content-center my-1 id_row"></div>');
-					var $seqCol = $('<div class="col-6 col-md-6 col-lg-4 text-center my-1">'+(response.seq*1+i)+'</div>');
-	    			var $pointCol = $('<div class="col-6 col-md-6 col-lg-4 text-center my-1">'+array[i-1].point+'</div>');
-	    			var $idCol = $('<div class="col-6 col-md-6 col-lg-4 text-center my-1">'+array[i-1].id+'</div>');
-	    			$row.append($seqCol).append($pointCol).append($idCol);
-	    			$("#search_result_div").append($row);
-	    		}
-	    		
-				var $naviRow = $('<div id="navi_row" class="row justify-content-center mb-1 mt-3"></div>');
-	    		
-	    		if(response.needPrev)
-	    		{
-// 	    			var $prevBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value=" < " name="'+(response.startNavi-1)+'">');
-					var $prevBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value=" < " name="'+(response.startNavi-1)+'">');
+	    			for(var i = 1 ; i <= array.length ; i++)
+		    		{
+						var $row = $('<div class="row justify-content-center my-1 id_row"></div>');
+						var $seqCol = $('<div class="col-6 col-md-6 col-lg-4 text-center my-1">'+(response.seq*1+i)+'</div>');
+		    			var $pointCol = $('<div class="col-6 col-md-6 col-lg-4 text-center my-1">'+array[i-1].point+'</div>');
+		    			var $idCol = $('<div class="col-6 col-md-6 col-lg-4 text-center my-1">'+array[i-1].id+'</div>');
+		    			$row.append($seqCol).append($pointCol).append($idCol);
+		    			$("#search_result_div").append($row);
+		    		}
+		    		
+					var $naviRow = $('<div id="navi_row" class="row justify-content-center mb-1 mt-3"></div>');
+		    		
+		    		if(response.needPrev)
+		    		{
+//	 	    			var $prevBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value=" < " name="'+(response.startNavi-1)+'">');
+						var $prevBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value=" < " name="'+(response.startNavi-1)+'">');
 
-	    			$naviRow.append($prevBtn);
-	    		}
-	    		
-	    		for(var i = response.startNavi ; i <= response.endNavi ; i++)
-	    		{
-	    			
-// 	    			if(i == response.currentPage)
-// 	    			{
-// 		    			var $naviBtn = $('<input class="btn btn-danger selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
-// 	    			}
-// 	    			else
-// 	    			{
-// 		    			var $naviBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
-// 	    			}
-				
-					if(i == response.currentPage)
-	    			{
-		    			var $naviBtn = $('<input class="btn btn-link selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
-	    			}
-	    			else
-	    			{
-		    			var $naviBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
-	    			}
+		    			$naviRow.append($prevBtn);
+		    		}
+		    		
+		    		for(var i = response.startNavi ; i <= response.endNavi ; i++)
+		    		{
+		    			
+//	 	    			if(i == response.currentPage)
+//	 	    			{
+//	 		    			var $naviBtn = $('<input class="btn btn-danger selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+//	 	    			}
+//	 	    			else
+//	 	    			{
+//	 		    			var $naviBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+//	 	    			}
+					
+						if(i == response.currentPage)
+		    			{
+			    			var $naviBtn = $('<input class="btn btn-link selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+		    			}
+		    			else
+		    			{
+			    			var $naviBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+		    			}
 
-	    			$naviRow.append($naviBtn);
+		    			$naviRow.append($naviBtn);
+		    		}
+		    		
+		    		if(response.needNext)
+		    		{
+//	 	    			var $nextBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value=" > " name="'+(response.endNavi+1)+'">');
+		    			var $nextBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value=" > " name="'+(response.endNavi+1)+'">');
+		    			$naviRow.append($nextBtn);
+		    		}
+		    		
+		    		$("#search_result_div").append($naviRow);
 	    		}
-	    		
-	    		if(response.needNext)
+	    		else
 	    		{
-// 	    			var $nextBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value=" > " name="'+(response.endNavi+1)+'">');
-	    			var $nextBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value=" > " name="'+(response.endNavi+1)+'">');
-	    			$naviRow.append($nextBtn);
+	    			alert("검색 결과 없음");
 	    		}
-	    		
-	    		$("#search_result_div").append($naviRow);
 	    		
 	    		
 	    	})

@@ -275,63 +275,69 @@ font-weight:bold;
 	    		
 	    		var array = response.array;
 	    		
-	    		$("#search_result_div").empty();
-	    		
-	    		for(var i = 1 ; i <= array.length ; i++)
+	    		if(array.length != 0)
 	    		{
-					var $row = $('<div class="row justify-content-center my-1 id_row"></div>');
-	    			var $seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].seq+'</div>');
-	    			var $nameCol = $('<div class="col-4 col-md-4 col-lg-3 text-center my-1">'+array[i-1].name+'</div>');
-	    			var $priceCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].price+'</div>');
-	    			var $sellerCol = $('<div class="col-4 col-md-4 col-lg-3 text-center my-1">'+array[i-1].seller+'</div>');
-	    			var $checkCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1"><input class="permission_check" name="'+array[i-1].seq+'" type="checkbox">'+'거래 승인'+'</div>');
-	    			$row.append($seqCol).append($nameCol).append($priceCol).append($sellerCol).append($checkCol);
-	    			$("#search_result_div").append($row);
-	    		}
-	    		
-				var $naviRow = $('<div id="navi_row" class="row justify-content-center mb-1 mt-3"></div>');
-	    		
-	    		if(response.needPrev)
-	    		{
-// 	    			var $prevBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value=" < " name="'+(response.startNavi-1)+'">');
-					var $prevBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value=" < " name="'+(response.startNavi-1)+'">');
+	    			$("#search_result_div").empty();
+		    		
+		    		for(var i = 1 ; i <= array.length ; i++)
+		    		{
+						var $row = $('<div class="row justify-content-center my-1 id_row"></div>');
+		    			var $seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].seq+'</div>');
+		    			var $nameCol = $('<div class="col-4 col-md-4 col-lg-3 text-center my-1">'+array[i-1].name+'</div>');
+		    			var $priceCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].price+'</div>');
+		    			var $sellerCol = $('<div class="col-4 col-md-4 col-lg-3 text-center my-1">'+array[i-1].seller+'</div>');
+		    			var $checkCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1"><input class="permission_check" name="'+array[i-1].seq+'" type="checkbox">'+'거래 승인'+'</div>');
+		    			$row.append($seqCol).append($nameCol).append($priceCol).append($sellerCol).append($checkCol);
+		    			$("#search_result_div").append($row);
+		    		}
+		    		
+					var $naviRow = $('<div id="navi_row" class="row justify-content-center mb-1 mt-3"></div>');
+		    		
+		    		if(response.needPrev)
+		    		{
+//	 	    			var $prevBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value=" < " name="'+(response.startNavi-1)+'">');
+						var $prevBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value=" < " name="'+(response.startNavi-1)+'">');
 
-	    			$naviRow.append($prevBtn);
-	    		}
-	    		
-	    		for(var i = response.startNavi ; i <= response.endNavi ; i++)
-	    		{
-	    			
-// 	    			if(i == response.currentPage)
-// 	    			{
-// 		    			var $naviBtn = $('<input class="btn btn-danger selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
-// 	    			}
-// 	    			else
-// 	    			{
-// 		    			var $naviBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
-// 	    			}
-				
-					if(i == response.currentPage)
-	    			{
-		    			var $naviBtn = $('<input class="btn btn-link selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
-	    			}
-	    			else
-	    			{
-		    			var $naviBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
-	    			}
+		    			$naviRow.append($prevBtn);
+		    		}
+		    		
+		    		for(var i = response.startNavi ; i <= response.endNavi ; i++)
+		    		{
+		    			
+//	 	    			if(i == response.currentPage)
+//	 	    			{
+//	 		    			var $naviBtn = $('<input class="btn btn-danger selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+//	 	    			}
+//	 	    			else
+//	 	    			{
+//	 		    			var $naviBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+//	 	    			}
+					
+						if(i == response.currentPage)
+		    			{
+			    			var $naviBtn = $('<input class="btn btn-link selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+		    			}
+		    			else
+		    			{
+			    			var $naviBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+		    			}
 
-	    			$naviRow.append($naviBtn);
+		    			$naviRow.append($naviBtn);
+		    		}
+		    		
+		    		if(response.needNext)
+		    		{
+//	 	    			var $nextBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value=" > " name="'+(response.endNavi+1)+'">');
+		    			var $nextBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value=" > " name="'+(response.endNavi+1)+'">');
+		    			$naviRow.append($nextBtn);
+		    		}
+		    		
+		    		$("#search_result_div").append($naviRow);
 	    		}
-	    		
-	    		if(response.needNext)
+	    		else
 	    		{
-// 	    			var $nextBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value=" > " name="'+(response.endNavi+1)+'">');
-	    			var $nextBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value=" > " name="'+(response.endNavi+1)+'">');
-	    			$naviRow.append($nextBtn);
+	    			alert("검색 결과 없음");
 	    		}
-	    		
-	    		$("#search_result_div").append($naviRow);
-	    		
 	    		
 	    	})
 	    	.fail(function()

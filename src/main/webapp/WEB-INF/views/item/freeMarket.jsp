@@ -33,11 +33,14 @@
 		background-color: #EC7357;
 		color: white;
 	}
-	h3{
+	h3, h4{
 		font-family: 'Gamja Flower';
 	}
 	.container-contents{
 		font-family: 'Gamja Flower';
+	}
+	.checkboxDiv{
+		text-align: right;
 	}
 	.menu-box{width: 150px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px; margin-top: 50px;}
     .menu-box>div{height: 35px;}
@@ -79,13 +82,13 @@
 	}
 	.fixedMenu{
  		position: absolute; 
-		width: 150px;
+		width: 180px;
 		height: 200px;
  		top: 790px;
 		right: 0px;
 		border: none;
 		text-align: center;
-		background-color: #00000030;
+		background-color: #754F4430;
 		font-family: 'Gamja Flower';
 		font-weight: bold !important;
 		z-index: 100;
@@ -115,7 +118,8 @@
  		padding: 0px;
  	}
  	#searchForm{
- 		width: 96px;
+ 		width: 106px;
+ 		margin-left: 10px;
  	}
  	#select{
  		font-size: 18px;
@@ -161,9 +165,12 @@
 						</blockquote>
 					</div>
 				</div>
+				<div class="checkboxDiv mt-3">
+					<input type="checkbox" id="withoutSoldout">판매완료 상품 제외하기
+				</div>
 			</div>
 		</div>
-		<div class="row m-3">
+		<div class="row m-3 ajaxRow">
 			<div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-row">
                 <div class="row menu-box">
                     <div class="col-12 s-menu">M E N U</div>
@@ -197,23 +204,23 @@
 				</div>
 			</div>
 		</div>
-		<div class="row mb-3">
+		<div class="row mb-3 ajaxRow">
 			<div class="col-2"></div>
 			<div class="col-10 d-flex justify-content-center" id="naviBox">
 				<c:if test="${pageNavi.needPrev == 1 }">
-					<a class="navi" href="freeMarket?currentPage=${pageNavi.startNavi - 1}&category=${category}">&laquo;</a>
+					<a class="navi" href="#conta" value="${pageNavi.startNavi - 1}">&laquo;</a>
 				</c:if>
 				<c:if test="${pageNavi.currentPage > pageNavi.startNavi }">
-					<a class="navi" href="freeMarket?currentPage=${pageNavi.currentPage - 1}&category=${category}">&lt;</a>
+					<a class="navi" href="#conta" value="${pageNavi.currentPage - 1}">&lt;</a>
 				</c:if>
 				<c:forEach var="i" begin="${pageNavi.startNavi}" end="${pageNavi.endNavi}">
-					<a class="navi" href="freeMarket?currentPage=${i }&category=${category}" class="pageNum">${i}</a>
+					<a class="navi" href="#conta" class="pageNum" value="${i }">${i}</a>
 				</c:forEach>
 				<c:if test="${pageNavi.currentPage < pageNavi.pageTotalCount }">
-					<a class="navi" href="freeMarket?currentPage=${pageNavi.currentPage + 1}&category=${category}">&gt;</a>
+					<a class="navi" href="#conta" value="${pageNavi.currentPage + 1}">&gt;</a>
 				</c:if>
 				<c:if test="${pageNavi.needNext == 1 }">
-					<a class="navi" href="freeMarket?currentPage=${pageNavi.endNavi + 1}&category=${category}">&raquo;</a>
+					<a class="navi" href="#conta" value="${pageNavi.endNavi + 1}">&raquo;</a>
 				</c:if>
 			</div>
 		</div>
@@ -286,7 +293,7 @@
 				if($(item).attr("soldout") == 'y'){
 					$(this).css("filter", "brightness(60%)");
 				}
-			})
+			});
 			
 			var menu = $(".fixedMenu");
 			var menuOffset = $(".fixedMenu").offset();
@@ -301,6 +308,59 @@
 			$("#searchBtn").on("click", function(){
 				$("#searchForm").submit();
 			});
+			
+			var withoutSoldout = "Y";
+			$("#withoutSoldout").on("change", function(){
+				if($(this).prop("checked")){
+					withoutSoldout = "N";
+				}else{
+					withoutSoldout = "Y";
+				}
+				$.ajax({
+					url: "freeMarket",
+					data: {
+						soldout: withoutSoldout
+					}
+				}).done(function(resp){
+					$(".ajaxRow").remove();
+					$("#conta").append(resp);
+					$(".navi").each(function(i, item){
+						if($(item).text() == 1){
+							$(this).css("color", "#EC7357");
+						}
+					});
+					$(".cardImg").each(function(i, item){
+						if($(item).attr("soldout") == 'y'){
+							$(this).css("filter", "brightness(60%)");
+						}
+					});
+				});
+			});
+			
+			$(document).on("click", ".navi", function(){
+				var currentPage = $(this).attr("value");
+				$.ajax({
+					url: "freeMarket",
+					data: {
+						currentPage: currentPage,
+						category: "${category}",
+						soldout: withoutSoldout
+					}
+				}).done(function(resp){
+					$(".ajaxRow").remove();
+					$("#conta").append(resp);
+					$(".navi").each(function(i, item){
+						if($(item).text() == currentPage){
+							$(this).css("color", "#EC7357");
+						}
+					});
+					$(".cardImg").each(function(i, item){
+						if($(item).attr("soldout") == 'y'){
+							$(this).css("filter", "brightness(60%)");
+						}
+					});
+				});
+			})
 		})
 	</script>
 </body>

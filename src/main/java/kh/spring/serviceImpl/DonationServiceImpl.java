@@ -260,6 +260,177 @@ public class DonationServiceImpl implements DonationService
 		return new Gson().toJson(outerjo);
 		
 	}
+	
+	@Transactional("txManager")
+	@Override
+	public Object updateDonation(HttpServletRequest request, MultipartFile image1, MultipartFile image2, MultipartFile image3, MultipartFile left, MultipartFile right) throws Exception
+	{
+		DonationDTO dto = new DonationDTO();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		int seq = Integer.parseInt(request.getParameter("seq"));
+		String name = request.getParameter("name");
+		String title = request.getParameter("title");
+		String explanation = request.getParameter("explanation");
+		int goalmoney = Integer.parseInt(request.getParameter("goalmoney"));
+		java.sql.Date startdate = new java.sql.Date(sdf.parse(request.getParameter("startdate")).getTime());
+		java.sql.Date enddate = new java.sql.Date(sdf.parse(request.getParameter("enddate")).getTime());
+		
+		dto.setSeq(seq);
+		dto.setName(name);
+		dto.setTitle(title);
+		dto.setExplanation(explanation);
+		dto.setGoalmoney(goalmoney);
+		dto.setStartdate(startdate);
+		dto.setEnddate(enddate);
+		
+		String resourcePath = session.getServletContext().getRealPath("");
+		logger.info(resourcePath);
+		DonationDTO oldDTO = donationDAO.selectBySeq(dto);
+		
+		long currTime = 0;
+		
+		if((image1 != null) && (image1.getSize() != 0))
+		{
+//			File f = new File(resourcePath+oldDTO.getImage1());
+//			System.out.println(f.getAbsolutePath());
+			if(new File(resourcePath+oldDTO.getImage1()).exists())
+			{
+//				System.out.println(1);
+				image1.transferTo(new File(resourcePath+oldDTO.getImage1()));
+			}
+			else
+			{
+//				System.out.println(2);
+				currTime = System.currentTimeMillis();
+				
+				String insertPath = "resources/donation/"+currTime+"-donation1.jpg";
+				String filePath = resourcePath + "/" +insertPath;
+				image1.transferTo(new File(filePath));
+				
+				oldDTO.setImage1(insertPath);
+				donationDAO.updateImage1BySeq(oldDTO);
+				
+			}
+			
+		}
+		else
+		{
+			logger.warn("image1 false");
+		}
+		
+		if((image2 != null) && (image2.getSize() != 0))
+		{
+			if(new File(resourcePath+oldDTO.getImage2()).exists())
+			{
+				image2.transferTo(new File(resourcePath+oldDTO.getImage2()));
+			}
+			else
+			{
+				currTime = System.currentTimeMillis();
+				
+				String insertPath = "resources/donation/"+currTime+"-donation2.jpg";
+				String filePath = resourcePath + "/" +insertPath;
+				image2.transferTo(new File(filePath));
+				
+				oldDTO.setImage2(insertPath);
+				donationDAO.updateImage2BySeq(oldDTO);
+				
+			}
+		}
+		else
+		{
+			logger.warn("image2 false");
+		}
+		
+		if((image3 != null) && (image3.getSize() != 0))
+		{
+			if(new File(resourcePath+oldDTO.getImage3()).exists())
+			{
+				image3.transferTo(new File(resourcePath+oldDTO.getImage2()));
+			}
+			else
+			{
+				currTime = System.currentTimeMillis();
+				
+				String insertPath = "resources/donation/"+currTime+"-donation3.jpg";
+				String filePath = resourcePath + "/" +insertPath;
+				image3.transferTo(new File(filePath));
+				
+				oldDTO.setImage3(insertPath);
+				donationDAO.updateImage3BySeq(oldDTO);
+				
+			}
+		}
+		else
+		{
+			logger.warn("image3 false");
+		}
+		
+		if(new File(resourcePath+oldDTO.getLeft()).exists())
+		{
+			if(!(oldDTO.getLeft().equals("없음")))
+			{
+				left.transferTo(new File(resourcePath+oldDTO.getLeft()));
+			}
+			else
+			{
+				currTime = System.currentTimeMillis();
+				
+				String insertPath = "resources/donation/"+currTime+"-left.jpg";
+				String filePath = resourcePath + "/" +insertPath;
+				left.transferTo(new File(filePath));
+				
+				oldDTO.setLeft(insertPath);
+				donationDAO.updateLeftBySeq(oldDTO);
+				
+			}
+		}
+		else
+		{
+			logger.warn("left false");
+		}
+		
+		if((right != null) && (right.getSize() != 0))
+		{
+			if(new File(resourcePath+oldDTO.getRight()).exists())
+			{
+				right.transferTo(new File(resourcePath+oldDTO.getRight()));
+			}
+			else
+			{
+				currTime = System.currentTimeMillis();
+				
+				String insertPath = "resources/donation/"+currTime+"-right.jpg";
+				String filePath = resourcePath + "/" +insertPath;
+				right.transferTo(new File(filePath));
+				
+				oldDTO.setRight(insertPath);
+				donationDAO.updateRightBySeq(oldDTO);
+				
+			}
+		}
+		else
+		{
+			logger.warn("right false");
+		}
+		
+		
+		
+		
+		
+		
+		
+		donationDAO.updateNameBySeq(dto);
+		donationDAO.updateTitleBySeq(dto);
+		donationDAO.updateExplanationBySeq(dto);
+		donationDAO.updateGoalmoneyBySeq(dto);
+		donationDAO.updateStartdateBySeq(dto);
+		donationDAO.updateEnddateBySeq(dto);
+		
+		return "redirect: admin-donation";
+	}
 
 //	@Override
 //	public Object changeImage(MultipartFile left, MultipartFile right) throws Exception

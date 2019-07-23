@@ -10,4 +10,6 @@ public interface DonationPaymentService {
 	public List<DonationPaymentDTO> selectDonationPaymentById(String id, int currentPage);
 	public int getDonationPaymentTotalCountById(String id);
 	public Map<String, Integer> getNaviForDonationPayment(int currentPage, int recordTotalCount);
+	
+	public Object selectDonatedList(String page) throws Exception;
 }

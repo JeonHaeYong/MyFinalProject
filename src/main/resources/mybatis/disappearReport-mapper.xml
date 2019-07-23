@@ -4,7 +4,7 @@
 	<insert id="insert">
 		insert into disappearReport values(disappearReport_seq.nextval, #{disDate}, #{areaList},
 						#{disappearArea}, #{tel}, #{kind}, #{gender}, #{neuter}, #{age}, #{furColor}, 
-						#{feature}, #{et}, #{image},#{writer}, default, #{ip})
+						#{feature}, #{et}, #{image1}, #{image2}, #{image3}, #{writer}, default, #{ip})
 	</insert>
 	<select id="recordAllCount" resultType="Integer">
 		select count(*)as count from disappearReport
@@ -21,7 +21,7 @@
 	</update>
 	<update id="update">
 		update disappearReport set disdate = #{disDate}, areaList = #{areaList}, disappeararea = #{disappearArea}, tel = #{tel}, kind = #{kind}, gender = #{gender},
-											neuter = #{neuter}, age = #{age}, furColor = #{furColor}, feature = #{feature}, et = #{et}, image = #{image} where seq = #{seq}
+											neuter = #{neuter}, age = #{age}, furColor = #{furColor}, feature = #{feature}, et = #{et}, image1 = #{image1}, image2 = #{image2}, image3 = #{image3} where seq = #{seq}
 	</update>
 	<delete id="delete">
 		delete disappearReport where seq = #{value}

@@ -2,6 +2,7 @@ package kh.spring.serviceImpl;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -20,15 +21,14 @@ public class DisappearReportServiceImpl implements DisappearReportService{
 	private HttpSession session;
 	@Autowired
 	private DisappearReportDAO drdao;
-	
 	@Override
 	public int insert(DisappearReportDTO drdto) {
 		return drdao.insert(drdto);
 	}
 	@Override
-	public String imageUploadService(MultipartFile image) {
+	public List<String> imageUploadService(MultipartFile[] image) {
 		String date = new SimpleDateFormat("yyyyMMdd").format(new java.util.Date());
-		long time = System.currentTimeMillis();
+		String time = new SimpleDateFormat("HHmmss").format(new java.util.Date());
 		String id = (String)session.getAttribute("id");
 		String resourcePath = session.getServletContext().getRealPath("/resources");
 		System.out.println(resourcePath);
@@ -41,14 +41,23 @@ public class DisappearReportServiceImpl implements DisappearReportService{
 		if(!uploadPath.exists()) {
 			uploadPath.mkdirs();
 		}
+		
+		List<String> pjPathList = new ArrayList<>();
 		try {
-			image.transferTo(new File(usersPath + "/" + time + "_disappear_image.png"));
+			
+			for(int i = 0; i < image.length; i++) {
+				if(image[i].getSize()==0) {
+					pjPathList.add("null");
+				}else {
+					image[i].transferTo(new File(usersPath + "/" + i +"_"+ time + "_disappear_image.png"));
+					pjPathList.add("/DisappearReport/" + date + "/" + id + "/" + i + "_" + time + "_disappear_image.png");
+				}
+				
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		String pjPath = "/DisappearReport/" + date + "/" + id + "/" + time + "_disappear_image.png";
-		System.out.println(pjPath);
-		return pjPath;
+		return pjPathList;
 	}
 	@Override
 	public List<DisappearReportDTO> selectPerPageService(int currentPage){

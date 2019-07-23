@@ -190,6 +190,38 @@ label {
 #dataNotExist {
 	text-align: center;
 }
+.menu-row {
+	text-align: -webkit-center;
+}
+
+.s-menu1>a {
+	text-decoration: none;
+	color: black;
+	font-size: 20px;
+	font-family: 'Gamja Flower', cursive;
+}
+
+.s-menu1:hover {
+	background-color: #F3F78130;
+}
+
+.s-menu1 {
+	padding-top: 10px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.s-menu {
+	color: #B45F04;
+	border-bottom: 2px solid black;
+}
+
+.menu-box {
+	width: 150px;
+	height: 100px;
+	padding-bottom: 120px;
+	margin-bottom: 150px;
+}
 </style>
 
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
@@ -740,16 +772,16 @@ label {
 				<div class="col-lg-2 col-md-2 col-sm-12 col-12 menu-bar">
 					<!--작은 메뉴바-->
 					<div class="menu">MENU</div>
-					<div>
+					<div class="s-menu1">
 						<a href="toAbandoned?currentPage=1">유기동물조회</a>
 					</div>
-					<div>
+					<div class="s-menu1">
 						<a href="listTempProtect?currentPage=1">임시보호중</a>
 					</div>
-					<div>
+					<div class="s-menu1">
 						<a href="">동물병원 조회</a>
 					</div>
-					<div>
+					<div class="s-menu1">
 						<a href="">보호센터 조회</a>
 					</div>
 				</div>
@@ -855,7 +887,7 @@ label {
 					<!--메뉴바랑 리스트 사이 빈 공간-->
 				</div>
 				<div class="col-lg-9 col-md-9 col-sm-12 col-12">
-					<div class="row justify-content-center">
+					<div class="row">
 						<c:if test="${list != null }">
 
 							<c:forEach var="dto" items="${list}">

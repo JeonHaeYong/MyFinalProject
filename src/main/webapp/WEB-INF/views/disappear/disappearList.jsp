@@ -28,7 +28,7 @@
 .infowrapper {
 font-family: 'Gamja Flower', cursive;
 	box-sizing: border-box;
-	height: 300px;
+	height: 350px;
 	overflow: hidden;
 	border: 2px solid #754F4470;
 }
@@ -71,11 +71,11 @@ padding-left:5px;
 height:15%;
 margin-top:2px;
 }
-.infoimg>img {
+.w-100 {
 width:100%;
 	top: 0;
 	left: 0;
-	height: 100%;
+height: 180px;
 }
 .writeInfo>div{float: left; height:15%;}
 .petInfo>div{float: left; heigth:15%; margin-left:15px;}
@@ -84,10 +84,10 @@ width:100%;
 .footer{text-align:right; margin-right:170px; margin-bottom: 30px;}
 .btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44;}
 .btn:hover{background-color:#FDD692; font-weight:bold;}
-.thumbnail{width:100%; height:100%;}
 .navi-section{text-align: center; margin-top:20px; font-family: 'Gamja Flower', cursive; font-size:25px;}
 .pageNum{text-decoration-line: none; color:#754F44; font-size:25px;}
 .pageNum:hover{font-weight:bold; text-decoration-line: none;}
+.furColor{overflow:hidden; text-overflow:ellipsis; white-space;nowrop;}
 
 </style>
 <script>
@@ -101,6 +101,12 @@ width:100%;
 				$(this).css("font-weight","bold");
 			}
 		})
+		$(".carousel-item img").each(function(index,items){
+			
+			if($(this).attr("src")=='null'){
+				 $(this).parent().parent().remove();
+			}
+		});
 	});
 </script>
 </head>
@@ -112,16 +118,32 @@ width:100%;
 	<div id="title"><h1>잠시 길 잃은 동물들</h1></div>
 	<div class="containier ">
 		<div class="row disappearList">
-		  <c:forEach var="list" items="${list }"> 
+		   <c:forEach var="list" items="${list }"> 
 			<div class="col-lg-4 col-md-6 col-sm-6 dtocol">
 				<div class="infowrapper">
-					<div class="infoimg"><a href="toReportContent?seq=${list.seq }"><img src='${list.image }' class="thumbnail"></a></div>
-				    <div class="inforecommend">♥</div>
+						<div class="infoimg">
+							
+								<div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+									<div class="carousel-inner">
+									
+										<div class="carousel-item active">
+											<a href="toReportContent?seq=${list.seq }">	<img src="${list.image1 }" class="d-block w-100"></a>
+										</div>
+										<div class="carousel-item">
+											<a href="toReportContent?seq=${list.seq }">	<img src="${list.image2 }" class="d-block w-100"></a>
+										</div>
+										<div class="carousel-item">
+											<a href="toReportContent?seq=${list.seq }">	<img src="${list.image3 }" class="d-block w-100"></a>
+										</div> 
+									</div>
+								</div>
+						</div>
+						<div class="inforecommend">♥</div>
                    <div class="infotext">${list.kind }</div>
                     <div class="petInfo">
                     	<div>${list.gender} </div>
                     	<div>${list.age }</div>
-                    	<div>${list.furColor }</div>
+                    	<div class="furColor">${list.furColor }</div>
                     </div><br>
                     <div class="writeInfo">
                     	<div class="writer">${list.writer }</div>
@@ -129,7 +151,7 @@ width:100%;
                     </div>
 				</div>
 			</div>
-			  </c:forEach>
+			  </c:forEach> 
 			
 			
 		</div>

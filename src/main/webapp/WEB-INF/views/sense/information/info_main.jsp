@@ -160,16 +160,19 @@ a[name="s-menu"]:hover {
 	height: 100% !important;
 }
 
-#infowrite, #infodel {
+#infowrite, #infodel,.infonavi ,.t_navi {
 	border: 0;
 	background-color: #FDD69270;
 	color: #754F44;
 	font-family: 'Gamja Flower', cursive;
 }
 
-#infowrite:hover, #infodel:hover {
+#infowrite:hover, #infodel:hover,.infonavi:hober, .t_navi:hover {
 	background-color: #FDD692;
 	font-weight: bold;
+}
+.btngroup{
+padding-right:105px;
 }
 </style>
 
@@ -194,9 +197,7 @@ a[name="s-menu"]:hover {
 					<div class="col-12 ">
 						<a name="s-menu" href="oxQuiz">OX QUIZ</a>
 					</div>
-					<div class="col-12">
-						<a name="s-menu" href="">반려동물 상식</a>
-					</div>
+
 					<div class="col-12">
 						<a name="s-menu" href="information_t">반려동물 정보</a>
 					</div>
@@ -217,61 +218,124 @@ a[name="s-menu"]:hover {
 			</div>
 			<div class="col-1"></div>
 			<div class="col-lg-9 col-md-8 col-sm-12 col-12 info-box">
-				<!--정보   -->
+				<!--내용   -->
+
+				<ul class="nav nav-tabs" id="myTab" role="tablist">
+					<li class="nav-item"><a class="nav-link active" id="home-tab"
+						data-toggle="tab" href="#home" role="tab" aria-controls="home"
+						aria-selected="true">정보 </a></li>
+					<li class="nav-item"><a class="nav-link" id="profile-tab"
+						data-toggle="tab" href="#training" role="tab"
+						aria-controls="training" aria-selected="false">훈련</a></li>
+
+				</ul>
 				<form action="delinfo" method="post" id="delform">
-					<div class="row .infinite">
+					<div class="tab-content" id="myTabContent">
 
-						<c:forEach var="dto" items="${infodto}">
-
-							<div class="col-lg-4 col-md-6 col-sm-6 dtocol">
-
-								<div class=infowrapper>
-
-									<div class=infoseq>
-										<c:if test="${id eq 'admin1234'}">
-											<input type=checkbox value="${dto.seq}" name="check">
-										</c:if>
-										NO.${dto.seq }
+						<!--반려견정보  -->
+						<div class="tab-pane fade show active" id="home" role="tabpanel"
+							aria-labelledby="home-tab">
+							<div class="row .infinite">
+								<c:forEach var="dto" items="${infodto}">
+									<div class="col-lg-4 col-md-6 col-sm-6 dtocol">
+										<div class=infowrapper>
+											<div class=infoseq>
+												<c:if test="${type == 4}">
+												<script>
+												console.log(${type});
+												</script>
+													<input type=checkbox value="${dto.seq}" name="check">
+												</c:if>
+												NO.${dto.seq }
+											</div>
+											<div class=infoimg>
+												<a href="detail_info?seq=${dto.seq}" class="detail">${dto.image}</a>
+											</div>
+											<div class=infotext>${dto.title}</div>
+											<div class="inforecommend">${dto.writeDate}</div>
+										</div>
 									</div>
+								</c:forEach>
+							</div>
 
-									<div class=infoimg>
-										<a href="detail_info?seq=${dto.seq}" class="detail">${dto.image}</a>
+							<div class="row mt-5" align="right">
+								<div class="col-12">
+									<div>
+										<div id="tnavi" align="center">${infonavi }</div>
 									</div>
-									<div class=infotext>${dto.title}</div>
-									<div class="inforecommend">${dto.writeDate}</div>
 								</div>
+							</div>
+						</div>
+
+						<!--훈련정보  -->
+						<div class="tab-pane fade " id="training" role="tabpanel"
+							aria-labelledby="profile-tab">
+
+							<div class="row tdtowrapper">
+
+								<c:forEach var="tdto" items="${tdto}">
+
+									<div class="col-lg-4 col-md-6 col-sm-6 dtocol">
+
+										<div class=infowrapper>
+
+											<div class=infoseq>
+												<c:if test="${type == '4'}">
+													<input type=checkbox value="${tdto.seq}" name="check">
+												</c:if>
+												NO.${tdto.seq }
+											</div>
+
+											<div class=infoimg>
+												<a href="detail_info?seq=${tdto.seq}" class="detail">${tdto.image}</a>
+											</div>
+											<div class=infotext>${tdto.title}</div>
+											<div class="inforecommend">${tdto.writeDate}</div>
+										</div>
+
+									</div>
+								</c:forEach>
 
 							</div>
-						</c:forEach>
+							<div class="row mt-5" align="right">
+								<div class="col-12">
+									<div>
+										<div id="tnavi" align="center">${tnavi}</div>
+									</div>
+								</div>
+							</div>
+						</div>
 
 
 					</div>
 				</form>
-			</div>
-		</div>
-		<div class="row mt-5" align="right">
-			<div class="col-12">
-				<div>
-					<div id="navi" align="center">${navi}</div>
-					<c:if test="${id eq 'admin1234'}">
-						<button id="infowrite" class="btn">글쓰기</button>
-						<button id="infodel" class="btn">글삭제</button>
-						<script>
-							document.getElementById("infowrite").onclick = function() {
-								location.href = "infowrite";
-							}
-						
-							document.getElementById("infodel").onclick = function() {
-									$("#delform").submit();
-								
-						
-							}
-						</script>
 
-					</c:if>
-				</div>
+
 			</div>
+
 		</div>
+	</div>
+	<div class="row mt-5 mb-5" >
+		<div class="col-lg-12 col-md-12 col-12 btngroup" align="right">
+
+			<c:if test="${type == 4}">
+				<button id="infowrite" class="btn">글쓰기</button>
+				<button id="infodel" class="btn">글삭제</button>
+				<script>
+					document.getElementById("infowrite").onclick = function() {
+						location.href = "infowrite";
+					}
+
+					document.getElementById("infodel").onclick = function() {
+						$("#delform").submit();
+
+					}
+				</script>
+
+			</c:if>
+		</div>
+
+	</div>
 
 	</div>
 	</div>
@@ -294,7 +358,34 @@ a[name="s-menu"]:hover {
 
 	<!--정보 스크립트 코드   -->
 
+	<script>
+		$(document).on("click", ".infonavi", function() {
+			$.ajax({
+				url : "info_main",
+				type : "post",
+				data : {
+					currentPage : $(this).attr("value")
+				}
+			}).done(function(resp) {
 
+				console.log(resp);
+				$("#home").html(resp);
+			})
+		});
+		$(document).on("click", ".t_navi", function() {
+			$.ajax({
+				url : "train_main",
+				type : "post",
+				data : {
+					currentPage : $(this).attr("value")
+				}
+			}).done(function(resp) {
+
+				console.log(resp);
+				$("#training").html(resp);
+			})
+		});
+	</script>
 
 </body>
 </html>

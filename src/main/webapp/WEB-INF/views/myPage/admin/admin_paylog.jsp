@@ -138,9 +138,9 @@ font-weight:bold;
 				
 					<div class="row justify-content-center">
 						
-						<div class="col-8 col-md-8 col-lg-2 text-center my-auto">
+						<div class="col-8 col-md-8 col-lg-3 text-center my-auto">
 							
-							<select id="condition_select">
+							<select id="condition_select" class="custom-select">
 								<option value="buyer-like">구매자</option>
 								<option value="seller-like">판매자</option>
 								<option value="buyer-equal">구매자(정확한 아이디)</option>
@@ -150,7 +150,7 @@ font-weight:bold;
 							
 						</div>
 						
-						<div class="col-8 col-md-8 col-lg-8 text-center my-auto">
+						<div class="col-8 col-md-8 col-lg-7 text-center my-auto">
 							
 							<input id="search_text" class="form-control" type="text" placeholder="검색할 키워드를 입력하세요(없을 시 전체)">
 							

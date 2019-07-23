@@ -27,6 +27,10 @@
 		where rown = #{value}
 	</select>
 	
+	<select id="selectBySeq" resultType="kh.spring.dto.DonationDTO">
+		select * from donation where seq = #{seq}
+	</select>
+	
 	<select id="selectCount" resultType="java.lang.Integer">
 		select count(*) from donation
 	</select>
@@ -37,6 +41,40 @@
 	
 	<update id="updateCurrentMoney">
 		update donation set currentmoney = currentmoney + #{value}
+	</update>
+	
+	<update id="updateNameBySeq">
+		update donation set name = #{name} where seq = #{seq}
+	</update>
+	<update id="updateTitleBySeq">
+		update donation set title = #{title} where seq = #{seq}
+	</update>
+	<update id="updateExplanationBySeq">
+		update donation set explanation = #{explanation} where seq = #{seq}
+	</update>
+	<update id="updateGoalmoneyBySeq">
+		update donation set goalmoney = #{goalmoney} where seq = #{seq}
+	</update>
+	<update id="updateStartdateBySeq">
+		update donation set startdate = #{startdate} where seq = #{seq}
+	</update>
+	<update id="updateEnddateBySeq">
+		update donation set enddate = #{enddate} where seq = #{seq}
+	</update>
+	<update id="updateImage1BySeq">
+		update donation set image1 = #{image1} where seq = #{seq}
+	</update>
+	<update id="updateImage2BySeq">
+		update donation set image2 = #{image2} where seq = #{seq}
+	</update>
+	<update id="updateImage3BySeq">
+		update donation set image3 = #{image3} where seq = #{seq}
+	</update>
+	<update id="updateLeftBySeq">
+		update donation set left = #{left} where seq = #{seq}
+	</update>
+	<update id="updateRightBySeq">
+		update donation set right = #{right} where seq = #{seq}
 	</update>
 	
 </mapper>

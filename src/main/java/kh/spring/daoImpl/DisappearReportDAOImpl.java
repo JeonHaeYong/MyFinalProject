@@ -22,12 +22,13 @@ public class DisappearReportDAOImpl implements DisappearReportDAO{
 	
 	@Override
 	public int insert(DisappearReportDTO drdto) {
-		if(drdto.getNeuter() == null) {
+		if(drdto.getNeuter() == null) { //중성화 안했을 경우
 			drdto.setNeuter("X");
 		}
-		if(drdto.getEt()==null) {
+		if(drdto.getEt()==null) { // 기타 사항 없을경우
 			drdto.setEt("");
 		}
+		
 		return sst.insert("DisappearReportDAO.insert", drdto);
 	}
 	@Override
