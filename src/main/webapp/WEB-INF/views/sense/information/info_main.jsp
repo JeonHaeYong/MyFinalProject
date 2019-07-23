@@ -202,7 +202,7 @@ padding-right:105px;
 						<a name="s-menu" href="information_t">반려동물 정보</a>
 					</div>
 					<c:choose>
-						<c:when test="${type eq '4'}">
+						<c:when test="${type == 4}">
 							<div class="col-12">
 								<a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a>
 							</div>
@@ -240,7 +240,10 @@ padding-right:105px;
 									<div class="col-lg-4 col-md-6 col-sm-6 dtocol">
 										<div class=infowrapper>
 											<div class=infoseq>
-												<c:if test="${type eq '4'}">
+												<c:if test="${type == 4}">
+												<script>
+												console.log(${type});
+												</script>
 													<input type=checkbox value="${dto.seq}" name="check">
 												</c:if>
 												NO.${dto.seq }
@@ -277,7 +280,7 @@ padding-right:105px;
 										<div class=infowrapper>
 
 											<div class=infoseq>
-												<c:if test="${type eq '4'}">
+												<c:if test="${type == '4'}">
 													<input type=checkbox value="${tdto.seq}" name="check">
 												</c:if>
 												NO.${tdto.seq }
