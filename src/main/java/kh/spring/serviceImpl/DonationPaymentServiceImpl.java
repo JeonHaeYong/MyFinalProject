@@ -106,4 +106,11 @@ public class DonationPaymentServiceImpl implements DonationPaymentService {
 		return pageNavi;
 	}
 
+	@Override
+	public Object selectDonatedList(String page) throws Exception
+	{
+		return null;
+	}
+
+	
 }
