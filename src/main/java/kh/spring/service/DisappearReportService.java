@@ -8,7 +8,7 @@ import kh.spring.dto.DisappearReportDTO;
 
 public interface DisappearReportService {
 	public int insert(DisappearReportDTO drdto);
-	public String imageUploadService(MultipartFile image);
+	public List<String> imageUploadService(MultipartFile[] image);
 	public List<DisappearReportDTO> selectPerPageService(int currentPage);
 	public String getNaviService (int currentPage);
 	public DisappearReportDTO toReportContentService(int seq);

@@ -63,10 +63,16 @@ public class MemberController {
 			}
 			else {
 				session.setAttribute("id", dto.getId());
+
+				MemberDTO mdto=mservice.selectOneMemberService(dto.getId());					
+				session.setAttribute("type", mdto.getType());
+				
 				System.out.println("session정보"+session.getAttribute("id"));
 				return "redirect:/"+returnUrl;	
+
 			}
 		}
+		
 		catch(Exception e) {
 			e.printStackTrace();
 			return "/loginfail";

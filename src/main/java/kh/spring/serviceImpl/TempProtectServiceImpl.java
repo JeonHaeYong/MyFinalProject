@@ -28,8 +28,9 @@ public class TempProtectServiceImpl implements TempProtectService{
 	@Autowired
 	private TempProtectDAO tpdao;
 
-	public int deleteTempProtect(TempProtectDTO dto) {
-		int result = tpdao.deleteTempProtect(dto);
+	
+	public int deleteTempProtect(int seq) {
+		int result = tpdao.deleteTempProtect(seq);
 		return result;
 	}
 

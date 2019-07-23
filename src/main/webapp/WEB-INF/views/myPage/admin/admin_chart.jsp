@@ -280,25 +280,25 @@ font-weight:bold;
 					// Some raw data (not necessarily accurate)
 	    			var data3 = google.visualization.arrayToDataTable
 	    			([
-	    				['월', '월 평균 방문자 수', 'Line']
-	    				,[response.year[11].time, response.year[11].count, response.year[11].count]
-	    				,[response.year[10].time, response.year[10].count, response.year[10].count]
-	    				,[response.year[9].time, response.year[9].count, response.year[9].count]
-	    				,[response.year[8].time, response.year[8].count, response.year[8].count]
-	    				,[response.year[7].time, response.year[7].count, response.year[7].count]
-	    				,[response.year[6].time, response.year[6].count, response.year[6].count]
-	    				,[response.year[5].time, response.year[5].count, response.year[5].count]
-	    				,[response.year[4].time, response.year[4].count, response.year[4].count]
-	    				,[response.year[3].time, response.year[3].count, response.year[3].count]
-	    				,[response.year[2].time, response.year[2].count, response.year[2].count]
-	    				,[response.year[1].time, response.year[1].count, response.year[1].count]
-	    				,[response.year[0].time, response.year[0].count, response.year[0].count]
+	    				['월', '후원 금액', '월 평균 방문자 수']
+	    				,[response.year[11].time, response.year[11].pay/50000, response.year[11].count]
+	    				,[response.year[10].time, response.year[10].pay/50000, response.year[10].count]
+	    				,[response.year[9].time, response.year[9].pay/50000, response.year[9].count]
+	    				,[response.year[8].time, response.year[8].pay/50000, response.year[8].count]
+	    				,[response.year[7].time, response.year[7].pay/50000, response.year[7].count]
+	    				,[response.year[6].time, response.year[6].pay/50000, response.year[6].count]
+	    				,[response.year[5].time, response.year[5].pay/50000, response.year[5].count]
+	    				,[response.year[4].time, response.year[4].pay/50000, response.year[4].count]
+	    				,[response.year[3].time, response.year[3].pay/50000, response.year[3].count]
+	    				,[response.year[2].time, response.year[2].pay/50000, response.year[2].count]
+	    				,[response.year[1].time, response.year[1].pay/50000, response.year[1].count]
+	    				,[response.year[0].time, response.year[0].pay/50000, response.year[0].count]
 	    			]);
 
 	    			var options3 = 
 	    			{
-	    				title : '최근 1년간 월별 하루 평균 방문자 수',
-// 	    				vAxis: {title: '단위 : 1'},
+	    				title : '최근 1년간 월별 하루 평균 방문자 수 및 후원금액',
+	    				vAxis: {title: '단위 : 50000'},
 // 	    				hAxis: {title: '단위 : 월'},
 	    				seriesType: 'bars',
 	    				series: {1: {type: 'line'}},

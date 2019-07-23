@@ -25,8 +25,8 @@ public class TempProtectDAOImpl implements TempProtectDAO {
 	@Autowired
 	private SqlSessionTemplate sst;
 
-	public int deleteTempProtect(TempProtectDTO dto) {
-		return sst.delete("TempProtectDAO.delete", dto);
+	public int deleteTempProtect(int seq) {
+		return sst.delete("TempProtectDAO.delete", seq);
 	}
 
 	public int modifyTempProtect(TempProtectDTO dto) {

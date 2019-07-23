@@ -204,6 +204,21 @@ public class AdminController
 		
 		return result;
 	}
+	@RequestMapping(value = "admin-donation-update", method = RequestMethod.POST)
+	public Object updateDonation(HttpServletRequest request,MultipartFile image1, MultipartFile image2, MultipartFile image3, MultipartFile left, MultipartFile right)
+	{
+		Object result = "error";
+		try
+		{
+			result = donationService.updateDonation(request, image1, image2, image3, left, right);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 //	@RequestMapping(value = "admin-donation-image", method = RequestMethod.POST)
 //	public Object changeLeftImage(MultipartFile left, MultipartFile right)
 //	{

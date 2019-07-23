@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Report Contents</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<linkhref="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i" rel="stylesheet">
 <link rel="stylesheet" href="resources/fonts/icomoon/style.css">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="resources/css/jquery-ui.css">
@@ -28,7 +28,8 @@
         #wrapper{border: 2px solid #754F44; width: 1200px; height: 400px; margin: auto; margin-bottom:20px;}
         #wrapper>div{float: left;}
         .pet{width: 35%; height: 97%; margin: 5px;}
-        .petImg{width: 100%; height: 65%;}
+        .infoImg{height:200px;}
+        .w-100{height:200px;}
         .feature{width: 100%; height: 35%;}
         .feature>div:first-child{height: 20%; width: 100%; font-weight: bold; font-family: 'Gamja Flower', cursive; font-size:20px;}
         .feature>div:nth-child(2){height: 80%; width: 100%; overflow-y: auto; word-wrap: break-word;}
@@ -65,6 +66,11 @@
     			location.href="deleteProc.dis?seq=${content.seq}";
             	}
     		});
+    		$(".carousel-item>img").each(function(index,items){
+    			if($(this).attr("src")=='null'){
+    				var parent = $(this).parent().remove();
+    			}
+    		});
     	});
     </script>
 </head>
@@ -75,9 +81,32 @@
 	<div class="px-0 pb-0 empty"></div>
 	<div class="title"><h1>실종신고</h1></div>
     <div id="wrapper">
-      
        <div class="pet">
-           <div class="petImg"><img src='${content.image }'></div>
+           <div class="petImg">
+           		<div class="infoimg">
+					<div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+						<div class="carousel-inner">
+							<div class="carousel-item active">
+								<img src="${content.image1 }" class="d-block w-100">
+							</div>
+							<div class="carousel-item">
+								<img src="${content.image2 }" class="d-block w-100">
+							</div>
+							<div class="carousel-item">
+								<img src="${content.image3 }" class="d-block w-100">
+							</div> 
+						</div>
+						<a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+    						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    						<span class="sr-only">Previous</span>
+  						</a>
+  						<a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+    						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+    						<span class="sr-only">Next</span>
+  						</a>
+					</div>
+				</div>
+           </div>
            <hr>
            <div class="feature">
                <div>특징</div>

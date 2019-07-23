@@ -229,7 +229,7 @@ function sendFile(files,editor){
 						<a name="s-menu" href="information_t">반려동물 정보</a>
 					</div>
 					<c:choose>
-						<c:when test="${type == 4}">
+						<c:when test="${type eq '4'}">
 							<div class="col-12">
 								<a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a>
 							</div>
