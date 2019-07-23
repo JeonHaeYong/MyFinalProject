@@ -314,6 +314,13 @@ public class MemberController {
 		System.out.println(dto.getId()+"님의 정보업데이트가 " +result+"행 완료되었습니다.");
 		return "redirect:toMyPage";
 	}
+	
+	//프로필img 바꾸기
+		@RequestMapping("changeProfileImg")
+		public String changeProfileImg(MemberDTO dto) {
+			//여기짜기
+			return "redirect:toMyPage";
+		}
 
 	@RequestMapping("toMyPage_writeList")
 	public String toMyPage_writeList_loginCheck(HttpServletRequest request) {

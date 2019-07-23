@@ -68,6 +68,7 @@
                                             <img src="tmp" class="upload-display">
                                         </div>
                                     </div>
+                                    <input type="hidden" value="${memberDTO.id }" name="id">
                                     </form>
                                 </div>
                                 <div class="modal-footer">

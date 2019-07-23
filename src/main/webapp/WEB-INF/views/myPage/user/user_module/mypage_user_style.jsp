@@ -51,7 +51,7 @@ src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/Lo
                 }
                 /*마이페이지 컨테이너 크기 조정*/
                 .container{
-                	max-width: 1400px;
+                	max-width: 1300px;
                 }
 </style>
    <!-- /user 마이페이지 스타일 -->

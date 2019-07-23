@@ -17,4 +17,6 @@ public interface ReviewCommentsDAO {
 	public int updateReviewCommentsLikeMinus(int seq);
 	public int selectReviewCommentsSeqCurrVal();
 	public ReviewCommentsDTO selectReviewCommentsBySeq(int seq);
+	public int updateReplyContentsByseq(ReviewCommentsDTO dto);
+	public ReviewCommentsDTO selectDTOBySeq(int seq);
 }

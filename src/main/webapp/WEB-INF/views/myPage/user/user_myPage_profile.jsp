@@ -437,5 +437,8 @@
 	                $(".profile_upload_part").toggle();
 	                $(".profile_upload_part.hide").removeClass("d-flex");
                 });
+                $(".changeImg_btn").on("click",function(){
+                	$("#changeProfileImg_form").submit();
+                })
         </script>
     </html>

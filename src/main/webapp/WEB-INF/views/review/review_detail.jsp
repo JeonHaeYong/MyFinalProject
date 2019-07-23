@@ -81,13 +81,13 @@
                                 <div class="col-12">
                                     <form class="text-right" action="deleteReview" method="post" onsubmit="return deleteCheck();">
                                         <c:if test="${id == reviewDTO.writer }">
-	                                        <input type="button" class="btn btn-outline-warning rounded" value="수정">
-	                                        <input type="hidden" value="${reviewDTO.seq }" name="seq">
-	                                        <input type="submit" class="btn btn-outline-warning rounded" value="삭제">
+                                            <input type="button" class="btn btn-outline-warning rounded" value="수정">
+                                            <input type="hidden" value="${reviewDTO.seq }" name="seq">
+                                            <input type="submit" class="btn btn-outline-warning rounded" value="삭제">
                                         </c:if>
                                         <input type="hidden" value="${currentPage }" name="currentPage">
                                         <input id="toList" type="button" class="btn btn-outline-warning rounded" value="목록">
-                                   </form>
+                                    </form>
                                 </div>
                             </div>
                             <div class="row">
@@ -104,23 +104,29 @@
                                 <!-- 댓글 목록 보여주기 -->
                                 <c:forEach var="list" items="${replyList }">
                                     <div class="col-12 border-bottom mb-1">
-                                        <div class="d-flex justify-content-between">
-                                        	<div class="font-weight-bold">${list.writer }</div>
-                                        	<c:if test="${id==list.writer }">
-                                        		<div>
-                                        			<a role="btn" class="btn btn-outline-warning rounded p-1" href="javascript:void(0)" onclick="modifyReply(this);">수정</a>
-                                        			<a role="btn" class="btn btn-outline-warning rounded p-1" href="javascript:void(0)" onclick="">삭제</a>
-                                        		</div>
-                                        	</c:if>
+                                        <div class="firstLine d-flex justify-content-between">
+                                            <div class="font-weight-bold">${list.writer }</div>
+                                            <c:if test="${id==list.writer }">
+                                                <div class="modifyReply_part">
+                                                    <a href="javascript:void(0)" onclick="modifyReplyToggle(this)"><img src="review/edit.png" style="width: 20px; height: 20px;"></a>
+                                                    <a href="javascript:void(0)" onclick="deleteReply(this)" value="${list.seq }"><img src="review/cancel.png" style="width: 20px; height: 20px;"></a>
+                                                </div>
+                                                <div class="modifyReply_part hide">
+                                                    <a role="btn" class="btn btn-outline-warning rounded p-1" href="javascript:void(0)" onclick="modifyReply(this);" value="${list.seq }">완료</a>
+                                                    <a role="btn" class="btn btn-outline-warning rounded p-1" href="javascript:void(0)" onclick="formReset(this)" value="${list.contents }">취소</a>
+                                                </div>
+                                            </c:if>
                                         </div>
-                                        <div class=""><input class="reply_contents" type="text" readonly value="${list.contents }"></div>
+                                        <div class="form-group">
+                                            <input type="text" readonly class="form-control-plaintext reply_contents" value="${list.contents }">
+                                        </div>
                                         <div class="d-flex justify-content-between">
-                                        	<span>${list.formed_date }</span>
-                                        	<span class="likeOk_check" value="${list.likeOk}" seq="${list.seq }" writer="${list.writer }">
-                                        		<span class="mr-2 reply_likes">${list.likes }</span>
-                                        		<a class="click_like_btn likeOk_n" href="javascript:void(0)" onclick="clickLikeImg(this);"><img src="review/like_1.png" style="width:25px;"></a>
-                                        		<a class="click_like_btn likeOk_y" href="javascript:void(0)" onclick="clickLikeImg(this);"><img src="review/like_2.png" style="width:25px;"></a>
-                                        	</span>
+                                            <span>${list.formed_date }</span>
+                                            <span class="likeOk_check" value="${list.likeOk}" seq="${list.seq }" writer="${list.writer }">
+                                                <span class="mr-2 reply_likes">${list.likes }</span>
+                                                <a class="click_like_btn likeOk_n" href="javascript:void(0)" onclick="clickLikeImg(this);"><img src="review/like_1.png" style="width:25px;"></a>
+                                                <a class="click_like_btn likeOk_y" href="javascript:void(0)" onclick="clickLikeImg(this);"><img src="review/like_2.png" style="width:25px;"></a>
+                                            </span>
                                         </div>
                                     </div>
                                 </c:forEach>
@@ -131,7 +137,7 @@
                                         <ul class="pagination justify-content-center">
                                             <c:forEach var="navi" items="${reply_navi }">
                                                 <li class="page-item reply_item" value="${navi }">
-                                                   	<a class="page-link text-decoration-none reply_navi" href="#toList" onclick="clickReplyNavi(this);">${navi }</a>
+                                                    <a class="page-link text-decoration-none reply_navi" href="#toList" onclick="clickReplyNavi(this);">${navi }</a>
                                                 </li>
                                             </c:forEach>
                                         </ul>
@@ -163,7 +169,7 @@
                 }
                 $("#review_reply_input").keyup(function(e) {
                     if (e.keyCode == 13) {
-                    	$("#review_reply_btn").trigger("click");
+                        $("#review_reply_btn").trigger("click");
                     }     
                 });
                 $("#review_reply_btn").on("click",function(){//댓글등록
@@ -197,71 +203,71 @@
                 });
                 //좋아요클릭했을때,
                 function clickLikeImg(param){
-                	var id = "${id}";
-                	var writer = $(param).parents(".likeOk_check").attr("writer");
-                	if(${id==null}){//아직 로그인을 하지 않았다면,
-                		alert("좋아요 기능은 로그인 한 사람만 가능합니다.");
-                		return false;
-                	}
-                	else if(id==writer){
-                		alert("본인의 댓글에 '좋아요'를 누를수 없습니다.");
-                		return false;
-                	}
-                	
-                	// insert 누른사람 / 몇번seq의 댓글에 좋아요누른건지(리뷰코멘트라이크 테이블) //// 몇번seq의 댓글의  dto의 좋아요 수 update (리뷰코멘트)
-                	var reply_seq = $(param).parents(".likeOk_check").attr("seq");
-                	if($(param).hasClass("likeOk_y") == true){ //만약 해당댓글에 이미 좋아요를 눌렀다면, 좋아요 취소
-                		$.ajax({
-							url : "reviewCommentsLikeCancel",
-							type : "post",
-							data : {
-								id : id,
-								r_comments_seq : reply_seq
-							}
-						}).done(function(resp){
-							if(resp==2){//트랜잭션처리 2
-								var like = $(param).siblings(".reply_likes");
-								$(like).text(parseInt($(like).text())-1);
-							}
-						});
-                	}else{	//만약 해당댓글에 좋아요를 누르지 않았다면, like+1 && like 테이블 insert  
-						$.ajax({
-							url : "reviewCommentsLikeClick",
-							type : "post",
-							data : {
-								id : id,
-								r_comments_seq : reply_seq
-							}
-						}).done(function(resp){
-							if(resp==2){
-								var like = $(param).siblings(".reply_likes");
-								$(like).text(parseInt($(like).text())+1);
-							}
-						});
-                	}
-                	$(param).toggle();
-                	$(param).siblings(".click_like_btn").toggle();
+                    var id = "${id}";
+                    var writer = $(param).parents(".likeOk_check").attr("writer");
+                    if(${id==null}){//아직 로그인을 하지 않았다면,
+                        alert("좋아요 기능은 로그인 한 사람만 가능합니다.");
+                        return false;
+                    }
+                    else if(id==writer){
+                        alert("본인의 댓글에 '좋아요'를 누를수 없습니다.");
+                        return false;
+                    }
+
+                    // insert 누른사람 / 몇번seq의 댓글에 좋아요누른건지(리뷰코멘트라이크 테이블) //// 몇번seq의 댓글의  dto의 좋아요 수 update (리뷰코멘트)
+                    var reply_seq = $(param).parents(".likeOk_check").attr("seq");
+                    if($(param).hasClass("likeOk_y") == true){ //만약 해당댓글에 이미 좋아요를 눌렀다면, 좋아요 취소
+                        $.ajax({
+                            url : "reviewCommentsLikeCancel",
+                            type : "post",
+                            data : {
+                                id : id,
+                                r_comments_seq : reply_seq
+                            }
+                        }).done(function(resp){
+                            if(resp==2){//트랜잭션처리 2
+                                var like = $(param).siblings(".reply_likes");
+                                $(like).text(parseInt($(like).text())-1);
+                            }
+                        });
+                    }else{	//만약 해당댓글에 좋아요를 누르지 않았다면, like+1 && like 테이블 insert  
+                        $.ajax({
+                            url : "reviewCommentsLikeClick",
+                            type : "post",
+                            data : {
+                                id : id,
+                                r_comments_seq : reply_seq
+                            }
+                        }).done(function(resp){
+                            if(resp==2){
+                                var like = $(param).siblings(".reply_likes");
+                                $(like).text(parseInt($(like).text())+1);
+                            }
+                        });
+                    }
+                    $(param).toggle();
+                    $(param).siblings(".click_like_btn").toggle();
                 }
                 function likeOkCheck (){
-                	$(".likeOk_check").each(function(i,item){
-                    	if($(item).attr("value")!=""){//좋아요를 누른상태
-                    		$(item).children(".likeOk_n").hide();
-                    	}else{
-                    		$(item).children(".likeOk_y").hide();
-                    	}
+                    $(".likeOk_check").each(function(i,item){
+                        if($(item).attr("value")!=""){//좋아요를 누른상태
+                            $(item).children(".likeOk_n").hide();
+                        }else{
+                            $(item).children(".likeOk_y").hide();
+                        }
                     });
                 }
                 likeOkCheck();
                 function clickReplyNavi(param){//댓글 navi 클릭했을때,
-                	var currentPage = $(param).text();
-                	if(currentPage=="<이전"){
-                		var prev =  $(param).parent().next().attr("value");
-                		currentPage = parseInt(prev) - 1 ;
-                	}else if(currentPage=="다음>"){
-                		var next  = $(param).parent().prev().attr("value");
-                		currentPage = parseInt(next) + 1 ;
-                	}
-                	$.ajax({
+                    var currentPage = $(param).text();
+                    if(currentPage=="<이전"){
+                        var prev =  $(param).parent().next().attr("value");
+                        currentPage = parseInt(prev) - 1 ;
+                    }else if(currentPage=="다음>"){
+                        var next  = $(param).parent().prev().attr("value");
+                        currentPage = parseInt(next) + 1 ;
+                    }
+                    $.ajax({
                         url : "clickReplyNavi",
                         type : "post",
                         data : {
@@ -276,20 +282,78 @@
                 }
                 //삭제버튼눌렀을때,
                 function deleteCheck(){
-                	if(!confirm("글을 삭제하시겠습니까?")){
-                		return false;
-                	}
+                    if(!confirm("글을 삭제하시겠습니까?")){
+                        return false;
+                    }
                 };
-              //목록으로 돌아가기
+                //목록으로 돌아가기
                 $("#toList").on("click",function(){
-                	var form = $(this).parent();
-                	$(form).attr("action","toReviewList");
-                	$(form).attr("onsubmit",false);
-                	$(form).submit();
+                    var form = $(this).parent();
+                    $(form).attr("action","toReviewList");
+                    $(form).attr("onsubmit",false);
+                    $(form).submit();
                 });
-              //댓글수정
-               function modifyReply(param){
-            	  
-              };
+                $(".modifyReply_part.hide").hide();
+                function modifyReplyToggle(param){//수정하려면,
+                    $(param).parent().toggle();
+                    $(param).parent().next().toggle();
+                    $(param).parents(".firstLine").next().children(".reply_contents").attr("readonly",false);
+                    $(param).parents(".firstLine").next().children(".reply_contents").css("background-color","skyblue");
+                }
+                function formReset(param){//수정취소눌렀을때,
+                    var contents = $(param).attr("value");
+                    $(param).parents(".firstLine").next().children(".reply_contents").val(contents);
+                    $(param).parent().toggle();
+                    $(param).parent().prev().toggle();
+                    $(param).parents(".firstLine").next().children(".reply_contents").attr("readonly",true);
+                    $(param).parents(".firstLine").next().children(".reply_contents").css("background-color","inherit");
+                }
+
+                function modifyReply(param){//댓글수정
+                    var input = $(param).parents(".firstLine").next().children(".reply_contents");
+                    var reply =  input.val();
+                    var replyRegex = /^ {1,}$/;
+                    var replyRegexResult = replyRegex.exec(reply);
+                    if(reply==""||replyRegexResult!=null){
+                        alert("댓글에 공백을 허용하지 않습니다.");
+                        input.focus();
+                        return false;
+                    }
+                    $.ajax({
+                        url : "updateReplyContents",
+                        type : "post",
+                        data : {
+                            seq : $(param).attr("value"),
+                            contents : reply
+                        }
+                    }).done(function(resp){
+                        input.val(resp);
+                        $(param).next().attr("value",resp);
+                        $(param).parent().toggle();
+                        $(param).parent().prev().toggle();
+                        input.attr("readonly",true);
+                        input.css("background-color","inherit");
+                    });
+                };
+                function deleteReply(param){//댓글 삭제
+                	var seq = $(param).attr("value");
+                	var writer = $(param).parent().prev().text();
+					if(confirm("댓글을 삭제하시겠습니까?")){
+						$.ajax({
+							url : "deleteReply",
+							type : "post",
+							data : {
+								seq : seq,
+								writer : writer
+							}
+						}).done(function(resp){
+							alert("댓글이 삭제되었습니다.");
+	                        $(".reply_part").remove();
+	                        $(".reply_wrapper").append(resp);
+	                        likeOkCheck();//좋아요 클릭한것만 빨강하트
+	                        $(".modifyReply_part.hide").hide();
+						});
+					}
+                }
             </script>
         </html>
