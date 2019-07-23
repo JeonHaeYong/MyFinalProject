@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kh.spring.dao.CartDAO;
+import kh.spring.dao.ChartDAO;
 import kh.spring.dao.DonationDAO;
 import kh.spring.dao.DonationPaymentDAO;
 import kh.spring.dao.ItemDAO;
@@ -38,6 +39,9 @@ public class PaymentServiceImpl implements PaymentService {
 	
 	@Autowired
 	private DonationDAO ddao;
+	
+	@Autowired
+	private ChartDAO chartDAO;
 	
 	@Autowired(required=true)
 	private DonationPaymentDAO dpdao;
@@ -78,6 +82,7 @@ public class PaymentServiceImpl implements PaymentService {
 			DonationPaymentDTO dpdto = new DonationPaymentDTO(0, pdto.getSeller(), pdto.getItem_name(), ddao.selectRecentDTO().getName(), price, null, "무료나눔");
 			dpdao.insertDonationPayment(dpdto);
 			ddao.updateCurrentMoney(price);
+			chartDAO.updateTodayPayAmount(price);
 		}
 		cdao.deleteCart(cartSeqs);
 		

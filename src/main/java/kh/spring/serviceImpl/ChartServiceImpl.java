@@ -9,7 +9,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import kh.spring.daoImpl.ChartDAOImpl;
+import kh.spring.dao.ChartDAO;
+import kh.spring.service.BlackListService;
 import kh.spring.service.ChartService;
 
 @Service
@@ -18,9 +19,9 @@ public class ChartServiceImpl implements ChartService
 	private static final Logger logger = LoggerFactory.getLogger(ChartServiceImpl.class);
 	
 	@Autowired
-	BlackListServiceImpl bs;
+	BlackListService bs;
 	@Autowired
-	ChartDAOImpl chartDAO;
+	ChartDAO chartDAO;
 	
 	@Override
 	public String getVisitCount() throws Exception
@@ -59,7 +60,7 @@ public class ChartServiceImpl implements ChartService
 			JsonObject jajo = new JsonObject();
 			jajo.addProperty("time", chartDAO.getMonthVisitTime(i));
 			jajo.addProperty("count", chartDAO.getMonthVisitCount(i));
-			
+			jajo.addProperty("pay", chartDAO.getMonthPayAmount(i));
 			ja.add(jajo);
 		}
 		
@@ -74,7 +75,7 @@ public class ChartServiceImpl implements ChartService
 		for(int i = 1; i <= 730 ; i++)
 		{
 			int randomNum = (int) ( Math.random() * 100 + 1 );
-			chartDAO.insertRandomRecord(i, randomNum);
+			chartDAO.insertRandomRecord(i, randomNum, randomNum * 1000);
 			
 			if(i == 730)
 			{
@@ -85,6 +86,12 @@ public class ChartServiceImpl implements ChartService
 		}
 		
 		return "error";
+	}
+
+	@Override
+	public int updateTodayPayAmount(int money) throws Exception
+	{
+		return chartDAO.updateTodayPayAmount(money);
 	}
 
 	

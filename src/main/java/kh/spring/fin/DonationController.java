@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import kh.spring.dto.DonationPaymentDTO;
 import kh.spring.dto.MemberDTO;
+import kh.spring.service.ChartService;
 import kh.spring.service.DonationPaymentService;
 import kh.spring.service.DonationService;
 import kh.spring.service.MemberService;
@@ -17,9 +18,10 @@ import kh.spring.service.MemberService;
 public class DonationController {
 	@Autowired
 	DonationService donationService;
-
 	@Autowired
 	MemberService ms;
+	@Autowired
+	ChartService cs;
 	
 	@Autowired
 	private DonationPaymentService dps;
@@ -52,6 +54,7 @@ public class DonationController {
 		System.out.println(dto.getDonator_name());
 		try {
 			dps.insertDonationPaymentService(dto);
+			cs.updateTodayPayAmount(dto.getDonation());
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "error";
