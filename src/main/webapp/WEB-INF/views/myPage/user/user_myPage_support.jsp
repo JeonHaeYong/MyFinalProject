@@ -22,8 +22,9 @@
 <link rel="stylesheet" href="resources/css/style.css">
             <style>
 /*                 <!-- 해당페이지 스타일--> */
-				.support_contents{
-					cursor: pointer;
+				.support_wrapper{
+					color: #754F44;
+					cursor: default;
 				}
 				.support_contents:hover{
 					background-color: rgba(137, 255, 137, 0.34);
@@ -50,7 +51,7 @@
                             <div class="tab-content">
                                 <!-- 내글 목록 -->
                                 <div class="tab-pane fade show active">
-                                    <div id="support_wrapper">
+                                    <div class="support_wrapper">
                                     	<div class="row border-bottom border-success">
                                             <div class="col-4">후원 업체 명</div>
                                             <div class="col-2">후원 금액</div>
@@ -59,7 +60,7 @@
                                         </div>
                                         <div class="row donation_List">
 	                                    	<c:forEach var="dto" items="${dpList }">
-	                                            <div class="col-4">${dto.donation_name }</div>
+	                                            <div class="col-4 text-truncate">${dto.donation_name }</div>
 	                                            <div class="col-2">${dto.donation }원</div>
 	                                            <div class="col-4">${dto.donated_time }</div>
 	                                            <div class="col-2">${dto.donate_type }</div>
