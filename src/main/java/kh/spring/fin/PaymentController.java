@@ -45,7 +45,13 @@ public class PaymentController {
 	@RequestMapping("paymentProc")
 	public String paymentProc(HttpServletRequest request, ItemDTOList list, PaymentDTO dto) {
 		dto.setBuyer((String)request.getSession().getAttribute("id"));
+		
+		int totalAmount = 0;
+		for(ItemDTO item : list.getList()) {
+			totalAmount += Integer.parseInt(item.getPrice().replaceAll(",", "").replaceAll(" ", ""));
+		}
 		request.setAttribute("payItem", ps.paymentComplete(dto, list));
+		request.setAttribute("totalAmount", totalAmount);
 		request.setAttribute("payMem", dto);
 		return "payment/paymentComplete";
 	}

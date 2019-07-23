@@ -48,7 +48,7 @@
 		<beans:property name="mapperLocations" value="classpath:/mybatis/*-mapper.xml"/>
 	</beans:bean>
 	
-	<beans:bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+	<beans:bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<beans:constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</beans:bean>
 
@@ -82,8 +82,7 @@
    <beans:bean id="naverLoginBO" class="kh.spring.loginapi.NaverLoginBO"></beans:bean>
    
 	<!-- tx -->
-   <tx:annotation-driven transaction-manager="txManager"
-   	proxy-target-class="true" />
+   <tx:annotation-driven transaction-manager="txManager" proxy-target-class="true"/>
 
 	<beans:bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<beans:property name="dataSource" ref="dataSource"></beans:property>

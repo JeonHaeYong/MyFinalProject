@@ -13,4 +13,8 @@
                     break;
                 }
             };
+//             var img = document.getElementById("profile_img");
+//             img.onClick = function(){
+//             	alert("프로필이미지클릭");
+//             }
             </script>

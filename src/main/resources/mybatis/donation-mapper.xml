@@ -35,4 +35,8 @@
 		delete from donation	
 	</delete>
 	
+	<update id="updateCurrentMoney">
+		update donation set currentmoney = currentmoney + #{value}
+	</update>
+	
 </mapper>

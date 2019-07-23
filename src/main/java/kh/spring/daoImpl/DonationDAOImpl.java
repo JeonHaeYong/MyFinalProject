@@ -44,4 +44,9 @@ public class DonationDAOImpl implements DonationDAO
 		return sst.selectOne("DonationDAO.selectCount");
 	}
 	
+	@Override
+	public int updateCurrentMoney(int currentMoney) {
+		return sst.update("DonationDAO.updateCurrentMoney", currentMoney);
+	}
+	
 }

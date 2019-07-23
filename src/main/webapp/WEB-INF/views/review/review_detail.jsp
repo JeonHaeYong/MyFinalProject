@@ -103,8 +103,16 @@
                             <div class="row reply_part">
                                 <!-- 댓글 목록 보여주기 -->
                                 <c:forEach var="list" items="${replyList }">
-                                    <div class="col-12 border-bottom">
-                                        <div class="font-weight-bold">${list.writer }</div>
+                                    <div class="col-12 border-bottom mb-1">
+                                        <div class="d-flex justify-content-between">
+                                        	<div class="font-weight-bold">${list.writer }</div>
+                                        	<c:if test="${id==list.writer }">
+                                        		<div>
+                                        			<a role="btn" class="btn btn-outline-warning rounded p-1" href="javascript:void(0)" onclick="">수정</a>
+                                        			<a role="btn" class="btn btn-outline-warning rounded p-1" href="javascript:void(0)" onclick="">삭제</a>
+                                        		</div>
+                                        	</c:if>
+                                        </div>
                                         <div class="">${list.contents }</div>
                                         <div class="d-flex justify-content-between">
                                         	<span>${list.formed_date }</span>
@@ -123,7 +131,7 @@
                                         <ul class="pagination justify-content-center">
                                             <c:forEach var="navi" items="${reply_navi }">
                                                 <li class="page-item reply_item" value="${navi }">
-                                                   	<a class="page-link text-decoration-none reply_navi" href="javascript:void(0)" onclick="clickReplyNavi(this);">${navi }</a>
+                                                   	<a class="page-link text-decoration-none reply_navi" href="#toList" onclick="clickReplyNavi(this);">${navi }</a>
                                                 </li>
                                             </c:forEach>
                                         </ul>
@@ -271,13 +279,17 @@
                 	if(!confirm("글을 삭제하시겠습니까?")){
                 		return false;
                 	}
-                }
+                };
               //목록으로 돌아가기
                 $("#toList").on("click",function(){
                 	var form = $(this).parent();
                 	$(form).attr("action","toReviewList");
                 	$(form).attr("onsubmit",false);
                 	$(form).submit();
-                })
+                });
+              //댓글수정
+               function modifyReply(){
+            	  
+              };
             </script>
         </html>

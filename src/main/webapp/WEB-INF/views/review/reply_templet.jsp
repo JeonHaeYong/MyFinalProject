@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         <div class="row reply_part">
             <!-- 댓글 목록 보여주기 -->
             <c:forEach var="list" items="${replyList }">
@@ -24,7 +24,7 @@
                     <ul class="pagination justify-content-center">
                         <c:forEach var="navi" items="${reply_navi }">
                             <li class="page-item reply_item" value="${navi }">
-                                <a class="page-link text-decoration-none reply_navi" href="javascript:void(0)" onclick="clickReplyNavi(this);">${navi }</a>
+                                <a class="page-link text-decoration-none reply_navi" href="#toList" onclick="clickReplyNavi(this);">${navi }</a>
                             </li>
                         </c:forEach>
                     </ul>
