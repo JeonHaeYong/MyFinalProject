@@ -59,11 +59,15 @@ div
 
 
 
+
+
 :not
 
 
 
+
  
+
 
 
 
@@ -72,7 +76,9 @@ div
 
 
 
+
  
+
 
 
 
@@ -84,7 +90,10 @@ line-height
 
 
 
+
+
 :
+
 
 
 
@@ -92,8 +101,11 @@ line-height
 
 
 
+
 50
 px
+
+
 
 
 
@@ -190,6 +202,7 @@ label {
 #dataNotExist {
 	text-align: center;
 }
+
 .menu-row {
 	text-align: -webkit-center;
 }
@@ -221,6 +234,20 @@ label {
 	height: 100px;
 	padding-bottom: 120px;
 	margin-bottom: 150px;
+}
+
+#btnSelect:hover {
+	background-color: #c16049;
+	font-weight: 900;
+}
+/*점보트론 이미지*/
+.jumbotron {
+	background-color: white;
+}
+
+.jumbotron>img {
+	width: 100%;
+	max-height: 600px;
 }
 </style>
 
@@ -763,6 +790,9 @@ label {
 	data-offset="300" id="home-section">
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<!-- -----ì¬ê¸°ê¹ì§ ê³ ì  Headerìëë¤----------------------------------------------------------------------------------------------------------- -->
+	<div class="jumbotron px-0 pb-0">
+		<img src="/abandoned/threeDogs.jpg">
+	</div>
 	<section class="site-section bg-light block-13">
 
 		<div class="container">
@@ -911,9 +941,9 @@ label {
 												class="title"><strong>발견 장소 </strong></label><label
 												class="content">${dto.happenPlace }</label><br> <label
 												class="title"><strong>특징 </strong></label><label
-												class="content">${dto.specialMark }</label><br>
-												<label class="title"><strong>상태</strong></label>
-												<label class="content">${dto.processState }</label>
+												class="content">${dto.specialMark }</label><br> <label
+												class="title"><strong>상태</strong></label> <label
+												class="content">${dto.processState }</label>
 										</p>
 									</div>
 								</div>
