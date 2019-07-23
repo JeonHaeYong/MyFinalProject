@@ -25,7 +25,7 @@
 	.empty{width: 100%; text-align: center; margin: auto; margin-bottom: 50px; height:50px;}
 	#title{width: 100%; text-align: center; margin: auto; margin-bottom: 50px;}
 	h1{ font-family: 'Gamja Flower', cursive;}
-        .aa{ width: 500px; height: 870px; margin: auto; box-sizing: border-box; margin-bottom: 100px;overflow: hidden;}
+        .aa{ width: 500px; height: 1080px; margin: auto; box-sizing: border-box; margin-bottom: 50px;overflow: hidden;}
         /*기본 정보 */
         .basic,.animal{background-color:#FDD692; text-align: center; font-size:30px; color: #754F44; font-weight: bold; font-family: 'Gamja Flower', cursive; border-radius:30px;}
         .basic-info{height:300px; width: 100%; }
@@ -46,9 +46,18 @@
         input[type="text"]{width: 300px;}
         
         /*footer 부분*/
-        #footer{text-align: center; width: 100%; margin-top:50px;}
-        .btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44; font-size:20px;}
+        #footer{text-align: center; width: 100%; margin-top:10px;}
+        .btn{font-family: 'Gamja Flower', cursive; background-color:#FDD69270;color:#754F44; font-size:20px;}
 		.btn:hover{background-color:#FDD692; font-weight:bold; color:#754F44;}
+		/* img 업로드 부분 */
+		.img-box{margin-top:50px; text-align:center; height: 110px;}
+		.img-div{border:2px solid #754F4470; width:150px; height:100px; float:left;}
+		.img1{margin-left:20px;}
+		.img2,.img3{ margin-left:5px;}
+		.img-div>img{width:100%; height:100%;}
+		.expl{text-align:center;  font-family: 'Gamja Flower', cursive; font-size:23px;}
+		.label-btn{border: 2px solid #754F4490; border-radius:10px; padding: 5px; font-family: 'Gamja Flower', cursive;}
+		.label-btn:hover{cursor:pointer;}
 </style>
 <script>
  	$(function(){
@@ -56,14 +65,27 @@
     			location.href="toDisappearList?currentPage=${currentPage}";
     		});
     		$(".insert-btn").on("click",function(){
-    			if($("#disappearDate").val() !=""&& $(".disappearArea").val() !=""&& $(".tel").val() !=""&& $('input:radio[name=gender]').is(':checked')==true
-    					&& $('input:checkbox[name=neuter]').is(':checked')==true && $(".furColor").val()!="" && $(".feature").val()!=""&&$(".image").val()!=""){
+    			  if($("#disappearDate").val() !=""&& $(".disappearArea").val() !=""&& $(".tel").val() !=""&& $('input:radio[name=gender]').is(':checked')==true
+    				 && $(".furColor").val()!="" && $(".feature").val()!=""&&$("#input-img1").val()!=""){
     				$("#reportForm").submit();
-    			}else{alert("기타사항을 제외하고 모두 입력해주세요.");}
-    		
-    			
+    			}else{alert("기타사항을 제외하고 모두 입력해주세요.");} 
     		});
+    		$(".file-btn").on("change",function(){
+    			$(this).each(function(index,items){
+    				var i = $(this).attr("seq");
+    				$(".img"+i).html("");
+    				var reader = new FileReader();
+    				reader.onload = function(e){
+    					var src = e.target.result;
+    					$(".img"+i).append("<img src='"+src+"'>")
+    				}
+    				reader.readAsDataURL($(this)[0].files[0]);
+    			})
+    		});
+    		
+    		
     	});
+ 		
     </script>
 </head>
  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
@@ -101,8 +123,8 @@
                         <option value="충청남도">충청남도</option><option value="충청북도">충청북도</option>
                     </select>
                 </div>
-                <div><input type="text" name="disappearArea" class="disappearArea"></div>
-                <div><input type="text" name="tel" class="tel"></div>
+                <div><input type="text" name="disappearArea" class="disappearArea" maxlength="60"></div>
+                <div><input type="text" name="tel" class="tel" maxlength="16"></div>
             </div>
         </div>
         
@@ -133,13 +155,24 @@
                         <option value="16-20살">16-20살</option><option value="21이">21살이상</option>
                     </select>
                     </div>
-                <div><input type="text" placeholder="털색을 설명해주세요" class="furColor" name="furColor" class="notnull"></div>
-                <div><input type="text" placeholder="눈에 띄는 특징을 적어주세요" class="feature" name="feature" class="notnull"></div>
-                <div><input type="text" placeholder="기타사항을 입력해주세요" class="et" name="et"></div>
-                <div><input type="file" name="image" class="image"></div>
+                <div><input type="text" placeholder="털색을 설명해주세요" class="furColor" name="furColor" class="notnull" maxlength="30"></div>
+                <div><input type="text" placeholder="눈에 띄는 특징을 적어주세요" class="feature" name="feature" class="notnull" maxlength="60"></div>
+                <div><input type="text" placeholder="기타사항을 입력해주세요" class="et" name="et" maxlength="90"></div>
+                <div>
+                <c:forEach var="i" begin="0" end="2" varStatus="status">
+                	<label for="input-img${status.index+1 }" class="label-btn">사진 선택${status.index+1 }</label>
+                	<input type="file" name="image" id="input-img${status.index+1 }" class="file-btn" seq="${status.index+1 }" accept="image/gif, image/jpeg, image/png" hidden>
+                </c:forEach>
+                </div>
             </div>
+            
         </div>
-        
+        <div class="img-box">
+            	<div class="img1 img-div"></div>
+            	<div class="img2 img-div"></div>
+            	<div class="img3 img-div"></div>
+            </div>
+            <div class="expl">첫번째 사진은 꼭 넣어주세요.<br>사진은 3개까지 가능합니다~</div>
         <div id="footer">
             <input type="button" class="insert-btn btn" value="등록">
             <input type="button" class="toList-btn btn" value="취소">

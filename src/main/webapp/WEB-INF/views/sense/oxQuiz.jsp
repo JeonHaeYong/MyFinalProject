@@ -133,6 +133,8 @@
 		$(document).on("click","#restart-btn",function(){//첫번째 : click / change  등등의 이벤트/두번째 : 이벤트 적용할 타겟 태그 /세번째 : 동작 함수
 			location.href="oxQuiz"
 		});
+		
+		
 		$(".question").hide();
 		$(".start-btn").on("click",function(){
 			if(${id == null}){
