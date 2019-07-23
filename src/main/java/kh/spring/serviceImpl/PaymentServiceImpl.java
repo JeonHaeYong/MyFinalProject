@@ -69,11 +69,6 @@ public class PaymentServiceImpl implements PaymentService {
 			cartSeqs[i++] = idto.getCart_seq()+"";
 			MessageDTO mdto1 = new MessageDTO(0, "admin", pdto.getSeller(), msg, null, null, pdto.getSeller(), 0);
 			mdao.insertMsg(mdto1);
-			//==에러
-			System.out.println("에러-----");
-			String tmp = null;
-			tmp.charAt(0);
-			//--
 			MessageDTO mdto2 = new MessageDTO(0, "admin", pdto.getSeller(), msg, null, null, "admin", mdao.selectSeqCurrVal());
 			mdao.insertMsg(mdto2);
 			
