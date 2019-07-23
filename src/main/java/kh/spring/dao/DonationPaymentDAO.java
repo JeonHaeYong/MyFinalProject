@@ -10,5 +10,6 @@ public interface DonationPaymentDAO {
 	public List<DonationPaymentDTO> selectDonationPaymentById(Map<String, String> param);
 	public int getDonationPaymentTotalCountById(String id);
 	
-	public List<DonationPaymentDTO> selectDonatedList(Map<String, Integer> param);
+	public List<DonationPaymentDTO> selectDonatedList(Map<String, Integer> param) throws Exception; 
+	public int selectCountForList() throws Exception;
 }

@@ -29,4 +29,12 @@
 		)
 		where rown between #{start} and #{end}	
 	</select>
+	
+	<select id="selectCountForList" resultType="java.lang.Integer">
+		select count(*)
+		from (select * from (select sum(donation) as donation, donation_name, to_char(donated_time, 'yy/MM') as donated_time from DONATED_PAYMENT
+				group by 
+				donation_name ,to_char(donated_time, 'yy/MM'))
+				order by donated_time desc, donation_name asc)			
+	</select>
 </mapper>

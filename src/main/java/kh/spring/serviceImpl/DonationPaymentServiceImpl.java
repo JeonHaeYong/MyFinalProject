@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import kh.spring.dao.DonationDAO;
 import kh.spring.dao.DonationPaymentDAO;
 import kh.spring.dto.DonationPaymentDTO;
@@ -109,7 +113,87 @@ public class DonationPaymentServiceImpl implements DonationPaymentService {
 	@Override
 	public Object selectDonatedList(String page) throws Exception
 	{
-		return null;
+		HashMap<String, Integer> param = new HashMap<>();
+		
+		if((page == null) || (page.equals("")))
+		{
+			page = "1";
+		}
+		
+		int currentPage = Integer.parseInt(page);
+		int recordTotalCount = dpdao.selectCountForList();
+		int pageTotalCount;
+		boolean needPrev = true;
+		boolean needNext = true;
+		
+		int start = currentPage * recordCountPerPage - recordCountPerPage + 1;
+		int end = currentPage * recordCountPerPage;
+		
+		param.put("start", start);
+		param.put("end", end);
+		
+		List<DonationPaymentDTO> list = dpdao.selectDonatedList(param);
+		
+		JsonObject outerjo = new JsonObject();
+		JsonArray ja = new JsonArray();
+		
+		for(int i = 1 ; i <= list.size() ; i++)
+		{
+			JsonObject jo = new JsonObject();
+			
+			int donation = list.get(i-1).getDonation();
+			String name = list.get(i-1).getDonation_name();
+			String time = list.get(i-1).getDonated_time();
+			
+			jo.addProperty("donation", donation);
+			jo.addProperty("name", name);
+			jo.addProperty("time", time);
+			ja.add(jo);
+		}
+		outerjo.add("array", ja);
+		
+		if( recordTotalCount % recordCountPerPage == 0)
+		{
+			pageTotalCount = recordTotalCount / recordCountPerPage;
+		}
+		else
+		{
+			pageTotalCount = recordTotalCount / recordCountPerPage + 1;
+		}
+
+		if(currentPage < 1)
+		{
+			currentPage = 1;
+		}
+		else if(currentPage > pageTotalCount)
+		{
+			currentPage = pageTotalCount;
+		}
+		
+		int startNavi = (currentPage - 1) / naviCountPerPage * naviCountPerPage + 1;
+		int endNavi = startNavi + naviCountPerPage - 1;
+		if(endNavi > pageTotalCount)
+		{
+			endNavi = pageTotalCount;
+		}
+		
+		if(startNavi == 1)
+		{
+			needPrev = false;
+		}
+		if(endNavi == pageTotalCount)
+		{
+			needNext = false;
+		}
+		
+		outerjo.addProperty("currentPage", currentPage);
+		outerjo.addProperty("needPrev", needPrev);
+		outerjo.addProperty("needNext", needNext);
+		outerjo.addProperty("startNavi", startNavi);
+		outerjo.addProperty("endNavi", endNavi);
+
+		
+		return new Gson().toJson(outerjo);
 	}
 
 	

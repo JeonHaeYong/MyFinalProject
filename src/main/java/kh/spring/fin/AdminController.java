@@ -20,6 +20,7 @@ import kh.spring.dto.BlackListDTO;
 import kh.spring.dto.QuizDTO;
 import kh.spring.service.BlackListService;
 import kh.spring.service.ChartService;
+import kh.spring.service.DonationPaymentService;
 import kh.spring.service.DonationService;
 import kh.spring.service.ItemService;
 import kh.spring.service.LogService;
@@ -47,6 +48,8 @@ public class AdminController
 	MemberService memberService;
 	@Autowired
 	LogService logService;
+	@Autowired
+	DonationPaymentService donationPaymentService;
 	
 	//Member Start
 	@RequestMapping(value = "admin-member")
@@ -219,22 +222,22 @@ public class AdminController
 		
 		return result;
 	}
-//	@RequestMapping(value = "admin-donation-image", method = RequestMethod.POST)
-//	public Object changeLeftImage(MultipartFile left, MultipartFile right)
-//	{
-//		Object result = "error";
-//		
-//		try
-//		{
-//			result = donationService.changeImage(left, right);
-//		}
-//		catch(Exception e)
-//		{
-//			e.printStackTrace();
-//		}
-//		
-//		return result;
-//	}
+	@ResponseBody
+	@RequestMapping(value = "admin-donation-log")
+	public Object selectDonatedList(String page)
+	{
+		Object result = "error";
+		try
+		{
+			result = donationPaymentService.selectDonatedList(page);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 	
 	//Donation End
 	
