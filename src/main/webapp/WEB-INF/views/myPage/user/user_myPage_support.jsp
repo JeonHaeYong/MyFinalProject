@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -27,6 +28,15 @@
 				.support_contents:hover{
 					background-color: rgba(137, 255, 137, 0.34);
 				}
+				.navi{
+                	color: #754F44;
+                	text-decoration: none;
+                	margin: 0px 5px;
+/*                 	font-family:  */
+                }
+                .navi:hover{
+                	font-weight: bold;
+                }
             </style>
             <jsp:include page="/WEB-INF/views/myPage/user/user_module/mypage_user_style.jsp" ></jsp:include><!-- user 마이페이지 스타일 -->
 			<jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
@@ -41,24 +51,39 @@
                                 <!-- 내글 목록 -->
                                 <div class="tab-pane fade show active">
                                     <div id="support_wrapper">
-                                        <div class="row border-bottom border-success">
-                                            <div class="col-3">후원 업체</div>
-                                            <div class="col-3">후원 금액</div>
-                                            <div class="col-3">후원 날짜</div>
-                                            <div class="col-3">후원 방법</div>
+                                    	<div class="row border-bottom border-success">
+                                            <div class="col-4">후원 업체 명</div>
+                                            <div class="col-2">후원 금액</div>
+                                            <div class="col-4">후원 날짜</div>
+                                            <div class="col-2">후원 방식</div>
                                         </div>
-                                        <div class="row support_contents">
-                                            <div class="col-3">후원 업체</div>
-                                            <div class="col-3">후원 금액</div>
-                                            <div class="col-3">후원 날짜</div>
-                                            <div class="col-3">후원 방법</div>
-                                        </div>
-                                        <div class="row support_contents">
-                                            <div class="col-3">후원 업체</div>
-                                            <div class="col-3">후원 금액</div>
-                                            <div class="col-3">후원 날짜</div>
-                                            <div class="col-3">후원 방법</div>
-                                        </div>
+                                        <div class="row donation_List">
+	                                    	<c:forEach var="dto" items="${dpList }">
+	                                            <div class="col-4">${dto.donation_name }</div>
+	                                            <div class="col-2">${dto.donation }원</div>
+	                                            <div class="col-4">${dto.donated_time }</div>
+	                                            <div class="col-2">${dto.donate_type }</div>
+		                                   	</c:forEach>
+                                    	</div>
+                                    	<div class="row">
+											<div class="col-12 d-flex justify-content-center" id="naviBox">
+												<c:if test="${pageNavi.needPrev == 1 }">
+													<a class="navi" href="toMyPage_support?currentPage=${pageNavi.startNavi - 1}">&laquo;</a>
+												</c:if>
+												<c:if test="${pageNavi.currentPage > pageNavi.startNavi }">
+													<a class="navi" href="toMyPage_support?currentPage=${pageNavi.currentPage - 1}">&lt;</a>
+												</c:if>
+												<c:forEach var="i" begin="${pageNavi.startNavi}" end="${pageNavi.endNavi}">
+													<a class="navi" href="toMyPage_support?currentPage=${i }" class="pageNum">${i}</a>
+												</c:forEach>
+												<c:if test="${pageNavi.currentPage < pageNavi.pageTotalCount }">
+													<a class="navi" href="toMyPage_support?currentPage=${pageNavi.currentPage + 1}">&gt;</a>
+												</c:if>
+												<c:if test="${pageNavi.needNext == 1 }">
+													<a class="navi" href="toMyPage_support?currentPage=${pageNavi.endNavi + 1}">&raquo;</a>
+												</c:if>
+											</div>
+										</div>
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +104,12 @@
    <script src="resources/js/jquery.fancybox.min.js"></script>
    <script src="resources/js/jquery.sticky.js"></script>
    <script src="resources/js/isotope.pkgd.min.js"></script>
-
-
    <script src="resources/js/main.js"></script>
+   <script>
+		$(".navi").each(function(i, item){
+			if($(item).text() == ${pageNavi.currentPage}){
+				$(item).css("color", "#EC7357");
+			}
+		});	
+   </script>
 </html>

@@ -7,14 +7,14 @@ public class DonationPaymentDTO {
 	private String donation_name;
 	private int donation;
 	private String donated_time;
-	private String docate_type;
+	private String donate_type;
 	
 	public DonationPaymentDTO() {
 		super();
 	}
 
 	public DonationPaymentDTO(int seq, String donator, String donator_name, String donation_name, int donation,
-			String donated_time, String docate_type) {
+			String donated_time, String donate_type) {
 		super();
 		this.seq = seq;
 		this.donator = donator;
@@ -22,7 +22,7 @@ public class DonationPaymentDTO {
 		this.donation_name = donation_name;
 		this.donation = donation;
 		this.donated_time = donated_time;
-		this.docate_type = docate_type;
+		this.donate_type = donate_type;
 	}
 
 	public int getSeq() {
@@ -73,12 +73,12 @@ public class DonationPaymentDTO {
 		this.donated_time = donated_time;
 	}
 
-	public String getDocate_type() {
-		return docate_type;
+	public String getDonate_type() {
+		return donate_type;
 	}
 
-	public void setDocate_type(String docate_type) {
-		this.docate_type = docate_type;
+	public void setDonate_type(String donate_type) {
+		this.donate_type = donate_type;
 	}
 	
 }

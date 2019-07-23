@@ -26,6 +26,7 @@ import kh.spring.dto.MessageDTO;
 import kh.spring.dto.PaymentDTO;
 import kh.spring.loginapi.NaverLoginBO;
 import kh.spring.loginapi.kakao_restapi;
+import kh.spring.service.DonationPaymentService;
 import kh.spring.service.MemberService;
 import kh.spring.service.MessageService;
 import kh.spring.service.PaymentService;
@@ -42,6 +43,8 @@ public class MemberController {
 	private PaymentService ps;
 	@Autowired
 	private HttpSession session;
+	@Autowired
+	private DonationPaymentService dps;
 
 
 	//로그인
@@ -310,7 +313,13 @@ public class MemberController {
 	}
 
 	@RequestMapping("toMyPage_support")
-	public String toMyPage_support_loginCheck(HttpServletRequest request) {
+	public String toMyPage_support_loginCheck(HttpServletRequest request, String currentPage) {
+		String id = (String)request.getSession().getAttribute("id");
+		if(currentPage == null) {
+			currentPage = "1";
+		}
+		request.setAttribute("dpList", dps.selectDonationPaymentById(id, Integer.parseInt(currentPage)));
+		request.setAttribute("pageNavi", dps.getNaviForDonationPayment(Integer.parseInt(currentPage), dps.getDonationPaymentTotalCountById(id)));
 		return "myPage/user/user_myPage_support";
 	}
 

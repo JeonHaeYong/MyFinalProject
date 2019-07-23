@@ -3,7 +3,19 @@
 <mapper namespace="DonationPaymentDAO">
 
 	<insert id="insertDonationPayment">
-		insert into donation_payment values(donation_payment_seq.nextval, #{donator}, #{donator_name}, #{donation_name}, #{donation} #{donate_type})
+		insert into donated_payment values(donated_payment_seq.nextval, #{donator}, #{donator_name}, #{donation_name}, #{donation}, default, #{donate_type})
 	</insert>
+	
+	<select id="selectDonationPaymentById" resultType="kh.spring.dto.DonationPaymentDTO">
+		select * from (
+			select row_number() over(order by seq desc) as rown, dp.*
+			from donated_payment dp
+			where donator = #{id}) 
+		where rown between #{start} and #{end}
+	</select>
+	
+	<select id="getDonationPaymentTotalCountById" resultType="int">
+		select count(*) from donated_payment where donator = #{value}
+	</select>
 
 </mapper>

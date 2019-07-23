@@ -6,7 +6,9 @@ public interface DonationDAO
 {
 	public int insert(DonationDTO dto) throws Exception;
 	
-	public DonationDTO selectDTO() throws Exception;
+	public DonationDTO selectDTO();
 	
 	public int delete() throws Exception;
+	
+	public int updateCurrentMoney(int currentMoney);
 }

@@ -55,7 +55,7 @@
 			</div>
 			<div class="col-12 d-flex justify-content-center">
 				<form action="donationProc" method="post" id="donationForm">
-					<input type="hidden" name="donate_type" value="d">
+					<input type="hidden" name="donate_type" value="후원">
 					<div class="form-group">
 						<label for="inputId">아이디</label>
 						<input type="text" class="form-control" id="inputId" name="donator" value="${member.id }" readonly>
