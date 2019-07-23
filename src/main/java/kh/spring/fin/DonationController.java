@@ -20,7 +20,7 @@ public class DonationController
 		
 		try
 		{
-			result = donationService.selectDTO();
+			result = donationService.selectRecentDTO();
 		}
 		catch(Exception e)
 		{
