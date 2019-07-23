@@ -6,6 +6,10 @@
 		insert into pay_log values(pay_log_seq.nextval, #{buyer}, #{name}, #{price}, #{seller}, default)
 	</insert>
 
+
+
+
+
 	<select id="selectAllPayLogByLikeBuyer" resultType="kh.spring.dto.PayLogDTO">
 		select * 
 		from (select row_number() over(order by seq desc) as rown, pay_log.* 
@@ -15,6 +19,48 @@
 	<select id="selectCountPayLogByLikeBuyer" resultType="java.lang.Integer">
 		select count(*) from pay_log where buyer like #{keyword}
 	</select>
+	
+	<select id="selectAllPayLogByLikeSeller" resultType="kh.spring.dto.PayLogDTO">
+		select * 
+		from (select row_number() over(order by seq desc) as rown, pay_log.* 
+				from pay_log where seller like #{keyword})
+		where (rown between #{start} and #{end})
+	</select>
+	<select id="selectCountPayLogByLikeSeller" resultType="java.lang.Integer">
+		select count(*) from pay_log where seller like #{keyword}
+	</select>
+	
+	<select id="selectAllPayLogByBuyer" resultType="kh.spring.dto.PayLogDTO">
+		select * 
+		from (select row_number() over(order by seq desc) as rown, pay_log.* 
+				from pay_log where buyer = #{keyword})
+		where (rown between #{start} and #{end})
+	</select>
+	<select id="selectCountPayLogByBuyer" resultType="java.lang.Integer">
+		select count(*) from pay_log where buyer = #{keyword}
+	</select>
+	
+	<select id="selectAllPayLogBySeller" resultType="kh.spring.dto.PayLogDTO">
+		select * 
+		from (select row_number() over(order by seq desc) as rown, pay_log.* 
+				from pay_log where seller = #{keyword})
+		where (rown between #{start} and #{end})
+	</select>
+	<select id="selectCountPayLogBySeller" resultType="java.lang.Integer">
+		select count(*) from pay_log where seller = #{keyword}
+	</select>
+	
+	<select id="selectAllPayLogByDate" resultType="kh.spring.dto.PayLogDTO">
+		select * 
+		from (select row_number() over(order by seq desc) as rown, pay_log.* 
+		        from pay_log 
+		        where time between to_date(#{keyword},'YYYY-MM-DD') and (to_date(#{keyword},'YYYY-MM-DD')+1))
+		where (rown between #{start} and #{end})
+	</select>
+	<select id="selectCountPayLogByDate" resultType="java.lang.Integer">
+		select count(*) from pay_log where time between to_date(#{keyword},'YYYY-MM-DD') and (to_date(#{keyword},'YYYY-MM-DD')+1)
+	</select>
+	
 	
 	
 </mapper>
