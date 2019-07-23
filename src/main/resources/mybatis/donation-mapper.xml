@@ -4,15 +4,39 @@
 
 	<insert id="insert">
 		insert into donation 
-		values(donation_seq.nextval, #{name}, #{title}, #{explanation}, #{image1}, #{image2}, #{image3}, #{goalmoney}, default, #{startdate}, #{enddate})
+		values(donation_seq.nextval, #{name}, #{title}, #{explanation}, #{image1}, #{image2}, #{image3}, #{left}, #{right}
+				, #{goalmoney}, default, #{startdate}, #{enddate})
 	</insert>
 	
-	<select id="selectDTO" resultType="kh.spring.dto.DonationDTO">
-		select * from donation
+	<select id="selectRecentDTO" resultType="kh.spring.dto.DonationDTO">
+		select * 
+		from 
+		    (select row_number() over(order by seq desc) as rown, donation.*
+		        from donation 
+		        where   (startdate <![CDATA[ < ]]>= to_date(to_char(sysdate, 'YYYY-MM-DD'),'YYYY-MM-DD'))
+		                and 
+		                (to_date(to_char(sysdate, 'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[ < ]]>= enddate))
+		where rown = 1
+	</select>
+	
+	<select id="selectDTOByRowNumber" resultType="kh.spring.dto.DonationDTO">
+		select * 
+		from 
+		    (select row_number() over(order by seq desc) as rown, donation.*
+		    from donation)
+		where rown = #{value}
+	</select>
+	
+	<select id="selectCount" resultType="java.lang.Integer">
+		select count(*) from donation
 	</select>
 	
 	<delete id="delete">
 		delete from donation	
 	</delete>
+	
+	<update id="updateCurrentMoney">
+		update donation set currentmoney = currentmoney + #{value}
+	</update>
 	
 </mapper>

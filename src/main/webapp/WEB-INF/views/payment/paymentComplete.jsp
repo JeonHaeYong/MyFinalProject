@@ -136,7 +136,7 @@
 				<div class="form-row">
 					<div class="col-6 form-group">
 						<label for="totalAmount">결제 금액</label>
-						<input type="text" class="form-control" id="totalAmount" name="totalAmount" value="${payMem.type }" readonly>
+						<input type="text" class="form-control" id="totalAmount" name="totalAmount" value="${totalAmount }원" readonly>
 					</div>
 					<div class="col-6 form-group">
 						<label for="type">결제 방식</label>
@@ -172,6 +172,7 @@
 	<script src="resources/js/isotope.pkgd.min.js"></script>
 	<script src="resources/js/main.js"></script>
 	<script>
+		$()
 		$("#goBuyList").on("click", function(){
 			location.href = "toMyPage_buyList";
 		});

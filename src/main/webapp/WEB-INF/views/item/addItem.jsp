@@ -60,7 +60,7 @@
 					</div>
 					<input type="text" class="form-control" name="name" id="name" placeholder="상품 이름을 입력해주세요">
 					<div class="input-group-append">
-					    <span class="input-group-text byteCheck">0/50</span>
+					    <span class="input-group-text byteCheck">0/30</span>
 					</div>
 				</div>
 				<div class="col-md-7 col-12 input-group mb-3">
@@ -179,21 +179,14 @@
 			});
 		}
 		
-		$("#name").on("input", function(){
-			var name = $("#name").val();
-			var nameByte = 0;
-			for(var i = 0; i < name.length; i++){
-				if(escape($("#name").val().charAt(i)).indexOf("%u") != -1){
-					nameByte += 3;
-				}else{
-					nameByte++;
-				}
+		$("#name").on("input", function(e){
+			name = $("#name").val();
+			if(name.length > 30){
+				alert("글자수를 초과하였습니다.");
+				name = name.substring(0, 30);
+				$("#name").val(name);
 			}
-			console.log(nameByte);
-			if(nameByte > 50){
-				alert("상품명은 50Byte까지만 입력 가능합니다.\n(한글 3Byte, 나머지 문자는 1Byte)");
-			}
-			$(".byteCheck").text(nameByte + "/50");
+			$(".byteCheck").text(name.length + "/30");
 		});
 		
 		$(".inputFile").change(function(){
@@ -226,8 +219,8 @@
 			contents = contents.replace(/(<p><br><\/p><p><br><\/p>)+/ig, "<p><br><\/p>");// 내용없이 엔터쳤을때
 			contents = contents.replace(/(<p>[ ]*?<\/p>)/ig, "<p><br><\/p>");// 공백만 넣고 엔터쳤을때
 			
-			if($("#name").val() == ""){
-				alert("상품명을 입력해주세요.");
+			if($("#name").val() == "" || $("#name").val().length > 30){
+				alert("상품명을 30자 이내로 입력해주세요.");
 				$("#name").focus();
 				return;
 			}else if(price == "" || regexPrice > 100000 || regexPrice < 0 || isNaN(regexPrice)){

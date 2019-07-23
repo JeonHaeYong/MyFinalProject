@@ -21,15 +21,32 @@ public class DonationDAOImpl implements DonationDAO
 	}
 
 	@Override
-	public DonationDTO selectDTO() throws Exception
+	public DonationDTO selectRecentDTO() throws Exception
 	{
-		return sst.selectOne("DonationDAO.selectDTO");
+		return sst.selectOne("DonationDAO.selectRecentDTO");
 	}
 
 	@Override
 	public int delete() throws Exception
 	{
 		return sst.delete("DonationDAO.delete");
+	}
+
+	@Override
+	public DonationDTO selectDTOByRowNumber(String page) throws Exception
+	{
+		return sst.selectOne("DonationDAO.selectDTOByRowNumber", page);
+	}
+
+	@Override
+	public int selectCount() throws Exception
+	{
+		return sst.selectOne("DonationDAO.selectCount");
+	}
+	
+	@Override
+	public int updateCurrentMoney(int currentMoney) {
+		return sst.update("DonationDAO.updateCurrentMoney", currentMoney);
 	}
 	
 }
