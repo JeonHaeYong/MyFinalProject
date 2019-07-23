@@ -27,10 +27,13 @@ public class DonationController {
 	@RequestMapping(value = "donation", method = RequestMethod.GET)
 	public Object donationPage() {
 		Object result = "error";
-
-		try {
-			result = donationService.selectDTO();
-		} catch (Exception e) {
+		
+		try
+		{
+			result = donationService.selectRecentDTO();
+		}
+		catch(Exception e)
+		{
 			e.printStackTrace();
 		}
 

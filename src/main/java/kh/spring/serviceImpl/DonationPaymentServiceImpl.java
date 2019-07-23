@@ -29,8 +29,8 @@ public class DonationPaymentServiceImpl implements DonationPaymentService {
 
 	@Override
 	@Transactional("txManager")
-	public int insertDonationPaymentService(DonationPaymentDTO dto) {
-		dto.setDonation_name(ddao.selectDTO().getName());
+	public int insertDonationPaymentService(DonationPaymentDTO dto) throws Exception {
+		dto.setDonation_name(ddao.selectRecentDTO().getName());
 		ddao.updateCurrentMoney(dto.getDonation());
 		return dpdao.insertDonationPayment(dto);
 	}
