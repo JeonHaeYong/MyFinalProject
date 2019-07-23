@@ -84,7 +84,9 @@
 	                                                    </div>
 	                                                    <div class="col-md-8">
 	                                                        <div class="card-body">
-	                                                            <h5 class="card-title d-flex justify-content-between"><a class="text-decoration-none" href="javascript:void(0);" onclick="reviewListForm(this);return false;">${list.title }</a><span class="badge badge-pill badge-danger">${list.likes} </span></h5>
+	                                                            <h5 class="card-title d-flex justify-content-between">
+	                                                            	<a class="text-decoration-none" href="javascript:void(0)" onclick="reviewListForm(this);">${list.title }</a><span class="badge badge-pill badge-danger">${list.comments} </span>
+	                                                            </h5>
 	                                                            <p class="card-text text-truncate">${list.contents }</p>
 	                                                            <p class="card-text d-flex justify-content-between"><small class="text-muted">${list.formed_date }</small><small class="text-muted">조회수 : ${list.view_count }</small></p>
 	                                                        </div>
@@ -100,9 +102,10 @@
                                 <div class="col-12">
                                     <ul class="pagination justify-content-center">
                                         <c:forEach var="navi" items="${navi }">
-                                            <li class="page-item">
-                                                <form>
-                                                    <a class="navi_click_a page-link text-decoration-none" href="#receivedBox">${navi }</a>
+                                            <li class="page-item review_page_navi" value="${navi }">
+                                                <form action="toReviewList" method="post">
+                                                	<input type="hidden" value="${navi }" name="currentPage">
+                                                    <a class="navi_click_a page-link text-decoration-none" href="javascript:void(0)" onclick="reviewNaviClick(this);">${navi }</a>
                                                 </form>
                                             </li>
                                         </c:forEach>
@@ -135,7 +138,19 @@
             <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
             <script>
             	function reviewListForm(param){
-            		$(param).parent("form").submit();
+            		$(param).parents("form").submit();
+            	}
+            	function reviewNaviClick(param){
+            		var navi = $(param).text();
+            		if(navi=="<이전"){
+            			var page  = $(param).parents(".review_page_navi").next().attr("value");
+            			navi = parseInt(page) - 1 ;
+            		}else if(navi=="다음>"){
+            			var page  = $(param).parents(".review_page_navi").prev().attr("value");
+            			navi = parseInt(page) + 1 ;
+            		}
+            		$(param).prev().val(navi);
+            		$(param).parent().submit();
             	}
             </script>
         </html>

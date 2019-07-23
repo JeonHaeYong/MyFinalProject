@@ -196,7 +196,7 @@ font-weight:bold;
 			<div class="col-12">
 				<div>
 				 <button id="tomainboard" class="btn">글목록으로</button>
-                        	<c:if test="${id eq 'admin1234'}">
+                        	<c:if test="${type==4}">
 					<button id="updatewrite" class="btn">글수정</button>
 					
 					<script>

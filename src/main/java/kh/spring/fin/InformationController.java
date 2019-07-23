@@ -1,6 +1,7 @@
 package kh.spring.fin;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import kh.spring.dto.TrainingDTO;
+import com.google.gson.Gson;
+
+import kh.spring.dto.InfomaitionDTO;
 import kh.spring.service.InfoService;
 
 @Controller
@@ -29,21 +32,64 @@ public class InformationController {
 	@RequestMapping("information_t")
 	public String informaition_t(String currentPage) {
 		try {
-			String navi = service.getNavi(Integer.parseInt(currentPage));
-			session.setAttribute("currentPage", currentPage);
-			List<TrainingDTO> tdto=service.selectAll(Integer.parseInt(currentPage));
-	
-			request.setAttribute("infodto", tdto);
-			request.setAttribute("navi", navi);
-			return "sense/information/information";
+			String infonavi = service.getNavi(Integer.parseInt(currentPage));
+			request.setAttribute("currentPage", currentPage);
+			List<InfomaitionDTO> infodto=service.selectAll(Integer.parseInt(currentPage));
+			request.setAttribute("infodto", infodto);
+			request.setAttribute("infonavi", infonavi);
+
+
+			String tnavi = service.getNavi_training(Integer.parseInt(currentPage));
+			request.setAttribute("currentPage", currentPage);
+			List<InfomaitionDTO> tdto=service.selectAll_training(Integer.parseInt(currentPage));
+			request.setAttribute("tdto", tdto);
+			request.setAttribute("tnavi", tnavi);
+
+			return "sense/information/info_main";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "error";
-			
 		}
-		
-		
+
+	}	
+
+	@RequestMapping("info_main")
+	public String infoList_templet(HttpServletRequest request) {
+		String currentPage=request.getParameter("currentPage");
+		try {	String infonavi = service.getNavi(Integer.parseInt(currentPage));
+		request.setAttribute("currentPage", currentPage);
+		List<InfomaitionDTO> infodto=service.selectAll(Integer.parseInt(currentPage));
+		request.setAttribute("infodto", infodto);
+		request.setAttribute("infonavi", infonavi);
+
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return "sense/information/infoList_templet";
 	}
+
+	@RequestMapping("train_main")
+	public String trainingList_templet(HttpServletRequest request) {
+		String currentPage=request.getParameter("currentPage");
+		try {	String tnavi = service.getNavi_training(Integer.parseInt(currentPage));
+		request.setAttribute("currentPage", currentPage);
+		List<InfomaitionDTO> tdto=service.selectAll_training(Integer.parseInt(currentPage));
+		request.setAttribute("tdto", tdto);
+		request.setAttribute("tnavi", tnavi);
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return "sense/information/trainingList_templet";
+	}
+
+
+
+
+
+
+
 
 	@RequestMapping("infowrite")
 	public String infowrite() {
@@ -52,27 +98,23 @@ public class InformationController {
 	}
 
 	@RequestMapping("writeformproc")
-	public String writeformproc(TrainingDTO tdto){
-		System.out.println(tdto.getTitle()+tdto.getContents());
+	public String writeformproc(InfomaitionDTO dto){
+		System.out.println(dto.getTitle()+dto.getContents()+dto.getType());
 		try {
-			tdto.setWriter("관리자");
-			tdto.setIp(request.getRemoteAddr());
-		
+			dto.setWriter((String)session.getAttribute("id"));	
+			//---------스크립트공격------------------
 			Pattern p=Pattern.compile("<img src=\"(.+?)\">");
-			Matcher m=p.matcher(tdto.getContents());
-			if(m.find()==true) {
-			tdto.setImage(m.group(0));
-			}
+			Matcher m=p.matcher(dto.getContents());
+
+			if(m.find()==true) {			
+				dto.setImage(m.group(0));	}
 			else {
-				tdto.setImage("null");
-			}
-			int result=service.Infoinsert(tdto);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
+				dto.setImage("<img src='resources/images/dog_1.jpg' width='100%' height='100%'>");	}
+			service.Infoinsert(dto);
+		} catch (Exception e) {		
 			e.printStackTrace();
 		}
-		System.out.println(tdto);
-	
 		return "redirect:/information_t?currentPage=1";
 
 	}
@@ -88,7 +130,7 @@ public class InformationController {
 		{
 			file.mkdirs();
 		}
-		
+
 		long currTime = System.currentTimeMillis();
 		String imagePath =  "info_board/" +  "admin" + "/" + currTime + ".png";
 
@@ -99,75 +141,77 @@ public class InformationController {
 		}
 		return imagePath;
 	}
-	
-	
+
+
 	@RequestMapping("detail_info")
 	public String detailinfo(HttpServletRequest request, int seq) {
 		try {
 			request.setAttribute("dto", service.detail_info(seq));
-			
+
 			return "sense/information/detail_info";
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	return "error";
+		return "error";
 	}
-@RequestMapping("updatewrite")
-public String updatewrite(HttpServletRequest request,int seq) {
-	
-	try {
-		request.setAttribute("dto", service.detail_info(seq));
-	} catch (Exception e) {
-		
-		e.printStackTrace();
-	}
-return "sense/information/update";}
+	@RequestMapping("updatewrite")
+	public String updatewrite(HttpServletRequest request,int seq) {
 
-@RequestMapping("uploadformproc")
-public String upload(TrainingDTO tdto)
-{
-	System.out.println(tdto.getTitle()+tdto.getContents());
-	try {
-		tdto.setWriter("관리자");
-		tdto.setIp(request.getRemoteAddr());
-	
-		Pattern p=Pattern.compile("<img src=\"(.+?)\">");
-		Matcher m=p.matcher(tdto.getContents());
-		if(m.find()==true) {
-		tdto.setImage(m.group(0));
-		}
-		else {
-			tdto.setImage("null");
-		}
-		int result=service.update_info(tdto);
-	} catch (Exception e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	System.out.println(tdto);
-
-	return "redirect:/information_t?currentPage=1";
-	}
-
-@RequestMapping("delinfo")
-public String delinfo(HttpServletRequest request) {
-	String[] check = request.getParameterValues("check");
-	int[]seq=new int[check.length];
-	for(int i=0;i<check.length;)
-	{
-		seq[i]=Integer.parseInt(check[i]);
-		System.out.println(seq[i]);
-		
 		try {
-			if(service.deleteinfo(seq[i])>0) {
-			i++;}
-			else {
-				i--;
+			request.setAttribute("dto", service.detail_info(seq));
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+		return "sense/information/update";}
+
+	@RequestMapping("uploadformproc")
+	public String upload(InfomaitionDTO tdto)
+	{
+		System.out.println(tdto.getTitle()+tdto.getContents());
+		try {
+			tdto.setWriter("관리자");
+
+
+			Pattern p=Pattern.compile("<img src=\"(.+?)\">");
+			Matcher m=p.matcher(tdto.getContents());
+			if(m.find()==true) {
+				tdto.setImage(m.group(0));
 			}
-		}catch(Exception e) {e.printStackTrace();}
+			else {
+				tdto.setImage("null");
+			}
+			service.update_info(tdto);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(tdto);
+
+		return "redirect:/information_t?currentPage=1";
 	}
-	
-	return "redirect:/information_t?currentPage=1";
-}
-	
+
+	@RequestMapping("delinfo")
+	public String delinfo(HttpServletRequest request) {
+		String[] check = request.getParameterValues("check");
+		int[]seq=new int[check.length];
+		for(int i=0;i<check.length;)
+		{
+			seq[i]=Integer.parseInt(check[i]);
+			System.out.println(seq[i]);
+
+			try {
+				if(service.deleteinfo(seq[i])>0) {
+					i++;}
+				else {
+					i--;
+				}
+			}catch(Exception e) {e.printStackTrace();}
+		}
+
+		return "redirect:/information_t?currentPage=1";
+	}
+
+
+
 }

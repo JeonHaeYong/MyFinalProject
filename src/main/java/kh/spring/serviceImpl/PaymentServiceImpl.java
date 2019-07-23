@@ -9,9 +9,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kh.spring.dao.CartDAO;
+import kh.spring.dao.ChartDAO;
+import kh.spring.dao.DonationDAO;
+import kh.spring.dao.DonationPaymentDAO;
 import kh.spring.dao.ItemDAO;
 import kh.spring.dao.MessageDAO;
 import kh.spring.dao.PaymentDAO;
+import kh.spring.dto.DonationPaymentDTO;
 import kh.spring.dto.ItemDTO;
 import kh.spring.dto.ItemDTOList;
 import kh.spring.dto.MessageDTO;
@@ -33,12 +37,21 @@ public class PaymentServiceImpl implements PaymentService {
 	@Autowired
 	private ItemDAO idao;
 	
+	@Autowired
+	private DonationDAO ddao;
+	
+	@Autowired
+	private ChartDAO chartDAO;
+	
+	@Autowired(required=true)
+	private DonationPaymentDAO dpdao;
+	
 	public List<ItemDTO> selectItemForPaymentService(String[] items) {
 		return pdao.selectItemForPayment(items);
 	}
 	
 	@Transactional("txManager")
-	public List<ItemDTO> paymentComplete(PaymentDTO dto, ItemDTOList list) {
+	public List<ItemDTO> paymentComplete(PaymentDTO dto, ItemDTOList list) throws Exception {
 		System.out.println("구매 서비스 실행");
 		String msg = "";
 		String[] cartSeqs = new String[list.getList().size()];
@@ -62,7 +75,14 @@ public class PaymentServiceImpl implements PaymentService {
 			mdao.insertMsg(mdto1);
 			MessageDTO mdto2 = new MessageDTO(0, "admin", pdto.getSeller(), msg, null, null, "admin", mdao.selectSeqCurrVal());
 			mdao.insertMsg(mdto2);
+			
 			idao.updateSoldOut(pdto.getItem_seq());
+			
+			int price = Integer.parseInt(idto.getPrice().replace(" ", "").replace(",", ""));
+			DonationPaymentDTO dpdto = new DonationPaymentDTO(0, pdto.getSeller(), pdto.getItem_name(), ddao.selectRecentDTO().getName(), price, null, "무료나눔");
+			dpdao.insertDonationPayment(dpdto);
+			ddao.updateCurrentMoney(price);
+			chartDAO.updateTodayPayAmount(price);
 		}
 		cdao.deleteCart(cartSeqs);
 		

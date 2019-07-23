@@ -18,7 +18,7 @@ public class ReviewCommentsDAOImpl implements ReviewCommentsDAO {
 	private SqlSessionTemplate sst;
 	
 	@Override
-	public int insertReviewComment(ReviewCommentsDTO dto) {
+	public int insertReviewComment(ReviewCommentsDTO dto) {//후기게시판 댓글 등록(insert)
 		return sst.insert("ReviewCommentsDAO.insertReviewComment", dto);
 	}
 
@@ -31,12 +31,6 @@ public class ReviewCommentsDAOImpl implements ReviewCommentsDAO {
 	public int deleteReviewComment(int review_seq) {
 		return sst.delete("ReviewCommentsDAO.deleteReviewComment", review_seq);
 	}
-
-	@Override
-	public List<ReviewCommentsDTO> selectAllReviewComments() {
-		return sst.selectList("ReviewCommentsDAO.selectAllReviewComments");
-	}
-
 	@Override
 	public List<ReviewCommentsDTO> selectReviewCommentsPerPage(int start, int end){
 		Map<String, Integer> param = new HashMap<>();
@@ -48,6 +42,43 @@ public class ReviewCommentsDAOImpl implements ReviewCommentsDAO {
 	@Override
 	public Map<String, Integer> getNaviForReviewComments(int commentPage) {
 		return null;
+	}
+
+	@Override
+	public List<ReviewCommentsDTO> selectAllReviewCommentsByReviewSeq(int seq , int start, int end , String loginId) {
+		Map<String, Object> param = new HashMap<>();
+		if(loginId!=null) {
+			param.put("id", loginId);
+		}
+		param.put("seq", seq);
+		param.put("start", start);
+		param.put("end", end);
+		return sst.selectList("ReviewCommentsDAO.selectAllReviewCommentsByReviewSeq",param);
+	}
+
+	@Override
+	public int selectReviewCommentsCountByReviewSeq(int reviewSeq) {
+		return sst.selectOne("ReviewCommentsDAO.selectReviewCommentsCountByReviewSeq",reviewSeq);
+	}
+
+	@Override
+	public int updateReviewCommentsLike(int seq) {//댓글좋아요수 + 1
+		return sst.update("ReviewCommentsDAO.updateReviewCommentsLike",seq);
+	}
+
+	@Override
+	public int updateReviewCommentsLikeMinus(int seq) {
+		return sst.update("ReviewCommentsDAO.updateReviewCommentsLikeMinus",seq);
+	}
+
+	@Override
+	public int selectReviewCommentsSeqCurrVal() {
+		return sst.selectOne("ReviewCommentsDAO.selectReviewCommentsSeqCurrVal");
+	}
+
+	@Override
+	public ReviewCommentsDTO selectReviewCommentsBySeq(int seq) {
+		return sst.selectOne("ReviewCommentsDAO.selectReviewCommentsBySeq",seq);
 	}
 
 }

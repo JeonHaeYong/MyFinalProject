@@ -21,8 +21,9 @@
             <link rel="stylesheet" href="resources/css/aos.css">
             <link rel="stylesheet" href="resources/css/style.css">
             <style>
-                #cart_wrapper{
+                .cart_wrapper{
                 	color: #754F44;
+                	cursor: default;
                 }
                 .itemName{
                 	text-decoration: none;
@@ -53,7 +54,7 @@
                             <div class="tab-content" id="pills-tabContent">
                                 <!-- 구매내역 -->
                                 <div class="tab-pane fade show active" id="pills-profile">
-                                    <div id="cart_wrapper">
+                                    <div class="cart_wrapper">
                                         <div class="row border-bottom border-success">
                                             <div class="col-5">상품명</div>
                                             <div class="col-2">금액</div>

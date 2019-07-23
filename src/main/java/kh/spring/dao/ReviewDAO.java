@@ -13,4 +13,5 @@ public interface ReviewDAO {
 	public List<ReviewDTO> selectReviewPerPage(int start, int end);
 	public int getReviewCount();
 	public ReviewDTO selectReviewBySeq(int seq);
+	public int updateViewCount(int seq);
 }

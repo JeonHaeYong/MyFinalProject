@@ -174,12 +174,12 @@ public class AdminController
 		return "myPage/admin/admin_donation";
 	}
 	@RequestMapping(value = "admin-donation-insert", method = RequestMethod.POST)
-	public Object addNewDonation(HttpServletRequest request,MultipartFile image1, MultipartFile image2, MultipartFile image3)
+	public Object addNewDonation(HttpServletRequest request,MultipartFile image1, MultipartFile image2, MultipartFile image3, MultipartFile left, MultipartFile right)
 	{
 		Object result = "error";
 		try
 		{
-			result = donationService.addNewDonation(request, image1, image2, image3);
+			result = donationService.addNewDonation(request, image1, image2, image3, left, right);
 		}
 		catch(Exception e)
 		{
@@ -188,14 +188,14 @@ public class AdminController
 		
 		return result;
 	}
-	@RequestMapping(value = "admin-donation-image", method = RequestMethod.POST)
-	public Object changeLeftImage(MultipartFile left, MultipartFile right)
+	@ResponseBody
+	@RequestMapping(value = "admin-donation-search", produces="application/json;charset=utf-8")
+	public Object donationSearch(String page)
 	{
 		Object result = "error";
-		
 		try
 		{
-			result = donationService.changeImage(left, right);
+			result = donationService.selectDTOByRowNumber(page);
 		}
 		catch(Exception e)
 		{
@@ -204,6 +204,37 @@ public class AdminController
 		
 		return result;
 	}
+	@RequestMapping(value = "admin-donation-update", method = RequestMethod.POST)
+	public Object updateDonation(HttpServletRequest request,MultipartFile image1, MultipartFile image2, MultipartFile image3, MultipartFile left, MultipartFile right)
+	{
+		Object result = "error";
+		try
+		{
+			result = donationService.updateDonation(request, image1, image2, image3, left, right);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+//	@RequestMapping(value = "admin-donation-image", method = RequestMethod.POST)
+//	public Object changeLeftImage(MultipartFile left, MultipartFile right)
+//	{
+//		Object result = "error";
+//		
+//		try
+//		{
+//			result = donationService.changeImage(left, right);
+//		}
+//		catch(Exception e)
+//		{
+//			e.printStackTrace();
+//		}
+//		
+//		return result;
+//	}
 	
 	//Donation End
 	
@@ -339,14 +370,14 @@ public class AdminController
 		return result;
 	}
 	@ResponseBody
-	@RequestMapping(value = "admin-paylog-select", produces="application/json;charset=utf-8")
-	public Object selectFromPayLog(String page, String condition)
+	@RequestMapping(value = "admin-paylog-search", produces="application/json;charset=utf-8")
+	public Object selectFromPayLog(String page, String condition, String keyword)
 	{
 		Object result = "error";
 		
 		try
 		{
-			
+			result = logService.selectPayLog(page, condition, keyword);
 		}
 		catch(Exception e)
 		{

@@ -12,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import kh.spring.dto.ReviewCommentsDTO;
 import kh.spring.dto.ReviewDTO;
+import kh.spring.service.ReviewCommentsService;
 import kh.spring.service.ReviewService;
 
 @Controller
@@ -21,6 +23,8 @@ public class ReviewController {
 	private HttpSession session;
 	@Autowired
 	private ReviewService rservice;
+	@Autowired
+	private ReviewCommentsService rcService;
 
 	@RequestMapping("toReviewList")
 	public String toReviewList(HttpServletRequest request , String currentPage) {
@@ -32,6 +36,7 @@ public class ReviewController {
 		request.setAttribute("reviewList", reviewList);
 		//navi넘기기
 		List<String> navi = rservice.getNaviForReviewList(Integer.parseInt(currentPage));
+		
 		request.setAttribute("navi", navi);
 		request.setAttribute("currentPage", currentPage);
 		return "review/meet_reviewList";
@@ -69,12 +74,28 @@ public class ReviewController {
 		return "redirect:toReviewList";
 	}
 	
+	//후기 글 클릭했을때,
 	@RequestMapping("toReviewDetail")
-	public String toReviewDetail(HttpServletRequest request,int seq, String currentPage) {
-		System.out.println(seq);
+	public String toReviewDetail(HttpServletRequest request, int seq, String currentPage) {
+		String loginId = (String)session.getAttribute("id");
+		//해당 글 조회수 올리기.
+		int result = rservice.updateViewCount(seq);
+		//해당 글 정보 가져오기
 		ReviewDTO dto = rservice.selectReviewBySeq(seq);
+		//해당 글의 댓글 가져오기
+		List<ReviewCommentsDTO> list = rcService.selectAllReviewCommentsService(seq,1,loginId);
+		//(댓글 navi)
+		List<String> reply_navi = rcService.getNaviForReviewCommentsList(seq, 1);
 		request.setAttribute("reviewDTO", dto);
 		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("replyList", list);
+		request.setAttribute("reply_navi", reply_navi);
 		return "review/review_detail";
+	}
+	//글 삭제하기.
+	@RequestMapping("deleteReview")
+	public String deleteReview(String seq) {
+		rservice.deleteReviewService(Integer.parseInt(seq));
+		return "redirect:toReviewList";
 	}
 }
