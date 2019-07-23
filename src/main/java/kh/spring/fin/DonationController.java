@@ -50,7 +50,12 @@ public class DonationController {
 	@RequestMapping("donationProc")
 	public String donationProc_loginCheck(HttpServletRequest request, DonationPaymentDTO dto) {
 		System.out.println(dto.getDonator_name());
-		dps.insertDonationPaymentService(dto);
+		try{
+			dps.insertDonationPaymentService(dto);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
 		return "redirect:toMyPage_support";
 	}
 

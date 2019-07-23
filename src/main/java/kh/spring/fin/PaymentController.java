@@ -50,7 +50,12 @@ public class PaymentController {
 		for(ItemDTO item : list.getList()) {
 			totalAmount += Integer.parseInt(item.getPrice().replaceAll(",", "").replaceAll(" ", ""));
 		}
-		request.setAttribute("payItem", ps.paymentComplete(dto, list));
+		try{
+			request.setAttribute("payItem", ps.paymentComplete(dto, list));
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
 		request.setAttribute("totalAmount", totalAmount);
 		request.setAttribute("payMem", dto);
 		return "payment/paymentComplete";
