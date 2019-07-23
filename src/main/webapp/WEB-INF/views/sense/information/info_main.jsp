@@ -160,14 +160,14 @@ a[name="s-menu"]:hover {
 	height: 100% !important;
 }
 
-#infowrite, #infodel {
+#infowrite, #infodel,.infonavi ,.t_navi {
 	border: 0;
 	background-color: #FDD69270;
 	color: #754F44;
 	font-family: 'Gamja Flower', cursive;
 }
 
-#infowrite:hover, #infodel:hover {
+#infowrite:hover, #infodel:hover,.infonavi:hober, .t_navi:hover {
 	background-color: #FDD692;
 	font-weight: bold;
 }
