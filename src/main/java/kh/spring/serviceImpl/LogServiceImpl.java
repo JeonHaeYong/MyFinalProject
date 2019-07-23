@@ -1,6 +1,8 @@
 package kh.spring.serviceImpl;
 
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,7 +36,7 @@ public class LogServiceImpl implements LogService
 			dto.setBuyer("buyer"+i);
 			dto.setName("name"+i);
 			dto.setPrice(1000+i);
-			dto.setSeller("seller"+i);
+			dto.setSeller("seller"+(301-i));
 			
 			int insertResult = logDAO.insertPayLog(dto);
 			
@@ -58,7 +60,6 @@ public class LogServiceImpl implements LogService
 		List<PayLogDTO> list = null;
 		HashMap<String, String> params = new HashMap<>();
 		
-		
 		if((page == null) || (page.equals("")))
 		{
 			page = "1";
@@ -81,28 +82,54 @@ public class LogServiceImpl implements LogService
 		params.put("end", ""+end);
 		
 		
-		if(condition.equals("buyer-like"))
+		
+		if((condition.equals("buyer-like")) || (condition.equals("seller-like")))
 		{
 			params.put("keyword", "%"+keyword+"%");
+		}
+		else if(((condition.equals("buyer-equal")) || (condition.equals("seller-equal"))) || (condition.equals("date")))
+		{
+			params.put("keyword", keyword);
+		}
+		else
+		{
+			return "error";
+		}
+		
+		
+		
+		if(condition.equals("buyer-like"))
+		{
 			list = logDAO.selectAllPayLogByLikeBuyer(params);
 			recordTotalCount = logDAO.selectCountPayLogByLikeBuyer(params);
 		}
 		else if(condition.equals("seller-like"))
 		{
-			
+			list = logDAO.selectAllPayLogByLikeSeller(params);
+			recordTotalCount = logDAO.selectCountPayLogByLikeSeller(params);
 		}
 		else if(condition.equals("buyer-equal"))
 		{
-			
+			list = logDAO.selectAllPayLogByBuyer(params);
+			recordTotalCount = logDAO.selectCountPayLogByBuyer(params);
 		}
 		else if(condition.equals("seller-equal"))
 		{
-			
+			list = logDAO.selectAllPayLogBySeller(params);
+			recordTotalCount = logDAO.selectCountPayLogBySeller(params);
 		}
 		else if(condition.equals("date"))
 		{
-			
+			list = logDAO.selectAllPayLogByDate(params);
+			recordTotalCount = logDAO.selectCountPayLogByDate(params);
 		}
+		else
+		{
+			logger.info("에러");
+			return "error";
+		}
+		
+		
 		
 		logger.info("검색된 아이디의 수 : {}", list.size());
 		

@@ -174,6 +174,7 @@ font-weight:bold;
 					
 					
 					
+					
 					<div class="row justify-content-center">
 						
 						<div class="col-12 text-center my-5">
@@ -183,6 +184,9 @@ font-weight:bold;
 						</div>
 						
 					</div>
+					
+					
+					
 					
 				</div>
 				
@@ -247,6 +251,11 @@ font-weight:bold;
 		var keyword;
 		function search(btnName)
 		{
+			
+			console.log(btnName);
+			console.log(keyword);
+			console.log($("#condition_select").val());
+			
 			$.ajax
 	    	({
 	    		url: "admin-paylog-search",
@@ -268,7 +277,7 @@ font-weight:bold;
     			var $menu_seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-3"><h3>번호</h3></div>');
     			var $menu_buyerCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-3"><h3>구매자</h3></div>');
     			var $menu_nameCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>상품명</h3></div>');
-    			var $menu_priceCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>가격</h3></div>');
+    			var $menu_priceCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>결제금액</h3></div>');
     			var $menu_sellerCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>판매자</h3></div>');
     			var $menu_timeCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>날짜</h3></div>');
     			$menu_row.append($menu_seqCol).append($menu_buyerCol).append($menu_nameCol).append($menu_priceCol).append($menu_sellerCol).append($menu_timeCol);
