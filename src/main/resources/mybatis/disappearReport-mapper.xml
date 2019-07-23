@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="DisappearReportDAO">
-	<insert id="insertNoImage">
-		insert into disappearReport values(disappearReport_seq.nextval, #{disDate}, #{areaList},
-						#{disappearArea}, #{tel}, #{kind}, #{gender}, #{neuter}, #{age}, #{furColor}, 
-						#{feature}, #{et}, null, #{writer}, default, #{ip})
-	</insert>
 	<insert id="insert">
 		insert into disappearReport values(disappearReport_seq.nextval, #{disDate}, #{areaList},
 						#{disappearArea}, #{tel}, #{kind}, #{gender}, #{neuter}, #{age}, #{furColor}, 
@@ -21,12 +16,15 @@
 		select * from disappearReport where seq = #{value}
 	</select>
 	<update id="updateNoImage">
-		update disappearReport set disdate = #{disDate}, areaList = #{areaList}, disappeararea = #{disappearArea}, tel = #{tel}, kind = #{kind}, gender = #{gender}
+		update disappearReport set disdate = #{disDate}, areaList = #{areaList}, disappeararea = #{disappearArea}, tel = #{tel}, kind = #{kind}, gender = #{gender},
 											neuter = #{neuter}, age = #{age}, furColor = #{furColor}, feature = #{feature}, et = #{et} where seq = #{seq}
 	</update>
 	<update id="update">
-		update disappearReport set disdate = #{disDate}, areaList = #{areaList}, disappeararea = #{disappearArea}, tel = #{tel}, kind = #{kind}, gender = #{gender}
+		update disappearReport set disdate = #{disDate}, areaList = #{areaList}, disappeararea = #{disappearArea}, tel = #{tel}, kind = #{kind}, gender = #{gender},
 											neuter = #{neuter}, age = #{age}, furColor = #{furColor}, feature = #{feature}, et = #{et}, image = #{image} where seq = #{seq}
 	</update>
+	<delete id="delete">
+		delete disappearReport where seq = #{value}
+	</delete>
 	
 </mapper>

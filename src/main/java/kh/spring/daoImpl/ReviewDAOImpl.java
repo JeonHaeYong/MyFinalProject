@@ -13,10 +13,6 @@ import kh.spring.dto.ReviewDTO;
 
 @Repository
 public class ReviewDAOImpl implements ReviewDAO {
-	// 한 페이지에 몇 개의 글이 보이게 할 것인지
-	public static int recordCountPerPage = 15;
-	// 한 페이지에 네비게이터가 총 몇 개가 보이게 할 것인지
-	public static int naviCountPerPage = 5;
 
 	@Autowired
 	private SqlSessionTemplate sst;
@@ -58,10 +54,14 @@ public class ReviewDAOImpl implements ReviewDAO {
 		return sst.selectList("ReviewDAO.selectAllReviewByCurrentpage",map);
 	}
 
-
 	@Override
 	public ReviewDTO selectReviewBySeq(int seq) {
 		return sst.selectOne("ReviewDAO.selectReviewBySeq",seq);
+	}
+
+	@Override
+	public int updateViewCount(int seq) {
+		return sst.update("ReviewDAO.updateViewCount",seq);
 	}
 
 }

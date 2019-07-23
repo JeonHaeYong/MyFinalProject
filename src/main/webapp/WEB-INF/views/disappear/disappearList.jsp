@@ -21,8 +21,9 @@
 <link rel="stylesheet" href="resources/css/style.css">
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
 <style>
-	/* -------------------infobox -----------------*/
+	.empty{width: 100%; text-align: center; margin: auto; margin-bottom: 50px; height:50px;}
   #title{text-align: center;}
+  h1{ font-family: 'Gamja Flower', cursive;}
     .disappearList{width: 80%; margin: auto;}
 .infowrapper {
 font-family: 'Gamja Flower', cursive;
@@ -80,9 +81,9 @@ width:100%;
 .petInfo>div{float: left; heigth:15%; margin-left:15px;}
 .writer{margin-left: 20px;}
 .writeDate{margin-left: 100px;}
-.footer{text-align:right; margin-right:120px; margin-bottom: 30px;}
-.write-btn{background-color: #EC7357; color:white; border-style: none; border-radius:5px;}
-.write-btn:hover{background-color:#f0522e; font-weight:bold; }
+.footer{text-align:right; margin-right:170px; margin-bottom: 30px;}
+.btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44;}
+.btn:hover{background-color:#FDD692; font-weight:bold;}
 .thumbnail{width:100%; height:100%;}
 .navi-section{text-align: center; margin-top:20px; font-family: 'Gamja Flower', cursive; font-size:25px;}
 .pageNum{text-decoration-line: none; color:#754F44; font-size:25px;}
@@ -107,6 +108,7 @@ width:100%;
 	data-offset="300" id="home-section">
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
+	<div class="px-0 pb-0 empty"></div>
 	<div id="title"><h1>잠시 길 잃은 동물들</h1></div>
 	<div class="containier ">
 		<div class="row disappearList">
@@ -136,7 +138,7 @@ width:100%;
 		</div>
 		<div class="row mt-5 footer" align="right">
 			<div class="col-12">
-					<input type="button" value="글쓰기" class="write-btn">
+					<input type="button" value="글쓰기" class="write-btn btn">
 			</div>
 		</div>
 	</div>

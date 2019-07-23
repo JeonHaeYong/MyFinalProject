@@ -16,7 +16,7 @@
                             </div>
                             <div class="my_page_info">
                                 <div>
-                                    <img src="/resources/images/dog_1.jpg" class="rounded-circle" style="width: 100px; height: 100px;">
+                                    <a href="#" onclick=""><img src="/resources/images/dog_1.jpg" class="rounded-circle" style="width: 100px; height: 100px;"></a>
                                 </div>
                                 <div>
                                     ${memberDTO.name }님                                </div>

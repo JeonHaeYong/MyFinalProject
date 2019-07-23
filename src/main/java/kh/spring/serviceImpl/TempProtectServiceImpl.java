@@ -40,8 +40,8 @@ public class TempProtectServiceImpl implements TempProtectService{
 	}
 
 
-	public TempProtectDTO readOneTempProtect(int seq) {
-		return tpdao.readOneTempProtect(seq);
+	public TempProtectDTO selectOneTempProtect(int seq) {
+		return tpdao.selectOneTempProtect(seq);
 	}
 
 

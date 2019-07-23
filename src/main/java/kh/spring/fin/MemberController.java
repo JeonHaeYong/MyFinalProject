@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,7 +48,11 @@ public class MemberController {
 
 	//로그인
 	@RequestMapping("login")
-	public String login(MemberDTO dto) {
+	public String login(HttpServletRequest request, MemberDTO dto) {
+		String url ="http://localhost/";
+		String referer = request.getHeader("referer");
+		String returnUrl = referer.substring(url.length());
+		
 		System.out.println(dto.getId());
 		try{
 			int result=mservice.isLoginOkService(dto.getId(), dto.getPassword());
@@ -61,7 +64,7 @@ public class MemberController {
 			else {
 				session.setAttribute("id", dto.getId());
 				System.out.println("session정보"+session.getAttribute("id"));
-				return "redirect:/";	
+				return "redirect:/"+returnUrl;	
 			}
 		}
 		catch(Exception e) {

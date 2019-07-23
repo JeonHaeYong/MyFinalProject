@@ -57,7 +57,7 @@ h3, h1 {
 	padding: 10px;
 	text-align: center;
 	margin: 0px;
-	margin-top: 45px;
+	margin-top: 25px;
 	padding: 0px;
 }
 
@@ -102,9 +102,8 @@ a[name="s-menu"]:hover {
 }
 
 /* -------------------infobox -----------------   */
-
 .infowrapper {
-font-family: 'Gamja Flower', cursive;
+	font-family: 'Gamja Flower', cursive;
 	box-sizing: border-box;
 	height: 300px;
 	overflow: hidden;
@@ -115,48 +114,63 @@ font-family: 'Gamja Flower', cursive;
 	padding-top: 50px;
 }
 
-.infoimg, .infotext,.infoextra {
+.infoimg, .infotext, .infoextra, infoseq {
+	overflow: hidden;
+}
 
-	
-overflow: hidden;
+.infoseq {
+	border-bottom: 1px solid #754F4470;
+}
 
+.infoimg {
+	margin-left: 10px;
+	margin-top: 2px;
+	margin-right: 10px;
+	box-sizing: border-box;
+	height: 70%;
 }
-.infoimg{
-margin-left:15px;
-margin-top:15px;
-margin-right:15px;
-box-sizing: border-box;
-height:70%;
-}
-.inforecommend{
-border-top:1px solid #754F4470;
-padding-left:5px;
-margin-top:2px;
-margin-left:15px;
-margin-right:15px;
-text-align:left;
-height:7%;
-box-sizing:border-box;
-overflow:hidden;
-}
-.infotext{
 
-font-size:18px;
-text-align:left;
-margin-left:15px;
-margin-right:15px;
-padding-left:5px;
-height:18%;
-margin-top:2px;
+.inforecommend {
+	padding-left: 5px;
+	margin-left: 15px;
+	margin-right: 15px;
+	text-align: left;
+	height: 7%;
+	box-sizing: border-box;
+	overflow: hidden;
 }
-.infoimg>img {
-width:100%;
+
+.infotext {
+	border-top: 1px solid #754F4470;
+	margin-top: 2px;
+	font-size: 20px;
+	line-height: 50px;
+	text-align: center;
+	margin-left: 15px;
+	margin-right: 15px;
+	padding-left: 5px;
+	height: 18%;
+	margin-top: 2px;
+}
+
+.infoimg>a>img {
+	width: 100% !important;
 	top: 0;
 	left: 0;
-	height: 100%;
+	height: 100% !important;
 }
 
+#infowrite, #infodel {
+	border: 0;
+	background-color: #FDD69270;
+	color: #754F44;
+	font-family: 'Gamja Flower', cursive;
+}
 
+#infowrite:hover, #infodel:hover {
+	background-color: #FDD692;
+	font-weight: bold;
+}
 </style>
 
 </head>
@@ -204,27 +218,57 @@ width:100%;
 			<div class="col-1"></div>
 			<div class="col-lg-9 col-md-8 col-sm-12 col-12 info-box">
 				<!--정보   -->
+				<form action="delinfo" method="post" id="delform">
+					<div class="row .infinite">
 
-				<div class="row .infinite">
-					<c:forEach var="dto" items="${infodto}">
-						<div class="col-lg-4 col-md-6 col-sm-6 dtocol">
-							<div class=infowrapper>
-							
-								<div class=infoimg><a href="detail?seq=${dto.seq }"class="detail">${dto.image}</a></div>
-								<div class="inforecommend">♥</div>
-								<div class=infotext>${dto.title}</div>
+						<c:forEach var="dto" items="${infodto}">
+
+							<div class="col-lg-4 col-md-6 col-sm-6 dtocol">
+
+								<div class=infowrapper>
+
+									<div class=infoseq>
+										<c:if test="${id eq 'admin1234'}">
+											<input type=checkbox value="${dto.seq}" name="check">
+										</c:if>
+										NO.${dto.seq }
+									</div>
+
+									<div class=infoimg>
+										<a href="detail_info?seq=${dto.seq}" class="detail">${dto.image}</a>
+									</div>
+									<div class=infotext>${dto.title}</div>
+									<div class="inforecommend">${dto.writeDate}</div>
+								</div>
+
 							</div>
-						</div>
-					</c:forEach>
-					
+						</c:forEach>
 
-				</div>
+
+					</div>
+				</form>
 			</div>
 		</div>
 		<div class="row mt-5" align="right">
 			<div class="col-12">
 				<div>
-					<input type="button" value="글쓰기" id="infowrite">
+					<div id="navi" align="center">${navi}</div>
+					<c:if test="${id eq 'admin1234'}">
+						<button id="infowrite" class="btn">글쓰기</button>
+						<button id="infodel" class="btn">글삭제</button>
+						<script>
+							document.getElementById("infowrite").onclick = function() {
+								location.href = "infowrite";
+							}
+						
+							document.getElementById("infodel").onclick = function() {
+									$("#delform").submit();
+								
+						
+							}
+						</script>
+
+					</c:if>
 				</div>
 			</div>
 		</div>
@@ -249,13 +293,8 @@ width:100%;
 
 
 	<!--정보 스크립트 코드   -->
-	<script>
-	   document.getElementById("infowrite").onclick = function(){
-           location.href = "infowrite";
-       }
-	  </script>
 
 
-	
+
 </body>
 </html>

@@ -22,6 +22,7 @@ import kh.spring.service.BlackListService;
 import kh.spring.service.ChartService;
 import kh.spring.service.DonationService;
 import kh.spring.service.ItemService;
+import kh.spring.service.LogService;
 import kh.spring.service.MemberService;
 import kh.spring.service.QuizService;
 
@@ -44,6 +45,8 @@ public class AdminController
 	ItemService itemService;
 	@Autowired
 	MemberService memberService;
+	@Autowired
+	LogService logService;
 	
 	//Member Start
 	@RequestMapping(value = "admin-member")
@@ -308,6 +311,52 @@ public class AdminController
 		return result;
 	}
 	//Quiz End
+	
+	
+	
+	
+	//PayLog start
+	
+	@RequestMapping(value = "admin-paylog")
+	public String paylogPage()
+	{
+		return "myPage/admin/admin_paylog";
+	}
+	@RequestMapping(value = "admin-paylog-insert")
+	public Object insertPayLogDummy()
+	{
+		Object result = "error";
+		
+		try
+		{
+			result = logService.insertDummy();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	@ResponseBody
+	@RequestMapping(value = "admin-paylog-search", produces="application/json;charset=utf-8")
+	public Object selectFromPayLog(String page, String condition, String keyword)
+	{
+		Object result = "error";
+		
+		try
+		{
+			result = logService.selectPayLog(page, condition, keyword);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	//PayLog end
 	
 	
 	

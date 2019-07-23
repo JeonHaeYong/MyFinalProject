@@ -22,33 +22,34 @@
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
  <style>
  		.empty{width: 100%; text-align: center; margin: auto; margin-bottom: 50px; height:50px;}
-        .title{text-align: center; }
+        .title{text-align: center;}
+        h1{ font-family: 'Gamja Flower', cursive;}
         div{ box-sizing: border-box; overflow:hidden; border: 0px solid black;}
         #wrapper{border: 2px solid #754F44; width: 1200px; height: 400px; margin: auto; margin-bottom:20px;}
         #wrapper>div{float: left;}
         .pet{width: 35%; height: 97%; margin: 5px;}
         .petImg{width: 100%; height: 65%;}
         .feature{width: 100%; height: 35%;}
-        .feature>div:first-child{height: 20%; width: 100%; font-weight: bold;}
+        .feature>div:first-child{height: 20%; width: 100%; font-weight: bold; font-family: 'Gamja Flower', cursive; font-size:20px;}
         .feature>div:nth-child(2){height: 80%; width: 100%; overflow-y: auto; word-wrap: break-word;}
         .petInfo{width: 63%; height: 97%; margin-left: 6px; margin-top:5px;}
         
         .content{width: 100%; height: 70%;}
         .content>div{float: left;width: 50%; height: 100%;}
-        .first-col{font-weight: bold;}
+        .first-col{font-weight: bold; font-family: 'Gamja Flower', cursive; font-size:20px;}
        .first-col,.second-col{float: left; width: 50%; height: 100%;}
         
         .first-col>div,.second-col>div{height: 20%; text-align: center; line-height: 50px;}
         .et{width: 100%; height: 30%; padding-left: 75px;}
         .content>div:nth-child(2)>.first-col>div,.content>div:nth-child(2)>.second-col>div{height: 34%; line-height: 80px;}
-        .et>div:first-child{height: 25%; font-weight: bold;}
+        .et>div:first-child{height: 25%; font-weight: bold; font-family: 'Gamja Flower', cursive; font-size:20px;}
         .et-contents{height: 75%; overflow-y: auto; word-wrap: break-word;}
         .petImg>img{width:100%; height:100%;}
         
         #footer{ margin:auto; width:1200px;}
         #footer>div{text-align:right;}
-        .btns{background-color: #EC7357; color:white; border-style: none; border-radius:5px;}
-		.btns:hover{background-color:#f0522e; font-weight:bold; }
+        .btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44;}
+		.btn:hover{background-color:#FDD692; font-weight:bold;}
     </style>
     <script>
     	$(function(){
@@ -59,7 +60,10 @@
     			location.href="toAlterForm?seq=${content.seq}";
     		});
     		$(".delete-btn").on("click",function(){
-    			//location.href="";
+    			var result = confirm("정말로 삭제하시겠습니까?");
+            	if(result == true){
+    			location.href="deleteProc.dis?seq=${content.seq}";
+            	}
     		});
     	});
     </script>
@@ -89,7 +93,6 @@
                         <div>성별/나이/털색</div>
                         <div>지역</div>
                         <div>실종장소</div>
-                       
                     </div>
                     <div class="second-col">
                          <div></div>
@@ -120,10 +123,17 @@
     </div>
       <div id="footer">
         	<div>
-        	
-        		<input type="button" class="alter-btn btns" value="수정">
-        		<input type="button" class="delete-btn btns" value="삭제">
-        		<input type="button" class="toList-btn btns" value="목록">
+        		<c:choose>
+        			<c:when test="${content.writer == id }">
+        				<input type="button" class="alter-btn btn" value="수정">
+        				<input type="button" class="delete-btn btn" value="삭제">
+        			</c:when>
+        			<c:otherwise>
+        				<input type="button" class="alter-btn btn" value="수정" hidden>
+        				<input type="button" class="delete-btn btn" value="삭제"hidden>
+        			</c:otherwise>
+        		</c:choose>
+        		<input type="button" class="toList-btn btn" value="목록">
         	</div>
         </div>
 	

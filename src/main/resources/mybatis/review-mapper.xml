@@ -7,8 +7,9 @@
 	</insert>
 	
 	<select id="selectAllReviewByCurrentpage" resultType="kh.spring.dto.ReviewDTO">
-		select * from (select row_number() over(order by seq desc) as rown, review.* 
-		from review) where rown between #{start} and #{end}
+		select * from (select row_number() over(order by r1.seq desc) as rown , r1.* , nvl(cnt,0) as comments from review r1 , 
+(select r.seq , count(r.seq) cnt from review r, review_comments rc where r.seq = rc.REVIEW_SEQ group by r.SEQ) r2 
+where r1.seq = r2.seq(+)) where rown between #{start} and #{end}
 	</select>
 	
 	<update id="modifyReview">
@@ -25,5 +26,7 @@
 	<select id="selectReviewBySeq" resultType="kh.spring.dto.ReviewDTO">
 		select * from review where seq = #{seq}
 	</select>
-	
+	<update id="updateViewCount">
+		update review set view_count = view_count + 1 where seq = #{seq}
+	</update>
 </mapper>

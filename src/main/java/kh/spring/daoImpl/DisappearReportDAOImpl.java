@@ -21,16 +21,12 @@ public class DisappearReportDAOImpl implements DisappearReportDAO{
 	private SqlSessionTemplate sst; 
 	
 	@Override
-	public int insertNoImage(DisappearReportDTO drdto) {
-		if(drdto.getNeuter() == null) {
-			drdto.setNeuter("X");
-		}
-		return sst.insert("DisappearReportDAO.insertNoImage", drdto);
-	}
-	@Override
 	public int insert(DisappearReportDTO drdto) {
 		if(drdto.getNeuter() == null) {
 			drdto.setNeuter("X");
+		}
+		if(drdto.getEt()==null) {
+			drdto.setEt("");
 		}
 		return sst.insert("DisappearReportDAO.insert", drdto);
 	}
@@ -97,11 +93,27 @@ public class DisappearReportDAOImpl implements DisappearReportDAO{
 	}
 	@Override 
 	public int updateNoImage(DisappearReportDTO drdto) {
+		if(drdto.getNeuter() == null) {
+			drdto.setNeuter("X");
+		}
+		if(drdto.getEt()==null) {
+			drdto.setEt("");
+		}
 		return sst.update("DisappearReportDAO.updateNoImage",drdto);
 	}
 	@Override
 	public int update(DisappearReportDTO drdto) {
+		if(drdto.getNeuter() == null) {
+			drdto.setNeuter("X");
+		}
+		if(drdto.getEt()==null) {
+			drdto.setEt("");
+		}
 		return sst.update("DisappearReportDAO.update",drdto);
+	}
+	@Override
+	public int delete(int seq) {
+		return sst.delete("DisappearReportDAO.delete",seq);
 	}
 	
 }

@@ -7,7 +7,6 @@ import org.springframework.web.multipart.MultipartFile;
 import kh.spring.dto.DisappearReportDTO;
 
 public interface DisappearReportService {
-	public  int insertNoImageService(DisappearReportDTO drdto);
 	public int insert(DisappearReportDTO drdto);
 	public String imageUploadService(MultipartFile image);
 	public List<DisappearReportDTO> selectPerPageService(int currentPage);
@@ -15,4 +14,5 @@ public interface DisappearReportService {
 	public DisappearReportDTO toReportContentService(int seq);
 	public int updateNoimageService(DisappearReportDTO drdto);
 	public int updateService(DisappearReportDTO drdto);
+	public int deleteService(int seq);
 }

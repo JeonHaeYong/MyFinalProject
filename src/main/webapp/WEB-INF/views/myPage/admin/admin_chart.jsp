@@ -21,24 +21,57 @@
 #container {
 	margin-top: 5%;
 }
+#mypage_link
+{
+	color: #EC7357 !important;
+	font-weight: 600 !important;
+}
 
-.my_buttons {
+
+
+
+.selected_menu_btns {
+	font-family: 'Gamja Flower', cursive !important;
 	border-radius: 0px !important;
 	width: 100%;
 	height: 100%;
-	
-	background-color: #EC7357 !important;
+	background-color:#FDD69270;
+	color:#754F44;
+	font-weight:bold !important;
 }
-.my_buttons:hover{
-	background-color: black !important;
-}
-.selected_my_buttons {
+.menu_btns{
+	font-family: 'Gamja Flower', cursive !important;
 	border-radius: 0px !important;
 	width: 100%;
 	height: 100%;
-	
-	background-color: black !important;
 }
+.menu_btns:hover{
+	background-color:#FDD692;
+	font-weight:bold !important;
+}
+
+
+
+.my_buttons, .navi_btns {
+font-family: 'Gamja Flower', cursive !important;
+background-color:#FDD69270;
+color:#754F44;
+}
+.my_buttons:hover , .navi_btns:hover {
+background-color:#FDD692;
+font-weight:bold;
+}
+.selected_btn{
+font-family: 'Gamja Flower', cursive !important;
+color:#754F44;
+background-color:#FDD692;
+font-weight:bold;
+}
+
+
+
+
+
 .no_radius {
 	border-radius: 0px !important;
 }
@@ -61,33 +94,6 @@
 	height: 50%;
 	min-height: 500px;
 }
-
-#mypage_link
-{
-	color: #EC7357 !important;
-	font-weight: 600 !important;
-}
-
-
-
-
-.selected_menu_btns {
-	border-radius: 0px !important;
-	width: 100%;
-	height: 100%;
-	color: white !important;
-	background-color: #9c2c2c !important;
-}
-.menu_btns{
-	border-radius: 0px !important;
-	width: 100%;
-	height: 100%;
-}
-.menu_btns:hover{
-	color: white !important;
-	background-color: #9c2c2c !important;
-}
-
 
 
 </style>
@@ -119,7 +125,7 @@
 			</div>
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-				<a href="#" class="btn menu_btns">무료 나눔 거래 내역</a>
+				<a href="admin-paylog" class="btn menu_btns">무료 나눔 거래 내역</a>
 			</div>
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">

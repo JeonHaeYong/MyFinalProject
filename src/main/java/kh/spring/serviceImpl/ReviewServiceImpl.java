@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kh.spring.dao.ReviewCommentsDAO;
+import kh.spring.dao.ReviewCommentsLikesDAO;
 import kh.spring.dao.ReviewDAO;
 import kh.spring.dto.ReviewDTO;
 import kh.spring.service.ReviewService;
@@ -22,6 +23,8 @@ public class ReviewServiceImpl implements ReviewService {
 	private ReviewDAO rdao;
 	@Autowired
 	private ReviewCommentsDAO rcdao;
+	@Autowired
+	private ReviewCommentsLikesDAO rcl_dao;
 
 	@Override
 	public int insertReviewService(ReviewDTO dto) {
@@ -125,7 +128,8 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Transactional("txManager")
 	@Override
-	public int deleteReviewService(int seq) {
+	public int deleteReviewService(int seq) {//review글삭제하기.
+		rcl_dao.deleteReviewCommentLiked(seq);
 		rcdao.deleteReviewComment(seq);
 		return rdao.deleteReview(seq);
 	}
@@ -137,6 +141,10 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public ReviewDTO selectReviewBySeq(int seq) {
 		return rdao.selectReviewBySeq(seq);
+	}
+	@Override
+	public int updateViewCount(int seq) {
+		return rdao.updateViewCount(seq);
 	}
 
 	
