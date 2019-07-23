@@ -25,10 +25,74 @@
 <script>
 	$(function() {
 		$("#write").on("click", function() {
-			location.href = "writeTempProtect";
+			if(${loginId!=null}){
+				location.href = "writeTempProtect";
+			}else{
+				alert("로그인을 해 주세요.");
+				$(".login-btn").trigger("click");
+			}	
 		});
 	});
 </script>
+<style>
+body {
+	color: #754F44;
+}
+
+.card {
+	width: 243px;
+	min-width: 243px;
+	max-width: 243px;
+}
+
+.card-body {
+	height: 200px;
+	padding: 0px 0px;
+	margin-bottom: 20px;
+}
+
+.title {
+	width: 37%;
+	margin-bottom: 0px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.content {
+	width: 57%;
+	margin-bottom: 0px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.naviBtn {
+	cursor: pointer;
+	font-family: 'Gamja Flower', cursive;
+	font-size: 23px;
+}
+
+a:hover {
+	color: #EC7357;
+}
+
+#write {
+	background-color: #EC7357;
+	color: white;
+	border-radius: 5px;
+	padding: 10px 10px;
+}
+
+.selected_navi {
+	color: #EC7357 !important;
+	font-weight: 600;
+}
+
+.naviBtn:hover {
+	font-weight: 600;
+}
+</style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="300" id="home-section">
@@ -60,38 +124,88 @@
 					<!--메뉴바랑 리스트 사이 빈 공간-->
 				</div>
 
-				<div class="col-lg-8 col-md-8 col-sm-12 col-12 row">
-					<c:forEach var="dto" items="${list}">
-
-						<div class="card myCard col-lg-4 col-md-4 col-sm-12">
-							<a href="detailTempProtect?seq=${dto.seq }"><img
-								src="${dto.imagePath }" class="card-img-top" alt="..."
-								style="width: 211px; height: 150px"></a>
-							<div class="card-body">
-
-								<p class="card-text">
-									<label class="title"><strong>제목</strong> </label><label
-										class="content">${dto.title}</label><br> <label
-										class="title"><strong>발견날짜 </strong> </label><label
-										class="content"><fmt:formatDate
-											value="${dto.findDate }" pattern="yyyy-MM-dd" /></label> <br>
-									<label class="title"><strong>시도 </strong></label><label
-										class="content">${dto.sido }</label><br> <label
-										class="title"><strong>시군구</strong></label><label
-										class="content">${dto.sigungu }</label><br> <label
-										class="title"><strong>발견 장소 </strong></label><label
-										class="content">${dto.place }</label><br> <label
-										class="title"><strong>품종 </strong></label><label
-										class="content">${dto.type }</label><br>
-								</p>
-							</div>
-						</div>
-
-					</c:forEach>
-					<input type="button" id="write" value="글  작성">
+				<div class="col-lg-9 col-md-9 col-sm-12 col-12">
+					<div class="text-center" style="margin: auto; margin-bottom: 40px;">
+						<h2>임시보호중</h2>
+					</div>
+					<div style="font-weight: 600; margin-bottom: 20px;">** 잃어버린 반려동물을
+						찾아서 임시보호중인 분께 연락해 보세요.<br>
+						** 길거리에 유기되거나 실종된 반려동물을 임시보호하고 계신 분은 글 작성 버튼을 통해 정보를 올려주세요.
+					</div>
+					<div class="text-right" style="margin-botom:20px;">
+					<button type="button" id="write" class="btn btn-sm">글 작성</button>
+					</div>
 				</div>
+				
 			</div>
+
+			<div class="row">
+				<div class="col-lg-2 col-md-2 col-sm-12 col-12 menu-bar"></div>
+				<div class="col-1"></div>
+				<div class="col-lg-9 col-md-9 col-sm-12 col-12">
+					<div class="row justify-content-center">
+						<c:forEach var="dto" items="${list}">
+
+							<div class="card myCard col-lg-4 col-md-4 col-sm-12">
+								<a href="detailTempProtect?seq=${dto.seq }"><img src=""
+									class="card-img-top" alt="..."
+									style="width: 211px; height: 150px; margin-bottom: 10px"></a>
+								<div class="card-body">
+
+									<p class="card-text">
+										<label class="title"><strong>제목</strong> </label><label
+											class="content">${dto.title}</label><br> <label
+											class="title"><strong>시도 </strong> </label><label
+											class="content">${dto.sido }</label> <label class="title"><strong>시군구
+										</strong></label><label class="content">${dto.sigungu }</label><br> <label
+											class="title"><strong>발견 장소</strong></label><label
+											class="content">${dto.place }</label><br> <label
+											class="title"><strong>발견 날짜 </strong></label><label
+											class="content"><fmt:formatDate
+												value="${dto.findDate }" pattern="yyyy-MM-dd" /></label><br> <label
+											class="title"><strong>품종 </strong></label><label
+											class="content">${dto.type }</label><br>
+									</p>
+								</div>
+							</div>
+
+						</c:forEach>
+					</div>
+					<div id="naviBox" style="margin: auto" class="text-center">
+						<c:if test="${pageNavi.needPrev == 1 }">
+							<a class="naviBtn mx-3" currPage="${pageNavi.startNavi - 1 }">&laquo;&nbsp;</a>
+						</c:if>
+						<c:if test="${pageNavi.currentPage > pageNavi.startNavi }">
+							<a class="naviBtn mx-3" currPage="${pageNavi.currentPage - 1}">&lt;&nbsp;</a>
+						</c:if>
+						<c:forEach var="i" begin="${pageNavi.startNavi}"
+							end="${pageNavi.endNavi}">
+							<c:if test="${i==pageNavi.currentPage}">
+								<a class="naviBtn mx-3 selected_navi" currPage="${i }">${i }&nbsp;</a>
+							</c:if>
+							<c:if test="${i!=pageNavi.currentPage}">
+								<a class="naviBtn mx-3" currPage="${i }">${i }&nbsp;</a>
+							</c:if>
+
+						</c:forEach>
+						<c:if test="${pageNavi.currentPage < pageNavi.pageTotalCount }">
+							<a class="naviBtn mx-3" currPage="${pageNavi.currentPage + 1}">&gt;&nbsp;</a>
+						</c:if>
+						<c:if test="${pageNavi.needNext == 1 }">
+							<a class="naviBtn mx-3" currPage="${pageNavi.endNavi + 1}">&raquo;</a>
+						</c:if>
+					</div>
+
+				</div>
+
+			</div>
+
+
 		</div>
+
+
+
+
 	</section>
 	<!-- ----Footerë¶ë¶ìëë¤^_^---------------------------------------------------------------------------------------------------------- -->
 
@@ -108,6 +222,11 @@
 	<script src="resources/js/isotope.pkgd.min.js"></script>
 	<script src="resources/js/main.js"></script>
 </body>
-
+<script>
+	$(".naviBtn").on("click", function() {
+		var currPage = $(this).attr("currPage");
+		location.href = "listTempProtect?currentPage=" + currPage;
+	})
+</script>
 
 </html>

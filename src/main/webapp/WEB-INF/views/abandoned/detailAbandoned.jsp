@@ -23,6 +23,10 @@
 <link rel="stylesheet" href="resources/css/style.css">
 
 <style>
+body{
+	color:#754F44;
+	font-weight:600;
+}
 table {
 	width: 760px;
 }
@@ -48,6 +52,15 @@ td {
 
 #toList {
 	text-align: center;
+}
+#btnToList {
+	background-color: #EC7357;
+	color: white;
+	border-radius: 5px;
+	padding: 5px 10px;
+}
+#btnToList:hover{
+	font-weight:600;
 }
 </style>
 
@@ -86,13 +99,11 @@ td {
 					<div id="animalPhoto">
 						<img src="${dto.popfile }" style="width: 200px; height: 150px">
 					</div>
-
+					<div>「동물보호법」 제17조, 같은 법 시행령 제7조 및 같은 법 시행규칙 제20조에 따라 구조된 동물의
+								보호상황을 아래와 같이 공고합니다.
+					</div>			
 					<table class="table">
 						<tbody>
-							<tr>「동물보호법」 제17조, 같은 법 시행령 제7조 및 같은 법 시행규칙 제20조에 따라 구조된 동물의
-								보호상황을 아래와 같이 공고합니다.
-							</tr>
-
 							<tr>
 								<th scope="row" style="width: 18%">공고번호</th>
 								<td>${dto.noticeNo }</td>
@@ -166,11 +177,11 @@ td {
 							</tr>
 						</tbody>
 					</table>
-					상기 동물을 분실하신 소유주께서는 보호센터로 문의하시어 동물을 찾아가시기 바라며, 동물보호 법 제17조 의 규정에 따른
+					상기 동물을 분실하신 소유주께서는 보호센터로 문의하시어 동물을 찾아가시기 바라며, 동물보호 법 제17조의 규정에 따른
 					공고가 있는 날부터 10일이 경과하여도 소유자 등을 알 수 없는 경우에는 유실물법 제12조 및 민법 제253조의 규정에
-					불구하고 해당 시,군,구자치구가 그 동물의 소유권을 취득하게 됩니다.
+					불구하고 해당 시,군,구 자치구가 그 동물의 소유권을 취득하게 됩니다.
 					<!-- 				<div style="text-align:center; margin:0 auto;"><a href="javascript:history.back();">목록</a></div> -->
-					<button type="button" onclick="goBack();">목록</button>
+					<div style="margin:auto"><button id="btnToList" class="btn btn-sm" type="button" onclick="goBack();">목록</button></div>
 				</div>
 
 			</div>

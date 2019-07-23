@@ -285,7 +285,7 @@
 						유기실종동물 보호센터에 맡겨주시기 바랍니다.</div>
 					
 					<div id="formWrapper" style="margin-top:20px;">
-						<form action="uploadTempProtect" method="post" enctype="multipart/form-data">
+						<form action="uploadTempProtect?currentPage=1" method="post" enctype="multipart/form-data">
 							<div class="row">
 								<div class="col-lg-2 col-md-2">제목</div>
 								<div class="col-lg-10 col-md-10"><input type="text" name="title"

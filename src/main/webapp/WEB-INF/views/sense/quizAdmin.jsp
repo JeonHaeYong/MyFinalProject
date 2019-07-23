@@ -20,6 +20,8 @@
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<!--  module-->
+<jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
  <style>
 	
             .jumbotron{background-color:white;}
@@ -27,7 +29,7 @@
             #title{width: 100%; text-align: center; margin: auto; margin-bottom: 50px;}
             h3,h1{ font-family:'Gamja Flower', cursive;}
             .container{min-width: 400px;box-sizing: border-box;margin-bottom:100px; font-family: 'Gamja Flower', cursive;}
-            .menu-box{width: 150px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px; margin-top: 50px;}
+            .menu-box{width: 200px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px; margin-top: 50px;}
             .menu-box>div{height: 35px;}
             .menu-box>div:first-child{font-weight: bold; border-bottom: 1px solid #754F44; line-height: 33px; color:#B45F04; font-size:40px;}
             .menu-box>div:not(.s-menu):hover{background-color: #FBFFB950;}
@@ -35,9 +37,9 @@
             a[name="s-menu"]{color: #754F44; text-decoration-line: none;}
             a[name="s-menu"]:hover{color: #754F44; text-decoration-line: none; font-weight:bold;}
            /*---------------------------------------------------------------------------------------------------------------------------------------------*/
-              .insert-quiz{ padding: 10px;;margin: 0px;padding: 0px;  }
+              .insert-quiz{ padding: 10px;;margin: 0px;padding: 0px;  margin-top:100px;}
           /*-퀴즈 등록--------------------------------------------------------------------------------------------------------------------------------------------*/
-        .header{background-color: #EC7357; color: white; font-size: 30px; text-align: center; width: 100%; margin-left: 0px;}
+        .header{background-color: #FDD692; color: #754F44; font-size: 30px; text-align: center; width: 100%; margin-left: 0px; border-radius:20px;}
         .quiz,.answer,.point,.explain{font-size: 25px;}
         .quiz{  margin-top: 50px;}
         .answer,.point{margin-top:20px; margin-bottom: 20px;}
@@ -46,8 +48,9 @@
         .input-point{width: 30px; margin-left: 10px; height: 35px;}
         textarea{width: 100%; font-size: 20px; }
         .button-box{text-align: center; margin-bottom: 10px; margin-top:10px;}
-        input[type="button"],input[type="submit"]{background-color: #EC7357; border: none; font-size: 20px; color:white; border-radius: 5px;}
-        input[type="button"]:hover,input[type="submit"]:hover{font-weight: bold; background-color: #f7613e;}
+        
+        .btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44; font-size:20px;}
+		.btn:hover{background-color:#FDD692; font-weight:bold; color:#754F44;}
          /*--퀴즈 리스트-------------------------------------------------------------------------------------------------------------------------------------------*/
 
         .quiz-list,.navi{font-size: 25px;}
@@ -78,7 +81,10 @@
        	 }
      });
         $(".delete-btn").on("click",function(){
-        	$("#deleteForm").submit();
+        	var result = confirm("정말로 삭제하시겠습니까?");
+        	if(result == true){
+        		$("#deleteForm").submit();
+        	}
         });
     });
 </script>
@@ -97,7 +103,8 @@
                     <div class="row menu-box">
                         <div class="col-12 s-menu">M E N U</div>
                         <div class="col-12 "><a name="s-menu" href="oxQuiz">OX QUIZ</a></div>
-                        <div class="col-12"><a name="s-menu" href="">반려동물 상식</a></div>
+                       <div class="col-12"><a name="s-menu" href="information_t?currentPage=1">반려동물 정보</a></div>
+                          <div class="col-12"><a name="s-menu" href="toTrainingList?currentPage=1">반려동물 훈련 정보</a></div>
                         <c:choose>
                         	<c:when test="${type == 4}">
                         		<div class="col-12"><a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a></div> <!-- 관리자만 볼 수 있게! -->
@@ -128,7 +135,7 @@
                         <div class="col-12 explain">설명</div>
                         <div class="col-12"> <textarea name="explain" id="" cols="30" rows="10" class="input-explain" required maxlength="1000"></textarea></div>
                     </div>
-                    <div class="row button-box"><div class="col-12"><input type="submit" class="quiz-btn" value="등록"></div></div>
+                    <div class="row button-box"><div class="col-12"><input type="submit" class="quiz-btn btn" value="등록"></div></div>
                 </form>
                     <!--문제 리스트 -->
          	        <div class="row header"><div class="col-12">QUIZ LIST</div></div>
@@ -147,7 +154,7 @@
                     </div>
                     </c:forEach>
                     <div class="row navi"><div class="col-12">${navi }</div></div>
-                    <div class="row button-box"><div class="col-12"><input type="button" class="delete-btn" value="선택삭제"></div></div>
+                    <div class="row button-box"><div class="col-12"><input type="button" class="delete-btn btn" value="선택 삭제"></div></div>
                     </form>
                 </div>
                

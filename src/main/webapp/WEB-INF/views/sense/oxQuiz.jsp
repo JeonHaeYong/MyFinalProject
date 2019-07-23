@@ -19,7 +19,8 @@
 <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
-
+<!--  module-->
+<jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
 
  <style>
            
@@ -45,9 +46,12 @@
             .question{width: 100%;}
             .btnImage{ line-height: 350px; display: inline-block; font-size: 500px; cursor: pointer; color:#FDD692; font-family:'Gamja Flower', cursive;}
             .btnImage:hover{color:#faba4b;}
+            .btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44; font-size:30px;}
+			.btn:hover{background-color:#FDD692; font-weight:bold; color:#754F44;}
+            
             .quiz{display:none;}
             #quiz1{display: block;}
-            .menu-box{width: 150px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px; margin-top: 50px;}
+            .menu-box{width: 200px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px; margin-top: 50px; margin-bottom:50px;}
             .menu-box>div{height: 35px;}
             .menu-box>div:first-child{font-weight: bold; border-bottom: 1px solid #754F44; line-height: 33px; color:#B45F04; font-size:40px;}
             .menu-box>div:not(.s-menu):hover{background-color: #FBFFB950;}
@@ -77,6 +81,7 @@
 		var corr = new Array(); //선택한 답 목록
 		var index = 0;
 		$(".btnImage").on("click", function(){
+			
 			corr[index] = $(this).attr("ox");
 			index++;
 			$("#quiz" + quizNum).css("display", "none");
@@ -101,13 +106,12 @@
 					
 					 $(".quiz-box").append($(".result-box").html()).css("font-family","'Gamja Flower', cursive");
 					$(".corrCount").append("맞은 갯수: " + resp.answer.length);
-					$(".getPoint").append("획득 포인트: " + resp.point);
+					$(".getPoint").append("획득 포인트: " + resp.getPoint);
 					//틀린문제
-					var incorr = "<c:forEach var='i' begin='0' end='10' varStatus='status' ><div class='col-1 wrong-n${status.index}'></div><div class='col-5 wrong-q${status.index}'></div><div class='col-1 answer${status.index}'></div><div class='col-5 ex${status.index}'></div></c:forEach>";
+					var incorr = "<c:forEach var='i' begin='0' end='10' varStatus='status' ><div class='col-5 wrong-q${status.index}'></div><div class='col-2 answer${status.index}'></div><div class='col-5 ex${status.index}'></div></c:forEach>";
 					$(".wrong").append(incorr);	
 					 for(var i = 0; i < 10; i++){
 							if(resp.wrongList[i]){
-								 $(".wrong-n"+i).append(resp.wrongList[i].seq);
 								  $(".wrong-q"+i).append(resp.wrongList[i].quiz);
 								  $(".answer"+i).append(resp.wrongList[i].correct);
 								  $(".ex"+i).append(resp.wrongList[i].explain);
@@ -129,7 +133,16 @@
 		$(document).on("click","#restart-btn",function(){//첫번째 : click / change  등등의 이벤트/두번째 : 이벤트 적용할 타겟 태그 /세번째 : 동작 함수
 			location.href="oxQuiz"
 		});
-		
+		$(".question").hide();
+		$(".start-btn").on("click",function(){
+			if(${id == null}){
+				alert("로그인을 해주세요~!");
+				$(".login-btn").trigger("click");
+			}else{
+				$(".question").show();
+				$(".start").hide();
+			}
+		});
 
 	});
 </script>
@@ -175,6 +188,12 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="row start">
+                    	<div class="col-12">
+                    		<input type="button" class="start-btn btn" value="S T A R T">
+                    	</div>
+                    </div>
          
                 </div>
             </div>
@@ -188,13 +207,13 @@
 		<!-- 틀린문제 / 해설 -->
 		<div class="col-12 incorrCount">틀린문제</div>
 		<div class="row header">
-			<div class="col-1">NO.</div>
+			
 			<div class="col-5">문제</div>
-			<div class="col-1">정답</div>
+			<div class="col-2">정답</div>
 			<div class="col-5">설명</div>
 		</div>
 		<div class="row wrong"><!-- 틀린문제 들어올 자리 --></div>
-		
+
 		<!--랭킹  -->
 		<div class='row header'>
 			<div class='col-4'>RANK</div>
@@ -208,6 +227,7 @@
 				<div class='col-4 point${status.index+1 }'></div>
 			</div>
 		</c:forEach>
+		
 		<!-- 재시작 버튼 -->
 		<div class='row footer'>
 			<div class='col-12'>

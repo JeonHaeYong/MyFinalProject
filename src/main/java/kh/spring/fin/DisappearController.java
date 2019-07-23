@@ -34,7 +34,6 @@ public class DisappearController {
 		 list = drs.selectPerPageService(currentPage);
 		 navi = drs.getNaviService(currentPage);
 		}catch(Exception e) {e.printStackTrace();}
-		System.out.println("지역:"+list.get(0).getDisappearArea());
 		request.setAttribute("list", list);
 		request.setAttribute("navi", navi);
 		return "disappear/disappearList";
@@ -71,17 +70,13 @@ public class DisappearController {
 		String et = request.getParameter("et");
 		String writer = (String)session.getAttribute("id");
 		String ip = request.getRemoteAddr();
-		
-		if(image.getSize() == 0) { // 이미지가 없을 경
-			DisappearReportDTO drdto = new DisappearReportDTO(0, disDate, areaList, disappearArea, tel, kind, gender, neuter, age, furColor, feature, et, null, writer, null, ip);
-			drs.insertNoImageService(drdto);
-		}else {// 이미지가 있을 경
+
 			String imgPath = drs.imageUploadService(image);
 			DisappearReportDTO drdto = new DisappearReportDTO(0, disDate, areaList, disappearArea, tel, kind, gender, neuter, age, furColor, feature, et, imgPath, writer, null, ip);
 			try {
 				drs.insert(drdto);
 			}catch(Exception e) {e.printStackTrace();}
-		}
+		
 		return "redirect:/toDisappearList?currentPage="+session.getAttribute("currentPage");
 	}
 	@RequestMapping("toReportContent")
@@ -141,7 +136,14 @@ public class DisappearController {
 			}catch(Exception e) {e.printStackTrace();}
 		}
 		return "redirect:/toReportContent?seq="+seq;
-		
+	}
+	@RequestMapping("deleteProc.dis")
+	public String deleteProc(HttpServletRequest request) {
+		int seq = Integer.parseInt(request.getParameter("seq"));
+		try {
+			drs.deleteService(seq);
+		}catch(Exception e) {e.printStackTrace();}
+		return "redirect:/toDisappearList?currentPage="+session.getAttribute("currentPage");
 	}
 	
 }

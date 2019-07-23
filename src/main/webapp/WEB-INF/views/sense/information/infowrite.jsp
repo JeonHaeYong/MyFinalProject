@@ -76,9 +76,9 @@
 					inputtitle.focus();
 					return					
 					}
+				
 				$("#type").attr("value",$("#inputGroupSelect01").val());
-				
-				
+						
 				if($("#inputGroupSelect01").val() =="카테고리") {
 					
 					alert("카테고리를 지정해주세요");

@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +25,7 @@ import kh.spring.dto.MessageDTO;
 import kh.spring.dto.PaymentDTO;
 import kh.spring.loginapi.NaverLoginBO;
 import kh.spring.loginapi.kakao_restapi;
+import kh.spring.service.DonationPaymentService;
 import kh.spring.service.MemberService;
 import kh.spring.service.MessageService;
 import kh.spring.service.PaymentService;
@@ -42,11 +42,17 @@ public class MemberController {
 	private PaymentService ps;
 	@Autowired
 	private HttpSession session;
+	@Autowired
+	private DonationPaymentService dps;
 
 
 	//로그인
 	@RequestMapping("login")
-	public String login(MemberDTO dto) {
+	public String login(HttpServletRequest request, MemberDTO dto) {
+		String url ="http://localhost/";
+		String referer = request.getHeader("referer");
+		String returnUrl = referer.substring(url.length());
+		
 		System.out.println(dto.getId());
 		try{
 			int result=mservice.isLoginOkService(dto.getId(), dto.getPassword());
@@ -57,12 +63,15 @@ public class MemberController {
 			}
 			else {
 				session.setAttribute("id", dto.getId());
+
 				MemberDTO mdto=mservice.selectOneMemberService(dto.getId());					
 				session.setAttribute("type", mdto.getType());
-				}
 				
-				return "redirect:/";	
+				System.out.println("session정보"+session.getAttribute("id"));
+				return "redirect:/"+returnUrl;	
+
 			}
+		}
 		
 		catch(Exception e) {
 			e.printStackTrace();
@@ -313,7 +322,13 @@ public class MemberController {
 	}
 
 	@RequestMapping("toMyPage_support")
-	public String toMyPage_support_loginCheck(HttpServletRequest request) {
+	public String toMyPage_support_loginCheck(HttpServletRequest request, String currentPage) {
+		String id = (String)request.getSession().getAttribute("id");
+		if(currentPage == null) {
+			currentPage = "1";
+		}
+		request.setAttribute("dpList", dps.selectDonationPaymentById(id, Integer.parseInt(currentPage)));
+		request.setAttribute("pageNavi", dps.getNaviForDonationPayment(Integer.parseInt(currentPage), dps.getDonationPaymentTotalCountById(id)));
 		return "myPage/user/user_myPage_support";
 	}
 

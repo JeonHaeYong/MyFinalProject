@@ -29,6 +29,7 @@ public class LoginCheckAdvice {
 				break;
 			}
 		}
+
 		Object retVal = null;
 		String id = (String)session.getAttribute("id");
 		if(id==null) {
