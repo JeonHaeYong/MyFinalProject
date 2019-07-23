@@ -67,13 +67,46 @@ public class ItemDAOImpl implements ItemDAO{
 		return sst.update("ItemDAO.updateSoldOut", seq);
 	}
 
+	@Override
 	public int itemContentsSize() {
 		return sst.selectOne("ItemDAO.getItemCount");
 	}
+	
 	@Override
 	public int itemContentsSizeByCategory(String category) {
 		return sst.selectOne("ItemDAO.getItemCountByCategory", category);
 	}
+	
+	@Override
+	public List<ItemDTO> selectItemPerPageWithoutSoldout(int start, int end) {
+		Map<String, Integer> param = new HashMap<>();
+		param.put("start", start);
+		param.put("end", end);
+		return sst.selectList("ItemDAO.selectItemPerPageWithoutSoldout", param);
+	}
+
+
+	@Override
+	public List<ItemDTO> selectItemPerPageByCategoryWithoutSoldout(String category, int start, int end) {
+		Map<String, String> param = new HashMap<>();
+		param.put("category", category);
+		param.put("start", start+"");
+		param.put("end", end+"");
+		return sst.selectList("ItemDAO.selectItemPerPageByCategoryWithoutSoldout", param);
+	}
+
+
+	@Override
+	public int itemContentsSizeWithoutSoldout() {
+		return sst.selectOne("ItemDAO.getItemCountWithoutSoldout");
+	}
+
+
+	@Override
+	public int itemContentsSizeByCategoryWithoutSoldout(String category) {
+		return sst.selectOne("ItemDAO.getItemCountByCategoryWithoutSoldout", category);
+	}
+	
 	public Map<String, Integer> getNaviforItem(int currentPage, int recordTotalCount){ // 부트스트랩은 int로 받아야함
 //		int recordTotalCount = this.itemContentsSize();
 		// 가지고 있는 게시글의 수에 맞는 페이지의 개수를 구함.
@@ -152,6 +185,5 @@ public class ItemDAOImpl implements ItemDAO{
 	{
 		return sst.update("ItemDAO.updatePermissionBySeq", seq);
 	}
-
 
 }

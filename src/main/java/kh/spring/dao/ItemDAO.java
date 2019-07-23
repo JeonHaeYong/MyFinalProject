@@ -12,10 +12,14 @@ public interface ItemDAO {
 	public int modifyItem(ItemDTO dto);
 	public List<ItemDTO> selectItemPerPage(int start, int end);
 	public List<ItemDTO> selectItemPerPageByCategory(String category, int start, int end);
+	public List<ItemDTO> selectItemPerPageWithoutSoldout(int start, int end);
+	public List<ItemDTO> selectItemPerPageByCategoryWithoutSoldout(String category, int start, int end);
 	public List<ItemDTO> selectItemByOrderNum(String orderNumber);
 	public int updateSoldOut(int seq);
 	public int itemContentsSize();
 	public int itemContentsSizeByCategory(String category);
+	public int itemContentsSizeWithoutSoldout();
+	public int itemContentsSizeByCategoryWithoutSoldout(String category);
 	public Map<String, Integer> getNaviforItem(int currentPage, int recordTotalCount);
 	
 	public List<ItemDTO> selectForAdmin(int start, int end) throws Exception;

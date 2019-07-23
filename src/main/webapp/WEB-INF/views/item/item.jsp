@@ -29,6 +29,9 @@
                 width: 100%;
                 max-height: 600px;
             }
+            body, h1{
+				font-family: 'Gamja Flower';
+			}
             .itemImage{
                 width: 100%;
                 height: 500px;
@@ -40,6 +43,7 @@
             .itemInfo{
             	position: relative;
             	bottom: 0px;
+            	font-size: 25px;
             }
             .itemInfo p{
             	width: 100%;
@@ -65,6 +69,7 @@
 				border-radius: 10px;
 				width: 100px;
 				padding: 10px;
+				font-size: 20px;
 			}
 			.cartBtn:hover{
 				background-color: #00000030;
@@ -82,19 +87,20 @@
 			.contents{
 				border: 1px solid #00000030;
 				padding: 20px;
+				font-size: 20px;
 			}
 			.contents img{
 				max-width: 100%;
 			}
 			.fixedMenu{
 		 		position: absolute; 
-				width: 150px;
+				width: 180px;
 				height: 200px;
 		 		top: 790px;
 				right: 0px;
 				border: none;
 				text-align: center;
-				background-color: #00000030;
+				background-color: #754F4430;
 				font-family: 'Gamja Flower';
 				font-weight: bold !important;
 				z-index: 100;
@@ -124,7 +130,8 @@
 		 		padding: 0px;
 		 	}
 		 	#searchForm{
-		 		width: 96px;
+		 		width: 106px;
+		 		margin-left: 10px;
 		 	}
 		 	#select{
 		 		font-size: 18px;
