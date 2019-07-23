@@ -1,55 +1,101 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	            <div class="jumbotron px-0 pb-0">
-                <img src="/mypage/dog_1.jpg">
-            </div>
-            <section id="wrapper" class="mb-5">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-4 p-2">
-                            <div class="my_page_empty invisible">
-                                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" data-toggle="pill" aria-controls="pills-home" aria-selected="true">Home</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="my_page_info">
-                                <div>
-                                    <a href="#" onclick=""><img src="/resources/images/dog_1.jpg" class="rounded-circle" style="width: 100px; height: 100px;"></a>
+    pageEncoding="UTF-8"%>
+    <div class="jumbotron px-0 pb-0">
+        <img src="/mypage/dog_1.jpg">
+    </div>
+    <section id="wrapper" class="mb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-4 p-2">
+                    <div class="my_page_empty invisible">
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="pill" aria-controls="pills-home" aria-selected="true">Home</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="my_page_info">
+                        <div>
+                            <a href="javascript:void(0)" onclick="changeProfileImg();"><img src="/resources/images/dog_1.jpg" class="rounded-circle" style="width: 100px; height: 100px;"></a>
+                        </div>
+                        <div>
+                            ${memberDTO.name }님                                </div>
+                        <div>
+                            현재포인트
+                        </div>
+                        <div>
+                            ${memberDTO.point } point
+                        </div>
+                        <div>
+                            안읽은 쪽지 : <a href="toMyPage_message" id="yet_noRead_msg">${msg }</a>개
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary d-none change_profileImg_mdBtn" data-toggle="modal" data-target="#change_profileImg_md">
+                        change_profileImg_mdBtn
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="change_profileImg_md" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title" id="change_img_title">프로필 사진 변경</h1>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
-                                <div>
-                                    ${memberDTO.name }님                                </div>
-                                <div>
-                                    현재포인트
+                                <div class="modal-body">
+                                    <!-- 파일 업로드 -->
+                                    <div class="form-group">
+                                        <div class="filebox preview-image">
+                                            <input class="upload-name text-truncate" value="파일선택" disabled="disabled">
+                                            <label for="input-file">업로드</label> 
+                                            <input type="file" id="input-file" class="upload-hidden" name="image">
+                                        </div>
+                                    </div>
+                                    <!-- /파일 업로드 -->
+                                    <!-- 이미지변경 -->
+                                    <div class="d-flex justify-content-around">
+                                        <div class="d-flex">
+                                            <div>변경전</div>
+                                            <img src="/resources/images/dog_1.jpg" class="rounded-circle" style="width: 100px; height: 100px;">
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <img src="/mypage/right-arrow.png" class="rounded-circle" style="width: 80px; height: 80px;">
+                                        </div>
+                                        <div class="d-flex" class="changeAfterImg">
+                                            <div>변경후</div>
+                                            
+                                        </div>
+                                    </div>
                                 </div>
-                                <div>
-                                    ${memberDTO.point } point
-                                </div>
-                                <div>
-                                    안읽은 쪽지 : <a href="toMyPage_message" id="yet_noRead_msg">${msg }</a>개
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-8">
-                            <!-- 마이페이지 상단메뉴 -->
-                            <ul class="nav nav_my_page_ul nav-pills mb-3" id="pills-tab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link my_page_nav" id="toMyPage" href="toMyPage">내 정보</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link my_page_nav" id="toMyPage_writeList"  href="toMyPage_writeList">내 글목록</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link my_page_nav" id="toMyPage_support" href="toMyPage_support">후원목록</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link my_page_nav" id="toMyPage_cart" href="toMyPage_cart">장바구니</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link my_page_nav" id="toMyPage_buyList" href="toMyPage_buyList">구매내역</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link my_page_nav" id="toMyPage_message" href="toMyPage_message">쪽지함</a>
-                                </li>
-                            </ul>
+                    </div>
+                    <!-- /Modal -->
+                </div>
+                <div class="col-8">
+                    <!-- 마이페이지 상단메뉴 -->
+                    <ul class="nav nav_my_page_ul nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link my_page_nav" id="toMyPage" href="toMyPage">내 정보</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link my_page_nav" id="toMyPage_writeList"  href="toMyPage_writeList">내 글목록</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link my_page_nav" id="toMyPage_support" href="toMyPage_support">후원목록</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link my_page_nav" id="toMyPage_cart" href="toMyPage_cart">장바구니</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link my_page_nav" id="toMyPage_buyList" href="toMyPage_buyList">구매내역</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link my_page_nav" id="toMyPage_message" href="toMyPage_message">쪽지함</a>
+                        </li>
+                    </ul>
