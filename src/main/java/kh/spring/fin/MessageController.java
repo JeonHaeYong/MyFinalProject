@@ -58,28 +58,24 @@ public class MessageController {
 	}
 
 	//쪽지함에서 page navi눌렀을때,
-	@ResponseBody
 	@RequestMapping(value = "ClickMsgNavi" ,produces = "application/text; charset=utf8")
-	public String ClickMsgNavi(String category , String currentPage) {
+	public String ClickMsgNavi(HttpServletRequest request , String category , String currentPage) { //ajax
 		String id = (String)session.getAttribute("id");
 		int page = Integer.parseInt(currentPage);
 		//페이지에 띄울 쪽지 리스트 가져오기
 		List<MessageDTO> list = msgService.selectAllMsgByCurrentPage(category,id, page);
 		//페이지 navi담기.
 		List<String> navi = msgService.getNaviforMsg(page, category, id);
-		Gson gson = new Gson();
-		
-		String listStr = gson.toJson(list);
-		String naviStr = gson.toJson(navi);
-//		System.out.println("listStr->"+listStr);
-//		System.out.println("naviStr->"+naviStr);
-		
-		JsonObject object = new JsonObject();
-		object.addProperty("list", listStr);
-		object.addProperty("navi", naviStr);
-		String json = gson.toJson(object);
-//		System.out.println(json);
-		return json;
+
+		if(category.equals("recipient")) {
+			request.setAttribute("receivedList", list);
+			request.setAttribute("receivedNavi", navi);
+			return "myPage/user/received_msg_templet";
+		}else {
+			request.setAttribute("sentList", list);
+			request.setAttribute("sentNavi", navi);
+			return "myPage/user/sent_msg_templet";
+		}
 	}
 
 

@@ -138,9 +138,9 @@ font-weight:bold;
 				
 					<div class="row justify-content-center">
 						
-						<div class="col-8 col-md-8 col-lg-2 text-center my-auto">
+						<div class="col-8 col-md-8 col-lg-3 text-center my-auto">
 							
-							<select id="condition_select">
+							<select id="condition_select" class="custom-select">
 								<option value="buyer-like">구매자</option>
 								<option value="seller-like">판매자</option>
 								<option value="buyer-equal">구매자(정확한 아이디)</option>
@@ -150,7 +150,7 @@ font-weight:bold;
 							
 						</div>
 						
-						<div class="col-8 col-md-8 col-lg-8 text-center my-auto">
+						<div class="col-8 col-md-8 col-lg-7 text-center my-auto">
 							
 							<input id="search_text" class="form-control" type="text" placeholder="검색할 키워드를 입력하세요(없을 시 전체)">
 							
@@ -174,6 +174,7 @@ font-weight:bold;
 					
 					
 					
+					
 					<div class="row justify-content-center">
 						
 						<div class="col-12 text-center my-5">
@@ -183,6 +184,9 @@ font-weight:bold;
 						</div>
 						
 					</div>
+					
+					
+					
 					
 				</div>
 				
@@ -216,11 +220,15 @@ font-weight:bold;
 			changeTypeDate();
 		});
 	    
-		$(document).on("click", "#search_btn,.navi_btns", function()
+		$(document).on("click", "#search_btn", function()
+		{
+			keyword = $("#search_text").val();
+			search(this.name);
+		})
+		$(document).on("click", ".navi_btns", function()
 		{
 			search(this.name);
 		})
-		
 		
 		function changeTypeDate()
 		{
@@ -239,8 +247,15 @@ font-weight:bold;
 			
 		}
 		
+		
+		var keyword;
 		function search(btnName)
 		{
+			
+			console.log(btnName);
+			console.log(keyword);
+			console.log($("#condition_select").val());
+			
 			$.ajax
 	    	({
 	    		url: "admin-paylog-search",
@@ -249,6 +264,7 @@ font-weight:bold;
 	    		data:
 	    		{
 	    			page: btnName
+	    			,keyword: keyword
 	    			,condition: $("#condition_select").val()
 	    		}
 	    	})
@@ -257,16 +273,27 @@ font-weight:bold;
 	    		
 	    		$("#search_result_div").empty();
 	    		
+	    		var $menu_row = $('<div class="row justify-content-center my-3 id_row"></div>');
+    			var $menu_seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-3"><h3>번호</h3></div>');
+    			var $menu_buyerCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-3"><h3>구매자</h3></div>');
+    			var $menu_nameCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>상품명</h3></div>');
+    			var $menu_priceCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>결제금액</h3></div>');
+    			var $menu_sellerCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>판매자</h3></div>');
+    			var $menu_timeCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>날짜</h3></div>');
+    			$menu_row.append($menu_seqCol).append($menu_buyerCol).append($menu_nameCol).append($menu_priceCol).append($menu_sellerCol).append($menu_timeCol);
+    			$("#search_result_div").append($menu_row);
+	    		
 	    		var array = response.array;
 	    		for(var i = 1 ; i <= array.length ; i++)
 	    		{
 					var $row = $('<div class="row justify-content-center my-1 id_row"></div>');
 	    			var $seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].seq+'</div>');
-	    			var $nameCol = $('<div class="col-4 col-md-4 col-lg-3 text-center my-1">'+array[i-1].name+'</div>');
+	    			var $buyerCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].buyer+'</div>');
+	    			var $nameCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].name+'</div>');
 	    			var $priceCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].price+'</div>');
-	    			var $sellerCol = $('<div class="col-4 col-md-4 col-lg-3 text-center my-1">'+array[i-1].seller+'</div>');
-	    			var $checkCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1"><input class="permission_check" name="'+array[i-1].seq+'" type="checkbox">'+'거래 승인'+'</div>');
-	    			$row.append($seqCol).append($nameCol).append($priceCol).append($sellerCol).append($checkCol);
+	    			var $sellerCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].seller+'</div>');
+	    			var $timeCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].time+'</div>');
+	    			$row.append($seqCol).append($buyerCol).append($nameCol).append($priceCol).append($sellerCol).append($timeCol);
 	    			$("#search_result_div").append($row);
 	    		}
 	    		

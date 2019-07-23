@@ -9,7 +9,7 @@ public interface TempProtectDAO {
 	public int uploadTempProtect(TempProtectDTO dto);
 	public List<TempProtectDTO> selectAllTempProtect(int currentPage);
 	public TempProtectDTO selectOneTempProtect(int seq);
-	public int deleteTempProtect(TempProtectDTO dto);
+	public int deleteTempProtect(int seq);
 	public int modifyTempProtect(TempProtectDTO dto);
 	public int tempProtectContentsSize();
 	public Map<String, Integer> getNaviForTempProtect(int currentPage);

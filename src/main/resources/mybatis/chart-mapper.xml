@@ -7,11 +7,11 @@
 	</select>
 
 	<insert id="insertTodayRecord">
-		insert into chart values(default, default)
+		insert into chart values(default, default, default)
 	</insert>
 	
 	<insert id="insertRandomRecord">
-		insert into chart values(sysdate - #{array[0]}, #{array[1]})
+		insert into chart values(sysdate - #{array[0]}, #{array[1]}, #{array[2]})
 	</insert>
 
 	<update id="visitCountPlus">
@@ -55,6 +55,15 @@
 					TRUNC(LAST_DAY(ADD_MONTHS(sysdate,-#{value}+1)+1)) +0.99999421
 	</select>
 	
+	<select id="getMonthPayAmount" resultType="java.lang.Integer">
+		SELECT sum(pay_amount)
+		FROM chart
+		WHERE time BETWEEN 
+					TRUNC(ADD_MONTHS(sysdate,-#{value}+1)+1) - TO_CHAR(sysdate,'DD')
+					AND 
+					TRUNC(LAST_DAY(ADD_MONTHS(sysdate,-#{value}+1)+1)) +0.99999421
+	</select>
+	
 	<select id="getMonthVisitTime" resultType="java.lang.String">
 		SELECT to_char(time, 'yy') || '년 ' || to_char(time, 'mm') || '월'
 		FROM chart
@@ -64,5 +73,11 @@
 			TRUNC(LAST_DAY(ADD_MONTHS(sysdate,-#{value}+1)+1)) +0.99999421
 		GROUP BY to_char(time, 'yy') || '년 ' || to_char(time, 'mm') || '월'
 	</select>
+	
+	<update id="updateTodayPayAmount">
+	
+		update chart set pay_amount = #{value} where to_char(time, 'yy/mm/dd' ) = to_char( sysdate, 'yy/mm/dd')
+		
+	</update>
 	
 </mapper>

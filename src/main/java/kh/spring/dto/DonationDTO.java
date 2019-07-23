@@ -13,6 +13,8 @@ public class DonationDTO
 	private String image1;
 	private String image2;
 	private String image3;
+	private String left;
+	private String right;
 	private int goalmoney;
 	private int currentmoney;
 	private Date startdate;
@@ -22,7 +24,9 @@ public class DonationDTO
 	{
 		super();
 	}
-	public DonationDTO(int seq, String name, String title, String explanation, String image1, String image2, String image3, int goalmoney, int currentmoney, Date startdate, Date enddate)
+	public DonationDTO(int seq, String name, String title, String explanation
+						, String image1, String image2, String image3, String left, String right
+						, int goalmoney, int currentmoney, Date startdate, Date enddate)
 	{
 		super();
 		this.seq = seq;
@@ -32,6 +36,8 @@ public class DonationDTO
 		this.image1 = image1;
 		this.image2 = image2;
 		this.image3 = image3;
+		this.left = left;
+		this.right = right;
 		this.goalmoney = goalmoney;
 		this.currentmoney = currentmoney;
 		this.startdate = startdate;
@@ -108,6 +114,26 @@ public class DonationDTO
 		this.image3 = image3;
 	}
 	
+	public String getLeft()
+	{
+		return left;
+	}
+	
+	public void setLeft(String left)
+	{
+		this.left = left;
+	}
+	
+	public String getRight()
+	{
+		return right;
+	}
+	
+	public void setRight(String right)
+	{
+		this.right = right;
+	}
+	
 	public int getGoalmoney()
 	{
 		return goalmoney;
@@ -147,6 +173,7 @@ public class DonationDTO
 	{
 		this.enddate = enddate;
 	}
+	
 	
 	
 }

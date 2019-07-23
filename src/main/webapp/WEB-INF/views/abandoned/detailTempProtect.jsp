@@ -21,18 +21,12 @@
 <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
-
+<script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 <style>
 table {
 	width: 760px;
 }
 
-#animalPhoto {
-	position: absolute;
-	right: 20px;
-	top: 55px;
-	z-index: 1;
-}
 
 th {
 	background-color: #f7f7f7;
@@ -50,11 +44,49 @@ td {
 	text-align: center;
 }
 
-#btnToList {
+.btn {
 	background-color: #EC7357;
 	color: white;
 	border-radius: 5px;
 	padding: 5px 10px;
+}
+
+.menu-row {
+	text-align: -webkit-center;
+}
+
+.s-menu1>a {
+	text-decoration: none;
+	color: black;
+	font-size: 20px;
+	font-family: 'Gamja Flower', cursive;
+}
+
+.s-menu1:hover {
+	background-color: #F3F78130;
+}
+
+.s-menu1 {
+	padding-top: 10px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.s-menu {
+	color: #B45F04;
+	border-bottom: 2px solid black;
+}
+
+.menu-box {
+	width: 150px;
+	height: 100px;
+	padding-bottom: 120px;
+	margin-bottom: 150px;
+}
+
+.inputHidden {
+	background-color: none;
+	border: none;
 }
 </style>
 
@@ -72,16 +104,16 @@ td {
 				<div class="col-lg-2 col-md-2 col-sm-12 col-12 menu-bar">
 					<!--작은 메뉴바-->
 					<div class="menu">MENU</div>
-					<div>
+					<div class="s-menu1">
 						<a href="toAbandoned?currentPage=1">유기동물조회</a>
 					</div>
-					<div>
-						<a href="listTempProtect?=currentPage=1">임시보호중</a>
+					<div class="s-menu1">
+						<a href="listTempProtect?currentPage=1">임시보호중</a>
 					</div>
-					<div>
+					<div class="s-menu1">
 						<a href="">동물병원 조회</a>
 					</div>
-					<div>
+					<div class="s-menu1">
 						<a href="">보호센터 조회</a>
 					</div>
 				</div>
@@ -90,62 +122,64 @@ td {
 					<!--메뉴바랑 리스트 사이 빈 공간-->
 				</div>
 				<div class="col-lg-9 col-md-9 col-sm-12 col-12 row">
-					<div id="animalPhoto">
-						<img src="" style="width: 200px; height: 150px">
+					<div class="text-center" style="margin: auto; margin-bottom: 40px;">
+						<h2>임시보호중</h2>
 					</div>
-
-					<table class="table">
+				
+					<table class="table table-borderless">
 						<tbody>
 							<tr>
-							</tr>
-
-							<tr>
-								<th scope="row" style="width: 18%">제목</th>
-								<td>${dto.title }</td>
+								<th scope="row" width="15%">제목</th>
+								<td width="20%">${dto.title }</td>
+							
+								<td colspan="2" rowspan="3" style="width:15%"><img src="${dto.imagePath }" style="width: 200px; height: 150px"></td>
+								
 							</tr>
 							<tr>
 								<th scope="row">시도</th>
 								<td>${dto.sido }</td>
+							
+								
 							</tr>
 							<tr>
 								<th scope="row">시군구</th>
 								<td>${dto.sigungu }</td>
+							
+								
 							</tr>
 							<tr>
 								<th scope="row">발견 장소</th>
 								<td>${dto.place }</td>
-							</tr>
-							<tr>
-								<th scope="row">발견 날짜</th>
-								<td><fmt:formatDate value="${dto.findDate }"
+								<th width="15%">발견 날짜</th>
+								<td width="20%"><fmt:formatDate value="${dto.findDate }"
 										pattern="yyyy-MM-dd" /></td>
 							</tr>
 							<tr>
 								<th scope="row">품종</th>
 								<td>${dto.type }</td>
-							</tr>
-							<tr>
-								<th scope="row">성별</th>
-								<td>${dto.sex }</td>
+										<th>성별</th>
+										<td>${dto.sex }</td>
 							</tr>
 							<tr>
 								<th scope="row">색깔</th>
-								<td>${dto.color }</td>
-							</tr>
-							<tr>
-								<th scope="row">특징</th>
+								<td>${dto.sex }</td>
+								<th>특징</th>
 								<td>${dto.feat }</td>
 							</tr>
 							<tr>
 								<th scope="row">연락처</th>
 								<td>${dto.phone }</td>
+								<th>작성자 ID</th>
+								<td>${dto.writer }</td>
 							</tr>
-
-						</tbody>
+					</tbody>
 					</table>
-					<div style="margin:auto">
-						<button type="button" id="btnToList" class="btn btn-sm"
-							onclick="goBack();">목록</button>
+					<div style="margin: auto">
+						<button type="button" class="btn btn-sm" onclick="goBack();">목록</button>
+						<c:if test="${loginId == dto.writer }">
+							<button type="button" id="modify" class="btn btn-sm">수정</button>
+							<button type="button" id="delete" class="btn btn-sm">삭제</button>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -154,10 +188,20 @@ td {
 	<!-- ----Footerë¶ë¶ìëë¤^_^---------------------------------------------------------------------------------------------------------- -->
 
 	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
-	<script type="text/javascript">
-		function goBack() {
-			window.history.back();
-		}
+	<script>
+	function goBack() {
+		window.history.back();
+	}
+		$(function(){
+			
+			$("#modify").on("click",function(){
+				location.href="toModifyPageTempProtect?seq=${dto.seq}";
+			})
+			$("#delete").on("click",function(){
+				location.href="deleteMyTempProtect?seq=${dto.seq}";
+			})
+		})
+		
 	</script>
 </body>
 
@@ -173,7 +217,5 @@ td {
 <script src="resources/js/jquery.fancybox.min.js"></script>
 <script src="resources/js/jquery.sticky.js"></script>
 <script src="resources/js/isotope.pkgd.min.js"></script>
-
-
 <script src="resources/js/main.js"></script>
 </html>

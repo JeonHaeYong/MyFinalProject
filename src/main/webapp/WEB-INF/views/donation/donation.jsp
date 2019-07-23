@@ -129,13 +129,13 @@
 				
 					<div class="col-12 col-lg-6 my-3 text-center">
 						
-						<img src="/resources/donation/left.jpg" alt="사진이 없습니다." id="left_img" class="mx-5">
+						<img src="${dto.left}" alt="사진이 없습니다." id="left_img" class="mx-5">
 					
 					</div>
 					
 					<div class="col-12 col-lg-6 my-3 text-center">
 					
-						<img src="/resources/donation/right.jpg" alt="사진이 없습니다." id="right_img" class="mx-5">
+						<img src="${dto.right}" alt="사진이 없습니다." id="right_img" class="mx-5">
 					
 					</div>
 				
@@ -253,6 +253,10 @@
 		{
 	    	$(this).attr("src","resources/images/dog_1.jpg");
 		});
+	    
+	    $("#donation_btn").on("click", function(){
+	    	location.href = "donationForm";
+	    });
 	    
     });
     

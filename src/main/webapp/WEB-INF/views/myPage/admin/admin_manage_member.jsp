@@ -263,54 +263,61 @@ font-weight:bold;
 	    		
 // 	    		console.log(response)
 	    		
-	    		for(var i = 1 ; i <= array.length ; i++)
+	    		if(array.length != 0)
 	    		{
-// 	    			console.log(response[i-1].id);
-					var $row = $('<div class="row justify-content-center my-1 id_row"></div>');
-	    			var $idCol = $('<div class="col-6 col-md-6 col-lg-6 text-center my-1">'+array[i-1].id+'</div>');
-	    			var $statusCol = $('<div class="col-4 col-md-4 col-lg-3 text-center my-1">'+array[i-1].status+'</div>');
-	    			var $checkCol = $('<div class="col-2 col-md-2 col-lg-3 text-center my-1"><input class="black_check" name="'+array[i-1].id+'" type="checkbox">'+'블랙리스트 등록'+'</div>');
-	    			$row.append($idCol).append($statusCol).append($checkCol);
-	    			$("#search_result_div").append($row);
-	    		}
-	    		
-	    		console.log(response.currentPage);
-	    		console.log(response.needPrev);
-	    		console.log(response.needNext);
-	    		console.log(response.startNavi);
-	    		console.log(response.endNavi);
-	    		
-	    		var $naviRow = $('<div id="navi_row" class="row justify-content-center mb-1 mt-3"></div>');
-	    		
-	    		if(response.needPrev)
-	    		{
-	    			var $prevBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value=" < " name="'+(response.startNavi-1)+'">');
-	    			$naviRow.append($prevBtn);
-	    		}
-	    		
-	    		for(var i = response.startNavi ; i <= response.endNavi ; i++)
-	    		{
-	    			
-	    			if(i == response.currentPage)
-	    			{
-		    			var $naviBtn = $('<input class="btn btn-link selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+	    			for(var i = 1 ; i <= array.length ; i++)
+		    		{
+//	 	    			console.log(response[i-1].id);
+						var $row = $('<div class="row justify-content-center my-1 id_row"></div>');
+		    			var $idCol = $('<div class="col-6 col-md-6 col-lg-6 text-center my-1">'+array[i-1].id+'</div>');
+		    			var $statusCol = $('<div class="col-4 col-md-4 col-lg-3 text-center my-1">'+array[i-1].status+'</div>');
+		    			var $checkCol = $('<div class="col-2 col-md-2 col-lg-3 text-center my-1"><input class="black_check" name="'+array[i-1].id+'" type="checkbox">'+'블랙리스트 등록'+'</div>');
+		    			$row.append($idCol).append($statusCol).append($checkCol);
+		    			$("#search_result_div").append($row);
+		    		}
+		    		
+		    		console.log(response.currentPage);
+		    		console.log(response.needPrev);
+		    		console.log(response.needNext);
+		    		console.log(response.startNavi);
+		    		console.log(response.endNavi);
+		    		
+		    		var $naviRow = $('<div id="navi_row" class="row justify-content-center mb-1 mt-3"></div>');
+		    		
+		    		if(response.needPrev)
+		    		{
+		    			var $prevBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value=" < " name="'+(response.startNavi-1)+'">');
+		    			$naviRow.append($prevBtn);
+		    		}
+		    		
+		    		for(var i = response.startNavi ; i <= response.endNavi ; i++)
+		    		{
+		    			
+		    			if(i == response.currentPage)
+		    			{
+			    			var $naviBtn = $('<input class="btn btn-link selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
 
-	    			}
-	    			else
-	    			{
-		    			var $naviBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+		    			}
+		    			else
+		    			{
+			    			var $naviBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
 
-	    			}
-	    			$naviRow.append($naviBtn);
+		    			}
+		    			$naviRow.append($naviBtn);
+		    		}
+		    		
+		    		if(response.needNext)
+		    		{
+		    			var $nextBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value=" > " name="'+(response.endNavi+1)+'">');
+		    			$naviRow.append($nextBtn);
+		    		}
+		    		
+		    		$("#search_result_div").append($naviRow);
 	    		}
-	    		
-	    		if(response.needNext)
+	    		else
 	    		{
-	    			var $nextBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value=" > " name="'+(response.endNavi+1)+'">');
-	    			$naviRow.append($nextBtn);
+	    			alert("검색 결과 없음");
 	    		}
-	    		
-	    		$("#search_result_div").append($naviRow);
 	    		
 	    	})
 	    	.fail(function()
@@ -340,54 +347,61 @@ font-weight:bold;
 	    		
 // 	    		console.log(response)
 	    		
-	    		for(var i = 1 ; i <= array.length ; i++)
+	    		if(array.length != 0)
 	    		{
-// 	    			console.log(response[i-1].id);
-					var $row = $('<div class="row justify-content-center my-1 id_row"></div>');
-	    			var $idCol = $('<div class="col-6 col-md-6 col-lg-6 text-center my-1">'+array[i-1].id+'</div>');
-	    			var $statusCol = $('<div class="col-4 col-md-4 col-lg-3 text-center my-1">'+array[i-1].status+'</div>');
-	    			var $checkCol = $('<div class="col-2 col-md-2 col-lg-3 text-center my-1"><input class="black_check" name="'+array[i-1].id+'" type="checkbox">'+'블랙리스트 등록'+'</div>');
-	    			$row.append($idCol).append($statusCol).append($checkCol);
-	    			$("#search_result_div").append($row);
-	    		}
-	    		
-// 	    		console.log(response.currentPage);
-// 	    		console.log(response.needPrev);
-// 	    		console.log(response.needNext);
-// 	    		console.log(response.startNavi);
-// 	    		console.log(response.endNavi);
-	    		
-				var $naviRow = $('<div id="navi_row" class="row justify-content-center mb-1 mt-3"></div>');
-	    		
-	    		if(response.needPrev)
-	    		{
-	    			var $prevBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value=" < " name="'+(response.startNavi-1)+'">');
-	    			$naviRow.append($prevBtn);
-	    		}
-	    		
-	    		for(var i = response.startNavi ; i <= response.endNavi ; i++)
-	    		{
-	    			
-	    			if(i == response.currentPage)
-	    			{
-		    			var $naviBtn = $('<input class="btn btn-link selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+	    			for(var i = 1 ; i <= array.length ; i++)
+		    		{
+//	 	    			console.log(response[i-1].id);
+						var $row = $('<div class="row justify-content-center my-1 id_row"></div>');
+		    			var $idCol = $('<div class="col-6 col-md-6 col-lg-6 text-center my-1">'+array[i-1].id+'</div>');
+		    			var $statusCol = $('<div class="col-4 col-md-4 col-lg-3 text-center my-1">'+array[i-1].status+'</div>');
+		    			var $checkCol = $('<div class="col-2 col-md-2 col-lg-3 text-center my-1"><input class="black_check" name="'+array[i-1].id+'" type="checkbox">'+'블랙리스트 등록'+'</div>');
+		    			$row.append($idCol).append($statusCol).append($checkCol);
+		    			$("#search_result_div").append($row);
+		    		}
+		    		
+//	 	    		console.log(response.currentPage);
+//	 	    		console.log(response.needPrev);
+//	 	    		console.log(response.needNext);
+//	 	    		console.log(response.startNavi);
+//	 	    		console.log(response.endNavi);
+		    		
+					var $naviRow = $('<div id="navi_row" class="row justify-content-center mb-1 mt-3"></div>');
+		    		
+		    		if(response.needPrev)
+		    		{
+		    			var $prevBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value=" < " name="'+(response.startNavi-1)+'">');
+		    			$naviRow.append($prevBtn);
+		    		}
+		    		
+		    		for(var i = response.startNavi ; i <= response.endNavi ; i++)
+		    		{
+		    			
+		    			if(i == response.currentPage)
+		    			{
+			    			var $naviBtn = $('<input class="btn btn-link selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
 
-	    			}
-	    			else
-	    			{
-		    			var $naviBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+		    			}
+		    			else
+		    			{
+			    			var $naviBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
 
-	    			}
-	    			$naviRow.append($naviBtn);
+		    			}
+		    			$naviRow.append($naviBtn);
+		    		}
+		    		
+		    		if(response.needNext)
+		    		{
+		    			var $nextBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value=" > " name="'+(response.endNavi+1)+'">');
+		    			$naviRow.append($nextBtn);
+		    		}
+		    		
+		    		$("#search_result_div").append($naviRow);
 	    		}
-	    		
-	    		if(response.needNext)
+	    		else
 	    		{
-	    			var $nextBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value=" > " name="'+(response.endNavi+1)+'">');
-	    			$naviRow.append($nextBtn);
+	    			alert("검색 결과 없음");
 	    		}
-	    		
-	    		$("#search_result_div").append($naviRow);
 	    	})
 	    	.fail(function()
 	    	{

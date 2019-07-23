@@ -139,3 +139,10 @@
 </div>
 <!--구글폰트-->
 <link href="https://fonts.googleapis.com/css?family=Gamja+Flower&display=swap&subset=korean" rel="stylesheet">
+<script>
+//--로그인에러로 넘어왔을경우,
+if(${errorLogin!=null}){
+	   alert("로그인을 먼저 해주세요.");
+	   $(".login-btn").trigger("click");
+}
+</script>

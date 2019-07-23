@@ -13,9 +13,9 @@ public class ChartDAOImpl implements ChartDAO
 	private SqlSessionTemplate sst;
 	
 	@Override
-	public int insertRandomRecord(int time, int count) throws Exception
+	public int insertRandomRecord(int time, int count, int pay) throws Exception
 	{
-		return sst.insert("ChartDAO.insertRandomRecord", new Object[] {time, count});
+		return sst.insert("ChartDAO.insertRandomRecord", new Object[] {time, count, pay});
 	}
 	
 	@Override
@@ -71,6 +71,18 @@ public class ChartDAOImpl implements ChartDAO
 	public String getMonthVisitTime(int month) throws Exception
 	{
 		return sst.selectOne("ChartDAO.getMonthVisitTime", month);
+	}
+
+	@Override
+	public int getMonthPayAmount(int month) throws Exception
+	{
+		return sst.selectOne("ChartDAO.getMonthPayAmount", month);
+	}
+
+	@Override
+	public int updateTodayPayAmount(int money) throws Exception
+	{
+		return sst.update("ChartDAO.updateTodayPayAmount", money);
 	}
 
 	

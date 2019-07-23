@@ -155,16 +155,7 @@ public class BlackListServiceImpl implements BlackListService
 		outerjo.addProperty("endNavi", endNavi);
 
 		
-		
-		
-		
-		
-		
-		
 		return new Gson().toJson(outerjo);
-		
-		
-
 		
 	}
 	@Override
