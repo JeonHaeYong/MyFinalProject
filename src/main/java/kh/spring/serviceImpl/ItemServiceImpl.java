@@ -62,11 +62,42 @@ public class ItemServiceImpl implements ItemService{
 	}
 	
 	@Override
-	public Map<String, Integer> getNaviforItem(int currentPage, String category) {
+	public List<ItemDTO> selectItemPerPageWithoutSoldout(int currentPage) {
+		Map<String, Integer> navi = itemDao.getNaviforItem(currentPage, itemDao.itemContentsSizeWithoutSoldout());
+		return itemDao.selectItemPerPageWithoutSoldout(navi.get("fromIndex"), navi.get("toIndex"));
+	}
+
+	@Override
+	public List<ItemDTO> selectItemPerPageByCategoryWithoutSoldout(int currentPage, String category) {
+		Map<String, Integer> navi = itemDao.getNaviforItem(currentPage, itemDao.itemContentsSizeByCategoryWithoutSoldout(category));
+		return itemDao.selectItemPerPageByCategoryWithoutSoldout(category, navi.get("fromIndex"), navi.get("toIndex"));
+	}
+
+	@Override
+	public int itemContentsSizeWithoutSoldout() {
+		return itemDao.itemContentsSizeWithoutSoldout();
+	}
+
+	@Override
+	public int itemContentsSizeByCategoryWithoutSoldout(String category) {
+		return itemDao.itemContentsSizeByCategoryWithoutSoldout(category);
+	}
+	
+	@Override
+	public Map<String, Integer> getNaviforItem(int currentPage, String category, String soldout) {
 		if(category.equals("all")) {
-			return itemDao.getNaviforItem(currentPage, itemDao.itemContentsSize());
+			if(soldout.equals("Y")) {
+				return itemDao.getNaviforItem(currentPage, itemDao.itemContentsSize());
+			}else {
+				return itemDao.getNaviforItem(currentPage, itemDao.itemContentsSizeWithoutSoldout());
+			}
 		}else {
-			return itemDao.getNaviforItem(currentPage, itemDao.itemContentsSizeByCategory(category));
+			if(soldout.equals("Y")) {
+				return itemDao.getNaviforItem(currentPage, itemDao.itemContentsSizeByCategory(category));
+			}else {
+				return itemDao.getNaviforItem(currentPage, itemDao.itemContentsSizeByCategoryWithoutSoldout(category));
+			}
+			
 		}
 	}
 
@@ -222,6 +253,5 @@ public class ItemServiceImpl implements ItemService{
 		return "N";
 		
 	}
-	
 	
 }

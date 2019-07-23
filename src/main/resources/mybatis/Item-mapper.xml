@@ -22,12 +22,28 @@
 		select count(*) from item where category=#{value} and permission = 'y'
 	</select>
 	
+	<select id="getItemCountWithoutSoldout" resultType="int">
+		select count(*) from item where permission = 'y' and soldout = 'n'
+	</select>
+	
+	<select id="getItemCountByCategoryWithoutSoldout" resultType="int">
+		select count(*) from item where category=#{value} and permission = 'y' and soldout = 'n'
+	</select>
+	
 	<select id="selectItemPerPage" resultType="kh.spring.dto.ItemDTO">
 		select * from (select row_number() over(order by seq desc) as rown, item.* from item where permission = 'y') where rown between #{start} and #{end}
 	</select>
 	
 	<select id="selectItemPerPageByCategory" resultType="kh.spring.dto.ItemDTO">
 		select * from (select row_number() over(order by seq desc) as rown, item.* from item where category=#{category} and permission = 'y') where rown between #{start} and #{end}
+	</select>
+	
+	<select id="selectItemPerPageWithoutSoldout" resultType="kh.spring.dto.ItemDTO">
+		select * from (select row_number() over(order by seq desc) as rown, item.* from item where permission = 'y' and soldout = 'n') where rown between #{start} and #{end}
+	</select>
+	
+	<select id="selectItemPerPageByCategoryWithoutSoldout" resultType="kh.spring.dto.ItemDTO">
+		select * from (select row_number() over(order by seq desc) as rown, item.* from item where category=#{category} and permission = 'y' and soldout = 'n') where rown between #{start} and #{end}
 	</select>
 	
 	<select id="selectItemForPayment" resultType="kh.spring.dto.ItemDTO">

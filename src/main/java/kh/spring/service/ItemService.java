@@ -9,11 +9,15 @@ public interface ItemService {
 	public int uploadItem(ItemDTO dto);
 	public List<ItemDTO> selectItemPerPage(int currentPage);
 	public List<ItemDTO> selectItemPerPageByCategory(int currentPage, String category);
+	public List<ItemDTO> selectItemPerPageWithoutSoldout(int currentPage);
+	public List<ItemDTO> selectItemPerPageByCategoryWithoutSoldout(int currentPage, String category);
 	public ItemDTO readOneItem(int seq);
 	public int deleteItem(ItemDTO dto);
 	public int itemContentsSize();
 	public int itemContentsSizeByCategory(String category);
-	public Map<String, Integer> getNaviforItem(int currentPage, String category);
+	public int itemContentsSizeWithoutSoldout();
+	public int itemContentsSizeByCategoryWithoutSoldout(String category);
+	public Map<String, Integer> getNaviforItem(int currentPage, String category, String soldout);
 	
 	public Object insertDummy() throws Exception;
 	public String selectForAdmin(String page) throws Exception;
