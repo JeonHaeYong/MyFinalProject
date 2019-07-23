@@ -47,7 +47,7 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 	
 	@Transactional("txManager")
-	public List<ItemDTO> paymentComplete(PaymentDTO dto, ItemDTOList list) {
+	public List<ItemDTO> paymentComplete(PaymentDTO dto, ItemDTOList list) throws Exception {
 		System.out.println("구매 서비스 실행");
 		String msg = "";
 		String[] cartSeqs = new String[list.getList().size()];
@@ -80,7 +80,7 @@ public class PaymentServiceImpl implements PaymentService {
 			idao.updateSoldOut(pdto.getItem_seq());
 			
 			int price = Integer.parseInt(idto.getPrice().replace(" ", "").replace(",", ""));
-			DonationPaymentDTO dpdto = new DonationPaymentDTO(0, pdto.getSeller(), pdto.getItem_name(), ddao.selectDTO().getName(), price, null, "무료나눔");
+			DonationPaymentDTO dpdto = new DonationPaymentDTO(0, pdto.getSeller(), pdto.getItem_name(), ddao.selectRecentDTO().getName(), price, null, "무료나눔");
 			dpdao.insertDonationPayment(dpdto);
 			ddao.updateCurrentMoney(price);
 		}
