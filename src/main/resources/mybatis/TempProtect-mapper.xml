@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="TempProtectDAO">
 	<delete id="delete">
-		delete from temp_protect where seq=#{seq}
+		delete from temp_protect where seq=#{value}
 	</delete>
 	<insert id="modify">
 		update temp_protect set title=#{title}, writer=#{writer}, findDate=#{findDate},
 		 sido=#{sido}, sigungu=#{sigungu}, place=#{place}, type=#{type}, sex=#{sex},
-		 color=#{color}, feat=#{feat}, imagePath=#{imagePath},email=#{email},
+		 color=#{color}, feat=#{feat}, imagePath=#{imagePath},
 		 phone=#{phone}, writeTime=#{writeTime} where seq=#{seq}
 	</insert>
 	<select id="select" resultType="int">
