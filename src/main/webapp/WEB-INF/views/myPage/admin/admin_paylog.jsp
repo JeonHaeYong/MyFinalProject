@@ -273,62 +273,74 @@ font-weight:bold;
 	    		
 	    		$("#search_result_div").empty();
 	    		
-	    		var $menu_row = $('<div class="row justify-content-center my-3 id_row"></div>');
-    			var $menu_seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-3"><h3>번호</h3></div>');
-    			var $menu_buyerCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-3"><h3>구매자</h3></div>');
-    			var $menu_nameCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>상품명</h3></div>');
-    			var $menu_priceCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>결제금액</h3></div>');
-    			var $menu_sellerCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>판매자</h3></div>');
-    			var $menu_timeCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>일시</h3></div>');
-    			$menu_row.append($menu_seqCol).append($menu_buyerCol).append($menu_nameCol).append($menu_priceCol).append($menu_sellerCol).append($menu_timeCol);
-    			$("#search_result_div").append($menu_row);
-	    		
 	    		var array = response.array;
-	    		for(var i = 1 ; i <= array.length ; i++)
+	    		
+	    		if(array.length != 0)
 	    		{
-					var $row = $('<div class="row justify-content-center my-1 id_row"></div>');
-	    			var $seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].seq+'</div>');
-	    			var $buyerCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].buyer+'</div>');
-	    			var $nameCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].name+'</div>');
-	    			var $priceCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].price+'</div>');
-	    			var $sellerCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].seller+'</div>');
-	    			var $timeCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">' + array[i-1].time.substring(0, array[i-1].time.length-2) + '</div>');
-	    			$row.append($seqCol).append($buyerCol).append($nameCol).append($priceCol).append($sellerCol).append($timeCol);
+	    			var $menu_row = $('<div class="row justify-content-center my-3 id_row"></div>');
+	    			var $menu_seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-3"><h3>번호</h3></div>');
+	    			var $menu_buyerCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-3"><h3>구매자</h3></div>');
+	    			var $menu_nameCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>상품명</h3></div>');
+	    			var $menu_priceCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>결제금액</h3></div>');
+	    			var $menu_sellerCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>판매자</h3></div>');
+	    			var $menu_timeCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>일시</h3></div>');
+	    			$menu_row.append($menu_seqCol).append($menu_buyerCol).append($menu_nameCol).append($menu_priceCol).append($menu_sellerCol).append($menu_timeCol);
+	    			$("#search_result_div").append($menu_row);
+		    		
+		    		
+		    		for(var i = 1 ; i <= array.length ; i++)
+		    		{
+						var $row = $('<div class="row justify-content-center my-1 id_row"></div>');
+		    			var $seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].seq+'</div>');
+		    			var $buyerCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].buyer+'</div>');
+		    			var $nameCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].name+'</div>');
+		    			var $priceCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].price+'</div>');
+		    			var $sellerCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].seller+'</div>');
+		    			var $timeCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">' + array[i-1].time.substring(0, array[i-1].time.length-2) + '</div>');
+		    			$row.append($seqCol).append($buyerCol).append($nameCol).append($priceCol).append($sellerCol).append($timeCol);
+		    			$("#search_result_div").append($row);
+		    			
+		    		}
+		    		
+					var $naviRow = $('<div id="navi_row" class="row justify-content-center mb-1 mt-3"></div>');
+		    		
+		    		if(response.needPrev)
+		    		{
+						var $prevBtn = $('<input class="btn navi_btns mx-1" type="button" value=" < " name="'+(response.startNavi-1)+'">');
+
+		    			$naviRow.append($prevBtn);
+		    		}
+		    		
+		    		for(var i = response.startNavi ; i <= response.endNavi ; i++)
+		    		{
+		    			
+						if(i == response.currentPage)
+		    			{
+			    			var $naviBtn = $('<input class="btn selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+		    			}
+		    			else
+		    			{
+			    			var $naviBtn = $('<input class="btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+		    			}
+
+		    			$naviRow.append($naviBtn);
+		    		}
+		    		
+		    		if(response.needNext)
+		    		{
+		    			var $nextBtn = $('<input class="btn navi_btns mx-1" type="button" value=" > " name="'+(response.endNavi+1)+'">');
+		    			$naviRow.append($nextBtn);
+		    		}
+		    		
+		    		$("#search_result_div").append($naviRow);	
+	    		}
+	    		else
+	    		{
+	    			var $row = $('<div class="row justify-content-center my-1"></div>');
+	    			var $noResultCol = $('<div class="col-6 col-md-6 col-lg-12 text-center my-1"><h3>검색 결과가 없습니다.</h3></div>');
+	    			$row.append($noResultCol);
 	    			$("#search_result_div").append($row);
-	    			
 	    		}
-	    		
-				var $naviRow = $('<div id="navi_row" class="row justify-content-center mb-1 mt-3"></div>');
-	    		
-	    		if(response.needPrev)
-	    		{
-					var $prevBtn = $('<input class="btn navi_btns mx-1" type="button" value=" < " name="'+(response.startNavi-1)+'">');
-
-	    			$naviRow.append($prevBtn);
-	    		}
-	    		
-	    		for(var i = response.startNavi ; i <= response.endNavi ; i++)
-	    		{
-	    			
-					if(i == response.currentPage)
-	    			{
-		    			var $naviBtn = $('<input class="btn selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
-	    			}
-	    			else
-	    			{
-		    			var $naviBtn = $('<input class="btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
-	    			}
-
-	    			$naviRow.append($naviBtn);
-	    		}
-	    		
-	    		if(response.needNext)
-	    		{
-	    			var $nextBtn = $('<input class="btn navi_btns mx-1" type="button" value=" > " name="'+(response.endNavi+1)+'">');
-	    			$naviRow.append($nextBtn);
-	    		}
-	    		
-	    		$("#search_result_div").append($naviRow);
 	    		
 	    		
 	    	})
