@@ -223,7 +223,7 @@ public class AdminController
 		return result;
 	}
 	@ResponseBody
-	@RequestMapping(value = "admin-donation-log")
+	@RequestMapping(value = "admin-donation-log", produces="application/json;charset=utf-8")
 	public Object selectDonatedList(String page)
 	{
 		Object result = "error";
