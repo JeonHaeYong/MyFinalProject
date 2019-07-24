@@ -23,16 +23,13 @@
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
 <script>
 //팝업창!!!---------------------------------------------------------------------
-
-
  function openPopup(url){
 	 var cookies = document.cookie;
 	var result = cookieToJson(cookies);
-                	   if(result != "Y"){
-                		   window.open(url,'','width=570,height=830,left=1300,top=70'); 
+                	   if(result != "N"){
+                		   window.open(url,'','width=570,height=830,left=1300,top=70,status=no,toolbar=no,scrollbars=no'); 
                 	   } 
                    }
-                   
 function cookieToJson(cookies){
 	var entry = cookies.split("=");
 	entry[0] = entry[1];
@@ -42,6 +39,13 @@ function cookieToJson(cookies){
 	
 
 </script>
+<style>
+/* 만화 부분 */
+	.no-gutters{}
+	.pricing{height:845px;}
+	.pricing img{width:405px; height:800px;  border: 5px dashed #754F44;}
+	.from{font-family:'Gamja Flower', cursive; font-size:22px;}
+</style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
    data-offset="300" id="home-section" onload="javascript:openPopup('popUp.home')">
@@ -75,10 +79,43 @@ function cookieToJson(cookies){
 
       <section class="site-section" id="about-section">
       <div class="container">
+        <div class="row no-gutters mb-5" style="width: 1300px;">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 " style="background-color: #FDD692;"
+               data-aos="fade-up" data-aos-delay="">
+
+               <div class="pricing">
+                  <span class="icon-paw d-block display-5 text-white mb-2 pt-2"></span><!-- 발자국 1 -->
+                  <img src="/resources/images/abandonedAnimalStory01.png">
+               </div>
+
+            </div>
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4"style="background-color: #FDD692;"
+               data-aos="fade-up" data-aos-delay="100">
+               <div class="pricing">
+                  <span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span><!-- 발자국2 -->
+                  <span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span><!-- 발자국2 -->
+                 	 <img src="/resources/images/abandonedAnimalStory02.png">
+               </div>
+            </div>
+            
+            <div
+               class="col-12 col-sm-6 col-md-6 col-lg-4"style="background-color: #FDD692;"
+               data-aos="fade-up" data-aos-delay="200">
+               <div class="pricing">
+                  <span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span><!-- 발자국3 -->
+                  <span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span><!-- 발자국3 -->
+                  <span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span><!-- 발자국3 -->
+                  <img src="/resources/images/abandonedAnimalStory03.png">
+               </div>
+            </div>
+            <div class="row"><div class="col-12 from">출처-포인핸드<img src="/resources/images/pet.png"></div>
+            </div>
+         </div>
          <div class="row justify-content-center" data-aos="fade-up">
             <div class="col-lg-6 text-center heading-section mb-5">
 
                <h2 class="text-black mb-2">전국 모든 지역 유기동물 현황</h2>
+               
                <p>2019년 06월 01일~2019년 07월 10일</p>
             </div>
          </div>
@@ -190,78 +227,7 @@ function cookieToJson(cookies){
                   </div>
                   </div>
       
-         <div class="row no-gutters">
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 p-3 p-md-5" style="background-color: orange;"
-               data-aos="fade-up" data-aos-delay="">
-
-               <div class="pricing">
-                  <span class="icon-paw d-block display-5 text-white mb-3"></span>
-                  <h3 class="text-center text-white text-uppercase">Basic</h3>
-                  <div class="price text-center mb-4 ">
-                     <span><span>$50</span> / year</span>
-                  </div>
-                  <ul class="list-unstyled ul-check success mb-5">
-
-                     <li>Officia quaerat eaque neque</li>
-                     <li>Possimus aut consequuntur incidunt</li>
-                     <li class="remove">Lorem ipsum dolor sit amet</li>
-                     <li class="remove">Consectetur adipisicing elit</li>
-                     <li class="remove">Dolorum esse odio quas architecto sint</li>
-                  </ul>
-                  <p class="text-center">
-                     <a href="#" class="btn btn-secondary">Buy Now</a>
-                  </p>
-               </div>
-
-            </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 bg-dark  p-3 p-md-5"
-               data-aos="fade-up" data-aos-delay="100">
-               <div class="pricing">
-                  <span class="icon-paw d-inline-block display-5 text-white mb-3"></span>
-                  <span class="icon-paw d-inline-block display-5 text-white mb-3"></span>
-                  <h3 class="text-center text-white text-uppercase">Premium</h3>
-                  <div class="price text-center mb-4 ">
-                     <span><span>$100</span> / year</span>
-                  </div>
-                  <ul class="list-unstyled ul-check success mb-5">
-
-                     <li>Officia quaerat eaque neque</li>
-                     <li>Possimus aut consequuntur incidunt</li>
-                     <li>Lorem ipsum dolor sit amet</li>
-                     <li>Consectetur adipisicing elit</li>
-                     <li class="remove">Dolorum esse odio quas architecto sint</li>
-                  </ul>
-                  <p class="text-center">
-                     <a href="#" class="btn btn-primary">Buy Now</a>
-                  </p>
-               </div>
-            </div>
-            
-            <div
-               class="col-12 col-sm-6 col-md-6 col-lg-4 bg-primary  p-3 p-md-5"
-               data-aos="fade-up" data-aos-delay="200">
-               <div class="pricing">
-                  <span class="icon-paw d-inline-block display-5 text-white mb-3"></span>
-                  <span class="icon-paw d-inline-block display-5 text-white mb-3"></span>
-                  <span class="icon-paw d-inline-block display-5 text-white mb-3"></span>
-                  <h3 class="text-center text-white text-uppercase">Professional</h3>
-                  <div class="price text-center mb-4 ">
-                     <span><span>$200</span> / year</span>
-                  </div>
-                  <ul class="list-unstyled ul-check success mb-5">
-
-                     <li>Officia quaerat eaque neque</li>
-                     <li>Possimus aut consequuntur incidunt</li>
-                     <li>Lorem ipsum dolor sit amet</li>
-                     <li>Consectetur adipisicing elit</li>
-                     <li>Dolorum esse odio quas architecto sint</li>
-                  </ul>
-                  <p class="text-center">
-                     <a href="#" class="btn btn-secondary">Buy Now</a>
-                  </p>
-               </div>
-            </div>
-         </div>
+       
       </div>
       </section>
 
@@ -407,5 +373,26 @@ function cookieToJson(cookies){
 		
   		 </script>
   	
+<script>
+	$(function()
+	{
+		
+		$.ajax
+		({
+			url : "admin-chart-acs"
+			, type : "POST"
+			, dataType : "JSON"
+		})
+		.done(function(response)
+		{
+			console.log(response);
+		})
+		.fail(function()
+		{
+			alert("error");
+		})
+	  		
+	})
+</script>
 </body>
 </html>

@@ -71,13 +71,13 @@
         });
         
         /* Regex */
-     $(".input-point").on("input",function(){
-    	 var point = $(".input-point").val();
-       	 var testPoint = point.value;
-       	 var regex = /[0-9]/g;
+     $(".input-point").on("focusout",function(){
+    	 var testPoint = $(".input-point").val();
+       	 var regex = /[0-9]{1,2}/g;
        	 var result = regex.exec(testPoint);
-       	 if(testPoint == null){
+       	 if(result == null){
        		 $(".point-span").text("숫자만 입력해주세요");
+       		 $(".input-point").val("");
        	 }
      });
         $(".delete-btn").on("click",function(){
@@ -121,7 +121,7 @@
                    
                       <form action="insertQuiz.admin" method="post" id="quizForm">
                     <div class="row section">
-                        <div class="col-12 quiz">Quiz<input type="text" name="quiz" class="input-quiz" required maxlength="333"></div>
+                        <div class="col-12 quiz">Quiz<input type="text" name="quiz" class="input-quiz" required maxlength="330"></div>
                         <div class="col-6 answer">
                            <div class="row">
                                <div class="col-lg-3 col-md-12 col-sm-12 col-12"> O or X</div>
@@ -133,7 +133,7 @@
                         </div>
                         <div class="col-6 point">point<input type="text" name="point" class="input-point" pattern="[0-9]{1,2}" required><span class="point-span"></span></div>
                         <div class="col-12 explain">설명</div>
-                        <div class="col-12"> <textarea name="explain" id="" cols="30" rows="10" class="input-explain" required maxlength="1000"></textarea></div>
+                        <div class="col-12"> <textarea name="explain" id="" cols="30" rows="10" class="input-explain" required maxlength="995"></textarea></div>
                     </div>
                     <div class="row button-box"><div class="col-12"><input type="submit" class="quiz-btn btn" value="등록"></div></div>
                 </form>

@@ -73,6 +73,11 @@ public class MemberServiceImpl implements MemberService {
 	public int idDuplCheckService(String id) {
 		return mdao.idDuplCheck(id);
 	}
+	@Override
+	public int doublemail(String email) {
+		System.out.println("매소드 결과:"+mdao.doublemail(email));
+		return mdao.doublemail(email);
+	}
 
 	@Override
 	public MemberDTO selectOneMemberService(String id) {
@@ -243,19 +248,19 @@ public class MemberServiceImpl implements MemberService {
 	public boolean create(String email)  {
 
 		// 임의의 authkey 생성
-		String authkey = new TempKey().getKey(50, false);
+		String authkey = new TempKey().getKey(10, false);
 		session.setAttribute("authkey",authkey);	
 		// mail 작성 관련 
 		try {
 			MailHandler  sendMail = new  MailHandler (mailSender);
 
-			sendMail.setSubject("회원가입 이메일 인증입니다.");
+			sendMail.setSubject("[라온펫]회원가입 이메일 인증입니다.");
 			sendMail.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>")
 					.append("<p>아래의 인증번호를 입력하시면 이메일 인증이 완료됩니다.</p>")
 					.append("인증번호=")
 					.append(authkey)
 					.toString());
-			sendMail.setFrom("wlsgid916@gmial.com ", "관리자입니다");
+			sendMail.setFrom("wlsgid916@gmial.com ", "[라온펫관리자]");
 			sendMail.setTo(email);
 			sendMail.send();
 			return true;
@@ -372,6 +377,7 @@ public class MemberServiceImpl implements MemberService {
 		return mdao.updateImagePath(dto);
 	}
 
+	
 
 }
 

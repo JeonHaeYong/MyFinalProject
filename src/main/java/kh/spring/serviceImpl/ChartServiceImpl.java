@@ -1,5 +1,7 @@
 package kh.spring.serviceImpl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import kh.spring.dao.ChartDAO;
+import kh.spring.dto.ACSDTO;
 import kh.spring.service.BlackListService;
 import kh.spring.service.ChartService;
 
@@ -92,6 +95,32 @@ public class ChartServiceImpl implements ChartService
 	public int updateTodayPayAmount(int money) throws Exception
 	{
 		return chartDAO.updateTodayPayAmount(money);
+	}
+
+	@Override
+	public String selectACSDTO() throws Exception
+	{
+		List<ACSDTO> list = chartDAO.selectACSDTO();
+		
+		JsonObject outerJO = new JsonObject();
+		JsonArray ja = new JsonArray();
+		
+		for(int i = 1 ; i <= list.size() ; i++)
+		{
+			JsonObject jo = new JsonObject();
+			
+			String location = list.get(i-1).getArea();
+			int number = list.get(i-1).getNum();
+			
+			jo.addProperty("location", location);
+			jo.addProperty("number", number);
+			
+			ja.add(jo);
+		}
+		
+		outerJO.add("array", ja);
+		
+		return new Gson().toJson(outerJO);
 	}
 
 	

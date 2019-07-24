@@ -130,6 +130,17 @@ public class MemberController {
 		{return "true";}
 		else return "false";
 	}
+	//이메일중복확인
+		@ResponseBody
+		@RequestMapping("doublemail")
+		public String doublemail(HttpServletRequest request) {
+			int check=mservice.doublemail(request.getParameter("email"));
+			if(check==1)
+			{return "true";}
+			else return "false";
+		}
+	
+	
 	//이메일 인증 확인
 	@ResponseBody
 	@RequestMapping("email.do") // 이메일로 인증번호 보내는거 
