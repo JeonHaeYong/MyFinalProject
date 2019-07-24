@@ -407,5 +407,26 @@ function cookieToJson(cookies){
 		
   		 </script>
   	
+<script>
+	$(function()
+	{
+		
+		$.ajax
+		({
+			url : "admin-chart-acs"
+			, type : "POST"
+			, dataType : "JSON"
+		})
+		.done(function(response)
+		{
+			console.log(response);
+		})
+		.fail(function()
+		{
+			alert("error");
+		})
+	  		
+	})
+</script>
 </body>
 </html>

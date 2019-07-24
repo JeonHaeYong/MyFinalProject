@@ -1,6 +1,9 @@
 package kh.spring.daoImpl;
 
 import kh.spring.dao.ChartDAO;
+import kh.spring.dto.ACSDTO;
+
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,6 +86,12 @@ public class ChartDAOImpl implements ChartDAO
 	public int updateTodayPayAmount(int money) throws Exception
 	{
 		return sst.update("ChartDAO.updateTodayPayAmount", money);
+	}
+
+	@Override
+	public List<ACSDTO> selectACSDTO() throws Exception
+	{
+		return sst.selectList("ChartDAO.selectACSDTO");
 	}
 
 	

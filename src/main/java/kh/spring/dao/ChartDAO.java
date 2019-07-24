@@ -1,5 +1,9 @@
 package kh.spring.dao;
 
+import java.util.List;
+
+import kh.spring.dto.ACSDTO;
+
 public interface ChartDAO
 {
 	public int insertRandomRecord(int time, int count, int pay) throws Exception;
@@ -18,4 +22,6 @@ public interface ChartDAO
 	public String getMonthVisitTime(int month) throws Exception;
 	
 	public int updateTodayPayAmount(int money) throws Exception;
+	
+	public List<ACSDTO> selectACSDTO() throws Exception;
 }
