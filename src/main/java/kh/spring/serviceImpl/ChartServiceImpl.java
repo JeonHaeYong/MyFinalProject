@@ -112,8 +112,8 @@ public class ChartServiceImpl implements ChartService
 			String location = list.get(i-1).getArea();
 			int number = list.get(i-1).getNum();
 			
-			jo.addProperty("location", location);
-			jo.addProperty("number", number);
+			jo.addProperty("area", location);
+			jo.addProperty("num", number);
 			
 			ja.add(jo);
 		}
