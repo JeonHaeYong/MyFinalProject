@@ -121,7 +121,7 @@ body:after {
 
 .site-footer {
   padding: 4em 0;
- background: #EC7357; }
+ background: black !important; }
   @media (min-width: 768px) {
     .site-footer {
       padding: 8em 0; } }

@@ -54,7 +54,7 @@ td {
 	text-align: center;
 }
 #btnToList {
-	background-color: #EC7357;
+	background-color: #754F44;
 	color: white;
 	border-radius: 5px;
 	padding: 5px 10px;
@@ -94,6 +94,19 @@ td {
 	padding-bottom: 120px;
 	margin-bottom: 150px;
 }
+/*점보트론 이미지*/
+.jumbotron {
+	background-color: white;
+	padding:0px 0px;
+}
+
+.jumbotron>img {
+	width: 100%;
+	max-height: 600px;
+}
+th{
+	 background-color:#FDD692;
+}
 </style>
 
 </head>
@@ -102,7 +115,9 @@ td {
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<!-- -----ì¬ê¸°ê¹ì§ ê³ ì  Headerìëë¤----------------------------------------------------------------------------------------------------------- -->
 	<section class="site-section bg-light block-13">
-
+		<div class="jumbotron px-0 pb-0">
+			<img src="/resources/images/abandoned/blackwhite.jpg">
+		</div>
 		<div class="container">
 
 			<div class="row">
@@ -131,13 +146,13 @@ td {
 					<div id="animalPhoto">
 						<img src="${dto.popfile }" style="width: 200px; height: 150px">
 					</div>
-					<div>「동물보호법」 제17조, 같은 법 시행령 제7조 및 같은 법 시행규칙 제20조에 따라 구조된 동물의
+					<div style="margin-bottom:20px">「동물보호법」 제17조, 같은 법 시행령 제7조 및 같은 법 시행규칙 제20조에 따라 구조된 동물의
 								보호상황을 아래와 같이 공고합니다.
 					</div>			
 					<table class="table">
 						<tbody>
 							<tr>
-								<th scope="row" style="width: 18%">공고번호</th>
+								<th scope="row" style="width: 18%;">공고번호</th>
 								<td>${dto.noticeNo }</td>
 							</tr>
 							<tr>

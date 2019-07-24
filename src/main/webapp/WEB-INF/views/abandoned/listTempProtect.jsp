@@ -126,8 +126,18 @@ a:hover {
 	padding-bottom: 120px;
 	margin-bottom: 150px;
 }
+
 #dataNotExist {
 	text-align: center;
+}
+.jumbotron {
+	background-color: white;
+	padding:0px 0px;
+}
+
+.jumbotron>img {
+	width: 100%;
+	max-height: 600px;
 }
 </style>
 </head>
@@ -136,6 +146,9 @@ a:hover {
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<!-- -----ì¬ê¸°ê¹ì§ ê³ ì  Headerìëë¤----------------------------------------------------------------------------------------------------------- -->
 	<section class="site-section bg-light block-13">
+		<div class="jumbotron px-0 pb-0">
+			<img src="/resources/images/abandoned/girlndog.jpg">
+		</div>
 		<div class="container">
 
 			<div class="row">
@@ -185,8 +198,8 @@ a:hover {
 							<c:forEach var="dto" items="${list}">
 
 								<div class="card myCard col-lg-4 col-md-4 col-sm-12">
-									<a href="detailTempProtect?seq=${dto.seq }"><img src="${dto.imagePath }"
-										class="card-img-top" alt="..."
+									<a href="detailTempProtect?seq=${dto.seq }"><img
+										src="${dto.imagePath }" class="card-img-top" alt="..."
 										style="width: 211px; height: 150px; margin-bottom: 10px"></a>
 									<div class="card-body">
 

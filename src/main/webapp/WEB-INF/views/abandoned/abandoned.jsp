@@ -22,234 +22,7 @@
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
 
-<style>
-body {
-	min-width: 375px;
-}
 
-.container {
-	margin-bottom: 30px;
-	color: #754F44;
-}
-
-.header {
-	background-color: #EC7357;
-	color: white;
-	text-align: center;
-	font-size: 20px;
-	height: 40px;
-	line-height: 40px;
-}
-
-.section {
-	text-align: center;
-	border-bottom: 1px solid black
-}
-
-.section:hover {
-	background-color: #FDD69250;
-}
-
-.section
->
-div
-
-
-
-
-
-
-
-
-:not
-
-
-
-
- 
-
-
-
-
-(
-.addr
-
-
-
-
- 
-
-
-
-
-){
-line-height
-
-
-
-
-
-
-
-
-:
-
-
-
-
- 
-
-
-
-
-50
-px
-
-
-
-
-
-
-
-
-;
-}
-.addr {
-	text-align: left;
-}
-
-.footer {
-	text-align: center;
-	padding-top: 15px;
-	font-size: 18px;
-}
-
-.menu-bar {
-	text-align: center;
-	height: 200px;
-}
-
-.menu-bar>div {
-	height: 40px;
-}
-
-.menu-bar>div:not (.menu ):hover {
-	background-color: #FBFFB950;
-	font-weight: bold;
-}
-
-.menu-bar div:first-child {
-	font-size: 20px;
-	font-weight: bold;
-	border-bottom: 1px solid black;
-	color: #754F44;
-}
-
-.card {
-	width: 243px;
-	min-width: 243px;
-	max-width: 243px;
-}
-
-.card-body {
-	height: 200px;
-	padding: 0px 0px;
-	margin-bottom: 20px;
-}
-
-.title {
-	width: 37%;
-	margin-bottom: 0px;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
-}
-
-.content {
-	width: 57%;
-	margin-bottom: 0px;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
-}
-
-.naviBtn {
-	cursor: pointer;
-	font-family: 'Gamja Flower', cursive;
-	font-size: 23px;
-}
-
-.naviBtn:hover {
-	font-weight: 600;
-}
-
-#btnSelect {
-	background-color: #EC7357;
-	color: white;
-	border-radius: 5px;
-	padding: 5px 10px;
-}
-
-.selected_navi {
-	color: #EC7357 !important;
-	font-weight: 600;
-}
-
-label {
-	width: 70px;
-}
-
-#dataNotExist {
-	text-align: center;
-}
-
-.menu-row {
-	text-align: -webkit-center;
-}
-
-.s-menu1>a {
-	text-decoration: none;
-	color: black;
-	font-size: 20px;
-	font-family: 'Gamja Flower', cursive;
-}
-
-.s-menu1:hover {
-	background-color: #F3F78130;
-}
-
-.s-menu1 {
-	padding-top: 10px;
-	padding-left: 0px;
-	padding-right: 0px;
-}
-
-.s-menu {
-	color: #B45F04;
-	border-bottom: 2px solid black;
-}
-
-.menu-box {
-	width: 150px;
-	height: 100px;
-	padding-bottom: 120px;
-	margin-bottom: 150px;
-}
-
-#btnSelect:hover {
-	background-color: #c16049;
-	font-weight: 900;
-}
-/*점보트론 이미지*/
-.jumbotron {
-	background-color: white;
-}
-
-.jumbotron>img {
-	width: 100%;
-	max-height: 600px;
-}
-</style>
 
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 <script>
@@ -783,18 +556,195 @@ label {
 						})
 	});
 </script>
+<style>
+@font-face { font-family: 'Handon3gyeopsal600g'; src:
+url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/Handon3gyeopsal600g.woff') 
+format('woff'); font-weight: normal; font-style: normal; }
 
+body {
+	min-width: 375px;
+	font-family: 'Handon3gyeopsal600g';
+}
+
+.container {
+	margin-bottom: 30px;
+	color: #754F44;
+}
+
+.header {
+	background-color: #EC7357;
+	color: white;
+	text-align: center;
+	font-size: 20px;
+	height: 40px;
+	line-height: 40px;
+}
+
+.section {
+	text-align: center;
+	border-bottom: 1px solid black
+}
+
+.section:hover {
+	background-color: #FDD69250;
+}
+
+.section>div:not(.addr
+){
+line-height:50px;
+}
+.addr {
+	text-align: left;
+}
+
+.footer {
+	text-align: center;
+	padding-top: 15px;
+	font-size: 18px;
+}
+
+.menu-bar {
+	text-align: center;
+	height: 200px;
+}
+
+.menu-bar>div {
+	height: 40px;
+}
+
+.menu-bar>div:not (.menu ):hover {
+	background-color: #FBFFB950;
+	font-weight: bold;
+}
+
+.menu-bar div:first-child {
+	font-size: 20px;
+	font-weight: bold;
+	border-bottom: 1px solid black;
+	color: #754F44;
+}
+
+.card {
+	width: 243px;
+	min-width: 243px;
+	max-width: 243px;
+}
+
+.card-body {
+	padding: 0px 0px;
+	margin-bottom: 20px;
+	font-family: 'Handon3gyeopsal600g';
+}
+
+.title {
+	width: 37%;
+	margin-bottom: 0px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.content {
+	width: 57%;
+	margin-bottom: 0px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.naviBtn {
+	cursor: pointer;
+	font-family: 'Gamja Flower', cursive;
+	font-size: 23px;
+}
+
+.naviBtn:hover {
+	font-weight: 600;
+}
+
+#btnSelect {
+	background-color: #EC7357;
+	color: white;
+	border-radius: 5px;
+	padding: 5px 10px;
+}
+
+.selected_navi {
+	color: #EC7357 !important;
+	font-weight: 600;
+}
+
+label {
+	width: 70px;
+}
+
+#dataNotExist {
+	text-align: center;
+}
+.menu{
+	font-family: 'Gamja Flower', cursive;
+	font-size:40px;
+}
+.menu-row {
+	text-align: -webkit-center;
+}
+
+.s-menu1>a {
+	text-decoration: none;
+	color: black;
+	font-size: 20px;
+	font-family: 'Gamja Flower', cursive;
+}
+
+.s-menu1:hover {
+	background-color: #F3F78130;
+}
+
+.s-menu1 {
+	padding-top: 10px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.s-menu {
+	color: #B45F04;
+	border-bottom: 2px solid black;
+}
+
+.menu-box {
+	width: 150px;
+	height: 100px;
+	padding-bottom: 120px;
+	margin-bottom: 150px;
+}
+
+#btnSelect:hover {
+	background-color: #f9a28c;
+	font-weight: 900;
+}
+/*점보트론 이미지*/
+.jumbotron {
+	background-color: white;
+	padding:0px 0px;
+}
+
+.jumbotron>img {
+	width: 100%;
+	max-height: 600px;
+}
+
+</style>
 
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="300" id="home-section">
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<!-- -----ì¬ê¸°ê¹ì§ ê³ ì  Headerìëë¤----------------------------------------------------------------------------------------------------------- -->
-	<div class="jumbotron px-0 pb-0">
-		<img src="/abandoned/threeDogs.jpg">
-	</div>
-	<section class="site-section bg-light block-13">
 
+	<section class="site-section bg-light block-13">
+		<div class="jumbotron px-0 pb-0">
+			<img src="/resources/images/abandoned/blackwhite.jpg">
+		</div>
 		<div class="container">
 
 			<div class="row">
@@ -822,10 +772,10 @@ label {
 
 				<div class="col-lg-9 col-md-9 col-sm-12 col-12">
 
-					<div class="text-center" style="margin: auto; margin-bottom: 40px">
+					<div class="text-center" style="margin: auto; margin-bottom: 40px; font-family: 'Handon3gyeopsal600g';">
 						<h2>유기동물 조회</h2>
 					</div>
-					<div style="font-weight: 600; margin-bottom: 20px">
+					<div style="font-weight: 600; margin-bottom: 20px; font-family: 'Handon3gyeopsal600g';">
 						**이 페이지에서 조회되는 유기동물 자료는 동물보호관리시스템에서 제공하는 OpenAPI 공공데이터입니다.<br>
 						「동물보호법」 제 17조 및 동법 시행규칙 제 7조에 따라 유기·유실동물을 보호하고 있는 경우에는 소유자 등이 보호조치
 						사실을 알 수 있도록 7일 동안 공고하여야 합니다. 공고중인 동물 소유자는 해당 시군구 및 동물보호센터에 문의하시어
