@@ -25,9 +25,9 @@
 	.empty{width: 100%; text-align: center; margin: auto; margin-bottom: 50px; height:50px;}
 	#title{width: 100%; text-align: center; margin: auto; margin-bottom: 50px;}
 	h1{ font-family: 'Gamja Flower', cursive;}
-        .aa{ width: 500px; height: 870px; margin: auto; box-sizing: border-box; margin-bottom: 100px;overflow: hidden;}
-        /*기본 정보 */
-        .basic,.animal{background-color:#EC7357; text-align: center; font-size:30px; color: white; font-weight: bold; font-family: 'Gamja Flower', cursive; }
+        .aa{ width: 500px; height: 1080px; margin: auto; box-sizing: border-box; margin-bottom: 50px;overflow: hidden;}
+         /*기본 정보 */
+        .basic,.animal{background-color:#FDD692; text-align: center; font-size:30px; color: #754F44; font-weight: bold; font-family: 'Gamja Flower', cursive; border-radius:30px;}
         .basic-info{height:300px; width: 100%; }
         .basic-info>div{height: 100%; float: left;}
         .basic-info .title{width: 150px; font-family: 'Gamja Flower', cursive; }
@@ -44,12 +44,21 @@
         .animal-info .input-box div{height: 55px; width: 100%; padding-top:20px;  }
         .check{float: left; width: 100px;}
         input[type="text"]{width: 300px;}
-      
         
         /*footer 부분*/
-        #footer{text-align: center; width: 100%; margin-top:50px;}
-         .btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44;}
-		.btn:hover{background-color:#FDD692; font-weight:bold;}
+        #footer{text-align: center; width: 100%; margin-top:10px;}
+        .btn{font-family: 'Gamja Flower', cursive; background-color:#FDD69270;color:#754F44; font-size:20px;}
+		.btn:hover{background-color:#FDD692; font-weight:bold; color:#754F44;}
+		/* img 업로드 부분 */
+		.img-box{margin-top:50px; text-align:center; height: 110px;}
+		.img-div{border:2px solid #754F4470; width:150px; height:100px; float:left;}
+		.img1{margin-left:20px;}
+		.img2,.img3{ margin-left:5px;}
+		.img-div>img{width:100%; height:100%;}
+		.expl{text-align:center;}
+		label{border: 2px solid #754F4490; border-radius:10px; padding: 5px; font-family: 'Gamja Flower', cursive;}
+		label:hover{cursor:pointer;}
+		.expl{text-align:center;  font-family: 'Gamja Flower', cursive; font-size:23px;}
 </style>
 <script>
  	$(function(){
@@ -61,9 +70,21 @@
     		});
     		$(".alter-btn").on("click",function(){
     			if($("#disappearDate").val() !=""&& $(".disappearArea").val() !=""&& $(".tel").val() !=""&& $('input:radio[name=gender]').is(':checked')==true
-    					&& $('input:checkbox[name=neuter]').is(':checked')==true && $(".furColor").val()!="" && $(".feature").val()!=""){
+    					&& $(".furColor").val()!="" && $(".feature").val()!=""&&$("#input-img1").val()!=""){
     				$("#reportForm").submit();
     			}else{alert("기타사항을 제외하고 모두 입력해주세요.");}
+    		});
+    		$(".file-btn").on("change",function(){
+    			$(this).each(function(index,items){
+    				var i = $(this).attr("seq");
+    				$(".img"+i).html("");
+    				var reader = new FileReader();
+    				reader.onload = function(e){
+    					var src = e.target.result;
+    					$(".img"+i).append("<img src='"+src+"'>")
+    				}
+    				reader.readAsDataURL($(this)[0].files[0]);
+    			})
     		});
     	});
     </script>
@@ -72,7 +93,7 @@
    <jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 <!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 <div class="px-0 pb-0 empty"></div>
- <div id="title"><h1>실종 신고</h1></div>
+ <div id="title"><h1>실종 신고 수정</h1></div>
 
 <div class="container">
 	<div class="row">
@@ -138,10 +159,21 @@
                 <div><input type="text" placeholder="털색을 설명해주세요" class="furColor" name="furColor"></div>
                 <div><input type="text" placeholder="눈에 띄는 특징을 적어주세요" class="feature" name="feature"></div>
                 <div><input type="text" placeholder="기타사항을 입력해주세요" class="et" name="et"></div>
-                <div><input type="file" name="image"></div>
+                <div>
+                	<c:forEach var="i" begin="0" end="2" varStatus="status">
+                		<label for="input-img${status.index+1 }" class="label-btn">사진 선택${status.index+1 }</label>
+                		<input type="file" name="image" id="input-img${status.index+1 }" class="file-btn" seq="${status.index+1 }" accept="image/gif, image/jpeg, image/png" hidden>
+                	</c:forEach>
+                </div>
             </div>
         </div>
-        
+         <div class="img-box">
+            	<div class="img1 img-div"></div>
+            	<div class="img2 img-div"></div>
+            	<div class="img3 img-div"></div>
+            </div>
+            <div class="expl">첫번째 사진은 꼭 넣어주세요.<br>사진은 3개까지 가능합니다~</div>
+            
         <div id="footer">
             <input type="button" class="alter-btn btn" value="수정">
             <input type="button" class="toList-btn btn" value="취소">
@@ -163,6 +195,7 @@
 	$(".furColor").val('${content.furColor}');
 	$(".feature").val('${content.feature}');
 	$(".et").val('${content.et}');
+
 </script>
 
 <!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->

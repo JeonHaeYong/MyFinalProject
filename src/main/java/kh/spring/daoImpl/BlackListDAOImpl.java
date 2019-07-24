@@ -1,5 +1,8 @@
 package kh.spring.daoImpl;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -35,6 +38,18 @@ public class BlackListDAOImpl implements BlackListDAO
 	public int deleteById(BlackListDTO dto) throws Exception
 	{
 		return sst.delete("BlackListDAO.deleteById", dto);
+	}
+
+	@Override
+	public List<BlackListDTO> selectList(HashMap<String, String> param) throws Exception
+	{
+		return sst.selectList("BlackListDAO.selectList", param);
+	}
+
+	@Override
+	public int selectCount() throws Exception
+	{
+		return sst.selectOne("BlackListDAO.selectCount");
 	}
 	
 }

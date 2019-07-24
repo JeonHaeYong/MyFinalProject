@@ -3,8 +3,8 @@
 <mapper namespace="InfoDAO">
 	<!--글쓰기   -->
 	<insert id="insertinfo">
-		insert into info_Board values(info_board_seq.nextval,#{type}, #{title},
-		#{contents},#{image},#{writer},default)
+		insert into info_Board values(info_board_seq.nextval,#{type,jdbcType=VARCHAR},#{title,jdbcType=VARCHAR},
+		#{contents,jdbcType=VARCHAR},#{image,jdbcType=VARCHAR},#{writer,jdbcType=VARCHAR},default)
 	</insert>
 	<!--글 보이기/정보값만    -->
 	<select id="selectall" resultType="kh.spring.dto.InfomaitionDTO">

@@ -226,31 +226,21 @@ font-weight:bold;
 		    		
 		    		if(response.needPrev)
 		    		{
-//	 	    			var $prevBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value=" < " name="'+(response.startNavi-1)+'">');
-						var $prevBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value=" < " name="'+(response.startNavi-1)+'">');
+						var $prevBtn = $('<input class="btn navi_btns mx-1" type="button" value=" < " name="'+(response.startNavi-1)+'">');
 
 		    			$naviRow.append($prevBtn);
 		    		}
 		    		
 		    		for(var i = response.startNavi ; i <= response.endNavi ; i++)
 		    		{
-		    			
-//	 	    			if(i == response.currentPage)
-//	 	    			{
-//	 		    			var $naviBtn = $('<input class="btn btn-danger selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
-//	 	    			}
-//	 	    			else
-//	 	    			{
-//	 		    			var $naviBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
-//	 	    			}
 					
 						if(i == response.currentPage)
 		    			{
-			    			var $naviBtn = $('<input class="btn btn-link selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+			    			var $naviBtn = $('<input class="btn selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
 		    			}
 		    			else
 		    			{
-			    			var $naviBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+			    			var $naviBtn = $('<input class="btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
 		    			}
 
 		    			$naviRow.append($naviBtn);
@@ -258,8 +248,7 @@ font-weight:bold;
 		    		
 		    		if(response.needNext)
 		    		{
-//	 	    			var $nextBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value=" > " name="'+(response.endNavi+1)+'">');
-		    			var $nextBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value=" > " name="'+(response.endNavi+1)+'">');
+		    			var $nextBtn = $('<input class="btn navi_btns mx-1" type="button" value=" > " name="'+(response.endNavi+1)+'">');
 		    			$naviRow.append($nextBtn);
 		    		}
 		    		

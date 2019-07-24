@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kh.spring.dto.DisappearReportDTO;
@@ -44,20 +46,17 @@ public class DisappearController {
 		request.setAttribute("todayDate", todayDate);
 		return "disappear/reportForm";
 	}
-	
+
 	@RequestMapping("insertProc.dis")
-	public String insertProc(HttpServletRequest request, MultipartFile image) {
-		
+	public String insertProc(HttpServletRequest request, MultipartFile[] image) {
+		System.out.println("개수:"+image[0].getSize() + ":" + image[1].getSize());
 		String disappearDate = request.getParameter("disappearDate");
-		System.out.println("날짜ㄴㄴㄴㄴ"+disappearDate);
 		java.sql.Date disDate = null;
 		try {
 			 disDate = java.sql.Date.valueOf(disappearDate);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
 		String areaList = request.getParameter("areaList");
 		String disappearArea = request.getParameter("disappearArea");
 		String tel = request.getParameter("tel");
@@ -70,14 +69,17 @@ public class DisappearController {
 		String et = request.getParameter("et");
 		String writer = (String)session.getAttribute("id");
 		String ip = request.getRemoteAddr();
-
-			String imgPath = drs.imageUploadService(image);
-			DisappearReportDTO drdto = new DisappearReportDTO(0, disDate, areaList, disappearArea, tel, kind, gender, neuter, age, furColor, feature, et, imgPath, writer, null, ip);
+		
+		
+			List<String> imgPath = drs.imageUploadService(image);
+		
+			DisappearReportDTO drdto = new DisappearReportDTO(0, disDate, areaList, disappearArea, tel, kind, gender, neuter, age, furColor, feature, et, imgPath.get(0), imgPath.get(1), imgPath.get(2), writer, null, ip);
 			try {
 				drs.insert(drdto);
 			}catch(Exception e) {e.printStackTrace();}
 		
 		return "redirect:/toDisappearList?currentPage="+session.getAttribute("currentPage");
+
 	}
 	@RequestMapping("toReportContent")
 	public String toContent(HttpServletRequest request) {
@@ -102,19 +104,17 @@ public class DisappearController {
 		return "disappear/alterForm";
 	}
 	@RequestMapping("alterProc.dis")
-	public String alterProc(HttpServletRequest request, MultipartFile image) {
+	public String alterProc(HttpServletRequest request, MultipartFile[] image) {
 		int seq = Integer.parseInt(request.getParameter("seq"));
 		System.out.println("글번호"+seq);
 		
 		String disappearDate = request.getParameter("disappearDate");
-		System.out.println("날짜ㄴㄴㄴㄴ"+disappearDate);
 		java.sql.Date disDate = null;
 		try {
 			 disDate = java.sql.Date.valueOf(disappearDate);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	
 		String areaList = request.getParameter("areaList");
 		String disappearArea = request.getParameter("disappearArea");
 		String tel = request.getParameter("tel");
@@ -125,12 +125,12 @@ public class DisappearController {
 		String furColor = request.getParameter("furColor");
 		String feature = request.getParameter("feature");
 		String et = request.getParameter("et");
-		if(image.getSize() == 0) { // 이미지가 없을 경
-			DisappearReportDTO drdto = new DisappearReportDTO(seq, disDate, areaList, disappearArea, tel, kind, gender, neuter, age, furColor, feature, et, null, null, null, null);
+		if(image.length == 0) { // 이미지가 없을 경
+			DisappearReportDTO drdto = new DisappearReportDTO(seq, disDate, areaList, disappearArea, tel, kind, gender, neuter, age, furColor, feature, et, null, null, null, null, null, null);
 			drs.updateNoimageService(drdto);
 		}else {// 이미지가 있을 경
-			String imgPath = drs.imageUploadService(image);
-			DisappearReportDTO drdto = new DisappearReportDTO(seq, disDate, areaList, disappearArea, tel, kind, gender, neuter, age, furColor, feature, et, imgPath, null, null, null);
+			List<String> imgPath = drs.imageUploadService(image);
+			DisappearReportDTO drdto = new DisappearReportDTO(seq, disDate, areaList, disappearArea, tel, kind, gender, neuter, age, furColor, feature, et, imgPath.get(0), imgPath.get(1), imgPath.get(2), null, null, null);
 			try {
 				drs.updateService(drdto);
 			}catch(Exception e) {e.printStackTrace();}

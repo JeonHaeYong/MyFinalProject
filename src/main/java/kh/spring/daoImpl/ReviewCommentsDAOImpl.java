@@ -81,4 +81,14 @@ public class ReviewCommentsDAOImpl implements ReviewCommentsDAO {
 		return sst.selectOne("ReviewCommentsDAO.selectReviewCommentsBySeq",seq);
 	}
 
+	@Override
+	public int updateReplyContentsByseq(ReviewCommentsDTO dto) {
+		return sst.update("ReviewCommentsDAO.updateReplyContentsByseq",dto);
+	}
+
+	@Override
+	public ReviewCommentsDTO selectDTOBySeq(int seq) {
+		return sst.selectOne("ReviewCommentsDAO.selectDTOBySeq",seq);
+	}
+
 }

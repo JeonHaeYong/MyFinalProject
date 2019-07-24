@@ -18,42 +18,33 @@
 <link rel="stylesheet" href="resources/css/style.css">
 
 <style>
-	#container
-	{
-		margin-top: 5%;
-	}
-
-	h3
-	{
-		border-bottom: 1px solid black;
-		
-		padding-top: 5px;
-		padding-bottom: 5px;
-	}
-	.tb-border
-	{
-		border-top: 1px solid bisque;
-		border-bottom: 1px solid bisque;
-	}
-
-	#notice_link
-	{
-		color: #EC7357 !important;
-		font-weight: 600 !important;
-	}
 	
-	#write_btn, .my_navi_btns
-	{
-		background-color: #EC7357 !important;
-	}
-	#write_btn:hover, .my_navi_btns:hover
-	{
-		background-color: black !important;
-	}
-	.selected_btn
-	{
-		background-color: black !important;
-	}
+#container
+{
+	margin-top: 5%;
+}
+#mypage_link
+{
+	color: #EC7357 !important;
+	font-weight: 600 !important;
+}
+
+
+.my_buttons, .navi_btns {
+font-family: 'Gamja Flower', cursive !important;
+background-color:#FDD69270;
+color:#754F44;
+}
+.my_buttons:hover , .navi_btns:hover {
+background-color:#FDD692;
+font-weight:bold;
+}
+.selected_btn{
+font-family: 'Gamja Flower', cursive !important;
+color:#754F44;
+background-color:#FDD692;
+font-weight:bold;
+}
 	
 </style>
 
@@ -80,7 +71,7 @@
 				</div>
 				
 				<div class="col-12 col-md-12 col-lg-12 text-right my-1">
-					<input id="write_btn" class="btn btn-danger mx-1" type="button" value="글 작성">
+					<input id="write_btn" class="btn my_buttons mx-1" type="button" value="글 작성">
 				</div>
 				
 				<div class="col-12 col-md-12 col-lg-12 text-center my-5">
@@ -145,7 +136,7 @@
 	    		
 	    		if(response.needPrev)
 	    		{
-	    			var $prevBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="이전" name="'+(response.startNavi-1)+'">');
+	    			var $prevBtn = $('<input class="btn navi_btns navi_btns mx-1" type="button" value="이전" name="'+(response.startNavi-1)+'">');
 	    			$naviRow.append($prevBtn);
 	    		}
 	    		
@@ -154,12 +145,12 @@
 	    			
 	    			if(i == response.currentPage)
 	    			{
-		    			var $naviBtn = $('<input class="btn btn-danger selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+		    			var $naviBtn = $('<input class="btn selected_btn mx-1" type="button" value="'+i+'" name="'+i+'">');
 
 	    			}
 	    			else
 	    			{
-		    			var $naviBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+		    			var $naviBtn = $('<input class="btn navi_btns navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
 
 	    			}
 	    			$naviRow.append($naviBtn);
@@ -167,7 +158,7 @@
 	    		
 	    		if(response.needNext)
 	    		{
-	    			var $nextBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="이후" name="'+(response.endNavi+1)+'">');
+	    			var $nextBtn = $('<input class="btn navi_btns navi_btns mx-1" type="button" value="이후" name="'+(response.endNavi+1)+'">');
 	    			$naviRow.append($nextBtn);
 	    		}
 	    		
@@ -225,7 +216,7 @@
     		
     		if(response.needPrev)
     		{
-    			var $prevBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="이전" name="'+(response.startNavi-1)+'">');
+    			var $prevBtn = $('<input class="btn navi_btns navi_btns mx-1" type="button" value="이전" name="'+(response.startNavi-1)+'">');
     			$naviRow.append($prevBtn);
     		}
     		
@@ -234,12 +225,12 @@
     			
     			if(i == response.currentPage)
     			{
-	    			var $naviBtn = $('<input class="btn btn-danger selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+	    			var $naviBtn = $('<input class="btn selected_btn mx-1" type="button" value="'+i+'" name="'+i+'">');
 
     			}
     			else
     			{
-	    			var $naviBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+	    			var $naviBtn = $('<input class="btn navi_btns navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
 
     			}
     			$naviRow.append($naviBtn);
@@ -247,7 +238,7 @@
     		
     		if(response.needNext)
     		{
-    			var $nextBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="이후" name="'+(response.endNavi+1)+'">');
+    			var $nextBtn = $('<input class="btn navi_btns navi_btns mx-1" type="button" value="이후" name="'+(response.endNavi+1)+'">');
     			$naviRow.append($nextBtn);
     		}
     		

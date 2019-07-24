@@ -153,5 +153,15 @@ public class ReviewCommentsServiceImpl implements ReviewCommentsService {
 		//현재 seq에 맞는 dto를 리턴한다.
 		return rcdao.selectReviewCommentsBySeq(currval);
 	}
+
+	@Override
+	public int updateReplyContentsByseq(ReviewCommentsDTO dto) {
+		return rcdao.updateReplyContentsByseq(dto);
+	}
+
+	@Override
+	public ReviewCommentsDTO selectDTOBySeq(int seq) {
+		return rcdao.selectDTOBySeq(seq);
+	}
 	
 }

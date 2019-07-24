@@ -12,4 +12,6 @@ public interface BlackListService
 	public String blackMember(String id, String reason) throws Exception;
 	
 	public String insertRandomMembers() throws Exception;
+	
+	public Object selectMembersInBlackList(String id, String page) throws Exception;
 }

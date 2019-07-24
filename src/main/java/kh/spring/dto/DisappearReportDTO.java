@@ -15,7 +15,9 @@ public class DisappearReportDTO {
 	private String furColor;
 	private String feature;
 	private String et;
-	private String image;
+	private String image1;
+	private String image2;
+	private String image3;
 	private String writer;
 	private String writeDate;
 	private String ip;
@@ -91,11 +93,23 @@ public class DisappearReportDTO {
 	public void setEt(String et) {
 		this.et = et;
 	}
-	public String getImage() {
-		return image;
+	public String getImage1() {
+		return image1;
 	}
-	public void setImage(String image) {
-		this.image = image;
+	public void setImage1(String image1) {
+		this.image1 = image1;
+	}
+	public String getImage2() {
+		return image2;
+	}
+	public void setImage2(String image2) {
+		this.image2 = image2;
+	}
+	public String getImage3() {
+		return image3;
+	}
+	public void setImage3(String image3) {
+		this.image3 = image3;
 	}
 	public String getWriter() {
 		return writer;
@@ -115,9 +129,9 @@ public class DisappearReportDTO {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	public DisappearReportDTO(int seq, Date disDate, String areaList, String disappearArea, String tel,
-			String kind, String gender, String neuter, String age, String furColor, String feature, String et,
-			String image, String writer, String writeDate, String ip) {
+	public DisappearReportDTO(int seq, Date disDate, String areaList, String disappearArea, String tel, String kind,
+			String gender, String neuter, String age, String furColor, String feature, String et, String image1,
+			String image2, String image3, String writer, String writeDate, String ip) {
 		super();
 		this.seq = seq;
 		this.disDate = disDate;
@@ -131,14 +145,18 @@ public class DisappearReportDTO {
 		this.furColor = furColor;
 		this.feature = feature;
 		this.et = et;
-		this.image = image;
+		this.image1 = image1;
+		this.image2 = image2;
+		this.image3 = image3;
 		this.writer = writer;
 		this.writeDate = writeDate;
 		this.ip = ip;
 	}
 	public DisappearReportDTO() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
+	
 	
 	
 	

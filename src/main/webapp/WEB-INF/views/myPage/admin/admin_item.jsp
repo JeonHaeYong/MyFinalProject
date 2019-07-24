@@ -272,13 +272,12 @@ font-weight:bold;
 	    	})
 	    	.done(function(response)
 	    	{
+	    		$("#search_result_div").empty();
 	    		
 	    		var array = response.array;
 	    		
 	    		if(array.length != 0)
 	    		{
-	    			$("#search_result_div").empty();
-		    		
 		    		for(var i = 1 ; i <= array.length ; i++)
 		    		{
 						var $row = $('<div class="row justify-content-center my-1 id_row"></div>');
@@ -295,8 +294,7 @@ font-weight:bold;
 		    		
 		    		if(response.needPrev)
 		    		{
-//	 	    			var $prevBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value=" < " name="'+(response.startNavi-1)+'">');
-						var $prevBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value=" < " name="'+(response.startNavi-1)+'">');
+						var $prevBtn = $('<input class="btn navi_btns mx-1" type="button" value=" < " name="'+(response.startNavi-1)+'">');
 
 		    			$naviRow.append($prevBtn);
 		    		}
@@ -304,22 +302,13 @@ font-weight:bold;
 		    		for(var i = response.startNavi ; i <= response.endNavi ; i++)
 		    		{
 		    			
-//	 	    			if(i == response.currentPage)
-//	 	    			{
-//	 		    			var $naviBtn = $('<input class="btn btn-danger selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
-//	 	    			}
-//	 	    			else
-//	 	    			{
-//	 		    			var $naviBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
-//	 	    			}
-					
 						if(i == response.currentPage)
 		    			{
-			    			var $naviBtn = $('<input class="btn btn-link selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+			    			var $naviBtn = $('<input class="btn selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
 		    			}
 		    			else
 		    			{
-			    			var $naviBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+			    			var $naviBtn = $('<input class="btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
 		    			}
 
 		    			$naviRow.append($naviBtn);
@@ -327,8 +316,7 @@ font-weight:bold;
 		    		
 		    		if(response.needNext)
 		    		{
-//	 	    			var $nextBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value=" > " name="'+(response.endNavi+1)+'">');
-		    			var $nextBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value=" > " name="'+(response.endNavi+1)+'">');
+		    			var $nextBtn = $('<input class="btn navi_btns mx-1" type="button" value=" > " name="'+(response.endNavi+1)+'">');
 		    			$naviRow.append($nextBtn);
 		    		}
 		    		
@@ -336,7 +324,11 @@ font-weight:bold;
 	    		}
 	    		else
 	    		{
-	    			alert("검색 결과 없음");
+// 	    			alert("검색 결과 없음");
+	    			var $row = $('<div class="row justify-content-center my-1"></div>');
+	    			var $noResultCol = $('<div class="col-6 col-md-6 col-lg-12 text-center my-1"><h3>검색 결과가 없습니다.</h3></div>');
+	    			$row.append($noResultCol);
+	    			$("#search_result_div").append($row);
 	    		}
 	    		
 	    	})

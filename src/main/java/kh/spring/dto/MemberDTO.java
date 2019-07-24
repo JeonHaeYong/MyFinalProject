@@ -14,7 +14,28 @@ public class MemberDTO {
 	private int type;//1.일반 2.네이버 3.카카오 4.관리자
 	private int point;
 	private int rank;
+	private String image;
 	
+	public MemberDTO(String id, String password, String name, String email, String birthDay, String gender,
+			String phone, String zipcode, String address1, String address2, int type, int point, int rank,
+			String image) {
+		super();
+		this.id = id;
+		this.password = password;
+		this.name = name;
+		this.email = email;
+		this.birthDay = birthDay;
+		this.gender = gender;
+		this.phone = phone;
+		this.zipcode = zipcode;
+		this.address1 = address1;
+		this.address2 = address2;
+		this.type = type;
+		this.point = point;
+		this.rank = rank;
+		this.image = image;
+	}
+
 	public String toString() {
 		String toStr = "아이디->"+id+" ,이름->"+this.name+" ,생일->"+this.birthDay+"\r\n";
 		toStr += "성별->"+this.gender+" ,폰번호->"+this.phone+"\r\n";
