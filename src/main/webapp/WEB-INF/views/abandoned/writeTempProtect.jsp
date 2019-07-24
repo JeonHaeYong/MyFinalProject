@@ -299,6 +299,7 @@
 	border-radius: 5px;
 	padding: 5px 10px;
 }
+
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -321,10 +322,10 @@
 						<a href="listTempProtect?currentPage=1">임시보호중</a>
 					</div>
 					<div class="s-menu1">
-						<a href="">동물병원 조회</a>
+						<a href="toHospital?currentPage=1">동물병원 조회</a>
 					</div>
 					<div class="s-menu1">
-						<a href="">보호센터 조회</a>
+						<a href="toCenter?currentPage=1">보호센터 조회</a>
 					</div>
 				</div>
 
@@ -344,7 +345,7 @@
 					<div id="formWrapper" style="margin-top: 20px;">
 						<form action="uploadTempProtect?currentPage=1" method="post"
 							enctype="multipart/form-data">
-							<table class="table table-borderless">
+							<table class="table table-striped">
 								<tbody>
 									<tr>
 										<th scope="row" style="width: 20%">제목</th>

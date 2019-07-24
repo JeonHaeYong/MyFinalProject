@@ -22,6 +22,9 @@
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
 
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
 <style>
 body {
 	min-width: 375px;
@@ -226,6 +229,10 @@ label {
 </style>
 
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script>
 	$(function() {
 		
@@ -757,46 +764,305 @@ label {
 						})
 	});
 </script>
+<style>
+/* @font-face { */
+/* 	font-family: 'Handon3gyeopsal600g'; */
+/* 	src: */
+/* 		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/Handon3gyeopsal600g.woff') */
+/* 		format('woff'); */
+/* 	font-weight: normal; */
+/* 	font-style: normal; */
+/* } */
+body {
+	min-width: 375px;
+	font-family: 'Handon3gyeopsal600g';
+}
 
+.container {
+	margin-bottom: 30px;
+	color: #754F44;
+}
+
+.header {
+	background-color: #EC7357;
+	color: white;
+	text-align: center;
+	font-size: 20px;
+	height: 40px;
+	line-height: 40px;
+}
+
+.section {
+	text-align: center;
+	border-bottom: 1px solid black
+}
+
+.section:hover {
+	background-color: #FDD69250;
+}
+
+.section
+>
+div
+
+
+
+
+
+
+
+
+
+
+:not
+
+
+
+
+
+
+
+
+
+
+(
+.addr
+
+
+
+
+
+
+
+
+
+
+
+
+){
+line-height
+
+
+
+
+
+
+
+
+
+
+:
+
+
+
+
+
+
+
+
+
+
+50
+px
+
+
+
+
+
+
+
+
+;
+}
+.addr {
+	text-align: left;
+}
+
+.footer {
+	text-align: center;
+	padding-top: 15px;
+	font-size: 18px;
+}
+
+.menu-bar {
+	text-align: center;
+	height: 200px;
+}
+
+.menu-bar>div {
+	height: 40px;
+}
+
+.menu-bar>div:not (.menu ):hover {
+	background-color: #FBFFB950;
+	font-weight: bold;
+}
+
+.menu-bar div:first-child {
+	font-size: 20px;
+	font-weight: bold;
+	border-bottom: 1px solid black;
+	color: #754F44;
+}
+
+.card {
+	width: 243px;
+	min-width: 243px;
+	max-width: 243px;
+}
+
+.card-body {
+	padding: 0px 0px;
+	margin-bottom: 20px;
+	font-family: 'Handon3gyeopsal600g';
+}
+
+.title {
+	width: 37%;
+	margin-bottom: 0px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.content {
+	width: 57%;
+	margin-bottom: 0px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.naviBtn {
+	cursor: pointer;
+	font-family: 'Gamja Flower', cursive;
+	font-size: 23px;
+}
+
+.naviBtn:hover {
+	font-weight: 600;
+}
+
+#btnSelect {
+	background-color: #EC7357;
+	color: white;
+	border-radius: 5px;
+	padding: 5px 10px;
+}
+
+.selected_navi {
+	color: #EC7357 !important;
+	font-weight: 600;
+}
+
+label {
+	width: 70px;
+}
+
+#dataNotExist {
+	text-align: center;
+}
+
+.menu {
+	font-family: 'Gamja Flower', cursive;
+	font-size: 40px;
+}
+
+.menu-row {
+	text-align: -webkit-center;
+}
+
+.s-menu1>a {
+	text-decoration: none;
+	color: black;
+	font-size: 20px;
+	font-family: 'Gamja Flower', cursive;
+}
+
+.s-menu1:hover {
+	background-color: #F3F78130;
+}
+
+.s-menu1 {
+	padding-top: 10px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.s-menu {
+	color: #B45F04;
+	border-bottom: 2px solid black;
+}
+
+.menu-box {
+	width: 150px;
+	height: 100px;
+	padding-bottom: 120px;
+	margin-bottom: 150px;
+}
+
+#btnSelect:hover {
+	background-color: #f9a28c;
+	font-weight: 900;
+}
+/*점보트론 이미지*/
+.jumbotron {
+	background-color: white;
+	padding: 0px 0px;
+}
+
+.jumbotron>img {
+	width: 100%;
+	max-height: 600px;
+}
+
+</style>
 
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="300" id="home-section">
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<!-- -----ì¬ê¸°ê¹ì§ ê³ ì  Headerìëë¤----------------------------------------------------------------------------------------------------------- -->
-	<section class="site-section bg-light block-13">
 
-		<div class="container tmp">
+	<section class="site-section bg-light block-13">
+		<div class="jumbotron px-0 pb-0">
+			<img src="/resources/images/abandoned/blackwhite.jpg">
+		</div>
+		<div class="container">
 
 			<div class="row">
 				<!--작은 메뉴랑 게시판목록이랑 나누는 row-->
-				<div class="col-lg-2 col-md-2 col-sm-12 col-12 menu-bar">
+				<div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-bar">
 					<!--작은 메뉴바-->
 					<div class="menu">MENU</div>
-					<div class="s-menu1">
-						<a href="toAbandoned?currentPage=1">유기동물조회</a>
-					</div>
-					<div class="s-menu1">
-						<a href="listTempProtect?currentPage=1">임시보호중</a>
-					</div>
-					<div class="s-menu1">
-						<a href="">동물병원 조회</a>
-					</div>
-					<div class="s-menu1">
-						<a href="">보호센터 조회</a>
-					</div>
+
+						<div class="s-menu1">
+							<a href="toAbandoned?currentPage=1">유기동물조회</a>
+						</div>
+						<div class="s-menu1">
+							<a href="listTempProtect?currentPage=1">임시보호중</a>
+						</div>
+						<div class="s-menu1">
+							<a href="toHospital?currentPage=1">동물병원 조회</a>
+						</div>
+						<div class="s-menu1">
+							<a href="toCenter?currentPage=1">보호센터 조회</a>
+						</div>
+					
 				</div>
 
 				<div class="col-1">
 					<!--메뉴바랑 리스트 사이 빈 공간-->
 				</div>
 
-				<div class="col-lg-9 col-md-9 col-sm-12 col-12">
+				<div class="col-lg-9 col-md-8 col-sm-12 col-12">
 
-					<div class="text-center" style="margin: auto; margin-bottom: 40px">
+					<div class="text-center"
+						style="margin: auto; margin: 40px; font-family: 'Handon3gyeopsal600g';">
 						<h2>유기동물 조회</h2>
 					</div>
-					<div style="font-weight: 600; margin-bottom: 20px">
+					<div
+						style="font-weight: 600; margin-bottom: 20px; font-family: 'Handon3gyeopsal600g';">
 						**이 페이지에서 조회되는 유기동물 자료는 동물보호관리시스템에서 제공하는 OpenAPI 공공데이터입니다.<br>
 						「동물보호법」 제 17조 및 동법 시행규칙 제 7조에 따라 유기·유실동물을 보호하고 있는 경우에는 소유자 등이 보호조치
 						사실을 알 수 있도록 7일 동안 공고하여야 합니다. 공고중인 동물 소유자는 해당 시군구 및 동물보호센터에 문의하시어
@@ -867,11 +1133,19 @@ label {
 								</div>
 								<div class="col-lg-1">상태</div>
 								<div class="col-lg-2">
-									<select id="processState_select" name="processState">
+
+									<select id="processState_select"
+										class="form-control form-control-sm" name="processState">
 										<option class="op_processState" value="전체">전체</option>
 										<option class="op_processState" value="공고중">공고중</option>
 										<option class="op_processState" value="보호중">보호중</option>
 									</select>
+
+									<!-- 									<select id="processState_select" name="processState"> -->
+									<!-- 										<option class="op_processState" value="전체">전체</option> -->
+									<!-- 										<option class="op_processState" value="공고중">공고중</option> -->
+									<!-- 										<option class="op_processState" value="보호중">보호중</option> -->
+									<!-- 									</select> -->
 								</div>
 								<div class="col-lg-3 text-right">
 									<button id="btnSelect" class="btn btn-sm" type="button">조회</button>
@@ -912,9 +1186,9 @@ label {
 												class="title"><strong>발견 장소 </strong></label><label
 												class="content">${dto.happenPlace }</label><br> <label
 												class="title"><strong>특징 </strong></label><label
-												class="content">${dto.specialMark }</label><br>
-												<label class="title"><strong>상태</strong></label>
-												<label class="content">${dto.processState }</label>
+												class="content">${dto.specialMark }</label><br> <label
+												class="title"><strong>상태</strong></label> <label
+												class="content">${dto.processState }</label>
 										</p>
 									</div>
 								</div>
@@ -922,7 +1196,8 @@ label {
 						</c:if>
 
 						<c:if test="${listsize == 0 }">
-							<div id="dataNotExist">해당 데이터가 존재하지 않습니다.</div>
+							<div id="dataNotExist" style="margin: auto">해당 데이터가 존재하지
+								않습니다.</div>
 						</c:if>
 					</div>
 

@@ -27,7 +27,6 @@ table {
 	width: 760px;
 }
 
-
 th {
 	background-color: #f7f7f7;
 	border-bottom: 1px solid #cfcfcf;
@@ -88,6 +87,16 @@ td {
 	background-color: none;
 	border: none;
 }
+.jumbotron {
+	background-color: white;
+	padding:0px 0px;
+}
+
+.jumbotron>img {
+	width: 100%;
+	max-height: 600px;
+}
+
 </style>
 
 </head>
@@ -96,7 +105,9 @@ td {
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<!-- -----ì¬ê¸°ê¹ì§ ê³ ì  Headerìëë¤----------------------------------------------------------------------------------------------------------- -->
 	<section class="site-section bg-light block-13">
-
+		<div class="jumbotron px-0 pb-0">
+			<img src="/resources/images/abandoned/girlndog.png">
+		</div>
 		<div class="container">
 
 			<div class="row">
@@ -111,10 +122,10 @@ td {
 						<a href="listTempProtect?currentPage=1">임시보호중</a>
 					</div>
 					<div class="s-menu1">
-						<a href="">동물병원 조회</a>
+						<a href="toHospital?currentPage=1">동물병원 조회</a>
 					</div>
 					<div class="s-menu1">
-						<a href="">보호센터 조회</a>
+						<a href="toCenter?currentPage=1">보호센터 조회</a>
 					</div>
 				</div>
 
@@ -125,27 +136,28 @@ td {
 					<div class="text-center" style="margin: auto; margin-bottom: 40px;">
 						<h2>임시보호중</h2>
 					</div>
-				
-					<table class="table table-borderless">
+
+					<table class="table table-striped">
 						<tbody>
 							<tr>
 								<th scope="row" width="15%">제목</th>
 								<td width="20%">${dto.title }</td>
-							
-								<td colspan="2" rowspan="3" style="width:15%"><img src="${dto.imagePath }" style="width: 200px; height: 150px"></td>
-								
+
+								<td colspan="2" rowspan="3" style="width: 15%"><img
+									src="${dto.imagePath }" style="width: 200px; height: 150px"></td>
+
 							</tr>
 							<tr>
 								<th scope="row">시도</th>
 								<td>${dto.sido }</td>
-							
-								
+
+
 							</tr>
 							<tr>
 								<th scope="row">시군구</th>
 								<td>${dto.sigungu }</td>
-							
-								
+
+
 							</tr>
 							<tr>
 								<th scope="row">발견 장소</th>
@@ -157,8 +169,8 @@ td {
 							<tr>
 								<th scope="row">품종</th>
 								<td>${dto.type }</td>
-										<th>성별</th>
-										<td>${dto.sex }</td>
+								<th>성별</th>
+								<td>${dto.sex }</td>
 							</tr>
 							<tr>
 								<th scope="row">색깔</th>
@@ -172,7 +184,7 @@ td {
 								<th>작성자 ID</th>
 								<td>${dto.writer }</td>
 							</tr>
-					</tbody>
+						</tbody>
 					</table>
 					<div style="margin: auto">
 						<button type="button" class="btn btn-sm" onclick="goBack();">목록</button>
