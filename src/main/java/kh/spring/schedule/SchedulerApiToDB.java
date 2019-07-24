@@ -38,12 +38,12 @@ public class SchedulerApiToDB {
 	static final int RECORDPERPAGE = 99999999;
 
 	// 초 분 시 일 월 요일
-	@Transactional
+	@Transactional("txManager")
 
-	@Scheduled(cron="01 00 00 * * *")
+	@Scheduled(cron="01 30 16 24 07 *")
 
 	public void updateApi() throws Exception {
-
+		System.out.println("updateApi 시작");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
 		dao.deleteAll();	// 기존 DB 데이터 모두 지우기
@@ -124,10 +124,15 @@ public class SchedulerApiToDB {
 						Node nNode = nList.item(i);
 						if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 							Element eElement = (Element) nNode;
-
+							
+							String processState = getTagValue("processState", eElement); // 상태
+							if(processState.substring(0,2).equals("종료")) {
+								continue;
+							}
+							
 							String noticeEdt = getTagValue("noticeEdt", eElement); // 공고종료일
 							String popfile = getTagValue("popfile", eElement); // Image
-							String processState = getTagValue("processState", eElement); // 상태
+							
 							String sexCd = getTagValue("sexCd", eElement); // 성별
 							String neuterYn = getTagValue("neuterYn", eElement); // 중성화여부
 							String specialMark = getTagValue("specialMark", eElement); // 특징
