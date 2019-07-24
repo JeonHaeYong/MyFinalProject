@@ -17,7 +17,7 @@
 				self.close();
 			}
 		})
-	});s
+	});
 </script>
 </head>
 <body>
