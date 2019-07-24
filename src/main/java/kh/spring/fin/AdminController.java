@@ -123,6 +123,24 @@ public class AdminController
 		
 		return result;
 	}
+	@ResponseBody
+	@RequestMapping(value = "admin-blacklist-search", produces="application/json;charset=utf-8")
+	public Object searchInBlackList(String id, String page)
+	{
+		Object result = "error";
+		try
+		{
+			result = blackService.selectMembersInBlackList(id, page);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
+		
+	}
+	
 	//Member End
 	
 	
