@@ -148,14 +148,7 @@ if(${errorLogin!=null}){
 </script>
 <script src='https://developers.kakao.com/sdk/js/kakao.min.js'></script>
 <script>
-//카카오 로그아웃
-/* 	Kakao.init('158c89adb3b9e4e64ef9002fd15b6f66'); 
-	function Kakao.Auth.logout(function(data){
-			
-		 if(data==true){ alert("로그인 성공");}else{ alert("로그인 실패");}
-			 location.href='logout';
-			
-	  });	 */
+
 $("#logout").on("click",function(){
 	window.open('kakaologout',
 			'window팝업',
