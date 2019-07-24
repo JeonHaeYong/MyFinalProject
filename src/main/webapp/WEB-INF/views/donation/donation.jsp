@@ -52,6 +52,7 @@
 .my_buttons:hover{
 	background-color: #9c2c2c !important;
 }
+
 </style>
 
 </head>
@@ -68,7 +69,17 @@
 		<div class="row justify-content-center">
 
 			<div class="col-12 col-lg-12 my-5">
-
+				
+				<div class="row justify-content-center my-5">
+				
+					<div class="col-12 text-center">
+					
+						<h1>${dto.name}</h1>
+					
+					</div>
+					
+				</div>
+				
 				<div class="row justify-content-center">
 
 					<div class="col-8 text-center">
@@ -113,7 +124,7 @@
 					</div>
 
 					<div class="col-4 text-center">
-
+						
 						<h2>${dto.title}</h2>
 						<br>${dto.explanation}
 
@@ -129,14 +140,26 @@
 				
 					<div class="col-12 col-lg-6 my-3 text-center">
 						
-						<img src="${dto.left}" alt="사진이 없습니다." id="left_img" class="mx-5">
+						<c:if test="${dto.left != '없음'}">
+							<img src="${dto.left}" alt="사진이 없습니다." id="left_img" class="mx-5">
+						</c:if>
+						
+						<c:if test="${dto.left == '없음'}">
+							<img src="resources/images/dog_1.jpg" alt="사진이 없습니다." id="left_img" class="mx-5">
+						</c:if>
 					
 					</div>
 					
 					<div class="col-12 col-lg-6 my-3 text-center">
-					
-						<img src="${dto.right}" alt="사진이 없습니다." id="right_img" class="mx-5">
-					
+						
+						<c:if test="${dto.right != '없음'}">
+							<img src="${dto.right}" alt="사진이 없습니다." id="right_img" class="mx-5">
+						</c:if>
+						
+						<c:if test="${dto.right == '없음'}">
+							<img src="resources/images/dog_1.jpg" alt="사진이 없습니다." id="right_img" class="mx-5">
+						</c:if>
+						
 					</div>
 				
 				</div>
@@ -153,21 +176,45 @@
 
 			</div>
 
-			<div class="col-12 col-md-6 text-center my-5">
-
-				<img src="/resources/images/clock-64.png" alt="사진이 없습니다.">
-				<span id="last_time_span"></span>
-
-			</div>
-
-			<div class="col-12 col-md-6 text-center my-5">
-
-				<img src="/resources/images/pie-chart-64.png" alt="사진이 없습니다.">
-				<span>${dto.currentmoney} / ${dto.goalmoney}</span>
-
-			</div>
-
+			
+			
 		</div>
+		
+		<div id="info_div" class="row justify-content-center">
+			
+			<div class="col-4 text-center">
+
+				<div>
+					
+					<img src="/resources/images/clock-64.png" alt="사진이 없습니다.">
+					<span id="last_time_span"></span>
+				
+				</div>
+
+			</div>
+
+			<div class="col-4 text-center">
+
+				<div>
+					
+					<img src="/resources/images/pie-chart-64.png" alt="사진이 없습니다.">
+					<span>${dto.currentmoney} / ${dto.goalmoney}</span>
+					
+				</div>
+					
+			</div>
+			
+			<div class="col-4 text-center px-0 my-auto progress">
+						
+				<div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+					
+				</div>
+							
+			</div>
+			
+		</div>
+		
+		
 
 	</div>
 
@@ -200,6 +247,9 @@
 <script>
 	$(function()
     {
+		var percent = (${dto.currentmoney}*1) / (${dto.goalmoney}*1) * 100;
+		$("#progress-bar").attr("style", "width:"+ percent + "%");
+		$("#progress-bar").text(percent+"%");
 		
 		$("#carousel-inner div:first-child").addClass("active");
 		
