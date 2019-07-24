@@ -28,7 +28,6 @@
  function openPopup(url){
 	 var cookies = document.cookie;
 	var result = cookieToJson(cookies);
-	console.log("결과:" + result)
                 	   if(result != "Y"){
                 		   window.open(url,'','width=570,height=830,left=1300,top=70'); 
                 	   } 
@@ -37,7 +36,6 @@
 function cookieToJson(cookies){
 	var entry = cookies.split("=");
 	entry[0] = entry[1];
-	console.log("값: "+entry[0]);
 	return entry[0];
 }
 
