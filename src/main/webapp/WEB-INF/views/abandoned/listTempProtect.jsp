@@ -93,7 +93,26 @@ a:hover {
 .naviBtn:hover {
 	font-weight: 600;
 }
+.menu-bar {
+	text-align: center;
+	height: 200px;
+}
 
+.menu-bar>div {
+	height: 40px;
+}
+
+.menu-bar>div:not (.menu ):hover {
+	background-color: #FBFFB950;
+	font-weight: bold;
+}
+
+.menu-bar div:first-child {
+	font-size: 20px;
+	font-weight: bold;
+	border-bottom: 1px solid black;
+	color: #754F44;
+}
 .menu-row {
 	text-align: -webkit-center;
 }

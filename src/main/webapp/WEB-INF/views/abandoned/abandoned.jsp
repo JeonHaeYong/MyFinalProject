@@ -21,12 +21,15 @@
 <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script>
 	$(function() {
 		
@@ -567,7 +570,6 @@
 /* 	font-weight: normal; */
 /* 	font-style: normal; */
 /* } */
-
 body {
 	min-width: 375px;
 	font-family: 'Handon3gyeopsal600g';
@@ -601,7 +603,15 @@ body {
 div
 
 
+
+
+
+
 :not
+
+
+
+
 
 
 (
@@ -610,20 +620,32 @@ div
 
 
 
+
+
+
+
 ){
 line-height
+
+
+
+
 
 
 :
 
 
+
+
+
+
 50
 px
+
+
+
+
 ;
-
-
-
-
 }
 .addr {
 	text-align: left;
@@ -782,31 +804,38 @@ label {
 
 			<div class="row">
 				<!--작은 메뉴랑 게시판목록이랑 나누는 row-->
-				<div class="col-lg-2 col-md-2 col-sm-12 col-12 menu-bar">
+				<div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-bar">
 					<!--작은 메뉴바-->
-					<div class="menu">MENU</div>
-					<div class="s-menu1">
-						<a href="toAbandoned?currentPage=1">유기동물조회</a>
-					</div>
-					<div class="s-menu1">
-						<a href="listTempProtect?currentPage=1">임시보호중</a>
-					</div>
-					<div class="s-menu1">
-						<a href="toHospital?currentPage=1">동물병원 조회</a>
-					</div>
-					<div class="s-menu1">
-						<a href="toCenter?currentPage=1">보호센터 조회</a>
-					</div>
+					<nav class="cl-effect-2">
+						<div class="menu">MENU</div>
+						<a href="toAbandoned?currentPage=1">유기동물조회</a> <a
+							href="listTempProtect?currentPage=1">임시보호중</a> <a
+							href="listTempProtect?currentPage=1">임시보호중</a> <a
+							href="listTempProtect?currentPage=1">임시보호중</a>
+						<!-- 						<div class="menu">MENU</div> -->
+						<!-- 						<div class="s-menu1"> -->
+						<!-- 							<a href="toAbandoned?currentPage=1">유기동물조회</a> -->
+						<!-- 						</div> -->
+						<!-- 						<div class="s-menu1"> -->
+						<!-- 							<a href="listTempProtect?currentPage=1">임시보호중</a> -->
+						<!-- 						</div> -->
+						<!-- 						<div class="s-menu1"> -->
+						<!-- 							<a href="listTempProtect?currentPage=1">임시보호중</a> -->
+						<!-- 						</div> -->
+						<!-- 						<div class="s-menu1"> -->
+						<!-- 							<a href="listTempProtect?currentPage=1">임시보호중</a> -->
+						<!-- 						</div> -->
+					</nav>
 				</div>
 
 				<div class="col-1">
 					<!--메뉴바랑 리스트 사이 빈 공간-->
 				</div>
 
-				<div class="col-lg-9 col-md-9 col-sm-12 col-12">
+				<div class="col-lg-9 col-md-8 col-sm-12 col-12">
 
 					<div class="text-center"
-						style="margin: auto; margin-bottom: 40px; font-family: 'Handon3gyeopsal600g';">
+						style="margin: auto; margin: 40px; font-family: 'Handon3gyeopsal600g';">
 						<h2>유기동물 조회</h2>
 					</div>
 					<div
@@ -882,7 +911,8 @@ label {
 								<div class="col-lg-1">상태</div>
 								<div class="col-lg-2">
 
-									<select id="processState_select" class="form-control form-control-sm" name="processState">
+									<select id="processState_select"
+										class="form-control form-control-sm" name="processState">
 										<option class="op_processState" value="전체">전체</option>
 										<option class="op_processState" value="공고중">공고중</option>
 										<option class="op_processState" value="보호중">보호중</option>
@@ -943,7 +973,8 @@ label {
 						</c:if>
 
 						<c:if test="${listsize == 0 }">
-							<div id="dataNotExist" style="margin:auto">해당 데이터가 존재하지 않습니다.</div>
+							<div id="dataNotExist" style="margin: auto">해당 데이터가 존재하지
+								않습니다.</div>
 						</c:if>
 					</div>
 
