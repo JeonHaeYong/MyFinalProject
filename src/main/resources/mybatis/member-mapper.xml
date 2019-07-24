@@ -4,11 +4,11 @@
 	
 	<insert id="insertMember" >
 		insert into member values(#{id}, #{password}, #{name}, #{email}, #{birthDay,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
-		#{phone,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR}, #{address1,jdbcType=VARCHAR}, #{address2,jdbcType=VARCHAR}, #{type,jdbcType=NUMERIC}, 0 , #{image,jdbcType=VARCHAR})
+		#{phone,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR}, #{address1,jdbcType=VARCHAR}, #{address2,jdbcType=VARCHAR}, #{type,jdbcType=NUMERIC}, 0 , #{imagepath,jdbcType=VARCHAR})
 	</insert>
 	<insert id="insertNaverJoin" >
 		insert into member values(#{id}, #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{birthDay,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
-		#{phone,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR}, #{address1,jdbcType=VARCHAR}, #{address2,jdbcType=VARCHAR}, #{type,jdbcType=NUMERIC}, 0 , #{image,jdbcType=VARCHAR})
+		#{phone,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR}, #{address1,jdbcType=VARCHAR}, #{address2,jdbcType=VARCHAR}, #{type,jdbcType=NUMERIC}, 0 , #{imagepath,jdbcType=VARCHAR})
 	</insert>
 	<select id="selectAllMembers" resultType="kh.spring.dto.MemberDTO">
 		select * from member;
@@ -59,7 +59,7 @@
 	<select id="selectOneMemberDTO_useMyPageAdvice" resultType="kh.spring.dto.MemberDTO">
 		select id , password , name , email , nvl( birthDay , '(미설정)') as birthDay ,nvl( GENDER , '(미설정)') as gender
 		,nvl( PHONE , '(미설정)') as phone ,nvl( ZIPCODE , '(미설정)') as zipcode ,nvl( ADDRESS1 , '(미설정)') as address1 
-		,nvl( ADDRESS2 , '(미입력)') as address2, type , point from member where id=#{id}
+		,nvl( ADDRESS2 , '(미입력)') as address2, type , point , imagepath from member where id=#{id}
 	</select>
 	<update id="updateMemberInfoByMyPage">
 		update member set name=#{name}
@@ -82,6 +82,9 @@
 				,address2 = #{address2}
 			</if>
 		where id=#{id}
+	</update>
+	<update id="updateImagePath">
+		update member set imagepath = #{imagepath} where id=#{id}
 	</update>
 	
 	<!-- used in admin-quiz -->

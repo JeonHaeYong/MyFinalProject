@@ -14,27 +14,7 @@ public class MemberDTO {
 	private int type;//1.일반 2.네이버 3.카카오 4.관리자
 	private int point;
 	private int rank;
-	private String image;
-	
-	public MemberDTO(String id, String password, String name, String email, String birthDay, String gender,
-			String phone, String zipcode, String address1, String address2, int type, int point, int rank,
-			String image) {
-		super();
-		this.id = id;
-		this.password = password;
-		this.name = name;
-		this.email = email;
-		this.birthDay = birthDay;
-		this.gender = gender;
-		this.phone = phone;
-		this.zipcode = zipcode;
-		this.address1 = address1;
-		this.address2 = address2;
-		this.type = type;
-		this.point = point;
-		this.rank = rank;
-		this.image = image;
-	}
+	private String imagepath;
 
 	public String toString() {
 		String toStr = "아이디->"+id+" ,이름->"+this.name+" ,생일->"+this.birthDay+"\r\n";
@@ -59,6 +39,25 @@ public class MemberDTO {
 		this.type = type;
 		this.point = point;
 		this.rank = rank;
+	}
+	public MemberDTO(String id, String password, String name, String email, String birthDay, String gender,
+			String phone, String zipcode, String address1, String address2, int type, int point, int rank,
+			String imagepath) {
+		super();
+		this.id = id;
+		this.password = password;
+		this.name = name;
+		this.email = email;
+		this.birthDay = birthDay;
+		this.gender = gender;
+		this.phone = phone;
+		this.zipcode = zipcode;
+		this.address1 = address1;
+		this.address2 = address2;
+		this.type = type;
+		this.point = point;
+		this.rank = rank;
+		this.imagepath = imagepath;
 	}
 	public String getId() {
 		return id;
@@ -138,6 +137,14 @@ public class MemberDTO {
 	public void setRank(int rank) {
 		this.rank = rank;
 
+	}
+
+	public String getimagepath() {
+		return imagepath;
+	}
+
+	public void setimagepath(String imagepath) {
+		this.imagepath = imagepath;
 	}
 	
 }
