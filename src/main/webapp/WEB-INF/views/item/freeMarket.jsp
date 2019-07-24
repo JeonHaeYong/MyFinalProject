@@ -33,6 +33,12 @@
 		background-color: #EC7357;
 		color: white;
 	}
+	.freeMarketInfo{
+		font-family: 'SeoulNamsanM';
+	}
+	.blockquote-footer{
+		font-family: 'Gamja Flower';
+	}
 	h3, h4{
 		font-family: 'Gamja Flower';
 	}
@@ -159,7 +165,7 @@
 						<h3 class="m-0">무료나눔과 기부를 함께</h3>
 					</div>
 					<div class="card-body">
-						<blockquote class="blockquote mb-0">
+						<blockquote class="blockquote mb-0 freeMarketInfo">
 							<p>무료나눔 상품을 구매하신 분은 저렴한 가격에 원하는 물건을 살 수 있고,<br> 나눔을 하신 분은 본인의 이름으로 후원단체에 기부를 하실 수 있어요!<br>
 							<small>무료나눔을 신청하면 관리자의 승인을 받은 후 무료나눔이 가능해요.</small></p>
 							<footer class="blockquote-footer">나눔 신청하러 가기 <a class="btn addBtn cartAddBtn" href="addItem">Go</a></footer>

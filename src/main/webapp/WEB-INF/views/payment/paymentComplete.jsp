@@ -45,7 +45,7 @@
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
-	data-offset="300" id="home-section" onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
+	data-offset="300" id="home-section">
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 
@@ -168,9 +168,10 @@
 	<script src="resources/js/isotope.pkgd.min.js"></script>
 	<script src="resources/js/main.js"></script>
 	<script>
-		window.history.forward();
-		function noBack(){window.history.forward();}
-		
+		history.pushState(null, null, location.href);
+		window.onpopstate = function(event) {
+			history.go(1);
+		};
 		$(".soldoutCheck").each(function(i, item){
 			alert($(item).val());
 		});
