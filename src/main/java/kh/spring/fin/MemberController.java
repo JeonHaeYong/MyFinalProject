@@ -49,10 +49,8 @@ public class MemberController {
 	//로그인
 	@RequestMapping("login")
 	public String login(HttpServletRequest request, MemberDTO dto) {
-		String url ="http://localhost/";
 		String referer = request.getHeader("referer");
-		String returnUrl = referer.substring(url.length());
-		
+		referer = referer.replaceAll("^http://.+?/", "");
 		System.out.println(dto.getId());
 		try{
 			int result=mservice.isLoginOkService(dto.getId(), dto.getPassword());
@@ -62,17 +60,13 @@ public class MemberController {
 				return "member/loginfail";
 			}
 			else {
-				session.setAttribute("id", dto.getId());
-
 				MemberDTO mdto=mservice.selectOneMemberService(dto.getId());					
+				session.setAttribute("id", mdto.getId());
 				session.setAttribute("type", mdto.getType());
-				
-				System.out.println("session정보"+session.getAttribute("id"));
-				return "redirect:/"+returnUrl;	
-
+				return "redirect:/"+referer;	
 			}
 		}
-		
+
 		catch(Exception e) {
 			e.printStackTrace();
 			return "/loginfail";
@@ -93,7 +87,11 @@ public class MemberController {
 	}
 	@RequestMapping("joininfo")
 	public String joininfo(MemberDTO dto) {
-		try{mservice.insertMemberService(dto);
+		try{
+//			int rand = (int)(Math.random() * 10 + 1 );
+//			System.out.println("rand"+rand);
+//			dto.setim
+			mservice.insertMemberService(dto);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -313,6 +311,13 @@ public class MemberController {
 		//id에 대해 업데이트 하기.
 		int result = mservice.updateMemberInfoByMyPage(dto);
 		System.out.println(dto.getId()+"님의 정보업데이트가 " +result+"행 완료되었습니다.");
+		return "redirect:toMyPage";
+	}
+
+	//프로필img 바꾸기
+	@RequestMapping("changeProfileImg")
+	public String changeProfileImg(MemberDTO dto) {
+		//여기짜기
 		return "redirect:toMyPage";
 	}
 

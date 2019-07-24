@@ -11,7 +11,7 @@
 	</update>
 	
 	<delete id="deleteReviewComment">
-		delete from review_comments where review_seq=#{value}
+		delete from review_comments where seq=#{value}
 	</delete>
 	
 	<select id="selectAllReviewCommentsByReviewSeq" resultType="kh.spring.dto.ReviewCommentsDTO">
@@ -40,6 +40,12 @@
 		select review_comments_seq.currval from dual
 	</select>
 	<select id="selectReviewCommentsBySeq" resultType="kh.spring.dto.ReviewCommentsDTO">
+		select * from review_comments where seq = #{seq}
+	</select>
+	<update id="updateReplyContentsByseq">
+		update review_comments set contents = #{contents} where seq = #{seq}
+	</update>
+	<select id="selectDTOBySeq" resultType="kh.spring.dto.ReviewCommentsDTO">
 		select * from review_comments where seq = #{seq}
 	</select>
 </mapper>

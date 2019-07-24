@@ -70,14 +70,14 @@ public class MessageController {
 		if(category.equals("recipient")) {
 			request.setAttribute("receivedList", list);
 			request.setAttribute("receivedNavi", navi);
-			return "myPage/user/received_msg_templet";
+			return "myPage/user/received_msg_template";
 		}else {
 			request.setAttribute("sentList", list);
 			request.setAttribute("sentNavi", navi);
-			return "myPage/user/sent_msg_templet";
+			return "myPage/user/sent_msg_template";
 		}
 	}
-
+	
 
 
 

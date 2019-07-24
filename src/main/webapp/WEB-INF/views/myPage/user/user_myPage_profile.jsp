@@ -24,6 +24,47 @@
                 .readMsg{
                     color : gray;
                 }
+                /*파일업로드*/
+                    .filebox input[type="file"] {
+                        position: absolute;
+                        width: 1px;
+                        height: 1px;
+                        padding: 0;
+                        margin: -1px;
+                        overflow: hidden;
+                        clip: rect(0, 0, 0, 0);
+                        border: 0;
+                    }
+                    .filebox label {
+                        display: inline-block;
+                        padding: .5em .75em;
+                        color: #754F44;
+                        font-size: inherit;
+                        line-height: normal;
+                        /* 	vertical-align: middle !important; */
+                        background-color: #fdfdfd;
+                        cursor: pointer;
+                        border: 1px solid #ebebeb;
+                        border-bottom-color: #e2e2e2;
+                        border-radius: .25em;
+                    }
+                    /* named upload */
+                    .filebox .upload-name {
+                        display: inline-block;
+                        padding: .5em .75em; /* label의 패딩값과 일치 */
+                        font-size: inherit;
+                        font-family: inherit;
+                        line-height: normal;
+                        /* 	vertical-align: middle; */
+                        width : 300px;
+                        background-color: #f5f5f5;
+                        border: 1px solid #ebebeb;
+                        border-bottom-color: #e2e2e2;
+                        border-radius: .25em;
+                        -webkit-appearance: none; /* 네이티브 외형 감추기 */
+                        -moz-appearance: none;
+                        appearance: none;
+                    }
             </style>
             <jsp:include page="/WEB-INF/views/myPage/user/user_module/mypage_user_style.jsp" ></jsp:include><!-- user 마이페이지 스타일 -->
             <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
@@ -147,7 +188,7 @@
                         <div class="form-group row">
                             <label for="my_address" class="col-sm-2 col-form-label">상세주소</label>
                             <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext addr_info_input" id="my_address2" value="${memberDTO.address2 }" placeholder="찾기버튼을 눌러주세요." name="address2s">
+                                <input type="text" readonly class="form-control-plaintext addr_info_input modify_info_input" id="my_address2" value="${memberDTO.address2 }" placeholder="상세주소를 입력해주세요." name="address2">
                             </div>
                         </div>
                         <div class="d-flex justify-content-center modify_bot_part">
@@ -343,9 +384,61 @@
                         // 우편번호와 주소 정보를 해당 필드에 넣는다.
                         document.getElementById("my_zipcode").value = data.zonecode;
                         document.getElementById("my_address1").value = roadAddr;
-                        document.getElementById("my_address2").value = data.jibunAddress;
+//                         document.getElementById("my_address2").value = data.jibunAddress;
                     }
                 }).open();
             }
+            function changeName (){
+                // 값이 변경되면 
+                if (window.FileReader) {
+                    // modern browser 
+                    var filename = $(fileTarget)[0].files[0].name;
+                } else { // old IE 
+                    var filename = $(fileTarget).val().split('/').pop().split(
+                        '\\').pop();
+                    // 파일명만 추출 
+                } // 추출한 파일명 삽입 
+                $(fileTarget).siblings('.upload-name').val(filename);
+            }
+            	//preview image 
+				var fileTarget = $('.filebox .upload-hidden');
+				var imgTarget = $('.preview-image .upload-hidden');
+				
+				$(".profile_upload_part.hide").hide();
+				imgTarget.on('change',function() {
+	                var parent = $(".changeAfterImg");
+	                parent.children('.upload-display').remove();
+	                if (window.FileReader) { //html5 이상에서 window.FileReader지원한다. 지원하는 브라우저에 한해서
+	                    if (!$(this)[0].files[0].type.match(/image/)) {//image 파일만
+	                        alert('이미지 파일만 선택할 수 있습니다.');
+	                        return;
+	                    }
+	                    var reader = new FileReader();
+	                    reader.onload = function(e) {
+	                        var src = e.target.result;
+	                        parent.append('<img src="'+src+'" class="upload-display rounded-circle" style="width: 100px; height: 100px;">');
+	                    }
+	                    reader.readAsDataURL($(this)[0].files[0]);
+	                } else {
+	                    $(this)[0].select();
+	                    $(this)[0].blur();
+	                    var imgSrc = document.selection.createRange().text;
+	                    parent.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img class="upload-thumb"></div></div>');
+	                    var img = $(this).siblings('.upload-display').find('img');
+	                    img[0].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""
+	                        + imgSrc + "\")";
+	                }
+	                changeName();
+	                $(".profile_upload_part").toggle();
+	                $(".profile_upload_part.hide").addClass("d-flex");
+	            });
+                $('#change_profileImg_md').on('hidden.bs.modal', function (e) {//modal 취소클릭해서 없어진후에 실행
+                	$("#changeProfileImg_form")[0].reset();
+	                $(".profile_upload_part").toggle();
+	                $(".profile_upload_part.hide").removeClass("d-flex");
+                });
+                $(".changeImg_btn").on("click",function(){
+                	$("#changeProfileImg_form").submit();
+                })
         </script>
     </html>

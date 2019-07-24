@@ -24,24 +24,43 @@ public class ItemController {
 	private CartService cs;
 
 	@RequestMapping("freeMarket")
-	public String freeMarket(HttpServletRequest request, String currentPage, String category) {
+	public String freeMarket(HttpServletRequest request, String currentPage, String category, String soldout) {
+		boolean flag = true;
 		if(currentPage == null) {
 			currentPage = "1";
 		}
+		if(soldout == null) {
+			soldout = "Y";
+			flag = false;
+		}
+
 		if(category == null || category.equals("all")) {
 			category = "all";
-			request.setAttribute("itemList", is.selectItemPerPage(Integer.parseInt(currentPage)));
+			if(soldout.equals("Y")) {
+				request.setAttribute("itemList", is.selectItemPerPage(Integer.parseInt(currentPage)));
+			}else {
+				request.setAttribute("itemList", is.selectItemPerPageWithoutSoldout(Integer.parseInt(currentPage)));
+			}
 		}else {
-			request.setAttribute("itemList", is.selectItemPerPageByCategory(Integer.parseInt(currentPage), category));
+			if(soldout.equals("Y")) {
+				request.setAttribute("itemList", is.selectItemPerPageByCategory(Integer.parseInt(currentPage), category));
+			}else {
+				request.setAttribute("itemList", is.selectItemPerPageByCategoryWithoutSoldout(Integer.parseInt(currentPage), category));
+			}
 		}
-		request.setAttribute("pageNavi", is.getNaviforItem(Integer.parseInt(currentPage), category));
+
+		request.setAttribute("pageNavi", is.getNaviforItem(Integer.parseInt(currentPage), category, soldout));
 		request.setAttribute("category", category);
-		
+		request.setAttribute("soldout", soldout);
 		String id = (String)request.getSession().getAttribute("id");
 		if(id != null) {
 			request.setAttribute("cartCount", cs.getCartCount(id));
 		}
-		return "item/freeMarket";
+		if(flag) {
+			return "item/freeMarket_template";
+		}else {
+			return "item/freeMarket";
+		}
 	}
 
 	@RequestMapping("item")
