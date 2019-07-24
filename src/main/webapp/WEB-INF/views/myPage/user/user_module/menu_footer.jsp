@@ -17,7 +17,14 @@
                     var image = $(".img_anchor").html();
                     $(".img_wrapper").html(image);
                 }
-                
+                $(".profileImg_round").each(function(i,item){
+                	var path = $(item).attr("src");
+                	var pathRegex = /^\/profile\/[^\/]+?/;
+                	var pathRegexResult = pathRegex.exec(path);
+                	if(pathRegexResult!=null){
+                		$(item).removeClass("rounded-circle");
+                	}
+                })
             }
             function changeProfileImg(){
             	$(".change_profileImg_mdBtn").trigger("click");

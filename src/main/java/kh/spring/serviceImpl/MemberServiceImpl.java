@@ -367,6 +367,11 @@ public class MemberServiceImpl implements MemberService {
 		return mdao.updateMemberInfoByMyPage(dto);
 	}
 
+	@Override
+	public int updateImagePath(MemberDTO dto) {
+		return mdao.updateImagePath(dto);
+	}
+
 
 }
 
