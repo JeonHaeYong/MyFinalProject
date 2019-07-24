@@ -45,7 +45,10 @@ color:#754F44;
 background-color:#FDD692;
 font-weight:bold;
 }
-	
+
+a{
+	text-decoration: none !important;
+}
 </style>
 
 </head>
@@ -55,29 +58,48 @@ font-weight:bold;
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 
 
+
+
 	<section class="site-section bg-light block-13">
+
+
 
 		<div id="container" class="container">
 
 			<div class="row justify-content-center">
 				
-				<div class="col-2 col-md-2 col-lg-2 text-center my-1"><h3>글 번호</h3></div>
-				<div class="col-6 col-md-6 col-lg-6 text-center my-1"><h3>제목</h3></div>
-				<div class="col-2 col-md-2 col-lg-2 text-center my-1"><h3>작성 일자</h3></div>
-				<div class="col-2 col-md-2 col-lg-2 text-center my-1"><h3>조회수</h3></div>
+				
+				
+				<div class="col-2 col-md-2 col-lg-2 text-center my-1 d-none d-lg-block"><h3>글 번호</h3></div>
+				<div class="col-6 col-md-6 col-lg-6 text-center my-1 d-none d-md-block"><h3>제목</h3></div>
+				<div class="col-2 col-md-3 col-lg-2 text-center my-1 d-none d-md-block"><h3>조회수</h3></div>
+				<div class="col-2 col-md-3 col-lg-2 text-center my-1 d-none d-md-block"><h3>작성 일자</h3></div>
+				
+				
+				
 				
 				<div id="contents_div" class="col-12 col-md-12 col-lg-12 text-center my-5">
 					
 				</div>
 				
+				
+				
 				<div class="col-12 col-md-12 col-lg-12 text-right my-1">
+					
 					<input id="write_btn" class="btn my_buttons mx-1" type="button" value="글 작성">
+					
 				</div>
 				
+				
+				
 				<div class="col-12 col-md-12 col-lg-12 text-center my-5">
+				
 					<a href="notice-write-random">데이터 삽입</a>
+					
 				</div>
-
+				
+				
+				
 			</div>
 
 		</div>
@@ -85,8 +107,7 @@ font-weight:bold;
 	</section>
 
 
-	<!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
-	
+
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="resources/js/jquery-ui.js"></script>
@@ -100,12 +121,32 @@ font-weight:bold;
 <script src="resources/js/jquery.sticky.js"></script>
 <script src="resources/js/isotope.pkgd.min.js"></script>
 <script src="resources/js/main.js"></script>
+<!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
 <jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 <script>
 	$(function()
     {
+		myAjax("1");
+		
 		$(document).on("click", ".navi_btns", function()
 		{
+			console.log(this.name)
+			myAjax(this.name);
+		});
+		
+		$(document).on("click", "#contents_div > .row", function()
+		{
+			location.href = $(this).children("div").children("a").attr("href");
+		});
+		
+		$("#write_btn").on("click", function()
+		{
+			location.href = "notice-write-page";
+		});
+		
+		function myAjax(btnName)
+		{
+			
 			$.ajax
 	    	({
 	    		url: "notice-view-do",
@@ -113,7 +154,7 @@ font-weight:bold;
 	    		dataType: "JSON",
 	    		data:
 	    		{
-	    			page: this.name
+	    			page: btnName
 	    		}
 	    	})
 	    	.done(function(response)
@@ -124,20 +165,25 @@ font-weight:bold;
 	    		
 	    		for(var i = 1 ; i <= array.length ; i++)
 	    		{
-					var $row = $('<div class="row justify-content-center my-1"></div>');
-					var $seqCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1">'+array[i-1].seq+'</div>');
-					var $titleCol = $('<div class="col-6 col-md-6 col-lg-6 text-center my-1"><a href=notice-detail-page?seq='+array[i-1].seq+'>'+array[i-1].title+'</a></div>');
-	    			var $writeTimeCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1">'+array[i-1].write_time+'</div>');
-	    			var $viewCountCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1">'+array[i-1].view_count+'</div>');
-	    			$row.append($seqCol).append($titleCol).append($writeTimeCol).append($viewCountCol);
+					
+	    			var $row = $('<div class="row justify-content-center my-1"></div>');
+	    			
+					var $seqCol = $('<div class="col-0 col-md-0 col-lg-2 text-center my-3 d-none d-lg-block">'+array[i-1].seq+'</div>');
+					var $titleCol = $('<div class="col-8 col-md-6 col-lg-6 text-center my-3"><span class="mx-5 d-inline d-md-none">제목 : </span><a href=notice-detail-page?seq='+array[i-1].seq+'>'+array[i-1].title+'</a></div>');
+					var $viewCountCol = $('<div class="col-4 col-md-3 col-lg-2 text-center my-3"><span class="d-inline d-md-none">조회수 : </span>'+array[i-1].view_count+'</div>');
+					var $writeTimeCol = $('<div class="col-6 col-md-3 col-lg-2 text-center my-3"><span class="d-inline d-md-none">작성 일시 : </span>'+array[i-1].write_time+'</div>');
+	    			
+	    			
+	    			$row.append($seqCol).append($titleCol).append($viewCountCol).append($writeTimeCol);
 	    			$("#contents_div").append($row);
+	    			
 	    		}
 	    		
 	    		var $naviRow = $('<div id="navi_row" class="row justify-content-center my-5"></div>');
 	    		
 	    		if(response.needPrev)
 	    		{
-	    			var $prevBtn = $('<input class="btn navi_btns navi_btns mx-1" type="button" value="이전" name="'+(response.startNavi-1)+'">');
+	    			var $prevBtn = $('<input class="btn navi_btns mx-1" type="button" value="이전" name="'+(response.startNavi-1)+'">');
 	    			$naviRow.append($prevBtn);
 	    		}
 	    		
@@ -151,7 +197,7 @@ font-weight:bold;
 	    			}
 	    			else
 	    			{
-		    			var $naviBtn = $('<input class="btn navi_btns navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+		    			var $naviBtn = $('<input class="btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
 
 	    			}
 	    			$naviRow.append($naviBtn);
@@ -159,7 +205,7 @@ font-weight:bold;
 	    		
 	    		if(response.needNext)
 	    		{
-	    			var $nextBtn = $('<input class="btn navi_btns navi_btns mx-1" type="button" value="이후" name="'+(response.endNavi+1)+'">');
+	    			var $nextBtn = $('<input class="btn navi_btns mx-1" type="button" value="이후" name="'+(response.endNavi+1)+'">');
 	    			$naviRow.append($nextBtn);
 	    		}
 	    		
@@ -170,87 +216,13 @@ font-weight:bold;
 	    	{
 	    		alert("error");
 	    	});
-		});
-		
-		$("#write_btn").on("click", function()
-		{
-			location.href = "notice-write-page";
-		});
-		
-		
+			
+		}
     });
     
     onload = function()
     {
 		
     };
-</script>
-<script>
-	$(function()
-    {
-		$.ajax
-    	({
-    		url: "notice-view-do",
-    		type: "POST",
-    		dataType: "JSON",
-    		data:
-    		{
-    			page: '1'
-    		}
-    	})
-    	.done(function(response)
-    	{
-    		var array = response.array;
-    		
-			for(var i = 1 ; i <= array.length ; i++)
-	    	{
-				var $row = $('<div class="row justify-content-center tb-border my-1"></div>');
-				var $seqCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1">'+array[i-1].seq+'</div>');
-	    		var $titleCol = $('<div class="col-6 col-md-6 col-lg-6 text-center my-1"><a href=notice-detail-page?seq='+array[i-1].seq+'>'+array[i-1].title+'</a></div>');
-	    		var $writeTimeCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1">'+array[i-1].write_time+'</div>');
-	    		var $viewCountCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1">'+array[i-1].view_count+'</div>');
-	    		$row.append($seqCol).append($titleCol).append($writeTimeCol).append($viewCountCol);
-	    		$("#contents_div").append($row);
-	    	}
-    		
-    		var $naviRow = $('<div id="navi_row" class="row justify-content-center my-5"></div>');
-    		
-    		if(response.needPrev)
-    		{
-    			var $prevBtn = $('<input class="btn navi_btns navi_btns mx-1" type="button" value="이전" name="'+(response.startNavi-1)+'">');
-    			$naviRow.append($prevBtn);
-    		}
-    		
-    		for(var i = response.startNavi ; i <= response.endNavi ; i++)
-    		{
-    			
-    			if(i == response.currentPage)
-    			{
-	    			var $naviBtn = $('<input class="btn selected_btn mx-1" type="button" value="'+i+'" name="'+i+'">');
-
-    			}
-    			else
-    			{
-	    			var $naviBtn = $('<input class="btn navi_btns navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
-
-    			}
-    			$naviRow.append($naviBtn);
-    		}
-    		
-    		if(response.needNext)
-    		{
-    			var $nextBtn = $('<input class="btn navi_btns navi_btns mx-1" type="button" value="이후" name="'+(response.endNavi+1)+'">');
-    			$naviRow.append($nextBtn);
-    		}
-    		
-    		$("#contents_div").append($naviRow);
-    		
-    	})
-    	.fail(function()
-    	{
-    		alert("error");
-    	});
-		
-    });
 </script>
 </html>

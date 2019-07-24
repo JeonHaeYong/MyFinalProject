@@ -181,13 +181,14 @@ public class AbandonedController {
 		System.out.println(sigungu);
 		System.out.println(shelter);
 		System.out.println(species);
-		System.out.println(speciesKind);
+		System.out.println(processState);
 
 		try {
 			List<ApiAbandonedAnimalDTO> list = apiService.selectByCondition(currentPage, from, to, species, speciesKind, sido, sigungu, shelter, processState);
 			Map<String, Integer> pageNavi = apiService.getNaviforApiAbandonedAnimal(currentPage);
 			request.setAttribute("list", list);
 			request.setAttribute("listsize", list.size());
+			System.out.println(list.size());
 			request.setAttribute("pageNavi", pageNavi);
 		} catch (Exception e) {
 			e.printStackTrace();

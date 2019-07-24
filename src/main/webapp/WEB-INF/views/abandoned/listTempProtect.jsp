@@ -21,6 +21,8 @@
 <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
+
+
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
 <script>
@@ -94,6 +96,27 @@ a:hover {
 	font-weight: 600;
 }
 
+.menu-bar {
+	text-align: center;
+	height: 200px;
+}
+
+.menu-bar>div {
+	height: 40px;
+}
+
+.menu-bar>div:not (.menu ):hover {
+	background-color: #FBFFB950;
+	font-weight: bold;
+}
+
+.menu-bar div:first-child {
+	font-size: 20px;
+	font-weight: bold;
+	border-bottom: 1px solid black;
+	color: #754F44;
+}
+
 .menu-row {
 	text-align: -webkit-center;
 }
@@ -126,8 +149,19 @@ a:hover {
 	padding-bottom: 120px;
 	margin-bottom: 150px;
 }
+
 #dataNotExist {
 	text-align: center;
+}
+
+.jumbotron {
+	background-color: white;
+	padding: 0px 0px;
+}
+
+.jumbotron>img {
+	width: 100%;
+	max-height: 600px;
 }
 </style>
 </head>
@@ -136,6 +170,9 @@ a:hover {
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<!-- -----ì¬ê¸°ê¹ì§ ê³ ì  Headerìëë¤----------------------------------------------------------------------------------------------------------- -->
 	<section class="site-section bg-light block-13">
+		<div class="jumbotron px-0 pb-0">
+			<img src="/resources/images/abandoned/girlndog.png">
+		</div>
 		<div class="container">
 
 			<div class="row">
@@ -143,6 +180,7 @@ a:hover {
 				<div class="col-lg-2 col-md-2 col-sm-12 col-12 menu-bar">
 					<!--작은 메뉴바-->
 					<div class="menu">MENU</div>
+
 					<div class="s-menu1">
 						<a href="toAbandoned?currentPage=1">유기동물조회</a>
 					</div>
@@ -150,10 +188,10 @@ a:hover {
 						<a href="listTempProtect?currentPage=1">임시보호중</a>
 					</div>
 					<div class="s-menu1">
-						<a href="">동물병원 조회</a>
+						<a href="toHospital?currentPage=1">동물병원 조회</a>
 					</div>
 					<div class="s-menu1">
-						<a href="">보호센터 조회</a>
+						<a href="toCenter?currentPage=1">보호센터 조회</a>
 					</div>
 				</div>
 
@@ -185,8 +223,8 @@ a:hover {
 							<c:forEach var="dto" items="${list}">
 
 								<div class="card myCard col-lg-4 col-md-4 col-sm-12">
-									<a href="detailTempProtect?seq=${dto.seq }"><img src="${dto.imagePath }"
-										class="card-img-top" alt="..."
+									<a href="detailTempProtect?seq=${dto.seq }"><img
+										src="${dto.imagePath }" class="card-img-top" alt="..."
 										style="width: 211px; height: 150px; margin-bottom: 10px"></a>
 									<div class="card-body">
 
@@ -265,7 +303,7 @@ a:hover {
 	<script src="resources/js/main.js"></script>
 </body>
 <script>
-	console.log(${listsize})
+	
 	$(".naviBtn").on("click", function() {
 		var currPage = $(this).attr("currPage");
 		location.href = "listTempProtect?currentPage=" + currPage;

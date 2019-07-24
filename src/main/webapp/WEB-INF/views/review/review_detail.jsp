@@ -21,7 +21,7 @@
                 <link rel="stylesheet" href="resources/css/aos.css">
                 <link rel="stylesheet" href="resources/css/style.css">
                 <style>
-                    *{ font-family: 'Gamja Flower' !important;}
+                    *{ font-family: 'Gamja Flower' !important; font-size: 20px;}
                     ::placeholder{font-family: 'Gamja Flower'}
                     /*점보트론 이미지*/
                     .jumbotron{
@@ -45,6 +45,9 @@
                     input:focus{
                     	outline: none;
                     }
+                    .review-wrapper{
+                    	max-width: 1300px;
+                    }
                 </style>
 
             </head>
@@ -55,7 +58,7 @@
                 <div class="jumbotron px-0 pb-0">
                     <img src="/mypage/dog_1.jpg">
                 </div>
-                <div class="container">
+                <div class="container review-wrapper">
                     <div class="row">
                         <div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-row">
                             <div class="row menu-box">
@@ -108,7 +111,7 @@
                                 <c:forEach var="list" items="${replyList }">
                                     <div class="col-12 border-bottom mb-1">
                                         <div class="firstLine d-flex justify-content-between">
-                                            <div class="font-weight-bold">${list.writer }</div>
+                                            <div class="font-weight-bold"><span class="mr-2"><img src="${list.imagepath }" class="profileImg_round rounded-circle" style="width: 50px ; height: 50px;"></span>${list.writer }</div>
                                             <c:if test="${id==list.writer }">
                                                 <div class="modifyReply_part">
                                                     <a href="javascript:void(0)" onclick="modifyReplyToggle(this)"><img src="review/edit.png" style="width: 20px; height: 20px;"></a>
@@ -120,11 +123,11 @@
                                                 </div>
                                             </c:if>
                                         </div>
-                                        <div class="form-group">
-                                            <input type="text" readonly class="form-control-plaintext reply_contents" value="${list.contents }">
+                                        <div>
+                                        	<span>${list.formed_date }</span>
                                         </div>
                                         <div class="d-flex justify-content-between">
-                                            <span>${list.formed_date }</span>
+                                            <span><input type="text" readonly class="form-control-plaintext reply_contents" value="${list.contents }" style="width: 600px;"></span>
                                             <span class="likeOk_check" value="${list.likeOk}" seq="${list.seq }" writer="${list.writer }">
                                                 <span class="mr-2 reply_likes">${list.likes }</span>
                                                 <a class="click_like_btn likeOk_n" href="javascript:void(0)" onclick="clickLikeImg(this);"><img src="review/like_1.png" style="width:25px;"></a>
@@ -203,6 +206,7 @@
                         likeOkCheck();//좋아요 클릭한것만 빨강하트
                         $("#review_reply_input").val("");
                         $(".modifyReply_part.hide").hide();
+                        profileImgRounded();
                     })
                 });
                 //좋아요클릭했을때,
@@ -282,6 +286,7 @@
                         $(".reply_part").remove();
                         $(".reply_wrapper").append(resp);
                         likeOkCheck();//좋아요 클릭한것만 빨강하트
+                        profileImgRounded();
                     })
                 }
                 //삭제버튼눌렀을때,
@@ -301,20 +306,20 @@
                 function modifyReplyToggle(param){//수정하려면,
                     $(param).parent().toggle();
                     $(param).parent().next().toggle();
-                    $(param).parents(".firstLine").next().children(".reply_contents").attr("readonly",false);
-                    $(param).parents(".firstLine").next().children(".reply_contents").css("background-color","skyblue");
+                    $(param).parents(".firstLine").next().next().find(".reply_contents").attr("readonly",false);
+                    $(param).parents(".firstLine").next().next().find(".reply_contents").css("background-color","skyblue");
                 }
                 function formReset(param){//수정취소눌렀을때,
                     var contents = $(param).attr("value");
-                    $(param).parents(".firstLine").next().children(".reply_contents").val(contents);
+                    $(param).parents(".firstLine").next().next().find(".reply_contents").val(contents);
                     $(param).parent().toggle();
                     $(param).parent().prev().toggle();
-                    $(param).parents(".firstLine").next().children(".reply_contents").attr("readonly",true);
-                    $(param).parents(".firstLine").next().children(".reply_contents").css("background-color","inherit");
+                    $(param).parents(".firstLine").next().next().find(".reply_contents").attr("readonly",true);
+                    $(param).parents(".firstLine").next().next().find(".reply_contents").css("background-color","inherit");
                 }
 
                 function modifyReply(param){//댓글수정
-                    var input = $(param).parents(".firstLine").next().children(".reply_contents");
+                    var input = $(param).parents(".firstLine").next().next().find(".reply_contents");
                     var reply =  input.val();
                     var replyRegex = /^ {1,}$/;
                     var replyRegexResult = replyRegex.exec(reply);
@@ -356,8 +361,20 @@
 	                        $(".reply_wrapper").append(resp);
 	                        likeOkCheck();//좋아요 클릭한것만 빨강하트
 	                        $(".modifyReply_part.hide").hide();
+	                        profileImgRounded();//이미지 원형
 						});
 					}
                 }
+                function profileImgRounded(){
+                	$(".profileImg_round").each(function(i,item){//기본이미지는 원형이미지 없애주기
+                    	var path = $(item).attr("src");
+                    	var pathRegex = /^\/profile\/[^\/]+?/;
+                    	var pathRegexResult = pathRegex.exec(path);
+                    	if(pathRegexResult!=null){
+                    		$(item).removeClass("rounded-circle");
+                    	}
+                    })
+                }
+                profileImgRounded();
             </script>
         </html>

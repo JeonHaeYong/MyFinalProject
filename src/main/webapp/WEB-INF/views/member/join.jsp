@@ -459,10 +459,19 @@ b {
 
 	<script>
 		function submit_check() { //submit 조건
+			
 			if ($("#passwordCheck").val() != $("#password").val()) {
 				alert("비밀번호가 일치하지 않습니다.");
 				return false;
-			} else {
+			} 
+			
+			if($("#email").prop("flag")!="true")
+				{
+				alert('이메일 인증을 확인하시요');
+				return false;
+				}
+			
+			else {
 				return true;
 			}
 		};
@@ -565,6 +574,16 @@ b {
 
 							} else {
 								$("#email").attr("regexFlag", "true");
+								$.ajax({
+									url : "doublemail",
+									type : "post",
+									data : {
+										email : $("#email").val()
+									}
+								}).done(function(resp) {
+									console.log(resp);
+								
+								if(resp=="false"){
 								$("#emailcheck").attr('disabled',false); 
 								$(".emailResult").html("");
 								//이메일 인증 버튼 
@@ -592,43 +611,16 @@ b {
 
 											});
 								});
-
+								}
+								else{
+									$(".emailResult").html("이미 가입된 이메일입니다");
+									$("#email").val("");
+								}
+							});
 							}
 						});
 
-		/*  //이메일 인증 버튼 
-		$("#emailcheck")
-		.on(
-				"click",
-				function() {
-					
-					if($("#emailcheck").prop("disabled", true)){
-					
-					console.log($("#email").val());
-					alert(" 해당 이메일에 인증 번호를 전송 중 입니다 \n 아래의 확인을 누르시면 인증번호 확인 창을 확인해주세요");
-					$
-							.ajax({
-								url : "email.do",
-								type : "post",
-								data : {
-									email : $("#email").val()
-								},
-								dataType : "json"
-							})
-							.done(
-									function(resp) {
-										console.log(resp);
-										if (resp == true) {
-											
-											window.open('emailcheck',
-															'window팝업',
-															'width=470, height=300, menubar=no, status=no, toolbar=no');
-										}
-
-									});
-					}
-				}); */
-
+	
 		/* 생년월일 regex */
 		$("#birthday").on("focusout", function() {
 			var birth = $("#birthday").val();

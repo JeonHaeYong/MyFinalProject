@@ -67,10 +67,10 @@
 	                                    </div>
                                     <!-- /파일 업로드 -->
                                     <!-- 이미지변경 -->
-                                    <div class="justify-content-around profile_upload_part hide">
+                                    <div class="justify-content-around profile_upload_part hide my-5">
                                         <div class="d-flex">
                                             <div>변경전</div>
-                                            <img src="${memberDTO.imagepath }" class="profileImg_round rounded-circle" style="width: 100px; height: 100px;">
+                                            <img src="${memberDTO.imagepath }" class="profileImg_round rounded-circle" style="width: 120px; height: 120px;">
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <img src="/mypage/right-arrow.png" class="profileImg_round rounded-circle" style="width: 80px; height: 80px;">

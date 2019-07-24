@@ -425,7 +425,7 @@
 	                    var reader = new FileReader();
 	                    reader.onload = function(e) {
 	                        var src = e.target.result;
-	                        parent.append('<img src="'+src+'" class="upload-display rounded-circle" style="width: 100px; height: 100px;">');
+	                        parent.append('<img src="'+src+'" class="upload-display rounded-circle" style="width: 120px; height: 120px;">');
 	                    }
 	                    reader.readAsDataURL($(this)[0].files[0]);
 	                } else {
@@ -461,7 +461,7 @@
                 	var parent = $(".changeAfterImg");
 	                parent.children('.upload-display').remove();
 	                var src = $(param).children("img").attr("src");
-	                parent.append('<img src="'+src+'" class="upload-display" style="width: 100px; height: 100px;">');
+	                parent.append('<img src="'+src+'" class="upload-display" style="width: 120px; height: 120px;">');
 	                parent.append('<input type="hidden" class="upload-display" value="'+src+'" name="defaultImg">');
 	                $(".profile_upload_part").toggle();
 	                $(".profile_upload_part.hide").addClass("d-flex");

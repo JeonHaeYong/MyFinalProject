@@ -6,7 +6,7 @@
                                 <c:forEach var="list" items="${replyList }">
                                     <div class="col-12 border-bottom mb-1">
                                         <div class="firstLine d-flex justify-content-between">
-                                            <div class="font-weight-bold">${list.writer }</div>
+                                            <div class="font-weight-bold"><span class="mr-2"><img src="${list.imagepath }" class="profileImg_round rounded-circle" style="width: 50px ; height: 50px;"></span>${list.writer }</div>
                                             <c:if test="${id==list.writer }">
                                                 <div class="modifyReply_part">
                                                     <a href="javascript:void(0)" onclick="modifyReplyToggle(this)"><img src="review/edit.png" style="width: 20px; height: 20px;"></a>
@@ -18,11 +18,11 @@
                                                 </div>
                                             </c:if>
                                         </div>
-                                        <div class="form-group">
-                                            <input type="text" readonly class="form-control-plaintext reply_contents" value="${list.contents }">
+                                        <div>
+                                        	<span>${list.formed_date }</span>
                                         </div>
                                         <div class="d-flex justify-content-between">
-                                            <span>${list.formed_date }</span>
+                                            <span><input type="text" readonly class="form-control-plaintext reply_contents" value="${list.contents }" style="width: 600px;"></span>
                                             <span class="likeOk_check" value="${list.likeOk}" seq="${list.seq }" writer="${list.writer }">
                                                 <span class="mr-2 reply_likes">${list.likes }</span>
                                                 <a class="click_like_btn likeOk_n" href="javascript:void(0)" onclick="clickLikeImg(this);"><img src="review/like_1.png" style="width:25px;"></a>
