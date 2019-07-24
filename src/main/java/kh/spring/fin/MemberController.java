@@ -1,12 +1,19 @@
 package kh.spring.fin;
 
 
+import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -44,8 +53,8 @@ public class MemberController {
 	private HttpSession session;
 	@Autowired
 	private DonationPaymentService dps;
-
-
+	private kakao_restapi kakao_restapi = new kakao_restapi();
+	
 	//로그인
 	@RequestMapping("login")
 	public String login(HttpServletRequest request, MemberDTO dto) {
@@ -63,6 +72,9 @@ public class MemberController {
 				MemberDTO mdto=mservice.selectOneMemberService(dto.getId());					
 				session.setAttribute("id", mdto.getId());
 				session.setAttribute("type", mdto.getType());
+				if(referer.equals("join")) {
+					return "redirect:/";	
+				}
 				return "redirect:/"+referer;	
 			}
 		}
@@ -76,21 +88,33 @@ public class MemberController {
 	//로그아웃
 	@RequestMapping("logout")
 	public String logout() {
-		session.invalidate();
-		return  "redirect:/";
-	}
+		
+	             
+	        session.invalidate();
 
+		return "redirect:/";
+
+			
+	}
+	//카카오 로그아웃
+	@RequestMapping("kakaologout")
+	public String kakaologout() {		           
+	        session.invalidate();
+		return "member/kakaologout";
+
+			
+	}
 	//회원가입
 	@RequestMapping("join")
 	public String join() {
 		return "member/join";
 	}
+	
 	@RequestMapping("joininfo")
 	public String joininfo(MemberDTO dto) {
 		try{
-//			int rand = (int)(Math.random() * 10 + 1 );
-//			System.out.println("rand"+rand);
-//			dto.setim
+			int rand = (int)(Math.random() * 11 + 1 );
+			dto.setimagepath("/profile/"+rand+".png");
 			mservice.insertMemberService(dto);
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -184,16 +208,20 @@ public class MemberController {
 		dto.setName(nickname);
 		dto.setGender(gender);
 		dto.setEmail(email);
+		int rand = (int)(Math.random() * 11 + 1 );
+		dto.setimagepath("/profile/"+rand+".png");
 		try{
 			if(mservice.idDuplCheckService("N_"+id)>0)
 			{
 				session.setAttribute("id","N_"+id); //세션 생성
+				session.setAttribute("type",2); //세션 생성
 				System.out.println("네이버 로그인 성공");
 				return "redirect:/";
 			}	
 			else {		
 				if(	mservice.insertNaverJoin(dto)>0) {
 					session.setAttribute("id","N_"+id); //세션 생성
+					session.setAttribute("type",2); //세션 생성
 					System.out.println("네이버 로그인 성공");
 					return "redirect:/";
 
@@ -211,7 +239,7 @@ public class MemberController {
 
 	}
 	//카카오
-	private kakao_restapi kakao_restapi = new kakao_restapi();
+
 	@RequestMapping(value = "/oauth", produces = "application/json")
 	public String kakaoLogin(@RequestParam("code") String code, Model model, HttpSession session,MemberDTO dto) {
 		System.out.println("로그인 할때 임시 코드값");
@@ -251,6 +279,7 @@ public class MemberController {
 			if(mservice.idDuplCheckService("k_"+id)>0)
 			{
 				session.setAttribute("id","k_"+id); //세션 생성
+				session.setAttribute("type",3); //세션 생성
 				System.out.println("카카오 로그인 성공");
 				return "redirect:/";
 			}
@@ -259,9 +288,12 @@ public class MemberController {
 				dto.setName(nickname);
 				dto.setEmail(kaccount_email);
 				dto.setType(3);
+				int rand = (int)(Math.random() * 11 + 1 );
+				dto.setimagepath("/profile/"+rand+".png");//처음가입시 랜덤이미지
 
 				if(	mservice.insertNaverJoin(dto)>0) {
 					session.setAttribute("id","k_"+id); //세션 생성
+					session.setAttribute("type",3); //세션 생성
 					System.out.println("네이버 로그인 성공");
 					return "redirect:/";
 				}
@@ -316,8 +348,30 @@ public class MemberController {
 
 	//프로필img 바꾸기
 	@RequestMapping("changeProfileImg")
-	public String changeProfileImg(MemberDTO dto) {
-		//여기짜기
+	public String changeProfileImg(MemberDTO dto , MultipartFile image) {
+		//image서버에 저장하기.
+		//profile폴더 내에 각 id 폴더내에 profileimg이름으로
+		String realPath = session.getServletContext().getRealPath("/");
+		String resourcePath = realPath + "resources/images/member/profile";//profile폴더
+		String savePath = resourcePath+"/"+dto.getId();
+		System.out.println("파일저장할 위치 -> " + savePath);
+		File uploadPath = new File(savePath);
+		System.out.println(image.getName()+":"+image.getOriginalFilename());
+		if(!uploadPath.exists()) {	//해당하는 이름의 폴더가 없다면
+			uploadPath.mkdir();	//폴더를 만들어줘라.
+		}
+		String fileName = null;
+		try {
+			String contentType = image.getContentType().replaceAll("image/", "");
+			fileName = "profileImg."+contentType;
+			image.transferTo(new File(savePath+"/"+fileName));
+			dto.setimagepath("profile/"+dto.getId()+"/"+fileName);
+			System.out.println(dto.getimagepath());
+			int result = mservice.updateImagePath(dto);
+			System.out.println(dto.getId()+"님의 프로필사진이 -> "+ result+" 업데이트 되었습니다");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "redirect:toMyPage";
 	}
 

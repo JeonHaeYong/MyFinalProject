@@ -40,7 +40,12 @@ public class HomeController {
 		session.setAttribute("url", naverAuthUrl);
 		return "index";
 	}
-
+	@RequestMapping("popUp.home")
+	public String popUp(HttpServletRequest request) {
+		String ip = request.getRemoteAddr();
+		request.setAttribute("ip", ip);
+		return "popup";
+	}
 
 
 }

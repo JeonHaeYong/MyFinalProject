@@ -693,48 +693,55 @@ font-weight:bold;
 	    
 	    $("#update_btn").on("click", function()
 		{
-	    	var $form = $('<form></form>');
-	        $form.attr('action', 'admin-donation-update');
-	        $form.attr('method', 'POST');
-	        $form.attr('enctype', 'multipart/form-data');
-	        $form.appendTo('body');
-	         
-	        
-	        var $seq = $('<input type="hidden" name="seq">');
-	        $seq.val($("#select_seq_text").val());
-	        
-	        var $name = $('<input type="hidden" name="name">');
-	        $name.val($("#select_name_text").val());
-	        
-	        var $title = $('<input type="hidden" name="title">');
-	        $title.val($("#select_title_text").val());
-	        
-	        var $explanation = $('<input type="hidden" name="explanation">');
-	        $explanation.val($("#select_explanation_text").val().replace(/(?:\r\n|\r|\n)/g, "<br>"));
-	        
-			var $image1 = $("#select_image1_file");
-			var $image2 = $("#select_image2_file");
-			var $image3 = $("#select_image3_file");
-			
-			var $left = $("#select_left_file");
-			var $right = $("#select_right_file");
+	    	if($("#select_seq_text").val() != "")
+	    	{
+	    		var $form = $('<form></form>');
+		        $form.attr('action', 'admin-donation-update');
+		        $form.attr('method', 'POST');
+		        $form.attr('enctype', 'multipart/form-data');
+		        $form.appendTo('body');
+		         
+		        
+		        var $seq = $('<input type="hidden" name="seq">');
+		        $seq.val($("#select_seq_text").val());
+		        
+		        var $name = $('<input type="hidden" name="name">');
+		        $name.val($("#select_name_text").val());
+		        
+		        var $title = $('<input type="hidden" name="title">');
+		        $title.val($("#select_title_text").val());
+		        
+		        var $explanation = $('<input type="hidden" name="explanation">');
+		        $explanation.val($("#select_explanation_text").val().replace(/(?:\r\n|\r|\n)/g, "<br>"));
+		        
+				var $image1 = $("#select_image1_file");
+				var $image2 = $("#select_image2_file");
+				var $image3 = $("#select_image3_file");
+				
+				var $left = $("#select_left_file");
+				var $right = $("#select_right_file");
 
-	        
-	        var $goalmoney = $('<input type="hidden" name="goalmoney">');
-	        $goalmoney.val($("#select_goalmoney_text").val());
-	        
-	        var $startdate = $('<input type="hidden" name="startdate">');
-	        $startdate.val($("#select_startdate_text").val());
-	        
-	        var $enddate = $('<input type="hidden" name="enddate">');
-	        $enddate.val($("#enddate_text").val());
-	        
-	        $form.append($seq).append($name).append($title).append($explanation)
-	        .append($image1).append($image2).append($image3)
-	        .append($goalmoney).append($startdate).append($enddate)
-	        .append($left).append($right);
-	        
-	        $form.submit();
+		        
+		        var $goalmoney = $('<input type="hidden" name="goalmoney">');
+		        $goalmoney.val($("#select_goalmoney_text").val());
+		        
+		        var $startdate = $('<input type="hidden" name="startdate">');
+		        $startdate.val($("#select_startdate_text").val());
+		        
+		        var $enddate = $('<input type="hidden" name="enddate">');
+		        $enddate.val($("#enddate_text").val());
+		        
+		        $form.append($seq).append($name).append($title).append($explanation)
+		        .append($image1).append($image2).append($image3)
+		        .append($goalmoney).append($startdate).append($enddate)
+		        .append($left).append($right);
+		        
+		        $form.submit();
+	    	}
+	    	else
+	    	{
+	    		alert("검색 후 변경하세요")
+	    	}
 		});
 	    
 	    function myAjax(btnName)
@@ -882,7 +889,10 @@ font-weight:bold;
 	    		}
 	    		else
 	    		{
-	    			alert("검색 결과 없음");
+	    			var $row = $('<div class="row justify-content-center my-1"></div>');
+	    			var $noResultCol = $('<div class="col-6 col-md-6 col-lg-12 text-center my-1"><h3>검색 결과가 없습니다.</h3></div>');
+	    			$row.append($noResultCol);
+	    			$("#log_result_div").append($row);
 	    		}
 
 	    	})
