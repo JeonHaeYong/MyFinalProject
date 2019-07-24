@@ -404,7 +404,7 @@ public class AdminController
 		}catch(Exception e) {e.printStackTrace();}
 		request.setAttribute("quizList", quizList);
 		request.setAttribute("navi", navi);
-		return "sense/quizAdmin";
+		return "sense/quiz/quizAdmin";
 	}
 	@RequestMapping("insertQuiz.admin")
 	public String insertQuiz(HttpServletRequest request) {
