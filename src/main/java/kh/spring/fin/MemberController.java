@@ -113,7 +113,7 @@ public class MemberController {
 	@RequestMapping("joininfo")
 	public String joininfo(MemberDTO dto) {
 		try{
-			int rand = (int)(Math.random() * 11 + 1 );
+			int rand = (int)(Math.random() * 16 + 1 );
 			dto.setimagepath("/profile/"+rand+".png");
 			mservice.insertMemberService(dto);
 		}catch(Exception e) {
@@ -208,7 +208,7 @@ public class MemberController {
 		dto.setName(nickname);
 		dto.setGender(gender);
 		dto.setEmail(email);
-		int rand = (int)(Math.random() * 11 + 1 );
+		int rand = (int)(Math.random() * 16 + 1 );
 		dto.setimagepath("/profile/"+rand+".png");
 		try{
 			if(mservice.idDuplCheckService("N_"+id)>0)
@@ -288,7 +288,7 @@ public class MemberController {
 				dto.setName(nickname);
 				dto.setEmail(kaccount_email);
 				dto.setType(3);
-				int rand = (int)(Math.random() * 11 + 1 );
+				int rand = (int)(Math.random() * 16 + 1 );
 				dto.setimagepath("/profile/"+rand+".png");//처음가입시 랜덤이미지
 
 				if(	mservice.insertNaverJoin(dto)>0) {
@@ -331,6 +331,10 @@ public class MemberController {
 	//마이페이지에서 pw변경
 	@RequestMapping("modifyPwByMyPage")
 	public String modifyPwByMyPage(String id, String pw) {
+		String loginId = (String)session.getAttribute("id");
+		if(!loginId.equals(id)) {
+			return "rediect:/logout";
+		}
 		int result = mservice.updatePwService(id, pw);
 		System.out.println("ID:"+id+"의 pw변경이 " + result +"행 완료되었습니다.");
 		return "redirect:toMyPage";
@@ -339,6 +343,10 @@ public class MemberController {
 	//정보수정하기(id,pw,email제외)
 	@RequestMapping("modifyProfile")
 	public String modifyProfileInfo(MemberDTO dto) {
+		String loginId = (String)session.getAttribute("id");
+		if(!loginId.equals(dto.getId())) {
+			return "rediect:/logout";
+		}
 		System.out.println(dto.toString());//값 제대로 넘어오는것 확인
 		//id에 대해 업데이트 하기.
 		int result = mservice.updateMemberInfoByMyPage(dto);
@@ -348,30 +356,38 @@ public class MemberController {
 
 	//프로필img 바꾸기
 	@RequestMapping("changeProfileImg")
-	public String changeProfileImg(MemberDTO dto , MultipartFile image) {
+	public String changeProfileImg(MemberDTO dto , MultipartFile image , String defaultImg) {
+		String loginId = (String)session.getAttribute("id");
+		if(!loginId.equals(dto.getId())) {
+			return "rediect:/logout";
+		}
 		//image서버에 저장하기.
 		//profile폴더 내에 각 id 폴더내에 profileimg이름으로
-		String realPath = session.getServletContext().getRealPath("/");
-		String resourcePath = realPath + "resources/images/member/profile";//profile폴더
-		String savePath = resourcePath+"/"+dto.getId();
-		System.out.println("파일저장할 위치 -> " + savePath);
-		File uploadPath = new File(savePath);
-		System.out.println(image.getName()+":"+image.getOriginalFilename());
-		if(!uploadPath.exists()) {	//해당하는 이름의 폴더가 없다면
-			uploadPath.mkdir();	//폴더를 만들어줘라.
+		if(defaultImg!=null) {
+			dto.setimagepath(defaultImg);
+		}else {
+			String realPath = session.getServletContext().getRealPath("/");
+			String resourcePath = realPath + "resources/images/member/profile";//profile폴더
+			String savePath = resourcePath+"/"+dto.getId();
+			System.out.println("파일저장할 위치 -> " + savePath);
+			File uploadPath = new File(savePath);
+			System.out.println(image.getName()+":"+image.getOriginalFilename());
+			if(!uploadPath.exists()) {	//해당하는 이름의 폴더가 없다면
+				uploadPath.mkdir();	//폴더를 만들어줘라.
+			}
+			String fileName = null;
+			try {
+				String contentType = image.getContentType().replaceAll("image/", "");
+				fileName = "profileImg."+contentType;
+				image.transferTo(new File(savePath+"/"+fileName));
+				dto.setimagepath("profile/"+dto.getId()+"/"+fileName);
+				System.out.println(dto.getimagepath());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-		String fileName = null;
-		try {
-			String contentType = image.getContentType().replaceAll("image/", "");
-			fileName = "profileImg."+contentType;
-			image.transferTo(new File(savePath+"/"+fileName));
-			dto.setimagepath("profile/"+dto.getId()+"/"+fileName);
-			System.out.println(dto.getimagepath());
-			int result = mservice.updateImagePath(dto);
-			System.out.println(dto.getId()+"님의 프로필사진이 -> "+ result+" 업데이트 되었습니다");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		int result = mservice.updateImagePath(dto);
+		System.out.println(dto.getId()+"님의 프로필사진이 -> "+ result+" 업데이트 되었습니다");
 		return "redirect:toMyPage";
 	}
 

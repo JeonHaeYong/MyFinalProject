@@ -443,6 +443,7 @@
 	            });
                 $('#change_profileImg_md').on('hidden.bs.modal', function (e) {//modal 취소클릭해서 없어진후에 실행
                 	$("#changeProfileImg_form")[0].reset();
+                	$(".changeAfterImg").children('.upload-display').remove();
                 	if($(".profile_upload_part.hide").hasClass("d-flex")){
     	                $(".profile_upload_part").toggle();
     	                $(".profile_upload_part.hide").removeClass("d-flex");
@@ -455,6 +456,15 @@
                 		alert("변경할 프로필 사진을 선택해주세요.");
                 	}
                 	
-                })
+                });
+                function defaultImgClick(param){
+                	var parent = $(".changeAfterImg");
+	                parent.children('.upload-display').remove();
+	                var src = $(param).children("img").attr("src");
+	                parent.append('<img src="'+src+'" class="upload-display" style="width: 100px; height: 100px;">');
+	                parent.append('<input type="hidden" class="upload-display" value="'+src+'" name="defaultImg">');
+	                $(".profile_upload_part").toggle();
+	                $(".profile_upload_part.hide").addClass("d-flex");
+                }
         </script>
     </html>

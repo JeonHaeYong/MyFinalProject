@@ -142,7 +142,7 @@
                                                         	<div class="container-fluid">
                                                         	<div id="r_sender_modal" sender="">보낸사람 : </div>
                                                             <div>
-                                                            	<textarea class="border-0" id="r_contents_modal" rows="8" cols="45" style="resize:none;" readonly></textarea>
+                                                            	<textarea class="border-0" id="r_contents_modal" rows="8" cols="40" style="resize:none;" readonly></textarea>
                                                             </div>
                                                         	</div>
                                                         </div>
@@ -222,7 +222,7 @@
                                                         	<div class="container-fluid">
                                                         	<div id="s_recipient_modal">받는사람:</div>
                                                             <div>
-                                                            	<textarea class="border-0" id="s_contents_modal" rows="8" cols="45" style="resize:none;" readonly></textarea>
+                                                            	<textarea class="border-0" id="s_contents_modal" rows="8" cols="40" style="resize:none;" readonly></textarea>
                                                             </div>
                                                         	</div>
                                                         </div>

@@ -4,6 +4,7 @@
                     </div>
                 </div>
             </section>
+            <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
             <script>
             var myPages = document.getElementsByClassName("my_page_nav");
         	for(var i=0; i<myPages.length;i++){
@@ -12,10 +13,12 @@
                     myPages[i].classList.add("active");
                 }
             };
-            window.onload = function(){
-                if("${myPage}"!="toMyPage"){//내정보가 아니라면
+            window.addEventListener("onload", mypageCheckFunc());
+            function mypageCheckFunc(){
+            	if("${myPage}"!="toMyPage"){//내정보가 아니라면
                     var image = $(".img_anchor").html();
                     $(".img_wrapper").html(image);
+                    $("#change_profileImg_md").remove();
                 }
                 $(".profileImg_round").each(function(i,item){
                 	var path = $(item).attr("src");

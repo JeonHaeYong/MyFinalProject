@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <div class="jumbotron px-0 pb-0">
         <img src="/mypage/dog_1.jpg">
     </div>
@@ -17,11 +18,12 @@
                     <div class="my_page_info">
                         <div class="img_wrapper position-relative">
                         	<img id="tabImg" class="position-absolute" src="/profile/tab.png" style="width: 50px; height: 50px; top:-10% ; right : 80%; ">
-                        	<div style="font-size: 19px; font-family:BBTreeGR !important;">이미지 클릭!</div>
-                            <a class="img_anchor" href="javascript:void(0)" onclick="changeProfileImg();"><img src="${memberDTO.imagepath }" class="profileImg_round rounded-circle" style="width: 200px; height: 200px;"></a>
+                        	<div style="font-size: 19px;">이미지 클릭!</div>
+                            <a class="img_anchor" href="javascript:void(0)" onclick="changeProfileImg();"><img src="${memberDTO.imagepath }" class="profileImg_round rounded-circle" style="width: 180px; height: 180px;"></a>
                         </div>
                         <div>
-                            ${memberDTO.name }님                                </div>
+                            ${memberDTO.name }님                                
+                        </div>
                         <div>
                             현재포인트
                         </div>
@@ -49,6 +51,14 @@
                                     <!-- 파일 업로드 -->
                                     <form id="changeProfileImg_form" action="changeProfileImg" method="post" enctype="multipart/form-data">
 	                                    <div class="form-group profile_upload_part">
+	                                    	<h4 class="font-weight-bold">기본 아이콘 선택</h4>
+	                                    	<div>
+	                                    		<c:forEach var="i" begin="1" end="16" step="1">
+	                                    			<a href="javascript:void(0)" onclick="defaultImgClick(this);"><img src="/profile/${i }.png" style="width: 50px; height: 50px;"></a>
+	                                    		</c:forEach>
+	                                    	</div>
+	                                    	<hr>
+	                                    	<h4 class="font-weight-bold">내 사진 업로드</h4>
 	                                        <div class="filebox preview-image">
 	                                            <input class="upload-name text-truncate" value="파일선택" disabled="disabled">
 	                                            <label for="input-file">업로드</label> 
@@ -60,7 +70,7 @@
                                     <div class="justify-content-around profile_upload_part hide">
                                         <div class="d-flex">
                                             <div>변경전</div>
-                                            <img src="${memberDTO.imagepath }" class="profileImg_round rounded-circle" style="width: 110px; height: 110px;">
+                                            <img src="${memberDTO.imagepath }" class="profileImg_round rounded-circle" style="width: 100px; height: 100px;">
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <img src="/mypage/right-arrow.png" class="profileImg_round rounded-circle" style="width: 80px; height: 80px;">

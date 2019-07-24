@@ -149,14 +149,14 @@ if(${errorLogin!=null}){
 <script src='https://developers.kakao.com/sdk/js/kakao.min.js'></script>
 <script>
 //카카오 로그아웃
+window.onload = function(){
+	$("#logout").on("click",function(){
+		window.open('kakaologout',
+				'window팝업',
+				'width=470, height=300, menubar=no, status=no, toolbar=no');
 
-$("#logout").on("click",function(){
-	window.open('kakaologout',
-			'window팝업',
-			'width=470, height=300, menubar=no, status=no, toolbar=no');
-
-});
-
+	});
+}
 </script>
 	
 
