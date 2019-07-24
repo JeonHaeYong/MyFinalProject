@@ -44,6 +44,7 @@ function cookieToJson(cookies){
 	.no-gutters{}
 	.pricing{height:845px;}
 	.pricing img{width:405px; height:800px;  border: 5px dashed #754F44;}
+	.from{font-family:'Gamja Flower', cursive; font-size:22px;}
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -106,6 +107,8 @@ function cookieToJson(cookies){
                   <span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span><!-- 발자국3 -->
                   <img src="/resources/images/abandonedAnimalStory03.png">
                </div>
+            </div>
+            <div class="row"><div class="col-12 from">출처-포인핸드<img src="/resources/images/pet.png"></div>
             </div>
          </div>
          <div class="row justify-content-center" data-aos="fade-up">
