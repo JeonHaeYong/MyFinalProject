@@ -14,5 +14,6 @@ public interface QuizDAO {
 	public List<QuizDTO> selectQuizPerPage(int currentPage);
 	public int QuizCount();
 	public String getNaviQuiz(int currentPage);
+	public String replaceAll(String text);
 	
 }

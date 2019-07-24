@@ -23,16 +23,13 @@
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
 <script>
 //팝업창!!!---------------------------------------------------------------------
-
-
  function openPopup(url){
 	 var cookies = document.cookie;
 	var result = cookieToJson(cookies);
-                	   if(result != "Y"){
-                		   window.open(url,'','width=570,height=830,left=1300,top=70'); 
+                	   if(result != "N"){
+                		   window.open(url,'','width=570,height=830,left=1300,top=70,status=no,toolbar=no,scrollbars=no'); 
                 	   } 
                    }
-                   
 function cookieToJson(cookies){
 	var entry = cookies.split("=");
 	entry[0] = entry[1];

@@ -24,6 +24,10 @@ public class QuizDAOImpl implements QuizDAO {
 
 	@Override
 	public int insertQuiz(QuizDTO dto) {
+		String quiz = this.replaceAll(dto.getQuiz());
+		String explain = this.replaceAll(dto.getExplain());
+		dto.setQuiz(quiz);
+		dto.setExplain(explain);
 		return sst.insert("QuizDAO.insertQuiz", dto);
 	}
 
@@ -124,4 +128,17 @@ public class QuizDAOImpl implements QuizDAO {
 		}
 		return sb.toString();
 	}
+	@Override
+	public String replaceAll(String text) {
+	      String reText = text;
+	      reText = reText.replaceAll("<script", "");
+	      reText = reText.replaceAll("< script", "");
+	      reText = reText.replaceAll("script>", "");
+	      reText = reText.replaceAll("srcipt >", "");
+	      reText = reText.replaceAll("\"\\)\\;", "");
+	      reText = reText.replaceAll(">alert", "");
+	      reText = reText.replaceAll("\\(\"", "");
+	      reText = reText.replaceAll("\\</", "");
+	      return reText;
+	   }
 }

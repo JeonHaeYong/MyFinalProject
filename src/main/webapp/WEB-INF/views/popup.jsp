@@ -13,7 +13,7 @@
 			var exdate = new Date();
 			if($("#noPopup").prop("checked")){
 				exdate.setDate(exdate.getDate()+1);
-				document.cookie = "noPopup=Y;expires="+exdate.toGMTString();
+				document.cookie = "noPopup=N;expires="+exdate.toGMTString();
 				self.close();
 			}
 		})
