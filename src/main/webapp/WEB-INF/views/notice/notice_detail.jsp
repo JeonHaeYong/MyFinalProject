@@ -20,24 +20,26 @@
 <style>
 
 	#container
-	{
-		margin-top: 5%;
-	}
+{
+	margin-top: 5%;
+}
+#mypage_link
+{
+	color: #EC7357 !important;
+	font-weight: 600 !important;
+}
 
-	#notice_link
-	{
-		color: #EC7357 !important;
-		font-weight: 600 !important;
-	}
-	
-	#back_btn, #update_btn, #delete_btn
-	{
-		background-color: #EC7357 !important;
-	}
-	#back_btn:hover, #update_btn:hover, #delete_btn:hover
-	{
-		background-color: black !important;
-	}
+
+.my_buttons{
+font-family: 'Gamja Flower', cursive !important;
+background-color:#FDD69270;
+color:#754F44;
+}
+.my_buttons:hover {
+background-color:#FDD692;
+font-weight:bold;
+}
+
 
 	
 </style>
@@ -89,9 +91,11 @@
 			
 				<div class="col-12 col-md-12 col-lg-12 text-right my-5">
 
-					<input id="back_btn" class="btn btn-danger" type="button" value="돌아가기">
-					<input id="update_btn" class="btn btn-danger" type="button" value="수정하기">
-					<input id="delete_btn" class="btn btn-danger" type="button" value="삭제하기">
+					<input id="back_btn" class="btn my_buttons" type="button" value="돌아가기">
+					
+					<input id="update_btn" class="btn my_buttons" type="button" value="수정하기">
+					
+					<input id="delete_btn" class="btn my_buttons" type="button" value="삭제하기">
 				
 				</div>
 				

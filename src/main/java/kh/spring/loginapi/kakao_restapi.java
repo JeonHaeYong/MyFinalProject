@@ -1,7 +1,11 @@
 package kh.spring.loginapi;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,9 +85,45 @@ public class kakao_restapi {
 		return returnNode;
 
 	}
-
-
-
+//로그아웃
+	 public JsonNode Logout(String autorize_code) {
+	        final String RequestUrl = "https://kapi.kakao.com/v1/user/logout";
+	 
+	        final HttpClient client = HttpClientBuilder.create().build();
+	 
+	        final HttpPost post = new HttpPost(RequestUrl);
+	 
+	        post.addHeader("Authorization", "Bearer " + autorize_code);
+	 
+	        JsonNode returnNode = null;
+	 
+	        try {
+	 
+	            final HttpResponse response = client.execute(post);
+	 
+	            ObjectMapper mapper = new ObjectMapper();
+	 
+	            returnNode = mapper.readTree(response.getEntity().getContent());
+	 
+	        } catch (UnsupportedEncodingException e) {
+	 
+	            e.printStackTrace();
+	 
+	        } catch (ClientProtocolException e) {
+	 
+	            e.printStackTrace();
+	 
+	        } catch (IOException e) {
+	 
+	            e.printStackTrace();
+	 
+	        } finally {
+	 
+	        }
+	 
+	        return returnNode;
+	 
+	    }
 
 
 

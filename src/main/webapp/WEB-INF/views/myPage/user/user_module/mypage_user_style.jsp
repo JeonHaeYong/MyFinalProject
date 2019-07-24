@@ -14,8 +14,8 @@ src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/Lo
 @font-face { font-family: 'SeoulNamsanM'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulNamsanM.woff') format('woff'); font-weight: normal; font-style: normal; }
 @font-face { font-family: 'BBTreeGB'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/BBTreeGB.woff') format('woff'); font-weight: normal; font-style: normal; }
 @font-face { font-family: 'BBTreeGR'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/BBTreeGR.woff') format('woff'); font-weight: normal; font-style: normal; }
-             	body *{ font-family: BBTreeGB !important; font-size: 1.3rem; font-weight: 400;}
-             	::placeholder{font-family: BBTreeGB !important;}
+             	body *{ font-family: SeoulNamsanM !important; font-size: 1.3rem; font-weight: 400;}
+             	::placeholder{font-family: SeoulNamsanM !important;}
                 .topBackGround{
                     height: 100px;
                 }

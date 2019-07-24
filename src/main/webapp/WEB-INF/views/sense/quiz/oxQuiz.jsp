@@ -50,6 +50,7 @@
 			.btn:hover{background-color:#FDD692; font-weight:bold; color:#754F44;}
             
             .quiz{display:none;}
+            .quiz-box{font-family:'Gamja Flower', cursive;}
             #quiz1{display: block;}
             .menu-box{width: 200px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px; margin-top: 50px; margin-bottom:50px;}
             .menu-box>div{height: 35px;}
@@ -59,24 +60,23 @@
             a[name="s-menu"]{color: #754F44; text-decoration-line: none;}
             a[name="s-menu"]:hover{color: #754F44; text-decoration-line: none; font-weight:bold;}
            /*---------------------------------------------------------------------------------------------------------------------------------------------*/
-            .result-box{border: 0px solid black; width: 70%;  margin-top: 30px; margin-bottom: 30px;}
-            .header{font-size: 25px; text-align: center; background-color: #EC7357; color: white;}
-            .section{border-bottom: 1px solid black; height: 40px; line-height: 35px;  font-size: 20px;}
+           .result-box{width: 70%;  margin-top: 30px; margin-bottom: 30px;}
+            .header{font-size: 25px; text-align: center; background-color: #FDD692; color: #754F44; border-radius: 30px;}
+            .section{ height: 40px; font-size: 20px;}
             .footer{margin-top: 10px; margin-bottom: 30px;}
-            #restart-btn{width:130px; height:130px; cursor: pointer;}
+            #restart-btn{cursor: pointer;}
           /*---------------------------------------------------------------------------------------------------------------------------------------------*/
             .result-box>div:first-child{font-size: 30px;}
-            .num,.wrong-q{position: relative; top:25px;}
-            .wrong{margin-bottom: 40px; }
-          
+            .wrong-q,.answer{text-align: center;}
+            .wrong{margin-bottom: 40px;}
             .incorrCount,.corrCount,.getPoint{font-size:30px;}
+    </style>
             
             
         </style>
 <script>
 	$(function(){
 		console.log(${type});
-		$(".result-box").hide();
 		var quizNum = 1;
 		var corr = new Array(); //선택한 답 목록
 		var index = 0;
@@ -93,60 +93,33 @@
 					url: "answerCheck",
 					method: "post",
 					traditional: true,
-					dataType: "json",
 					data: {
 						corr: corr
 					}
 				}).done(function(resp){
-					// resp에는 맞힌 문제 번호(answer), 틀린문제(wrong) ,총 획득 포인트(point)!!
-				/* 	 alert(resp.answer);
-						alert(resp.wrong);
-					alert(resp.answer.length);	// 맞힌 문제 개수
-					alert(resp.point);  */
-					
-					 $(".quiz-box").append($(".result-box").html()).css("font-family","'Gamja Flower', cursive");
-					$(".corrCount").append("맞은 갯수: " + resp.answer.length);
-					$(".getPoint").append("획득 포인트: " + resp.getPoint);
-					//틀린문제
-					var incorr = "<c:forEach var='i' begin='0' end='10' varStatus='status' ><div class='col-5 wrong-q${status.index}'></div><div class='col-2 answer${status.index}'></div><div class='col-5 ex${status.index}'></div></c:forEach>";
-					$(".wrong").append(incorr);	
-					 for(var i = 0; i < 10; i++){
-							if(resp.wrongList[i]){
-								  $(".wrong-q"+i).append(resp.wrongList[i].quiz);
-								  $(".answer"+i).append(resp.wrongList[i].correct);
-								  $(".ex"+i).append(resp.wrongList[i].explain);
-							}
-						};
-					//랭킹
-					   for(var i = 0; i < 10; i++){
-						 if(resp.rankList[i]){
-						 	$(".rank"+(i+1)).append(resp.rankList[i].rank);
-						 	$(".id"+(i+1)).append(resp.rankList[i].id);
-						 	$(".point"+(i+1)).append(resp.rankList[i].point);
-						 };
-					 }; 
-					 
+					console.log(resp);
+					$(".quiz-box").append(resp);
 				});
 			}
 		});
+		
 		//동적으로 만들어진 태그에 이벤트 걸기
 		$(document).on("click","#restart-btn",function(){//첫번째 : click / change  등등의 이벤트/두번째 : 이벤트 적용할 타겟 태그 /세번째 : 동작 함수
 			location.href="oxQuiz"
 		});
-		
-		
 		$(".question").hide();
 		$(".start-btn").on("click",function(){
 			if(${id == null}){
 				alert("로그인을 해주세요~!");
 				$(".login-btn").trigger("click");
 			}else{
-				$(".question").show();
-				$(".start").hide();
+				$(".question").toggle();
+				$(".start").toggle();
 			}
 		});
 
 	});
+	
 </script>
 </head>
  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
@@ -155,8 +128,6 @@
       <div class="jumbotron px-0 pb-0">
      	<img  src="/resources/images/dog_7.png">
       </div>
-        <div id="title"><h1>나는 얼마나 잘 알고 있을까??</h1></div>
-
         <div class="container">
             <div class="row">
                 <div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-row">
@@ -176,6 +147,9 @@
                 </div>
                 <div class="col-1"></div>
                 <div class="col-lg-9 col-md-8 col-sm-12 col-12 quiz-box">
+                  <div class="row">
+			        	<div id="title" class="col-12"><h1>나는 얼마나 잘 알고 있을까??</h1></div>
+            		</div>
                     <div class="row question">
                        <c:forEach var="dto" items="${sessionScope.list }" varStatus="status">
                         <div class="quiz col-12" id="quiz${status.index+1 }">
@@ -199,51 +173,8 @@
          
                 </div>
             </div>
+    
              </div>
-<!-----결과확인----------------------------------------------------------------------------------------------------------------------------------------->
-	<div class='result-box'>
-		<!-- 맞힌문제 개수 / 획득 포인트 -->
-		<div class="row">
-			<div class="col-6 corrCount"></div><div class="col-6 getPoint"></div>
-		</div>
-		<!-- 틀린문제 / 해설 -->
-		<div class="col-12 incorrCount">틀린문제</div>
-		<div class="row header">
-			
-			<div class="col-5">문제</div>
-			<div class="col-2">정답</div>
-			<div class="col-5">설명</div>
-		</div>
-		<div class="row wrong"><!-- 틀린문제 들어올 자리 --></div>
-
-		<!--랭킹  -->
-		<div class='row header'>
-			<div class='col-4'>RANK</div>
-			<div class='col-4'>ID</div>
-			<div class='col-4'>POINT</div>
-		</div>
-		<c:forEach var="i" begin="0" end="10" varStatus="status">
-			<div class='row section'>
-				<div class='col-4 rank${status.index+1 }'></div>
-				<div class='col-4 id${status.index+1 }'></div>
-				<div class='col-4 point${status.index+1 }'></div>
-			</div>
-		</c:forEach>
-		
-		<!-- 재시작 버튼 -->
-		<div class='row footer'>
-			<div class='col-12'>
-				<img alt='' src='/resources/images/restart-btn.png' id='restart-btn'>
-			</div>
-		</div>
-
-	</div>
-
-
-
-
-
-
 	<!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
    <jsp:include page="/WEB-INF/views/module/footer.jsp" ></jsp:include>
    <script src="resources/js/jquery-ui.js"></script>

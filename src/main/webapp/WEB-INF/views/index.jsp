@@ -342,9 +342,6 @@
 
    <!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
 
-   <jsp:include page="/WEB-INF/views/module/footer.jsp" ></jsp:include>
-   
-   
    
 
    
@@ -361,7 +358,7 @@
    <script src="resources/js/isotope.pkgd.min.js"></script>
    <script src="resources/js/main.js"></script>
    
-   
+     <jsp:include page="/WEB-INF/views/module/footer.jsp" ></jsp:include>
       <!-- 로그인시enter -->
    <script>
          //엔터 입력시 로그인
@@ -387,6 +384,8 @@
                            }
                            //                            로그인 버튼과 회원가입 버튼의 script
   		 </script>
-  		
+  		<script>
+  		console.log("${type}");
+  		</script>
 </body>
 </html>

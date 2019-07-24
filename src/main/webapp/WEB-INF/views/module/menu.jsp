@@ -13,7 +13,7 @@
 	</div>
 
 	<header class="site-navbar js-sticky-header site-navbar-target"
-		role="banner" style="height:68px; z-index:1000;">
+		role="banner" style="height: 68px; z-index: 1000;">
 		<div class="container">
 			<div class="row  align-items-center">
 				<div class="col-6 col-xl-2">
@@ -32,21 +32,32 @@
 							<li><a href="toDisappearList?currentPage=1" class="nav-link">실종신고</a></li>
 
 							<li><a href="toReviewList" class="nav-link">재회</a></li>
-							<li><a href="freeMarket?currentPage=1&category=all" class="nav-link">무료나눔</a></li>
+							<li><a href="freeMarket?currentPage=1&category=all"
+								class="nav-link">무료나눔</a></li>
 							<li><a href="/oxQuiz" class="nav-link">Fun</a></li>
 							<li><a id="donation_link" href="donation" class="nav-link">후원하기</a></li>
-							<li><a id="notice_link" href="notice-view-page" class="nav-link ">공지사항</a></li>
+							<li><a id="notice_link" href="notice-view-page"
+								class="nav-link ">공지사항</a></li>
 							<c:choose>
 								<c:when test="${id eq null}">
 									<li><input type="button" data-toggle="modal"
-											data-target="#loginmodal" class="login-btn" value="로그인">
-										</li>
+										data-target="#loginmodal" class="login-btn" value="로그인">
+									</li>
 									<li><a href="join" class="nav-link pl-0 pr-0">회원가입</a></li>
 								</c:when>
-								<c:otherwise>			
-									<li><a href="/logout" class="nav-link ">
-											로그아웃 </a></li>
-									<li><a id="mypage_link" href="toMyPage" class="nav-link pl-0 pr-0 ">마이페이지</a></li>
+								<c:otherwise>
+									<li>
+									<c:choose>
+											<c:when test="${type ==3}">
+												<input type="button" id="logout" value="로그아웃">
+											</c:when>
+											<c:otherwise>
+												<a href="/logout" class="nav-link "> 로그아웃 </a>
+											</c:otherwise>
+										</c:choose>
+										</li>
+									<li><a id="mypage_link" href="toMyPage"
+										class="nav-link pl-0 pr-0 ">마이페이지</a></li>
 								</c:otherwise>
 							</c:choose>
 						</ul>

@@ -24,18 +24,15 @@
 	margin-top: 5%;
 }
 
-.my_buttons {
-	border-radius: 0px !important;
-	background-color: #EC7357 !important;
+.my_buttons{
+font-family: 'Gamja Flower', cursive !important;
+background-color:#FDD69270 !important;
+color:#754F44;
+border-radius: 25% !important;
 }
-.my_buttons:hover{
-	background-color: black !important;
-}
-
-#notice_link
-{
-	color: #EC7357 !important;
-	font-weight: 600 !important;
+.my_buttons:hover {
+background-color:#FDD692 !important;
+font-weight:bold;
 }
 
 </style>
@@ -43,24 +40,17 @@
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
-<%-- 	<jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include> --%>
+	<jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 
 
 	<section class="site-section bg-light block-13">
 
-<!-- 		<div id="container" class="container"> -->
-<!-- 			<div class="row justify-content-center"> -->
-<!-- 				<div class="col-12 col-md-12 col-lg-12 text-center my-5"> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-
 		<div id="container" class="container">
 			
 			<div class="row justify-content-center">
 				
-				<div class="col-4 col-md-12 col-lg-12 text-center my-1">
+				<div class="col-4 col-md-12 col-lg-12 text-center my-3">
 					
 					<label>제목</label>
 				
@@ -72,7 +62,7 @@
 				
 				</div>
 				
-				<div class="col-12 col-md-12 col-lg-12 text-center my-1">
+				<div class="col-12 col-md-12 col-lg-12 text-center my-3">
 					
 					<label>내용</label>
 				
@@ -84,9 +74,9 @@
 				
 				</div>
 				
-				<div class="col-12 col-md-12 col-lg-12 my-3">
+				<div class="col-12 col-md-12 col-lg-12 my-3 text-right">
 					
-					<input id="write_btn" class="btn btn-danger my_buttons" type="button" value="작성 완료">
+					<input id="write_btn" class="btn my_buttons" type="button" value="작성 완료">
 				
 				</div>
 				

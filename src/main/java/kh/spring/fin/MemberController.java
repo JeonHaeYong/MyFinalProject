@@ -3,11 +3,17 @@ package kh.spring.fin;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -46,8 +53,8 @@ public class MemberController {
 	private HttpSession session;
 	@Autowired
 	private DonationPaymentService dps;
-
-
+	private kakao_restapi kakao_restapi = new kakao_restapi();
+	
 	//로그인
 	@RequestMapping("login")
 	public String login(HttpServletRequest request, MemberDTO dto) {
@@ -81,10 +88,24 @@ public class MemberController {
 	//로그아웃
 	@RequestMapping("logout")
 	public String logout() {
-		session.invalidate();
-		return  "redirect:/";
-	}
+		
+	             
+	        session.invalidate();
 
+		return "redirect:/";
+
+			
+	}
+	@RequestMapping("kakaologout")
+	public String kakaologout() {
+		
+	             
+	        session.invalidate();
+
+		return "kakaologout";
+
+			
+	}
 	//회원가입
 	@RequestMapping("join")
 	public String join() {
@@ -194,12 +215,14 @@ public class MemberController {
 			if(mservice.idDuplCheckService("N_"+id)>0)
 			{
 				session.setAttribute("id","N_"+id); //세션 생성
+				session.setAttribute("type",2); //세션 생성
 				System.out.println("네이버 로그인 성공");
 				return "redirect:/";
 			}	
 			else {		
 				if(	mservice.insertNaverJoin(dto)>0) {
 					session.setAttribute("id","N_"+id); //세션 생성
+					session.setAttribute("type",2); //세션 생성
 					System.out.println("네이버 로그인 성공");
 					return "redirect:/";
 
@@ -217,7 +240,7 @@ public class MemberController {
 
 	}
 	//카카오
-	private kakao_restapi kakao_restapi = new kakao_restapi();
+
 	@RequestMapping(value = "/oauth", produces = "application/json")
 	public String kakaoLogin(@RequestParam("code") String code, Model model, HttpSession session,MemberDTO dto) {
 		System.out.println("로그인 할때 임시 코드값");
@@ -257,6 +280,7 @@ public class MemberController {
 			if(mservice.idDuplCheckService("k_"+id)>0)
 			{
 				session.setAttribute("id","k_"+id); //세션 생성
+				session.setAttribute("type",3); //세션 생성
 				System.out.println("카카오 로그인 성공");
 				return "redirect:/";
 			}
@@ -270,6 +294,7 @@ public class MemberController {
 
 				if(	mservice.insertNaverJoin(dto)>0) {
 					session.setAttribute("id","k_"+id); //세션 생성
+					session.setAttribute("type",3); //세션 생성
 					System.out.println("네이버 로그인 성공");
 					return "redirect:/";
 				}
