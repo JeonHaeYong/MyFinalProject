@@ -364,9 +364,6 @@ function cookieToJson(cookies){
 
    <!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
 
-   <jsp:include page="/WEB-INF/views/module/footer.jsp" ></jsp:include>
-   
-   
    
 
    
@@ -383,7 +380,7 @@ function cookieToJson(cookies){
    <script src="resources/js/isotope.pkgd.min.js"></script>
    <script src="resources/js/main.js"></script>
    
-   
+     <jsp:include page="/WEB-INF/views/module/footer.jsp" ></jsp:include>
       <!-- 로그인시enter -->
    <script>
          //엔터 입력시 로그인
@@ -411,6 +408,8 @@ function cookieToJson(cookies){
 		
 		
   		 </script>
-  		
+  		<script>
+  		console.log("${type}");
+  		</script>
 </body>
 </html>
