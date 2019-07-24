@@ -21,6 +21,8 @@
 <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
+
+
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
 <script>
@@ -93,6 +95,7 @@ a:hover {
 .naviBtn:hover {
 	font-weight: 600;
 }
+
 .menu-bar {
 	text-align: center;
 	height: 200px;
@@ -113,6 +116,7 @@ a:hover {
 	border-bottom: 1px solid black;
 	color: #754F44;
 }
+
 .menu-row {
 	text-align: -webkit-center;
 }
@@ -149,9 +153,10 @@ a:hover {
 #dataNotExist {
 	text-align: center;
 }
+
 .jumbotron {
 	background-color: white;
-	padding:0px 0px;
+	padding: 0px 0px;
 }
 
 .jumbotron>img {
@@ -175,6 +180,7 @@ a:hover {
 				<div class="col-lg-2 col-md-2 col-sm-12 col-12 menu-bar">
 					<!--작은 메뉴바-->
 					<div class="menu">MENU</div>
+
 					<div class="s-menu1">
 						<a href="toAbandoned?currentPage=1">유기동물조회</a>
 					</div>

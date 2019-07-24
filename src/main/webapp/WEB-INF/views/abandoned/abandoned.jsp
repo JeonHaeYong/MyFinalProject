@@ -24,7 +24,6 @@
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -607,7 +606,15 @@ div
 
 
 
+
+
+
+
 :not
+
+
+
+
 
 
 
@@ -624,8 +631,16 @@ div
 
 
 
+
+
+
+
 ){
 line-height
+
+
+
+
 
 
 
@@ -639,8 +654,16 @@ line-height
 
 
 
+
+
+
+
 50
 px
+
+
+
+
 
 
 
@@ -788,6 +811,7 @@ label {
 	width: 100%;
 	max-height: 600px;
 }
+
 </style>
 
 </head>
@@ -806,26 +830,21 @@ label {
 				<!--작은 메뉴랑 게시판목록이랑 나누는 row-->
 				<div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-bar">
 					<!--작은 메뉴바-->
-					<nav class="cl-effect-3">
+					<div class="menu">MENU</div>
+
+						<div class="s-menu1">
+							<a href="toAbandoned?currentPage=1">유기동물조회</a>
+						</div>
+						<div class="s-menu1">
+							<a href="listTempProtect?currentPage=1">임시보호중</a>
+						</div>
+						<div class="s-menu1">
+							<a href="toHospital?currentPage=1">동물병원 조회</a>
+						</div>
+						<div class="s-menu1">
+							<a href="toCenter?currentPage=1">보호센터 조회</a>
+						</div>
 					
-						<a href="toAbandoned?currentPage=1" data-hover="유기동물조회">유기동물조회</a> <a
-							href="listTempProtect?currentPage=1" data-hover="임시보호중">임시보호중</a> <a
-							href="toHospital?currentPage=1" data-hover="동물병원 조회">동물병원 조회</a> <a
-							href="toCenter?currentPage=1" data-hover="보호센터 조회">보호센터 조회</a>
-						<!-- 						<div class="menu">MENU</div> -->
-						<!-- 						<div class="s-menu1"> -->
-						<!-- 							<a href="toAbandoned?currentPage=1">유기동물조회</a> -->
-						<!-- 						</div> -->
-						<!-- 						<div class="s-menu1"> -->
-						<!-- 							<a href="listTempProtect?currentPage=1">임시보호중</a> -->
-						<!-- 						</div> -->
-						<!-- 						<div class="s-menu1"> -->
-						<!-- 							<a href="listTempProtect?currentPage=1">임시보호중</a> -->
-						<!-- 						</div> -->
-						<!-- 						<div class="s-menu1"> -->
-						<!-- 							<a href="listTempProtect?currentPage=1">임시보호중</a> -->
-						<!-- 						</div> -->
-					</nav>
 				</div>
 
 				<div class="col-1">
