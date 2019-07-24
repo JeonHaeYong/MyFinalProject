@@ -7,6 +7,7 @@
 		from API_ABANDONED_ANIMAL  
 		where SUBSTR(NOTICESDT, 1, 5) = to_char(sysdate, 'yy/MM') 
 		group by substr(NOTICENO, 0, 2)
+		order by area asc
 	</select>
 		
 	<select id="selectCountTodayRecord" resultType="java.lang.Integer">
