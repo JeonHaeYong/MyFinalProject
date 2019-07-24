@@ -89,7 +89,13 @@ public class MemberDAOImpl implements MemberDAO {
 	public int idDuplCheck(String id) {
 		return sst.selectOne("MemberDAO.idDuplCheck", id);
 	}
-
+	
+	@Override
+	public int doublemail(String email) {
+	System.out.println(email);
+		return sst.selectOne("MemberDAO.doublemail", email);
+	}
+	
 	@Override
 	public MemberDTO selectOneMember(String id) {
 		return sst.selectOne("MemberDAO.selectOneMember", id);
@@ -160,6 +166,6 @@ public class MemberDAOImpl implements MemberDAO {
 	public int updateImagePath(MemberDTO dto) {
 		return sst.update("MemberDAO.updateImagePath",dto);
 	}
-	
+
 	
 }

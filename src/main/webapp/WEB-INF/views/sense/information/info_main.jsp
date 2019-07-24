@@ -220,7 +220,7 @@ padding-right:105px;
 			<div class="col-lg-9 col-md-8 col-sm-12 col-12 info-box">
 				<!--내용   -->
 
-				<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
 					<li class="nav-item"><a class="nav-link active" id="home-tab"
 						data-toggle="tab" href="#home" role="tab" aria-controls="home"
 						aria-selected="true">정보 </a></li>

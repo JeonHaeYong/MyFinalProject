@@ -28,4 +28,5 @@ public interface MemberDAO {
 	public int selectCountRankFiveByPoint() throws Exception;				//관리자 페이지에서 최고점수 5등까지 조회 몇명인지
 	public int selectCount() throws Exception;
 	public int updatePointRandom(HashMap<String, Integer> param) throws Exception;
+	public int doublemail(String email);
 }
