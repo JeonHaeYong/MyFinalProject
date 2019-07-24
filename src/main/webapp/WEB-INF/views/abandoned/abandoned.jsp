@@ -25,6 +25,7 @@
 <style>
 body {
 	min-width: 375px;
+	font-family:'Gamja Flower' !important;
 }
 
 .container {

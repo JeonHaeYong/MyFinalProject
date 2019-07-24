@@ -1,6 +1,7 @@
 package kh.spring.fin;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.scribejava.core.model.OAuth2AccessToken;
@@ -63,6 +65,9 @@ public class MemberController {
 				MemberDTO mdto=mservice.selectOneMemberService(dto.getId());					
 				session.setAttribute("id", mdto.getId());
 				session.setAttribute("type", mdto.getType());
+				if(referer.equals("join")) {
+					return "redirect:/";	
+				}
 				return "redirect:/"+referer;	
 			}
 		}
@@ -88,9 +93,8 @@ public class MemberController {
 	@RequestMapping("joininfo")
 	public String joininfo(MemberDTO dto) {
 		try{
-//			int rand = (int)(Math.random() * 10 + 1 );
-//			System.out.println("rand"+rand);
-//			dto.setim
+			int rand = (int)(Math.random() * 11 + 1 );
+			dto.setimagepath("/profile/"+rand+".png");
 			mservice.insertMemberService(dto);
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -184,6 +188,8 @@ public class MemberController {
 		dto.setName(nickname);
 		dto.setGender(gender);
 		dto.setEmail(email);
+		int rand = (int)(Math.random() * 11 + 1 );
+		dto.setimagepath("/profile/"+rand+".png");
 		try{
 			if(mservice.idDuplCheckService("N_"+id)>0)
 			{
@@ -259,6 +265,8 @@ public class MemberController {
 				dto.setName(nickname);
 				dto.setEmail(kaccount_email);
 				dto.setType(3);
+				int rand = (int)(Math.random() * 11 + 1 );
+				dto.setimagepath("/profile/"+rand+".png");//처음가입시 랜덤이미지
 
 				if(	mservice.insertNaverJoin(dto)>0) {
 					session.setAttribute("id","k_"+id); //세션 생성
@@ -316,8 +324,30 @@ public class MemberController {
 
 	//프로필img 바꾸기
 	@RequestMapping("changeProfileImg")
-	public String changeProfileImg(MemberDTO dto) {
-		//여기짜기
+	public String changeProfileImg(MemberDTO dto , MultipartFile image) {
+		//image서버에 저장하기.
+		//profile폴더 내에 각 id 폴더내에 profileimg이름으로
+		String realPath = session.getServletContext().getRealPath("/");
+		String resourcePath = realPath + "resources/images/member/profile";//profile폴더
+		String savePath = resourcePath+"/"+dto.getId();
+		System.out.println("파일저장할 위치 -> " + savePath);
+		File uploadPath = new File(savePath);
+		System.out.println(image.getName()+":"+image.getOriginalFilename());
+		if(!uploadPath.exists()) {	//해당하는 이름의 폴더가 없다면
+			uploadPath.mkdir();	//폴더를 만들어줘라.
+		}
+		String fileName = null;
+		try {
+			String contentType = image.getContentType().replaceAll("image/", "");
+			fileName = "profileImg."+contentType;
+			image.transferTo(new File(savePath+"/"+fileName));
+			dto.setimagepath("profile/"+dto.getId()+"/"+fileName);
+			System.out.println(dto.getimagepath());
+			int result = mservice.updateImagePath(dto);
+			System.out.println(dto.getId()+"님의 프로필사진이 -> "+ result+" 업데이트 되었습니다");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "redirect:toMyPage";
 	}
 

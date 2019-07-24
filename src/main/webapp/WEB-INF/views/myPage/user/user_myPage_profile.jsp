@@ -82,8 +82,11 @@
                     <form id="modify_profile_form" action="modifyProfile" method="post">
                         <div class="form-group row">
                             <label for="my_id" class="col-sm-2 col-form-label">ID</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-7">
                                 <input type="text" readonly class="form-control-plaintext" id="my_id" value="${memberDTO.id }" name="id">
+                            </div>
+                            <div class="text-right col-sm-3" style="font-size: 15px; font-family:BBTreeGR !important;">
+                            	*프로필사진변경은 왼쪽의 프로필 이미지를 클릭! 해주세요. 
                             </div>
                         </div>
                         <div class="form-group row">
@@ -137,7 +140,7 @@
                         <div class="form-group row">
                             <label for="my_email" class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" id="my_email" value="${memberDTO.email }">
+                                <input type="text" readonly class="form-control-plaintext py-1" id="my_email" value="${memberDTO.email }">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -222,6 +225,12 @@
         <script src="resources/js/main.js"></script>
         <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
         <script>
+        	//tab이미지 animate
+    		function tabImgAnimate (){
+       			var tab = $("#tabImg");
+       			tab.animate({top:"5%" , right : "76%"},"400","linear").animate({top:"2%" , right : "80%"},"400","linear",tabImgAnimate);;
+   			 }
+    		tabImgAnimate();
             var PwInputCount = 0;//pw변경시 현재비밀번호 틀리는 숫자 카운트
             $(".modify_bot_part.hide").hide();
             $(".gender_radio.hide").hide();
@@ -434,11 +443,18 @@
 	            });
                 $('#change_profileImg_md').on('hidden.bs.modal', function (e) {//modal 취소클릭해서 없어진후에 실행
                 	$("#changeProfileImg_form")[0].reset();
-	                $(".profile_upload_part").toggle();
-	                $(".profile_upload_part.hide").removeClass("d-flex");
+                	if($(".profile_upload_part.hide").hasClass("d-flex")){
+    	                $(".profile_upload_part").toggle();
+    	                $(".profile_upload_part.hide").removeClass("d-flex");
+                	}
                 });
                 $(".changeImg_btn").on("click",function(){
-                	$("#changeProfileImg_form").submit();
+                	if($(".profile_upload_part.hide").hasClass("d-flex")){
+                		$("#changeProfileImg_form").submit();
+                	}else{
+                		alert("변경할 프로필 사진을 선택해주세요.");
+                	}
+                	
                 })
         </script>
     </html>
