@@ -70,6 +70,7 @@
 	.btn:hover{background-color:#FDD692; font-weight:bold;}
 	.totalAmountBottom{
 		font-size: 20px;
+		text-align: center;
 	}
 </style>
 </head>
@@ -166,9 +167,10 @@
 		    				<option value="phone">휴대폰 소액결제</option>
 						</select>
 					</div>
+					<p class="totalAmountBottom pt-2">총 결제 금액 : ${totalAmount }원</p>
 					<div class="form-group d-flex justify-content-center">
-						<span class="totalAmountBottom pt-2">총 결제 금액 : ${totalAmount }원&nbsp;&nbsp;</span>
 						<input type="button" class="btn" id="payBtn" value="결제하기">
+						<input type="button" class="btn" id="cancelBtn" value="취소하기">
 					</div>
 				</form>
 			</div>
@@ -201,7 +203,7 @@
 				alert("판매완료된 상품은 결제하실 수 없습니다. 다시 확인해주세요.");
 				location.href = "toMyPage_cart";
 			}
-		})
+		});
 		
 		document.getElementById("searchBtn").onclick = searchAddress;
 		function searchAddress() {
@@ -225,23 +227,83 @@
 			}).open();
 		}
 		
+		var phoneCheck = true;
+		$("#inputPhone").on("blur", function() {
+			var phonenum = $(this).val();
+			var regPhone = /(01[0|1|6|9|7])[-](\d{3}|\d{4})[-](\d{4}$)/g;
+			if (phonenum != "") {
+			    if (!regPhone.test(phonenum)) {
+					phoneCheck = false;
+				}else{
+					phoneCheck = true;
+				}
+			}
+		});
+	    function autoHypenPhone(str){
+	        str = str.replace(/[^0-9]/g, '');
+	        var tmp = '';
+	        if( str.length < 4){
+	            return str;
+	        }else if(str.length < 7){
+	            tmp += str.substr(0, 3);
+	            tmp += '-';
+	            tmp += str.substr(3);
+	            return tmp;
+	        }else if(str.length < 11){
+	            tmp += str.substr(0, 3);
+	            tmp += '-';
+	            tmp += str.substr(3, 3);
+	            tmp += '-';
+	            tmp += str.substr(6);
+	            return tmp;
+	        }else{              
+	            tmp += str.substr(0, 3);
+	            tmp += '-';
+	            tmp += str.substr(3, 4);
+	            tmp += '-';
+	            tmp += str.substr(7);
+	            return tmp;
+	        }
+	        return str;
+	    }
+		var cellPhone = document.getElementById('inputPhone');
+		cellPhone.onkeyup = function(event){
+		    event = event || window.event;
+		    var _val = this.value.trim();
+		    this.value = autoHypenPhone(_val) ;
+		}
+		
 		$("#payBtn").on("click", function(){
+			$(".soldoutCheck").each(function(i, item){
+				if($(item).val() == 'y'){
+					alert("판매완료된 상품은 결제하실 수 없습니다. 다시 확인해주세요.");
+					location.href = "toMyPage_cart";
+				}
+			});
+			
 			var name = $("#inputName").val();
 			var regex = /^[가-힣]{2,5}$/g;
 			var result = regex.exec(name);
 			var payMethod = $("#selectMethod option:selected").val();
 			if(result == null){
 				alert("잘못된 이름 형식입니다.");
-				$("#inputName").val("");
+				$("#inputName").val("").focus();
 				return;
 			}
 			if($("#inputName").val() == ""){
 				alert("이름을 입력해주세요.");
+				$("#inputName").focus();
 				return;
 			}else if($("#inputPhone").val() == ""){
 				alert("전화번호를 입력해주세요.");
+				$("#inputPhone").focus();
 				return;
-			}else if($("#zipcode").val() == "" || $("#inputAddress").val() == "" || $("#inputAddress2").val() == ""){
+			}else if(!phoneCheck){
+				alert("전화번호 형식이 잘못되었습니다.");
+				$("#inputPhone").val("").focus();
+				return;
+			}
+			else if($("#zipcode").val() == "" || $("#inputAddress").val() == "" || $("#inputAddress2").val() == ""){
 				alert("주소를 입력해주세요.");
 				return;
 			}else if(payMethod == "0"){
@@ -319,6 +381,10 @@
 // 					location.href = "toMyPage_cart";
 // 				}
 // 			});
+		});
+		
+		$("#cancelBtn").on("click", function(){
+			location.href = "toMyPage_cart";
 		});
 	</script>
 </body>
