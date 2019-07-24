@@ -1,5 +1,7 @@
 package kh.spring.serviceImpl;
 
+import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -236,7 +238,120 @@ public class BlackListServiceImpl implements BlackListService
 				}
 			}
 		}
+		{
+			MemberDTO dto = new MemberDTO();
+			
+			dto.setId("admin");
+			dto.setPassword("pwpw");
+			dto.setName("어드민");
+			dto.setEmail("sdfsdf@sdfsdf.sdfsdf");
+			dto.setAddress2("jusojuso");
+			
+			ms.insertMemberService(dto);
+		}
+		{
+			MemberDTO dto = new MemberDTO();
+			
+			dto.setId("client");
+			dto.setPassword("pwpw");
+			dto.setName("클라이언트");
+			dto.setEmail("sdfsdf@sdfsdf.sdfsdf");
+			dto.setAddress2("jusojuso");
+			
+			ms.insertMemberService(dto);
+		}
 		logger.info("아이디 삽입 완료");
 		return "redirect: admin-member";
+	}
+	
+	@Override
+	public Object selectMembersInBlackList(String idForSearch, String page) throws Exception
+	{
+		HashMap<String, String> param = new HashMap<>();
+		
+		if((page == null) || (page.equals("")))
+		{
+			page = "1";
+		}
+		
+		int currentPage = Integer.parseInt(page);
+		int recordTotalCount = blacklistDAO.selectCount();
+		int pageTotalCount;
+		int recordCountPerPage = 10;
+		int naviCountPerPage = 5;
+		boolean needPrev = true;
+		boolean needNext = true;
+		
+		int start = currentPage * recordCountPerPage - recordCountPerPage + 1;
+		int end = currentPage * recordCountPerPage;
+		
+		param.put("id", "%" + idForSearch + "%");
+		param.put("start", ""+start);
+		param.put("end", ""+end);
+		
+		List<BlackListDTO> list = blacklistDAO.selectList(param);
+		
+		JsonObject outerjo = new JsonObject();
+		JsonArray ja = new JsonArray();
+		
+		for(int i = 1 ; i <= list.size() ; i++)
+		{
+			JsonObject jo = new JsonObject();
+			
+			int seq = list.get(i-1).getSeq();
+			String id = list.get(i-1).getId();
+			String reason = list.get(i-1).getReason();
+			Date time = list.get(i-1).getBlack_date();
+			
+			jo.addProperty("seq", seq);
+			jo.addProperty("id", id);
+			jo.addProperty("reason", reason);
+			jo.addProperty("time", ""+time);
+			ja.add(jo);
+		}
+		outerjo.add("array", ja);
+		
+		if( recordTotalCount % recordCountPerPage == 0)
+		{
+			pageTotalCount = recordTotalCount / recordCountPerPage;
+		}
+		else
+		{
+			pageTotalCount = recordTotalCount / recordCountPerPage + 1;
+		}
+
+		if(currentPage < 1)
+		{
+			currentPage = 1;
+		}
+		else if(currentPage > pageTotalCount)
+		{
+			currentPage = pageTotalCount;
+		}
+		
+		int startNavi = (currentPage - 1) / naviCountPerPage * naviCountPerPage + 1;
+		int endNavi = startNavi + naviCountPerPage - 1;
+		if(endNavi > pageTotalCount)
+		{
+			endNavi = pageTotalCount;
+		}
+		
+		if(startNavi == 1)
+		{
+			needPrev = false;
+		}
+		if(endNavi == pageTotalCount)
+		{
+			needNext = false;
+		}
+		
+		outerjo.addProperty("currentPage", currentPage);
+		outerjo.addProperty("needPrev", needPrev);
+		outerjo.addProperty("needNext", needNext);
+		outerjo.addProperty("startNavi", startNavi);
+		outerjo.addProperty("endNavi", endNavi);
+
+		
+		return new Gson().toJson(outerjo);
 	}
 }

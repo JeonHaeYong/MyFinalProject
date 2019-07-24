@@ -279,7 +279,7 @@ font-weight:bold;
     			var $menu_nameCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>상품명</h3></div>');
     			var $menu_priceCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>결제금액</h3></div>');
     			var $menu_sellerCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>판매자</h3></div>');
-    			var $menu_timeCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>날짜</h3></div>');
+    			var $menu_timeCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>일시</h3></div>');
     			$menu_row.append($menu_seqCol).append($menu_buyerCol).append($menu_nameCol).append($menu_priceCol).append($menu_sellerCol).append($menu_timeCol);
     			$("#search_result_div").append($menu_row);
 	    		
@@ -292,17 +292,17 @@ font-weight:bold;
 	    			var $nameCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].name+'</div>');
 	    			var $priceCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].price+'</div>');
 	    			var $sellerCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].seller+'</div>');
-	    			var $timeCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].time+'</div>');
+	    			var $timeCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">' + array[i-1].time.substring(0, array[i-1].time.length-2) + '</div>');
 	    			$row.append($seqCol).append($buyerCol).append($nameCol).append($priceCol).append($sellerCol).append($timeCol);
 	    			$("#search_result_div").append($row);
+	    			
 	    		}
 	    		
 				var $naviRow = $('<div id="navi_row" class="row justify-content-center mb-1 mt-3"></div>');
 	    		
 	    		if(response.needPrev)
 	    		{
-// 	    			var $prevBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value=" < " name="'+(response.startNavi-1)+'">');
-					var $prevBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value=" < " name="'+(response.startNavi-1)+'">');
+					var $prevBtn = $('<input class="btn navi_btns mx-1" type="button" value=" < " name="'+(response.startNavi-1)+'">');
 
 	    			$naviRow.append($prevBtn);
 	    		}
@@ -310,22 +310,13 @@ font-weight:bold;
 	    		for(var i = response.startNavi ; i <= response.endNavi ; i++)
 	    		{
 	    			
-// 	    			if(i == response.currentPage)
-// 	    			{
-// 		    			var $naviBtn = $('<input class="btn btn-danger selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
-// 	    			}
-// 	    			else
-// 	    			{
-// 		    			var $naviBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
-// 	    			}
-				
 					if(i == response.currentPage)
 	    			{
-		    			var $naviBtn = $('<input class="btn btn-link selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+		    			var $naviBtn = $('<input class="btn selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
 	    			}
 	    			else
 	    			{
-		    			var $naviBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+		    			var $naviBtn = $('<input class="btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
 	    			}
 
 	    			$naviRow.append($naviBtn);
@@ -333,8 +324,7 @@ font-weight:bold;
 	    		
 	    		if(response.needNext)
 	    		{
-// 	    			var $nextBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value=" > " name="'+(response.endNavi+1)+'">');
-	    			var $nextBtn = $('<input class="btn btn-link navi_btns mx-1" type="button" value=" > " name="'+(response.endNavi+1)+'">');
+	    			var $nextBtn = $('<input class="btn navi_btns mx-1" type="button" value=" > " name="'+(response.endNavi+1)+'">');
 	    			$naviRow.append($nextBtn);
 	    		}
 	    		
