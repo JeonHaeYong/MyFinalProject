@@ -17,7 +17,6 @@ public class TempProtectDTO {
 	private String color;
 	private String feat;
 	private String imagePath;
-	private String email;
 	private String phone;
 	private String writer;
 	private Timestamp writeTime;
@@ -25,8 +24,7 @@ public class TempProtectDTO {
 		super();
 	}
 	public TempProtectDTO(int seq, String title, Date findDate, String sido, String sigungu, String place, String type,
-			String sex, String color, String feat, String imagePath, String email, String phone, String writer,
-			Timestamp writeTime) {
+			String sex, String color, String feat, String imagePath, String phone, String writer, Timestamp writeTime) {
 		super();
 		this.seq = seq;
 		this.title = title;
@@ -39,7 +37,6 @@ public class TempProtectDTO {
 		this.color = color;
 		this.feat = feat;
 		this.imagePath = imagePath;
-		this.email = email;
 		this.phone = phone;
 		this.writer = writer;
 		this.writeTime = writeTime;
@@ -110,12 +107,6 @@ public class TempProtectDTO {
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
 	public String getPhone() {
 		return phone;
 	}
@@ -136,7 +127,6 @@ public class TempProtectDTO {
 	}
 
 	
-
 
 
 }

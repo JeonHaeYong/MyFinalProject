@@ -16,17 +16,17 @@
 		role="banner" style="height: 68px; z-index: 1000;">
 		<div class="container">
 			<div class="row  align-items-center">
-				<div class="col-6 col-xl-2">
+				<div class="col-2 col-xl-2">
 					<h1 class="mb-0 site-logo">
-						<a href="/" class="h2 mb-0"><strong>Dog</strong>Life<span
-							class="text-primary">.</span> </a>
+						<a href="/" class="h2 mb-0" style="font-family:Gamja Flower; font-size:25px"><img src="/resources/images/doglogo2.png" width="80px"><strong>라온</strong>펫<span
+							class="text-primary"></span> </a>
 					</h1>
 				</div>
-				<div class="col-12 col-md-10  d-none d-xl-block pr-0">
+				<div class="col-8 col-md-10  d-none d-xl-block pr-0">
 					<nav class="site-navigation position-relative text-right pl-0"
 						role="navigation">
 						<ul
-							class="site-menu main-menu js-clone-nav mr-0 pl-0 d-none d-lg-block">
+							class="site-menu main-menu js-clone-nav ml-0 mr-0 pl-0 d-none d-lg-block">
 
 							<li><a href="toAbandoned?currentPage=1" class="nav-link">유기동물</a></li>
 							<li><a href="toDisappearList?currentPage=1" class="nav-link">실종신고</a></li>
