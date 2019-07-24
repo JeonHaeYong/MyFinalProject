@@ -33,11 +33,25 @@
 /* 		height: 150px; */
 /* 	} */
 	.imageBox{
-		min-width: 100px;
+		width: 100%;
+		height: inherit;
+/* 		max-width: 180px; */
+/* 		max-height: 180px; */
+/* 		min-height: 180px; */
 	}
-	#itemImage{
+	.itemImage{
 		width: 100%; 
 		height: 100%;
+	}
+/* 	.card-body{ */
+/* 		height: 100%; */
+/* 		line-height: 300%; */
+/* 	} */
+	.itemInfo{
+		font-family: 'Gamja flower';
+	}
+	.card-text{
+		font-size: 25px;
 	}
 	.totalAmount{
 		text-align: right;
@@ -52,6 +66,11 @@
 	#lab{
 		color: white;
 	}
+	.btn{font-family: 'Gamja Flower', cursive; background-color:#FDD69270; color:#754F44;}
+	.btn:hover{background-color:#FDD692; font-weight:bold;}
+	.totalAmountBottom{
+		font-size: 20px;
+	}
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -64,36 +83,37 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12 align-self-center text-center">
-				<h1>구매하기</h1>
+				<h1>무료나눔 물품 구매하기</h1>
 			</div>
 		</div>
 		<div class="row m-3">
 			<c:forEach var="dto" items="${items }" varStatus="status">
 				<div class="col-12 d-flex justify-content-center">
-					<div class="card mb-3 myCard" style="width: 75%;">
-						<div class="row no-gutters">
-							<div class="col-md-4 col-12 imageBox">
+					<div class="card mb-3 myCard" style="width: 75%; height: 80%;">
+						<div class="row no-gutters" style="width: 100%; height: 100%;">
+							<div class="col-lg-4 col-md-5 d-md-block d-none imageBox">
 								<img src="${dto.imagePath1 }" class="card-img itemImage">
 							</div>
-							<div class="col-md-8 col-12">
+							<div class="col-lg-8 col-md-7 col-12">
 								<div class="card-body">
 									<input type="hidden" class="soldoutCheck" value="${dto.soldout }">
-									<h5 class="card-title">상품명 : ${dto.name }</h5>
-									<p class="card-text">금액 : ${dto.price }원</p>
-									<p class="card-text"><small class="text-muted">판매자 : ${dto.seller }</small></p>
+									<h3 class="card-title itemInfo text-truncate">상품명: ${dto.name }</h3>
+									<p class="card-text itemInfo text-truncate">금액: ${dto.price }원</p>
+									<p class="card-text itemInfo text-truncate"><small class="text-muted">판매자: ${dto.seller }</small></p>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</c:forEach>
-			<div class="col-12">
-				<h4 class="totalAmount">총 결제 금액 : ${totalAmount }원</h4>
+			<div class="col-12 d-flex justify-content-center">
+				<h4 class="totalAmount" style="width: 75%;">총 결제 금액 : ${totalAmount }원</h4>
 			</div>
 		</div>
+		<hr>
 		<div class="row">
-			<div class="col-12 formTop">
-				<h5>구매자 정보</h5><br>
+			<div class="col-12 mt-3 formTop">
+				<h5>< 구매자 정보 ></h5><br>
 				<p id="msg">*모든 항목을 작성해주셔야 합니다.</p>
 			</div>
 			<div class="col-12 d-flex justify-content-center">
@@ -125,7 +145,7 @@
 						</div>
 						<div class="form-group col-4">
 							<label for="zipcode" id="lab">우</label>
-							<input type="button" class="btn btn-primary m-auto p-auto form-control" id="searchBtn" value="찾기">
+							<input type="button" class="btn m-auto p-auto form-control" id="searchBtn" value="찾기">
 						</div>
 					</div>
 					<div class="form-group">
@@ -147,7 +167,8 @@
 						</select>
 					</div>
 					<div class="form-group d-flex justify-content-center">
-						<input type="button" class="btn btn-primary" id="payBtn" value="결제하기">
+						<span class="totalAmountBottom pt-2">총 결제 금액 : ${totalAmount }원&nbsp;&nbsp;</span>
+						<input type="button" class="btn" id="payBtn" value="결제하기">
 					</div>
 				</form>
 			</div>
@@ -230,9 +251,7 @@
 			
 			var orderNum = new Date().getTime();
 			$("#orderNumber").val(orderNum);
-			
 			$("#payForm").submit();
-			
 // 			var IMP = window.IMP; // 생략가능
 // 			IMP.init('imp84992027'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 // 			IMP.request_pay({
