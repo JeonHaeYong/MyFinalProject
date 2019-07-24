@@ -96,13 +96,11 @@ public class MemberController {
 
 			
 	}
+	//카카오 로그아웃
 	@RequestMapping("kakaologout")
-	public String kakaologout() {
-		
-	             
+	public String kakaologout() {		           
 	        session.invalidate();
-
-		return "kakaologout";
+		return "member/kakaologout";
 
 			
 	}
@@ -111,6 +109,7 @@ public class MemberController {
 	public String join() {
 		return "member/join";
 	}
+	
 	@RequestMapping("joininfo")
 	public String joininfo(MemberDTO dto) {
 		try{

@@ -86,7 +86,7 @@ font-weight:bold;
 
 
 	<!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
-	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
+	
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="resources/js/jquery-ui.js"></script>
@@ -100,6 +100,7 @@ font-weight:bold;
 <script src="resources/js/jquery.sticky.js"></script>
 <script src="resources/js/isotope.pkgd.min.js"></script>
 <script src="resources/js/main.js"></script>
+<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 <script>
 	$(function()
     {

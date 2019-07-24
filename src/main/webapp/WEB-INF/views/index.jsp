@@ -21,10 +21,30 @@
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
+<script>
+//팝업창!!!---------------------------------------------------------------------
 
+
+ function openPopup(url){
+	 var cookies = document.cookie;
+	var result = cookieToJson(cookies);
+                	   if(result != "Y"){
+                		   window.open(url,'','width=570,height=830,left=1300,top=70'); 
+                	   } 
+                   }
+                   
+function cookieToJson(cookies){
+	var entry = cookies.split("=");
+	entry[0] = entry[1];
+	return entry[0];
+}
+
+	
+
+</script>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
-   data-offset="300" id="home-section">
+   data-offset="300" id="home-section" onload="javascript:openPopup('popUp.home')">
    <jsp:include page="/WEB-INF/views/module/menu.jsp" ></jsp:include>
    <!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 
@@ -383,9 +403,9 @@
                            document.getElementById("form").submit();
                            }
                            //                            로그인 버튼과 회원가입 버튼의 script
+		
+		
   		 </script>
-  		<script>
-  		console.log("${type}");
-  		</script>
+  	
 </body>
 </html>
