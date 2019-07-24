@@ -593,16 +593,14 @@ font-weight:bold;
 					
 					<div class="row justify-content-center">
 					
+						<div id="log_result_div" class="col-12 col-md-12 col-lg-12 text-center my-3">
+							
+						</div>
+						
 						<div class="col-12 col-md-12 col-lg-12 text-center my-3">
 							
 							<input id="log_btn" class="btn my_buttons" name="1" type="button" value="월 별 후원금 검색">
 							
-						</div>
-						
-						<div id="log_result_div" class="col-12 col-md-12 col-lg-12 text-center my-3">
-							
-							
-						
 						</div>
 						
 					</div>
