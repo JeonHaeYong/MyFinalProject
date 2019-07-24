@@ -116,5 +116,18 @@ public class DisappearReportDAOImpl implements DisappearReportDAO{
 	public int delete(int seq) {
 		return sst.delete("DisappearReportDAO.delete",seq);
 	}
+	@Override
+	public String replaceAll(String text) {
+	      String reText = text;
+	      reText = reText.replaceAll("<script", "");
+	      reText = reText.replaceAll("< script", "");
+	      reText = reText.replaceAll("script>", "");
+	      reText = reText.replaceAll("srcipt >", "");
+	      reText = reText.replaceAll("\"\\)\\;", "");
+	      reText = reText.replaceAll(">alert", "");
+	      reText = reText.replaceAll("\\(\"", "");
+	      reText = reText.replaceAll("\\</", "");
+	      return reText;
+	   }
 	
 }

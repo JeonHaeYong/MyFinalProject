@@ -13,4 +13,5 @@ public interface DisappearReportDAO {
 	public int updateNoImage(DisappearReportDTO drdto);
 	public int update(DisappearReportDTO drdto);
 	public int delete(int seq);
+	public String replaceAll(String text);
 }
