@@ -104,9 +104,7 @@ td {
 	width: 100%;
 	max-height: 600px;
 }
-th{
-	 background-color:#FDD692;
-}
+
 </style>
 
 </head>
@@ -132,10 +130,10 @@ th{
 						<a href="listTempProtect?=currentPage=1">임시보호중</a>
 					</div>
 					<div class="s-menu1">
-						<a href="">동물병원 조회</a>
+						<a href="toHospital?currentPage=1">동물병원 조회</a>
 					</div>
 					<div class="s-menu1">
-						<a href="">보호센터 조회</a>
+						<a href="toCenter?currentPage=1">보호센터 조회</a>
 					</div>
 				</div>
 
@@ -149,7 +147,7 @@ th{
 					<div style="margin-bottom:20px">「동물보호법」 제17조, 같은 법 시행령 제7조 및 같은 법 시행규칙 제20조에 따라 구조된 동물의
 								보호상황을 아래와 같이 공고합니다.
 					</div>			
-					<table class="table">
+					<table class="table table-striped">
 						<tbody>
 							<tr>
 								<th scope="row" style="width: 18%;">공고번호</th>

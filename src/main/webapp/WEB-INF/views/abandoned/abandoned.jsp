@@ -21,10 +21,12 @@
 <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
-
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script>
 	$(function() {
 		
@@ -557,9 +559,14 @@
 	});
 </script>
 <style>
-@font-face { font-family: 'Handon3gyeopsal600g'; src:
-url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/Handon3gyeopsal600g.woff') 
-format('woff'); font-weight: normal; font-style: normal; }
+/* @font-face { */
+/* 	font-family: 'Handon3gyeopsal600g'; */
+/* 	src: */
+/* 		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/Handon3gyeopsal600g.woff') */
+/* 		format('woff'); */
+/* 	font-weight: normal; */
+/* 	font-style: normal; */
+/* } */
 
 body {
 	min-width: 375px;
@@ -589,9 +596,34 @@ body {
 	background-color: #FDD69250;
 }
 
-.section>div:not(.addr
+.section
+>
+div
+
+
+:not
+
+
+(
+.addr
+
+
+
+
 ){
-line-height:50px;
+line-height
+
+
+:
+
+
+50
+px
+;
+
+
+
+
 }
 .addr {
 	text-align: left;
@@ -681,10 +713,12 @@ label {
 #dataNotExist {
 	text-align: center;
 }
-.menu{
+
+.menu {
 	font-family: 'Gamja Flower', cursive;
-	font-size:40px;
+	font-size: 40px;
 }
+
 .menu-row {
 	text-align: -webkit-center;
 }
@@ -725,14 +759,13 @@ label {
 /*점보트론 이미지*/
 .jumbotron {
 	background-color: white;
-	padding:0px 0px;
+	padding: 0px 0px;
 }
 
 .jumbotron>img {
 	width: 100%;
 	max-height: 600px;
 }
-
 </style>
 
 </head>
@@ -759,10 +792,10 @@ label {
 						<a href="listTempProtect?currentPage=1">임시보호중</a>
 					</div>
 					<div class="s-menu1">
-						<a href="">동물병원 조회</a>
+						<a href="toHospital?currentPage=1">동물병원 조회</a>
 					</div>
 					<div class="s-menu1">
-						<a href="">보호센터 조회</a>
+						<a href="toCenter?currentPage=1">보호센터 조회</a>
 					</div>
 				</div>
 
@@ -772,10 +805,12 @@ label {
 
 				<div class="col-lg-9 col-md-9 col-sm-12 col-12">
 
-					<div class="text-center" style="margin: auto; margin-bottom: 40px; font-family: 'Handon3gyeopsal600g';">
+					<div class="text-center"
+						style="margin: auto; margin-bottom: 40px; font-family: 'Handon3gyeopsal600g';">
 						<h2>유기동물 조회</h2>
 					</div>
-					<div style="font-weight: 600; margin-bottom: 20px; font-family: 'Handon3gyeopsal600g';">
+					<div
+						style="font-weight: 600; margin-bottom: 20px; font-family: 'Handon3gyeopsal600g';">
 						**이 페이지에서 조회되는 유기동물 자료는 동물보호관리시스템에서 제공하는 OpenAPI 공공데이터입니다.<br>
 						「동물보호법」 제 17조 및 동법 시행규칙 제 7조에 따라 유기·유실동물을 보호하고 있는 경우에는 소유자 등이 보호조치
 						사실을 알 수 있도록 7일 동안 공고하여야 합니다. 공고중인 동물 소유자는 해당 시군구 및 동물보호센터에 문의하시어
@@ -846,11 +881,18 @@ label {
 								</div>
 								<div class="col-lg-1">상태</div>
 								<div class="col-lg-2">
-									<select id="processState_select" name="processState">
+
+									<select id="processState_select" class="form-control form-control-sm" name="processState">
 										<option class="op_processState" value="전체">전체</option>
 										<option class="op_processState" value="공고중">공고중</option>
 										<option class="op_processState" value="보호중">보호중</option>
 									</select>
+
+									<!-- 									<select id="processState_select" name="processState"> -->
+									<!-- 										<option class="op_processState" value="전체">전체</option> -->
+									<!-- 										<option class="op_processState" value="공고중">공고중</option> -->
+									<!-- 										<option class="op_processState" value="보호중">보호중</option> -->
+									<!-- 									</select> -->
 								</div>
 								<div class="col-lg-3 text-right">
 									<button id="btnSelect" class="btn btn-sm" type="button">조회</button>
@@ -901,7 +943,7 @@ label {
 						</c:if>
 
 						<c:if test="${listsize == 0 }">
-							<div id="dataNotExist">해당 데이터가 존재하지 않습니다.</div>
+							<div id="dataNotExist" style="margin:auto">해당 데이터가 존재하지 않습니다.</div>
 						</c:if>
 					</div>
 

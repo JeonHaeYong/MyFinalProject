@@ -147,7 +147,7 @@ a:hover {
 	<!-- -----ì¬ê¸°ê¹ì§ ê³ ì  Headerìëë¤----------------------------------------------------------------------------------------------------------- -->
 	<section class="site-section bg-light block-13">
 		<div class="jumbotron px-0 pb-0">
-			<img src="/resources/images/abandoned/girlndog.jpg">
+			<img src="/resources/images/abandoned/girlndog.png">
 		</div>
 		<div class="container">
 
@@ -163,10 +163,10 @@ a:hover {
 						<a href="listTempProtect?currentPage=1">임시보호중</a>
 					</div>
 					<div class="s-menu1">
-						<a href="">동물병원 조회</a>
+						<a href="toHospital?currentPage=1">동물병원 조회</a>
 					</div>
 					<div class="s-menu1">
-						<a href="">보호센터 조회</a>
+						<a href="toCenter?currentPage=1">보호센터 조회</a>
 					</div>
 				</div>
 
@@ -278,7 +278,7 @@ a:hover {
 	<script src="resources/js/main.js"></script>
 </body>
 <script>
-	console.log(${listsize})
+	
 	$(".naviBtn").on("click", function() {
 		var currPage = $(this).attr("currPage");
 		location.href = "listTempProtect?currentPage=" + currPage;
