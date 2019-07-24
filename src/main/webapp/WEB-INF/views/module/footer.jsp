@@ -141,28 +141,28 @@
 <link href="https://fonts.googleapis.com/css?family=Gamja+Flower&display=swap&subset=korean" rel="stylesheet">
 <script>
 //--로그인에러로 넘어왔을경우,
-if(${errorLogin!=null}){
-	   alert("로그인을 먼저 해주세요.");
-	   $(".login-btn").trigger("click");
-}
+onload = function()
+{
+	if(${errorLogin!=null}){
+		   alert("로그인을 먼저 해주세요.");
+		   $(".login-btn").trigger("click");
+	}
+};
+
 </script>
 <script src='https://developers.kakao.com/sdk/js/kakao.min.js'></script>
 <script>
 //카카오 로그아웃
-/* 	Kakao.init('158c89adb3b9e4e64ef9002fd15b6f66'); 
-	function Kakao.Auth.logout(function(data){
-			
-		 if(data==true){ alert("로그인 성공");}else{ alert("로그인 실패");}
-			 location.href='logout';
-			
-	  });	 */
-$("#logout").on("click",function(){
-	window.open('kakaologout',
-			'window팝업',
-			'width=470, height=300, menubar=no, status=no, toolbar=no');
+onload = function()
+{
+	$("#logout").on("click",function(){
+		window.open('kakaologout',
+				'window팝업',
+				'width=470, height=300, menubar=no, status=no, toolbar=no');
 
+	});
+};
 
-});
 
 </script>
 	

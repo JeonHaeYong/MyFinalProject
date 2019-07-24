@@ -15,8 +15,10 @@
                         </ul>
                     </div>
                     <div class="my_page_info">
-                        <div class="img_wrapper">
-                            <a class="img_anchor" href="javascript:void(0)" onclick="changeProfileImg();"><img src="/resources/images/dog_1.jpg" class="rounded-circle" style="width: 200px; height: 200px;"></a>
+                        <div class="img_wrapper position-relative">
+                        	<img id="tabImg" class="position-absolute" src="/profile/tab.png" style="width: 50px; height: 50px; top:-10% ; right : 80%; ">
+                        	<div style="font-size: 19px; font-family:BBTreeGR !important;">이미지 클릭!</div>
+                            <a class="img_anchor" href="javascript:void(0)" onclick="changeProfileImg();"><img src="${memberDTO.imagepath }" class="profileImg_round rounded-circle" style="width: 200px; height: 200px;"></a>
                         </div>
                         <div>
                             ${memberDTO.name }님                                </div>
@@ -45,7 +47,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <!-- 파일 업로드 -->
-                                    <form id="changeProfileImg_form" action="changeProfileImg" method="post">
+                                    <form id="changeProfileImg_form" action="changeProfileImg" method="post" enctype="multipart/form-data">
 	                                    <div class="form-group profile_upload_part">
 	                                        <div class="filebox preview-image">
 	                                            <input class="upload-name text-truncate" value="파일선택" disabled="disabled">
@@ -58,14 +60,14 @@
                                     <div class="justify-content-around profile_upload_part hide">
                                         <div class="d-flex">
                                             <div>변경전</div>
-                                            <img src="/resources/images/dog_1.jpg" class="rounded-circle" style="width: 110px; height: 110px;">
+                                            <img src="${memberDTO.imagepath }" class="profileImg_round rounded-circle" style="width: 110px; height: 110px;">
                                         </div>
                                         <div class="d-flex align-items-center">
-                                            <img src="/mypage/right-arrow.png" class="rounded-circle" style="width: 80px; height: 80px;">
+                                            <img src="/mypage/right-arrow.png" class="profileImg_round rounded-circle" style="width: 80px; height: 80px;">
                                         </div>
                                         <div class="d-flex changeAfterImg">
                                             <div>변경후</div>
-                                            <img src="tmp" class="upload-display">
+                                            <img src="" class="upload-display">
                                         </div>
                                     </div>
                                     <input type="hidden" value="${memberDTO.id }" name="id">

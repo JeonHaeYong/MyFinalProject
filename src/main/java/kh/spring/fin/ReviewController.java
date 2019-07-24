@@ -78,10 +78,12 @@ public class ReviewController {
 	@RequestMapping("toReviewDetail")
 	public String toReviewDetail(HttpServletRequest request, int seq, String currentPage) {
 		String loginId = (String)session.getAttribute("id");
-		//해당 글 조회수 올리기.
-		int result = rservice.updateViewCount(seq);
 		//해당 글 정보 가져오기
 		ReviewDTO dto = rservice.selectReviewBySeq(seq);
+		//해당 글 작성자와 현재 로그인한 id와 같지 않다면 , 해당 글 조회수 올리기.
+		if(loginId!=null&&!loginId.equals(dto.getWriter())) {
+			int result = rservice.updateViewCount(seq);
+		}
 		//해당 글의 댓글 가져오기
 		List<ReviewCommentsDTO> list = rcService.selectAllReviewCommentsService(seq,1,loginId);
 		//(댓글 navi)

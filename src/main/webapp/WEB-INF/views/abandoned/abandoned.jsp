@@ -21,8 +21,212 @@
 <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
+
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<style>
+body {
+	min-width: 375px;
+	font-family:'Gamja Flower' !important;
+}
+
+.container {
+	margin-bottom: 30px;
+	color: #754F44;
+}
+
+.header {
+	background-color: #EC7357;
+	color: white;
+	text-align: center;
+	font-size: 20px;
+	height: 40px;
+	line-height: 40px;
+}
+
+.section {
+	text-align: center;
+	border-bottom: 1px solid black
+}
+
+.section:hover {
+	background-color: #FDD69250;
+}
+
+.section
+>
+div
+
+
+
+
+
+
+:not
+
+
+
+ 
+
+
+
+(
+.addr
+
+
+
+ 
+
+
+
+){
+line-height
+
+
+
+
+
+
+:
+
+
+
+ 
+
+
+
+50
+px
+
+
+
+
+
+
+;
+}
+.addr {
+	text-align: left;
+}
+
+.footer {
+	text-align: center;
+	padding-top: 15px;
+	font-size: 18px;
+}
+
+.menu-bar {
+	text-align: center;
+	height: 200px;
+}
+
+.menu-bar>div {
+	height: 40px;
+}
+
+.menu-bar>div:not (.menu ):hover {
+	background-color: #FBFFB950;
+	font-weight: bold;
+}
+
+.menu-bar div:first-child {
+	font-size: 20px;
+	font-weight: bold;
+	border-bottom: 1px solid black;
+	color: #754F44;
+}
+
+.card {
+	width: 243px;
+	min-width: 243px;
+	max-width: 243px;
+}
+
+.card-body {
+	height: 200px;
+	padding: 0px 0px;
+	margin-bottom: 20px;
+}
+
+.title {
+	width: 37%;
+	margin-bottom: 0px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.content {
+	width: 57%;
+	margin-bottom: 0px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.naviBtn {
+	cursor: pointer;
+	font-family: 'Gamja Flower', cursive;
+	font-size: 23px;
+}
+
+.naviBtn:hover {
+	font-weight: 600;
+}
+
+#btnSelect {
+	background-color: #EC7357;
+	color: white;
+	border-radius: 5px;
+	padding: 5px 10px;
+}
+
+.selected_navi {
+	color: #EC7357 !important;
+	font-weight: 600;
+}
+
+label {
+	width: 70px;
+}
+
+#dataNotExist {
+	text-align: center;
+}
+.menu-row {
+	text-align: -webkit-center;
+}
+
+.s-menu1>a {
+	text-decoration: none;
+	color: black;
+	font-size: 20px;
+	font-family: 'Gamja Flower', cursive;
+}
+
+.s-menu1:hover {
+	background-color: #F3F78130;
+}
+
+.s-menu1 {
+	padding-top: 10px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.s-menu {
+	color: #B45F04;
+	border-bottom: 2px solid black;
+}
+
+.menu-box {
+	width: 150px;
+	height: 100px;
+	padding-bottom: 120px;
+	margin-bottom: 150px;
+}
+</style>
 
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 <script

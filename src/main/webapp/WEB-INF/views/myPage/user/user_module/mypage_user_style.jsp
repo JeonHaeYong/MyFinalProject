@@ -13,8 +13,9 @@ src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/Lo
 @font-face { font-family: 'SeoulHangangM'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulHangangM.woff') format('woff'); font-weight: normal; font-style: normal; }
 @font-face { font-family: 'SeoulNamsanM'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulNamsanM.woff') format('woff'); font-weight: normal; font-style: normal; }
 @font-face { font-family: 'BBTreeGB'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/BBTreeGB.woff') format('woff'); font-weight: normal; font-style: normal; }
-             	body *{ font-family: BBTreeGB !important; font-size: 22px; font-weight: 400;}
-             	::placeholder{font-family: BBTreeGB !important;}
+@font-face { font-family: 'BBTreeGR'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/BBTreeGR.woff') format('woff'); font-weight: normal; font-style: normal; }
+             	body *{ font-family: SeoulNamsanM !important; font-size: 1.3rem; font-weight: 400;}
+             	::placeholder{font-family: SeoulNamsanM !important;}
                 .topBackGround{
                     height: 100px;
                 }
@@ -52,6 +53,10 @@ src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/Lo
                 /*마이페이지 컨테이너 크기 조정*/
                 .container{
                 	max-width: 1300px;
+                }
+                /*input 포커스되었을때, 테두리 없애기*/
+                input:focus{
+                    outline: none;
                 }
 </style>
    <!-- /user 마이페이지 스타일 -->

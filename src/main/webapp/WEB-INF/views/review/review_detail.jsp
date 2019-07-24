@@ -42,6 +42,9 @@
                     /*~왼쪽 메뉴 */
                     .write-btn{background-color: #EC7357; border: none; font-size: 20px; color:white; border-radius: 5px;}
                     .write-btn:hover{font-weight: bold; background-color: #f7613e;}
+                    input:focus{
+                    	outline: none;
+                    }
                 </style>
 
             </head>
@@ -199,6 +202,7 @@
                         $(".reply_wrapper").append(resp);
                         likeOkCheck();//좋아요 클릭한것만 빨강하트
                         $("#review_reply_input").val("");
+                        $(".modifyReply_part.hide").hide();
                     })
                 });
                 //좋아요클릭했을때,

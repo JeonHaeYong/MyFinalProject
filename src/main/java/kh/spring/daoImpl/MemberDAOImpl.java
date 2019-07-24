@@ -156,6 +156,10 @@ public class MemberDAOImpl implements MemberDAO {
 	public int updateMemberInfoByMyPage(MemberDTO dto) {
 		return sst.update("MemberDAO.updateMemberInfoByMyPage",dto);
 	}
+	@Override
+	public int updateImagePath(MemberDTO dto) {
+		return sst.update("MemberDAO.updateImagePath",dto);
+	}
 	
 	
 }

@@ -406,8 +406,6 @@ function cookieToJson(cookies){
 		
 		
   		 </script>
-  		<script>
-  		console.log("${type}");
-  		</script>
+  	
 </body>
 </html>

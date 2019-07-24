@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!-- 로그인 Modal Style영역입니다 -->
 <style>
+@font-face { font-family: 'SeoulNamsanM'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulNamsanM.woff') format('woff'); font-weight: normal; font-style: normal; }
 .login-btn{background:none; border:none; font-family:'Gamja Flower', cursive; font-size:20px; color:#EC7357;}
 	.login-btn:hover{font-weight:bold; color:#ed461f;}
  #loginbtn{
