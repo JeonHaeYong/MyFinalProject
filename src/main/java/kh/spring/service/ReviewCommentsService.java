@@ -15,4 +15,6 @@ public interface ReviewCommentsService {
 	public int reviewCommentsLikeClick(ReviewCommentsLikesDTO dto);
 	public int reviewCommentsLikeCancel(ReviewCommentsLikesDTO dto);
 	public ReviewCommentsDTO selectReviewCommentsDTOByCurrValSeq();
+	public int updateReplyContentsByseq(ReviewCommentsDTO dto);
+	public ReviewCommentsDTO selectDTOBySeq(int seq);
 }

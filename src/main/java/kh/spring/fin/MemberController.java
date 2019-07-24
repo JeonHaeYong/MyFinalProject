@@ -53,38 +53,36 @@ public class MemberController {
 	private DonationPaymentService dps;
 	private kakao_restapi kakao_restapi = new kakao_restapi();
 
-	//로그인
-	@RequestMapping("login")
-	public String login(HttpServletRequest request, MemberDTO dto) {
-		String url ="http://localhost/";
-		String referer = request.getHeader("referer");
-		String returnUrl = referer.substring(url.length());
+	   //로그인
+	   @RequestMapping("login")
+	   public String login(HttpServletRequest request, MemberDTO dto) {
+	      String referer = request.getHeader("referer");
+	      referer = referer.replaceAll("^http://.+?/", "");
+	      System.out.println(dto.getId());
+	      try{
+	         int result=mservice.isLoginOkService(dto.getId(), dto.getPassword());
+	         System.out.println(result);
+	         if(result<1)
+	         {
+	            return "member/loginfail";
+	         }
+	         else {
+	            MemberDTO mdto=mservice.selectOneMemberService(dto.getId());               
+	            session.setAttribute("id", mdto.getId());
+	            session.setAttribute("type", mdto.getType());
+	            if(referer.equals("join")) {
+	               return "redirect:/";   
+	            }
+	            return "redirect:/"+referer;   
+	         }
+	      }
 
-		System.out.println(dto.getId());
-		try{
-			int result=mservice.isLoginOkService(dto.getId(), dto.getPassword());
-			System.out.println(result);
-			if(result<1)
-			{
-				return "member/loginfail";
-			}
-			else {
+	      catch(Exception e) {
+	         e.printStackTrace();
+	         return "/loginfail";
+	      }
 
-
-				MemberDTO mdto=mservice.selectOneMemberService(dto.getId());					
-				session.setAttribute("id", mdto.getId());
-				session.setAttribute("type", mdto.getType());
-				return "redirect:/"+returnUrl;	
-
-			}
-		}
-
-		catch(Exception e) {
-			e.printStackTrace();
-			return "/loginfail";
-		}
-
-	}
+	   }
 	//로그아웃
 	@RequestMapping("logout")
 	public String logout() {
@@ -113,7 +111,11 @@ public class MemberController {
 	}
 	@RequestMapping("joininfo")
 	public String joininfo(MemberDTO dto) {
-		try{mservice.insertMemberService(dto);
+		try{
+//			int rand = (int)(Math.random() * 10 + 1 );
+//			System.out.println("rand"+rand);
+//			dto.setim
+			mservice.insertMemberService(dto);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -337,6 +339,13 @@ public class MemberController {
 		//id에 대해 업데이트 하기.
 		int result = mservice.updateMemberInfoByMyPage(dto);
 		System.out.println(dto.getId()+"님의 정보업데이트가 " +result+"행 완료되었습니다.");
+		return "redirect:toMyPage";
+	}
+
+	//프로필img 바꾸기
+	@RequestMapping("changeProfileImg")
+	public String changeProfileImg(MemberDTO dto) {
+		//여기짜기
 		return "redirect:toMyPage";
 	}
 

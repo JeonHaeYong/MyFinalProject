@@ -4,11 +4,11 @@
 	
 	<insert id="insertMember" >
 		insert into member values(#{id}, #{password}, #{name}, #{email}, #{birthDay,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
-		#{phone,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR}, #{address1,jdbcType=VARCHAR}, #{address2,jdbcType=VARCHAR}, #{type,jdbcType=NUMERIC}, 0)
+		#{phone,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR}, #{address1,jdbcType=VARCHAR}, #{address2,jdbcType=VARCHAR}, #{type,jdbcType=NUMERIC}, 0 , #{image,jdbcType=VARCHAR})
 	</insert>
 	<insert id="insertNaverJoin" >
 		insert into member values(#{id}, #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{birthDay,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
-		#{phone,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR}, #{address1,jdbcType=VARCHAR}, #{address2,jdbcType=VARCHAR}, #{type,jdbcType=NUMERIC}, 0)
+		#{phone,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR}, #{address1,jdbcType=VARCHAR}, #{address2,jdbcType=VARCHAR}, #{type,jdbcType=NUMERIC}, 0 , #{image,jdbcType=VARCHAR})
 	</insert>
 	<select id="selectAllMembers" resultType="kh.spring.dto.MemberDTO">
 		select * from member;

@@ -13,6 +13,21 @@
 	<select id="selectCountById" resultType="java.lang.Integer">
 		select count(*) from blacklist where id = #{id}
 	</select>
+	
+	<select id="selectList" resultType="kh.spring.dto.BlackListDTO">
+		select * 
+		from    
+		(  
+		    select row_number() over(order by seq desc) as rown, BLACKLIST.* 
+		    from BLACKLIST
+		    where id like #{id}
+		)
+		where rown between #{start} and #{end}
+	</select>
+	
+	<select id="selectCount" resultType="java.lang.Integer">
+		select count(*) from blacklist
+	</select>
 		
 	<delete id="deleteById">
 		delete from blacklist where id = #{id}	

@@ -76,7 +76,7 @@
 	
 	<update id="updateTodayPayAmount">
 	
-		update chart set pay_amount = #{value} where to_char(time, 'yy/mm/dd' ) = to_char( sysdate, 'yy/mm/dd')
+		update chart set pay_amount = pay_amount + #{value} where to_char(time, 'yy/mm/dd' ) = to_char( sysdate, 'yy/mm/dd')
 		
 	</update>
 	

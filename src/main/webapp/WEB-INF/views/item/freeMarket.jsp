@@ -319,6 +319,7 @@
 				$.ajax({
 					url: "freeMarket",
 					data: {
+						category: "${category}",
 						soldout: withoutSoldout
 					}
 				}).done(function(resp){
