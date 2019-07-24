@@ -17,5 +17,24 @@
 	<select id="getDonationPaymentTotalCountById" resultType="int">
 		select count(*) from donated_payment where donator = #{value}
 	</select>
-
+	
+	<select id="selectList" resultType="kh.spring.dto.DonationPaymentDTO">
+		select donation, donation_name, donated_time from
+		(
+		    select ROWNUM as rown, donation, donation_name, donated_time from
+		    (select * from (select sum(donation) as donation, donation_name, to_char(donated_time, 'yy/MM') as donated_time from DONATED_PAYMENT
+		    group by 
+		        donation_name ,to_char(donated_time, 'yy/MM'))
+		    order by donated_time desc, donation_name asc)
+		)
+		where rown between #{start} and #{end}	
+	</select>
+	
+	<select id="selectCountForList" resultType="java.lang.Integer">
+		select count(*)
+		from (select * from (select sum(donation) as donation, donation_name, to_char(donated_time, 'yy/MM') as donated_time from DONATED_PAYMENT
+				group by 
+				donation_name ,to_char(donated_time, 'yy/MM'))
+				order by donated_time desc, donation_name asc)			
+	</select>
 </mapper>

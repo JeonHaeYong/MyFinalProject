@@ -29,6 +29,7 @@ public class ReviewCommentsController {
 		}
 		int result = rcService.insertReviewCommentService(dto);
 		if(result!=1) {
+			System.out.println("result--->>"+result);
 			return "redirect:error";
 		}
 		int seq = dto.getReview_seq();
@@ -38,7 +39,7 @@ public class ReviewCommentsController {
 		List<String> reply_navi = rcService.getNaviForReviewCommentsList(seq, 1);
 		request.setAttribute("replyList", list);
 		request.setAttribute("reply_navi", reply_navi);
-		return "review/reply_templet";
+		return "review/reply_template";
 	}
 	
 	@ResponseBody
@@ -72,6 +73,32 @@ public class ReviewCommentsController {
 		List<String> reply_navi = rcService.getNaviForReviewCommentsList(seq, currentPage);
 		request.setAttribute("replyList", list);
 		request.setAttribute("reply_navi", reply_navi);
-		return "review/reply_templet";
+		return "review/reply_template";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="updateReplyContents",produces = "application/text; charset=utf8")
+	public String updateReplyContents(HttpServletRequest request , ReviewCommentsDTO dto) {
+		rcService.updateReplyContentsByseq(dto);
+		return	dto.getContents();
+	}
+	
+	@RequestMapping(value="deleteReply",produces = "application/text; charset=utf8")
+	public String deleteReply(HttpServletRequest request , ReviewCommentsDTO dto) {
+		String loginId = (String)session.getAttribute("id");
+		String writer = dto.getWriter();
+		dto  = rcService.selectDTOBySeq(dto.getSeq());
+		int seq = dto.getReview_seq();
+		if(!writer.equals(dto.getWriter())||!loginId.equals(writer)) {
+			return "redirect:error";
+		}
+		rcService.deleteReviewCommentService(dto.getSeq());
+		//해당 글의 댓글 가져오기
+		List<ReviewCommentsDTO> list = rcService.selectAllReviewCommentsService(seq,1,loginId);
+		//(댓글 navi)
+		List<String> reply_navi = rcService.getNaviForReviewCommentsList(seq, 1);
+		request.setAttribute("replyList", list);
+		request.setAttribute("reply_navi", reply_navi);
+		return "review/reply_template";
 	}
 }

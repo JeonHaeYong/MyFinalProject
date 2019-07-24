@@ -107,11 +107,16 @@ public class InformationController {
 			Matcher m=p.matcher(dto.getContents());
 
 			if(m.find()==true) {			
-				dto.setImage(m.group(0));	}
+				dto.setImage(m.group(0));	
+				}
 			else {
 			
 				dto.setImage("<img src='resources/images/dog_1.jpg' width='100%' height='100%'>");	}
-			service.Infoinsert(dto);
+			int result=service.Infoinsert(dto);
+			if(result>0)
+			{
+				return "redirect:/information_t?currentPage=1";
+			}
 		} catch (Exception e) {		
 			e.printStackTrace();
 		}

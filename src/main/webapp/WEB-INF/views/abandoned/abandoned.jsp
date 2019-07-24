@@ -765,7 +765,7 @@ label {
 	<!-- -----ì¬ê¸°ê¹ì§ ê³ ì  Headerìëë¤----------------------------------------------------------------------------------------------------------- -->
 	<section class="site-section bg-light block-13">
 
-		<div class="container">
+		<div class="container tmp">
 
 			<div class="row">
 				<!--작은 메뉴랑 게시판목록이랑 나누는 row-->

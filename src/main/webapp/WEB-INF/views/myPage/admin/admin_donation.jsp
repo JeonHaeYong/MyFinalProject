@@ -72,6 +72,22 @@ background-color:#FDD692;
 font-weight:bold;
 }
 
+.log_navi_btns {
+font-family: 'Gamja Flower', cursive !important;
+background-color:#FDD69270;
+color:#754F44;
+}
+.log_navi_btns:hover {
+background-color:#FDD692;
+font-weight:bold;
+}
+.selected_log_btn{
+font-family: 'Gamja Flower', cursive !important;
+color:#754F44;
+background-color:#FDD692;
+font-weight:bold;
+}
+
 
 </style>
 
@@ -561,6 +577,40 @@ font-weight:bold;
 
 			</div>
 			
+			<div class="row justify-content-center">
+				
+				<div class="col-12 col-md-12 col-lg-12 text-center my-3">
+					
+					<div class="row justify-content-center">
+					
+						<div class="col-12 col-md-12 col-lg-12 text-center my-3">
+							
+							<h2>월 별 후원금 검색</h2>
+							
+						</div>
+						
+					</div>
+					
+					<div class="row justify-content-center">
+					
+						<div class="col-12 col-md-12 col-lg-12 text-center my-3">
+							
+							<input id="log_btn" class="btn my_buttons" name="1" type="button" value="월 별 후원금 검색">
+							
+						</div>
+						
+						<div id="log_result_div" class="col-12 col-md-12 col-lg-12 text-center my-3">
+							
+							
+						
+						</div>
+						
+					</div>
+								
+				</div>
+				
+			</div>
+			
 		</div>
 
 	</section>
@@ -754,6 +804,101 @@ font-weight:bold;
 	    	{
 	    		alert("error");
 	    	});
+	    }
+	    
+
+	    
+		$(document).on("click", "#log_btn, .log_navi_btns", function()
+		{
+	    	logAjax(this.name);	    	
+		});
+		
+	    function logAjax(btnName)
+	    {
+	    	$.ajax
+	    	({
+	    		url: "admin-donation-log",
+	    		type: "POST",
+	    		dataType: "JSON",
+	    		data:
+	    		{
+	    			page: btnName
+	    		}
+	    	})
+	    	.done(function(response)
+	    	{
+	    		var array = response.array;
+	    		
+	    		if(array.length != 0)
+	    		{
+	    			$("#log_result_div").empty();
+		    		
+	    			var $menu_row = $('<div class="row justify-content-center my-1 id_row"></div>');
+	    			var $menu_timeCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1"><h3>연/월</h3></div>');
+	    			var $menu_nameCol = $('<div class="col-4 col-md-4 col-lg-6 text-center my-1"><h3>기관 명</h3></div>');
+	    			var $menu_donationCol = $('<div class="col-4 col-md-4 col-lg-4 text-center my-1"><h3>후원 금액</h3></div>');
+	    			$menu_row.append($menu_timeCol).append($menu_nameCol).append($menu_donationCol);
+	    			$("#log_result_div").append($menu_row);
+	    			
+		    		for(var i = 1 ; i <= array.length ; i++)
+		    		{
+						var $row = $('<div class="row justify-content-center my-1 id_row"></div>');
+		    			var $timeCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].time+'</div>');
+		    			var $nameCol = $('<div class="col-4 col-md-4 col-lg-6 text-center my-1">'+array[i-1].name+'</div>');
+		    			var $donationCol = $('<div class="col-4 col-md-4 col-lg-4 text-center my-1">'+array[i-1].donation+'</div>');
+		    			$row.append($timeCol).append($nameCol).append($donationCol);
+		    			$("#log_result_div").append($row);
+		    		}
+		    		
+					var $naviRow = $('<div id="navi_row" class="row justify-content-center mb-1 mt-3"></div>');
+		    		
+		    		if(response.needPrev)
+		    		{
+//	 	    			var $prevBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value=" < " name="'+(response.startNavi-1)+'">');
+						var $prevBtn = $('<input class="btn btn-link log_navi_btns mx-1" type="button" value=" < " name="'+(response.startNavi-1)+'">');
+
+		    			$naviRow.append($prevBtn);
+		    		}
+		    		
+		    		for(var i = response.startNavi ; i <= response.endNavi ; i++)
+		    		{
+		    			
+//	 	    			if(i == response.currentPage)
+//	 	    			{
+//	 		    			var $naviBtn = $('<input class="btn btn-danger selected_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+//	 	    			}
+//	 	    			else
+//	 	    			{
+//	 		    			var $naviBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+//	 	    			}
+					
+						if(i == response.currentPage)
+		    			{
+			    			var $naviBtn = $('<input class="btn btn-link selected_log_btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+		    			}
+		    			else
+		    			{
+			    			var $naviBtn = $('<input class="btn btn-link log_navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+		    			}
+
+		    			$naviRow.append($naviBtn);
+		    		}
+		    		
+		    		if(response.needNext)
+		    		{
+//	 	    			var $nextBtn = $('<input class="btn btn-danger my_navi_btns navi_btns mx-1" type="button" value=" > " name="'+(response.endNavi+1)+'">');
+		    			var $nextBtn = $('<input class="btn btn-link log_navi_btns mx-1" type="button" value=" > " name="'+(response.endNavi+1)+'">');
+		    			$naviRow.append($nextBtn);
+		    		}
+		    		
+		    		$("#log_result_div").append($naviRow);
+	    		}
+	    		else
+	    		{
+	    			alert("검색 결과 없음");
+	    		}
+
+	    	})
 	    }
 	    
     });
