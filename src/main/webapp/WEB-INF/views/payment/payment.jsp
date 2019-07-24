@@ -33,11 +33,14 @@
 /* 		height: 150px; */
 /* 	} */
 	.imageBox{
-		width: 150px;
+		min-width: 100px;
 	}
 	#itemImage{
 		width: 100%; 
 		height: 100%;
+	}
+	.totalAmount{
+		text-align: right;
 	}
 	.formTop{
 		text-align: center;
@@ -67,12 +70,12 @@
 		<div class="row m-3">
 			<c:forEach var="dto" items="${items }" varStatus="status">
 				<div class="col-12 d-flex justify-content-center">
-					<div class="card mb-3 myCard" style="width: 90%;">
+					<div class="card mb-3 myCard" style="width: 75%;">
 						<div class="row no-gutters">
-							<div class="col-4 imageBox">
+							<div class="col-md-4 col-12 imageBox">
 								<img src="${dto.imagePath1 }" class="card-img itemImage">
 							</div>
-							<div class="col-8">
+							<div class="col-md-8 col-12">
 								<div class="card-body">
 									<input type="hidden" class="soldoutCheck" value="${dto.soldout }">
 									<h5 class="card-title">상품명 : ${dto.name }</h5>
@@ -85,7 +88,7 @@
 				</div>
 			</c:forEach>
 			<div class="col-12">
-				전체 금액 : ${totalAmount }원
+				<h4 class="totalAmount">총 결제 금액 : ${totalAmount }원</h4>
 			</div>
 		</div>
 		<div class="row">
