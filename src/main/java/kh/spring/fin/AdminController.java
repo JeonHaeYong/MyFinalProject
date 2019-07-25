@@ -273,7 +273,22 @@ public class AdminController
 		
 		return result;
 	}
-	
+	@ResponseBody
+	@RequestMapping(value = "admin-donation-index", produces="application/json;charset=utf-8")
+	public Object selectDonationAjax()
+	{
+		Object result = "error";
+		try
+		{
+			result = donationService.selectRecentDTOAjax();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 	//Donation End
 	
 	

@@ -11,6 +11,7 @@ public interface DonationService
 		throws Exception;
 	
 	public Object selectRecentDTO() throws Exception;
+	public Object selectRecentDTOAjax() throws Exception;
 	public Object selectDTOByRowNumber(String page) throws Exception;
 	
 	public Object updateDonation
