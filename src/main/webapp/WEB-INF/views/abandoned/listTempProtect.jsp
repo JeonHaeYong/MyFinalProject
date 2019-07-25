@@ -80,13 +80,6 @@ a:hover {
 	color: #EC7357;
 }
 
-#write {
-	background-color: #EC7357;
-	color: white;
-	border-radius: 5px;
-	padding: 10px 10px;
-}
-
 .selected_navi {
 	color: #EC7357 !important;
 	font-weight: 600;
@@ -162,6 +155,13 @@ a:hover {
 .jumbotron>img {
 	width: 100%;
 	max-height: 600px;
+}
+
+.btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44;}
+.btn:hover{background-color:#FDD692; font-weight:bold;}
+.selected_navi {
+	color: #EC7357 !important;
+	font-weight: 600;
 }
 </style>
 </head>
