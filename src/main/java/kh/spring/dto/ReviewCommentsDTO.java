@@ -13,6 +13,7 @@ public class ReviewCommentsDTO {
 	private int dislike;			// 싫어요 수
 	
 	private String likeOk; //조회하는 사람이 좋아요 했는지..
+	private String imagepath; //댓글 작성자의 프로필사진
 	
 	private String formed_date; //시간이용해, 얼마전에 작성했는지... 띄워주기.
 	
@@ -82,6 +83,13 @@ public class ReviewCommentsDTO {
 	}
 	public void setLikeOk(String likeOk) {
 		this.likeOk = likeOk;
+	}
+	
+	public String getImagepath() {
+		return imagepath;
+	}
+	public void setImagepath(String imagepath) {
+		this.imagepath = imagepath;
 	}
 	/**
 	 * 게시글 작성 시간 세밀하게 표시하기

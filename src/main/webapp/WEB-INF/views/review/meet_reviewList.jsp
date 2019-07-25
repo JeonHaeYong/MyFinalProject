@@ -42,6 +42,10 @@
                     /*~왼쪽 메뉴 */
                     .write-btn{background-color: #EC7357; border: none; font-size: 20px; color:white; border-radius: 5px;}
                     .write-btn:hover{font-weight: bold; background-color: #f7613e;}
+                    .review-wrapper{
+                    	max-width: 1300px;
+                    	font-size: 22px !important;
+                    }
                 </style>
             </head>
             <body data-spy="scroll" data-target=".site-navbar-target"
@@ -51,7 +55,7 @@
                 <div class="jumbotron px-0 pb-0">
                     <img src="/mypage/dog_1.jpg">
                 </div>
-                <div class="container">
+                <div class="container review-wrapper">
                     <div class="row">
                         <div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-row">
                             <div class="row menu-box">
@@ -80,7 +84,9 @@
 	                                            <div class="card mb-3" style="max-width: 540px;">
 	                                                <div class="row no-gutters">
 	                                                    <div class="col-md-4">
-	                                                        <img src="/review/${list.image_path1 }" class="card-img" alt="...">
+	                                                    	<div style="width: 100%;height: 100%;">
+	                                                    		<img src="/review/${list.image_path1 }" class="card-img" style="width: 100%;height: 100%;">
+	                                                    	</div>
 	                                                    </div>
 	                                                    <div class="col-md-8">
 	                                                        <div class="card-body">
@@ -98,7 +104,7 @@
                                     </c:forEach> 
                                 </div>      
                             </c:if>
-                            <div class="row">
+                            <div class="row mb-3">
                                 <div class="col-12">
                                     <ul class="pagination justify-content-center">
                                         <c:forEach var="navi" items="${navi }">

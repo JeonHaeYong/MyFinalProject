@@ -16,13 +16,13 @@
 		role="banner" style="height: 68px; z-index: 1000;">
 		<div class="container">
 			<div class="row  align-items-center">
-				<div class="col-2 col-xl-2">
+				<div class="col-6 col-xl-2">
 					<h1 class="mb-0 site-logo">
 						<a href="/" class="h2 mb-0" style="font-family:Gamja Flower; font-size:25px"><img src="/resources/images/doglogo2.png" width="80px"><strong>라온</strong>펫<span
 							class="text-primary"></span> </a>
 					</h1>
 				</div>
-				<div class="col-8 col-md-10  d-none d-xl-block pr-0">
+				<div class="col-8 col-xl-10  d-none d-xl-block pr-0">
 					<nav class="site-navigation position-relative text-right pl-0"
 						role="navigation">
 						<ul
@@ -42,20 +42,21 @@
 								<c:when test="${id eq null}">
 									<li><input type="button" data-toggle="modal"
 										data-target="#loginmodal" class="login-btn" value="로그인" style="padding:10px 40px 10px 0px">
+
 									</li>
 									<li><a href="join" class="nav-link pl-0 pr-0">회원가입</a></li>
 								</c:when>
 								<c:otherwise>
 									<li>
-									<c:choose>
-											<c:when test="${type ==3}">
-												<input type="button" id="logout" value="로그아웃">
-											</c:when>
-											<c:otherwise>
-												<a href="/logout" class="nav-link "> 로그아웃 </a>
-											</c:otherwise>
+										<c:choose>
+												<c:when test="${type ==3}">
+													<input class="border-left" type="button" id="logout" value="로그아웃">
+												</c:when>
+												<c:otherwise>
+													<a href="/logout" class="nav-link "><input class="border-left logoutBtn" type="button" value="로그아웃"></a>
+												</c:otherwise>
 										</c:choose>
-										</li>
+									</li>
 									<li><a id="mypage_link" href="toMyPage"
 										class="nav-link pl-0 pr-0 ">마이페이지</a></li>
 								</c:otherwise>

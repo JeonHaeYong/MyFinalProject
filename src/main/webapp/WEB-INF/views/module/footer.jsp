@@ -162,8 +162,6 @@ onload = function()
 
 	});
 };
-
-
 </script>
 	
 
