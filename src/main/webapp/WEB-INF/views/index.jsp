@@ -481,8 +481,6 @@ function cookieToJson(cookies){
 		.done(function(response)
 		{
 			
-			console.log(response);
-			
 			var name = response.name;
 			var title = response.title;
 			var explanation = response.explanation;
@@ -517,6 +515,7 @@ function cookieToJson(cookies){
 // 			alert("error");
 			console.log("index ajax error");
 		});
+		
 		
 	})
 </script>

@@ -56,5 +56,10 @@ font-family:'Gamja Flower', cursive;
 padding-bottom:0px;
 }
 .modal-open{padding-right: 0px !important;}
+
+#site_logo_img
+{
+/* 	transition-duration: 3s; */
+}
 </style>
 <link href="https://fonts.googleapis.com/css?family=Gamja+Flower&display=swap&subset=korean" rel="stylesheet">
