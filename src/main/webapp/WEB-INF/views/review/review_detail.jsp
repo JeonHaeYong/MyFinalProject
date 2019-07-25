@@ -20,6 +20,7 @@
                 <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
                 <link rel="stylesheet" href="resources/css/aos.css">
                 <link rel="stylesheet" href="resources/css/style.css">
+                <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
                 <style>
                     *{ font-family: 'Gamja Flower' !important; font-size: 20px;}
                     ::placeholder{font-family: 'Gamja Flower'}
@@ -42,7 +43,7 @@
                     /*~왼쪽 메뉴 */
                     .write-btn{background-color: #EC7357; border: none; font-size: 20px; color:white; border-radius: 5px;}
                     .write-btn:hover{font-weight: bold; background-color: #f7613e;}
-                    input:focus{
+                    .review-wrapper input:focus{
                     	outline: none;
                     }
                     .review-wrapper{

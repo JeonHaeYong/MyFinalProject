@@ -45,6 +45,15 @@
                     .msg_box_nav.active{
                     	color : #EC7357 !important;
                     }
+                    /*쪽지함 체크박스*/
+                    .custom-control-input:checked~.custom-control-label:before{
+                    	border-color: #adb5bd !important;
+                    }
+                    .custom-control-input:checked~.custom-control-label:after{
+                    	border-color: #EC7357 !important;
+                   		background-color: #EC7357 !important;
+                   		border-radius: 0.25rem;
+                    }
                 </style>
                 <jsp:include page="/WEB-INF/views/myPage/user/user_module/mypage_user_style.jsp" ></jsp:include><!-- user 마이페이지 스타일 -->
                 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
