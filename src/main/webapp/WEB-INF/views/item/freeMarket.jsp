@@ -24,6 +24,7 @@
 <style>
 	.myJumbo{
 		background-color: white;
+		padding: 5rem;
 	}
 	#jumboImg{
 		width: 100%;
@@ -33,6 +34,12 @@
 		background-color: #EC7357;
 		color: white;
 	}
+	.freeMarketInfo{
+		font-family: 'SeoulNamsanM';
+	}
+	.blockquote-footer{
+		font-family: 'Gamja Flower';
+	}
 	h3, h4{
 		font-family: 'Gamja Flower';
 	}
@@ -41,6 +48,13 @@
 	}
 	.checkboxDiv{
 		text-align: right;
+	}
+	#wsLabel::before{
+		border-color: #adb5bd;
+	}
+	#withoutSoldout:checked + #wsLabel::before{
+		background-color: #ec7357;
+		border-color: #ec7357;
 	}
 	.menu-box{width: 150px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px; margin-top: 50px;}
     .menu-box>div{height: 35px;}
@@ -65,6 +79,7 @@
 	}
 	.detail:hover{
 		font-weight: bold;
+		background-color: #FBFFB950;
 	}
 	.price{
 		text-align: right;
@@ -158,15 +173,16 @@
 						<h3 class="m-0">무료나눔과 기부를 함께</h3>
 					</div>
 					<div class="card-body">
-						<blockquote class="blockquote mb-0">
+						<blockquote class="blockquote mb-0 freeMarketInfo">
 							<p>무료나눔 상품을 구매하신 분은 저렴한 가격에 원하는 물건을 살 수 있고,<br> 나눔을 하신 분은 본인의 이름으로 후원단체에 기부를 하실 수 있어요!<br>
 							<small>무료나눔을 신청하면 관리자의 승인을 받은 후 무료나눔이 가능해요.</small></p>
 							<footer class="blockquote-footer">나눔 신청하러 가기 <a class="btn addBtn cartAddBtn" href="addItem">Go</a></footer>
 						</blockquote>
 					</div>
 				</div>
-				<div class="checkboxDiv mt-3">
-					<input type="checkbox" id="withoutSoldout">판매완료 상품 제외하기
+				<div class="custom-control custom-switch checkboxDiv mt-3">
+					<input type="checkbox" class="custom-control-input" id="withoutSoldout">
+					<label class="custom-control-label" for="withoutSoldout" id="wsLabel">판매완료 상품 제외하기</label>
 				</div>
 			</div>
 		</div>
@@ -270,6 +286,62 @@
 	<script src="resources/js/main.js"></script>
 	<script>
 		$(function(){
+			
+			var withoutSoldout = "Y";
+			function withoutSoldoutChanged(){
+				$.ajax({
+					url: "freeMarket",
+					data: {
+						currentPage: "${pageNavi.currentPage}",
+						category: "${category}",
+						soldout: withoutSoldout
+					}
+				}).done(function(resp){
+					$(".ajaxRow").remove();
+					$("#conta").append(resp);
+					$(".navi").each(function(i, item){
+						if($(item).text() == "${pageNavi.currentPage}"){
+							$(this).css("color", "#EC7357");
+						}
+					});
+					$(".cardImg").each(function(i, item){
+						if($(item).attr("soldout") == 'y'){
+							$(this).css("filter", "brightness(60%)");
+						}
+					});
+				});
+			}
+			
+			if(document.cookie != ""){
+				var cookies = cookieToJson(document.cookie);
+				$("#withoutSoldout").prop("checked", true);
+				withoutSoldout = "N";
+				withoutSoldoutChanged();
+				console.log(cookies);
+			}
+			$("#withoutSoldout").on("change", function(){
+				var exdate = new Date();
+				if($(this).prop("checked")){
+					withoutSoldout = "N";
+					exdate.setDate(exdate.getDate() + 30);
+				}else{
+					withoutSoldout = "Y";
+					exdate.setDate(exdate.getDate() - 1);
+				}
+				document.cookie = "withoutSoldout=" + $("#withoutSoldout").prop("checked") + ";expires=" + exdate.toGMTString();
+				withoutSoldoutChanged();
+			});
+			function cookieToJson(cookie){
+				var cookieJson = {};
+				var cookies = document.cookie;
+				var cookieArr = cookies.replace(/ /g, "").split(";");
+				for(var i = 0; i < cookieArr.length; i++){
+					var entry = cookieArr[i].split("=");
+					cookieJson[entry[0]] = entry[1];
+				}
+				return cookieJson;
+			}
+			
 			$(".site-navbar").css("z-index", "100 !important");
 			$(".nav-link").each(function(i, item){
 				if($(item).attr("href").match("^freeMarket")){
@@ -307,35 +379,6 @@
 			
 			$("#searchBtn").on("click", function(){
 				$("#searchForm").submit();
-			});
-			
-			var withoutSoldout = "Y";
-			$("#withoutSoldout").on("change", function(){
-				if($(this).prop("checked")){
-					withoutSoldout = "N";
-				}else{
-					withoutSoldout = "Y";
-				}
-				$.ajax({
-					url: "freeMarket",
-					data: {
-						category: "${category}",
-						soldout: withoutSoldout
-					}
-				}).done(function(resp){
-					$(".ajaxRow").remove();
-					$("#conta").append(resp);
-					$(".navi").each(function(i, item){
-						if($(item).text() == 1){
-							$(this).css("color", "#EC7357");
-						}
-					});
-					$(".cardImg").each(function(i, item){
-						if($(item).attr("soldout") == 'y'){
-							$(this).css("filter", "brightness(60%)");
-						}
-					});
-				});
 			});
 			
 			$(document).on("click", ".navi", function(){

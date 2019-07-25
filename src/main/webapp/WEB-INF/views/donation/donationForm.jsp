@@ -24,6 +24,7 @@
 <style>
 	.myJumbo{
 		background-color: white;
+		padding-top: 80px;
 	}
 	#jumboImg{
 		width: 100%;
@@ -33,12 +34,20 @@
 		text-align: center;
 	}
 	.formTop p{
+		font-size: 25px;
+	}
+	#msg{
 		font-size: 13px;
 		color: red;
+	}
+	#donationForm{
+		width: 40%;
 	}
 	#lab{
 		color: white;
 	}
+	.btn{font-family: 'Gamja Flower', cursive; background-color:#FDD69270; color:#754F44;}
+	.btn:hover{background-color:#FDD692; font-weight:bold;}
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -51,7 +60,12 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12 formTop">
-				<h5>후원자 정보</h5><br>
+				<p>후원하기</p>
+				<h2>"${donationName }"</h2>
+				<hr>
+			</div>
+			<div class="col-12 mt-2 formTop">
+				<h5>< 후원자 정보 ></h5><br>
 				<p id="msg">*모든 항목을 작성해주셔야 합니다.</p>
 			</div>
 			<div class="col-12 d-flex justify-content-center">
@@ -80,7 +94,7 @@
 						</select>
 					</div>
 					<div class="form-group d-flex justify-content-center m-4">
-						<input type="button" class="btn btn-primary" id="donationBtn" value="결제하기">
+						<input type="button" class="btn" id="donationBtn" value="결제하기">
 					</div>
 				</form>
 			</div>
@@ -163,10 +177,10 @@
 	//				    나중에 포스팅 해볼게요.
 	//				 */
 	//				name : "무료나눔 결제", //결제창에서 보여질 이름 //
-	//				amount : ${totalAmount},
-	//				buyer_email : $("#inputEmail").val(),
+	//				amount : regexPrice,
+	//				buyer_email : "",
 	//				buyer_name : $("#inputName").val(),
-	//				buyer_tel : $("#inputPhone").val(),
+	//				buyer_tel : "",
 	//				m_redirect_url : ''
 	//			/*  
 	//			    모바일 결제시,
