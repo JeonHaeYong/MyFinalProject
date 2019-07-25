@@ -19,13 +19,13 @@
 	<insert id="upload">
 		insert into temp_protect values(temp_protect_seq.nextval,#{title}, #{writer}, #{findDate},
 		 #{sido}, #{sigungu}, #{place}, #{type}, #{sex},
-		#{color}, #{feat}, #{imagePath}, #{email},
+		#{color}, #{feat}, #{imagePath},
 		 #{phone}, #{writeTime})
 	</insert>
 	<select id="selectList" resultType="kh.spring.dto.TempProtectDTO">
 		select * from (select row_number() over(order by seq desc) as rown, seq, title, writer, findDate,
 		 sido, sigungu, place, type, sex,
-		 color, feat, imagePath,email,
+		 color, feat, imagePath,
 		 phone, writeTime from temp_protect)"
 				+ " where rown between #{array[0]} and #{array[1]}
 	</select>

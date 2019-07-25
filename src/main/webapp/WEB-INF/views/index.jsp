@@ -45,6 +45,12 @@ function cookieToJson(cookies){
 	.pricing{height:845px;}
 	.pricing img{width:405px; height:800px;  border: 5px dashed #754F44;}
 	.from{font-family:'Gamja Flower', cursive; font-size:22px;}
+	
+	#acs_div
+	{
+		width: 100%;
+		height: 600px;
+	}
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -116,30 +122,30 @@ function cookieToJson(cookies){
 
                <h2 class="text-black mb-2">전국 모든 지역 유기동물 현황</h2>
                
-               <p>2019년 06월 01일~2019년 07월 10일</p>
+               <p>이번 달 유기 동물 현황</p>
             </div>
          </div>
 
          <div class="row hover-1-wrap mb-5 mb-lg-0">
-            <div class="col-12">
-               <div class="row">
-                  <div class="mb-4 mb-lg-0 col-lg-6 order-lg-2" data-aos="fade-left">
-                     <a href="#" class="rotate10"> <img
-                        src="resources/images/dog_3.jpg" alt="Image" class="img-fluid">
-                     </a>
-                  </div>
-                  <div
-                     class="col-lg-5 mr-auto text-lg-right align-self-center order-lg-1"
-                     data-aos="fade-right">
-                     <h2 class="text-black">Happy Pets</h2>
-                     <p class="mb-4">Far far away, behind the word mountains,
-                        Separated they live in Bookmarksgrove right at the coast of the
-                        Semantics, a large language ocean.</p>
-                     <p>
-                        <a href="#" class="btn btn-primary">Read More</a>
-                     </p>
-                  </div>
-               </div>
+            <div id="acs_div" class="col-12">
+<!--                <div class="row"> -->
+<!--                   <div class="mb-4 mb-lg-0 col-lg-6 order-lg-2" data-aos="fade-left"> -->
+<!--                      <a href="#" class="rotate10"> <img -->
+<!--                         src="resources/images/dog_3.jpg" alt="Image" class="img-fluid"> -->
+<!--                      </a> -->
+<!--                   </div> -->
+<!--                   <div -->
+<!--                      class="col-lg-5 mr-auto text-lg-right align-self-center order-lg-1" -->
+<!--                      data-aos="fade-right"> -->
+<!--                      <h2 class="text-black">Happy Pets</h2> -->
+<!--                      <p class="mb-4">Far far away, behind the word mountains, -->
+<!--                         Separated they live in Bookmarksgrove right at the coast of the -->
+<!--                         Semantics, a large language ocean.</p> -->
+<!--                      <p> -->
+<!--                         <a href="#" class="btn btn-primary">Read More</a> -->
+<!--                      </p> -->
+<!--                   </div> -->
+<!--                </div> -->
             </div>
          </div>
 
@@ -240,7 +246,7 @@ function cookieToJson(cookies){
          <div class="row justify-content-center" data-aos="fade-up">
             <div class="col-lg-6 text-center heading-section mb-5">
 
-               <h2 class="text-black mb-2">분양 & 재회 후기</h2>
+               <h2 class="text-black mb-2">재회 후기</h2>
             </div>
          </div>
          <div data-aos="fade-up" data-aos-delay="200">
@@ -311,7 +317,7 @@ function cookieToJson(cookies){
                            mollitia nam itaque laborum?.&rdquo;</p>
                      </blockquote>
 
-                     <figure> <img src="resources/images/person_2.jpg"
+<!--                      <figure> <img src="resources/images/person_2.jpg" -->
                         alt="Image" class="img-fluid rounded-circle mx-auto"> </figure>
                      <h3 class="font-size-20 mb-4 text-black">Robert Steward</h3>
 
@@ -343,7 +349,8 @@ function cookieToJson(cookies){
    <script src="resources/js/jquery.sticky.js"></script>
    <script src="resources/js/isotope.pkgd.min.js"></script>
    <script src="resources/js/main.js"></script>
-   
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i" rel="stylesheet">
      <jsp:include page="/WEB-INF/views/module/footer.jsp" ></jsp:include>
       <!-- 로그인시enter -->
    <script>
@@ -376,6 +383,7 @@ function cookieToJson(cookies){
 <script>
 	$(function()
 	{
+		var temp3;
 		
 		$.ajax
 		({
@@ -385,13 +393,77 @@ function cookieToJson(cookies){
 		})
 		.done(function(response)
 		{
-			console.log(response);
+			
+			var array = response.array; 
+			
+// 			console.log(array);
+
+			if(array.length != 0)
+			{
+				
+				google.charts.load('current',{ 'packages' :['corechart'] });
+	    		
+	    		google.charts.setOnLoadCallback(drawChart);
+				
+	    		function drawChart()
+	    		{
+	    			
+	    			var data3 = google.visualization.arrayToDataTable
+	    			([
+	    				['지역', '유기 동물 수']
+	    				,[array[0].area, array[0].num]
+	    				,[array[1].area, array[1].num]
+	    				,[array[2].area, array[2].num]
+	    				,[array[3].area, array[3].num]
+	    				,[array[4].area, array[4].num]
+	    				,[array[5].area, array[5].num]
+	    				,[array[6].area, array[6].num]
+	    				,[array[7].area, array[7].num]
+	    				,[array[8].area, array[8].num]
+	    				,[array[9].area, array[9].num]
+	    				,[array[10].area, array[10].num]
+	    				,[array[11].area, array[11].num]
+	    				,[array[12].area, array[12].num]
+	    				,[array[13].area, array[13].num]
+	    				,[array[14].area, array[14].num]
+	    				,[array[15].area, array[15].num]
+	    				,[array[16].area, array[16].num]
+	    			]);
+
+	    			var options3 = 
+	    			{
+	    				title : '지역 별 현월 유기 동물 현황',
+// 	    				vAxis: {title: '단위 : 1'},
+//	     				hAxis: {title: '단위 : 월'},
+	    				seriesType: 'bars',
+//	    					series: {1: {type: 'line'}},
+	    				chartArea: {width: '60%', height: '70%'}
+	    			};
+
+	    			if(temp3 != null)
+	    			{
+	    				temp3.clearChart();
+	    			}
+	    			
+	    			var chart3 = new google.visualization.ComboChart(document.getElementById('acs_div'));
+	    			chart3.draw(data3, options3);
+	    			
+	    			temp3 = chart3;
+	    		}
+	    		
+			}
+			else
+			{
+				console.log("유기 동물 현황 오류 발생");
+			}
 		})
 		.fail(function()
 		{
 			alert("error");
-		})
-	  		
+		});
+	  	
+		
+		
 	})
 </script>
 </body>
