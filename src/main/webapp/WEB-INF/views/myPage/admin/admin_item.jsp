@@ -263,6 +263,14 @@ font-weight:bold;
 			myAjax(this.name);
 		})
 		
+		$(document).on("change", ".permission_check", function()
+		{
+			if($(this).prop("checked") == false)
+			{
+				$("#permission_all_btn").prop("checked", false);
+			}
+		})
+		
 		function myAjax(btnName)
 		{
 			$.ajax

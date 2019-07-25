@@ -295,6 +295,8 @@ font-weight:bold;
 <script>
 	$(function()
     {
+		searchOnMember("1");
+		searchOnBlackList("1");
 		
 	    $(document).on("click", "#search_btn, .navi_btns", function()
 		{
@@ -309,41 +311,55 @@ font-weight:bold;
 	    $("#black_btn").on("click", function()
 	    {
 			var reasonValue = $("#reason_text").val();
+			
+		
 			var $checkboxClass = $(".black_check"); 
-           	var checkboxNumber = $checkboxClass.length;
-	               	    	
+	        var checkboxNumber = $checkboxClass.length;
+		               	    	
 			var id = "";
-	    	for(var i = 1 ; i <= checkboxNumber ; i++)
-	    	{
-	    		if($checkboxClass.eq(i-1).prop("checked") == true)
-	    		{
-	    			id = id + " " + $checkboxClass.eq(i-1).attr("name");
-	    		}
-	    	}
-	               	    	
+		    for(var i = 1 ; i <= checkboxNumber ; i++)
+		    {
+		    	if($checkboxClass.eq(i-1).prop("checked") == true)
+		    	{
+		    		id = id + " " + $checkboxClass.eq(i-1).attr("name");
+		    	}
+		    }
+			if(id == "")
+			{
+		        alert("아이디를 체크하세요");
+		        return false;
+			}
+			
 			var $form = $('<form></form>');
 			$form.attr('action', 'admin-member-black');
 			$form.attr('method', 'POST');
 			$form.appendTo('body');
-         
+	         
 			var idArr = $('<input type="hidden" value="'+id+'" name="id">');
-	        var blackReason = $('<input type="hidden" value="'+reasonValue+'" name="reason">')
+			var blackReason = $('<input type="hidden" value="'+reasonValue+'" name="reason">')
 			$form.append(idArr).append(blackReason);
-	        $form.submit();
-	               	       	 
+			$form.submit();
+			
 	               	    	
 	    });
 	               	    
 	    $("#release_btn").on("click", function()
 		{
-	    	var $form = $('<form></form>');
-	    	$form.attr('action', 'admin-member-release');
-	    	$form.attr('method', 'POST');
-	    	$form.appendTo('body');
-	               	         
-	    	var id = $('<input type="hidden" value="'+$("#release_id_text").val()+'" name="id">');
-	    	$form.append(id);
-	    	$form.submit();
+	    	if($("#release_id_text").val() != "")
+	    	{
+	    		var $form = $('<form></form>');
+		    	$form.attr('action', 'admin-member-release');
+		    	$form.attr('method', 'POST');
+		    	$form.appendTo('body');
+		               	         
+		    	var id = $('<input type="hidden" value="'+$("#release_id_text").val()+'" name="id">');
+		    	$form.append(id);
+		    	$form.submit();
+	    	}
+	    	else
+	    	{
+	    		alert("")
+	    	}
 	               	    	
 		});
 	    
@@ -366,13 +382,11 @@ font-weight:bold;
 	    		
 	    		var array = response.array;
 	    		
-// 	    		console.log(response)
 	    		
 	    		if(array.length != 0)
 	    		{
 	    			for(var i = 1 ; i <= array.length ; i++)
 		    		{
-//	 	    			console.log(response[i-1].id);
 						var $row = $('<div class="row justify-content-center my-1 id_row"></div>');
 		    			var $idCol = $('<div class="col-6 col-md-6 col-lg-6 text-center my-1">'+array[i-1].id+'</div>');
 		    			var $statusCol = $('<div class="col-4 col-md-4 col-lg-3 text-center my-1">'+array[i-1].status+'</div>');
@@ -380,12 +394,6 @@ font-weight:bold;
 		    			$row.append($idCol).append($statusCol).append($checkCol);
 		    			$("#search_result_div").append($row);
 		    		}
-		    		
-		    		console.log(response.currentPage);
-		    		console.log(response.needPrev);
-		    		console.log(response.needNext);
-		    		console.log(response.startNavi);
-		    		console.log(response.endNavi);
 		    		
 		    		var $naviRow = $('<div id="navi_row" class="row justify-content-center mb-1 mt-3"></div>');
 		    		
@@ -450,16 +458,17 @@ font-weight:bold;
 	    		
 	    		var array = response.array;
 	    		
-	    		var $menu_row = $('<div class="row justify-content-center my-1"></div>');
-				var $menu_seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1"><h3>등록 번호</h3></div>');
-    			var $menu_idCol = $('<div class="col-6 col-md-6 col-lg-3 text-center my-1"><h3>아이디</h3></div>');
-    			var $menu_reasonCol = $('<div class="col-4 col-md-4 col-lg-4 text-center my-1"><h3>정지 사유</h3></div>');
-    			var $menu_timeCol = $('<div class="col-2 col-md-2 col-lg-3 text-center my-1"><h3>조치일</h3></div>');
-    			$menu_row.append($menu_seqCol).append($menu_idCol).append($menu_reasonCol).append($menu_timeCol);
-    			$("#blacklist_search_result_div").append($menu_row);
-	    		
 	    		if(array.length != 0)
 	    		{
+	    			
+	    			var $menu_row = $('<div class="row justify-content-center my-1"></div>');
+					var $menu_seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1"><h3>등록 번호</h3></div>');
+	    			var $menu_idCol = $('<div class="col-6 col-md-6 col-lg-3 text-center my-1"><h3>아이디</h3></div>');
+	    			var $menu_reasonCol = $('<div class="col-4 col-md-4 col-lg-4 text-center my-1"><h3>정지 사유</h3></div>');
+	    			var $menu_timeCol = $('<div class="col-2 col-md-2 col-lg-3 text-center my-1"><h3>조치일</h3></div>');
+	    			$menu_row.append($menu_seqCol).append($menu_idCol).append($menu_reasonCol).append($menu_timeCol);
+	    			$("#blacklist_search_result_div").append($menu_row);
+	    			
 	    			for(var i = 1 ; i <= array.length ; i++)
 		    		{
 						var $row = $('<div class="row justify-content-center my-1"></div>');
@@ -470,12 +479,6 @@ font-weight:bold;
 		    			$row.append($seqCol).append($idCol).append($reasonCol).append($timeCol);
 		    			$("#blacklist_search_result_div").append($row);
 		    		}
-		    		
-		    		console.log(response.currentPage);
-		    		console.log(response.needPrev);
-		    		console.log(response.needNext);
-		    		console.log(response.startNavi);
-		    		console.log(response.endNavi);
 		    		
 		    		var $naviRow = $('<div id="navi_row" class="row justify-content-center mb-1 mt-3"></div>');
 		    		
