@@ -163,5 +163,50 @@ onload = function()
 	});
 };
 </script>
+<script>
+
+onload = function()
+{
 	
+	
+// 	$(document).on("mouseenter", "#site_logo_col", function() 
+// 	{
+// 		$("#site_logo_img").fadeOut(200, function() 
+// 		{
+// 			$("#site_logo_img").attr("src", "resources/images/catlogo.png");
+// 		})
+// 		.fadeIn(200);
+// 	});
+// 	$(document).on("mouseleave", "#site_logo_col", function() 
+// 	{
+// 		$("#site_logo_img").fadeOut(200, function() 
+// 		{
+// 			$("#site_logo_img").attr("src", "resources/images/doglogo2.png");
+// 		})
+// 		.fadeIn(200);
+// 	});
+//
+//
+//	
+// 	$(document).on("hover", "#site_logo_col", 
+// 	function()
+// 	{
+// 		$("#site_logo_img").attr("src", "resources/images/catlogo.png");
+// 	},
+// 	function()
+// 	{
+// 		$("#site_logo_img").attr("src", "resources/images/doglogo2.png");
+// 	});
+
+
+
+
+
+
+
+
+
+};
+
+</script>	
 

@@ -22,13 +22,14 @@
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+<jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
 <style>
 table {
 	width: 760px;
 }
 
 th {
-	background-color: #f7f7f7;
+	
 	border-bottom: 1px solid #cfcfcf;
 	text-align: center;
 	padding: 5px;
@@ -43,13 +44,32 @@ td {
 	text-align: center;
 }
 
-.btn {
-	background-color: #EC7357;
-	color: white;
-	border-radius: 5px;
-	padding: 5px 10px;
+.btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44;}
+.btn:hover{background-color:#FDD692; font-weight:bold;}
+.selected_navi {
+	color: #EC7357 !important;
+	font-weight: 600;
 }
 
+.menu-bar{
+	text-align:center;
+	height:200px;
+}
+.menu-bar>div {
+	height: 40px;
+}
+
+.menu-bar>div:not (.menu ):hover {
+	background-color: #FBFFB950;
+	font-weight: bold;
+}
+
+.menu-bar div:first-child {
+	font-size: 20px;
+	font-weight: bold;
+	border-bottom: 1px solid black;
+	color: #754F44;
+}
 .menu-row {
 	text-align: -webkit-center;
 }

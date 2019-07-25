@@ -31,6 +31,12 @@
 
 
 
+
+
+
+#menu_row > div > a{
+	font-size: 22px;
+}
 .selected_menu_btns {
 	font-family: 'Gamja Flower', cursive !important;
 	border-radius: 0px !important;
@@ -90,7 +96,7 @@ font-weight:bold;
 <!-- 	</div> -->
 <!-- </div> -->
 
-	<section class="site-section bg-light block-13">
+	<section class="site-section block-13">
 
 		<div id="container" class="container">
 			
@@ -215,6 +221,9 @@ font-weight:bold;
 <script>
 	$(function()
     {
+		keyword = $("#search_text").val();
+		search("");
+		
 		$("#condition_select").on("change", function()
 		{
 			changeTypeDate();
@@ -252,9 +261,9 @@ font-weight:bold;
 		function search(btnName)
 		{
 			
-			console.log(btnName);
-			console.log(keyword);
-			console.log($("#condition_select").val());
+// 			console.log(btnName);
+// 			console.log(keyword);
+// 			console.log($("#condition_select").val());
 			
 			$.ajax
 	    	({
