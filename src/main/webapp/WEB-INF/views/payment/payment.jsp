@@ -24,29 +24,20 @@
 <style>
 	.myJumbo{
 		background-color: white;
+		padding-top: 80px;
 	}
 	#jumboImg{
 		width: 100%;
 		max-height: 600px;
 	}
-/* 	.myCard{ */
-/* 		height: 150px; */
-/* 	} */
 	.imageBox{
 		width: 100%;
 		height: inherit;
-/* 		max-width: 180px; */
-/* 		max-height: 180px; */
-/* 		min-height: 180px; */
 	}
 	.itemImage{
 		width: 100%; 
 		height: 100%;
 	}
-/* 	.card-body{ */
-/* 		height: 100%; */
-/* 		line-height: 300%; */
-/* 	} */
 	.itemInfo{
 		font-family: 'Gamja flower';
 	}

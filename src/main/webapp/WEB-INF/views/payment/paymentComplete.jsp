@@ -24,6 +24,7 @@
 <style>
 	.myJumbo{
 		background-color: white;
+		padding-top: 80px;
 	}
 	#jumboImg{
 		width: 100%;
@@ -172,9 +173,6 @@
 		window.onpopstate = function(event) {
 			history.go(1);
 		};
-		$(".soldoutCheck").each(function(i, item){
-			alert($(item).val());
-		});
 		$("#goBuyList").on("click", function(){
 			location.href = "toMyPage_buyList";
 		});
