@@ -13,11 +13,11 @@
 	color:white;
 
  } 
- #logout{
+ #logout,.logoutBtn{
 background:none; border:none; font-family:'Gamja Flower', cursive; font-size:20px; color:#EC7357;
  }
-#loginbtn:hover { 
-background-color:#F5505D;
+#loginbtn:hover{ 
+	background-color:#F5505D;
 }
  #loginimg{
   height:60px;
@@ -56,5 +56,10 @@ font-family:'Gamja Flower', cursive;
 padding-bottom:0px;
 }
 .modal-open{padding-right: 0px !important;}
+
+#site_logo_img
+{
+/* 	transition-duration: 3s; */
+}
 </style>
 <link href="https://fonts.googleapis.com/css?family=Gamja+Flower&display=swap&subset=korean" rel="stylesheet">

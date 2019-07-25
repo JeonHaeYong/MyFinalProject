@@ -161,7 +161,23 @@ public class DonationServiceImpl implements DonationService
 		
 		return mav;
 	}
-
+	
+	@Override
+	public Object selectRecentDTOAjax() throws Exception
+	{
+		DonationDTO dto = donationDAO.selectRecentDTO();
+		
+		JsonObject jo = new JsonObject();
+		jo.addProperty("image1", dto.getImage1());
+		jo.addProperty("image2", dto.getImage2());
+		jo.addProperty("image3", dto.getImage3());
+		jo.addProperty("name", dto.getName());
+		jo.addProperty("title", dto.getTitle());
+		jo.addProperty("explanation", dto.getExplanation());
+		
+		return new Gson().toJson(jo);
+	}
+	
 	@Override
 	public Object selectDTOByRowNumber(String page) throws Exception
 	{
@@ -431,6 +447,7 @@ public class DonationServiceImpl implements DonationService
 		
 		return "redirect: admin-donation";
 	}
+
 
 //	@Override
 //	public Object changeImage(MultipartFile left, MultipartFile right) throws Exception
