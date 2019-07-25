@@ -46,11 +46,11 @@ function cookieToJson(cookies){
 	.pricing img{width:405px; height:800px;  border: 5px dashed #754F44;}
 	.from{font-family:'Gamja Flower', cursive; font-size:22px;}
 	
-	#acs_div
+ 	#acs_div
 	{
 		width: 100%;
 		height: 600px;
-	}
+	} 
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
