@@ -24,7 +24,7 @@
 <style>
 	.myJumbo{
 		background-color: white;
-		padding-top: 80px;
+		padding: 5rem;
 	}
 	#jumboImg{
 		width: 100%;
@@ -107,20 +107,24 @@
  	.fixedMenu div{
  		margin: 10px;
  	}
- 	.btn{font-family: 'Gamja Flower', cursive; background-color:#FDD69270; color:#754F44;}
-	.btn:hover{background-color:#FDD692; font-weight:bold;}
  	.addBtn{
+ 		background-color: #ec7357;
+ 		color: white;
+ 		font-weight: bold !important;
+ 	}
+ 	.addBtn:hover, #searchBtn:hover{
+ 		background-color: #cf654c;
+ 		color: white;
+ 		font-weight: bold !important;
+ 		cursor: pointer;
+ 	}
+ 	.cartAddBtn{
+ 		background-color: #ec7357;
+ 		color: white;
  		width: 30px;
- 		height: 25px;
+ 		height:25px;
  		padding: 0px;
  	}
-/*  	.cartAddBtn{ */
-/*  		background-color: #ec7357; */
-/*  		color: white; */
-/*  		width: 30px; */
-/*  		height:25px; */
-/*  		padding: 0px; */
-/*  	} */
  	#searchForm{
  		width: 106px;
  		margin-left: 10px;
@@ -132,13 +136,9 @@
  		font-size: 20px;
  	}
 	#searchBtn{
-		background-color: #FDD69270;
+		background-color: #ec7357;
 		border-radius: 5px 10px 10px 5px;
 		width: 38px;
-		cursor: pointer;
-	}
-	#searchBtn:hover{
-		background-color: #FDD692;
 	}
 	.cartBadge{
 		position: absolute;
@@ -169,7 +169,7 @@
 						<blockquote class="blockquote mb-0 freeMarketInfo">
 							<p>무료나눔 상품을 구매하신 분은 저렴한 가격에 원하는 물건을 살 수 있고,<br> 나눔을 하신 분은 본인의 이름으로 후원단체에 기부를 하실 수 있어요!<br>
 							<small>무료나눔을 신청하면 관리자의 승인을 받은 후 무료나눔이 가능해요.</small></p>
-							<footer class="blockquote-footer">나눔 신청하러 가기 <a class="btn addBtn" href="addItem">Go</a></footer>
+							<footer class="blockquote-footer">나눔 신청하러 가기 <a class="btn addBtn cartAddBtn" href="addItem">Go</a></footer>
 						</blockquote>
 					</div>
 				</div>
@@ -237,7 +237,7 @@
 	
     <div class="fixedMenu">
     	<div class="btnBox">
-			<a class="btn" href="addItem">나눔신청</a>
+			<a class="btn addBtn" href="addItem">나눔신청</a>
     	</div>
     	<div class="input-group selectBox">
     		<form action="freeMarket" id="searchForm">

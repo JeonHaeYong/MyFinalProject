@@ -24,7 +24,7 @@
         <style>
             .myJumbo{
                 background-color: white;
-                padding-top: 80px;
+                padding: 5rem;
             }
             #jumboImg{
                 width: 100%;
@@ -69,27 +69,6 @@
             	color: white;
             	background-color: #bf5e47;
             }
-            .cartBtn{
-				background-color: #ec7357;
-				color: white;
-				border-radius: 10px;
-				width: 100px;
-				padding: 10px;
-				font-size: 20px;
-			}
-			.cartBtn:hover{
-				background-color: #00000030;
-			}
-			.myBtn{
-				background-color: #00000030;
-				border-radius: 10px;
-				width: 30px;
-				padding: 10px;
-			}
-			.myBtn:hover{
-				background-color: #ec7357;
-				color: white;
-			}
 			.contents{
 				border: 1px solid #00000030;
 				padding: 20px;
@@ -117,23 +96,19 @@
 		 	.fixedMenu div{
 		 		margin: 10px;
 		 	}
+			.btn{font-family: 'Gamja Flower', cursive; font-size: 22px; background-color:#FDD69270; color:#754F44;}
+			.btn:hover{background-color:#FDD692; font-weight:bold;}
 		 	.addBtn{
 		 		background-color: #ec7357;
 		 		color: white;
 		 		font-weight: bold !important;
+		 		font-size: 18px;
 		 	}
 		 	.addBtn:hover, #searchBtn:hover{
 		 		background-color: #cf654c;
 		 		color: white;
 		 		font-weight: bold !important;
 		 		cursor: pointer;
-		 	}
-		 	.cartAddBtn{
-		 		background-color: #ec7357;
-		 		color: white;
-		 		width: 30px;
-		 		height:25px;
-		 		padding: 0px;
 		 	}
 		 	#searchForm{
 		 		width: 106px;
@@ -221,10 +196,10 @@
 	                				<a class="btn cartBtn" id="soldout" disabled>판매완료 상품</a>
 	                			</c:when>
 	                			<c:otherwise>
-	                				<a class="btn cartBtn" id="addCart" href="">장바구니 담기</a>
+	                				<a class="btn" id="addCart" href="">장바구니 담기</a>
 	                			</c:otherwise>
 	                		</c:choose>
-	                		<a class="btn cartBtn" id="goCart" href="">장바구니 가기</a>
+	                		<a class="btn" id="goCart" href="">장바구니 가기</a>
 	                	</div>
                 	</div>
                 </div>
@@ -238,7 +213,7 @@
             </div>
             <div class="row m-3">
             	<div class="col-12 d-flex justify-content-end">
-            		<a class="btn cartBtn" href="freeMarket?currentPage=${currentPage }&category=${category}">목록으로</a> 
+            		<a class="btn" href="freeMarket?currentPage=${currentPage }&category=${category}">목록으로</a> 
             	</div>
             </div>
         </div>

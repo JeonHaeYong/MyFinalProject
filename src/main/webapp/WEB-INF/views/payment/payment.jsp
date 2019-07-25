@@ -24,7 +24,7 @@
 <style>
 	.myJumbo{
 		background-color: white;
-		padding-top: 80px;
+		padding: 5rem;
 	}
 	#jumboImg{
 		width: 100%;
