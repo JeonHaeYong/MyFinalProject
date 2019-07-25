@@ -36,8 +36,6 @@ function cookieToJson(cookies){
 	return entry[0];
 }
 
-	
-
 </script>
 <style>
 /* 만화 부분 */
@@ -120,7 +118,7 @@ function cookieToJson(cookies){
          <div class="row justify-content-center" data-aos="fade-up">
             <div class="col-lg-6 text-center heading-section mb-5">
 
-               <h2 class="text-black mb-2">전국 모든 지역 유기동물 현황</h2>
+               <h2 id="acs_title" class="text-black mb-2"></h2>
                
                <p>이번 달 유기 동물 현황</p>
             </div>
@@ -223,12 +221,16 @@ function cookieToJson(cookies){
          </div>
                <div class="row">
                   <div class="mb-4 mb-lg-6 col-lg-6" data-aos="fade-right">
-                     <img src="resources/images/dog_4.jpg" alt="Image"
+                     <img id="donation_img" alt="Image"
                         class="img-fluid cover-img2" height="50"> 
                   </div>
                   <div class="mb-4 mb-lg-6 col-lg-6" data-aos="fade-right">
-                     <h2 class="mb-2 text-black heading mt-5">이달의 후원 장소</h2>
-                     <pre>후원할 업체 소개글~~~~~<br>후원할 업체 소개글~~~~~<br>후원할 업체 소개글~~~~~</pre>
+					
+					<h2 id="donation_name" class="mb-2 text-black heading my-3"></h2>
+					
+					<h3 id="donation_title" class="mb-2 text-black heading my-3"></h3>
+                     
+					<pre id="donation_explanation">후원할 업체 소개글~~~~~<br>후원할 업체 소개글~~~~~<br>후원할 업체 소개글~~~~~</pre>
                      
                   </div>
                   </div>
@@ -429,10 +431,18 @@ function cookieToJson(cookies){
 	    				,[array[15].area, array[15].num]
 	    				,[array[16].area, array[16].num]
 	    			]);
-
+					
+	    			var sum = 0;
+	    			for(var i = 1 ; i <= array.length ; i++)
+	    			{
+	    				sum = sum + array[i-1].num;
+	    			}
+	    			
+	    			$("#acs_title").text(new Date().getMonth() + 1 + "월 전국 지역별 유기동물 현황")
+	    			
 	    			var options3 = 
 	    			{
-	    				title : '지역 별 현월 유기 동물 현황',
+	    				title : '총 개체수 : ' + sum,
 // 	    				vAxis: {title: '단위 : 1'},
 //	     				hAxis: {title: '단위 : 월'},
 	    				seriesType: 'bars',
@@ -463,6 +473,50 @@ function cookieToJson(cookies){
 		});
 	  	
 		
+		$.ajax
+		({
+			url : "admin-donation-index"
+			, dataType : "JSON"
+		})
+		.done(function(response)
+		{
+			
+			console.log(response);
+			
+			var name = response.name;
+			var title = response.title;
+			var explanation = response.explanation;
+			var image1 = response.image1;
+			var image2 = response.image2;
+			var image3 = response.image3;
+			
+			$("#donation_name").text(name);
+			$("#donation_title").text(title);
+			$("#donation_explanation").text(explanation);
+			
+			if(image1 != "없음")
+			{
+				$("#donation_img").attr("src", image1)
+			}
+			else if(image2 != "없음")
+			{
+				$("#donation_img").attr("src", image2)
+			}
+			else if(image3 != "없음")
+			{
+				$("#donation_img").attr("src", image3)
+			}
+			else
+			{
+				$("#donation_img").attr("src", "resources/images/dog_3.jpg")
+			}
+			
+		})
+		.fail(function()
+		{
+// 			alert("error");
+			console.log("index ajax error");
+		});
 		
 	})
 </script>
