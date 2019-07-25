@@ -373,8 +373,8 @@
                     	if(pathRegexResult!=null){
                     		$(item).removeClass("rounded-circle");
                     	}
-                    })
-                }
+                    });
+                };
                 profileImgRounded();
             </script>
         </html>
