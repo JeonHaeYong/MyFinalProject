@@ -115,7 +115,11 @@ public class MemberController {
 		try{
 			int rand = (int)(Math.random() * 16 + 1 );
 			dto.setimagepath("/profile/"+rand+".png");
-			mservice.insertMemberService(dto);
+			int insert=mservice.insertMemberService(dto);
+		if(insert==1) {
+			session.setAttribute("id", dto.getId());
+			session.setAttribute("type", 1);
+		}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

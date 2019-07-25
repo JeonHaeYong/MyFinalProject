@@ -3,18 +3,17 @@
 <!-- 로그인 Modal Style영역입니다 -->
 <style>
 @font-face { font-family: 'SeoulNamsanM'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulNamsanM.woff') format('woff'); font-weight: normal; font-style: normal; }
-.login-btn{background:none; border:none; font-family:'Gamja Flower', cursive; font-size:20px; color:#EC7357;}
-	.login-btn:hover{font-weight:bold; color:#ed461f;}
+.login-btn{background:none; border:none; font-family:'Gamja Flower', cursive; color:#754F44 ; font-weight: bold;}
+.login-btn:hover{color:#ed461f;}
  #loginbtn{
- height:50px;
- background-color:#FFBF00;
-  border:0;
- outline:0;
+ 	height:50px;
+ 	background-color:#FFBF00;
+  	border:0;
+ 	outline:0;
 	color:white;
-
  } 
  #logout,.logoutBtn{
-background:none; border:none; font-family:'Gamja Flower', cursive; font-size:20px; color:#EC7357;
+	background:none; border:none; font-family:'Gamja Flower', cursive; font-size:20px; color:#754F44; font-weight: bold;
  }
 #loginbtn:hover{ 
 	background-color:#F5505D;
@@ -53,8 +52,11 @@ font-family:'Gamja Flower', cursive;
 
 }
 .modal-header{
-padding-bottom:0px;
+	padding-bottom:0px;
 }
 .modal-open{padding-right: 0px !important;}
+.top_menu_container{
+	max-width: 1250px;
+}
 </style>
 <link href="https://fonts.googleapis.com/css?family=Gamja+Flower&display=swap&subset=korean" rel="stylesheet">
