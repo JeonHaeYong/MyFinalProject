@@ -14,8 +14,9 @@ src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/Lo
 @font-face { font-family: 'SeoulNamsanM'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SeoulNamsanM.woff') format('woff'); font-weight: normal; font-style: normal; }
 @font-face { font-family: 'BBTreeGB'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/BBTreeGB.woff') format('woff'); font-weight: normal; font-style: normal; }
 @font-face { font-family: 'BBTreeGR'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/BBTreeGR.woff') format('woff'); font-weight: normal; font-style: normal; }
-             	body *{ font-family: SeoulNamsanM !important; font-size: 1.3rem; font-weight: 400;}
-             	::placeholder{font-family: SeoulNamsanM !important;}
+				#wrapper{
+					
+				}
                 .topBackGround{
                     height: 100px;
                 }
@@ -37,6 +38,9 @@ src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/Lo
                 }
                 .nav_my_page_ul{
                     border-bottom: 1px solid #754F44 ; 
+                    font-family: Gamja Flower;
+                    font-size : 22px;
+                    font-weight: 600;
                 }
                 .nav_my_page_ul>li{
                     width: 16.6%;
@@ -45,6 +49,7 @@ src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/Lo
                 /*점보트론 이미지*/
                 .jumbotron{
                     background-color: white;
+                    padding-top: 5rem;
                 }
                 .jumbotron>img{
                     width: 100%;
