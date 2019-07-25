@@ -36,8 +36,6 @@ function cookieToJson(cookies){
 	return entry[0];
 }
 
-	
-
 </script>
 <style>
 /* 만화 부분 */
