@@ -24,6 +24,14 @@
 
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
 <style>
+ @font-face {
+ 	font-family: 'SeoulNamsanM';
+ 	src: */
+ 		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/SeoulNamsanM.woff') */
+ 		format('woff'); 
+ 	font-weight: normal; 
+ 	font-style: normal; 
+}
 body{
 	color:#754F44;
 
@@ -47,6 +55,26 @@ td {
 
 #toList {
 	text-align: center;
+}
+.menu-bar {
+	text-align: center;
+	height: 200px;
+}
+
+.menu-bar>div {
+	height: 40px;
+}
+
+.menu-bar>div:not (.menu ):hover {
+	background-color: #FBFFB950;
+	font-weight: bold;
+}
+
+.menu-bar div:first-child {
+	font-size: 20px;
+	font-weight: bold;
+	border-bottom: 1px solid black;
+	color: #754F44;
 }
 
 .menu-row {
@@ -134,8 +162,10 @@ td {
 					<!--메뉴바랑 리스트 사이 빈 공간-->
 				</div>
 				<div class="col-lg-8 col-md-8 col-sm-12 col-12 row">
-
-					<div style="margin-bottom:20px">「동물보호법」 제17조, 같은 법 시행령 제7조 및 같은 법 시행규칙 제20조에 따라 구조된 동물의
+					<div style="margin: auto; margin: 40px; font-family: 'SeoulNamsanM'; font-size:40px">
+						유기동물 조회
+					</div>
+					<div style="margin-bottom:20px; font-weight:bold;">「동물보호법」 제17조, 같은 법 시행령 제7조 및 같은 법 시행규칙 제20조에 따라 구조된 동물의
 								보호상황을 아래와 같이 공고합니다.
 					</div>			
 					<table class="table table-striped">
@@ -214,9 +244,10 @@ td {
 							</tr>
 						</tbody>
 					</table>
-					상기 동물을 분실하신 소유주께서는 보호센터로 문의하시어 동물을 찾아가시기 바라며, 동물보호 법 제17조의 규정에 따른
+					<div style="font-weight:bold;">상기 동물을 분실하신 소유주께서는 보호센터로 문의하시어 동물을 찾아가시기 바라며, 동물보호 법 제17조의 규정에 따른
 					공고가 있는 날부터 10일이 경과하여도 소유자 등을 알 수 없는 경우에는 유실물법 제12조 및 민법 제253조의 규정에
 					불구하고 해당 시,군,구 자치구가 그 동물의 소유권을 취득하게 됩니다.
+					</div>
 					<!-- 				<div style="text-align:center; margin:0 auto;"><a href="javascript:history.back();">목록</a></div> -->
 					<div style="margin:auto"><button id="btnToList" class="btn btn-sm" type="button" onclick="goBack();">목록</button></div>
 				</div>

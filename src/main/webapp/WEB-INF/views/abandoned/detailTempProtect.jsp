@@ -24,6 +24,14 @@
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
 <style>
+ @font-face {
+ 	font-family: 'SeoulNamsanM';
+ 	src: */
+ 		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/SeoulNamsanM.woff') */
+ 		format('woff'); 
+ 	font-weight: normal; 
+ 	font-style: normal; 
+}
 table {
 	width: 760px;
 }

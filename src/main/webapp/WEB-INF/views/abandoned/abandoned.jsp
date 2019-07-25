@@ -25,17 +25,16 @@
 
 
 
-<jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
+<jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
 
 <style>
- @font-face {
- 	font-family: 'SeoulNamsanM';
- 	src: */
- 		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/SeoulNamsanM.woff') */
- 		format('woff'); 
- 	font-weight: normal; 
- 	font-style: normal; 
+@font-face {
+	font-family: 'SeoulNamsanM';
+	src: */url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/SeoulNamsanM.woff')*/format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
+
 body {
 	min-width: 375px;
 	font-family: 'SeoulNamsanM';
@@ -79,7 +78,11 @@ div
 
 
 
+
+
 :not
+
+
 
 
 
@@ -108,8 +111,12 @@ div
 
 
 
+
+
 ){
 line-height
+
+
 
 
 
@@ -135,8 +142,12 @@ line-height
 
 
 
+
+
 50
 px
+
+
 
 
 
@@ -218,9 +229,17 @@ px
 	font-weight: 600;
 }
 
+.btn {
+	font-family: 'Gamja Flower', cursive;
+	background-color: #FDD69270;
+	color: #754F44;
+}
 
-.btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44;}
-.btn:hover{background-color:#FDD692; font-weight:bold;}
+.btn:hover {
+	background-color: #FDD692;
+	font-weight: bold;
+}
+
 .selected_navi {
 	color: #EC7357 !important;
 	font-weight: 600;
@@ -279,23 +298,26 @@ label {
 /*점보트론 이미지*/
 .jumbotron {
 	background-color: white;
+	padding: 5rem;
 }
 
 .jumbotron>img {
 	width: 100%;
 	max-height: 600px;
 }
+
 .page-item.active .page-link {
-	background-color:#EC7357;
-	border-color:#EC7357;
-}
-.page-link{
-	color:#EC7357;
-}
-.page-link:hover{
-	color:#EC7357;
+	background-color: #EC7357;
+	border-color: #EC7357;
 }
 
+.page-link {
+	color: #EC7357;
+}
+
+.page-link:hover {
+	color: #EC7357;
+}
 </style>
 
 </head>
@@ -303,257 +325,261 @@ label {
 	data-offset="300" id="home-section">
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<!-- -----ì¬ê¸°ê¹ì§ ê³ ì  Headerìëë¤----------------------------------------------------------------------------------------------------------- -->
-		<div class="jumbotron px-0 pb-0">
-			<img src="/resources/images/abandoned/blackwhite.jpg">
-		</div>
-		<div class="container">
+	<div class="jumbotron px-0 pb-0">
+		<img src="/resources/images/abandoned/blackwhite.jpg">
+	</div>
+	<div class="container">
 
-			<div class="row">
-				<!--작은 메뉴랑 게시판목록이랑 나누는 row-->
-				<div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-bar">
-					<!--작은 메뉴바-->
-					<div class="menu">MENU</div>
+		<div class="row">
+			<!--작은 메뉴랑 게시판목록이랑 나누는 row-->
+			<div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-bar">
+				<!--작은 메뉴바-->
+				<div class="menu">MENU</div>
 
-					<div class="s-menu1">
-						<a href="toAbandoned?currentPage=1">유기동물조회</a>
-					</div>
-					<div class="s-menu1">
-						<a href="listTempProtect?currentPage=1">임시보호중</a>
-					</div>
-					<div class="s-menu1">
-						<a href="toHospital?currentPage=1">동물병원 조회</a>
-					</div>
-					<div class="s-menu1">
-						<a href="toCenter?currentPage=1">보호센터 조회</a>
-					</div>
-
+				<div class="s-menu1">
+					<a href="toAbandoned?currentPage=1">유기동물조회</a>
+				</div>
+				<div class="s-menu1">
+					<a href="listTempProtect?currentPage=1">임시보호중</a>
+				</div>
+				<div class="s-menu1">
+					<a href="toHospital?currentPage=1">동물병원 조회</a>
+				</div>
+				<div class="s-menu1">
+					<a href="toCenter?currentPage=1">보호센터 조회</a>
 				</div>
 
-				<div class="col-1">
-					<!--메뉴바랑 리스트 사이 빈 공간-->
+			</div>
+
+			<div class="col-1">
+				<!--메뉴바랑 리스트 사이 빈 공간-->
+			</div>
+
+			<div class="col-lg-9 col-md-8 col-sm-12 col-12">
+
+				<div class="text-center"
+					style="margin: auto; margin: 40px; font-family: 'SeoulNamsanM'; font-size: 40px">
+					유기동물 조회</div>
+				<div
+					style="font-weight: 600; margin-bottom: 20px; font-family: 'SeoulNamsanM';">
+					**이 페이지에서 조회되는 유기동물 자료는 동물보호관리시스템에서 제공하는 OpenAPI 공공데이터입니다.<br>
+					「동물보호법」 제 17조 및 동법 시행규칙 제 7조에 따라 유기·유실동물을 보호하고 있는 경우에는 소유자 등이 보호조치
+					사실을 알 수 있도록 7일 동안 공고하여야 합니다. 공고중인 동물 소유자는 해당 시군구 및 동물보호센터에 문의하시어
+					동물을 찾아가시기 바랍니다. 다만, 「동물보호법」제19조 및 동법 시행규칙 제21조에 따라 소유자에게 보호비용이 청구될
+					수 있습니다. 또한 「동물보호법」제 17조에 따른 공고가 있는 날부터 10일이 경과하여도 소유자 등을 알 수 없는
+					경우에는 「유실물법」 제12조 및 「민법」제253조의 규정에도 불구하고 해당 시·도지사 또는 시장·군수·구청장이 그
+					동물의 소유권을 취득하게 됩니다.
 				</div>
 
-				<div class="col-lg-9 col-md-8 col-sm-12 col-12">
-
-					<div class="text-center"
-						style="margin: auto; margin: 40px; font-family: 'SeoulNamsanM'; font-size:40px">
-						유기동물 조회
-					</div>
-					<div
-						style="font-weight: 600; margin-bottom: 20px; font-family: 'SeoulNamsanM';">
-						**이 페이지에서 조회되는 유기동물 자료는 동물보호관리시스템에서 제공하는 OpenAPI 공공데이터입니다.<br>
-						「동물보호법」 제 17조 및 동법 시행규칙 제 7조에 따라 유기·유실동물을 보호하고 있는 경우에는 소유자 등이 보호조치
-						사실을 알 수 있도록 7일 동안 공고하여야 합니다. 공고중인 동물 소유자는 해당 시군구 및 동물보호센터에 문의하시어
-						동물을 찾아가시기 바랍니다. 다만, 「동물보호법」제19조 및 동법 시행규칙 제21조에 따라 소유자에게 보호비용이 청구될
-						수 있습니다. 또한 「동물보호법」제 17조에 따른 공고가 있는 날부터 10일이 경과하여도 소유자 등을 알 수 없는
-						경우에는 「유실물법」 제12조 및 「민법」제253조의 규정에도 불구하고 해당 시·도지사 또는 시장·군수·구청장이 그
-						동물의 소유권을 취득하게 됩니다.
-					</div>
-
-					<div id="formWrapper" style="font-weight: 600; font-family: 'SeoulNamsanM';">
-						<form action="select" method="get">
-							<div class="row">
-								<div class="col-lg-1">날짜</div>
-								<div class="col-lg-11">
-									<input id="from" type="date" max="${todayStr }" name="from"
-										required> ~ <input id="to" type="date"
-										max="${todayStr }" name="to" required>(날짜는 접수일 기준입니다.)
-								</div>
+				<div id="formWrapper"
+					style="font-weight: 600; font-family: 'SeoulNamsanM';">
+					<form action="select" method="get">
+						<div class="row">
+							<div class="col-lg-1">날짜</div>
+							<div class="col-lg-11">
+								<input id="from" type="date" max="${todayStr }" name="from"
+									required> ~ <input id="to" type="date"
+									max="${todayStr }" name="to" required>(날짜는 접수일 기준입니다.)
 							</div>
-							<div class="row">
+						</div>
+						<div class="row">
 
-								<div class="col-lg-1">시도</div>
-								<div class="col-lg-3">
-									<select id="sido_select" name="sido">
-										<option class="op_sido" value="0">전체</option>
-										<option class="op_sido" value="6110000">서울특별시</option>
-										<option class="op_sido" value="6260000">부산광역시</option>
-										<option class="op_sido" value="6270000">대구광역시</option>
-										<option class="op_sido" value="6280000">인천광역시</option>
-										<option class="op_sido" value="6290000">광주광역시</option>
-										<option class="op_sido" value="6300000">대전광역시</option>
-										<option class="op_sido" value="6310000">울산광역시</option>
-										<option class="op_sido" value="6410000">경기도</option>
-										<option class="op_sido" value="6420000">강원도</option>
-										<option class="op_sido" value="6430000">충청북도</option>
-										<option class="op_sido" value="6440000">충청남도</option>
-										<option class="op_sido" value="6450000">전라북도</option>
-										<option class="op_sido" value="6460000">전라남도</option>
-										<option class="op_sido" value="6470000">경상북도</option>
-										<option class="op_sido" value="6480000">경상남도</option>
-										<option class="op_sido" value="6500000">제주특별자치도</option>
-									</select>
-								</div>
-								<div class="col-lg-2">시군구</div>
-								<div class="col-lg-2">
-									<select id="sigungu_select" name="sigungu">
-										<option class="op_sigungu" value="0">전체</option>
-									</select>
-								</div>
-								<div class="col-lg-2">보호센터</div>
-								<div class="col-lg-2">
-									<select id="shelter_select" name="shelter">
-										<option value="0">전체</option>
-									</select>
-								</div>
+							<div class="col-lg-1">시도</div>
+							<div class="col-lg-3">
+								<select id="sido_select" name="sido">
+									<option class="op_sido" value="0">전체</option>
+									<option class="op_sido" value="6110000">서울특별시</option>
+									<option class="op_sido" value="6260000">부산광역시</option>
+									<option class="op_sido" value="6270000">대구광역시</option>
+									<option class="op_sido" value="6280000">인천광역시</option>
+									<option class="op_sido" value="6290000">광주광역시</option>
+									<option class="op_sido" value="6300000">대전광역시</option>
+									<option class="op_sido" value="6310000">울산광역시</option>
+									<option class="op_sido" value="6410000">경기도</option>
+									<option class="op_sido" value="6420000">강원도</option>
+									<option class="op_sido" value="6430000">충청북도</option>
+									<option class="op_sido" value="6440000">충청남도</option>
+									<option class="op_sido" value="6450000">전라북도</option>
+									<option class="op_sido" value="6460000">전라남도</option>
+									<option class="op_sido" value="6470000">경상북도</option>
+									<option class="op_sido" value="6480000">경상남도</option>
+									<option class="op_sido" value="6500000">제주특별자치도</option>
+								</select>
 							</div>
-							<div class="row">
-								<div class="col-lg-1">품종</div>
-								<div class="col-lg-5">
-									<select id="species_select" name="species">
-										<option class="op_species" value="0">전체</option>
-										<option class="op_species" value="417000">개</option>
-										<option class="op_species" value="422400">고양이</option>
-										<option class="op_species" value="429900">기타</option>
-									</select> <select id="kind_select" name="speciesKind">
-										<option class="op_kind" value="0">전체</option>
-									</select>
-								</div>
-								<div class="col-lg-1">상태</div>
-								<div class="col-lg-2">
-
-									<select id="processState_select"
-										class="form-control form-control-sm" name="processState">
-										<option class="op_processState" value="전체">전체</option>
-										<option class="op_processState" value="공고중">공고중</option>
-										<option class="op_processState" value="보호중">보호중</option>
-									</select>
-
-									<!-- 									<select id="processState_select" name="processState"> -->
-									<!-- 										<option class="op_processState" value="전체">전체</option> -->
-									<!-- 										<option class="op_processState" value="공고중">공고중</option> -->
-									<!-- 										<option class="op_processState" value="보호중">보호중</option> -->
-									<!-- 									</select> -->
-								</div>
-								<div class="col-lg-3 text-right">
-									<button id="btnSelect" class="btn btn-sm" type="button">조회</button>
-								</div>
-								<input type="hidden" name="currentPage" value=1>
+							<div class="col-lg-2">시군구</div>
+							<div class="col-lg-2">
+								<select id="sigungu_select" name="sigungu">
+									<option class="op_sigungu" value="0">전체</option>
+								</select>
 							</div>
-						</form>
-					</div>
+							<div class="col-lg-2">보호센터</div>
+							<div class="col-lg-2">
+								<select id="shelter_select" name="shelter">
+									<option value="0">전체</option>
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-1">품종</div>
+							<div class="col-lg-5">
+								<select id="species_select" name="species">
+									<option class="op_species" value="0">전체</option>
+									<option class="op_species" value="417000">개</option>
+									<option class="op_species" value="422400">고양이</option>
+									<option class="op_species" value="429900">기타</option>
+								</select> <select id="kind_select" name="speciesKind">
+									<option class="op_kind" value="0">전체</option>
+								</select>
+							</div>
+							<div class="col-lg-1">상태</div>
+							<div class="col-lg-2">
+
+								<!-- 									<select id="processState_select" -->
+								<!-- 										class="form-control form-control-sm" name="processState"> -->
+								<!-- 										<option class="op_processState" value="전체">전체</option> -->
+								<!-- 										<option class="op_processState" value="공고중">공고중</option> -->
+								<!-- 										<option class="op_processState" value="보호중">보호중</option> -->
+								<!-- 									</select> -->
+
+								<select id="processState_select" name="processState">
+									<option class="op_processState" value="전체">전체</option>
+									<option class="op_processState" value="공고중">공고중</option>
+									<option class="op_processState" value="보호중">보호중</option>
+								</select>
+							</div>
+							<div class="col-lg-3 text-right">
+								<button id="btnSelect" class="btn btn-sm" type="button">조회</button>
+							</div>
+							<input type="hidden" name="currentPage" value=1>
+						</div>
+					</form>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-lg-2 col-md-2 col-sm-12 col-12 menu-bar"></div>
-				<div class="col-1">
-					<!--메뉴바랑 리스트 사이 빈 공간-->
-				</div>
-				<div class="col-lg-9 col-md-9 col-sm-12 col-12">
-					<div class="row">
-						<c:if test="${list != null }">
+		</div>
+		<div class="row">
+			<div class="col-lg-2 col-md-2 col-sm-12 col-12 menu-bar"></div>
+			<div class="col-1">
+				<!--메뉴바랑 리스트 사이 빈 공간-->
+			</div>
+			<div class="col-lg-9 col-md-9 col-sm-12 col-12">
+				<div class="row">
+					<c:if test="${list != null }">
 
-							<c:forEach var="dto" items="${list}">
+						<c:forEach var="dto" items="${list}">
 
-								<div class="card myCard col-lg-4 col-md-4 col-sm-12">
-									<a href="detailAbandoned?seq=${dto.seq }"><img
-										src="${dto.popfile }" class="card-img-top" alt="..."
-										style="width: 211px; height: 150px; margin-bottom: 10px;"></a>
-									<div class="card-body">
+							<div class="card myCard col-lg-4 col-md-4 col-sm-12">
+								<a href="detailAbandoned?seq=${dto.seq }"><img
+									src="${dto.popfile }" class="card-img-top" alt="..."
+									style="width: 211px; height: 150px; margin-bottom: 10px;"></a>
+								<div class="card-body">
 
-										<p class="card-text">
-											<label class="title"><strong>공고번호</strong> </label><label
-												class="content">${dto.noticeNo}</label><br> <label
-												class="title"><strong>접수일 </strong> </label><label
-												class="content"><fmt:formatDate
-													value="${dto.noticeSdt }" pattern="yyyy-MM-dd" /></label> <br>
-											<label class="title"><strong>품종 </strong></label><label
-												class="content">${dto.kindCd }</label><br> <label
-												class="title"><strong>성별 </strong></label><label
-												class="content">${dto.sexCd }</label><br> <label
-												class="title"><strong>발견 장소 </strong></label><label
-												class="content">${dto.happenPlace }</label><br> <label
-												class="title"><strong>특징 </strong></label><label
-												class="content">${dto.specialMark }</label><br> <label
-												class="title"><strong>상태</strong></label> <label
-												class="content">${dto.processState }</label>
-										</p>
-									</div>
+									<p class="card-text">
+										<label class="title"><strong>공고번호</strong> </label><label
+											class="content">${dto.noticeNo}</label><br> <label
+											class="title"><strong>접수일 </strong> </label><label
+											class="content"><fmt:formatDate
+												value="${dto.noticeSdt }" pattern="yyyy-MM-dd" /></label> <br>
+										<label class="title"><strong>품종 </strong></label><label
+											class="content">${dto.kindCd }</label><br> <label
+											class="title"><strong>성별 </strong></label><label
+											class="content">${dto.sexCd }</label><br> <label
+											class="title"><strong>발견 장소 </strong></label><label
+											class="content">${dto.happenPlace }</label><br> <label
+											class="title"><strong>특징 </strong></label><label
+											class="content">${dto.specialMark }</label><br> <label
+											class="title"><strong>상태</strong></label> <label
+											class="content">${dto.processState }</label>
+									</p>
 								</div>
-							</c:forEach>
-						</c:if>
+							</div>
+						</c:forEach>
+					</c:if>
 
-						<c:if test="${listsize == 0 }">
-							<div id="dataNotExist" style="margin: auto">해당 데이터가 존재하지
-								않습니다.</div>
-						</c:if>
-					</div>
+					<c:if test="${listsize == 0 }">
+						<div id="dataNotExist" style="margin: auto">해당 데이터가 존재하지
+							않습니다.</div>
+					</c:if>
+				</div>
 
-					<nav aria-label="..." style="font-size:1.2rem; font-weight:600">
-						<ul class="pagination justify-content-center">
+				<nav aria-label="..." style="font-size: 1.2rem; font-weight: 600">
+					<ul class="pagination justify-content-center">
 						<c:if test="${pageNavi.needPrev == 1 }">
 							<li class="page-item disabled"><a class="page-link" href="#"
-								tabindex="-1" aria-disabled="true" currPage="${pageNavi.startNavi - 1 }">&laquo;&nbsp;</a></li>
-								</c:if>
-							<c:if test="${pageNavi.currentPage > pageNavi.startNavi }">
-							<li class="page-item"><a class="page-link" href="#" currPage="${pageNavi.currentPage - 1}">이전</a></li>
-							</c:if>
-							<c:forEach var="i" begin="${pageNavi.startNavi}"
+								tabindex="-1" aria-disabled="true"
+								currPage="${pageNavi.startNavi - 1 }">&laquo;&nbsp;</a></li>
+						</c:if>
+						<c:if test="${pageNavi.currentPage > pageNavi.startNavi }">
+							<li class="page-item"><a class="page-link" href="#"
+								currPage="${pageNavi.currentPage - 1}">이전</a></li>
+						</c:if>
+						<c:forEach var="i" begin="${pageNavi.startNavi}"
 							end="${pageNavi.endNavi}">
 							<c:if test="${i==pageNavi.currentPage}">
-							<li class="page-item active" aria-current="page"><a
-								class="page-link" href="#" currPage="${i }">${i } <span class="sr-only">(current)</span></a>
-							</li>
+								<li class="page-item active" aria-current="page"><a
+									class="page-link" href="#" currPage="${i }">${i } <span
+										class="sr-only">(current)</span></a></li>
 							</c:if>
 							<c:if test="${i!=pageNavi.currentPage}">
-							<li class="page-item"><a class="page-link" href="#" currPage="${i }">${i }</a></li>
-								</c:if>
+								<li class="page-item"><a class="page-link" href="#"
+									currPage="${i }">${i }</a></li>
+							</c:if>
 						</c:forEach>
 						<c:if test="${pageNavi.currentPage < pageNavi.pageTotalCount }">
-							<li class="page-item"><a class="page-link" href="#" currPage="${pageNavi.currentPage + 1}">다음</a>
-							</li>
-						</c:if>	
-						<c:if test="${pageNavi.needNext == 1 }">
-							<li class="page-item"><a class="page-link" href="#" currPage="${pageNavi.endNavi + 1}">&raquo;</a></li>
+							<li class="page-item"><a class="page-link" href="#"
+								currPage="${pageNavi.currentPage + 1}">다음</a></li>
 						</c:if>
-						</ul>
-					</nav>
+						<c:if test="${pageNavi.needNext == 1 }">
+							<li class="page-item"><a class="page-link" href="#"
+								currPage="${pageNavi.endNavi + 1}">&raquo;</a></li>
+						</c:if>
+					</ul>
+				</nav>
 
-<!-- 					<div id="naviBox" style="margin-top: 10px;" class="text-center"> -->
-<%-- 						<c:if test="${pageNavi.needPrev == 1 }"> --%>
-<%-- 							<a class="naviBtn mx-3" currPage="${pageNavi.startNavi - 1 }">&laquo;&nbsp;</a> --%>
-<%-- 						</c:if> --%>
-<%-- 						<c:if test="${pageNavi.currentPage > pageNavi.startNavi }"> --%>
-<%-- 							<a class="naviBtn mx-3" currPage="${pageNavi.currentPage - 1}">&lt;&nbsp;</a> --%>
-<%-- 						</c:if> --%>
-<%-- 						<c:forEach var="i" begin="${pageNavi.startNavi}" --%>
-<%-- 							end="${pageNavi.endNavi}"> --%>
-<%-- 							<c:if test="${i==pageNavi.currentPage}"> --%>
-<%-- 								<a class="naviBtn mx-3 selected_navi" currPage="${i }">${i }&nbsp;</a> --%>
-<%-- 							</c:if> --%>
-<%-- 							<c:if test="${i!=pageNavi.currentPage}"> --%>
-<%-- 								<a class="naviBtn mx-3" currPage="${i }">${i }&nbsp;</a> --%>
-<%-- 							</c:if> --%>
+				<!-- 					<div id="naviBox" style="margin-top: 10px;" class="text-center"> -->
+				<%-- 						<c:if test="${pageNavi.needPrev == 1 }"> --%>
+				<%-- 							<a class="naviBtn mx-3" currPage="${pageNavi.startNavi - 1 }">&laquo;&nbsp;</a> --%>
+				<%-- 						</c:if> --%>
+				<%-- 						<c:if test="${pageNavi.currentPage > pageNavi.startNavi }"> --%>
+				<%-- 							<a class="naviBtn mx-3" currPage="${pageNavi.currentPage - 1}">&lt;&nbsp;</a> --%>
+				<%-- 						</c:if> --%>
+				<%-- 						<c:forEach var="i" begin="${pageNavi.startNavi}" --%>
+				<%-- 							end="${pageNavi.endNavi}"> --%>
+				<%-- 							<c:if test="${i==pageNavi.currentPage}"> --%>
+				<%-- 								<a class="naviBtn mx-3 selected_navi" currPage="${i }">${i }&nbsp;</a> --%>
+				<%-- 							</c:if> --%>
+				<%-- 							<c:if test="${i!=pageNavi.currentPage}"> --%>
+				<%-- 								<a class="naviBtn mx-3" currPage="${i }">${i }&nbsp;</a> --%>
+				<%-- 							</c:if> --%>
 
-<%-- 						</c:forEach> --%>
-<%-- 						<c:if test="${pageNavi.currentPage < pageNavi.pageTotalCount }"> --%>
-<%-- 							<a class="naviBtn mx-3" currPage="${pageNavi.currentPage + 1}">&gt;&nbsp;</a> --%>
-<%-- 						</c:if> --%>
-<%-- 						<c:if test="${pageNavi.needNext == 1 }"> --%>
-<%-- 							<a class="naviBtn mx-3" currPage="${pageNavi.endNavi + 1}">&raquo;</a> --%>
-<%-- 						</c:if> --%>
-<!-- 					</div> -->
-
-				</div>
+				<%-- 						</c:forEach> --%>
+				<%-- 						<c:if test="${pageNavi.currentPage < pageNavi.pageTotalCount }"> --%>
+				<%-- 							<a class="naviBtn mx-3" currPage="${pageNavi.currentPage + 1}">&gt;&nbsp;</a> --%>
+				<%-- 						</c:if> --%>
+				<%-- 						<c:if test="${pageNavi.needNext == 1 }"> --%>
+				<%-- 							<a class="naviBtn mx-3" currPage="${pageNavi.endNavi + 1}">&raquo;</a> --%>
+				<%-- 						</c:if> --%>
+				<!-- 					</div> -->
 
 			</div>
-		</div>
 
-		<form id="apiSelect" action="select" method="post">
-			<input class="selectCondition" type="hidden" id="currentPage"
-				value="" name="currentPage"> <input class="selectCondition"
-				type="hidden" value="${from }" name="from"> <input
-				class="selectCondition" type="hidden" value="${to }" name="to">
-			<input class="selectCondition" type="hidden" value="${species }"
-				name="species"> <input class="selectCondition" type="hidden"
-				value="${speciesKind }" name="speciesKind"> <input
-				class="selectCondition" type="hidden" value="${sido }" name="sido">
-			<input class="selectCondition" type="hidden" value="${sigungu }"
-				name="sigungu"> <input class="selectCondition" type="hidden"
-				value="${shelter }" name="shelter"> <input
-				class="selectCondition" type="hidden" value="${processState }"
-				name="processState">
-		</form>
+		</div>
+	</div>
+
+	<form id="apiSelect" action="select" method="post">
+		<input class="selectCondition" type="hidden" id="currentPage" value=""
+			name="currentPage"> <input class="selectCondition"
+			type="hidden" value="${from }" name="from"> <input
+			class="selectCondition" type="hidden" value="${to }" name="to">
+		<input class="selectCondition" type="hidden" value="${species }"
+			name="species"> <input class="selectCondition" type="hidden"
+			value="${speciesKind }" name="speciesKind"> <input
+			class="selectCondition" type="hidden" value="${sido }" name="sido">
+		<input class="selectCondition" type="hidden" value="${sigungu }"
+			name="sigungu"> <input class="selectCondition" type="hidden"
+			value="${shelter }" name="shelter"> <input
+			class="selectCondition" type="hidden" value="${processState }"
+			name="processState">
+	</form>
 
 
 
@@ -835,6 +861,7 @@ $(function() {
         $(".op_sido").each(function(i, item){
             if($(item).text() == "${sido}"){
                $(this).attr("selected", true);
+               sidoSelected();
             }
          });
         
@@ -963,9 +990,12 @@ $(function() {
 	
 	$("#sido_select")
 	.on(
-			"change",
+			"change", 
 			function() {
-				sidoSelected();
+				if($("#sido_select").val() != 0){
+					sidoSelected();
+				}
+				
 			});
 
 	$("#sigungu_select")

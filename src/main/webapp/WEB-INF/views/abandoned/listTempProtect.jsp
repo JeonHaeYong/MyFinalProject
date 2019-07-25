@@ -38,6 +38,14 @@
 	});
 </script>
 <style>
+ @font-face {
+ 	font-family: 'SeoulNamsanM';
+ 	src: */
+ 		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/SeoulNamsanM.woff') */
+ 		format('woff'); 
+ 	font-weight: normal; 
+ 	font-style: normal; 
+}
 body {
 	color: #754F44;
 }

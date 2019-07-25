@@ -22,6 +22,9 @@
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
+
 <script>
 $(function() {
 
@@ -306,6 +309,9 @@ td {
 .inputHidden{
 	background-color:none;
 	border:none;
+}
+.site-section{
+	padding:5rem;
 }
 </style>
 
