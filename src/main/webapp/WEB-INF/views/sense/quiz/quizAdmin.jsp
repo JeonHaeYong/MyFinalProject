@@ -24,7 +24,7 @@
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
  <style>
 	
-            .jumbotron{background-color:white;}
+            .jumbotron{background-color:white; padding-top: 80px; }
      		.jumbotron>img{width:100%; height: 700px;}
             #title{width: 100%; text-align: center; margin: auto; margin-bottom: 50px;}
             h3,h1{ font-family:'Gamja Flower', cursive;}

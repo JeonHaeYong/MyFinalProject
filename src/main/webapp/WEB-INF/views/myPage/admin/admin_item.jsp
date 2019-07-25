@@ -30,6 +30,11 @@
 
 
 
+
+
+#menu_row > div > a{
+	font-size: 22px;
+}
 .selected_menu_btns {
 	font-family: 'Gamja Flower', cursive !important;
 	border-radius: 0px !important;
@@ -82,7 +87,7 @@ font-weight:bold;
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 
 
-	<section class="site-section bg-light block-13">
+	<section class="site-section block-13">
 
 	<div id="container" class="container">
 
@@ -256,6 +261,14 @@ font-weight:bold;
 		{
 			$("#permission_all_btn").prop("checked", false);
 			myAjax(this.name);
+		})
+		
+		$(document).on("change", ".permission_check", function()
+		{
+			if($(this).prop("checked") == false)
+			{
+				$("#permission_all_btn").prop("checked", false);
+			}
 		})
 		
 		function myAjax(btnName)
