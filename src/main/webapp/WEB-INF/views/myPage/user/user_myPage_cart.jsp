@@ -41,17 +41,20 @@
                 	text-decoration: underline;
                 	color: #ec7357;
                 }
-                #delBtn, #soldoutDelBtn{
-                	padding: 5px;
-                	margin-bottom: 5px;
-                	border-color: grey;
-                	font-size: 15px;
-                }
-                #delBtn:hover, #soldoutDelBtn:hover{
-                	border-color: #ec7357;
-                	background-color: #ec7357;
-                	color: white;
-                }
+                label:before{
+					border-color: #adb5bd !important;
+				}
+				.custom-control-input:checked + label:before{
+					background-color: #ec7357 !important;
+					border-color: #ec7357 !important;
+				}
+                .btn{font-family: 'Gamja Flower', cursive; background-color:#FDD69270; color:#754F44;}
+				.btn:hover{background-color:#FDD692; font-weight:bold;}
+				.btn:hover span{font-weight:bold;}
+				.delete{
+					color: #ec7357;
+					font-size: 17px;
+				}
             </style>
             <jsp:include page="/WEB-INF/views/myPage/user/user_module/mypage_user_style.jsp" ></jsp:include><!-- user 마이페이지 스타일 -->
 			<jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
@@ -76,8 +79,9 @@
 												</div>
 											</c:if>
 											<c:if test="${list.size() == 0 }">
-												<div class="col-12 d-flex justify-content-center mt-3">
-                                        			<h4>장바구니가 비어있습니다.</h4>
+												<div class="col-12 mt-3" style="height: 300px;">
+                                        			<div><h4 style="line-height: 150px; text-align: center;">장바구니가 비어있습니다.</h4></div>
+                                        			<div style="text-align: center;"><a class="btn" href="freeMarket">무료나눔 가기</a></div>
                                         		</div>
 											</c:if>
 											<form class="row" action="toPayment" id="itemCheckForm" method="post">
@@ -105,15 +109,13 @@
 		                                            </div>
 	                                            </c:forEach>
                                             </form>
-                                            <div class="col-12 d-flex justify-content-left">
-                                            	<input type="button" class="btn rounded" id="delBtn" value="선택 상품 삭제하기">
-                                            	<input type="button" class="btn rounded" id="soldoutDelBtn" value="판매완료 상품 삭제하기">
+                                            <div class="col-6 d-flex justify-content-left">
+                                            	<button type="button" class="btn" id="delBtn">선택 상품 <span class="delete">삭제</span>하기</button>&nbsp;
+                                            	<button type="button" class="btn" id="soldoutDelBtn">판매완료 상품 <span class="delete">삭제</span>하기</button>
                                             </div>
-                                        </div>
-                                        <div class="row">
-	                                        <div class="col-12">
-	                                        	<input type="button" class="btn btn-outline-warning rounded" id="payBtn" value="선택 상품 결제하기">
-	                                        	<input type="button" class="btn btn-outline-warning rounded" id="allPayBtn" value="전체 상품 결제하기">
+                                            <div class="col-6 d-flex justify-content-end">
+	                                        	<input type="button" class="btn" id="payBtn" value="선택 상품 결제하기">&nbsp;
+	                                        	<input type="button" class="btn" id="allPayBtn" value="전체 상품 결제하기">
 	                                        </div>
                                         </div>
                                     </div>

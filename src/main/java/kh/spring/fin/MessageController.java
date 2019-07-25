@@ -25,7 +25,7 @@ public class MessageController {
 	private HttpSession session;
 
 	@RequestMapping("insertMsg")
-	public String insertMsg(MessageDTO dto) {
+	public String insertMsg(HttpServletRequest request, MessageDTO dto) {
 		System.out.println("보낸사람:"+dto.getSender()+"/받는사람:"+dto.getRecipient()+"/내용"+dto.getContents());
 		//		int count=0;
 		//		while(true) {
@@ -40,7 +40,9 @@ public class MessageController {
 		//		}
 		int insertResult = msgService.insertMsg_service(dto);
 		System.out.println("입력결과-> " + insertResult);
-		return "redirect:toMyPage_message";
+		String referer = request.getHeader("referer");
+		referer = referer.replaceAll("^http://.+?/", "");
+		return "redirect:" + referer;
 	}
 
 	@ResponseBody

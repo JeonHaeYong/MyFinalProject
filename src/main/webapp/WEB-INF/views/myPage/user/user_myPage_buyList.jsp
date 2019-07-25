@@ -40,6 +40,13 @@
                 .navi:hover{
                 	font-weight: bold;
                 }
+                .sendMsg_btn{
+                	text-decoration: none;
+                }
+                .sendMsg_btn:hover{
+	            	font-weight: bold;
+	            	background-color: #FBFFB950;
+	            }
             </style>
 			<jsp:include page="/WEB-INF/views/myPage/user/user_module/mypage_user_style.jsp" ></jsp:include><!-- user 마이페이지 스타일 -->
             <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
@@ -67,7 +74,7 @@
                                                     <div class="col-5"><a class="itemName" href="item?seq=${dto.item_seq }">${dto.item_name}</a></div>
                                                     <div class="col-2">${dto.item_price }</div>
                                                     <div class="col-3">${dto.pay_date }</div>
-                                                    <div class="col-2">${dto.seller }</div>
+                                                    <div class="col-2"><a class="sendMsg_btn" data-toggle="modal" data-target="#msg_modal" data-whatever="@mdo" href="javascript(0)">${dto.seller }</a></div>
                                                 </div>
                                         	</c:forEach>
                                         </div>
@@ -93,6 +100,36 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="modal fade text-left" id="msg_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					            <div class="modal-dialog" role="document">
+					                <div class="modal-content">
+					                    <div class="modal-header">
+					                        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+					                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					                            <span aria-hidden="true">&times;</span>
+					                        </button>
+					                    </div>
+					                    <div class="modal-body">
+					                        <form id="msg_send_form" action="insertMsg" method="post">
+					                            <div class="form-group">
+					                                <label for="recipient-name" class="col-form-label">받는사람ID : </label>
+					                                <input type="text" class="form-control" id="recipient-name" name="recipient" readonly>
+					                            </div>
+					                            <div class="form-group">
+					                                <label for="message-text" class="col-form-label">보낼메세지:</label>
+					                                <textarea rows="8" cols="80" class="form-control" id="message-text" style="resize:none;" name="contents"></textarea>
+					                            </div>
+					                            <div><span id="counter">0/300</span></div>
+					                            <input type="hidden" value="${sessionScope.id}" name="sender">
+					                        </form>
+					                    </div>
+					                    <div class="modal-footer">
+					                        <button id="msg_close_btn" type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+					                        <button id="msg_send_btn" type="button" class="btn btn-primary">쪽지 보내기</button>
+					                    </div>
+					                </div>
+					            </div>
+					        </div>
 	<jsp:include page="/WEB-INF/views/myPage/user/user_module/menu_footer.jsp" ></jsp:include>
             <!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
 
@@ -117,6 +154,47 @@
         			$(item).css("color", "#EC7357");
         		}
         	});
+        	
+        	$(".sendMsg_btn").on("click", function(){
+        		$("#recipient-name").val($(this).text());
+        	});
+        	
+        	$('#message-text').keyup(function (e){
+                var content = $(this).val();
+                if(content.length>300){
+                    alert("쪽지는 300자 이내만 가능합니다.");
+                    content = content.substr(0,300);
+                    $('#counter').html(content.length + '/300');
+                    $(this).val(content);
+                    return;
+                }else{
+                    $('#counter').html(content.length + '/300');
+                }
+            });
+            $("#msg_send_btn").on("click",function(){
+                var recipient = $("#recipient-name").val();
+                var content = $('#message-text').val();
+                if("${sessionScope.id}"==recipient){
+                	alert("쪽지는 본인에게 쓸수없습니다.");
+                	$("#recipient-name").focus();
+                	return false;
+                }
+                $.ajax({
+                    url: "idExistOk",
+                    method: "post",
+                    data: {
+                        id : recipient
+                    }
+                }).done(function(resp){
+                    //alert("조회결과->" +resp);
+                    if(resp=="0"){
+                        alert("존재하지 않는 회원입니다. \r\n받는사람ID를 다시한번 확인해주세요.");
+                        return;
+                    }
+                    alert("쪽지를 보냈습니다.");
+                    $("#msg_send_form").submit();
+                });
+            });
         </script>
         
     </html>
