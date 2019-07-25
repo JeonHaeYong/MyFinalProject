@@ -31,6 +31,12 @@
 
 
 
+
+
+
+#menu_row > div > a{
+	font-size: 22px;
+}
 .selected_menu_btns {
 	font-family: 'Gamja Flower', cursive !important;
 	border-radius: 0px !important;
@@ -100,7 +106,7 @@ font-weight:bold;
 <!-- 	</div> -->
 <!-- </div> -->
 
-	<section class="site-section bg-light block-13">
+	<section class="site-section block-13">
 
 		<div id="container" class="container">
 			

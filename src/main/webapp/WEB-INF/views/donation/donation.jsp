@@ -247,7 +247,7 @@
 <script>
 	$(function()
     {
-		var percent = (${dto.currentmoney}*1) / (${dto.goalmoney}*1) * 100;
+		var percent = Math.floor((${dto.currentmoney}*1) / (${dto.goalmoney}*1) * 100);
 		$("#progress-bar").attr("style", "width:"+ percent + "%");
 		$("#progress-bar").text(percent+"%");
 		
