@@ -13,20 +13,18 @@
 	</div>
 
 	<header class="site-navbar js-sticky-header site-navbar-target"
-		role="banner" style="height: 68px; z-index: 1000;">
-		<div class="container">
+		role="banner" style="height: 71px; z-index: 1000;">
+		<div class="container top_menu_container">
 			<div class="row  align-items-center">
 				<div id="site_logo_col" class="col-6 col-xl-2">
 					<h1 class="mb-0 site-logo">
-						<a href="/" class="h2 mb-0" style="font-family:Gamja Flower; font-size:25px"><img id="site_logo_img" src="/resources/images/doglogo2.png" data-alt="/resources/images/catlogo.png" width="80px" height="80px"><strong>라온</strong>펫<span
-							class="text-primary"></span> </a>
+						<a href="/" class="h2 mb-0" style="font-family:Gamja Flower;"><img src="/resources/images/doglogo2.png" width="80px"><strong>라온</strong>펫</a>
 					</h1>
 				</div>
 				<div class="col-8 col-xl-10  d-none d-xl-block pr-0">
 					<nav class="site-navigation position-relative text-right pl-0"
 						role="navigation">
-						<ul
-							class="site-menu main-menu js-clone-nav ml-0 mr-0 pl-0 d-none d-lg-block">
+						<ul	class="site-menu main-menu js-clone-nav ml-0 mr-0 pl-0 d-none d-lg-block">
 
 							<li><a href="toAbandoned?currentPage=1" class="nav-link">유기동물</a></li>
 							<li><a href="toDisappearList?currentPage=1" class="nav-link">실종신고</a></li>
@@ -36,24 +34,33 @@
 								class="nav-link">무료나눔</a></li>
 							<li><a href="/oxQuiz" class="nav-link">Fun</a></li>
 							<li><a id="donation_link" href="donation" class="nav-link">후원하기</a></li>
-							<li><a id="notice_link" href="notice-view-page"
-								class="nav-link" style="padding:10px 40px 10px 0px">공지사항</a></li>
+							<li>
+								<a id="notice_link" href="notice-view-page"	class="nav-link ">공지사항</a>
+							</li>
+							<li>
+								<div class="border-right d-none d-xl-block">
+									<a href="javascirpt:void(0)" class="nav-link invisible">1</a>
+								</div>
+								<div class="border-top d-xl-none">
+									<a href="javascirpt:void(0)" class="nav-link invisible">1</a>
+								</div>
+							</li>
 							<c:choose>
 								<c:when test="${id eq null}">
-									<li><input type="button" data-toggle="modal"
-										data-target="#loginmodal" class="login-btn" value="로그인" style="padding:10px 40px 10px 0px">
-
-									</li>
+									<li><a href="javascript:void(0)" data-toggle="modal" data-target="#loginmodal" class="login-btn nav-link">로그인</a></li>
+<!-- 									<li><input type="button" data-toggle="modal" -->
+<!-- 										data-target="#loginmodal" class="login-btn nav-link" value="로그인"> -->
+<!-- 									</li> -->
 									<li><a href="join" class="nav-link pl-0 pr-0">회원가입</a></li>
 								</c:when>
 								<c:otherwise>
 									<li>
 										<c:choose>
 												<c:when test="${type ==3}">
-													<input class="border-left" type="button" id="logout" value="로그아웃">
+													<input type="button" id="logout" value="로그아웃">
 												</c:when>
 												<c:otherwise>
-													<a href="/logout" class="nav-link "><input class="border-left logoutBtn" type="button" value="로그아웃"></a>
+													<a href="/logout" class="nav-link "><input class="logoutBtn" type="button" value="로그아웃"></a>
 												</c:otherwise>
 										</c:choose>
 									</li>

@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+import kh.spring.dto.DonationDTO;
 import kh.spring.dto.DonationPaymentDTO;
 import kh.spring.dto.MemberDTO;
 import kh.spring.service.ChartService;
@@ -46,6 +48,13 @@ public class DonationController {
 	public String donationForm_loginCheck(HttpServletRequest request) {
 		MemberDTO member = ms.selectOneMemberService((String) request.getSession().getAttribute("id"));
 		request.setAttribute("member", member);
+		try {
+			ModelAndView mav = (ModelAndView)donationService.selectRecentDTO();
+			String donationName = ((DonationDTO)mav.getModel().get("dto")).getName();
+			request.setAttribute("donationName", donationName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "donation/donationForm";
 	}
 
