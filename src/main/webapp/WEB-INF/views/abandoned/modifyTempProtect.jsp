@@ -355,9 +355,9 @@ td {
 						<tbody>
 							<tr>
 								<th scope="row" style="width:20%">제목</th>
-								<td width="20%"><input id="title" type="text" name="title" placeholder="${dto.title }"></td>
+								<td width="20%"><input id="title" type="text" name="title" placeholder="${dto.title }" required></td>
 								<th width="20%">이미지</th>
-								<td><input type="file" id="img" name="image"></td>
+								<td><input type="file" id="img" name="image" required></td>
 							</tr>
 							<tr>
 								<th scope="row">시도</th>
@@ -393,9 +393,9 @@ td {
 
 							<tr>
 								<th width="15%">발견 장소</th>	
-								<td width="20%"><input id="place" type="text" name="place" placeholder="${dto.place }"></td>
+								<td width="20%"><input id="place" type="text" name="place" placeholder="${dto.place }" required></td>
 								<th scope="row">발견 날짜</th>
-								<td><input id="findDate" type="date" name="findDateString" placeholder="${dto.findDate }"></td>
+								<td><input id="findDate" type="date" name="findDateString" placeholder="${dto.findDate }" required></td>
 								
 							</tr>
 							<tr>

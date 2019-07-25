@@ -80,7 +80,19 @@ div
 
 
 
+
+
+
+
+
+
 :not
+
+
+
+
+
+
 
 
 
@@ -113,8 +125,20 @@ div
 
 
 
+
+
+
+
+
+
 ){
 line-height
+
+
+
+
+
+
 
 
 
@@ -144,8 +168,20 @@ line-height
 
 
 
+
+
+
+
+
+
 50
 px
+
+
+
+
+
+
 
 
 
@@ -229,17 +265,6 @@ px
 	font-weight: 600;
 }
 
-.btn {
-	font-family: 'Gamja Flower', cursive;
-	background-color: #FDD69270;
-	color: #754F44;
-}
-
-.btn:hover {
-	background-color: #FDD692;
-	font-weight: bold;
-}
-
 .selected_navi {
 	color: #EC7357 !important;
 	font-weight: 600;
@@ -291,6 +316,17 @@ label {
 	margin-bottom: 150px;
 }
 
+.btn {
+	font-family: 'Gamja Flower', cursive;
+	background-color: #FDD69270;
+	color: #754F44;
+}
+
+.btn:hover {
+	background-color: #FDD692;
+	font-weight: bold;
+}
+
 #btnSelect:hover {
 	background-color: #f9a28c;
 	font-weight: 900;
@@ -306,17 +342,34 @@ label {
 	max-height: 600px;
 }
 
-.page-item.active .page-link {
-	background-color: #EC7357;
-	border-color: #EC7357;
+/* .page-item.active .page-link { */
+/* 	background-color: #EC7357; */
+/* 	border-color: #EC7357; */
+/* } */
+
+/* .page-link { */
+/* 	color: #EC7357; */
+/* } */
+
+/* .page-link:hover { */
+/* 	color: #EC7357; */
+/* } */
+.naviBtn {
+	font-family: 'Gamja Flower', cursive !important;
+	background-color: #FDD69270;
+	color: #754F44;
 }
 
-.page-link {
-	color: #EC7357;
+.naviBtn:hover {
+	background-color: #FDD692;
+	font-weight: bold;
 }
 
-.page-link:hover {
-	color: #EC7357;
+.selected_navi {
+	font-family: 'Gamja Flower', cursive !important;
+	color: #754F44;
+	background-color: #FDD692;
+	font-weight: bold;
 }
 </style>
 
@@ -376,17 +429,18 @@ label {
 					<form action="select" method="get">
 						<div class="row">
 							<div class="col-lg-1">날짜</div>
-							<div class="col-lg-11">
+							<div class="col-lg-11" style="font-family:"Gulim;">
 								<input id="from" type="date" max="${todayStr }" name="from"
-									required> ~ <input id="to" type="date"
-									max="${todayStr }" name="to" required>(날짜는 접수일 기준입니다.)
+									style="height: 30px;" required> ~ <input id="to"
+									type="date" max="${todayStr }" name="to" style="height: 30px;"
+									required>(날짜는 접수일 기준입니다.)
 							</div>
 						</div>
 						<div class="row">
 
 							<div class="col-lg-1">시도</div>
 							<div class="col-lg-3">
-								<select id="sido_select" name="sido">
+								<select id="sido_select" name="sido" style="height: 30px;">
 									<option class="op_sido" value="0">전체</option>
 									<option class="op_sido" value="6110000">서울특별시</option>
 									<option class="op_sido" value="6260000">부산광역시</option>
@@ -408,13 +462,13 @@ label {
 							</div>
 							<div class="col-lg-2">시군구</div>
 							<div class="col-lg-2">
-								<select id="sigungu_select" name="sigungu">
+								<select id="sigungu_select" style="height: 30px;" name="sigungu">
 									<option class="op_sigungu" value="0">전체</option>
 								</select>
 							</div>
 							<div class="col-lg-2">보호센터</div>
 							<div class="col-lg-2">
-								<select id="shelter_select" name="shelter">
+								<select id="shelter_select" style="height: 30px;" name="shelter">
 									<option value="0">전체</option>
 								</select>
 							</div>
@@ -422,12 +476,13 @@ label {
 						<div class="row">
 							<div class="col-lg-1">품종</div>
 							<div class="col-lg-5">
-								<select id="species_select" name="species">
+								<select id="species_select" style="height: 30px;" name="species">
 									<option class="op_species" value="0">전체</option>
 									<option class="op_species" value="417000">개</option>
 									<option class="op_species" value="422400">고양이</option>
 									<option class="op_species" value="429900">기타</option>
-								</select> <select id="kind_select" name="speciesKind">
+								</select> <select id="kind_select" style="height: 30px;"
+									name="speciesKind">
 									<option class="op_kind" value="0">전체</option>
 								</select>
 							</div>
@@ -441,7 +496,8 @@ label {
 								<!-- 										<option class="op_processState" value="보호중">보호중</option> -->
 								<!-- 									</select> -->
 
-								<select id="processState_select" name="processState">
+								<select id="processState_select" style="height: 30px;"
+									name="processState">
 									<option class="op_processState" value="전체">전체</option>
 									<option class="op_processState" value="공고중">공고중</option>
 									<option class="op_processState" value="보호중">보호중</option>
@@ -501,92 +557,96 @@ label {
 					</c:if>
 				</div>
 
-				<nav aria-label="..." style="font-size: 1.2rem; font-weight: 600">
-					<ul class="pagination justify-content-center">
-						<c:if test="${pageNavi.needPrev == 1 }">
-							<li class="page-item disabled"><a class="page-link" href="#"
-								tabindex="-1" aria-disabled="true"
-								currPage="${pageNavi.startNavi - 1 }">&laquo;&nbsp;</a></li>
-						</c:if>
-						<c:if test="${pageNavi.currentPage > pageNavi.startNavi }">
-							<li class="page-item"><a class="page-link" href="#"
-								currPage="${pageNavi.currentPage - 1}">이전</a></li>
-						</c:if>
-						<c:forEach var="i" begin="${pageNavi.startNavi}"
-							end="${pageNavi.endNavi}">
-							<c:if test="${i==pageNavi.currentPage}">
-								<li class="page-item active" aria-current="page"><a
-									class="page-link" href="#" currPage="${i }">${i } <span
-										class="sr-only">(current)</span></a></li>
-							</c:if>
-							<c:if test="${i!=pageNavi.currentPage}">
-								<li class="page-item"><a class="page-link" href="#"
-									currPage="${i }">${i }</a></li>
-							</c:if>
-						</c:forEach>
-						<c:if test="${pageNavi.currentPage < pageNavi.pageTotalCount }">
-							<li class="page-item"><a class="page-link" href="#"
-								currPage="${pageNavi.currentPage + 1}">다음</a></li>
-						</c:if>
-						<c:if test="${pageNavi.needNext == 1 }">
-							<li class="page-item"><a class="page-link" href="#"
-								currPage="${pageNavi.endNavi + 1}">&raquo;</a></li>
-						</c:if>
-					</ul>
-				</nav>
-
-				<!-- 					<div id="naviBox" style="margin-top: 10px;" class="text-center"> -->
+				<!-- 				<nav aria-label="..." style="font-size: 1.2rem; font-weight: 600"> -->
+				<!-- 					<ul class="pagination justify-content-center"> -->
 				<%-- 						<c:if test="${pageNavi.needPrev == 1 }"> --%>
-				<%-- 							<a class="naviBtn mx-3" currPage="${pageNavi.startNavi - 1 }">&laquo;&nbsp;</a> --%>
+				<!-- 							<li class="page-item disabled"><a class="page-link" href="#" -->
+				<!-- 								tabindex="-1" aria-disabled="true" -->
+				<%-- 								currPage="${pageNavi.startNavi - 1 }">&laquo;&nbsp;</a></li> --%>
 				<%-- 						</c:if> --%>
 				<%-- 						<c:if test="${pageNavi.currentPage > pageNavi.startNavi }"> --%>
-				<%-- 							<a class="naviBtn mx-3" currPage="${pageNavi.currentPage - 1}">&lt;&nbsp;</a> --%>
+				<!-- 							<li class="page-item"><a class="page-link" href="#" -->
+				<%-- 								currPage="${pageNavi.currentPage - 1}">이전</a></li> --%>
 				<%-- 						</c:if> --%>
 				<%-- 						<c:forEach var="i" begin="${pageNavi.startNavi}" --%>
 				<%-- 							end="${pageNavi.endNavi}"> --%>
 				<%-- 							<c:if test="${i==pageNavi.currentPage}"> --%>
-				<%-- 								<a class="naviBtn mx-3 selected_navi" currPage="${i }">${i }&nbsp;</a> --%>
+				<!-- 								<li class="page-item active" aria-current="page"><a -->
+				<%-- 									class="page-link" href="#" currPage="${i }">${i } <span --%>
+				<!-- 										class="sr-only">(current)</span></a></li> -->
 				<%-- 							</c:if> --%>
 				<%-- 							<c:if test="${i!=pageNavi.currentPage}"> --%>
-				<%-- 								<a class="naviBtn mx-3" currPage="${i }">${i }&nbsp;</a> --%>
+				<!-- 								<li class="page-item"><a class="page-link" href="#" -->
+				<%-- 									currPage="${i }">${i }</a></li> --%>
 				<%-- 							</c:if> --%>
-
 				<%-- 						</c:forEach> --%>
 				<%-- 						<c:if test="${pageNavi.currentPage < pageNavi.pageTotalCount }"> --%>
-				<%-- 							<a class="naviBtn mx-3" currPage="${pageNavi.currentPage + 1}">&gt;&nbsp;</a> --%>
+				<!-- 							<li class="page-item"><a class="page-link" href="#" -->
+				<%-- 								currPage="${pageNavi.currentPage + 1}">다음</a></li> --%>
 				<%-- 						</c:if> --%>
 				<%-- 						<c:if test="${pageNavi.needNext == 1 }"> --%>
-				<%-- 							<a class="naviBtn mx-3" currPage="${pageNavi.endNavi + 1}">&raquo;</a> --%>
+				<!-- 							<li class="page-item"><a class="page-link" href="#" -->
+				<%-- 								currPage="${pageNavi.endNavi + 1}">&raquo;</a></li> --%>
 				<%-- 						</c:if> --%>
-				<!-- 					</div> -->
+				<!-- 					</ul> -->
+				<!-- 				</nav> -->
+
+				<div id="naviBox" style="margin-top: 10px;" class="text-center">
+					<c:if test="${pageNavi.needPrev == 1 }">
+						<input type="button" class="naviBtn">
+						<a class="mx-3" currPage="${pageNavi.startNavi - 1 }">&laquo;&nbsp;</a>
+					</c:if>
+					<c:if test="${pageNavi.currentPage > pageNavi.startNavi }">
+						<input type="button" class="naviBtn">
+						<a class="mx-3" currPage="${pageNavi.currentPage - 1}">&lt;&nbsp;</a>
+					</c:if>
+					<c:forEach var="i" begin="${pageNavi.startNavi}"
+						end="${pageNavi.endNavi}">
+						<c:if test="${i==pageNavi.currentPage}">
+							<input type="button" class="naviBtn selected_navi">
+							<a class="mx-3 selected_navi" currPage="${i }">${i }&nbsp;</a>
+						</c:if>
+						<c:if test="${i!=pageNavi.currentPage}">
+							<input type="button" class="naviBtn">
+							<a class="naviBtn mx-3" currPage="${i }">${i }&nbsp;</a>
+						</c:if>
+
+					</c:forEach>
+
+					<c:if test="${pageNavi.currentPage < pageNavi.pageTotalCount }">
+						<a class="naviBtn mx-3" currPage="${pageNavi.currentPage + 1}">&gt;&nbsp;</a>
+					</c:if>
+
+					<c:if test="${pageNavi.needNext == 1 }">
+						<a class="naviBtn mx-3" currPage="${pageNavi.endNavi + 1}">&raquo;</a>
+					</c:if>
+					<!-- 					</div> -->
+				</div>
 
 			</div>
-
 		</div>
-	</div>
 
-	<form id="apiSelect" action="select" method="post">
-		<input class="selectCondition" type="hidden" id="currentPage" value=""
-			name="currentPage"> <input class="selectCondition"
-			type="hidden" value="${from }" name="from"> <input
-			class="selectCondition" type="hidden" value="${to }" name="to">
-		<input class="selectCondition" type="hidden" value="${species }"
-			name="species"> <input class="selectCondition" type="hidden"
-			value="${speciesKind }" name="speciesKind"> <input
-			class="selectCondition" type="hidden" value="${sido }" name="sido">
-		<input class="selectCondition" type="hidden" value="${sigungu }"
-			name="sigungu"> <input class="selectCondition" type="hidden"
-			value="${shelter }" name="shelter"> <input
-			class="selectCondition" type="hidden" value="${processState }"
-			name="processState">
-	</form>
-
+		<form id="apiect" action="select" method="post">
+			<input class="selectCondition" type="hidden" id="currentPage"
+				value="" name="currentPage"> <input class="selectCondition"
+				type="hidden" value="${from }" name="from"> <input
+				class="selectCondition" type="hidden" value="${to }" name="to">
+			<input class="selectCondition" type="hidden" value="${species }"
+				name="species"> <input class="selectCondition" type="hidden"
+				value="${speciesKind }" name="speciesKind"> <input
+				class="selectCondition" type="hidden" value="${sido }" name="sido">
+			<input class="selectCondition" type="hidden" value="${sigungu }"
+				name="sigungu"> <input class="selectCondition" type="hidden"
+				value="${shelter }" name="shelter"> <input
+				class="selectCondition" type="hidden" value="${processState }"
+				name="processState">
+		</form>
 
 
-	<!-- ----Footerë¶ë¶ìëë¤^_^---------------------------------------------------------------------------------------------------------- -->
 
-	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
+		<!-- ----Footerë¶ë¶ìëë¤^_^---------------------------------------------------------------------------------------------------------- -->
 
+		<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="resources/js/jquery-ui.js"></script>
