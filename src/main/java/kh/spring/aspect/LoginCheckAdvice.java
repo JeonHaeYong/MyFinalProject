@@ -33,6 +33,7 @@ public class LoginCheckAdvice {
 		Object retVal = null;
 		String id = (String)session.getAttribute("id");
 		if(id==null) {
+			System.out.println("로그인이 필요함.");
 			request.setAttribute("errorLogin", "errorLogin");
 			return "index";
 		}
