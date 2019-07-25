@@ -49,6 +49,13 @@
 	.checkboxDiv{
 		text-align: right;
 	}
+	#wsLabel::before{
+		border-color: #adb5bd;
+	}
+	#withoutSoldout:checked + #wsLabel::before{
+		background-color: #ec7357;
+		border-color: #ec7357;
+	}
 	.menu-box{width: 150px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px; margin-top: 50px;}
     .menu-box>div{height: 35px;}
     .menu-box>div:first-child{font-weight: bold; border-bottom: 1px solid #754F44; line-height: 33px;}
@@ -173,9 +180,9 @@
 						</blockquote>
 					</div>
 				</div>
-				<div class="custom-control custom-checkbox checkboxDiv mt-3">
+				<div class="custom-control custom-switch checkboxDiv mt-3">
 					<input type="checkbox" class="custom-control-input" id="withoutSoldout">
-					<label class="custom-control-label" for="withoutSoldout">판매완료 상품 제외하기</label>
+					<label class="custom-control-label" for="withoutSoldout" id="wsLabel">판매완료 상품 제외하기</label>
 				</div>
 			</div>
 		</div>

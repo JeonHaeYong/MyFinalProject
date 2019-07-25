@@ -41,6 +41,13 @@
                 	text-decoration: underline;
                 	color: #ec7357;
                 }
+                label:before{
+					border-color: #adb5bd !important;
+				}
+				.custom-control-input:checked + label:before{
+					background-color: #ec7357 !important;
+					border-color: #ec7357 !important;
+				}
                 .btn{font-family: 'Gamja Flower', cursive; background-color:#FDD69270; color:#754F44;}
 				.btn:hover{background-color:#FDD692; font-weight:bold;}
 				.btn:hover span{font-weight:bold;}
