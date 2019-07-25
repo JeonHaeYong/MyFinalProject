@@ -36,13 +36,13 @@
 								class="nav-link">무료나눔</a></li>
 							<li><a href="/oxQuiz" class="nav-link">Fun</a></li>
 							<li><a id="donation_link" href="donation" class="nav-link">후원하기</a></li>
-							<li>
-								<a id="notice_link" href="notice-view-page"	class="nav-link ">공지사항</a>
-							</li>
+							<li><a id="notice_link" href="notice-view-page"
+								class="nav-link" style="padding:10px 40px 10px 0px">공지사항</a></li>
 							<c:choose>
 								<c:when test="${id eq null}">
-									<li class="border-left"><input type="button" data-toggle="modal"
-										data-target="#loginmodal" class="login-btn" value="로그인">
+									<li><input type="button" data-toggle="modal"
+										data-target="#loginmodal" class="login-btn" value="로그인" style="padding:10px 40px 10px 0px">
+
 									</li>
 									<li><a href="join" class="nav-link pl-0 pr-0">회원가입</a></li>
 								</c:when>

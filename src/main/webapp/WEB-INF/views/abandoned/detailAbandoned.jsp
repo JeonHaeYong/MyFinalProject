@@ -22,24 +22,19 @@
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
 
+<jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
 <style>
 body{
 	color:#754F44;
-	font-weight:600;
+
 }
 table {
 	width: 760px;
 }
 
-#animalPhoto {
-	position: absolute;
-	right: 20px;
-	top: 55px;
-	z-index: 1;
-}
 
 th {
-	background-color: #f7f7f7;
+
 	border-bottom: 1px solid #cfcfcf;
 	text-align: center;
 	padding: 5px;
@@ -53,15 +48,7 @@ td {
 #toList {
 	text-align: center;
 }
-#btnToList {
-	background-color: #754F44;
-	color: white;
-	border-radius: 5px;
-	padding: 5px 10px;
-}
-#btnToList:hover{
-	font-weight:600;
-}
+
 .menu-row {
 	text-align: -webkit-center;
 }
@@ -105,6 +92,12 @@ td {
 	max-height: 600px;
 }
 
+.btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44;}
+.btn:hover{background-color:#FDD692; font-weight:bold;}
+.selected_navi {
+	color: #EC7357 !important;
+	font-weight: 600;
+}
 </style>
 
 </head>
@@ -127,7 +120,7 @@ td {
 						<a href="toAbandoned?currentPage=1">유기동물조회</a>
 					</div>
 					<div class="s-menu1">
-						<a href="listTempProtect?=currentPage=1">임시보호중</a>
+						<a href="listTempProtect?currentPage=1">임시보호중</a>
 					</div>
 					<div class="s-menu1">
 						<a href="toHospital?currentPage=1">동물병원 조회</a>
@@ -141,9 +134,7 @@ td {
 					<!--메뉴바랑 리스트 사이 빈 공간-->
 				</div>
 				<div class="col-lg-8 col-md-8 col-sm-12 col-12 row">
-					<div id="animalPhoto">
-						<img src="${dto.popfile }" style="width: 200px; height: 150px">
-					</div>
+
 					<div style="margin-bottom:20px">「동물보호법」 제17조, 같은 법 시행령 제7조 및 같은 법 시행규칙 제20조에 따라 구조된 동물의
 								보호상황을 아래와 같이 공고합니다.
 					</div>			
@@ -152,6 +143,7 @@ td {
 							<tr>
 								<th scope="row" style="width: 18%;">공고번호</th>
 								<td>${dto.noticeNo }</td>
+								<th colspan="2" rowspan="3"><img src="${dto.popfile }" style="width: 200px; height: 150px"></th>
 							</tr>
 							<tr>
 								<th scope="row">품종</th>

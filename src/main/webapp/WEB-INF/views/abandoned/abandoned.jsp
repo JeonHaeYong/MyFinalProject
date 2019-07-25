@@ -218,13 +218,9 @@ px
 	font-weight: 600;
 }
 
-#btnSelect {
-	background-color: #EC7357;
-	color: white;
-	border-radius: 5px;
-	padding: 5px 10px;
-}
 
+.btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44;}
+.btn:hover{background-color:#FDD692; font-weight:bold;}
 .selected_navi {
 	color: #EC7357 !important;
 	font-weight: 600;
