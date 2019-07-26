@@ -25,5 +25,12 @@
 		</foreach>
 	</delete>
 	
+	<delete id="deleteCartByItemSeq">
+		delete from cart where item_seq in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
 	
 </mapper>
