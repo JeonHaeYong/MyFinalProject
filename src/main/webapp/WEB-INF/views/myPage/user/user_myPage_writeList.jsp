@@ -5,6 +5,7 @@
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <title>Insert title here</title>
+            <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
             <link
                   href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
                   rel="stylesheet">

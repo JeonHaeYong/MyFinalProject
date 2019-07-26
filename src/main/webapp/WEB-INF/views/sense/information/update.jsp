@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <title>OX 상식 퀴즈</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
 	rel="stylesheet">
