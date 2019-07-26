@@ -49,12 +49,12 @@
 	.checkboxDiv{
 		text-align: right;
 	}
-	#wsLabel::before{
-		border-color: #adb5bd;
+	label:before{
+		border-color: #adb5bd !important;
 	}
-	#withoutSoldout:checked + #wsLabel::before{
-		background-color: #ec7357;
-		border-color: #ec7357;
+	.custom-control-input:checked + label:before{
+		background-color: #ec7357 !important;
+		border-color: #ec7357 !important;
 	}
 	.menu-box{width: 150px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px; margin-top: 50px;}
     .menu-box>div{height: 35px;}
@@ -73,6 +73,12 @@
 	.itemName{
 		height: 58px;
 	}
+	.categoryBadge{
+		background-color: #FBFFB9;
+		margin: 10px 0px;
+		color: #754F44;
+		font-size: 15px;
+	}
 	.detail{
 		text-decoration: none;
 		color: #754F44;
@@ -82,6 +88,7 @@
 		background-color: #FBFFB950;
 	}
 	.price{
+		float: right;
 		text-align: right;
 		font-size: 25px;
 	}
@@ -190,10 +197,7 @@
 			<div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-row">
                 <div class="row menu-box">
                     <div class="col-12 s-menu">M E N U</div>
-                    <div class="col-12 "><a name="s-menu" href="freeMarket">무료나눔</a></div>
-                   	<c:if test="${type == 4}">
-                   		<div class="col-12"><a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a></div> <!-- 관리자만 볼 수 있게! -->
-                   	</c:if>
+                    <div class="col-12 "><a name="s-menu" href="freeMarket">무료나눔<c:if test="${type == 4}"><br><small>관리자모드</small></c:if></a></div>
                 </div>
             </div>
 <!--             <div class="col-1"></div> -->
@@ -202,8 +206,20 @@
 					<c:if test="${itemList.size() == 0 }">
 						<div class="col-12 m-3"><h3>등록된 상품이 없습니다.</h3></div> 
 					</c:if>
-					<c:forEach var="dto" items="${itemList }">
+					<c:if test="${sessionScope.type == 4 }">
+						<div class="col-12 custom-control custom-checkbox">
+							<input type="checkbox" class="custom-control-input" id="allCheck" name="items" value="${dto.cart_seq }">
+							<label class="custom-control-label" for="allCheck">전체선택</label>
+						</div>
+					</c:if>
+					<c:forEach var="dto" items="${itemList }" varStatus="status">
 						<div class="col-lg-4 col-md-6 col-12 p-0">
+							<c:if test="${sessionScope.type == 4 }">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input itemCheck" id="customCheck${status.count }" name="items" value="${dto.cart_seq }">
+									<label class="custom-control-label" for="customCheck${status.count }"></label>
+								</div>
+							</c:if>
 							<div class="card myCard mb-3">
 								<img class="card-img-top cardImg" src="${dto.imagePath1 }" alt="Card image" soldout="${dto.soldout }">
 								<div class="card-body">
@@ -212,7 +228,10 @@
 											<c:if test="${dto.soldout == 'y' }">[판매완료] </c:if>${dto.name }
 										</a></h4>
 									</div>
-									<p class="card-text price">${dto.price } 원</p>
+									<div style="height: 42px;">
+										<p class="badge badge-pill categoryBadge" category="${dto.category }"></p>
+										<p class="card-text price">${dto.price } 원</p>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -286,6 +305,40 @@
 	<script src="resources/js/main.js"></script>
 	<script>
 		$(function(){
+			$(document).on("change", "#allCheck", function(){
+        		if($("#allCheck").prop("checked")){
+        			$(".itemCheck").prop("checked", true);
+        		}else{
+        			$(".itemCheck").prop("checked", false);
+        		}
+        	});
+			$(document).on("change", ".itemCheck", function(){
+        		var allChecked = true;
+        		$(".itemCheck").each(function(i, item){
+        			if(!($(item).prop("checked"))){
+        				allChecked = false;
+        			}
+        		});
+        		console.log(allChecked);
+        		if(allChecked){
+        			$("#allCheck").prop("checked", true);
+        		}
+        		if(!$(this).prop("checked")){
+        			$("#allCheck").prop("checked", false);
+        		}
+        	});
+			$(".categoryBadge").each(function(i, item){
+				var category = $(item).attr("category");
+				if(category == "food"){
+					$(this).text("사료&간식");
+				}else if(category == "toy"){
+					$(this).text("장난감");
+				}else if(category == "clothing"){
+					$(this).text("의류");
+				}else{
+					$(this).text("기타");
+				}
+			});
 			
 			var withoutSoldout = "Y";
 			function withoutSoldoutChanged(){
@@ -307,6 +360,18 @@
 					$(".cardImg").each(function(i, item){
 						if($(item).attr("soldout") == 'y'){
 							$(this).css("filter", "brightness(60%)");
+						}
+					});
+					$(".categoryBadge").each(function(i, item){
+						var category = $(item).attr("category");
+						if(category == "food"){
+							$(this).text("사료&간식");
+						}else if(category == "toy"){
+							$(this).text("장난감");
+						}else if(category == "clothing"){
+							$(this).text("의류");
+						}else{
+							$(this).text("기타");
 						}
 					});
 				});
@@ -401,6 +466,18 @@
 					$(".cardImg").each(function(i, item){
 						if($(item).attr("soldout") == 'y'){
 							$(this).css("filter", "brightness(60%)");
+						}
+					});
+					$(".categoryBadge").each(function(i, item){
+						var category = $(item).attr("category");
+						if(category == "food"){
+							$(this).text("사료&간식");
+						}else if(category == "toy"){
+							$(this).text("장난감");
+						}else if(category == "clothing"){
+							$(this).text("의류");
+						}else{
+							$(this).text("기타");
 						}
 					});
 				});

@@ -5,10 +5,7 @@
 			<div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-row">
                 <div class="row menu-box">
                     <div class="col-12 s-menu">M E N U</div>
-                    <div class="col-12 "><a name="s-menu" href="freeMarket">무료나눔</a></div>
-                   	<c:if test="${type == 4}">
-                   		<div class="col-12"><a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a></div> <!-- 관리자만 볼 수 있게! -->
-                   	</c:if>
+                    <div class="col-12 "><a name="s-menu" href="freeMarket">무료나눔<c:if test="${type == 4}"><br>관리자모드</c:if></a></div>
                 </div>
             </div>
 <!--             <div class="col-1"></div> -->
@@ -17,8 +14,20 @@
 					<c:if test="${itemList.size() == 0 }">
 						<div class="col-12 m-3"><h3>등록된 상품이 없습니다.</h3></div> 
 					</c:if>
+					<c:if test="${sessionScope.type == 4 }">
+						<div class="col-12 custom-control custom-checkbox">
+							<input type="checkbox" class="custom-control-input" id="allCheck" name="items" value="${dto.cart_seq }">
+							<label class="custom-control-label" for="allCheck">전체선택</label>
+						</div>
+					</c:if>
 					<c:forEach var="dto" items="${itemList }">
 						<div class="col-lg-4 col-md-6 col-12 p-0">
+							<c:if test="${sessionScope.type == 4 }">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input itemCheck" id="customCheck${status.count }" name="items" value="${dto.cart_seq }">
+									<label class="custom-control-label" for="customCheck${status.count }"></label>
+								</div>
+							</c:if>
 							<div class="card myCard mb-3">
 								<img class="card-img-top cardImg" src="${dto.imagePath1 }" alt="Card image" soldout="${dto.soldout }">
 								<div class="card-body">
@@ -27,7 +36,10 @@
 											<c:if test="${dto.soldout == 'y' }">[판매완료] </c:if>${dto.name }
 										</a></h4>
 									</div>
-									<p class="card-text price">${dto.price } 원</p>
+									<div style="height: 42px;">
+										<p class="badge badge-pill categoryBadge" category="${dto.category }"></p>
+										<p class="card-text price">${dto.price } 원</p>
+									</div>
 								</div>
 							</div>
 						</div>
