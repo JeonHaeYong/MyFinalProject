@@ -29,7 +29,10 @@
 	color: #EC7357 !important;
 	font-weight: 600 !important;
 }
-
+#container *
+{
+	font-family: 'SeoulNamsanM';
+}
 
 
 
@@ -389,9 +392,9 @@ font-weight:bold;
 	    			for(var i = 1 ; i <= array.length ; i++)
 		    		{
 						var $row = $('<div class="row justify-content-center my-1 id_row"></div>');
-		    			var $idCol = $('<div class="col-6 col-md-6 col-lg-6 text-center my-1">'+array[i-1].id+'</div>');
-		    			var $statusCol = $('<div class="col-4 col-md-4 col-lg-3 text-center my-1">'+array[i-1].status+'</div>');
-		    			var $checkCol = $('<div class="col-2 col-md-2 col-lg-3 text-center my-1"><input class="black_check" name="'+array[i-1].id+'" type="checkbox">'+'블랙리스트 등록'+'</div>');
+		    			var $idCol = $('<div class="col-6 col-md-6 col-lg-4 text-center my-1">'+array[i-1].id+'</div>');
+		    			var $statusCol = $('<div class="col-4 col-md-4 col-lg-4 text-center my-1">'+array[i-1].status+'</div>');
+		    			var $checkCol = $('<div class="col-2 col-md-2 col-lg-4 text-center my-1"><input class="black_check" name="'+array[i-1].id+'" type="checkbox">'+'블랙리스트 등록'+'</div>');
 		    			$row.append($idCol).append($statusCol).append($checkCol);
 		    			$("#search_result_div").append($row);
 		    		}
@@ -430,7 +433,10 @@ font-weight:bold;
 	    		}
 	    		else
 	    		{
-	    			alert("검색 결과 없음");
+	    			var $row = $('<div class="row justify-content-center my-5"></div>');
+	    			var $noResultCol = $('<div class="col-6 col-md-6 col-lg-12 text-center my-1"><h3>검색 결과가 없습니다.</h3></div>');
+	    			$row.append($noResultCol);
+	    			$("#search_result_div").append($row);
 	    		}
 	    		
 	    	})
@@ -515,7 +521,10 @@ font-weight:bold;
 	    		}
 	    		else
 	    		{
-	    			alert("검색 결과 없음");
+	    			var $row = $('<div class="row justify-content-center my-1"></div>');
+	    			var $noResultCol = $('<div class="col-6 col-md-6 col-lg-12 text-center my-1"><h3>검색 결과가 없습니다.</h3></div>');
+	    			$row.append($noResultCol);
+	    			$("#blacklist_search_result_div").append($row);
 	    		}
 	    		
 	    	})

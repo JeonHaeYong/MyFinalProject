@@ -328,7 +328,7 @@ public class MemberController {
 		int type= dto.getType();
 		System.out.println("관리자확인->" + type);
 		if(type==4) {//관리자라면
-			return "myPage/admin/admin_chart";
+			return "myPage/admin/admin_manage_member";
 		}
 		return "myPage/user/user_myPage_profile";
 	}

@@ -28,7 +28,10 @@
 	color: #EC7357 !important;
 	font-weight: 600 !important;
 }
-
+#container *
+{
+	font-family: 'SeoulNamsanM';
+}
 
 
 

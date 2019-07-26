@@ -21,9 +21,13 @@
 
 <style>
 
-	#container
+#container
 {
 	margin-top: 5%;
+}
+#container *
+{
+	font-family: 'SeoulNamsanM';
 }
 #mypage_link
 {

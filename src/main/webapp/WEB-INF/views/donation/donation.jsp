@@ -259,58 +259,8 @@ body{
 <script>
 	$(function()
     {
-		var percent = Math.floor((${dto.currentmoney}*1) / (${dto.goalmoney}*1) * 100);
-		$("#progress-bar").attr("style", "width:"+ percent + "%");
-		$("#progress-bar").text(percent+"%");
-		
 		$("#carousel-inner div:first-child").addClass("active");
 		
-		var time = "${dto.enddate}";
-		var forTime = time.substring(5, 7)+"/"+time.substring(8, 10)+"/"+time.substring(0, 4);
-		
-	    CountDownTimer(forTime, 'last_time_span'); //첫번째 인수로 넣은 날짜까지
-// 		CountDownTimer('01/01/2018 00:00 AM', 'newcountdown'); // 2018년 1월 1일까지, 시간을 표시하려면 01:00 AM과 같은 형식을 사용합니다.
-	    
-	    function CountDownTimer(dt, id)
-	    {
-		    var end = new Date(dt);
-		    
-		    var _second = 1000;
-		    var _minute = _second * 60;
-		    var _hour = _minute * 60;
-		    var _day = _hour * 24;
-		    var timer;
-		    
-		    var targetId = "#" + id;
-		    
-		    var $target = $(targetId);
-		    
-		    function showRemaining()
-		    {
-			    var now = new Date();
-			    var distance = end - now;
-			    if(distance < 0)
-			    {
-				    
-				    clearInterval(timer);
-				    $target.text = '종료!';
-				    
-				    return;
-			    }
-			    
-			    var days = Math.floor(distance / _day);
-			    var hours = Math.floor((distance % _day) / _hour);
-			    var minutes = Math.floor((distance % _hour) / _minute);
-			    var seconds = Math.floor((distance % _minute) / _second);
-			    
-			    $target.text(days + '일 ' + hours + '시간 ' + minutes + '분 ' + seconds + '초');
-		    }
-		    
-		    timer = setInterval(showRemaining, 1000);
-	    }
-	    // Source: stackoverflow
-	   
-	    
 	    $("img").on("error", function()
 		{
 	    	$(this).attr("src","resources/images/dog_1.jpg");
@@ -327,4 +277,56 @@ body{
 		
     };
 </script>
+<c:if test="${dto.currentmoney != null}">
+<script>
+var percent = Math.floor((${dto.currentmoney}*1) / (${dto.goalmoney}*1) * 100);
+$("#progress-bar").attr("style", "width:"+ percent + "%");
+$("#progress-bar").text(percent+"%");
+
+var time = "${dto.enddate}";
+var forTime = time.substring(5, 7)+"/"+time.substring(8, 10)+"/"+time.substring(0, 4);
+
+CountDownTimer(forTime, 'last_time_span'); //첫번째 인수로 넣은 날짜까지
+//	CountDownTimer('01/01/2018 00:00 AM', 'newcountdown'); // 2018년 1월 1일까지, 시간을 표시하려면 01:00 AM과 같은 형식을 사용합니다.
+
+function CountDownTimer(dt, id)
+{
+    var end = new Date(dt);
+    
+    var _second = 1000;
+    var _minute = _second * 60;
+    var _hour = _minute * 60;
+    var _day = _hour * 24;
+    var timer;
+    
+    var targetId = "#" + id;
+    
+    var $target = $(targetId);
+    
+    function showRemaining()
+    {
+	    var now = new Date();
+	    var distance = end - now;
+	    if(distance < 0)
+	    {
+		    
+		    clearInterval(timer);
+		    $target.text = '종료!';
+		    
+		    return;
+	    }
+	    
+	    var days = Math.floor(distance / _day);
+	    var hours = Math.floor((distance % _day) / _hour);
+	    var minutes = Math.floor((distance % _hour) / _minute);
+	    var seconds = Math.floor((distance % _minute) / _second);
+	    
+	    $target.text(days + '일 ' + hours + '시간 ' + minutes + '분 ' + seconds + '초');
+    }
+    
+    timer = setInterval(showRemaining, 1000);
+}
+// Source: stackoverflow
+</script>
+</c:if>
 </html>

@@ -24,7 +24,10 @@
 #container {
 	margin-top: 5%;
 }
-
+#container *
+{
+	font-family: 'SeoulNamsanM';
+}
 .my_buttons{
 font-family: 'Gamja Flower', cursive !important;
 background-color:#FDD69270 !important;
