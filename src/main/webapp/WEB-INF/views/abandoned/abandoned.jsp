@@ -68,130 +68,25 @@ body {
 div
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 :not
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 (
 .addr
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 ){
 line-height
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 :
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 50
 px
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ;
@@ -328,7 +223,7 @@ label {
 }
 
 #btnSelect:hover {
-	background-color: #f9a28c;
+	background-color: #FDD692;
 	font-weight: 900;
 }
 /*점보트론 이미지*/
@@ -354,18 +249,18 @@ label {
 /* .page-link:hover { */
 /* 	color: #EC7357; */
 /* } */
-.naviBtn {
+.navi_btns {
 	font-family: 'Gamja Flower', cursive !important;
 	background-color: #FDD69270;
 	color: #754F44;
 }
 
-.naviBtn:hover {
+.navi_btns:hover {
 	background-color: #FDD692;
 	font-weight: bold;
 }
 
-.selected_navi {
+.selected_btn {
 	font-family: 'Gamja Flower', cursive !important;
 	color: #754F44;
 	background-color: #FDD692;
@@ -556,7 +451,7 @@ label {
 							않습니다.</div>
 					</c:if>
 				</div>
-
+<!-- 부트스트랩 페이지네비 -->
 				<!-- 				<nav aria-label="..." style="font-size: 1.2rem; font-weight: 600"> -->
 				<!-- 					<ul class="pagination justify-content-center"> -->
 				<%-- 						<c:if test="${pageNavi.needPrev == 1 }"> --%>
@@ -591,42 +486,46 @@ label {
 				<!-- 					</ul> -->
 				<!-- 				</nav> -->
 
+
+
 				<div id="naviBox" style="margin-top: 10px;" class="text-center">
 					<c:if test="${pageNavi.needPrev == 1 }">
-						<input type="button" class="naviBtn">
-						<a class="mx-3" currPage="${pageNavi.startNavi - 1 }">&laquo;&nbsp;</a>
+						<input class="btn navi_btns mx-1" type="button" value="이전"
+							currPage="${pageNavi.startNavi - 1 }">
 					</c:if>
-					<c:if test="${pageNavi.currentPage > pageNavi.startNavi }">
-						<input type="button" class="naviBtn">
-						<a class="mx-3" currPage="${pageNavi.currentPage - 1}">&lt;&nbsp;</a>
-					</c:if>
+
 					<c:forEach var="i" begin="${pageNavi.startNavi}"
 						end="${pageNavi.endNavi}">
 						<c:if test="${i==pageNavi.currentPage}">
-							<input type="button" class="naviBtn selected_navi">
-							<a class="mx-3 selected_navi" currPage="${i }">${i }&nbsp;</a>
-						</c:if>
-						<c:if test="${i!=pageNavi.currentPage}">
-							<input type="button" class="naviBtn">
-							<a class="naviBtn mx-3" currPage="${i }">${i }&nbsp;</a>
+							<input class="btn selected_btn mx-1" type="button" value="${i }"
+								currPage="${i }">
 						</c:if>
 
+						<c:if test="${i!=pageNavi.currentPage}">
+							<input class="btn navi_btns mx-1" type="button" value="${i }"
+								currPage="${i }">
+						</c:if>
 					</c:forEach>
 
-					<c:if test="${pageNavi.currentPage < pageNavi.pageTotalCount }">
-						<a class="naviBtn mx-3" currPage="${pageNavi.currentPage + 1}">&gt;&nbsp;</a>
+					<c:if test="${pageNavi.needNext == 1 }">
+						<input class="btn navi_btns mx-1" type="button" value="이후" currPage="${pageNavi.endNavi + 1}" >
 					</c:if>
 
-					<c:if test="${pageNavi.needNext == 1 }">
-						<a class="naviBtn mx-3" currPage="${pageNavi.endNavi + 1}">&raquo;</a>
-					</c:if>
-					<!-- 					</div> -->
 				</div>
 
 			</div>
 		</div>
+		<!--  페이지네비  바로 전 페이지 -->
+		<%-- 					<c:if test="${pageNavi.currentPage > pageNavi.startNavi }"> --%>
+		<!-- 						<input type="button" class="naviBtn"> -->
+		<%-- 						<a class="mx-3" currPage="${pageNavi.currentPage - 1}">&lt;&nbsp;</a> --%>
+		<%-- 					</c:if> --%>
+		<!-- 페이지네비 바로 다음 페이지 -->
+		<%-- 					<c:if test="${pageNavi.currentPage < pageNavi.pageTotalCount }"> --%>
+		<%-- 						<a class="naviBtn mx-3" currPage="${pageNavi.currentPage + 1}">&gt;&nbsp;</a> --%>
+		<%-- 					</c:if> --%>
 
-		<form id="apiect" action="select" method="post">
+		<form id="apiSelect" action="select" method="post">
 			<input class="selectCondition" type="hidden" id="currentPage"
 				value="" name="currentPage"> <input class="selectCondition"
 				type="hidden" value="${from }" name="from"> <input
@@ -641,12 +540,12 @@ label {
 				class="selectCondition" type="hidden" value="${processState }"
 				name="processState">
 		</form>
+	</div>
 
 
+	<!-- ----Footerë¶ë¶ìëë¤^_^---------------------------------------------------------------------------------------------------------- -->
 
-		<!-- ----Footerë¶ë¶ìëë¤^_^---------------------------------------------------------------------------------------------------------- -->
-
-		<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="resources/js/jquery-ui.js"></script>
@@ -1196,7 +1095,7 @@ $(function() {
 					})
 });
 
-	$(".page-link").on("click", function() {
+	$(".btn").on("click", function() {
 // 		$(".naviBtn").text("").css("color","#EC7357");
 		var flag = "selectAll";
 		$(".selectCondition").each(function(i,item){
