@@ -148,7 +148,7 @@ public class AbandonedController {
 
 		try {
 			List<ApiAbandonedAnimalDTO> list = apiService.selectAll(currentPage);
-			Map<String, Integer> pageNavi = apiService.getNaviforApiAbandonedAnimal(currentPage);
+			Map<String, Integer> pageNavi = apiService.getNaviTotal(currentPage);
 			request.setAttribute("list", list);
 			request.setAttribute("pageNavi", pageNavi);
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -185,7 +185,7 @@ public class AbandonedController {
 
 		try {
 			List<ApiAbandonedAnimalDTO> list = apiService.selectByCondition(currentPage, from, to, species, speciesKind, sido, sigungu, shelter, processState);
-			Map<String, Integer> pageNavi = apiService.getNaviforApiAbandonedAnimal(currentPage);
+			Map<String, Integer> pageNavi = apiService.getNaviCondition(currentPage,from, to, species, speciesKind, sido, sigungu, shelter, processState );
 			request.setAttribute("list", list);
 			request.setAttribute("listsize", list.size());
 			System.out.println(list.size());

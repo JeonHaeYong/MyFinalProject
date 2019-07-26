@@ -1,5 +1,6 @@
 package kh.spring.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +15,8 @@ public interface ApiAbandonedAnimalService {
 			String sido, String sigungu, String shelter, String processState);
 	public ApiAbandonedAnimalDTO selectOneApiAbandonedAnimal(int seq);
 	public int apiAbandonedAnimalContentsSize();
-	public Map<String, Integer> getNaviforApiAbandonedAnimal(int currentPage);
+	public Map<String, Integer> getNaviTotal(int currentPage);
+	public Map<String, Integer> getNaviCondition(int currentPage,String from, String to, String species, String speciesKind, String sido, String sigungu, String shelter,String processState);
 	public String getTagValue(String tag, Element eElement);
 	public List<ApiAbandonedAnimalDTO> selectAll(int currentPage);
 
