@@ -100,7 +100,7 @@ font-weight:bold;
 <!-- 	</div> -->
 <!-- </div> -->
 
-	<section class="site-section bg-light block-13">
+	<section class="site-section block-13">
 
 		<div id="container" class="container">
 			
@@ -444,16 +444,17 @@ font-weight:bold;
 	    		
 	    		var array = response.array;
 	    		
-	    		var $menu_row = $('<div class="row justify-content-center my-1"></div>');
-				var $menu_seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1"><h3>등록 번호</h3></div>');
-    			var $menu_idCol = $('<div class="col-6 col-md-6 col-lg-3 text-center my-1"><h3>아이디</h3></div>');
-    			var $menu_reasonCol = $('<div class="col-4 col-md-4 col-lg-4 text-center my-1"><h3>정지 사유</h3></div>');
-    			var $menu_timeCol = $('<div class="col-2 col-md-2 col-lg-3 text-center my-1"><h3>조치일</h3></div>');
-    			$menu_row.append($menu_seqCol).append($menu_idCol).append($menu_reasonCol).append($menu_timeCol);
-    			$("#blacklist_search_result_div").append($menu_row);
-	    		
 	    		if(array.length != 0)
 	    		{
+	    			
+	    			var $menu_row = $('<div class="row justify-content-center my-1"></div>');
+					var $menu_seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1"><h3>등록 번호</h3></div>');
+	    			var $menu_idCol = $('<div class="col-6 col-md-6 col-lg-3 text-center my-1"><h3>아이디</h3></div>');
+	    			var $menu_reasonCol = $('<div class="col-4 col-md-4 col-lg-4 text-center my-1"><h3>정지 사유</h3></div>');
+	    			var $menu_timeCol = $('<div class="col-2 col-md-2 col-lg-3 text-center my-1"><h3>조치일</h3></div>');
+	    			$menu_row.append($menu_seqCol).append($menu_idCol).append($menu_reasonCol).append($menu_timeCol);
+	    			$("#blacklist_search_result_div").append($menu_row);
+	    			
 	    			for(var i = 1 ; i <= array.length ; i++)
 		    		{
 						var $row = $('<div class="row justify-content-center my-1"></div>');

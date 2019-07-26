@@ -44,31 +44,27 @@ font-weight:bold;
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 
 
-	<section class="site-section bg-light block-13">
+	<section class="site-section block-13">
 
 		<div id="container" class="container">
 			
 			<div class="row justify-content-center">
 				
-				<div class="col-4 col-md-12 col-lg-12 text-center my-3">
+				<div class="col-4 col-md-12 col-lg-2 text-center my-3">
 					
 					<label>제목</label>
 				
 				</div>
 				
-				<div class="col-8 col-md-12 col-lg-12 text-center my-1">
+				<div class="col-8 col-md-12 col-lg-10 text-center my-1">
 					
 					<input type="text" id="title_text" class="form-control" name="title" required>
 				
 				</div>
 				
-				<div class="col-12 col-md-12 col-lg-12 text-center my-3">
-					
-					<label>내용</label>
+				<div class="col-12 col-md-12 col-lg-2 text-center my-3"></div>
 				
-				</div>
-				
-				<div class="col-12 col-md-12 col-lg-12 my-1">
+				<div class="col-12 col-md-12 col-lg-10 my-1">
 					
 					<div id="summernote" contenteditable="true"></div>
 				

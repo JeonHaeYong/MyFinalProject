@@ -53,6 +53,14 @@
 	background-color: #9c2c2c !important;
 }
 
+.progress
+{
+	height: 40px;
+}
+#progress-bar
+{
+	height: 50px;
+}
 </style>
 
 </head>
@@ -62,7 +70,7 @@
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 
 
-	<section class="site-section bg-light block-13">
+	<section class="site-section block-13">
 
 	<div id="container" class="container">
 
@@ -247,7 +255,7 @@
 <script>
 	$(function()
     {
-		var percent = (${dto.currentmoney}*1) / (${dto.goalmoney}*1) * 100;
+		var percent = Math.floor((${dto.currentmoney}*1) / (${dto.goalmoney}*1) * 100);
 		$("#progress-bar").attr("style", "width:"+ percent + "%");
 		$("#progress-bar").text(percent+"%");
 		

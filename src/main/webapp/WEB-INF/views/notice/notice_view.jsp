@@ -60,7 +60,7 @@ a{
 
 
 
-	<section class="site-section bg-light block-13">
+	<section class="site-section block-13">
 
 
 
