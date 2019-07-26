@@ -53,7 +53,7 @@ public class MemberController {
 	private HttpSession session;
 	@Autowired
 	private DonationPaymentService dps;
-	private kakao_restapi kakao_restapi = new kakao_restapi();
+
 	
 	//로그인
 	@RequestMapping("login")
@@ -505,10 +505,11 @@ public class MemberController {
 		return "member/findPassword";
 	}
 	@ResponseBody
-	@RequestMapping("findPwProc")
+	@RequestMapping("findPwProc.do")
 	public String findPwProc(HttpServletRequest request) {
 		String id = request.getParameter("id");
 		String email = request.getParameter("email");
+	
 		int idcheck=mservice.idDuplCheckService(request.getParameter("id"));
 		String result = null;
 		if(idcheck==1) { // 아이디 존재 여부
