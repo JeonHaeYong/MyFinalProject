@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>유기동물 조회</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
 	rel="stylesheet">
@@ -101,26 +102,7 @@ px
 	font-size: 18px;
 }
 
-.menu-bar {
-	text-align: center;
-	height: 200px;
-}
 
-.menu-bar>div {
-	height: 40px;
-}
-
-.menu-bar>div:not (.menu ):hover {
-	background-color: #FBFFB950;
-	font-weight: bold;
-}
-
-.menu-bar div:first-child {
-	font-size: 20px;
-	font-weight: bold;
-	border-bottom: 1px solid black;
-	color: #754F44;
-}
 
 .card {
 	width: 243px;
@@ -172,10 +154,29 @@ label {
 #dataNotExist {
 	text-align: center;
 }
+.menu-bar {
+	text-align: center;
+	height: 200px;
+}
 
+.menu-bar>div {
+	height: 40px;
+}
+
+.menu-bar>div:not (.menu ):hover {
+	background-color: #FBFFB950;
+	font-weight: bold;
+}
+
+.menu-bar div:first-child {
+	font-size: 30px;
+	font-weight: bold;
+	border-bottom: 1px solid black;
+	color: #754F44;
+}
 .menu {
 	font-family: 'Gamja Flower', cursive;
-	font-size: 40px;
+	color:#754F44;
 }
 
 .menu-row {
@@ -184,13 +185,14 @@ label {
 
 .s-menu1>a {
 	text-decoration: none;
-	color: black;
+	color: #754F44;
 	font-size: 20px;
 	font-family: 'Gamja Flower', cursive;
 }
 
 .s-menu1:hover {
 	background-color: #F3F78130;
+	font-weight:bold;
 }
 
 .s-menu1 {
@@ -215,6 +217,8 @@ label {
 	font-family: 'Gamja Flower', cursive;
 	background-color: #FDD69270;
 	color: #754F44;
+	font-size:19px;
+	padding:6px 12px;
 }
 
 .btn:hover {
@@ -237,18 +241,6 @@ label {
 	max-height: 600px;
 }
 
-/* .page-item.active .page-link { */
-/* 	background-color: #EC7357; */
-/* 	border-color: #EC7357; */
-/* } */
-
-/* .page-link { */
-/* 	color: #EC7357; */
-/* } */
-
-/* .page-link:hover { */
-/* 	color: #EC7357; */
-/* } */
 .navi_btns {
 	font-family: 'Gamja Flower', cursive !important;
 	background-color: #FDD69270;
@@ -263,8 +255,8 @@ label {
 .selected_btn {
 	font-family: 'Gamja Flower', cursive !important;
 	color: #754F44;
-	background-color: #FDD692;
-	font-weight: bold;
+	background-color: #FDD692 !important;
+	font-weight: bold !important;
 }
 </style>
 
@@ -282,7 +274,7 @@ label {
 			<!--작은 메뉴랑 게시판목록이랑 나누는 row-->
 			<div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-bar">
 				<!--작은 메뉴바-->
-				<div class="menu">MENU</div>
+				<div class="menu">M E N U</div>
 
 				<div class="s-menu1">
 					<a href="toAbandoned?currentPage=1">유기동물조회</a>
@@ -401,7 +393,7 @@ label {
 							<div class="col-lg-3 text-right">
 								<button id="btnSelect" class="btn btn-sm" type="button">조회</button>
 							</div>
-							<input type="hidden" name="currentPage" value=1>
+							<input type="hidden" name="currentPage" value="1">
 						</div>
 					</form>
 				</div>
@@ -497,7 +489,7 @@ label {
 					<c:forEach var="i" begin="${pageNavi.startNavi}"
 						end="${pageNavi.endNavi}">
 						<c:if test="${i==pageNavi.currentPage}">
-							<input class="btn selected_btn mx-1" type="button" value="${i }"
+							<input class="btn navi_btns selected_btn mx-1" type="button" value="${i }"
 								currPage="${i }">
 						</c:if>
 
@@ -1093,10 +1085,9 @@ $(function() {
 							form.submit();
 						} //else
 					})
-});
 
-	$(".btn").on("click", function() {
-// 		$(".naviBtn").text("").css("color","#EC7357");
+	$(".navi_btns").on("click", function() {
+
 		var flag = "selectAll";
 		$(".selectCondition").each(function(i,item){
 			if($(item).val()!=""){
@@ -1110,7 +1101,8 @@ $(function() {
 		}else{
 			location.href="toAbandoned?currentPage="+currPage;
 		}
-	});
+	})
+})
 </script>
 
 
