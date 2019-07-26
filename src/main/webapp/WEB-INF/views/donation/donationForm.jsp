@@ -6,7 +6,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
 	rel="stylesheet">
@@ -21,7 +20,6 @@
 <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
-<jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
 <style>
 	.myJumbo{
 		background-color: white;
@@ -47,8 +45,8 @@
 	#lab{
 		color: white;
 	}
-	#donationBtn{font-family: 'Gamja Flower', cursive; background-color:#FDD69270; color:#754F44;}
-	#donationBtn:hover{background-color:#FDD692; font-weight:bold;}
+	.btn{font-family: 'Gamja Flower', cursive; background-color:#FDD69270; color:#754F44;}
+	.btn:hover{background-color:#FDD692; font-weight:bold;}
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -82,7 +80,7 @@
 					</div>
 					<div class="form-group">
 						<label for="inputMoney">후원 금액</label>
-						<input type="text" class="form-control" id="inputMoney" name="donation">
+						<input type="number" class="form-control" id="inputMoney" name="donation" min="10" max="10000000">
 					</div>
 					<div class="form-group">
 						<label for="selectMethod">결제 방식</label>
@@ -118,50 +116,32 @@
 	<script src="resources/js/isotope.pkgd.min.js"></script>
 	<script src="resources/js/main.js"></script>
 	<script>
-		//키를 누르거나 떼었을때 이벤트 발생
-	    $("#inputMoney").bind('keyup keydown',function(){
-	        inputNumberFormat(this);
-	    });
-	    //입력한 문자열 전달
-	    function inputNumberFormat(obj) {
-	        obj.value = comma(uncomma(obj.value));
-	    } 
-	    //콤마찍기
-	    function comma(str) {
-	        str = String(str);
-	        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-	    }
-	    //콤마풀기
-	    function uncomma(str) {
-	        str = String(str);
-	        return str.replace(/[^\d]+/g, '');
-	    }
-	    
 		$("#donationBtn").on("click", function(){
 			var name = $("#inputName").val();
 			var regex = /^[가-힣]{2,5}$/g;
 			var result = regex.exec(name);
 			
-			var price = $("#inputMoney").val().replace(/,/g, "");
+			var price = $("#inputMoney").val();
+			var regex = /^[0-9]{1,6}$/
+			var regexPrice = parseInt(regex.exec(price));
+			
 			var payMethod = $("#selectMethod option:selected").val();
 			if(result == null){
 				alert("잘못된 이름 형식입니다.");
-				$("#inputName").val("").focus();
+				$("#inputName").val("");
 				return;
 			}
 			if($("#inputName").val() == ""){
 				alert("이름을 입력해주세요.");
-				$("#inputName").focus();
 				return;
-			}else if(price == "" || price < 10 || price > 10000000){
+			}else if(price == "" || regexPrice < 10 || regexPrice > 10000000){
 				alert("결제금액은 10원이상 10,000,000이하로 입력해주세요.");
-				$("#inputMoney").val("").focus();
 				return;
 			}else if(payMethod == "0"){
 				alert("결제 방식을 선택해주세요.");
 				return;
 			}
-			$("#inputMoney").val(price);
+			
 			$("#donationForm").submit();
 			
 	//			var IMP = window.IMP; // 생략가능

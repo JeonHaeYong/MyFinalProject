@@ -6,7 +6,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>나눔 신청</title>
-<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
 	rel="stylesheet">
@@ -21,6 +20,7 @@
 <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
+<jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
 <style>
 	body{
 		font-family: 'Gamja Flower' !important;
@@ -30,20 +30,27 @@
 	}
 	.myJumbo{
 		background-color: white !important;
-		padding: 5rem !important;
 	}
 	#jumboImg{
 		width: 100%;
 		height: 100%;
 		max-height: 600px;
 	}
-	#writeBtn, #cancelBtn{font-family: 'Gamja Flower', cursive; font-size: 22px; background-color:#FDD69270; color:#754F44;}
-	#writeBtn:hover, #cancelBtn:hover{background-color:#FDD692; font-weight:bold;}
+	.myBtn{
+		background-color: #ec7357 !important;
+		color: white !important;
+		border-radius: 10px;
+		width: 100px;
+		padding: 10px;
+		margin: 10px;
+	}
+	.myBtn:hover{
+		background-color: #00000030 !important;
+	}
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="300" id="home-section">
-	<jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 

@@ -5,8 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>라온펫</title>
-<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
+<title>Insert title here</title>
 <link
    href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
    rel="stylesheet">

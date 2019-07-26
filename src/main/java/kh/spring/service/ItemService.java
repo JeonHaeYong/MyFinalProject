@@ -12,7 +12,7 @@ public interface ItemService {
 	public List<ItemDTO> selectItemPerPageWithoutSoldout(int currentPage);
 	public List<ItemDTO> selectItemPerPageByCategoryWithoutSoldout(int currentPage, String category);
 	public ItemDTO readOneItem(int seq);
-	public int deleteItem(String[] seqs);
+	public int deleteItem(ItemDTO dto);
 	public int itemContentsSize();
 	public int itemContentsSizeByCategory(String category);
 	public int itemContentsSizeWithoutSoldout();

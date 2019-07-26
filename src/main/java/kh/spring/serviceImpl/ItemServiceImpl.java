@@ -6,13 +6,11 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import kh.spring.dao.CartDAO;
 import kh.spring.dao.ItemDAO;
 import kh.spring.dto.ItemDTO;
 import kh.spring.service.ItemService;
@@ -21,8 +19,6 @@ import kh.spring.service.ItemService;
 public class ItemServiceImpl implements ItemService{
 	@Autowired
 	private ItemDAO itemDao;
-	@Autowired
-	private CartDAO cdao;
 	
 	@Override
 	public int uploadItem(ItemDTO dto) {
@@ -51,10 +47,8 @@ public class ItemServiceImpl implements ItemService{
 	}
 
 	@Override
-	@Transactional("txManager")
-	public int deleteItem(String[] seqs) {
-		cdao.deleteCartByItemSeq(seqs);
-		return itemDao.deleteItem(seqs);
+	public int deleteItem(ItemDTO dto) {
+		return itemDao.deleteItem(dto);
 	}
 
 	@Override

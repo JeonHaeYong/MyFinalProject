@@ -21,8 +21,8 @@ public class ItemDAOImpl implements ItemDAO{
 	@Autowired
 	private SqlSessionTemplate sst;
 
-	public int deleteItem(String[] seqs) {
-		return sst.delete("ItemDAO.delete", seqs);
+	public int deleteItem(ItemDTO dto) {
+		return sst.delete("ItemDAO.delete", dto);
 	}
 
 

@@ -189,14 +189,4 @@ public class ItemController {
 		return "redirect:freeMarket?currentPage=1&category=all";
 	}
 	
-	@ResponseBody
-	@RequestMapping("deleteItem")
-	public String deleteItem_loginCheck(HttpServletRequest request, String[] seqs) {
-		for(int i = 0; i < seqs.length; i++) {
-			System.out.println(seqs[i]);
-		}
-		is.deleteItem(seqs);
-		return null;
-	}
-	
 }

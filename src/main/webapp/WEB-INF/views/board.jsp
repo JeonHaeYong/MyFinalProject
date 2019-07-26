@@ -5,7 +5,6 @@
 <html lang="en">
   <head>
     <title>DogLife &mdash; Website Template by Colorlib</title>
-    <link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> 
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i" rel="stylesheet">
