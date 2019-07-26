@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>라온펫</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link
    href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
    rel="stylesheet">
@@ -36,21 +37,20 @@ function cookieToJson(cookies){
 	return entry[0];
 }
 
-	
-
 </script>
 <style>
 /* 만화 부분 */
-	.no-gutters{}
+	.no-gutters{text-align:center;}
 	.pricing{height:845px;}
 	.pricing img{width:405px; height:800px;  border: 5px dashed #754F44;}
 	.from{font-family:'Gamja Flower', cursive; font-size:22px;}
-	
-	#acs_div
+	.cartoon-container{max-width:1300px;}
+/* 만화 부분 끝*/	
+ 	#acs_div
 	{
 		width: 100%;
 		height: 600px;
-	}
+	} 
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -84,49 +84,49 @@ function cookieToJson(cookies){
       </section>
 
       <section class="site-section" id="about-section">
-      <div class="container">
-        <div class="row no-gutters mb-5" style="width: 1300px;">
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4 " style="background-color: #FDD692;"
-               data-aos="fade-up" data-aos-delay="">
-
-               <div class="pricing">
-                  <span class="icon-paw d-block display-5 text-white mb-2 pt-2"></span><!-- 발자국 1 -->
-                  <img src="/resources/images/abandonedAnimalStory01.png">
+      <div class="container cartoon-container">
+        <div class="row no-gutters mb-5">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+               <div class="row pricing">
+                 <div class="col-12"><span class="icon-paw d-block display-5 text-white mb-2 pt-2"></span></div>
+                 <div class="col-12 "><img src="/resources/images/abandonedAnimalStory01.png"></div>
                </div>
 
-            </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4"style="background-color: #FDD692;"
-               data-aos="fade-up" data-aos-delay="100">
-               <div class="pricing">
-                  <span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span><!-- 발자국2 -->
-                  <span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span><!-- 발자국2 -->
-                 	 <img src="/resources/images/abandonedAnimalStory02.png">
-               </div>
             </div>
             
-            <div
-               class="col-12 col-sm-6 col-md-6 col-lg-4"style="background-color: #FDD692;"
-               data-aos="fade-up" data-aos-delay="200">
-               <div class="pricing">
-                  <span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span><!-- 발자국3 -->
-                  <span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span><!-- 발자국3 -->
-                  <span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span><!-- 발자국3 -->
-                  <img src="/resources/images/abandonedAnimalStory03.png">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+               <div class="row pricing">
+              <div class="col-12 ">
+              	<span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span>
+                <span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span>
+              </div><!-- 발자국2 -->
+              <div class="col-12 "><img src="/resources/images/abandonedAnimalStory02.png"></div>
+             </div>
+            </div>
+            
+            <div class="col-12 col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+               <div class="row pricing">
+                <div class="col-12">
+                	<span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span>
+                  	<span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span>
+                  	<span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span></div>
+                <div class="col-12 "><img src="/resources/images/abandonedAnimalStory03.png"></div>
                </div>
             </div>
-            <div class="row"><div class="col-12 from">출처-포인핸드<img src="/resources/images/pet.png"></div>
-            </div>
+            <div class="col-12 from">출처-포인핸드<img src="/resources/images/pet.png"></div>
          </div>
+         </div>
+         <div class="container">
          <div class="row justify-content-center" data-aos="fade-up">
             <div class="col-lg-6 text-center heading-section mb-5">
 
-               <h2 class="text-black mb-2">전국 모든 지역 유기동물 현황</h2>
+               <h2 id="acs_title" class="text-black mb-2"></h2>
                
                <p>이번 달 유기 동물 현황</p>
             </div>
          </div>
 
-         <div class="row hover-1-wrap mb-5 mb-lg-0">
+         <div class="row hover-1-wrap mb-5 mb-lg-0" data-aos="fade-up">
             <div id="acs_div" class="col-12">
 <!--                <div class="row"> -->
 <!--                   <div class="mb-4 mb-lg-0 col-lg-6 order-lg-2" data-aos="fade-left"> -->
@@ -223,12 +223,16 @@ function cookieToJson(cookies){
          </div>
                <div class="row">
                   <div class="mb-4 mb-lg-6 col-lg-6" data-aos="fade-right">
-                     <img src="resources/images/dog_4.jpg" alt="Image"
+                     <img id="donation_img" alt="Image"
                         class="img-fluid cover-img2" height="50"> 
                   </div>
                   <div class="mb-4 mb-lg-6 col-lg-6" data-aos="fade-right">
-                     <h2 class="mb-2 text-black heading mt-5">이달의 후원 장소</h2>
-                     <pre>후원할 업체 소개글~~~~~<br>후원할 업체 소개글~~~~~<br>후원할 업체 소개글~~~~~</pre>
+					
+					<h2 id="donation_name" class="mb-2 text-black heading my-3"></h2>
+					
+					<h3 id="donation_title" class="mb-2 text-black heading my-3"></h3>
+                     
+					<pre id="donation_explanation">후원할 업체 소개글~~~~~<br>후원할 업체 소개글~~~~~<br>후원할 업체 소개글~~~~~</pre>
                      
                   </div>
                   </div>
@@ -377,7 +381,10 @@ function cookieToJson(cookies){
                            }
                            //                            로그인 버튼과 회원가입 버튼의 script
 		
-		
+		if(${errorLogin!=null}){
+			alert("로그인을 먼저 해주세요.");
+			$(".login-btn").trigger("click");
+		}
   		 </script>
   	
 <script>
@@ -429,10 +436,18 @@ function cookieToJson(cookies){
 	    				,[array[15].area, array[15].num]
 	    				,[array[16].area, array[16].num]
 	    			]);
-
+					
+	    			var sum = 0;
+	    			for(var i = 1 ; i <= array.length ; i++)
+	    			{
+	    				sum = sum + array[i-1].num;
+	    			}
+	    			
+	    			$("#acs_title").text(new Date().getMonth() + 1 + "월 전국 지역별 유기동물 현황")
+	    			
 	    			var options3 = 
 	    			{
-	    				title : '지역 별 현월 유기 동물 현황',
+	    				title : '총 개체수 : ' + sum,
 // 	    				vAxis: {title: '단위 : 1'},
 //	     				hAxis: {title: '단위 : 월'},
 	    				seriesType: 'bars',
@@ -462,6 +477,49 @@ function cookieToJson(cookies){
 			alert("error");
 		});
 	  	
+		
+		$.ajax
+		({
+			url : "admin-donation-index"
+			, dataType : "JSON"
+		})
+		.done(function(response)
+		{
+			
+			var name = response.name;
+			var title = response.title;
+			var explanation = response.explanation;
+			var image1 = response.image1;
+			var image2 = response.image2;
+			var image3 = response.image3;
+			
+			$("#donation_name").text(name);
+			$("#donation_title").text(title);
+			$("#donation_explanation").text(explanation);
+			
+			if(image1 != "없음")
+			{
+				$("#donation_img").attr("src", image1)
+			}
+			else if(image2 != "없음")
+			{
+				$("#donation_img").attr("src", image2)
+			}
+			else if(image3 != "없음")
+			{
+				$("#donation_img").attr("src", image3)
+			}
+			else
+			{
+				$("#donation_img").attr("src", "resources/images/dog_3.jpg")
+			}
+			
+		})
+		.fail(function()
+		{
+// 			alert("error");
+			console.log("index ajax error");
+		});
 		
 		
 	})

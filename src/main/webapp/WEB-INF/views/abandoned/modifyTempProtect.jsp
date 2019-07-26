@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>임시보호중</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
 	rel="stylesheet">
@@ -21,7 +22,10 @@
 <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+
+<jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
+
 <script>
 $(function() {
 
@@ -271,19 +275,43 @@ td {
 	border-radius: 5px;
 	padding: 5px 10px;
 }
+.menu {
+	font-family: 'Gamja Flower', cursive;
+	color:#754F44;
+}
+.menu-bar{
+	text-align:center;
+	height:200px;
+}
+.menu-bar>div {
+	height: 40px;
+}
+
+.menu-bar>div:not (.menu ):hover {
+	background-color: #FBFFB950;
+	font-weight: bold;
+}
+
+.menu-bar div:first-child {
+	font-size: 30px;
+	font-weight: bold;
+	border-bottom: 1px solid black;
+	color: #754F44;
+}
 .menu-row {
 	text-align: -webkit-center;
 }
 
 .s-menu1>a {
 	text-decoration: none;
-	color: black;
+	color: #754F44;
 	font-size: 20px;
 	font-family: 'Gamja Flower', cursive;
 }
 
 .s-menu1:hover {
 	background-color: #F3F78130;
+	font-weight: bold;
 }
 
 .s-menu1 {
@@ -307,6 +335,18 @@ td {
 	background-color:none;
 	border:none;
 }
+/* .site-section{ */
+/* 	padding:5rem; */
+/* } */
+.jumbotron {
+	background-color: white;
+	padding:0px 0px;
+}
+
+.jumbotron>img {
+	width: 100%;
+	max-height: 600px;
+}
 </style>
 
 </head>
@@ -315,14 +355,16 @@ td {
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<!-- -----ì¬ê¸°ê¹ì§ ê³ ì  Headerìëë¤----------------------------------------------------------------------------------------------------------- -->
 	<section class="site-section bg-light block-13">
-
+		<div class="jumbotron px-0 pb-0">
+			<img src="/resources/images/abandoned/girlndog.png">
+		</div>
 		<div class="container">
 
 			<div class="row">
 				<!--작은 메뉴랑 게시판목록이랑 나누는 row-->
 				<div class="col-lg-2 col-md-2 col-sm-12 col-12 menu-bar">
 					<!--작은 메뉴바-->
-					<div class="menu">MENU</div>
+					<div class="menu">M E N U</div>
 					<div class="s-menu1">
 						<a href="toAbandoned?currentPage=1">유기동물조회</a>
 					</div>
@@ -349,9 +391,9 @@ td {
 						<tbody>
 							<tr>
 								<th scope="row" style="width:20%">제목</th>
-								<td width="20%"><input id="title" type="text" name="title" placeholder="${dto.title }"></td>
+								<td width="20%"><input id="title" type="text" name="title" placeholder="${dto.title }" required></td>
 								<th width="20%">이미지</th>
-								<td><input type="file" id="img" name="image"></td>
+								<td><input type="file" id="img" name="image" required></td>
 							</tr>
 							<tr>
 								<th scope="row">시도</th>
@@ -387,9 +429,9 @@ td {
 
 							<tr>
 								<th width="15%">발견 장소</th>	
-								<td width="20%"><input id="place" type="text" name="place" placeholder="${dto.place }"></td>
+								<td width="20%"><input id="place" type="text" name="place" placeholder="${dto.place }" required></td>
 								<th scope="row">발견 날짜</th>
-								<td><input id="findDate" type="date" name="findDateString" placeholder="${dto.findDate }"></td>
+								<td><input id="findDate" type="date" name="findDateString" placeholder="${dto.findDate }" required></td>
 								
 							</tr>
 							<tr>

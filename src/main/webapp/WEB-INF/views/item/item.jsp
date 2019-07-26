@@ -6,6 +6,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>무료나눔 - ${item.name }</title>
+        <link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
         <link
               href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
               rel="stylesheet">
@@ -24,6 +25,7 @@
         <style>
             .myJumbo{
                 background-color: white;
+                padding: 5rem;
             }
             #jumboImg{
                 width: 100%;
@@ -47,6 +49,8 @@
             }
             .itemInfo p{
             	width: 100%;
+            	color: #754F44;
+            	cursor: default;
             }
             .column{
             	display: inline-block;
@@ -54,36 +58,18 @@
             }
             .cell{
             	display: inline-block;
-            	width: 80%;
+            }
+            #sendMsg_btn{
+            	cursor: pointer;
+            }
+            #sendMsg_btn:hover{
+            	font-weight: bold;
+            	background-color: #FBFFB950;
             }
             #soldout{
             	color: white;
             	background-color: #bf5e47;
             }
-            #soldout:hover{
-            	
-            }
-            .cartBtn{
-				background-color: #ec7357;
-				color: white;
-				border-radius: 10px;
-				width: 100px;
-				padding: 10px;
-				font-size: 20px;
-			}
-			.cartBtn:hover{
-				background-color: #00000030;
-			}
-			.myBtn{
-				background-color: #00000030;
-				border-radius: 10px;
-				width: 30px;
-				padding: 10px;
-			}
-			.myBtn:hover{
-				background-color: #ec7357;
-				color: white;
-			}
 			.contents{
 				border: 1px solid #00000030;
 				padding: 20px;
@@ -111,23 +97,19 @@
 		 	.fixedMenu div{
 		 		margin: 10px;
 		 	}
+			.btn{font-family: 'Gamja Flower', cursive; font-size: 22px; background-color:#FDD69270; color:#754F44;}
+			.btn:hover{background-color:#FDD692; font-weight:bold;}
 		 	.addBtn{
 		 		background-color: #ec7357;
 		 		color: white;
 		 		font-weight: bold !important;
+		 		font-size: 18px;
 		 	}
 		 	.addBtn:hover, #searchBtn:hover{
 		 		background-color: #cf654c;
 		 		color: white;
 		 		font-weight: bold !important;
 		 		cursor: pointer;
-		 	}
-		 	.cartAddBtn{
-		 		background-color: #ec7357;
-		 		color: white;
-		 		width: 30px;
-		 		height:25px;
-		 		padding: 0px;
 		 	}
 		 	#searchForm{
 		 		width: 106px;
@@ -206,7 +188,7 @@
 						</div>
 	                	<div class="col-12 itemInfo">
 	                		<p><span class="column">Price</span><span class="cell">${item.price }</span></p><hr>
-	                		<p><span class="column">Seller</span><span class="cell">${item.seller }</span></p><hr>
+	                		<p><span class="column">Seller</span><span class="cell" id="sendMsg_btn" data-toggle="modal" data-target="#msg_modal" data-whatever="@mdo">${item.seller }</span></p><hr>
 	                		<p><span class="column">Date</span><span class="cell">${item.fomredDate }</span></p>
 	                	</div>
 	                	<div class="col-12 align-self-center text-center">
@@ -215,10 +197,10 @@
 	                				<a class="btn cartBtn" id="soldout" disabled>판매완료 상품</a>
 	                			</c:when>
 	                			<c:otherwise>
-	                				<a class="btn cartBtn" id="addCart" href="">장바구니 담기</a>
+	                				<a class="btn" id="addCart" href="">장바구니 담기</a>
 	                			</c:otherwise>
 	                		</c:choose>
-	                		<a class="btn cartBtn" id="goCart" href="">장바구니 가기</a>
+	                		<a class="btn" id="goCart" href="">장바구니 가기</a>
 	                	</div>
                 	</div>
                 </div>
@@ -232,7 +214,7 @@
             </div>
             <div class="row m-3">
             	<div class="col-12 d-flex justify-content-end">
-            		<a class="btn cartBtn" href="freeMarket?currentPage=${currentPage }&category=${category}">목록으로</a> 
+            		<a class="btn" href="freeMarket?currentPage=${currentPage }&category=${category}">목록으로</a> 
             	</div>
             </div>
         </div>
@@ -261,6 +243,36 @@
 	    		<a href="toMyPage_cart"><img alt="" src="/resources/images/item/cart.png" id="cartImg"></a>
 	    	</div>
 	    </div>
+	    <div class="modal fade text-left" id="msg_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="msg_send_form" action="insertMsg" method="post">
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">받는사람ID : </label>
+                                <input type="text" class="form-control" id="recipient-name" name="recipient" value="${item.seller }" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">보낼메세지:</label>
+                                <textarea rows="8" cols="80" class="form-control" id="message-text" style="resize:none;" name="contents"></textarea>
+                            </div>
+                            <div><span id="counter">0/300</span></div>
+                            <input type="hidden" value="${sessionScope.id}" name="sender">
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="msg_close_btn" type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                        <button id="msg_send_btn" type="button" class="btn btn-primary">쪽지 보내기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
 
@@ -352,6 +364,47 @@
 			$("#searchBtn").on("click", function(){
 				$("#searchForm").submit();
 			});
+			
+			$('#message-text').keyup(function (e){
+                var content = $(this).val();
+                if(content.length>300){
+                    alert("쪽지는 300자 이내만 가능합니다.");
+                    content = content.substr(0,300);
+                    $('#counter').html(content.length + '/300');
+                    $(this).val(content);
+                    return;
+                }else{
+                    $('#counter').html(content.length + '/300');
+                }
+            });
+            $("#msg_send_btn").on("click",function(){
+                var recipient = $("#recipient-name").val();
+                var content = $('#message-text').val();
+                if("${sessionScope.id}"==recipient){
+                	alert("쪽지는 본인에게 쓸수없습니다.");
+                	$("#recipient-name").focus();
+                	return false;
+                }
+                $.ajax({
+                    url: "idExistOk",
+                    method: "post",
+                    data: {
+                        id : recipient
+                    }
+                }).done(function(resp){
+                    //alert("조회결과->" +resp);
+                    if(resp=="0"){
+                        alert("존재하지 않는 회원입니다. \r\n받는사람ID를 다시한번 확인해주세요.");
+                        return;
+                    }
+                    alert("쪽지를 보냈습니다.");
+                    $("#msg_send_form").submit();
+                });
+            });
+            
+            $("#msg_close_btn").on("click", function(){
+            	$('#message-text').val("");
+            });
             
         </script>
 </html>

@@ -453,7 +453,9 @@ body:after {
       padding: 10px 20px;
       display: block;
       position: relative;
-      color: #212529; }
+      color: #754F44 ;
+      font-weight: bold;
+       }
       .site-mobile-menu .site-nav-wrap a:hover {
         color: #EC7357; }
     .site-mobile-menu .site-nav-wrap li {
@@ -540,11 +542,14 @@ body:after {
     color: #000;
     text-decoration: none; }
   .sticky-wrapper .site-navbar .site-logo a {
-    color: #000; }
+    color: #754F44; }
+     /*main navi 메뉴*/
   .sticky-wrapper .site-navbar .site-menu > li > a {
-    color: rgba(0, 0, 0, 0.7) !important; 
+    color: #754F44; 
     font-family:'Gamja Flower', cursive;
-    font-size:20px;}
+    font-size: 22px;
+    font-weight:bold !important;
+    }
     .sticky-wrapper .site-navbar .site-menu > li > a:hover, .sticky-wrapper .site-navbar .site-menu > li > a.active {
       color: #EC7357 !important; 
       font-weight:bold;}
@@ -556,9 +561,9 @@ body:after {
     .sticky-wrapper.is-sticky .site-navbar .site-menu-toggle {
       color: #000; }
     .sticky-wrapper.is-sticky .site-navbar .site-logo a {
-      color: #000; }
+      color: #754F44 ; }
     .sticky-wrapper.is-sticky .site-navbar .site-menu > li > a {
-      color: #000 !important;
+      color: #754F44  !important;
       padding: 20px 20px; }
       .sticky-wrapper.is-sticky .site-navbar .site-menu > li > a:hover, .sticky-wrapper.is-sticky .site-navbar .site-menu > li > a.active {
         color: #EC7357 !important; }

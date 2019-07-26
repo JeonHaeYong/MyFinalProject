@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>임시보호중</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
 	rel="stylesheet">
@@ -25,19 +26,15 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
-<script>
-	$(function() {
-		$("#write").on("click", function() {
-			if(${loginId!=null}){
-				location.href = "writeTempProtect";
-			}else{
-				alert("로그인을 해 주세요.");
-				$(".login-btn").trigger("click");
-			}	
-		});
-	});
-</script>
+
 <style>
+@font-face {
+	font-family: 'SeoulNamsanM';
+	src: */url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/SeoulNamsanM.woff')*/format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
 body {
 	color: #754F44;
 }
@@ -80,13 +77,6 @@ a:hover {
 	color: #EC7357;
 }
 
-#write {
-	background-color: #EC7357;
-	color: white;
-	border-radius: 5px;
-	padding: 10px 10px;
-}
-
 .selected_navi {
 	color: #EC7357 !important;
 	font-weight: 600;
@@ -95,7 +85,10 @@ a:hover {
 .naviBtn:hover {
 	font-weight: 600;
 }
-
+.menu {
+	font-family: 'Gamja Flower', cursive;
+	color:#754F44;
+}
 .menu-bar {
 	text-align: center;
 	height: 200px;
@@ -111,7 +104,7 @@ a:hover {
 }
 
 .menu-bar div:first-child {
-	font-size: 20px;
+	font-size: 30px;
 	font-weight: bold;
 	border-bottom: 1px solid black;
 	color: #754F44;
@@ -123,13 +116,14 @@ a:hover {
 
 .s-menu1>a {
 	text-decoration: none;
-	color: black;
+	color: #754F44;
 	font-size: 20px;
 	font-family: 'Gamja Flower', cursive;
 }
 
 .s-menu1:hover {
 	background-color: #F3F78130;
+	font-weight:bold;
 }
 
 .s-menu1 {
@@ -156,12 +150,43 @@ a:hover {
 
 .jumbotron {
 	background-color: white;
-	padding: 0px 0px;
+	padding: 5rem;
 }
 
 .jumbotron>img {
 	width: 100%;
 	max-height: 600px;
+}
+
+#writeBtn {
+	font-family: 'Gamja Flower', cursive !important;
+	background-color: #FDD69270;
+	color: #754F44;
+}
+
+#writeBtn:hover {
+	background-color: #FDD692;
+	font-weight: bold;
+}
+
+.btn {
+	font-family: 'Gamja Flower', cursive !important;
+	background-color: #FDD69270;
+	color: #754F44;
+	font-size:19px;
+	padding:6px 12px;
+}
+
+.btn:hover {
+	background-color: #FDD692;
+	font-weight: bold;
+}
+
+.selected_btn {
+	font-family: 'Gamja Flower', cursive !important;
+	color: #754F44;
+	background-color: #FDD692;
+	font-weight: bold;
 }
 </style>
 </head>
@@ -169,7 +194,7 @@ a:hover {
 	data-offset="300" id="home-section">
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<!-- -----ì¬ê¸°ê¹ì§ ê³ ì  Headerìëë¤----------------------------------------------------------------------------------------------------------- -->
-	<section class="site-section bg-light block-13">
+	
 		<div class="jumbotron px-0 pb-0">
 			<img src="/resources/images/abandoned/girlndog.png">
 		</div>
@@ -179,7 +204,7 @@ a:hover {
 				<!--작은 메뉴랑 게시판목록이랑 나누는 row-->
 				<div class="col-lg-2 col-md-2 col-sm-12 col-12 menu-bar">
 					<!--작은 메뉴바-->
-					<div class="menu">MENU</div>
+					<div class="menu">M E N U</div>
 
 					<div class="s-menu1">
 						<a href="toAbandoned?currentPage=1">유기동물조회</a>
@@ -208,7 +233,7 @@ a:hover {
 						반려동물을 임시보호하고 계신 분은 글 작성 버튼을 통해 정보를 올려주세요.
 					</div>
 					<div class="text-right" style="margin-botom: 20px;">
-						<button type="button" id="write" class="btn btn-sm">글 작성</button>
+						<button type="button" id="writeBtn" class="btn btn-sm">글 작성</button>
 					</div>
 				</div>
 
@@ -251,30 +276,38 @@ a:hover {
 							<div id="dataNotExist">해당 데이터가 존재하지 않습니다.</div>
 						</c:if>
 					</div>
-					<div id="naviBox" style="margin: auto" class="text-center">
+
+					<div id="naviBox" style="margin-top: 10px;" class="text-center">
 						<c:if test="${pageNavi.needPrev == 1 }">
-							<a class="naviBtn mx-3" currPage="${pageNavi.startNavi - 1 }">&laquo;&nbsp;</a>
+							<input class="btn navi_btns mx-1" type="button" value="이전"
+								currPage="${pageNavi.startNavi - 1 }">
 						</c:if>
-						<c:if test="${pageNavi.currentPage > pageNavi.startNavi }">
-							<a class="naviBtn mx-3" currPage="${pageNavi.currentPage - 1}">&lt;&nbsp;</a>
-						</c:if>
+
 						<c:forEach var="i" begin="${pageNavi.startNavi}"
 							end="${pageNavi.endNavi}">
 							<c:if test="${i==pageNavi.currentPage}">
-								<a class="naviBtn mx-3 selected_navi" currPage="${i }">${i }&nbsp;</a>
-							</c:if>
-							<c:if test="${i!=pageNavi.currentPage}">
-								<a class="naviBtn mx-3" currPage="${i }">${i }&nbsp;</a>
+								<input class="btn selected_btn mx-1" type="button" value="${i }"
+									currPage="${i }">
 							</c:if>
 
+							<c:if test="${i!=pageNavi.currentPage}">
+								<input class="btn navi_btns mx-1" type="button" value="${i }"
+									currPage="${i }">
+							</c:if>
 						</c:forEach>
-						<c:if test="${pageNavi.currentPage < pageNavi.pageTotalCount }">
-							<a class="naviBtn mx-3" currPage="${pageNavi.currentPage + 1}">&gt;&nbsp;</a>
-						</c:if>
+
 						<c:if test="${pageNavi.needNext == 1 }">
-							<a class="naviBtn mx-3" currPage="${pageNavi.endNavi + 1}">&raquo;</a>
+							<input class="btn navi_btns mx-1" type="button" value="이후"
+								currPage="${pageNavi.endNavi + 1}">
 						</c:if>
+
 					</div>
+
+					<form id="apiSelect" action="select" method="post">
+						<input class="selectCondition" type="hidden" id="currentPage"
+							value="" name="currentPage">
+					</form>
+
 
 				</div>
 
@@ -283,10 +316,6 @@ a:hover {
 
 		</div>
 
-
-
-
-	</section>
 	<!-- ----Footerë¶ë¶ìëë¤^_^---------------------------------------------------------------------------------------------------------- -->
 
 	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
@@ -303,11 +332,37 @@ a:hover {
 	<script src="resources/js/main.js"></script>
 </body>
 <script>
-	
+$(function() {
+	$("#writeBtn").on("click", function() {
+		if(${loginId!=null}){
+			location.href = "writeTempProtect";
+		}else{
+			alert("로그인을 해 주세요.");
+			$(".login-btn").trigger("click");
+		}	
+	});
+// $(".btn").on("click", function() {
+
+// 	var flag = "selectAll";
+// 	$(".selectCondition").each(function(i,item){
+// 		if($(item).val()!=""){
+// 			flag = "condition";
+// 		}
+// 	})
+// 	var currPage = $(this).attr("currPage");
+// 	if(flag=="condition"){
+// 		$("#currentPage").val(currPage);
+// 		$("#apiSelect").submit();
+// 	}else{
+// 		location.href="listTempProtect?currentPage="+currPage;
+// 	}
+// });
 	$(".naviBtn").on("click", function() {
 		var currPage = $(this).attr("currPage");
 		location.href = "listTempProtect?currentPage=" + currPage;
 	})
+	
+})
 </script>
 
 </html>

@@ -4,6 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i" rel="stylesheet">
 <link rel="stylesheet" href="resources/fonts/icomoon/style.css">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
@@ -134,7 +135,7 @@ a{
 			myAjax(this.name);
 		});
 		
-		$(document).on("click", "#contents_div > .row", function()
+		$(document).on("click", "#contents_div > .notice_contents_row", function()
 		{
 			location.href = $(this).children("div").children("a").attr("href");
 		});
@@ -166,7 +167,7 @@ a{
 	    		for(var i = 1 ; i <= array.length ; i++)
 	    		{
 					
-	    			var $row = $('<div class="row justify-content-center my-1"></div>');
+	    			var $row = $('<div class="row justify-content-center my-1 notice_contents_row"></div>');
 	    			
 					var $seqCol = $('<div class="col-0 col-md-0 col-lg-2 text-center my-3 d-none d-lg-block">'+array[i-1].seq+'</div>');
 					var $titleCol = $('<div class="col-8 col-md-6 col-lg-6 text-center my-3"><span class="mx-5 d-inline d-md-none">제목 : </span><a href=notice-detail-page?seq='+array[i-1].seq+'>'+array[i-1].title+'</a></div>');

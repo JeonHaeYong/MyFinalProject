@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
 	rel="stylesheet">
@@ -24,20 +25,25 @@
 <style>
 	.myJumbo{
 		background-color: white;
+		padding: 5rem;
 	}
 	#jumboImg{
 		width: 100%;
 		max-height: 600px;
 	}
-/* 	.myCard{ */
-/* 		height: 150px; */
-/* 	} */
 	.imageBox{
-		min-width: 100px;
+		width: 100%;
+		height: inherit;
 	}
-	#itemImage{
+	.itemImage{
 		width: 100%; 
 		height: 100%;
+	}
+	.itemInfo{
+		font-family: 'Gamja flower';
+	}
+	.card-text{
+		font-size: 25px;
 	}
 	.totalAmount{
 		text-align: right;
@@ -52,6 +58,12 @@
 	#lab{
 		color: white;
 	}
+	.btn{font-family: 'Gamja Flower', cursive; background-color:#FDD69270; color:#754F44;}
+	.btn:hover{background-color:#FDD692; font-weight:bold;}
+	.totalAmountBottom{
+		font-size: 20px;
+		text-align: center;
+	}
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -64,36 +76,37 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12 align-self-center text-center">
-				<h1>구매하기</h1>
+				<h1>무료나눔 물품 구매하기</h1>
 			</div>
 		</div>
 		<div class="row m-3">
 			<c:forEach var="dto" items="${items }" varStatus="status">
 				<div class="col-12 d-flex justify-content-center">
-					<div class="card mb-3 myCard" style="width: 75%;">
-						<div class="row no-gutters">
-							<div class="col-md-4 col-12 imageBox">
+					<div class="card mb-3 myCard" style="width: 75%; height: 80%;">
+						<div class="row no-gutters" style="width: 100%; height: 100%;">
+							<div class="col-lg-4 col-md-5 d-md-block d-none imageBox">
 								<img src="${dto.imagePath1 }" class="card-img itemImage">
 							</div>
-							<div class="col-md-8 col-12">
+							<div class="col-lg-8 col-md-7 col-12">
 								<div class="card-body">
 									<input type="hidden" class="soldoutCheck" value="${dto.soldout }">
-									<h5 class="card-title">상품명 : ${dto.name }</h5>
-									<p class="card-text">금액 : ${dto.price }원</p>
-									<p class="card-text"><small class="text-muted">판매자 : ${dto.seller }</small></p>
+									<h3 class="card-title itemInfo text-truncate">상품명: ${dto.name }</h3>
+									<p class="card-text itemInfo text-truncate">금액: ${dto.price }원</p>
+									<p class="card-text itemInfo text-truncate"><small class="text-muted">판매자: ${dto.seller }</small></p>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</c:forEach>
-			<div class="col-12">
-				<h4 class="totalAmount">총 결제 금액 : ${totalAmount }원</h4>
+			<div class="col-12 d-flex justify-content-center">
+				<h4 class="totalAmount" style="width: 75%;">총 결제 금액 : ${totalAmount }원</h4>
 			</div>
 		</div>
+		<hr>
 		<div class="row">
-			<div class="col-12 formTop">
-				<h5>구매자 정보</h5><br>
+			<div class="col-12 mt-3 formTop">
+				<h5>< 구매자 정보 ></h5><br>
 				<p id="msg">*모든 항목을 작성해주셔야 합니다.</p>
 			</div>
 			<div class="col-12 d-flex justify-content-center">
@@ -125,7 +138,7 @@
 						</div>
 						<div class="form-group col-4">
 							<label for="zipcode" id="lab">우</label>
-							<input type="button" class="btn btn-primary m-auto p-auto form-control" id="searchBtn" value="찾기">
+							<input type="button" class="btn m-auto p-auto form-control" id="searchBtn" value="찾기">
 						</div>
 					</div>
 					<div class="form-group">
@@ -146,8 +159,10 @@
 		    				<option value="phone">휴대폰 소액결제</option>
 						</select>
 					</div>
+					<p class="totalAmountBottom pt-2">총 결제 금액 : ${totalAmount }원</p>
 					<div class="form-group d-flex justify-content-center">
-						<input type="button" class="btn btn-primary" id="payBtn" value="결제하기">
+						<input type="button" class="btn" id="payBtn" value="결제하기">
+						<input type="button" class="btn" id="cancelBtn" value="취소하기">
 					</div>
 				</form>
 			</div>
@@ -180,7 +195,7 @@
 				alert("판매완료된 상품은 결제하실 수 없습니다. 다시 확인해주세요.");
 				location.href = "toMyPage_cart";
 			}
-		})
+		});
 		
 		document.getElementById("searchBtn").onclick = searchAddress;
 		function searchAddress() {
@@ -204,23 +219,83 @@
 			}).open();
 		}
 		
+		var phoneCheck = true;
+		$("#inputPhone").on("blur", function() {
+			var phonenum = $(this).val();
+			var regPhone = /(01[0|1|6|9|7])[-](\d{3}|\d{4})[-](\d{4}$)/g;
+			if (phonenum != "") {
+			    if (!regPhone.test(phonenum)) {
+					phoneCheck = false;
+				}else{
+					phoneCheck = true;
+				}
+			}
+		});
+	    function autoHypenPhone(str){
+	        str = str.replace(/[^0-9]/g, '');
+	        var tmp = '';
+	        if( str.length < 4){
+	            return str;
+	        }else if(str.length < 7){
+	            tmp += str.substr(0, 3);
+	            tmp += '-';
+	            tmp += str.substr(3);
+	            return tmp;
+	        }else if(str.length < 11){
+	            tmp += str.substr(0, 3);
+	            tmp += '-';
+	            tmp += str.substr(3, 3);
+	            tmp += '-';
+	            tmp += str.substr(6);
+	            return tmp;
+	        }else{              
+	            tmp += str.substr(0, 3);
+	            tmp += '-';
+	            tmp += str.substr(3, 4);
+	            tmp += '-';
+	            tmp += str.substr(7);
+	            return tmp;
+	        }
+	        return str;
+	    }
+		var cellPhone = document.getElementById('inputPhone');
+		cellPhone.onkeyup = function(event){
+		    event = event || window.event;
+		    var _val = this.value.trim();
+		    this.value = autoHypenPhone(_val) ;
+		}
+		
 		$("#payBtn").on("click", function(){
+			$(".soldoutCheck").each(function(i, item){
+				if($(item).val() == 'y'){
+					alert("판매완료된 상품은 결제하실 수 없습니다. 다시 확인해주세요.");
+					location.href = "toMyPage_cart";
+				}
+			});
+			
 			var name = $("#inputName").val();
 			var regex = /^[가-힣]{2,5}$/g;
 			var result = regex.exec(name);
 			var payMethod = $("#selectMethod option:selected").val();
 			if(result == null){
 				alert("잘못된 이름 형식입니다.");
-				$("#inputName").val("");
+				$("#inputName").val("").focus();
 				return;
 			}
 			if($("#inputName").val() == ""){
 				alert("이름을 입력해주세요.");
+				$("#inputName").focus();
 				return;
 			}else if($("#inputPhone").val() == ""){
 				alert("전화번호를 입력해주세요.");
+				$("#inputPhone").focus();
 				return;
-			}else if($("#zipcode").val() == "" || $("#inputAddress").val() == "" || $("#inputAddress2").val() == ""){
+			}else if(!phoneCheck){
+				alert("전화번호 형식이 잘못되었습니다.");
+				$("#inputPhone").val("").focus();
+				return;
+			}
+			else if($("#zipcode").val() == "" || $("#inputAddress").val() == "" || $("#inputAddress2").val() == ""){
 				alert("주소를 입력해주세요.");
 				return;
 			}else if(payMethod == "0"){
@@ -230,9 +305,7 @@
 			
 			var orderNum = new Date().getTime();
 			$("#orderNumber").val(orderNum);
-			
 			$("#payForm").submit();
-			
 // 			var IMP = window.IMP; // 생략가능
 // 			IMP.init('imp84992027'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 // 			IMP.request_pay({
@@ -300,6 +373,10 @@
 // 					location.href = "toMyPage_cart";
 // 				}
 // 			});
+		});
+		
+		$("#cancelBtn").on("click", function(){
+			location.href = "toMyPage_cart";
 		});
 	</script>
 </body>

@@ -139,29 +139,57 @@
 </div>
 <!--구글폰트-->
 <link href="https://fonts.googleapis.com/css?family=Gamja+Flower&display=swap&subset=korean" rel="stylesheet">
-<script>
-//--로그인에러로 넘어왔을경우,
-onload = function()
-{
-	if(${errorLogin!=null}){
-		   alert("로그인을 먼저 해주세요.");
-		   $(".login-btn").trigger("click");
-	}
-};
-
-</script>
 <script src='https://developers.kakao.com/sdk/js/kakao.min.js'></script>
 <script>
-//카카오 로그아웃
+
 onload = function()
 {
+	
+	
+// 	$(document).on("mouseenter", "#site_logo_col", function() 
+// 	{
+// 		$("#site_logo_img").fadeOut(200, function() 
+// 		{
+// 			$("#site_logo_img").attr("src", "resources/images/catlogo.png");
+// 		})
+// 		.fadeIn(200);
+// 	});
+// 	$(document).on("mouseleave", "#site_logo_col", function() 
+// 	{
+// 		$("#site_logo_img").fadeOut(200, function() 
+// 		{
+// 			$("#site_logo_img").attr("src", "resources/images/doglogo2.png");
+// 		})
+// 		.fadeIn(200);
+// 	});
+//
+//
+//	
+// 	$(document).on("hover", "#site_logo_col", 
+// 	function()
+// 	{
+// 		$("#site_logo_img").attr("src", "resources/images/catlogo.png");
+// 	},
+// 	function()
+// 	{
+// 		$("#site_logo_img").attr("src", "resources/images/doglogo2.png");
+// 	});
+
+
+	//카카오 로그아웃
 	$("#logout").on("click",function(){
 		window.open('kakaologout',
 				'window팝업',
 				'width=470, height=300, menubar=no, status=no, toolbar=no');
 
 	});
+	if(${errorLogin!=null}){
+		   alert("로그인을 먼저 해주세요.");
+		   $(".login-btn").trigger("click");
+	}
+
+
 };
-</script>
-	
+
+</script>	
 

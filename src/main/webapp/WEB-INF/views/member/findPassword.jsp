@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Find Password</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"rel="stylesheet">
 <link rel="stylesheet" href="resources/fonts/icomoon/style.css">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
@@ -20,7 +21,10 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
 <style>
-			.jumbotron {background-color: white;}
+			.jumbotron {
+padding:5rem;
+	background-color: white;
+}
 	 		 #title{width: 100%; text-align: center; margin: auto; margin-bottom: 50px;}
             h3{ font-family:'Gamja Flower', cursive;}
             .container{min-width: 400px;box-sizing: border-box;margin-bottom:100px; font-family: 'Gamja Flower', cursive;}
@@ -69,6 +73,8 @@ margin-bottom:150px;
 font-family: 'Gamja Flower', cursive;
 	font-size: 40px;
 }
+.btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44;}
+.btn:hover{background-color:#FDD692; font-weight:bold;}
 
            /*---------------------------------------------------------------------------------------------------------------------------------------------*/
               .section{ padding: 10px;;margin: 0px;padding: 0px; margin-top:0px; }
@@ -127,7 +133,7 @@ font-family: 'Gamja Flower', cursive;
    <jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 <!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 	<div class="jumbotron px-0 pb-0">
-		<img src="resources/images/member/joinimg.jpg" height="600px"width="100%">
+		<img src="resources/images/member/joinimg.jpg"  max-height="600px" width="100%">
 	</div>
 	
   <div id="title"><b>비밀번호 찾기</b></div>
@@ -155,7 +161,7 @@ font-family: 'Gamja Flower', cursive;
               	<div class="col-12 input-email">
               		<input type="text" name="email" class="email" regexFlag="false">
               	</div>
-              	<div class="col-12 btn-box"><input type="button" value="확인" class="compl-btn"></div>
+              	<div class="col-12 btn-box"><input type="button" value="확인" class="btn"></div>
               	<div class="col-12"><span class="e-span"></span></div>
               </div>
               </form>

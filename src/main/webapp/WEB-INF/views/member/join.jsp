@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
 	rel="stylesheet">
@@ -43,6 +44,7 @@
 }
 
 .jumbotron {
+padding:5rem;
 	background-color: white;
 }
 
@@ -51,6 +53,7 @@
 }
 
 #joinInfo>div {
+
 	margin-bottom: 10px;
 }
 
@@ -58,9 +61,7 @@
 	font-size: 15px;
 }
 
-.textbox {
-	width: 250px;
-}
+
 
 #privateagreetext {
 	font-size: 15px;
@@ -117,9 +118,7 @@ b {
 	color: white;
 }
 
-.span {
-	padding-left: 205px;
-}
+
 
 #signin, #reset {
 	width: 80px;
@@ -158,6 +157,7 @@ b {
 	padding-bottom: 120px;
 	margin-bottom: 150px;
 }
+#search-btn,#emailcheck{margin-top:10px;}
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -167,7 +167,7 @@ b {
 
 
 	<div class="jumbotron px-0 pb-0">
-		<img src="resources/images/member/joinimg.jpg" height="600px"
+		<img src="resources/images/member/joinimg.jpg" max-height="600px"
 			width="100%">
 
 	</div>
@@ -301,10 +301,9 @@ b {
 								onsubmit="return submit_check()">
 								<div class="row">
 									<div class="col-lg-3 col-md-3 col-sm-3 col-3 first-col">아이디</div>
-									<div class="col-lg-9 col-md-3 col-sm-9 col-9">
-										<input type="text" id="id" name="id" required
-											placeholder="영대소문자및숫자포함5글자이상" flag="false" regexFlag="false"
-											class="textbox">
+									<div class="col-lg-9 col-md-9 col-sm-9 col-9">								
+										   <input type="text" class="form-control textbox" id="id"  name="id" flag="false" regexFlag="false" placeholder="영대소문자및숫자포함5글자이상" required >
+						
 									</div>
 									<div class="col-12 span">
 										<span id="idresult"></span>
@@ -317,7 +316,7 @@ b {
 									<div class="col-lg-9 col-md-9 col-sm-9 col-9">
 										<input type="password" id="password" name="password"
 											placeholder="패스워드" maxlength="30" required regexFlag="false"
-											class="textbox">
+											class="form-control textbox">
 									</div>
 									<div class="col-12 span">
 										<span id="pwResult"></span>
@@ -329,7 +328,7 @@ b {
 										class="col-lg-3 col-md-3 col-sm-3 col-3 first-col">비밀번호확인</div>
 									<div class="col-lg-9 col-md-9 col-sm-9 col-9">
 										<input type="password" id="passwordCheck"
-											placeholder="패스워드 확인" required class="textbox">
+											placeholder="패스워드 확인" required class="form-control textbox">
 									</div>
 									<div class="col-12 span">
 										<span id="pwCheckResult"></span>
@@ -341,7 +340,7 @@ b {
 										class="col-lg-3 col-md-3 col-sm-3 col-3 first-col">이름</div>
 									<div class="col-lg-9 col-md-9 col-sm-9 col-9">
 										<input type="text" placeholder="한글만 입력 가능합니다." maxlength="15"
-											name="name" class="name" required regexFlag="false"
+											name="name" class="form-control name" required regexFlag="false"
 											class="textbox">
 									</div>
 								</div>
@@ -349,11 +348,16 @@ b {
 								<div class="row">
 									<div class="col-lg-3 col-md-3 col-sm-3 col-3 first-col">이메일</div>
 									<div class="col-lg-9 col-md-9 col-sm-9 col-9">
-
+									<div class="row col-lg-12 col-md-12 col-sm-12 col-12">
+										<div class="row col-lg-11 col-md-11 col-sm-11 col-11">
 										<input type="text" id="email"
 											placeholder="ex)dogandcat@aaa.com" name="email" flag="false"
-											required regexFlag="false" class="textbox"> <input
-											type="button" id="emailcheck" value="인증" class="btn">
+											required regexFlag="false" class="form-control textbox"> 
+											</div>
+											<div class="col-lg-1 col-md-1 col-sm-1 col-1">
+											<input type="button" id="emailcheck" value="인증" class="btn">
+									</div>
+									</div>
 									</div>
 									<div class="col-12 span">
 										<span class="emailResult"></span>
@@ -365,7 +369,7 @@ b {
 										class="col-lg-3 col-md-3 col-sm-3 col-3 first-col">생년월일</div>
 									<div class="col-lg-9 col-md-9 col-sm-9 col-9">
 										<input type="text" id="birthday" placeholder="20000101"
-											name="birthDay" required regexFlag="false" class="textbox">
+											name="birthDay" required regexFlag="false" class="form-control textbox">
 									</div>
 								</div>
 
@@ -386,26 +390,32 @@ b {
 									<div class="col-lg-9 col-md-9 col-sm-9 col-9">
 										<input type="text" placeholder="-를 제외하고 숫자만 입력하세요."
 											maxlength="11" name="phone" id="phoneNum" required
-											regexFlag="false" class="textbox">
+											regexFlag="false" class="form-control textbox">
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-lg-3 col-md-3 col-sm-3 col-3 first-col">주소</div>
 									<div class="col-lg-9 col-md-9 col-sm-9 col-9">
 										<div class="row input-addr">
-											<div class="col-lg-12 col-md-12 col-sm-12 col-12 zipcode">
+											<div class="row col-lg-12 col-md-12 col-sm-12 col-12 zipcode">
+										
+										<div class="  col-lg-6 col-md-6 col-sm-6 col-6">
 												<input type="text" id="zipcode" placeholder="우편번호"
-													name="zipcode" required readonly> <input
+													name="zipcode"  readonly class="form-control">
+													</div>
+												<div class=" col-lg-6 col-md-6 col-sm-6 col-6">
+													 <input
 													type="button" value="찾기" id="search-btn" class="btn"
-													class="textbox">
+													class="textbox pt-1">
+													</div>
 											</div>
 											<div class="col-lg-12 col-md-12 col-sm-12 col-12">
 												<input type="text" id="address1" placeholder="주소"
-													name="address1" required class="textbox" readonly>
+													name="address1"  class="form-control textbox" readonly>
 											</div>
 											<div class="col-lg-12 col-md-12 col-sm-12 col-12">
 												<input type="text" id="address2" placeholder="상세주소를 입력하시오"
-													name="address2" required class="textbox">
+													name="address2"  class="form-control textbox">
 											</div>
 										</div>
 									</div>

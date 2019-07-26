@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
 	rel="stylesheet">
@@ -30,6 +31,15 @@
 	font-family: 'Gamja Flower', cursive;
 	font-size: 40px;
 }
+.jumbotron {
+padding:5rem;
+	background-color: white;
+}
+.btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44;
+margin-top:20px;
+margin-left:150px;
+}
+.btn:hover{background-color:#FDD692; font-weight:bold;}
 /*  ------메뉴-----------*/
 b {
 	font-family: 'Gamja Flower', cursive;
@@ -92,7 +102,7 @@ b {
 
 
 	<div class="jumbotron px-0 pb-0">
-		<img src="resources/images/member/joinimg.jpg" height="600px"
+		<img src="resources/images/member/joinimg.jpg"  max-height="600px"
 			width="100%">
 
 	</div>
@@ -152,11 +162,12 @@ b {
 						<div class="row" id="emaildiv">
 							<div class="col-lg-12 col-md-12 col-sm-12 col-12 suggest">전송 받을
 								이메일을 입력하시오.</div>
-							<div class="col-lg-6 col-md-12 col-sm-12 col-12">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-12">
 								<input type="text" placeholder="이메일을 입력하시오" name="email"
 									id="email">
 							</div>
-							<div class="col-lg-6 col-md-12 col-sm-12 btn-box"><input type="button" value="확인"  id="findid"></div>
+							<div class="col-lg-12 col-md-12 col-sm-12 btn-box">
+							<input type="button" value="확인"  id="findid" class="btn"></div>
 						</div>
 						
 					</form>

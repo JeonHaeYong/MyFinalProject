@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
 	rel="stylesheet">
@@ -24,6 +25,7 @@
 <style>
 	.myJumbo{
 		background-color: white;
+		padding-top: 80px;
 	}
 	#jumboImg{
 		width: 100%;
@@ -40,9 +42,8 @@
 		font-size: 13px;
 		color: red;
 	}
-	#lab{
-		color: white;
-	}
+	.btn{font-family: 'Gamja Flower', cursive; background-color:#FDD69270; color:#754F44;}
+	.btn:hover{background-color:#FDD692; font-weight:bold;}
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -79,6 +80,7 @@
 				</div>
 			</div>
 			<c:forEach var="dto" items="${payItem }" varStatus="status">
+				<input type="hidden" class="soldoutCheck" value="${dto.soldout }">
 				<div class="col-12 d-flex justify-content-center" style="height: 80px;">
 					<div class="card mb-3 myCard" style="width: 90%;">
 						<div class="row no-gutters">
@@ -86,10 +88,10 @@
 								<div class="col-md-6 col-12 cardContents">
 									<p><a href="item?seq=${dto.seq }&currentPage=1&category=all"><h5 class="card-title">${dto.name }</h5></a><p>
 								</div>
-								<div  class="col-md-3 col-6 cardContents">
+								<div class="col-md-3 d-md-block d-none cardContents">
 									<p class="card-text">${dto.price }원</p>
 								</div>
-								<div  class="col-md-3 col-6 cardContents">
+								<div class="col-md-3 d-md-block d-none cardContents">
 									<p class="card-text">${dto.seller }</p>
 								</div>
 							</div>
@@ -120,10 +122,6 @@
 						<label for="zipcode">우편번호</label>
 						<input type="text" class="form-control" id="zipcode" name="zipcode" value="${payMem.zipcode }" readonly>
 					</div>
-					<div class="form-group col-4">
-						<label for="zipcode" id="lab">우</label>
-						<input type="button" class="btn btn-primary m-auto p-auto form-control" id="searchBtn" value="찾기">
-					</div>
 				</div>
 				<div class="form-group">
 					<label for="inputAddress">주소</label>
@@ -145,10 +143,10 @@
 				</div>
 				<div class="form-row">
 					<div class="col-6 form-group">
-						<input type="button" class="btn btn-primary m-auto p-auto form-control" id="goBuyList" value="구매내역 확인">
+						<input type="button" class="btn m-auto p-auto form-control" id="goBuyList" value="구매내역 확인">
 					</div>
 					<div class="col-6 form-group">
-						<input type="button" class="btn btn-primary m-auto p-auto form-control" id="goFreemarket" value="무료나눔 목록">
+						<input type="button" class="btn m-auto p-auto form-control" id="goFreemarket" value="무료나눔 목록">
 					</div>
 				</div>
 				
@@ -172,13 +170,30 @@
 	<script src="resources/js/isotope.pkgd.min.js"></script>
 	<script src="resources/js/main.js"></script>
 	<script>
-		$()
+		history.pushState(null, null, location.href);
+		window.onpopstate = function(event) {
+			history.go(1);
+		};
 		$("#goBuyList").on("click", function(){
 			location.href = "toMyPage_buyList";
 		});
 		$("#goFreemarket").on("click", function(){
 			location.href = "freeMarket?currentPage=1&category=all";
 		});
+		// 뒤로가기 방지
+		window.history.forward(1);
+		//새로고침, 뒤로가기 막기
+		document.onkeydown = function(e) {
+			key = (e) ? e.keyCode : event.keyCode;
+			if (key == 8 || key == 116) {
+				if (e) {
+					e.preventDefault();
+				} else {
+					event.keyCode = 0;
+					event.returnValue = false;
+				}
+			}
+		}
 	</script>
 </body>
 </html>

@@ -4,6 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i" rel="stylesheet">
 <link rel="stylesheet" href="resources/fonts/icomoon/style.css">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
@@ -31,6 +32,11 @@
 
 
 
+
+
+#menu_row > div > a{
+	font-size: 22px;
+}
 .selected_menu_btns {
 	font-family: 'Gamja Flower', cursive !important;
 	border-radius: 0px !important;
@@ -632,6 +638,10 @@ font-weight:bold;
 <script>
 	$(function()
     {
+		
+		myAjax("1");
+		logAjax("1");
+		
 		
 		$("#name_text").val("후원 업체 명");
 		$("#title_text").val("제목입니다");

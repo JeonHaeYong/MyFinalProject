@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>유기동물 조회</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
 	rel="stylesheet">
@@ -22,24 +23,27 @@
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
 
+<jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
 <style>
+ @font-face {
+ 	font-family: 'SeoulNamsanM';
+ 	src: */
+ 		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/SeoulNamsanM.woff') */
+ 		format('woff'); 
+ 	font-weight: normal; 
+ 	font-style: normal; 
+}
 body{
 	color:#754F44;
-	font-weight:600;
+
 }
 table {
 	width: 760px;
 }
 
-#animalPhoto {
-	position: absolute;
-	right: 20px;
-	top: 55px;
-	z-index: 1;
-}
 
 th {
-	background-color: #f7f7f7;
+
 	border-bottom: 1px solid #cfcfcf;
 	text-align: center;
 	padding: 5px;
@@ -53,28 +57,45 @@ td {
 #toList {
 	text-align: center;
 }
-#btnToList {
-	background-color: #754F44;
-	color: white;
-	border-radius: 5px;
-	padding: 5px 10px;
+.menu {
+	font-family: 'Gamja Flower', cursive;
+	color:#754F44;
 }
-#btnToList:hover{
-	font-weight:600;
+.menu-bar {
+	text-align: center;
+	height: 200px;
 }
+
+.menu-bar>div {
+	height: 40px;
+}
+
+.menu-bar>div:not (.menu ):hover {
+	background-color: #FBFFB950;
+	font-weight: bold;
+}
+
+.menu-bar div:first-child {
+	font-size: 30px;
+	font-weight: bold;
+	border-bottom: 1px solid black;
+	color: #754F44;
+}
+
 .menu-row {
 	text-align: -webkit-center;
 }
 
 .s-menu1>a {
 	text-decoration: none;
-	color: black;
+	color: #754F44;
 	font-size: 20px;
 	font-family: 'Gamja Flower', cursive;
 }
 
 .s-menu1:hover {
 	background-color: #F3F78130;
+	font-weight:bold;
 }
 
 .s-menu1 {
@@ -105,6 +126,12 @@ td {
 	max-height: 600px;
 }
 
+.btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44; padding:6px 12px;}
+.btn:hover{background-color:#FDD692; font-weight:bold;}
+.selected_navi {
+	color: #EC7357 !important;
+	font-weight: 600;
+}
 </style>
 
 </head>
@@ -122,12 +149,12 @@ td {
 				<!--작은 메뉴랑 게시판목록이랑 나누는 row-->
 				<div class="col-lg-2 col-md-2 col-sm-12 col-12 menu-bar">
 					<!--작은 메뉴바-->
-					<div class="menu">MENU</div>
+					<div class="menu">M E N U</div>
 					<div class="s-menu1">
 						<a href="toAbandoned?currentPage=1">유기동물조회</a>
 					</div>
 					<div class="s-menu1">
-						<a href="listTempProtect?=currentPage=1">임시보호중</a>
+						<a href="listTempProtect?currentPage=1">임시보호중</a>
 					</div>
 					<div class="s-menu1">
 						<a href="toHospital?currentPage=1">동물병원 조회</a>
@@ -141,10 +168,10 @@ td {
 					<!--메뉴바랑 리스트 사이 빈 공간-->
 				</div>
 				<div class="col-lg-8 col-md-8 col-sm-12 col-12 row">
-					<div id="animalPhoto">
-						<img src="${dto.popfile }" style="width: 200px; height: 150px">
+					<div style="margin: auto; margin: 40px; font-family: 'SeoulNamsanM'; font-size:40px">
+						유기동물 조회
 					</div>
-					<div style="margin-bottom:20px">「동물보호법」 제17조, 같은 법 시행령 제7조 및 같은 법 시행규칙 제20조에 따라 구조된 동물의
+					<div style="margin-bottom:20px; font-weight:bold;">「동물보호법」 제17조, 같은 법 시행령 제7조 및 같은 법 시행규칙 제20조에 따라 구조된 동물의
 								보호상황을 아래와 같이 공고합니다.
 					</div>			
 					<table class="table table-striped">
@@ -152,6 +179,7 @@ td {
 							<tr>
 								<th scope="row" style="width: 18%;">공고번호</th>
 								<td>${dto.noticeNo }</td>
+								<th colspan="2" rowspan="3"><img src="${dto.popfile }" style="width: 200px; height: 150px"></th>
 							</tr>
 							<tr>
 								<th scope="row">품종</th>
@@ -222,9 +250,10 @@ td {
 							</tr>
 						</tbody>
 					</table>
-					상기 동물을 분실하신 소유주께서는 보호센터로 문의하시어 동물을 찾아가시기 바라며, 동물보호 법 제17조의 규정에 따른
+					<div style="font-weight:bold;">상기 동물을 분실하신 소유주께서는 보호센터로 문의하시어 동물을 찾아가시기 바라며, 동물보호 법 제17조의 규정에 따른
 					공고가 있는 날부터 10일이 경과하여도 소유자 등을 알 수 없는 경우에는 유실물법 제12조 및 민법 제253조의 규정에
 					불구하고 해당 시,군,구 자치구가 그 동물의 소유권을 취득하게 됩니다.
+					</div>
 					<!-- 				<div style="text-align:center; margin:0 auto;"><a href="javascript:history.back();">목록</a></div> -->
 					<div style="margin:auto"><button id="btnToList" class="btn btn-sm" type="button" onclick="goBack();">목록</button></div>
 				</div>
