@@ -44,8 +44,8 @@
 		
 </script>
 <style>
-	 .jumbotron{background-color:white;}
-     .jumbotron>img{width:100%; height: 700px; margin-bottom: 50px;}
+	 .jumbotron{background-color:white; padding-top:5rem;}
+     .jumbotron>img{width:100%; max-height: 600px;}
      .container{margin-bottom: 30px; color: #754F44;}
      .header{background-color: #EC7357; color: white; text-align: center; font-size: 25px; height: 40px; line-height: 40px; font-family:'Gamja Flower', cursive;}
      .header>div{padding: 0px;}
