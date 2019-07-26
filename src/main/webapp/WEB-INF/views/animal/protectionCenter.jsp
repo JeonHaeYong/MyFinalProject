@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Center</title>
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"rel="stylesheet">
 <link rel="stylesheet" href="resources/fonts/icomoon/style.css">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
@@ -45,8 +45,8 @@
 		
 </script>
 <style>
-	 .jumbotron{background-color:white; padding-top:5rem;}
-     .jumbotron>img{width:100%; max-height: 600px;}
+	 .jumbotron{background-color:white;}
+     .jumbotron>img{width:100%; height: 700px; margin-bottom: 50px;}
      .container{margin-bottom: 30px; color: #754F44;}
      .header{background-color: #EC7357; color: white; text-align: center; font-size: 25px; height: 40px; line-height: 40px; font-family:'Gamja Flower', cursive;}
      .header>div{padding: 0px;}

@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link
    href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
    rel="stylesheet">
@@ -31,13 +31,16 @@
 					background-color: rgba(137, 255, 137, 0.34);
 				}
 				.navi{
-                	color: #754F44;
                 	text-decoration: none;
-                	margin: 0px 5px;
-/*                 	font-family:  */
+                	background-color: #FDD69270;
+					color: #754F44;
+					font-size:19px;
+					font-family: 'Gamja Flower';
+					padding:6px 12px;
                 }
                 .navi:hover{
                 	font-weight: bold;
+                	background-color: #FDD692;
                 }
             </style>
             <jsp:include page="/WEB-INF/views/myPage/user/user_module/mypage_user_style.jsp" ></jsp:include><!-- user 마이페이지 스타일 -->
@@ -54,35 +57,37 @@
                                 <div class="tab-pane fade show active">
                                     <div class="support_wrapper">
                                     	<div class="row border-bottom border-success">
-                                            <div class="col-4">후원 업체 명</div>
-                                            <div class="col-2">후원 금액</div>
-                                            <div class="col-4">후원 날짜</div>
-                                            <div class="col-2">후원 방식</div>
+                                            <div class="col-4 text-truncate">후원 업체 명</div>
+                                            <div class="col-2 text-truncate">후원 금액</div>
+                                            <div class="col-4 text-truncate">후원 날짜</div>
+                                            <div class="col-2 text-truncate">후원 방식</div>
                                         </div>
                                         <div class="row donation_List">
 	                                    	<c:forEach var="dto" items="${dpList }">
-	                                            <div class="col-4 text-truncate">${dto.donation_name }</div>
-	                                            <div class="col-2">${dto.donation }원</div>
-	                                            <div class="col-4">${dto.donated_time }</div>
-	                                            <div class="col-2">${dto.donate_type }</div>
+	                                    		<div class="col-12 row mt-2 mb-1">
+	                                    			<div class="col-4 text-truncate">${dto.donation_name }</div>
+		                                            <div class="col-2 text-truncate">${dto.donation }원</div>
+		                                            <div class="col-4 text-truncate">${dto.donated_time }</div>
+		                                            <div class="col-2 text-truncate">${dto.donate_type }</div>
+	                                    		</div>
 		                                   	</c:forEach>
                                     	</div>
-                                    	<div class="row">
+                                    	<div class="row mt-3">
 											<div class="col-12 d-flex justify-content-center" id="naviBox">
 												<c:if test="${pageNavi.needPrev == 1 }">
-													<a class="navi" href="toMyPage_support?currentPage=${pageNavi.startNavi - 1}">&laquo;</a>
+													<a class="btn navi" href="toMyPage_support?currentPage=${pageNavi.startNavi - 1}">&laquo;</a>
 												</c:if>
 												<c:if test="${pageNavi.currentPage > pageNavi.startNavi }">
-													<a class="navi" href="toMyPage_support?currentPage=${pageNavi.currentPage - 1}">&lt;</a>
+													<a class="btn navi" href="toMyPage_support?currentPage=${pageNavi.currentPage - 1}">&lt;</a>
 												</c:if>
 												<c:forEach var="i" begin="${pageNavi.startNavi}" end="${pageNavi.endNavi}">
-													<a class="navi" href="toMyPage_support?currentPage=${i }" class="pageNum">${i}</a>
+													<a class="btn navi" href="toMyPage_support?currentPage=${i }" class="pageNum">${i}</a>
 												</c:forEach>
 												<c:if test="${pageNavi.currentPage < pageNavi.pageTotalCount }">
-													<a class="navi" href="toMyPage_support?currentPage=${pageNavi.currentPage + 1}">&gt;</a>
+													<a class="btn navi" href="toMyPage_support?currentPage=${pageNavi.currentPage + 1}">&gt;</a>
 												</c:if>
 												<c:if test="${pageNavi.needNext == 1 }">
-													<a class="navi" href="toMyPage_support?currentPage=${pageNavi.endNavi + 1}">&raquo;</a>
+													<a class="btn navi" href="toMyPage_support?currentPage=${pageNavi.endNavi + 1}">&raquo;</a>
 												</c:if>
 											</div>
 										</div>
