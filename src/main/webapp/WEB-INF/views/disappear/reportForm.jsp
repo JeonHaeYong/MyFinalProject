@@ -60,34 +60,7 @@
 		.label-btn{border: 2px solid #754F4490; border-radius:10px; padding: 5px; font-family: 'Gamja Flower', cursive;}
 		.label-btn:hover{cursor:pointer;}
 </style>
-<script>
- 	$(function(){
-    		$(".toList-btn").on("click",function(){
-    			location.href="toDisappearList?currentPage=${currentPage}";
-    		});
-    		$(".insert-btn").on("click",function(){
-    			  if($("#disappearDate").val() !=""&& $(".disappearArea").val() !=""&& $(".tel").val() !=""&& $('input:radio[name=gender]').is(':checked')==true
-    				 && $(".furColor").val()!="" && $(".feature").val()!=""&&$("#input-img1").val()!=""){
-    				$("#reportForm").submit();
-    			}else{alert("기타사항을 제외하고 모두 입력해주세요.");} 
-    		});
-    		$(".file-btn").on("change",function(){
-    			$(this).each(function(index,items){
-    				var i = $(this).attr("seq");
-    				$(".img"+i).html("");
-    				var reader = new FileReader();
-    				reader.onload = function(e){
-    					var src = e.target.result;
-    					$(".img"+i).append("<img src='"+src+"'>")
-    				}
-    				reader.readAsDataURL($(this)[0].files[0]);
-    			})
-    		});
-    		
-    		
-    	});
- 		
-    </script>
+
 </head>
  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
    <jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
@@ -143,7 +116,7 @@
             </div>
             <div class="input-box">
                 <div><select name="kind" id="kind" >
-                        <option value="개">개</option><option value="고양이">고양이</option><option value="기타">기타동물</option> 
+                        <option value="개">개</option><option value="고양이">고양이</option><option value="기타동물">기타동물</option> 
                     </select>
                 </div>
                 <div>
@@ -161,7 +134,7 @@
                 <div><input type="text" placeholder="기타사항을 입력해주세요" class="et" name="et" maxlength="90"></div>
                 <div>
                 <c:forEach var="i" begin="0" end="2" varStatus="status">
-                	<label for="input-img${status.index+1 }" class="label-btn">사진 선택${status.index+1 }</label>
+                	<label for="input-img${status.index+1 }" class="label-btn" id="lable-btn${status.index+1 }">사진 선택${status.index+1 }</label>
                 	<input type="file" name="image" id="input-img${status.index+1 }" class="file-btn" seq="${status.index+1 }" accept="image/gif, image/jpeg, image/png" hidden>
                 </c:forEach>
                 </div>
@@ -197,5 +170,35 @@
    <script src="resources/js/jquery.sticky.js"></script>
    <script src="resources/js/isotope.pkgd.min.js"></script>
    <script src="resources/js/main.js"></script>
+   <script>
+    		$(".toList-btn").on("click",function(){
+    			location.href="toDisappearList?currentPage=${currentPage}";
+    		});
+    		$(".insert-btn").on("click",function(){
+    			  if($("#disappearDate").val() !=""&& $(".disappearArea").val() !=""&& $(".tel").val() !=""&& $('input:radio[name=gender]').is(':checked')==true
+    				 && $(".furColor").val()!="" && $(".feature").val()!=""&&$("#input-img1").val()!=""){
+    				$("#reportForm").submit();
+    			}else{alert("기타사항을 제외하고 모두 입력해주세요.");} 
+    		});
+    		$(".file-btn").on("change",function(){ 
+    			$(this).each(function(index,items){ 
+    				var i = $(this).attr("seq");
+    				$(".img"+i).html("");
+    				var reader = new FileReader();
+    				reader.onload = function(e){
+    					var src = e.target.result;
+    					$(".img"+i).append("<img src='"+src+"'>")
+    				}
+    				reader.readAsDataURL($(this)[0].files[0]);
+    			})
+    		});
+			$(this).children("img").attr("src","/resources/images/disappear/cat_01.png");
+			/*사진 선택 버튼 */
+			$("#input-img2").attr("disabled",true);
+			$("#lable-btn2").css("background-color","#dce0e6");
+			$("#input-img3").attr("disabled",true);
+			
+    		/*Regex------------------------------ */
+    </script>
 </body>
 </html>

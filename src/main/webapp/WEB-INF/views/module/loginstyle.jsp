@@ -56,7 +56,7 @@ font-family:'Gamja Flower', cursive;
 }
 .modal-open{padding-right: 0px !important;}
 .top_menu_container{
-	max-width: 1250px;
+	max-width: 1270px !important;
 }
 </style>
 <link href="https://fonts.googleapis.com/css?family=Gamja+Flower&display=swap&subset=korean" rel="stylesheet">

@@ -43,10 +43,14 @@
 	height: 600px;
 }
 
-.jumbotron {
-padding:5rem;
-	background-color: white;
-}
+	.myJumbo{
+		background-color: white;
+		padding: 5rem;
+	}
+	#jumboImg{
+		width: 100%;
+		max-height: 600px;
+	}
 
 .title {
 	padding-top: 80px;
@@ -152,9 +156,8 @@ b {
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 
 
-	<div class="jumbotron px-0 pb-0">
-		<img src="resources/images/member/joinimg.jpg" max-height="600px"
-			width="100%">
+		<div class="jumbotron myJumbo pr-0 pl-0 pb-2">
+		<img src="resources/images/member/joinimg.jpg" id="jumboImg">
 
 	</div>
 
@@ -523,11 +526,11 @@ b {
 		/* 비밀번호 Regex */
 		$("#password").on("focusout", function() {
 			var password = $("#password").val();
-			var regex = /^[a-zA-Z0-9]{8,15}$/g;
+			var regex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,15}$/g;
 			var result = regex.exec(password);
 			if (result == null) {
 				$("#password").val("");
-				$("#pwResult").html("알파벳과 숫자의 조합으로 8~15이하로 입력해주세요.");
+				$("#pwResult").html("알파벳 ,숫자의 조합으로 8~15이하로 입력해주세요.");
 				$("#pwResult").css("color", "red");
 			} else {
 				$("#password").attr("regexFlag", "true");

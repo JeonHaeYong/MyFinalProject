@@ -61,34 +61,7 @@
         .pageNum,.prev,.next{text-decoration-line: none; color: #754F44; font-size:20px;}
      	.pageNum:hover,.prev:hover,.next:hover{font-weight: bold;}
 </style>
-<script>
-    $(function(){
-        $("textarea").css("height","100");
-        $(".pageNum").each(function(index,items){
-        	if($(this).text()==${currentPage}){
-        		$(this).css("color","#EC7357");
-				$(this).css("font-weight","bold");
-        	}
-        });
-        
-        /* Regex */
-     $(".input-point").on("focusout",function(){
-    	 var testPoint = $(".input-point").val();
-       	 var regex = /[0-9]{1,2}/g;
-       	 var result = regex.exec(testPoint);
-       	 if(result == null){
-       		 $(".point-span").text("숫자만 입력해주세요");
-       		 $(".input-point").val("");
-       	 }
-     });
-        $(".delete-btn").on("click",function(){
-        	var result = confirm("정말로 삭제하시겠습니까?");
-        	if(result == true){
-        		$("#deleteForm").submit();
-        	}
-        });
-    });
-</script>
+
 
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
@@ -102,18 +75,17 @@
          	<div class="row">
          		 <div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-row">
                     <div class="row menu-box">
-                        <div class="col-12 s-menu">M E N U</div>
+                          <div class="col-12 s-menu">M E N U</div>
                         <div class="col-12 "><a name="s-menu" href="oxQuiz">OX QUIZ</a></div>
-                       <div class="col-12"><a name="s-menu" href="information_t?currentPage=1">반려동물 정보</a></div>
-                          <div class="col-12"><a name="s-menu" href="toTrainingList?currentPage=1">반려동물 훈련 정보</a></div>
-                        <c:choose>
+                          <div class="col-12"><a name="s-menu" href="information_t?currentPage=1">반려동물 정보</a></div>
+                            <c:choose>
                         	<c:when test="${type == 4}">
                         		<div class="col-12"><a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a></div> <!-- 관리자만 볼 수 있게! -->
                         	</c:when>
                         	<c:otherwise>
                         		 <div class="col-12" hidden><a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a></div> 
                         	</c:otherwise>
-                        </c:choose>
+                        </c:choose> 
                     </div>
                 </div>
                 <div class="col-1"></div>
@@ -176,5 +148,31 @@
    <script src="resources/js/jquery.sticky.js"></script>
    <script src="resources/js/isotope.pkgd.min.js"></script>
    <script src="resources/js/main.js"></script>
+   <script>
+        $("textarea").css("height","100");
+        $(".pageNum").each(function(index,items){
+        	if($(this).text()==${currentPage}){
+        		$(this).css("color","#EC7357");
+				$(this).css("font-weight","bold");
+        	}
+        });
+        
+        /* Regex */
+     $(".input-point").on("focusout",function(){
+    	 var testPoint = $(".input-point").val();
+       	 var regex = /[0-9]{1,2}/g;
+       	 var result = regex.exec(testPoint);
+       	 if(result == null){
+       		 $(".point-span").text("숫자만 입력해주세요");
+       		 $(".input-point").val("");
+       	 }
+     });
+        $(".delete-btn").on("click",function(){
+        	var result = confirm("정말로 삭제하시겠습니까?");
+        	if(result == true){
+        		$("#deleteForm").submit();
+        	}
+        });
+</script>
 </body>
 </html>
