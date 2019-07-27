@@ -30,6 +30,12 @@
 		where rown between #{start} and #{end}	
 	</select>
 	
+	<select id="selectAll" resultType="kh.spring.dto.DonationPaymentDTO">
+		select * 
+		from (select row_number() over(order by seq desc) as rown, donated_payment.* from donated_payment)
+		where rown between #{start} and #{end}	
+	</select>
+	
 	<select id="selectCountForList" resultType="java.lang.Integer">
 		select count(*)
 		from (select * from (select sum(donation) as donation, donation_name, to_char(donated_time, 'yy/MM') as donated_time from DONATED_PAYMENT
