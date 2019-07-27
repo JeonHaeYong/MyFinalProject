@@ -299,7 +299,7 @@
               url : "clickReplyNavi.dis",
               type : "post",
               data : {
-                  seqStr : "${DisappearDTO.seq}",
+                  seqStr : "${reviewDTO.seq}",
                   currentPageStr : currentPage
               }
           }).done(function(resp){
