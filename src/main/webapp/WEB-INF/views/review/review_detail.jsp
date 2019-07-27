@@ -5,7 +5,7 @@
         <html>
             <head>
                 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-                <title>Insert title here</title>
+                <title>후기읽기</title>
                 <link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
                 <link
                       href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
@@ -51,6 +51,35 @@
                     .review-wrapper{
                     	max-width: 1300px;
                     }
+                    .font_22{
+                    	font-size: 22px;
+                    }
+                    .btn{
+                    	font-size: 20px;
+                    }
+                    .font_11rem{
+                    	font-size: 1.1rem;
+                    }
+                    .laon_btn_style{
+                    	background-color:#FDD69270;
+                    	color:#754F44;
+                    }
+                    .laon_btn_style:hover{
+                    	background-color:#FDD692; 
+                    	font-weight:bold;
+                    }
+                   	.navi{
+                        text-decoration: none;
+                        background-color: #FDD69270;
+                        color: #754F44;
+                        font-size:20px;
+                        padding:6px 12px;
+                        border-radius: 30px;
+                    }
+                    .navi:hover{
+                        font-weight: bold;
+                        background-color: #FDD692;
+                    }
                 </style>
             </head>
             <body data-spy="scroll" data-target=".site-navbar-target"
@@ -75,25 +104,25 @@
                                     <h1>재회 후기</h1>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row font_22">
                                 <div class="col-5">
                                     <img class="w-100" src="review/${reviewDTO.image_path1 }">
                                 </div>
                                 <div class="col-7">
                                     <div class="d-flex justify-content-between"><span class="w-20">작성자 : ${reviewDTO.writer }</span><span>${reviewDTO.formed_date }</span></div>
-                                    <div class="d-flex justify-content-between"><div class="w-80">제목 : ${reviewDTO.title }</div><div class="w-20">조회수 : ${reviewDTO.view_count }</div></div>
+                                    <div class="d-flex justify-content-between border-bottom"><div class="w-80">제목 : ${reviewDTO.title }</div><div class="w-20">조회수 : ${reviewDTO.view_count }</div></div>
                                     <div><span class="text-break">${reviewDTO.contents }</span></div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12">
                                     <form class="text-right" action="deleteReview" method="post" onsubmit="return deleteCheck();">
-                                        <c:if test="${id == reviewDTO.writer }">
+                                        <c:if test="${id == reviewDTO.writer or type == 4}">
                                             <input type="hidden" value="${reviewDTO.seq }" name="seq">
-                                            <input type="submit" class="btn btn-outline-warning rounded" value="삭제">
+                                            <input type="submit" class="laon_btn_style btn" value="삭제">
                                         </c:if>
                                         <input type="hidden" value="${currentPage }" name="currentPage">
-                                        <input id="toList" type="button" class="btn btn-outline-warning rounded" value="목록">
+                                        <input id="toList" type="button" class="laon_btn_style btn" value="목록">
                                     </form>
                                 </div>
                             </div>
@@ -107,7 +136,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row reply_part">
+                            <div class="row reply_part font_11rem">
                                 <!-- 댓글 목록 보여주기 -->
                                 <c:forEach var="list" items="${replyList }">
                                     <div class="col-12 border-bottom mb-1">
@@ -115,12 +144,12 @@
                                             <div class="font-weight-bold"><span class="mr-2"><img src="${list.imagepath }" class="profileImg_round rounded-circle" style="width: 50px ; height: 50px;"></span>${list.writer }</div>
                                             <c:if test="${id==list.writer }">
                                                 <div class="modifyReply_part">
-                                                    <a href="javascript:void(0)" onclick="modifyReplyToggle(this)"><img src="review/edit.png" style="width: 20px; height: 20px;"></a>
-                                                    <a href="javascript:void(0)" onclick="deleteReply(this)" value="${list.seq }"><img src="review/cancel.png" style="width: 20px; height: 20px;"></a>
+                                                    <a class="mx-1" href="javascript:void(0)" onclick="modifyReplyToggle(this)"><img src="review/edit.png" style="width: 20px; height: 20px;"></a>
+                                                    <a class="mx-1" href="javascript:void(0)" onclick="deleteReply(this)" value="${list.seq }"><img src="review/cancel.png" style="width: 20px; height: 20px;"></a>
                                                 </div>
                                                 <div class="modifyReply_part hide">
-                                                    <a role="btn" class="btn btn-outline-warning rounded p-1" href="javascript:void(0)" onclick="modifyReply(this);" value="${list.seq }">완료</a>
-                                                    <a role="btn" class="btn btn-outline-warning rounded p-1" href="javascript:void(0)" onclick="formReset(this)" value="${list.contents }">취소</a>
+                                                    <a role="btn" class="laon_btn_style btn p-1" href="javascript:void(0)" onclick="modifyReply(this);" value="${list.seq }">완료</a>
+                                                    <a role="btn" class="laon_btn_style btn p-1" href="javascript:void(0)" onclick="formReset(this)" value="${list.contents }">취소</a>
                                                 </div>
                                             </c:if>
                                         </div>
@@ -138,16 +167,12 @@
                                     </div>
                                 </c:forEach>
                             </div>
-                            <div class="row reply_part">
+                            <div class="row reply_part my-4">
                                 <c:if test="${reply_navi.size()!=0 }">
-                                    <div class="col-12">
-                                        <ul class="pagination justify-content-center">
-                                            <c:forEach var="navi" items="${reply_navi }">
-                                                <li class="page-item reply_item" value="${navi }">
-                                                    <a class="page-link text-decoration-none reply_navi" href="#toList" onclick="clickReplyNavi(this);">${navi }</a>
-                                                </li>
-                                            </c:forEach>
-                                        </ul>
+                                    <div class="col-12 text-center">
+                                        <c:forEach var="navi" items="${reply_navi }">
+                                           <a class="ml-1 navi reply_navi" href="#toList" onclick="clickReplyNavi(this);">${navi }</a>
+                                        </c:forEach>
                                     </div>
                                 </c:if>
                             </div>
@@ -186,10 +211,19 @@
                         return;
                     }
                     var reply = $("#review_reply_input").val();
-                    if(reply==""){
+                    var replyRegex = /^ {1,}$/;
+                    var replyRegexResult = replyRegex.exec(reply);
+                    if(reply==""||replyRegexResult!=null){
                         alert("댓글을 입력해주세요.");
+                        $("#review_reply_input").val("");
                         $("#review_reply_input").focus();
                         return;
+                    }
+                    if(reply.length>50){
+                    	alert("댓글은 50자이내로 적어주세요.");
+                    	$("#review_reply_input").val(reply.substr(0,50));
+                    	$("#review_reply_input").focus();
+                        return false;
                     }
                     //ajax로 table에 insert하기.
                     $.ajax({
@@ -288,6 +322,7 @@
                         $(".reply_wrapper").append(resp);
                         likeOkCheck();//좋아요 클릭한것만 빨강하트
                         profileImgRounded();
+                        $(".modifyReply_part.hide").hide();
                     })
                 }
                 //삭제버튼눌렀을때,
@@ -308,7 +343,7 @@
                     $(param).parent().toggle();
                     $(param).parent().next().toggle();
                     $(param).parents(".firstLine").next().next().find(".reply_contents").attr("readonly",false);
-                    $(param).parents(".firstLine").next().next().find(".reply_contents").css("background-color","skyblue");
+                    $(param).parents(".firstLine").next().next().find(".reply_contents").css("background-color","rgba(253, 214, 146, 0.23)");
                 }
                 function formReset(param){//수정취소눌렀을때,
                     var contents = $(param).attr("value");
@@ -326,6 +361,12 @@
                     var replyRegexResult = replyRegex.exec(reply);
                     if(reply==""||replyRegexResult!=null){
                         alert("댓글에 공백을 허용하지 않습니다.");
+                        input.focus();
+                        return false;
+                    }
+                    if(reply.length>50){
+                    	alert("댓글은 50자이내로 적어주세요.");
+                    	input.val(reply.substr(0,50));
                         input.focus();
                         return false;
                     }
