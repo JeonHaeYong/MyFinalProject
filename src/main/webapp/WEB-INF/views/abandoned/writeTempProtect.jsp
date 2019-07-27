@@ -221,7 +221,7 @@
 					console.log(index);
 					var length = sigunguArr[index].length;
 
-					var newOption = $("<option class='op_sigungu' value='0'>선택</option>");
+					var newOption = $("<option class='op_sigungu' value='' required>선택</option>");
 					sigungu_select.append(newOption);
 
 					for (var i = 1; i <= length; i++) {
@@ -252,6 +252,11 @@
 				$("#img").change(function() {
 					readURL(this);
 				});
+				
+				$("#btnReg").on("click", function(){
+					
+				})
+				
 
 			})
 </script>
@@ -401,7 +406,7 @@
 									<tr>
 										<th scope="row">시도</th>
 										<td><select id="sido_select" name="sido" required>
-												<option class="op_sido" value="0">선택</option>
+												<option class="op_sido" value="">선택</option>
 												<option class="op_sido" value="서울특별시">서울특별시</option>
 												<option class="op_sido" value="부산광역시">부산광역시</option>
 												<option class="op_sido" value="대구광역시">대구광역시</option>
@@ -427,7 +432,7 @@
 									<tr>
 										<th scope="row">시군구</th>
 										<td><select id="sigungu_select" name="sigungu" required>
-												<option class="op_sigungu" value="0">선택</option>
+												<option class="op_sigungu" value="">선택</option>
 										</select></td>
 
 									</tr>
@@ -446,7 +451,7 @@
 											placeholder="${dto.type }"></td>
 										<th scope="row">성별</th>
 										<td><select id="sex_select" name="sex" required>
-												<option class="op_sex" value="0">선택</option>
+												<option class="op_sex" value="">선택</option>
 												<option class="op_sex" value="암컷">암컷</option>
 												<option class="op_sex" value="수컷">수컷</option>
 										</select></td>
@@ -469,7 +474,7 @@
 								</tbody>
 							</table>
 							<div class="text-center">
-								<button type="submit" class="btn btn-sm">등록</button>
+								<button type="submit" id="btnReg" class="btn btn-sm">등록</button>
 								<button type="button" class="btn btn-sm" onclick="goBack();">취소</button>
 							</div>
 						</form>

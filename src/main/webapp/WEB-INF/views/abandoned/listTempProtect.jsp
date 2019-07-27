@@ -225,11 +225,11 @@ a:hover {
 				</div>
 
 				<div class="col-lg-9 col-md-9 col-sm-12 col-12">
-					<div class="text-center" style="margin: auto; margin-bottom: 40px;">
-						<h2>임시보호중</h2>
+					<div class="text-center" style="margin: auto; margin-bottom: 40px; font-size:40px;  font-family: 'SeoulNamsanM';">
+						임시보호중
 					</div>
-					<div style="font-weight: 600; margin-bottom: 20px;">
-						** 잃어버린 반려동물을 찾아서 임시보호중인 분께 연락해 보세요.<br> ** 길거리에 유기되거나 실종된
+					<div style="font-weight: 600; margin-bottom: 20px; font-family: 'SeoulNamsanM';">
+						** 반려동물을 잃어버리신 분은 이 페이지에서 찾아서 임시보호중인 분께 연락해 보세요.<br> ** 길거리에 유기되거나 실종된
 						반려동물을 임시보호하고 계신 분은 글 작성 버튼을 통해 정보를 올려주세요.
 					</div>
 					<div class="text-right" style="margin-botom: 20px;">
@@ -251,7 +251,7 @@ a:hover {
 									<a href="detailTempProtect?seq=${dto.seq }"><img
 										src="${dto.imagePath }" class="card-img-top" alt="..."
 										style="width: 211px; height: 150px; margin-bottom: 10px"></a>
-									<div class="card-body">
+									<div class="card-body" style="font-family: 'SeoulNamsanM';">
 
 										<p class="card-text">
 											<label class="title"><strong>제목</strong> </label><label
@@ -265,7 +265,10 @@ a:hover {
 												class="content"><fmt:formatDate
 													value="${dto.findDate }" pattern="yyyy-MM-dd" /></label><br>
 											<label class="title"><strong>품종 </strong></label><label
-												class="content">${dto.type }</label><br>
+												class="content">${dto.type }</label>
+<%-- 												<a href="detailTempProtect?seq=${dto.seq }">더 보기</a> --%>
+											<div>&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</div>
 										</p>
 									</div>
 								</div>
@@ -273,7 +276,7 @@ a:hover {
 							</c:forEach>
 						</c:if>
 						<c:if test="${listsize == 0 }">
-							<div id="dataNotExist">해당 데이터가 존재하지 않습니다.</div>
+							<div id="dataNotExist" style="margin:auto">해당 데이터가 존재하지 않습니다.</div>
 						</c:if>
 					</div>
 

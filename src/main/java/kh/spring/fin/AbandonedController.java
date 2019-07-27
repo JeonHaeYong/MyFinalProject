@@ -50,6 +50,15 @@ public class AbandonedController {
 	public String toModifyPageTempProtect(HttpServletRequest request, int seq) {
 		TempProtectDTO dto = tempService.selectOneTempProtect(seq);
 		request.setAttribute("dto", dto);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String findDateString = sdf.format(dto.getFindDate());
+		request.setAttribute("findDateString", findDateString);
+		
+		Date today = new Date();
+		String todayStr = sdf.format(today);
+		request.setAttribute("todayStr", todayStr);
+		
 		return "abandoned/modifyTempProtect";
 	}
 	@RequestMapping("modifyTempProtect")
@@ -103,7 +112,7 @@ public class AbandonedController {
 		Timestamp ts = new Timestamp(time);
 		dto.setWriteTime(ts);
 		int result = tempService.uploadTempProtect(dto);
-	
+		
 		return "redirect: listTempProtect?currentPage=1";
 	}
 
@@ -199,8 +208,8 @@ public class AbandonedController {
 			e.printStackTrace();
 		}
 		return "abandoned/abandoned";
-
 	}
+	
 
 
 }

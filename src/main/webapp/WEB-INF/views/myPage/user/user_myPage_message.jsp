@@ -55,6 +55,37 @@
                    		background-color: #EC7357 !important;
                    		border-radius: 0.25rem;
                     }
+                    .navi{
+                        text-decoration: none;
+                        background-color: #FDD69270;
+                        color: #754F44;
+                        font-size:20px;
+                        padding:6px 12px;
+                        border-radius: 30px;
+                        font-family: 'Gamja Flower';
+                    }
+                    .navi:hover{
+                        font-weight: bold;
+                        background-color: #FDD692;
+                    }
+                    .bg2_ft4{
+                    	color : #754F44;
+                    	background-color: #FDD69270;
+                    }
+                    .bg2_ft4:hover{
+                    	color : #754F44;
+                    	background-color: #FDD692;
+                    	font-weight: bold;
+                    }
+                    .bg4_ft2{
+                    	color : #FDD692;
+                    	background-color: rgba(117, 79, 68, 0.91);
+                    }
+                    .bg4_ft2:hover{
+                    	color : #FDD692;
+                    	background-color: #754F44;
+                    	font-weight: bold;
+                    }
                 </style>
                 <jsp:include page="/WEB-INF/views/myPage/user/user_module/mypage_user_style.jsp" ></jsp:include><!-- user 마이페이지 스타일 -->
                 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
@@ -90,7 +121,7 @@
                                                 <div class="col-2">보낸사람</div>
                                                 <div class="col-5">내용</div>
                                                 <div class="col-3">받은날짜</div>
-                                                <div class="col-1">read</div>
+                                                <div class="col-1 text-center">read</div>
                                             </div>
                                             <!-- 테이블에서 값 가져오기 -->
                                             <!-- 받은쪽지함 내용 -->
@@ -121,21 +152,17 @@
                                                     	</c:if>
                                                     </div>
                                                     <div class="col-3">${r_list.message_date }</div>
-                                                    <div class="col-1 r_readOk">${r_list.readOk }</div>
+                                                    <div class="col-1 r_readOk text-center">${r_list.readOk }</div>
                                                 </div>
                                             </c:forEach>
                                             <!-- 받은쪽지함 내용들 -->
                                             </form>
                                             <!-- 받은쪽지 네비게이터 띄워주기 -->
-                                            <div class="row receivedList_part">
-                                            	<div class="col-12">
-                                            		<ul class="pagination justify-content-center">
+                                            <div class="row receivedList_part my-4">
+                                            	<div class="col-12 text-center">
                                             		<c:forEach var="navi" items="${receivedNavi }">
-														<li class="page-item" value="${navi }">
-															<a class="navi_click_a page-link text-decoration-none" href="javascript:void(0)"  value="recipient">${navi }</a>
-														</li>
+															<a class="ml-1 navi navi_click_a" href="javascript:void(0)"  value="recipient">${navi }</a>
                                             		</c:forEach>
-                                            		</ul>
                                             	</div>
                                             </div><!-- /받은쪽지 네비게이터-->
                                             <!-- 받은쪽지클릭하면 내용띄워주기 -->
@@ -176,7 +203,7 @@
                                                 <div class="col-2">받는사람</div>
                                                 <div class="col-5">내용</div>
                                                 <div class="col-3">보낸날짜</div>
-                                                <div class="col-1">Read</div>
+                                                <div class="col-1 text-center">read</div>
                                             </div>
                                             <c:if test="${sentList.size()==0 }">
                                             	<div class="row">
@@ -200,21 +227,17 @@
                                                     	<a class="sent_msg_click text-decoration-none" href="javascript:void(0)"  seq="${s_list.seq }" data-toggle="modal" data-target="#s_msg_modal" value="${s_list.recipient }">${s_list.contents }</a>
                                                     </div>
                                                     <div class="col-3">${s_list.message_date }</div>
-                                                    <div class="col-1 s_readOk">${s_list.readOk }</div>
+                                                    <div class="col-1 s_readOk text-center">${s_list.readOk }</div>
                                                 </div>
                                                 <!-- //보낸쪽지함 내용들 -->
                                             </c:forEach>
                                            	</form>
                                             <!-- 보낸쪽지 네비게이터 띄워주기 -->
-                                            <div class="row sentList_part">
-                                            	<div class="col-12">
-                                            		<ul class="pagination justify-content-center">
+                                            <div class="row sentList_part my-4">
+                                            	<div class="col-12 text-center">
                                             		<c:forEach var="navi" items="${sentNavi }">
-														<li class="page-item" value="${navi }">
-															<a class="navi_click_a page-link text-decoration-none" href="javascript:void(0)"  value="sender">${navi }</a>
-														</li>
+															<a class="ml-1 navi navi_click_a" href="javascript:void(0)"  value="sender">${navi }</a>
                                             		</c:forEach>
-                                            		</ul>
                                             	</div>
                                             </div>
                                             <!-- /보낸쪽지 네비게이터-->
@@ -281,8 +304,8 @@
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button id="msg_close_btn" type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                                    <button id="msg_send_btn" type="button" class="btn btn-primary">쪽지 보내기</button>
+                                    <button id="msg_close_btn" type="button" class="btn bg4_ft2" data-dismiss="modal">닫기</button>
+                                    <button id="msg_send_btn" type="button" class="btn bg2_ft4">쪽지 보내기</button>
                                 </div>
                             </div>
                         </div>

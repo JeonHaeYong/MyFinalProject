@@ -3,6 +3,7 @@ package kh.spring.service;
 import java.util.List;
 
 import kh.spring.dto.ProtectionCenterDTO;
+import kh.spring.insertDataldto.CenterDTO;
 
 public interface ProtectionCenterService {
 	public List<ProtectionCenterDTO> selectAllCenterService();
@@ -10,4 +11,5 @@ public interface ProtectionCenterService {
 	public int getRecordTotalCountService();
 	public String getNaviForCenterService(int currentPage,String option);
 	public List<ProtectionCenterDTO> searchCenterPerPageService(int currentPage, String option);
+	public void insertDataService(CenterDTO cdto);
 }

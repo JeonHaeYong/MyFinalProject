@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kh.spring.dao.ProtectionCenterDAO;
 import kh.spring.dto.ProtectionCenterDTO;
+import kh.spring.insertDataldto.CenterDTO;
 import kh.spring.service.ProtectionCenterService;
 
 @Service
@@ -41,6 +42,9 @@ public class ProtectionCenterServiceimpl implements ProtectionCenterService{
 		List<ProtectionCenterDTO> list = new ArrayList<>();
 		return list = pdao.searchCenterPerPage(currentPage, option);
 	}
-	
+	@Override
+	public void insertDataService(CenterDTO cdto) {
+		 pdao.insertData(cdto);
+	}
 
 }

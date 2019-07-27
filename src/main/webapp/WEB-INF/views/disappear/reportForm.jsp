@@ -197,6 +197,17 @@
 			$("#input-img2").attr("disabled",true);
 			$("#lable-btn2").css("background-color","#dce0e6");
 			$("#input-img3").attr("disabled",true);
+			$("#lable-btn3").css("background-color","#dce0e6");
+			
+			$("#input-img1").on("change",function(){
+				$("#input-img2").attr("disabled",false);
+				$("#lable-btn2").css("background-color","white");
+			});
+			$("#input-img2").on("change",function(){
+				$("#input-img3").attr("disabled",false);
+				$("#lable-btn3").css("background-color","white");
+			})
+			
 			
     		/*Regex------------------------------ */
     </script>
