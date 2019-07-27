@@ -24,6 +24,10 @@
 {
 	margin-top: 5%;
 }
+#container *
+{
+	font-family: 'SeoulNamsanM';
+}
 #mypage_link
 {
 	color: #EC7357 !important;
@@ -61,7 +65,7 @@ a{
 
 
 
-	<section class="site-section bg-light block-13">
+	<section class="site-section block-13">
 
 
 

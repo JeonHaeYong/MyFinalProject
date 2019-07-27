@@ -29,7 +29,10 @@
 	color: #EC7357 !important;
 	font-weight: 600 !important;
 }
-
+#container *
+{
+	font-family: 'SeoulNamsanM';
+}
 
 
 
@@ -638,18 +641,18 @@ font-weight:bold;
 <script>
 	$(function()
     {
-		
+		//페이지 로딩 후 검색 결과가 바로 보이게 실행
 		myAjax("1");
 		logAjax("1");
 		
-		
+		//테스트용 시작
 		$("#name_text").val("후원 업체 명");
 		$("#title_text").val("제목입니다");
 		$("#explanation_text").val("설명 설명");
 		$("#goalmoney_text").val("1000000");
 		$("#startdate_text").val("2019-07-01");
 		$("#enddate_text").val("2019-07-30");
-		
+		//테스트용 끝
 		
 	    $("#submit_btn").on("click", function()
 		{

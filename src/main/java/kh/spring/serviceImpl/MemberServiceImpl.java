@@ -53,14 +53,7 @@ public class MemberServiceImpl implements MemberService {
 	public int isLoginOkService(String id, String password){
 		try
 		{
-			if(bdao.selectCountById(new BlackListDTO(id)) == 1)
-			{
-				return 0;
-			}
-			else
-			{
-				return mdao.isLoginOk(id, password);
-			}
+			return mdao.isLoginOk(id, password);
 		}
 		catch(Exception e)
 		{

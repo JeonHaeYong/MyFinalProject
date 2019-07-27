@@ -212,7 +212,7 @@ b {
 
 $("#findid").on("click", function() {
 				console.log($("#email").val());
-				alert(" 해당 이메일에  전송 중 입니다 \n 아래의 확인을 누르신 후 이메일을 확인하시오");
+				
 				$
 						.ajax({
 							url : "findIdProc",

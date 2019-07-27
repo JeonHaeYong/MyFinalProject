@@ -6,6 +6,7 @@ public interface BlackListService
 {
 	public void insert(BlackListDTO dto) throws Exception;
 	public BlackListDTO selectById(BlackListDTO dto) throws Exception;
+	public int selectCountById(BlackListDTO dto) throws Exception;
 	public String delete(BlackListDTO dto) throws Exception;
 	
 	public String searchMember(String id, String page) throws Exception;
