@@ -68,8 +68,9 @@
 	</fieldset>
 
 	<script>
-			$("#check").on("click",function(){
-				console.log($("#authkey").val());	
+	var count=0;
+			$("#check").on("click",function(){	
+				
 				$.ajax({
 					url : " authkey.do",
 					type : "post",
@@ -86,9 +87,17 @@
 						
 					}
 					else{
-						alert("인증번호가 잘못되었습니다 이메일 인증을 다시 작성하시오");
+						
+						count++;
+						if(count==3){
+							alert(count+"회 다시 인증번호 발송해주세요");
+							window.close();}
+						else{
+						alert(count+"회 인증번호가 잘못되었습니다 이메일 인증번호를 다시 작성하시오");
 						opener.document.getElementById("email").value = "";
-						window.close();
+						opener.document.getElementById("emailcheck").attr('disabled',false);
+						
+						}
 						
 					}
 
