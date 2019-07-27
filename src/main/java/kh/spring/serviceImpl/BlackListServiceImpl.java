@@ -48,9 +48,19 @@ public class BlackListServiceImpl implements BlackListService
 		}
 		
 	}
+	@Override
 	public BlackListDTO selectById(BlackListDTO dto) throws Exception
 	{
 		return blacklistDAO.selectById(dto);
+	}
+	@Override
+	public int selectCountById(BlackListDTO dto) throws Exception
+	{
+		int result = blacklistDAO.selectCountById(dto);
+		
+		logger.info("블랙리스트에서 해당 아이디 {} 로 검색한 결과 수 : {}",dto.getId(),result);
+		
+		return result;
 	}
 	@Override
 	public String delete(BlackListDTO dto) throws Exception
@@ -354,4 +364,5 @@ public class BlackListServiceImpl implements BlackListService
 		
 		return new Gson().toJson(outerjo);
 	}
+	
 }

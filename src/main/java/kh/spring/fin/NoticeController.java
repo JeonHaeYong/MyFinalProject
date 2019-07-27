@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kh.spring.dto.NoticeDTO;
-import kh.spring.serviceImpl.NoticeServiceImpl;
+import kh.spring.service.NoticeService;
 
 @Controller
 public class NoticeController
@@ -22,7 +22,7 @@ public class NoticeController
 	private static final Logger logger = LoggerFactory.getLogger(NoticeController.class);
 	
 	@Autowired
-	NoticeServiceImpl noticeService;
+	NoticeService noticeService;
 	
 	@RequestMapping(value = "notice-view-page", method = RequestMethod.GET)
 	public String noticeListPage()

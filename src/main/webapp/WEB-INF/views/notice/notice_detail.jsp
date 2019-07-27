@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,9 +21,13 @@
 
 <style>
 
-	#container
+#container
 {
 	margin-top: 5%;
+}
+#container *
+{
+	font-family: 'SeoulNamsanM';
 }
 #mypage_link
 {
@@ -52,7 +57,7 @@ font-weight:bold;
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 
 
-	<section class="site-section bg-light block-13">
+	<section class="site-section block-13">
 
 		<div id="container" class="container">
 
@@ -94,10 +99,13 @@ font-weight:bold;
 
 					<input id="back_btn" class="btn my_buttons" type="button" value="돌아가기">
 					
-					<input id="update_btn" class="btn my_buttons" type="button" value="수정하기">
+					<c:if test="${type == 4}">
 					
-					<input id="delete_btn" class="btn my_buttons" type="button" value="삭제하기">
-				
+						<input id="update_btn" class="btn my_buttons" type="button" value="수정하기">
+						
+						<input id="delete_btn" class="btn my_buttons" type="button" value="삭제하기">
+						
+					</c:if>
 				</div>
 				
 			</div>
@@ -131,15 +139,7 @@ font-weight:bold;
 			location.href = "notice-view-page";
 		});
 		
-		$("#update_btn").on("click", function()
-		{
-			location.href = "notice-update-page?seq=${dto.seq}";
-		});
 		
-		$("#delete_btn").on("click", function()
-		{
-			location.href = "notice-delete-do?seq=${dto.seq}";
-		});
 		
     });
     
@@ -148,4 +148,18 @@ font-weight:bold;
 		
     };
 </script>
+<c:if test="${type == 4}">
+<script>
+
+	$("#update_btn").on("click", function()
+	{
+		location.href = "notice-update-page?seq=${dto.seq}";
+	});
+	$("#delete_btn").on("click", function()
+	{
+		location.href = "notice-delete-do?seq=${dto.seq}";
+	});
+
+</script>
+</c:if>
 </html>

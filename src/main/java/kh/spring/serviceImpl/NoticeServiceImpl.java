@@ -2,6 +2,8 @@ package kh.spring.serviceImpl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import kh.spring.dao.MemberDAO;
 import kh.spring.dao.NoticeDAO;
 import kh.spring.dto.NoticeDTO;
 import kh.spring.service.NoticeService;
@@ -23,7 +26,11 @@ public class NoticeServiceImpl implements NoticeService
 	private static final Logger logger = LoggerFactory.getLogger(NoticeServiceImpl.class);
 	
 	@Autowired
+	HttpSession session;
+	@Autowired
 	NoticeDAO noticeDAO;
+	@Autowired
+	MemberDAO memberDAO;
 	
 	@Override
 	public String insert(NoticeDTO dto) throws Exception
@@ -173,7 +180,19 @@ public class NoticeServiceImpl implements NoticeService
 			logger.info("시간 : {}", resultDTO.getWrite_time());
 			logger.info("조회 : {}", resultDTO.getView_count());
 			
+			String id = (String)session.getAttribute("id");
+			logger.info("조회 시도한 아이디 : {}", id);
+			
+			int type = 9;
+			if(id != null)
+			{
+				type = memberDAO.selectOneMember(id).getType();
+				logger.info("조회 시도한 사람의 등급 : {}", type);
+			}
+			
+			mav.addObject("type", type);
 			mav.addObject("dto", resultDTO);
+			
 			mav.setViewName("/notice/notice_detail");
 		}
 		else

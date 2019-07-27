@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,11 +30,13 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import kh.spring.dto.BlackListDTO;
 import kh.spring.dto.MemberDTO;
 import kh.spring.dto.MessageDTO;
 import kh.spring.dto.PaymentDTO;
 import kh.spring.loginapi.NaverLoginBO;
 import kh.spring.loginapi.kakao_restapi;
+import kh.spring.service.BlackListService;
 import kh.spring.service.DonationPaymentService;
 import kh.spring.service.MemberService;
 import kh.spring.service.MessageService;
@@ -53,37 +56,57 @@ public class MemberController {
 	private HttpSession session;
 	@Autowired
 	private DonationPaymentService dps;
-	private kakao_restapi kakao_restapi = new kakao_restapi();
+	@Autowired
+	private BlackListService blackService;
 	
 	//로그인
 	@RequestMapping("login")
-	public String login(HttpServletRequest request, MemberDTO dto) {
+	public Object login(HttpServletRequest request, MemberDTO dto) {
+		ModelAndView mav = new ModelAndView();
 		String referer = request.getHeader("referer");
 		referer = referer.replaceAll("^http://.+?/", "");
 		System.out.println(dto.getId());
-		try{
+		try
+		{
 			int result=mservice.isLoginOkService(dto.getId(), dto.getPassword());
 			System.out.println(result);
-			if(result<1)
+			
+			if(blackService.selectCountById(new BlackListDTO(dto.getId())) < 1)
 			{
-				return "member/loginfail";
-			}
-			else {
-				MemberDTO mdto=mservice.selectOneMemberService(dto.getId());
-				int msg = msgService.selectMsgYetReadCount(dto.getId());//안읽은 메세지갯수
-				session.setAttribute("id", mdto.getId());
-				session.setAttribute("type", mdto.getType());
-				session.setAttribute("msg", msg);
-				if(referer.equals("join")) {
-					return "redirect:/";	
+				if(result<1)
+				{
+					mav.setViewName("member/loginfail");
+					mav.addObject("type", "fail");
+					return mav;
 				}
-				return "redirect:/"+referer;	
+				else 
+				{
+					MemberDTO mdto=mservice.selectOneMemberService(dto.getId());					
+					session.setAttribute("id", mdto.getId());
+					session.setAttribute("type", mdto.getType());
+					int msg = msgService.selectMsgYetReadCount(dto.getId());//안읽은 메세지갯수
+					session.setAttribute("msg", msg);
+					if(referer.equals("join")) 
+					{
+						mav.setViewName("redirect:/");
+						return mav;	
+					}
+					mav.setViewName("redirect:/"+referer);
+					return mav;	
+				}
+			}
+			else
+			{
+				mav.setViewName("member/loginfail");
+				mav.addObject("type", "black");
+				return mav;	
 			}
 		}
-
-		catch(Exception e) {
-			e.printStackTrace();
-			return "/loginfail";
+		catch(Exception e) 
+		{
+			mav.setViewName("member/loginfail");
+			mav.addObject("type", "fail");
+			return mav;
 		}
 
 	}
@@ -330,7 +353,7 @@ public class MemberController {
 		int type= dto.getType();
 		System.out.println("관리자확인->" + type);
 		if(type==4) {//관리자라면
-			return "myPage/admin/admin_chart";
+			return "myPage/admin/admin_manage_member";
 		}
 		return "myPage/user/user_myPage_profile";
 	}
@@ -507,10 +530,11 @@ public class MemberController {
 		return "member/findPassword";
 	}
 	@ResponseBody
-	@RequestMapping("findPwProc")
+	@RequestMapping("findPwProc.do")
 	public String findPwProc(HttpServletRequest request) {
 		String id = request.getParameter("id");
 		String email = request.getParameter("email");
+	
 		int idcheck=mservice.idDuplCheckService(request.getParameter("id"));
 		String result = null;
 		if(idcheck==1) { // 아이디 존재 여부

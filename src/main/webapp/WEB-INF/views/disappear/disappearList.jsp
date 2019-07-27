@@ -38,7 +38,7 @@ font-family: 'Gamja Flower', cursive;
 	padding-top: 50px;
 }
 
-.infoimg, .infotext,.infoextra {
+.infoimg, .animal-kind,.infoextra {
 
 	
 overflow: hidden;
@@ -51,18 +51,8 @@ margin-right:15px;
 box-sizing: border-box;
 height:50%;
 }
-.inforecommend{
-border-top:1px solid #754F4470;
-padding-left:5px;
-margin-top:2px;
-margin-left:15px;
-margin-right:15px;
-text-align:left;
-height:7%;
-box-sizing:border-box;
-overflow:hidden;
-}
-.infotext{
+
+.animal-kind{
 
 font-size:18px;
 text-align:left;
@@ -78,6 +68,7 @@ width:100%;
 	left: 0;
 height: 180px;
 }
+.animal-kind>img{margin-left:5px;}
 .writeInfo>div{float: left; height:15%;}
 .petInfo>div{float: left; heigth:15%; margin-left:15px;}
 .writer{margin-left: 20px;}
@@ -91,25 +82,6 @@ height: 180px;
 .furColor{overflow:hidden; text-overflow:ellipsis; white-space;nowrop;}
 
 </style>
-<script>
-	$(function(){
-		$(".write-btn").on("click",function(){
-			location.href="toReportForm";
-		});
-		$(".pageNum").each(function(index,items){
-			if($(this).text() == ${currentPage}){
-				$(this).css("color","#FDD692");
-				$(this).css("font-weight","bold");
-			}
-		})
-		$(".carousel-item img").each(function(index,items){
-			
-			if($(this).attr("src")=='null'){
-				 $(this).parent().parent().remove();
-			}
-		});
-	});
-</script>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="300" id="home-section">
@@ -139,8 +111,8 @@ height: 180px;
 									</div>
 								</div>
 						</div>
-						<div class="inforecommend">♥</div>
-                   <div class="infotext">${list.kind }</div>
+				
+                   <div class="animal-kind">${list.kind }<img src=""></div>
                     <div class="petInfo">
                     	<div>${list.gender} </div>
                     	<div>${list.age }</div>
@@ -178,5 +150,35 @@ height: 180px;
 	<script src="resources/js/jquery.sticky.js"></script>
 	<script src="resources/js/isotope.pkgd.min.js"></script>
 	<script src="resources/js/main.js"></script>
+	<script>
+		$(".write-btn").on("click",function(){
+			location.href="toReportForm";
+		});
+		$(".pageNum").each(function(index,items){
+			if($(this).text() == ${currentPage}){
+				$(this).css("color","#FDD692");
+				$(this).css("font-weight","bold");
+			}
+		})
+		$(".carousel-item img").each(function(index,items){
+			if($(this).attr("src") =='noImage'){
+				console.log($(this).parent().parent().attr("class"));
+				 $(this).parent().parent().remove();
+				 $(this).parent().remove();
+				 $(this).remove();
+			}
+		});
+		$(".animal-kind").each(function(index,items){
+			if($(this).text()=="개"){
+				$(this).children("img").attr("src","/resources/images/disappear/dog_02.png");
+			}else if($(this).text()=="고양이"){
+				$(this).children("img").attr("src","/resources/images/disappear/cat_01.png");
+
+			}else if($(this).text()=="기타동물"){
+				$(this).children("img").attr("src","/resources/images/disappear/rabbit_02.png");
+
+			}
+		});
+</script>
 </body>
 </html>

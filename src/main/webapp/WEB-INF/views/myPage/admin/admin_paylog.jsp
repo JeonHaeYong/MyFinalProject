@@ -29,7 +29,10 @@
 	color: #EC7357 !important;
 	font-weight: 600 !important;
 }
-
+#container *
+{
+	font-family: 'SeoulNamsanM';
+}
 
 
 
@@ -247,7 +250,22 @@ font-weight:bold;
 			
 			if($("#condition_select").val() == "date")
 			{
+				var today = new Date();
+				var dd = today.getDate();
+				var mm = today.getMonth() + 1;
+				var yyyy = today.getFullYear();
+				
+				if(dd < 10)
+				{
+					dd = '0' + dd;
+				} 
+				if(mm < 10)
+				{
+					mm = '0' + mm;
+				} 
+				
 				$("#search_text").attr("type", "date");
+				$("#search_text").attr("max", yyyy + "-" + mm + "-" + dd);
 			}
 			else
 			{

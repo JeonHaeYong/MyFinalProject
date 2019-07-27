@@ -61,34 +61,6 @@
 		label:hover{cursor:pointer;}
 		.expl{text-align:center;  font-family: 'Gamja Flower', cursive; font-size:23px;}
 </style>
-<script>
- 	$(function(){
- 			
-
-
-    		$(".toList-btn").on("click",function(){
-    			location.href="toDisappearList?currentPage=${currentPage}";
-    		});
-    		$(".alter-btn").on("click",function(){
-    			if($("#disappearDate").val() !=""&& $(".disappearArea").val() !=""&& $(".tel").val() !=""&& $('input:radio[name=gender]').is(':checked')==true
-    					&& $(".furColor").val()!="" && $(".feature").val()!=""&&$("#input-img1").val()!=""){
-    				$("#reportForm").submit();
-    			}else{alert("기타사항을 제외하고 모두 입력해주세요.");}
-    		});
-    		$(".file-btn").on("change",function(){
-    			$(this).each(function(index,items){
-    				var i = $(this).attr("seq");
-    				$(".img"+i).html("");
-    				var reader = new FileReader();
-    				reader.onload = function(e){
-    					var src = e.target.result;
-    					$(".img"+i).append("<img src='"+src+"'>")
-    				}
-    				reader.readAsDataURL($(this)[0].files[0]);
-    			})
-    		});
-    	});
-    </script>
 </head>
  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
    <jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
@@ -212,5 +184,29 @@
    <script src="resources/js/jquery.sticky.js"></script>
    <script src="resources/js/isotope.pkgd.min.js"></script>
    <script src="resources/js/main.js"></script>
+   <script>
+    		$(".toList-btn").on("click",function(){
+    			location.href="toDisappearList?currentPage=${currentPage}";
+    		});
+    		$(".alter-btn").on("click",function(){
+    			if($("#disappearDate").val() !=""&& $(".disappearArea").val() !=""&& $(".tel").val() !=""&& $('input:radio[name=gender]').is(':checked')==true
+    					&& $(".furColor").val()!="" && $(".feature").val()!=""&&$("#input-img1").val()!=""){
+    				$("#reportForm").submit();
+    			}else{alert("기타사항을 제외하고 모두 입력해주세요.");}
+    		});
+    		$(".file-btn").on("change",function(){
+    			$(this).each(function(index,items){
+    				var i = $(this).attr("seq");
+    				$(".img"+i).html("");
+    				var reader = new FileReader();
+    				reader.onload = function(e){
+    					var src = e.target.result;
+    					$(".img"+i).append("<img src='"+src+"'>")
+    				}
+    				reader.readAsDataURL($(this)[0].files[0]);
+    			})
+    		});
+    
+    </script>
 </body>
 </html>
