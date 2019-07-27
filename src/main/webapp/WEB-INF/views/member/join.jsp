@@ -266,13 +266,13 @@ b {
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-8 col-sm-7 col-md-7 col-lg-7 pt-5 agree"
+						<div class="col-8 col-sm-8 col-md-8 col-lg-8 pt-5 agree"
 							align="right">
 							<input type="radio" id="provisionY" name="provisionYn">
 							동의합니다. <input type="radio" id="provisionN" name="provisionYn">
 							동의하지 않습니다.
 						</div>
-						<div class="col-4 col-sm-5 col-md-5 col-lg-5 pt-3" align="left">
+						<div class="col-4 col-sm-4 col-md-4 col-lg-4 pt-3" align="left">
 							<img src="resources/images/member/nextbtn.png" height="100px"
 								width="100px" id="next">
 						</div>
@@ -351,7 +351,7 @@ b {
 													class="form-control textbox">
 											</div>
 											<div class="col-lg-1 col-md-1 col-sm-1 col-1">
-												<input type="button" id="emailcheck" value="인증" class="btn" 	disabled="false">
+												<input type="button" id="emailcheck" value="인증" class="btn" >
 											</div>
 										</div>
 									</div>
@@ -364,7 +364,7 @@ b {
 									<div id="birthDay"
 										class="col-lg-3 col-md-3 col-sm-3 col-3 first-col">생년월일</div>
 									<div class="col-lg-9 col-md-9 col-sm-9 col-9">
-										<input type="text" id="birthday" placeholder="20000101"
+										<input type="date" id="birthday"
 											name="birthDay" required regexFlag="false"
 											class="form-control textbox">
 									</div>
@@ -461,7 +461,11 @@ b {
 	<script src="resources/js/main.js"></script>
 
 	<!--  joinscript-->
+<script>
+ var today=new Date();
+$("#birthday").prop("max",today); 
 
+</script>
 
 	<script>
 		function submit_check() { //submit 조건
@@ -567,7 +571,7 @@ b {
 				$("#emailcheck").attr('disabled',false);
 			});
 		
-		$("#email")	.on("focusout",	function() {
+		$("#email")	.on("focusout",function() {
 			
 								var email = $("#email").val();
 								var regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
@@ -584,53 +588,57 @@ b {
 							
 							} else {//올바른메일인경우
 								$("#email").attr("regexFlag", "true");
-								
+								console.log("메일 값"+$("#email").val());
 							//이메일 중복검사 
-								$.ajax({
+							$.ajax({
 									url : "doublemail",
 									type : "post",
 									data : {email : $("#email").val()}
 								}).done(function(resp) {
 								console.log("중복확인"+resp);
 								if(resp=="true"){
+									$("#emailcheck").attr('disabled',true);
 									$(".emailResult").html("이미 가입된 이메일입니다");
 									$("#email").val("");
-									$("#emailcheck").attr('disabled',true);
+								
 									}
 								else{
 									$(".emailResult").html("");
 									$("#emailcheck").attr('disabled',false); 
-									$("#emailcheck").on("click", function(){
-										alert(" 해당 이메일에 인증 번호를 전송 중 입니다 \n 아래의 확인을 누르신 후 인증번호 확인 창을 확인해주세요");
-										$.ajax({
-											url : "email.do",
-											type : "post",
-											data : {email : $("#email").val()},
-											dataType : "json"
-											}).done(function(resp) {
-													console.log(resp);
-													if (resp == true) {	//메일 전송 성공													
-													window.open('emailcheck','window팝업','width=470, height=300, menubar=no, status=no, toolbar=no');
-													$("#emailcheck").attr('disabled',false);
-													}
-													else{
-														$("#email").val("");
-														alert("메일 전송을 실패했습니다");
-														$("#emailcheck").attr('disabled',false);
-													}
-												});
-									});
+								
 									}								
 								});								
 							
+						
 							}
 						});
-
+		$("#emailcheck").on("click", function(){
+			alert(" 해당 이메일에 인증 번호를 전송 중 입니다 \n 아래의 확인을 누르신 후 인증번호 확인 창을 확인해주세요");
+			$("#emailcheck").attr('disabled',true);
+		$.ajax({
+				url : "email.do",
+				type : "post",
+				data : {email : $("#email").val()},
+				dataType : "json"
+				}).done(function(resp) {
+						console.log(resp);
+						if (resp == true) {	//메일 전송 성공													
+					
+							window.open('emailcheck','window팝업','width=470, height=300, menubar=no, status=no, toolbar=no');
+					
+						}
+						else{
+							$("#email").val("");
+							alert("메일 전송을 실패했습니다");
+							$("#emailcheck").attr('disabled',false);
+						}
+					}); 
+		});
 	
 		/* 생년월일 regex */
 		$("#birthday").on("focusout", function() {
 			var birth = $("#birthday").val();
-			var regex = /[0-9]{8}/g
+			var regex = /[0-9]{4}-[0-9]{2}-[0-9]{2}/g
 			var result = regex.exec(birth);
 			if (result == null) {
 				$("#birthday").val("");
