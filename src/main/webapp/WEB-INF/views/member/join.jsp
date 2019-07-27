@@ -463,7 +463,8 @@ b {
 	<!--  joinscript-->
 <script>
  var today=new Date();
-$("#birthday").prop("max",today); 
+ var month =today.getMonth()+1;
+$("#birthday").attr("max",today.getFullYear()+'-0'+month+'-'+today.getDate()); 
 
 </script>
 
