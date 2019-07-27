@@ -21,12 +21,14 @@
                 <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
                 <link rel="stylesheet" href="resources/css/aos.css">
                 <link rel="stylesheet" href="resources/css/style.css">
+                <jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
                 <style>
-                    *{ font-family: 'Gamja Flower' !important; font-size: 20px;}
+                	*{ font-family: 'Gamja Flower' !important;}
                     ::placeholder{font-family: 'Gamja Flower'}
                     /*점보트론 이미지*/
                     .jumbotron{
                         background-color: white;
+                        padding-top: 5rem;
                     }
                     .jumbotron>img{
                         width: 100%;
@@ -43,14 +45,13 @@
                     /*~왼쪽 메뉴 */
                     .write-btn{background-color: #EC7357; border: none; font-size: 20px; color:white; border-radius: 5px;}
                     .write-btn:hover{font-weight: bold; background-color: #f7613e;}
-                    input:focus{
+                    .review-wrapper input:focus{
                     	outline: none;
                     }
                     .review-wrapper{
                     	max-width: 1300px;
                     }
                 </style>
-
             </head>
             <body data-spy="scroll" data-target=".site-navbar-target"
                   data-offset="300" id="home-section">
@@ -81,14 +82,13 @@
                                 <div class="col-7">
                                     <div class="d-flex justify-content-between"><span class="w-20">작성자 : ${reviewDTO.writer }</span><span>${reviewDTO.formed_date }</span></div>
                                     <div class="d-flex justify-content-between"><div class="w-80">제목 : ${reviewDTO.title }</div><div class="w-20">조회수 : ${reviewDTO.view_count }</div></div>
-                                    <div><span>${reviewDTO.contents }</span></div>
+                                    <div><span class="text-break">${reviewDTO.contents }</span></div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12">
                                     <form class="text-right" action="deleteReview" method="post" onsubmit="return deleteCheck();">
                                         <c:if test="${id == reviewDTO.writer }">
-                                            <input type="button" class="btn btn-outline-warning rounded" value="수정">
                                             <input type="hidden" value="${reviewDTO.seq }" name="seq">
                                             <input type="submit" class="btn btn-outline-warning rounded" value="삭제">
                                         </c:if>

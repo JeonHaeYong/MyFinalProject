@@ -151,7 +151,10 @@ public class InformationController {
 	@RequestMapping("detail_info")
 	public String detailinfo(HttpServletRequest request, int seq) {
 		try {
-			request.setAttribute("dto", service.detail_info(seq));
+			 InfomaitionDTO dto=service.detail_info(seq);
+			if(dto.getType().equals("info")) {dto.setType("정보");}
+			else {dto.setType("훈련");}
+			request.setAttribute("dto",dto);
 
 			return "sense/information/detail_info";
 		} catch (Exception e) {
@@ -163,6 +166,7 @@ public class InformationController {
 	public String updatewrite(HttpServletRequest request,int seq) {
 
 		try {
+			
 			request.setAttribute("dto", service.detail_info(seq));
 		} catch (Exception e) {
 
@@ -171,29 +175,25 @@ public class InformationController {
 		return "sense/information/update";}
 
 	@RequestMapping("uploadformproc")
-	public String upload(InfomaitionDTO tdto)
+	public String upload(InfomaitionDTO dto)
 	{
-		System.out.println(tdto.getTitle()+tdto.getContents());
+		System.out.println(dto.getTitle()+dto.getContents());
 		try {
-			tdto.setWriter("관리자");
-
-
+			dto.setWriter("관리자");
 			Pattern p=Pattern.compile("<img src=\"(.+?)\">");
-			Matcher m=p.matcher(tdto.getContents());
+			Matcher m=p.matcher(dto.getContents());
 			if(m.find()==true) {
-				tdto.setImage(m.group(0));
+				dto.setImage(m.group(0));
 			}
 			else {
-				tdto.setImage("null");
+				dto.setImage("<img src='resources/images/dog_1.jpg' width='100%' height='100%'>");
 			}
-			service.update_info(tdto);
+			service.update_info(dto);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 		}
-		System.out.println(tdto);
-
-		return "redirect:/information_t?currentPage=1";
+			return "redirect:/information_t?currentPage=1";
 	}
 
 	@RequestMapping("delinfo")

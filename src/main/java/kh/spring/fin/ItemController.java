@@ -64,7 +64,7 @@ public class ItemController {
 	}
 
 	@RequestMapping("item")
-	public String readOneItem(HttpServletRequest request, String currentPage, String category, int seq) {
+	public String readOneItem(HttpServletRequest request, String currentPage, String category, int seq, String admin) {
 		if(currentPage == null) {
 			currentPage = "1";
 		}
@@ -78,7 +78,11 @@ public class ItemController {
 		if(id != null) {
 			request.setAttribute("cartCount", cs.getCartCount(id));
 		}
-		return "item/item";
+		if(admin != null) {
+			return "item/item_admin";
+		}else {
+			return "item/item";
+		}
 	}
 
 	@RequestMapping("addItem")

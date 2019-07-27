@@ -40,12 +40,12 @@
 
 <style>
 .jumbotron {
-	background-color: white;
+	background-color: white;	padding: 5rem;
 }
 
 .jumbotron>img {
 	width: 100%;
-	height: 700px;
+	height: 600px;
 }
 
 #title {
@@ -142,65 +142,6 @@ background-color:#FDD692;
 font-weight:bold;
 }
 </style>
-<!--  summernote script-->
-
-<script>
-//파일 업로드        
-function sendFile(files,editor){
-            var data = new FormData(document.getElementById("writeForm"));
-            data.append("files", files);
-             $.ajax({
-                data: data,
-                type: "post",
-                url: "fileajax",
-                cache: false,
-                contentType: false,
-                processData: false,
-                enctype:"multipart/form-data",
-            }).done(function(resp){
-            	
-    		          $(".note-editable").append("<img src='"+resp+"' >");  
-            })
-}
-      
-           
-    window.onload = function(){
-            //이전으로 버튼 
-                document.getElementById("tomainboard").onclick = function(){
-                    location.href = "toBoard";
-                }
-            //작성 완료 보튼 
-                document.getElementById("uploadwritebtn").onclick = function(){
-                //제목을 입력하지 않았을 경우     
-            	var inputtitle= $("#inputtitle");              
-                    if(inputtitle.val()==""){
-                        alert("제목을 입력해주세요.");
-                        inputtitle.focus();
-                        return;   }
-                    
-                    //summernote가 비어있을 경우 
-                    if ($('#summernote').summernote('isEmpty')) {
-                    alert('내용을 입력해주세요.');
-                    return;       }
-            
-				//summernote 작성이 완료된경우 
-            $('textarea[name="contents"]').val($('#summernote').summernote('code'));
-                    document.getElementById("uploadForm").submit();   
-    }
-            $('#summernote').summernote({
-                    placeholder: '내용을 입력해주세요.',
-                    tabsize:2,
-                    height: 500,
-                  callbacks : {
-                        onImageUpload: function(files, editor, welEditable) {
-                            sendFile(files[0],this);
-                         
-                        }
-                    } 
-                });
-    }   
-        </script>
-
 
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -219,33 +160,21 @@ function sendFile(files,editor){
 		<div class="row">
 			<div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-row">
 				<div class="row menu-box">
-					<div class="col-12 s-menu">M E N U</div>
-					<div class="col-12 ">
-						<a name="s-menu" href="oxQuiz">OX QUIZ</a>
-					</div>
-					<div class="col-12">
-						<a name="s-menu" href="">반려동물 상식</a>
-					</div>
-					<div class="col-12">
-						<a name="s-menu" href="information_t">반려동물 정보</a>
-					</div>
-					<c:choose>
-						<c:when test="${type eq '4'}">
-							<div class="col-12">
-								<a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a>
-							</div>
-							<!-- 관리자만 볼 수 있게! -->
-						</c:when>
-						<c:otherwise>
-							<div class="col-12" hidden>
-								<a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a>
-							</div>
-						</c:otherwise>
-					</c:choose>
+					   <div class="col-12 s-menu">M E N U</div>
+                        <div class="col-12 "><a name="s-menu" href="oxQuiz">OX QUIZ</a></div>
+                          <div class="col-12"><a name="s-menu" href="information_t?currentPage=1">반려동물 정보</a></div>
+                            <c:choose>
+                        	<c:when test="${type == 4}">
+                        		<div class="col-12"><a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a></div> <!-- 관리자만 볼 수 있게! -->
+                        	</c:when>
+                        	<c:otherwise>
+                        		 <div class="col-12" hidden><a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a></div> 
+                        	</c:otherwise>
+                        </c:choose> 
 				</div>
 			</div>
 			<div class="col-1"></div>
-			<div class="col-lg-9 col-md-8 col-sm-12 col-12 info-box">
+			<div class="col-lg-9 col-md-8 col-sm-12 col-12 info-box mt-5">
 				<!--summernote body   -->
 
 				<form id="uploadForm" action="uploadformproc" method="post">
@@ -302,6 +231,71 @@ function sendFile(files,editor){
 
 <script>
 $("#summernote").html($('textarea[name="contents"]').val());
+
+
+<!--  summernote script-->
+
+
+//파일 업로드        
+function sendFile(files,editor){
+            var data = new FormData(document.getElementById("uploadForm"));
+            data.append("files", files);
+             $.ajax({
+                data: data,
+                type: "post",
+                url: "fileajax",
+                cache: false,
+                contentType: false,
+                processData: false,
+                enctype:"multipart/form-data",
+            }).done(function(resp){
+            	
+    		          $(".note-editable").append("<img src='"+resp+"' width='100%'>");  
+            })
+}
+      
+           
+
+            //이전으로 버튼 
+                document.getElementById("tomainboard").onclick = function(){
+                    location.href = "toBoard";
+                }
+            //작성 완료 보튼 
+                document.getElementById("uploadwritebtn").onclick = function(){
+                //제목을 입력하지 않았을 경우     
+            	var inputtitle= $("#inputtitle");              
+                    if(inputtitle.val()==""){
+                        alert("제목을 입력해주세요.");
+                        inputtitle.focus();
+                        return;   }
+                    
+                    //summernote가 비어있을 경우 
+                    if ($('#summernote').summernote('isEmpty')) {
+                    alert('내용을 입력해주세요.');
+                    return;       }
+            
+				//summernote 작성이 완료된경우 
+            $('textarea[name="contents"]').val($('#summernote').summernote('code'));
+                    document.getElementById("uploadForm").submit();   
+    }
+            $('#summernote').summernote({
+                    placeholder: '내용을 입력해주세요.',
+                    tabsize:2,
+                    height: 500,
+                  callbacks : {
+                        onImageUpload: function(files, editor, welEditable) {
+                        	for (var i = files.length - 1; i >= 0; i--) {
+        						sendFile(files[0], this);
+        						}}
+                         
+                        
+                    } 
+                });
+       
+        
+
+
+
 </script>
 
 </body>

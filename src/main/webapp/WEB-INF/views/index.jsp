@@ -365,11 +365,6 @@
                            document.getElementById("form").submit();
                            }
                            //                            로그인 버튼과 회원가입 버튼의 script
-		
-		if(${errorLogin!=null}){
-			alert("로그인을 먼저 해주세요.");
-			$(".login-btn").trigger("click");
-		}
   		 </script>
   	
 <script>

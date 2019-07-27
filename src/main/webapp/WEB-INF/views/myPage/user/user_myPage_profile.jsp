@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
     <html>
         <head>
@@ -93,7 +94,12 @@
                         <div class="form-group row">
                             <label for="my_password" class="col-sm-2 col-form-label">Password</label>
                             <div class="col-sm-10">
-                                <button type="button" id="my_password" class="btn btn-outline-warning rounded" data-toggle="modal" data-target="#password_change_modal">비밀번호 변경하기</button>
+                            	<c:if test="${memberDTO.type!=1 }">
+                            		-
+                            	</c:if>
+                            	<c:if test="${memberDTO.type==1 }">
+                            		<button type="button" id="my_password" class="btn btn-outline-warning rounded" data-toggle="modal" data-target="#password_change_modal">비밀번호 변경하기</button>
+                            	</c:if>
                                 <!-- Modal -->
                                 <div class="modal fade" id="password_change_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -260,7 +266,11 @@
                 //pw regex확인
                 var pwRegex = /^[a-zA-Z0-9]{8,15}$/g;
                 var regexResult = pwRegex.exec(pw1);
-                if(regexResult==null){	
+                var pwRegex2 = /^[a-zA-Z]{8,15}$/g;
+                var regexResult2 = pwRegex2.exec(pw1);
+                var pwRegex3 = /^[0-9]{8,15}$/g;
+                var regexResult3 = pwRegex3.exec(pw1);
+                if(regexResult==null||regexResult2!=null||regexResult3!=null){	
                     alert("변경할 비밀번호의 조건을 확인해주세요.\r\n조건->알파벳과 숫자의 조합으로 8~15이하");
                     $("#changePw1").focus();
                     return false;

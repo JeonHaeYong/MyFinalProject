@@ -396,7 +396,9 @@
 					$("#conta").append(resp);
 					$(".navi").each(function(i, item){
 						if($(item).text() == "${pageNavi.currentPage}"){
-							$(this).css("color", "#EC7357");
+							$(this).css("color", "#754F44");
+							$(this).css("background-color", "#FDD692");
+							$(this).css("font-weight", "bold");
 						}
 					});
 					$(".cardImg").each(function(i, item){
@@ -463,7 +465,7 @@
 			});
 			
 			$(".navi").each(function(i, item){
-				if($(item).text() == ${pageNavi.currentPage}){
+				if($(item).text() == "${pageNavi.currentPage}"){
 					$(this).css("color", "#754F44");
 					$(this).css("background-color", "#FDD692");
 					$(this).css("font-weight", "bold");

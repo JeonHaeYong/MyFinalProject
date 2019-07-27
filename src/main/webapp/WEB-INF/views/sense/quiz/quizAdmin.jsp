@@ -75,18 +75,17 @@
          	<div class="row">
          		 <div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-row">
                     <div class="row menu-box">
-                        <div class="col-12 s-menu">M E N U</div>
+                          <div class="col-12 s-menu">M E N U</div>
                         <div class="col-12 "><a name="s-menu" href="oxQuiz">OX QUIZ</a></div>
-                       <div class="col-12"><a name="s-menu" href="information_t?currentPage=1">반려동물 정보</a></div>
-                          <div class="col-12"><a name="s-menu" href="toTrainingList?currentPage=1">반려동물 훈련 정보</a></div>
-                        <c:choose>
+                          <div class="col-12"><a name="s-menu" href="information_t?currentPage=1">반려동물 정보</a></div>
+                            <c:choose>
                         	<c:when test="${type == 4}">
                         		<div class="col-12"><a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a></div> <!-- 관리자만 볼 수 있게! -->
                         	</c:when>
                         	<c:otherwise>
                         		 <div class="col-12" hidden><a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a></div> 
                         	</c:otherwise>
-                        </c:choose>
+                        </c:choose> 
                     </div>
                 </div>
                 <div class="col-1"></div>

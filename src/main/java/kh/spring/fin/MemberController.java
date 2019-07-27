@@ -84,6 +84,8 @@ public class MemberController {
 					MemberDTO mdto=mservice.selectOneMemberService(dto.getId());					
 					session.setAttribute("id", mdto.getId());
 					session.setAttribute("type", mdto.getType());
+					int msg = msgService.selectMsgYetReadCount(dto.getId());//안읽은 메세지갯수
+					session.setAttribute("msg", msg);
 					if(referer.equals("join")) 
 					{
 						mav.setViewName("redirect:/");
