@@ -5,7 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
+<link rel="icon" type="image/png" sizes="16x16"
+	href="/resources/images/favicon.png">
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
 	rel="stylesheet">
@@ -43,29 +44,27 @@
 	height: 600px;
 }
 
-	.myJumbo{
-		background-color: white;
-		padding: 5rem;
-	}
-	#jumboImg{
-		width: 100%;
-		max-height: 600px;
-	}
+.myJumbo {
+	background-color: white;
+	padding: 5rem;
+}
+
+#jumboImg {
+	width: 100%;
+	max-height: 600px;
+}
 
 .title {
 	padding-top: 80px;
 }
 
 #joinInfo>div {
-
 	margin-bottom: 10px;
 }
 
 #divPasswordCheck {
 	font-size: 15px;
 }
-
-
 
 #privateagreetext {
 	font-size: 15px;
@@ -107,13 +106,16 @@ b {
 	margin-left: 5px;
 }
 
-.btn, input[type="reset"]{	font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44;}
-.btn:hover,input[type="reset"]:hover{background-color:#FDD692; font-weight:bold;}
+.btn, input[type="reset"] {
+	font-family: 'Gamja Flower', cursive;
+	background-color: #FDD69270;
+	color: #754F44;
+}
 
-
-
-
-
+.btn:hover, input[type="reset"]:hover {
+	background-color: #FDD692;
+	font-weight: bold;
+}
 
 .menu-row {
 	text-align: -webkit-center;
@@ -147,7 +149,6 @@ b {
 	padding-bottom: 120px;
 	margin-bottom: 150px;
 }
-
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -156,7 +157,7 @@ b {
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 
 
-		<div class="jumbotron myJumbo pr-0 pl-0 pb-2">
+	<div class="jumbotron myJumbo pr-0 pl-0 pb-2">
 		<img src="resources/images/member/joinimg.jpg" id="jumboImg">
 
 	</div>
@@ -290,9 +291,11 @@ b {
 								onsubmit="return submit_check()">
 								<div class="row">
 									<div class="col-lg-3 col-md-3 col-sm-3 col-3 first-col">아이디</div>
-									<div class="col-lg-9 col-md-9 col-sm-9 col-9">								
-										   <input type="text" class="form-control textbox" id="id"  name="id" flag="false" regexFlag="false" placeholder="알파벳으로 시작하고 6~12자리 이하" required >
-						
+									<div class="col-lg-9 col-md-9 col-sm-9 col-9">
+										<input type="text" class="form-control textbox" id="id"
+											name="id" flag="false" regexFlag="false"
+											placeholder="알파벳으로 시작하고 6~12자리 이하" required>
+
 									</div>
 									<div class="col-12 span">
 										<span id="idresult"></span>
@@ -328,8 +331,8 @@ b {
 									<div id="inputName"
 										class="col-lg-3 col-md-3 col-sm-3 col-3 first-col">이름</div>
 									<div class="col-lg-9 col-md-9 col-sm-9 col-9">
-										<input type="text" placeholder="한글만 입력 가능합니다."
-											name="name" class="form-control name" required regexFlag="false"
+										<input type="text" placeholder="한글만 입력 가능합니다." name="name"
+											class="form-control name" required regexFlag="false"
 											class="textbox" maxlength="4" oninput="maxLengthCheck(this)">
 									</div>
 									<div class="col-12 span">
@@ -340,16 +343,17 @@ b {
 								<div class="row">
 									<div class="col-lg-3 col-md-3 col-sm-3 col-3 first-col">이메일</div>
 									<div class="col-lg-9 col-md-9 col-sm-9 col-9">
-									<div class="row col-lg-12 col-md-12 col-sm-12 col-12">
-										<div class="row col-lg-11 col-md-11 col-sm-11 col-11">
-										<input type="text" id="email"
-											placeholder="ex)dogandcat@aaa.com" name="email" flag="false"
-											required regexFlag="false" class="form-control textbox"> 
+										<div class="row col-lg-12 col-md-12 col-sm-12 col-12">
+											<div class="row col-lg-11 col-md-11 col-sm-11 col-11">
+												<input type="text" id="email"
+													placeholder="ex)dogandcat@aaa.com" name="email"
+													flag="false" required regexFlag="false"
+													class="form-control textbox">
 											</div>
 											<div class="col-lg-1 col-md-1 col-sm-1 col-1">
-											<input type="button" id="emailcheck" value="인증" class="btn">
-									</div>
-									</div>
+												<input type="button" id="emailcheck" value="인증" class="btn" 	disabled="false">
+											</div>
+										</div>
 									</div>
 									<div class="col-12 span">
 										<span class="emailResult"></span>
@@ -361,7 +365,8 @@ b {
 										class="col-lg-3 col-md-3 col-sm-3 col-3 first-col">생년월일</div>
 									<div class="col-lg-9 col-md-9 col-sm-9 col-9">
 										<input type="text" id="birthday" placeholder="20000101"
-											name="birthDay" required regexFlag="false" class="form-control textbox">
+											name="birthDay" required regexFlag="false"
+											class="form-control textbox">
 									</div>
 								</div>
 
@@ -390,24 +395,23 @@ b {
 									<div class="col-lg-9 col-md-9 col-sm-9 col-9">
 										<div class="row input-addr">
 											<div class="row col-lg-12 col-md-12 col-sm-12 col-12 zipcode">
-										
-										<div class="  col-lg-6 col-md-6 col-sm-6 col-6">
-												<input type="text" id="zipcode" placeholder="우편번호"
-													name="zipcode"  readonly class="form-control">
-													</div>
+
+												<div class="  col-lg-6 col-md-6 col-sm-6 col-6">
+													<input type="text" id="zipcode" placeholder="우편번호"
+														name="zipcode" readonly class="form-control">
+												</div>
 												<div class=" col-lg-6 col-md-6 col-sm-6 col-6">
-													 <input
-													type="button" value="찾기" id="search-btn" class="btn"
-													class="textbox pt-1">
-													</div>
+													<input type="button" value="찾기" id="search-btn" class="btn"
+														class="textbox pt-1">
+												</div>
 											</div>
 											<div class="col-lg-12 col-md-12 col-sm-12 col-12">
 												<input type="text" id="address1" placeholder="주소"
-													name="address1"  class="form-control textbox" readonly>
+													name="address1" class="form-control textbox" readonly>
 											</div>
 											<div class="col-lg-12 col-md-12 col-sm-12 col-12">
 												<input type="text" id="address2" placeholder="상세주소를 입력하시오"
-													name="address2"  class="form-control textbox">
+													name="address2" class="form-control textbox">
 											</div>
 										</div>
 									</div>
@@ -416,8 +420,8 @@ b {
 								<div class="row footer">
 									<div class="col-lg-12 col-md-12 col-sm-12 col-12"
 										id="formfooterbtn">
-										<input type="submit" id="signin" value="완료" class="btn"> <input
-											type="reset" id="reset" class="btn">
+										<input type="submit" id="signin" value="완료" class="btn">
+										<input type="reset" id="reset" class="btn">
 									</div>
 								</div>
 
@@ -557,68 +561,68 @@ b {
 			}
 		});
 		/* 이메일 regex */
-		$("#email")
-				.on(
-						"focusout",
-						function() {
-							var email = $("#email").val();
-							var regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		
+		
+			$("#email").on("focus",	function() {
+				$("#emailcheck").attr('disabled',false);
+			});
+		
+		$("#email")	.on("focusout",	function() {
+			
+								var email = $("#email").val();
+								var regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 							/* 안에 있는 내용은 정규표현식 검증에 사용되는 패턴이 이 안에 위치함
 							/ /i 정규표현식에 사용된 패턴이 대소문자를 구분하지 않도록 i를 사용함
 							^ 표시는 처음시작하는 부분부터 일치한다는 표시임
 							 [0-9a-zA-Z] 하나의 문자가 []안에 위치한 규칙을 따른다는 것으로 숫자와 알파벳 소문지 대문자인 경우를 뜻 함
 							 * 이 기호는 0또는 그 이상의 문자가 연속될 수 있음을 말함 */
 							var result = regex.exec(email);
-							if (result == null) {
+							if (result == null) {//올바른 메일작성확인
+								$("#emailcheck").attr('disabled',true);
 								$(".emailResult").html("올바른 이메일을 작성해주세요.");
 								$("#email").val("");
-								$("#emailcheck").attr('disabled',true); 
-
-							} else {
+							
+							} else {//올바른메일인경우
 								$("#email").attr("regexFlag", "true");
+								
+							//이메일 중복검사 
 								$.ajax({
 									url : "doublemail",
 									type : "post",
-									data : {
-										email : $("#email").val()
-									}
+									data : {email : $("#email").val()}
 								}).done(function(resp) {
-									console.log(resp);
-								
-								if(resp=="false"){
-								$("#emailcheck").attr('disabled',false); 
-								$(".emailResult").html("");
-								//이메일 인증 버튼 
-								$("#emailcheck").on("click", function() {
-									console.log($("#email").val());
-									alert(" 해당 이메일에 인증 번호를 전송 중 입니다 \n 아래의 확인을 누르시면 인증번호 확인 창을 확인해주세요");	
-									$
-									.ajax({
-										url : "email.do",
-										type : "post",
-										data : {
-											email : $("#email").val()
-										},
-										dataType : "json"
-									})
-									.done(
-											function(resp) {
-												console.log(resp);
-												if (resp == true) {
-													
-													window.open('emailcheck',
-																	'window팝업',
-																	'width=470, height=300, menubar=no, status=no, toolbar=no');
-												}
-
-											});
-								});
-								}
-								else{
+								console.log("중복확인"+resp);
+								if(resp=="true"){
 									$(".emailResult").html("이미 가입된 이메일입니다");
 									$("#email").val("");
-								}
-							});
+									$("#emailcheck").attr('disabled',true);
+									}
+								else{
+									$(".emailResult").html("");
+									$("#emailcheck").attr('disabled',false); 
+									$("#emailcheck").on("click", function(){
+										alert(" 해당 이메일에 인증 번호를 전송 중 입니다 \n 아래의 확인을 누르신 후 인증번호 확인 창을 확인해주세요");
+										$.ajax({
+											url : "email.do",
+											type : "post",
+											data : {email : $("#email").val()},
+											dataType : "json"
+											}).done(function(resp) {
+													console.log(resp);
+													if (resp == true) {	//메일 전송 성공													
+													window.open('emailcheck','window팝업','width=470, height=300, menubar=no, status=no, toolbar=no');
+													$("#emailcheck").attr('disabled',false);
+													}
+													else{
+														$("#email").val("");
+														alert("메일 전송을 실패했습니다");
+														$("#emailcheck").attr('disabled',false);
+													}
+												});
+									});
+									}								
+								});								
+							
 							}
 						});
 
@@ -648,9 +652,9 @@ b {
 		
 		
 	</script>
-	
+
 	<!--  이름-->
-<script>
+	<script>
 function maxLengthCheck(object){
     if (object.value.length > object.maxLength){
       object.value = object.value.slice(0, object.maxLength);
