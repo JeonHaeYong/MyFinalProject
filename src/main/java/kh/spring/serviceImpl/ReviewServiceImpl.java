@@ -115,13 +115,13 @@ public class ReviewServiceImpl implements ReviewService {
 
 		List<String> list = new ArrayList<>();
 		if(needPrev) {
-			list.add("<이전");
+			list.add("<");
 		}
 		for(int i =startNavi ; i<=endNavi; i++) {
 			list.add(i+"");
 		}
 		if(needNext) {
-			list.add("다음>");
+			list.add(">");
 		}
 		return list;
 	}
