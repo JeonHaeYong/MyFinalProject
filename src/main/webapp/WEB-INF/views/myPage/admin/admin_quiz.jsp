@@ -54,10 +54,12 @@
 	border-radius: 0px !important;
 	width: 100%;
 	height: 100%;
+	color:#754F44;
 }
 .menu_btns:hover{
 	background-color:#FDD692;
 	font-weight:bold !important;
+	color:#754F44;
 }
 
 
@@ -125,6 +127,10 @@ font-weight:bold;
 
 			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
 				<a href="admin-chart" class="btn menu_btns">통계</a>
+			</div>
+			
+			<div class="col-6 col-md-4 col-lg-2 text-center px-1">
+				<a href="admin-msg" class="btn menu_btns">관리자쪽지함</a>
 			</div>
 
 		</div>

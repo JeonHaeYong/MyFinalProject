@@ -146,6 +146,10 @@ public class ReviewServiceImpl implements ReviewService {
 	public int updateViewCount(int seq) {
 		return rdao.updateViewCount(seq);
 	}
+	@Override
+	public int deleteReviewService(String[] seq) {//관리자가 글삭제
+		return rdao.deleteReview(seq);
+	}
 
 	
 }

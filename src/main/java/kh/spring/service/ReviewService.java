@@ -9,6 +9,7 @@ public interface ReviewService {
 	public int insertReviewService(ReviewDTO dto);
 	public List<ReviewDTO> selectAllReviewByCurrentpage(String currentPage);
 	public int deleteReviewService(int seq);
+	public int deleteReviewService(String[] seq);
 	public List<ReviewDTO> selectReviewPerPageService(int start, int end);
 	public List<String> getNaviForReviewList(int currentPage);
 	public ReviewDTO selectReviewBySeq(int seq);

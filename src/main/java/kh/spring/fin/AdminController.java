@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kh.spring.dto.BlackListDTO;
+import kh.spring.dto.MessageDTO;
 import kh.spring.dto.QuizDTO;
 import kh.spring.service.BlackListService;
 import kh.spring.service.ChartService;
@@ -25,6 +26,7 @@ import kh.spring.service.DonationService;
 import kh.spring.service.ItemService;
 import kh.spring.service.LogService;
 import kh.spring.service.MemberService;
+import kh.spring.service.MessageService;
 import kh.spring.service.QuizService;
 
 @Controller
@@ -32,6 +34,8 @@ public class AdminController
 {
 	@Autowired
 	private QuizService qs;
+	@Autowired
+	private MessageService msgService;
 	@Autowired
 	private HttpSession session;
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
@@ -498,5 +502,34 @@ public class AdminController
 	@RequestMapping("inputData.admin")
 	public String inputData() {
 		return "animal/admin";
+	}
+	@RequestMapping("admin-msg")
+	public String admin_msg_loginCheck(HttpServletRequest request,String currentPage) {
+		int type = (int)session.getAttribute("type");
+		if(type!=4) {
+			request.setAttribute("errorMsg", "잘못된 접근입니다.error:a_m_error");
+			return "error";
+		}
+		if(currentPage==null) {
+			currentPage = "1";
+		}
+		int page = Integer.parseInt(currentPage);
+		String loginId = (String)session.getAttribute("id");
+		//페이지에 띄울 쪽지 리스트 담기.
+		//받은쪽지
+		List<MessageDTO> receivedList = msgService.selectAllMsgByCurrentPage("recipient",loginId, page);
+		request.setAttribute("receivedList", receivedList);
+		//보낸쪽지
+		List<MessageDTO> sentList = msgService.selectAllMsgByCurrentPage("sender",loginId, page);
+		request.setAttribute("sentList", sentList);
+
+		//페이지 navi담기.
+		//받은쪽지
+		List<String> receivedNavi = msgService.getNaviforMsg(page, "recipient", loginId);
+		request.setAttribute("receivedNavi", receivedNavi);
+		//보낸쪽지
+		List<String> sentNavi = msgService.getNaviforMsg(page, "sender", loginId);
+		request.setAttribute("sentNavi", sentNavi);
+		return "myPage/admin/admin_message";
 	}
 }

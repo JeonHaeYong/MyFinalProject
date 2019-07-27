@@ -86,6 +86,8 @@
                     	background-color: #754F44;
                     	font-weight: bold;
                     }
+                    .laon_btn_style{background-color:#FDD69270;color:#754F44; margin: 0px 2px; font-size: 1.1rem;cursor: pointer;}
+					.laon_btn_style:hover{background-color:#FDD692; font-weight:bold; color:#754F44;}
                 </style>
                 <jsp:include page="/WEB-INF/views/myPage/user/user_module/mypage_user_style.jsp" ></jsp:include><!-- user 마이페이지 스타일 -->
                 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
@@ -277,8 +279,8 @@
                 </div>
                 <div class="row">
                     <div class="col-12 text-center">
-                    	<button type="button" class="btn btn-outline-warning rounded" id="selectMsg_delete">선택 삭제하기</button>
-                        <button id="sendMsg_btn"type="button" class="btn btn-outline-warning rounded" data-toggle="modal" data-target="#msg_modal" data-whatever="@mdo">쪽지보내기</button>
+                    	<button type="button" class="btn laon_btn_style" id="selectMsg_delete">선택 삭제하기</button>
+                        <button id="sendMsg_btn"type="button" class="btn laon_btn_style" data-toggle="modal" data-target="#msg_modal" data-whatever="@mdo">쪽지보내기</button>
                     </div>
                     <div class="modal fade text-left" id="msg_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">

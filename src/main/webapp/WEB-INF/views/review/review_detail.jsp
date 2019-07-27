@@ -63,6 +63,7 @@
                     .laon_btn_style{
                     	background-color:#FDD69270;
                     	color:#754F44;
+                    	cursor: pointer;
                     }
                     .laon_btn_style:hover{
                     	background-color:#FDD692; 

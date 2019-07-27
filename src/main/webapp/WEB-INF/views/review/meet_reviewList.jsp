@@ -42,7 +42,7 @@
                     a[name="s-menu"]{color: #754F44; text-decoration-line: none;}
                     a[name="s-menu"]:hover{color: #754F44; text-decoration-line: none; font-weight:bold;}
                     /*~왼쪽 메뉴 */
-                    .write-btn{background-color: #EC7357; border: none; font-size: 20px; color:white; border-radius: 5px;}
+                    .write-btn{background-color: #EC7357; border: none; font-size: 20px; color:white; border-radius: 5px;cursor: pointer;}
                     .write-btn:hover{font-weight: bold; background-color: #f7613e;}
                     .review-wrapper{
                         max-width: 1300px;
@@ -76,6 +76,20 @@
                     .card_title:hover {
 						font-weight: 900;
 					}
+					/*checkbox*/
+					.custom-control-input:checked~.custom-control-label:before{
+                    	border-color: #EC7357 !important;
+                    }
+                    .custom-control-input:checked~.custom-control-label:after{
+                    	border-color: #EC7357 !important;
+                   		background-color: #EC7357 !important;
+                   		border-radius: 0.25rem;
+                    }
+                    .all-label:before,.all-label:after{
+                    	width: 22px !important;
+						height: 22px !important;
+						margin-top: 2px;
+                    }
                 </style>
             </head>
             <body data-spy="scroll" data-target=".site-navbar-target"
@@ -123,9 +137,15 @@
                             </c:if>
                             <c:if test="${reviewList.size()!=0 }">
                                 <div class="row">
-                                    <c:forEach var="list" items="${reviewList }">
+                                    <c:forEach var="list" items="${reviewList }" varStatus="status">
                                         <div class="col-6">
                                             <form action="toReviewDetail" method="post">
+                                            	<c:if test="${type==4 }">
+	                                            	<div class="custom-control custom-checkbox">
+	                                                    <input type="checkbox" class="custom-control-input review_check" id="review_${status.count }" value="${list.seq }">
+	                                                    <label class="custom-control-label" for="review_${status.count }"></label>
+	                                                </div>
+                                            	</c:if>
                                                 <input type="hidden" value="${list.seq }" name="seq">
                                                 <input type="hidden" value="${currentPage }" name="currentPage">
                                                 <div class="card mb-3" style="max-width: 540px;">
@@ -164,7 +184,21 @@
                             </div><!-- / 네비게이터-->
                             <form action="toWriteReview" method="post">
                                 <div class="row mb-3">
-                                    <div class="col-12 text-right"><input id="toWriteReview" type="submit" class="write-btn" value="글쓰기"></div>
+                                	<c:choose>
+                                		<c:when test="${type==4 }">
+                                			<div class="col-8 text-left">
+                                				<div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="allCheck">
+                                                    <label class="custom-control-label all-label" for="allCheck">전체글선택</label>
+                                                    <input type="button" id="deleteReviewList" class="write-btn mx-2 text-center" value="글삭제(관리자)">
+                                                </div>
+                                			</div>
+                                			<div class="col-4 text-right"><input id="toWriteReview" type="submit" class="write-btn" value="글쓰기"></div>
+                                		</c:when>
+                                		<c:otherwise>
+                                			<div class="col-12 text-right"><input id="toWriteReview" type="submit" class="write-btn" value="글쓰기"></div>
+                                		</c:otherwise>
+                                	</c:choose>
                                 </div>
                             </form>
                         </div>
@@ -207,6 +241,57 @@
                 }
                 $(".toWrite").on("click",function(){
                     $("#toWriteReview").trigger("click");
-                })
+                });
+                //checkbox function
+                function allChecked( all , part ) {
+                	if($(all).prop("checked")){
+                        $(part).prop("checked",true);
+                    }else{
+                        $(part).prop("checked",false);
+                    }
+				}
+                function partChecked( all , part ) {
+                    var length = $(part).length;
+                    var count = 0;
+                    $(part).each(function(i,item){
+                    	if(!($(item).prop("checked"))&&$(all).prop("checked")){
+                            $(all).prop("checked",false);
+                            return false;
+                        }                      
+                        if($(item).prop("checked")){
+                            count++;
+                        }
+                        if(length==count){
+                            $(all).prop("checked",true);
+                        }
+                    });
+				}
+                //받은쪽지함에서 Checkbox 전체버튼, 개별버튼 작동하게하기.
+                $("#allCheck").on("change",function(){
+					var all = $(this);
+					var check = $(".review_check");
+					allChecked(all,check);
+                });
+                $(document).on("change",".review_check",function(){
+					var all = $("#allCheck");
+					var check = $(".review_check");
+					partChecked(all,check);
+                });
+                $("#deleteReviewList").on("click",function(){
+                	var form = $("<form id='deleteReviewList_form' action='deleteReview' method='post'></form>");
+                	var countCheck = true;
+                	$(".review_check").each(function(i,item){
+                		if($(item).prop("checked")){
+                			form.append("<input type='hidden' name='reviewList' value='"+$(item).val()+"'>");
+                			countCheck = false;
+                		}
+                	});
+                	if(countCheck){
+                		alert("삭제할 글을 선택해주세요.");
+                		return false;
+                	}
+                	$(body).append(form);
+                	$("#deleteReviewList_form").submit();
+                });
             </script>
         </html>
