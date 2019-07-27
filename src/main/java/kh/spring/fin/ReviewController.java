@@ -7,9 +7,11 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileUploadBase.SizeLimitExceededException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
 
 import kh.spring.dto.ReviewCommentsDTO;
@@ -62,6 +64,9 @@ public class ReviewController {
 		String savePath = resourcePath+"/"+today;
 		System.out.println("파일저장할 위치 -> " + savePath);
 		File uploadPath = new File(savePath);
+		if(image.getSize()==0) {
+			System.out.println("파일 없음");
+		}
 		System.out.println(image.getName()+":"+image.getOriginalFilename());
 		if(!uploadPath.exists()) {	//해당하는 이름의 폴더가 없다면
 			uploadPath.mkdir();	//폴더를 만들어줘라. mkdir() : makeDirectory
