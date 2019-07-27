@@ -21,6 +21,7 @@
                 <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
                 <link rel="stylesheet" href="resources/css/aos.css">
                 <link rel="stylesheet" href="resources/css/style.css">
+                <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
                 <style>
                     *{ font-family: 'Gamja Flower' !important; font-size: 20px;}
                     ::placeholder{font-family: 'Gamja Flower'}
@@ -81,7 +82,7 @@
                                 <div class="col-7">
                                     <div class="d-flex justify-content-between"><span class="w-20">작성자 : ${reviewDTO.writer }</span><span>${reviewDTO.formed_date }</span></div>
                                     <div class="d-flex justify-content-between"><div class="w-80">제목 : ${reviewDTO.title }</div><div class="w-20">조회수 : ${reviewDTO.view_count }</div></div>
-                                    <div><span>${reviewDTO.contents }</span></div>
+                                    <div><span class="text-break">${reviewDTO.contents }</span></div>
                                 </div>
                             </div>
                             <div class="row">

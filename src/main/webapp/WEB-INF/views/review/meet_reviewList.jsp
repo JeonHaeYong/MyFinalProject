@@ -27,6 +27,7 @@
                     /*점보트론 이미지*/
                     .jumbotron{
                         background-color: white;
+                        padding-top: 5rem;
                     }
                     .jumbotron>img{
                         width: 100%;
@@ -158,6 +159,9 @@
             		}
             		$(param).prev().val(navi);
             		$(param).parent().submit();
+            	}
+            	if(${writeReview!=null}){
+            		alert("재회후기가 등록되었습니다.");
             	}
             </script>
         </html>

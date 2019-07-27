@@ -28,6 +28,12 @@ public class ReviewController {
 
 	@RequestMapping("toReviewList")
 	public String toReviewList(HttpServletRequest request , String currentPage) {
+//		String referer = request.getHeader("referer");
+//		referer = referer.replaceAll("^http://.+?/", "");
+//		System.out.println("refererrefererreferer-> "+referer);
+//		if(referer.equals("insertReview")) {
+//			request.setAttribute("writeReview", "success");
+//		}
 		if(currentPage==null) {
 			currentPage = "1";
 		}

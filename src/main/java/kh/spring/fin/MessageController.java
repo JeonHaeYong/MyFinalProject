@@ -48,7 +48,11 @@ public class MessageController {
 	@ResponseBody
 	@RequestMapping("updateReadOk")
 	public String updateReadOk(String seq) {
-		return msgService.updateReadOkToYes(seq)+"";
+		int result = msgService.updateReadOkToYes(seq);
+		if(result==1) {
+			session.setAttribute("msg", (int)session.getAttribute("msg")-1);
+		}
+		return result+"";
 	}
 
 	@RequestMapping("deleteMsg")

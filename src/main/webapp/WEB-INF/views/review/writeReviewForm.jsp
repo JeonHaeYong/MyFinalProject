@@ -27,6 +27,7 @@
                     /*점보트론 이미지*/
                     .jumbotron{
                         background-color: white;
+                        padding-top: 5rem;
                     }
                     .jumbotron>img{
                         width: 100%;
@@ -137,7 +138,7 @@
                         <div class="col-1"></div>
                         <div class="col-lg-9 col-md-8 col-sm-12 col-12">
                             <!-- 내용작성 -->
-                            <form action="insertReview" method="post" enctype="multipart/form-data">
+                            <form action="insertReview" method="post" enctype="multipart/form-data" onsubmit="return reviewWriteForm();">
                                 <input type="hidden" value="${id }" name="writer">
                                 <div class="form-group text-center">
                                     <h1>재회후기 작성하기</h1>	
@@ -147,7 +148,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">제목</span>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="제목을 입력하세요." aria-label="Username" aria-describedby="basic-addon1" name="title">
+                                        <input type="text" class="form-control title" placeholder="제목은 10글자 이상 , 30글자 이하" aria-label="Username" aria-describedby="basic-addon1" name="title">
                                     </div>	
                                 </div>
                                 <!-- 파일 업로드 -->
@@ -164,7 +165,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">내용</span>
                                         </div>
-                                        <textarea class="form-control" aria-label="With textarea" placeholder="내용을 입력하세요." rows="10" style="resize:none;" name="contents"></textarea>
+                                        <textarea class="form-control contents" aria-label="With textarea" placeholder="내용은 최소 50글자를 작성해주셔야합니다." rows="10" style="resize:none;" name="contents"></textarea>
                                     </div>
                                 </div>
                                 <div class="text-right"><input type="submit" value="글작성하기"></div>
@@ -230,5 +231,26 @@
                     }
                     changeName();
                 });
+                function reviewWriteForm(){
+                	var title = $(".title").val();
+                	var titleRegex = /^.{10,30}$/;
+                	var titleRegexResult = titleRegex.exec(title);
+                	if(titleRegexResult==null){
+                		alert("제목은 10글자 이상 , 30글자 이하로 작성해주세요.");
+                		$(".title").focus();
+                		return false;
+                	}
+                	var contents = $(".contents").val();
+                	var contentsRegex = /^.{50,}/;
+                	var contentsRegexResult = contentsRegex.exec(contents);
+                	if(contentsRegexResult==null){
+                		alert("내용은 최소 50글자를 작성해주셔야합니다.");
+                		$(".contents").focus();
+                		return false;
+                	}
+                	if(contents.length>800){
+                		$(".contents").val(contents.substr(0,800));
+                	}
+                }
             </script>
         </html>

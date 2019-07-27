@@ -69,9 +69,11 @@ public class MemberController {
 				return "member/loginfail";
 			}
 			else {
-				MemberDTO mdto=mservice.selectOneMemberService(dto.getId());					
+				MemberDTO mdto=mservice.selectOneMemberService(dto.getId());
+				int msg = msgService.selectMsgYetReadCount(dto.getId());//안읽은 메세지갯수
 				session.setAttribute("id", mdto.getId());
 				session.setAttribute("type", mdto.getType());
+				session.setAttribute("msg", msg);
 				if(referer.equals("join")) {
 					return "redirect:/";	
 				}
