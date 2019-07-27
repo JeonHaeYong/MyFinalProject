@@ -55,20 +55,27 @@
                         color: white;
                     }
                     .font_namsan{
-
+						font-family: 'SeoulNamsanM' !important;
                     }
                     .navi{
                         text-decoration: none;
                         background-color: #FDD69270;
                         color: #754F44;
-                        font-size:19px;
-                        font-family: 'Gamja Flower';
+                        font-size:20px;
                         padding:6px 12px;
+                        border-radius: 30px;
                     }
                     .navi:hover{
                         font-weight: bold;
                         background-color: #FDD692;
                     }
+                    .card_title{
+                    	color: #754F44;
+                    	font-size: 24px;
+                    }
+                    .card_title:hover {
+						font-weight: 900;
+					}
                 </style>
             </head>
             <body data-spy="scroll" data-target=".site-navbar-target"
@@ -89,11 +96,11 @@
                                 <div class="card-header noT_bgc">
                                     <h3 class="m-0">-재회후기-</h3>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body font_namsan">
                                     <blockquote class="blockquote">
                                         <p>라온펫을 통해 반려동물을 다시 만난 재회 후기입니다.<br>
-                                            다들 축하해주세요!!<br>
-                                            라온펫을통해 반려동물을 만났다면? -> <input type="button" class="write-btn toWrite" value="후기쓰러가기"></p>
+                                           	 다들 축하해주세요!!<br>
+                                            	라온펫을통해 반려동물을 만났다면? -> <input type="button" class="write-btn toWrite" value="후기쓰러가기"></p>
                                     </blockquote>
                                 </div>
                             </div>
@@ -131,7 +138,8 @@
                                                         <div class="col-md-8">
                                                             <div class="card-body">
                                                                 <h5 class="card-title d-flex justify-content-between">
-                                                                    <a class="text-decoration-none" href="javascript:void(0)" onclick="reviewListForm(this);">${list.title }</a><span class="badge badge-pill badge-danger">${list.comments} </span>
+                                                                    <a class="text-truncate text-decoration-none card_title w-80" href="javascript:void(0)" onclick="reviewListForm(this);">${list.title }</a>
+                                                                    <span class="w-20 badge badge-pill badge-danger">${list.comments} </span>
                                                                 </h5>
                                                                 <p class="card-text text-truncate">${list.contents }</p>
                                                                 <p class="card-text d-flex justify-content-between"><small class="text-muted">${list.formed_date }</small><small class="text-muted">조회수 : ${list.view_count }</small></p>
@@ -144,12 +152,12 @@
                                     </c:forEach> 
                                 </div>      
                             </c:if>
-                            <div class="row mx-3">
+                            <div class="row my-4">
                                 <div class="col-12 text-center">
                                     <c:forEach var="navi" items="${navi }">
-                                        <form class="my-1" action="toReviewList" method="post">
+                                        <form class="ml-1" action="toReviewList" method="post">
                                             <input type="hidden" value="${navi }" name="currentPage">
-                                            <a class="btn navi navi_click_a" href="javascript:void(0)" onclick="reviewNaviClick(this);">${navi }</a>
+                                            <a class="navi navi_click_a" href="javascript:void(0)" onclick="reviewNaviClick(this);">${navi }</a>
                                         </form>
                                     </c:forEach>
                                 </div>

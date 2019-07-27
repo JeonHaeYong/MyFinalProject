@@ -42,8 +42,6 @@ public class HomeController {
 	}
 	@RequestMapping("popUp.home")
 	public String popUp(HttpServletRequest request) {
-		String ip = request.getRemoteAddr();
-		request.setAttribute("ip", ip);
 		return "popup";
 	}
 

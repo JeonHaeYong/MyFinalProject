@@ -85,6 +85,7 @@ public class MemberController {
 					session.setAttribute("id", mdto.getId());
 					session.setAttribute("type", mdto.getType());
 					int msg = msgService.selectMsgYetReadCount(dto.getId());//안읽은 메세지갯수
+					System.out.println("안읽은메세지수->"+msg);
 					session.setAttribute("msg", msg);
 					if(referer.equals("join")) 
 					{
@@ -251,22 +252,16 @@ public class MemberController {
 		int rand = (int)(Math.random() * 16 + 1 );
 		dto.setimagepath("/profile/"+rand+".png");
 		try{
-			if(mservice.idDuplCheckService("N_"+id)>0)
+			if(mservice.idDuplCheckService("N_"+id)>0||mservice.insertNaverJoin(dto)>0)
 			{
 				session.setAttribute("id","N_"+id); //세션 생성
 				session.setAttribute("type",2); //세션 생성
+				int msg = msgService.selectMsgYetReadCount(dto.getId());//안읽은 메세지갯수
+				System.out.println("안읽은메세지수->"+msg);
+				session.setAttribute("msg", msg);
 				System.out.println("네이버 로그인 성공");
 				return "redirect:/";
 			}	
-			else {		
-				if(	mservice.insertNaverJoin(dto)>0) {
-					session.setAttribute("id","N_"+id); //세션 생성
-					session.setAttribute("type",2); //세션 생성
-					System.out.println("네이버 로그인 성공");
-					return "redirect:/";
-
-				}
-			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -314,29 +309,22 @@ public class MemberController {
 		} else {
 			nickname = properties.path("nickname").asText();
 		}
-
+		dto.setId("k_"+id);
+		dto.setName(nickname);
+		dto.setEmail(kaccount_email);
+		dto.setType(3);
+		int rand = (int)(Math.random() * 16 + 1 );
+		dto.setimagepath("/profile/"+rand+".png");//처음가입시 랜덤이미지
 		try{
-			if(mservice.idDuplCheckService("k_"+id)>0)
+			if(mservice.idDuplCheckService("k_"+id)>0 || mservice.insertNaverJoin(dto)>0)
 			{
 				session.setAttribute("id","k_"+id); //세션 생성
 				session.setAttribute("type",3); //세션 생성
 				System.out.println("카카오 로그인 성공");
+				int msg = msgService.selectMsgYetReadCount(dto.getId());//안읽은 메세지갯수
+				System.out.println("안읽은메세지수->"+msg);
+				session.setAttribute("msg", msg);
 				return "redirect:/";
-			}
-			else {
-				dto.setId("k_"+id);
-				dto.setName(nickname);
-				dto.setEmail(kaccount_email);
-				dto.setType(3);
-				int rand = (int)(Math.random() * 16 + 1 );
-				dto.setimagepath("/profile/"+rand+".png");//처음가입시 랜덤이미지
-
-				if(	mservice.insertNaverJoin(dto)>0) {
-					session.setAttribute("id","k_"+id); //세션 생성
-					session.setAttribute("type",3); //세션 생성
-					System.out.println("네이버 로그인 성공");
-					return "redirect:/";
-				}
 			}
 		}catch(Exception e){
 			e.printStackTrace();

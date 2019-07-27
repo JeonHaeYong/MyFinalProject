@@ -58,5 +58,8 @@ font-family:'Gamja Flower', cursive;
 .top_menu_container{
 	max-width: 1270px !important;
 }
+.badge-danger{
+	background-color : rgba(236, 115, 87, 0.95);
+}
 </style>
 <link href="https://fonts.googleapis.com/css?family=Gamja+Flower&display=swap&subset=korean" rel="stylesheet">

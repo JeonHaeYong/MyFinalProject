@@ -22,10 +22,6 @@
 <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
-
-
-
-
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
 
 <style>
@@ -38,7 +34,6 @@
 
 body {
 	min-width: 375px;
-	font-family: 'SeoulNamsanM';
 }
 
 .container {
@@ -320,7 +315,7 @@ label {
 								<input id="from" type="date" max="${todayStr }" name="from"
 									style="height: 30px;" required> ~ <input id="to"
 									type="date" max="${todayStr }" name="to" style="height: 30px;"
-									required>(날짜는 접수일 기준입니다.)
+									required><br>(날짜는 접수일 기준이고, 2019년 1월 1일부터 오늘까지의 자료를 조회하실 수 있습니다.)
 							</div>
 						</div>
 						<div class="row">
@@ -414,7 +409,7 @@ label {
 								<a href="detailAbandoned?seq=${dto.seq }"><img
 									src="${dto.popfile }" class="card-img-top" alt="..."
 									style="width: 211px; height: 150px; margin-bottom: 10px;"></a>
-								<div class="card-body">
+								<div class="card-body" style="font-family:SeoulNamsanM;">
 
 									<p class="card-text">
 										<label class="title"><strong>공고번호</strong> </label><label

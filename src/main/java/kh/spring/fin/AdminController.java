@@ -494,4 +494,9 @@ public class AdminController
 		}
 		return "redirect:/";
 	}
+	//동물병원, 동물보호소 데이터 삽입-----------------------------
+	@RequestMapping("inputData.admin")
+	public String inputData() {
+		return "animal/admin";
+	}
 }

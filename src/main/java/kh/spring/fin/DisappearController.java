@@ -69,10 +69,20 @@ public class DisappearController {
 		String writer = (String)session.getAttribute("id");
 		String ip = request.getRemoteAddr();
 		
-		
+			
 			List<String> imgPath = drs.imageUploadService(image);
-		
-			DisappearReportDTO drdto = new DisappearReportDTO(0, disDate, areaList, disappearArea, tel, kind, gender, neuter, age, furColor, feature, et, imgPath.get(0), imgPath.get(1), imgPath.get(2), writer, null, ip);
+			DisappearReportDTO drdto = null;
+			if(imgPath.size() == 1) {
+				drdto = new DisappearReportDTO(0, disDate, areaList, disappearArea, tel, kind, gender, neuter, age, furColor, feature, et, imgPath.get(0), "noImage", "noImage", writer, null, ip);
+
+			} else if(imgPath.size() ==2) {
+				drdto = new DisappearReportDTO(0, disDate, areaList, disappearArea, tel, kind, gender, neuter, age, furColor, feature, et, imgPath.get(0), imgPath.get(1), "noImage", writer, null, ip);
+
+			}else if(imgPath.size()==3) {
+				drdto = new DisappearReportDTO(0, disDate, areaList, disappearArea, tel, kind, gender, neuter, age, furColor, feature, et, imgPath.get(0), imgPath.get(1), imgPath.get(2), writer, null, ip);
+
+			}
+			
 			try {
 				drs.insert(drdto);
 			}catch(Exception e) {e.printStackTrace();}
