@@ -23,30 +23,10 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <!--  module-->
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
-<script>
-	$(function(){
-		$(".pageNum").each(function(index,items){
-			if($(this).text() == ${currentPage}){
-				$(this).css("color","#EC7357");
-				$(this).css("font-weight","bold");
-			}
-		});
-		$(".search-btn").on("click",function(){
-			var option = $("#search option:selected").val();
-			if(search == ""){
-				alert("지역을 선택해주세요.");
-			}
-			else{
-				location.href="searchToCenter?currentPage=1&&option="+option;
-			}
-		});
-		
-	});
-		
-</script>
+
 <style>
-	 .jumbotron{background-color:white;}
-     .jumbotron>img{width:100%; height: 700px; margin-bottom: 50px;}
+	 .jumbotron{background-color:white; padding-top:80px;}
+     .jumbotron>img{width:100%; height: 600px; margin-bottom: 50px;}
      .container{margin-bottom: 30px; color: #754F44;}
      .header{background-color: #EC7357; color: white; text-align: center; font-size: 25px; height: 40px; line-height: 40px; font-family:'Gamja Flower', cursive;}
      .header>div{padding: 0px;}
@@ -151,5 +131,26 @@
    <script src="resources/js/jquery.sticky.js"></script>
    <script src="resources/js/isotope.pkgd.min.js"></script>
    <script src="resources/js/main.js"></script>
+   <script>
+
+		$(".pageNum").each(function(index,items){
+			if($(this).text() == ${currentPage}){
+				$(this).css("color","#EC7357");
+				$(this).css("font-weight","bold");
+			}
+		});
+		$(".search-btn").on("click",function(){
+			var option = $("#search option:selected").val();
+			if(search == ""){
+				alert("지역을 선택해주세요.");
+			}
+			else{
+				location.href="searchToCenter?currentPage=1&&option="+option;
+			}
+		});
+		
+
+		
+</script>
 </body>
 </html>

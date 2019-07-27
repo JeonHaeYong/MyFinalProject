@@ -447,39 +447,51 @@ public class AdminController
 	//퀴즈 관리자 -------------------------------------------------------------------------------------------
 	@RequestMapping("quizAdmin.admin")
 	public String quizAdmin(HttpServletRequest request) {
-		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		session.setAttribute("currentPage", currentPage);
-		List<QuizDTO> quizList = new ArrayList<>();
-		String navi = null;
-		try {
-			quizList = qs.selectQuizPerPageService(currentPage);
-			navi = qs.getNaviQuizService(currentPage);
-		}catch(Exception e) {e.printStackTrace();}
-		request.setAttribute("quizList", quizList);
-		request.setAttribute("navi", navi);
-		return "sense/quiz/quizAdmin";
+		int type = (int)session.getAttribute("type");
+		if(type == 4) {
+			int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+			session.setAttribute("currentPage", currentPage);
+			List<QuizDTO> quizList = new ArrayList<>();
+			String navi = null;
+			try {
+				quizList = qs.selectQuizPerPageService(currentPage);
+				navi = qs.getNaviQuizService(currentPage);
+			}catch(Exception e) {e.printStackTrace();}
+			request.setAttribute("quizList", quizList);
+			request.setAttribute("navi", navi);
+			return "sense/quiz/quizAdmin";
+		}
+		return "redirect:/";
 	}
 	@RequestMapping("insertQuiz.admin")
 	public String insertQuiz(HttpServletRequest request) {
-		String quiz = request.getParameter("quiz");
-		String correct = request.getParameter("correct");
-		int point = Integer.parseInt(request.getParameter("point"));
-		String explain = request.getParameter("explain");
-		
-		QuizDTO qdto = new QuizDTO(0, quiz, correct, point, explain);
-		qs.insertQuizService(qdto);
-		return "redirect:/quizAdmin.admin?currentPage="+session.getAttribute("currentPage");
+		int type = (int)session.getAttribute("type");
+		if(type == 4) {
+			String quiz = request.getParameter("quiz");
+			String correct = request.getParameter("correct");
+			int point = Integer.parseInt(request.getParameter("point"));
+			String explain = request.getParameter("explain");
+			
+			QuizDTO qdto = new QuizDTO(0, quiz, correct, point, explain);
+			qs.insertQuizService(qdto);
+			return "redirect:/quizAdmin.admin?currentPage="+session.getAttribute("currentPage");
+		}		
+		return "redirect:/";
 	}
 	@RequestMapping("deleteQuiz.admin")
 	public String deleteQuiz(HttpServletRequest request) {
-		String[] num = request.getParameterValues("check");
-		int[] seq = new int[num.length];
-		for(int i = 0; i < num.length; i++) {
-			seq[i] = Integer.parseInt(num[i]);
-			try {
-				qs.deleteQuizService(seq[i]);
-			}catch(Exception e) {e.printStackTrace();}
+		int type = (int)session.getAttribute("type");
+		if(type == 4) {
+			String[] num = request.getParameterValues("check");
+			int[] seq = new int[num.length];
+			for(int i = 0; i < num.length; i++) {
+				seq[i] = Integer.parseInt(num[i]);
+				try {
+					qs.deleteQuizService(seq[i]);
+				}catch(Exception e) {e.printStackTrace();}
+			}
+			return "redirect:/quizAdmin.admin?currentPage=" + session.getAttribute("currentPage");
 		}
-		return "redirect:/quizAdmin.admin?currentPage=" + session.getAttribute("currentPage");
+		return "redirect:/";
 	}
 }
