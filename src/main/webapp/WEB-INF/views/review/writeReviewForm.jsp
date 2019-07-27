@@ -219,6 +219,8 @@
                     if (window.FileReader) { //html5 이상에서 window.FileReader지원한다. 지원하는 브라우저에 한해서
                         if (!$(this)[0].files[0].type.match(/image/)) {//image 파일만
                             alert('이미지 파일만 선택할 수 있습니다.');
+                            $(fileTarget).siblings('.upload-name').val("파일선택");
+                            $("#input-file").val("");
                             return;
                         }
                         var reader = new FileReader();
@@ -241,22 +243,40 @@
                 });
                 function reviewWriteForm(){
                 	var title = $(".title").val();
-                	var titleRegex = /^.{10,30}$/;
+                	var titleRegex = /^ +$/;
                 	var titleRegexResult = titleRegex.exec(title);
-                	if(titleRegexResult==null){
+                	if(titleRegexResult!=null){
+                		alert("제목을 작성해주세요.");
+                		$(".title").val("");
+                		$(".title").focus();
+                		return false;
+                	}else if(title.length<10||title.length>30){
                 		alert("제목은 10글자 이상 , 30글자 이하로 작성해주세요.");
+                		$(".title").val(title.substr(0,30));
                 		$(".title").focus();
                 		return false;
                 	}
                 	var contents = $(".contents").val();
-                	var contentsRegex = /^.{50,}/;
+                	var contentsRegex = /^ +$/;
                 	var contentsRegexResult = contentsRegex.exec(contents);
-                	if(contentsRegexResult==null){
-                		alert("내용은 최소 50글자를 작성해주셔야합니다.");
+                	if(contentsRegexResult!=null){
+                		alert("내용을 작성해주세요");
+                		$(".contents").val("");
+                		$(".contents").focus();
+                		return false;
+                	}else if(contents.length < 50){
+                		alert("내용은 50글자 이상 작성해주세요.");
+                		$(".contents").val(contents.substr(0,50));
                 		$(".contents").focus();
                 		return false;
                 	}
-                	if(contents.length>800){
+                	if($(fileTarget).siblings('.upload-name').val()=="파일선택"){
+                		if(!confirm("이미지파일 없이 글을 작성하시겠습니까?")){
+                				return false;
+                		}
+                		$("#input-file").val("");
+                	}
+                    if(contents.length>800){
                 		$(".contents").val(contents.substr(0,800));
                 	}
                 }

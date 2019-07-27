@@ -111,7 +111,7 @@ public class DonationPaymentServiceImpl implements DonationPaymentService {
 	}
 
 	@Override
-	public Object selectDonatedList(String page) throws Exception
+	public Object selectDonatedListByGroup(String page) throws Exception
 	{
 		HashMap<String, Integer> param = new HashMap<>();
 		
@@ -132,7 +132,7 @@ public class DonationPaymentServiceImpl implements DonationPaymentService {
 		param.put("start", start);
 		param.put("end", end);
 		
-		List<DonationPaymentDTO> list = dpdao.selectDonatedList(param);
+		List<DonationPaymentDTO> list = dpdao.selectDonatedListByGroup(param);
 		
 		JsonObject outerjo = new JsonObject();
 		JsonArray ja = new JsonArray();
@@ -148,6 +148,99 @@ public class DonationPaymentServiceImpl implements DonationPaymentService {
 			jo.addProperty("donation", donation);
 			jo.addProperty("name", name);
 			jo.addProperty("time", time);
+			ja.add(jo);
+		}
+		outerjo.add("array", ja);
+		
+		if( recordTotalCount % recordCountPerPage == 0)
+		{
+			pageTotalCount = recordTotalCount / recordCountPerPage;
+		}
+		else
+		{
+			pageTotalCount = recordTotalCount / recordCountPerPage + 1;
+		}
+
+		if(currentPage < 1)
+		{
+			currentPage = 1;
+		}
+		else if(currentPage > pageTotalCount)
+		{
+			currentPage = pageTotalCount;
+		}
+		
+		int startNavi = (currentPage - 1) / naviCountPerPage * naviCountPerPage + 1;
+		int endNavi = startNavi + naviCountPerPage - 1;
+		if(endNavi > pageTotalCount)
+		{
+			endNavi = pageTotalCount;
+		}
+		
+		if(startNavi == 1)
+		{
+			needPrev = false;
+		}
+		if(endNavi == pageTotalCount)
+		{
+			needNext = false;
+		}
+		
+		outerjo.addProperty("currentPage", currentPage);
+		outerjo.addProperty("needPrev", needPrev);
+		outerjo.addProperty("needNext", needNext);
+		outerjo.addProperty("startNavi", startNavi);
+		outerjo.addProperty("endNavi", endNavi);
+
+		
+		return new Gson().toJson(outerjo);
+	}
+
+	@Override
+	public Object selectDonatedListAll(String page) throws Exception
+	{
+		HashMap<String, Integer> param = new HashMap<>();
+		
+		if((page == null) || (page.equals("")))
+		{
+			page = "1";
+		}
+		
+		int currentPage = Integer.parseInt(page);
+		int recordTotalCount = dpdao.selectCountForList();
+		int pageTotalCount;
+		boolean needPrev = true;
+		boolean needNext = true;
+		
+		int start = currentPage * recordCountPerPage - recordCountPerPage + 1;
+		int end = currentPage * recordCountPerPage;
+		
+		param.put("start", start);
+		param.put("end", end);
+		
+		List<DonationPaymentDTO> list = dpdao.selectDonatedListAll(param);
+		
+		JsonObject outerjo = new JsonObject();
+		JsonArray ja = new JsonArray();
+		
+		for(int i = 1 ; i <= list.size() ; i++)
+		{
+			JsonObject jo = new JsonObject();
+			
+			int seq = list.get(i-1).getSeq();
+			String donator = list.get(i-1).getDonator();
+			int donation = list.get(i-1).getDonation();
+			String name = list.get(i-1).getDonation_name();
+			String time = list.get(i-1).getDonated_time();
+			String type = list.get(i-1).getDonate_type();
+			
+			jo.addProperty("seq", seq);
+			jo.addProperty("id", donator);
+			jo.addProperty("amount", donation);
+			jo.addProperty("target", name);
+			jo.addProperty("time", time);
+			jo.addProperty("type", type);
+			
 			ja.add(jo);
 		}
 		outerjo.add("array", ja);

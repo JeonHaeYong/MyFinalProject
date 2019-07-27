@@ -63,7 +63,15 @@
 				<p style="font-size: 60px;">ERROR</p>
 			</div>
 			<div class="col-12 d-flex justify-content-center">
-				<p>알수없는 문제가 발생하였습니다.<br>관리자에게 문의하세요.<br>laonpetAdmin@gmail.com</p>
+				<c:choose>
+					<c:when test="${errorMsg!=null }">
+						<p>${errorMsg }
+					</c:when>
+					<c:otherwise>
+						<p>알수없는 문제가 발생하였습니다.
+					</c:otherwise>
+				</c:choose>
+				<br>관리자에게 문의하세요.<br>laonpetAdmin@gmail.com</p>
 			</div>
 		</div>
 	</div>

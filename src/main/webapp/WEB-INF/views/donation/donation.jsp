@@ -77,154 +77,177 @@ body{
 	<section class="site-section block-13">
 
 	<div id="container" class="container">
-
-		<div class="row justify-content-center">
-
-			<div class="col-12 col-lg-12 my-5">
-				
-				<div class="row justify-content-center my-5">
-				
-					<div class="col-12 text-center">
-					
-						<h1>${dto.name}</h1>
-					
-					</div>
-					
-				</div>
+		<c:choose>
+		
+			<c:when test="${dto.name != null}">
 				
 				<div class="row justify-content-center">
 
-					<div class="col-8 text-center">
-
-
-						<div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
-							<div id="carousel-inner" class="carousel-inner">
-								
-								<c:if test="${dto.image1 != '없음'}">
-									<div class="carousel-item" data-interval="3000">
-										<img src="${dto.image1}" class="d-block w-100 c-img" alt="...">
+					<div class="col-12 col-lg-12 my-5">
+						
+						<div class="row justify-content-center my-5">
+						
+							<div class="col-12 text-center">
+							
+								<h1>${dto.name}</h1>
+							
+							</div>
+							
+						</div>
+						
+						<div class="row justify-content-center">
+		
+							<div class="col-8 text-center">
+		
+		
+								<div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+									<div id="carousel-inner" class="carousel-inner">
+										
+										<c:if test="${dto.image1 != '없음'}">
+											<div class="carousel-item" data-interval="3000">
+												<img src="${dto.image1}" class="d-block w-100 c-img" alt="...">
+											</div>
+										</c:if>
+										
+										<c:if test="${dto.image2 != '없음'}">
+											<div class="carousel-item" data-interval="3000">
+												<img src="${dto.image2}" class="d-block w-100 c-img" alt="...">
+											</div>
+										</c:if>
+										
+										<c:if test="${dto.image3 != '없음'}">
+											<div class="carousel-item" data-interval="3000">
+												<img src="${dto.image3}" class="d-block w-100 c-img" alt="...">
+											</div>
+										</c:if>
+										
+										<c:if test="${ ((dto.image1 == '없음') && (dto.image2 == '없음')) && (dto.image3 == '없음') }">
+											<div class="carousel-item" data-interval="3000">
+												<img src="resources/images/dog_1.jpg" class="d-block w-100 c-img" alt="...">
+											</div>
+										</c:if>
+										
 									</div>
+									<a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev"> 
+										<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span>
+									</a> 
+									<a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next"> 
+										<span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span>
+									</a>
+								</div>
+		
+							</div>
+		
+							<div class="col-4 text-center">
+								
+								<h2>${dto.title}</h2>
+								<br>${dto.explanation}
+		
+							</div>
+		
+						</div>
+		
+					</div>
+				
+					<div class="col-12 text-center my-5">
+		
+						<div class="row">
+						
+							<div class="col-12 col-lg-6 my-3 text-center">
+								
+								<c:if test="${dto.left != '없음'}">
+									<img src="${dto.left}" alt="사진이 없습니다." id="left_img" class="mx-5">
 								</c:if>
 								
-								<c:if test="${dto.image2 != '없음'}">
-									<div class="carousel-item" data-interval="3000">
-										<img src="${dto.image2}" class="d-block w-100 c-img" alt="...">
-									</div>
+								<c:if test="${dto.left == '없음'}">
+									<img src="resources/images/dog_1.jpg" alt="사진이 없습니다." id="left_img" class="mx-5">
+								</c:if>
+							
+							</div>
+							
+							<div class="col-12 col-lg-6 my-3 text-center">
+								
+								<c:if test="${dto.right != '없음'}">
+									<img src="${dto.right}" alt="사진이 없습니다." id="right_img" class="mx-5">
 								</c:if>
 								
-								<c:if test="${dto.image3 != '없음'}">
-									<div class="carousel-item" data-interval="3000">
-										<img src="${dto.image3}" class="d-block w-100 c-img" alt="...">
-									</div>
-								</c:if>
-								
-								<c:if test="${ ((dto.image1 == '없음') && (dto.image2 == '없음')) && (dto.image3 == '없음') }">
-									<div class="carousel-item" data-interval="3000">
-										<img src="resources/images/dog_1.jpg" class="d-block w-100 c-img" alt="...">
-									</div>
+								<c:if test="${dto.right == '없음'}">
+									<img src="resources/images/dog_1.jpg" alt="사진이 없습니다." id="right_img" class="mx-5">
 								</c:if>
 								
 							</div>
-							<a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev"> 
-								<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span>
-							</a> 
-							<a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next"> 
-								<span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span>
-							</a>
+						
 						</div>
-
-					</div>
-
-					<div class="col-4 text-center">
 						
-						<h2>${dto.title}</h2>
-						<br>${dto.explanation}
-
-					</div>
-
-				</div>
-
-			</div>
-		
-			<div class="col-12 text-center my-5">
-
-				<div class="row">
-				
-					<div class="col-12 col-lg-6 my-3 text-center">
+						<div class="row">
 						
-						<c:if test="${dto.left != '없음'}">
-							<img src="${dto.left}" alt="사진이 없습니다." id="left_img" class="mx-5">
-						</c:if>
-						
-						<c:if test="${dto.left == '없음'}">
-							<img src="resources/images/dog_1.jpg" alt="사진이 없습니다." id="left_img" class="mx-5">
-						</c:if>
-					
-					</div>
-					
-					<div class="col-12 col-lg-6 my-3 text-center">
-						
-						<c:if test="${dto.right != '없음'}">
-							<img src="${dto.right}" alt="사진이 없습니다." id="right_img" class="mx-5">
-						</c:if>
-						
-						<c:if test="${dto.right == '없음'}">
-							<img src="resources/images/dog_1.jpg" alt="사진이 없습니다." id="right_img" class="mx-5">
-						</c:if>
-						
-					</div>
-				
-				</div>
-				
-				<div class="row">
-				
-					<div class="col-12 text-center">
-					
-						<input id="donation_btn" class="btn my_buttons mt-5" type="button" value="후원">
-						
-					</div>
-				
-				</div>
-
-			</div>
-
-			
-			
-		</div>
-		
-		<div id="info_div" class="row justify-content-center">
-			
-			<div class="col-4 text-center">
-
-				<div>
-					
-					<img src="/resources/images/clock-64.png" alt="사진이 없습니다.">
-					<span id="last_time_span"></span>
-				
-				</div>
-
-			</div>
-
-			<div class="col-4 text-center">
-
-				<div>
-					
-					<img src="/resources/images/pie-chart-64.png" alt="사진이 없습니다.">
-					<span>${dto.currentmoney} / ${dto.goalmoney}</span>
-					
-				</div>
-					
-			</div>
-			
-			<div class="col-4 text-center px-0 my-auto progress">
-						
-				<div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-					
-				</div>
+							<div class="col-12 text-center">
 							
-			</div>
+								<input id="donation_btn" class="btn my_buttons mt-5" type="button" value="후원">
+								
+							</div>
+						
+						</div>
+		
+					</div>
+					
+				</div>
+				
+				
+				
+				
+				
+				<div id="info_div" class="row justify-content-center">
+					
+					<div class="col-4 text-center">
+		
+						<div>
+							
+							<img src="/resources/images/clock-64.png" alt="사진이 없습니다.">
+							<span id="last_time_span"></span>
+						
+						</div>
+		
+					</div>
+		
+					<div class="col-4 text-center">
+		
+						<div>
+							
+							<img src="/resources/images/pie-chart-64.png" alt="사진이 없습니다.">
+							<span>${dto.currentmoney} / ${dto.goalmoney}</span>
+							
+						</div>
+							
+					</div>
+					
+					<div class="col-4 text-center px-0 my-auto progress">
+								
+						<div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+							
+						</div>
+									
+					</div>
+					
+				</div>
+				
+			</c:when>
 			
-		</div>
+			<c:otherwise>
+				
+				<div class="row justify-content-center">
+
+					<div class="col-12 col-lg-12 my-5 text-center">
+						
+						<h1> 현재 진행중인 후원 업체가 없습니다</h1>	
+						
+					</div>
+					
+				</div>
+			
+			</c:otherwise>
+		
+		</c:choose>
 		
 		
 

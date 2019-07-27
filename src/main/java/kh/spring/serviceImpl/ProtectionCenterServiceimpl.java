@@ -46,5 +46,9 @@ public class ProtectionCenterServiceimpl implements ProtectionCenterService{
 	public void insertDataService(CenterDTO cdto) {
 		 pdao.insertData(cdto);
 	}
+	@Override
+	public void deleteCenterData() {
+		pdao.deleteCenterData();
+	}
 
 }

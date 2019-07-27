@@ -259,12 +259,28 @@ public class AdminController
 	}
 	@ResponseBody
 	@RequestMapping(value = "admin-donation-log", produces="application/json;charset=utf-8")
-	public Object selectDonatedList(String page)
+	public Object selectDonatedListByGroup(String page)
 	{
 		Object result = "error";
 		try
 		{
-			result = donationPaymentService.selectDonatedList(page);
+			result = donationPaymentService.selectDonatedListByGroup(page);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	@ResponseBody
+	@RequestMapping(value = "admin-donation-all", produces="application/json;charset=utf-8")
+	public Object selectDonatedListAll(String page)
+	{
+		Object result = "error";
+		try
+		{
+			result = donationPaymentService.selectDonatedListAll(page);
 		}
 		catch(Exception e)
 		{
