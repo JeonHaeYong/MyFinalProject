@@ -27,12 +27,12 @@
 
 <style>
 .jumbotron {
-	background-color: white;
+	background-color: white;	padding: 5rem;
 }
 
 .jumbotron>img {
 	width: 100%;
-	height: 700px;
+		max-height: 600px;
 }
 
 #title {

@@ -40,12 +40,12 @@
 
 <style>
 .jumbotron {
-	background-color: white;
+	background-color: white;	padding: 5rem;
 }
 
 .jumbotron>img {
 	width: 100%;
-	height: 700px;
+	height: 600px;
 }
 
 #title {
@@ -142,65 +142,6 @@ background-color:#FDD692;
 font-weight:bold;
 }
 </style>
-<!--  summernote script-->
-
-<script>
-//파일 업로드        
-function sendFile(files,editor){
-            var data = new FormData(document.getElementById("writeForm"));
-            data.append("files", files);
-             $.ajax({
-                data: data,
-                type: "post",
-                url: "fileajax",
-                cache: false,
-                contentType: false,
-                processData: false,
-                enctype:"multipart/form-data",
-            }).done(function(resp){
-            	
-    		          $(".note-editable").append("<img src='"+resp+"' >");  
-            })
-}
-      
-           
-    window.onload = function(){
-            //이전으로 버튼 
-                document.getElementById("tomainboard").onclick = function(){
-                    location.href = "toBoard";
-                }
-            //작성 완료 보튼 
-                document.getElementById("uploadwritebtn").onclick = function(){
-                //제목을 입력하지 않았을 경우     
-            	var inputtitle= $("#inputtitle");              
-                    if(inputtitle.val()==""){
-                        alert("제목을 입력해주세요.");
-                        inputtitle.focus();
-                        return;   }
-                    
-                    //summernote가 비어있을 경우 
-                    if ($('#summernote').summernote('isEmpty')) {
-                    alert('내용을 입력해주세요.');
-                    return;       }
-            
-				//summernote 작성이 완료된경우 
-            $('textarea[name="contents"]').val($('#summernote').summernote('code'));
-                    document.getElementById("uploadForm").submit();   
-    }
-            $('#summernote').summernote({
-                    placeholder: '내용을 입력해주세요.',
-                    tabsize:2,
-                    height: 500,
-                  callbacks : {
-                        onImageUpload: function(files, editor, welEditable) {
-                            sendFile(files[0],this);
-                         
-                        }
-                    } 
-                });
-    }   
-        </script>
-
 
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -302,6 +243,69 @@ function sendFile(files,editor){
 
 <script>
 $("#summernote").html($('textarea[name="contents"]').val());
+
+
+<!--  summernote script-->
+
+
+//파일 업로드        
+function sendFile(files,editor){
+            var data = new FormData(document.getElementById("writeForm"));
+            data.append("files", files);
+             $.ajax({
+                data: data,
+                type: "post",
+                url: "fileajax",
+                cache: false,
+                contentType: false,
+                processData: false,
+                enctype:"multipart/form-data",
+            }).done(function(resp){
+            	
+    		          $(".note-editable").append("<img src='"+resp+"' >");  
+            })
+}
+      
+           
+
+            //이전으로 버튼 
+                document.getElementById("tomainboard").onclick = function(){
+                    location.href = "toBoard";
+                }
+            //작성 완료 보튼 
+                document.getElementById("uploadwritebtn").onclick = function(){
+                //제목을 입력하지 않았을 경우     
+            	var inputtitle= $("#inputtitle");              
+                    if(inputtitle.val()==""){
+                        alert("제목을 입력해주세요.");
+                        inputtitle.focus();
+                        return;   }
+                    
+                    //summernote가 비어있을 경우 
+                    if ($('#summernote').summernote('isEmpty')) {
+                    alert('내용을 입력해주세요.');
+                    return;       }
+            
+				//summernote 작성이 완료된경우 
+            $('textarea[name="contents"]').val($('#summernote').summernote('code'));
+                    document.getElementById("uploadForm").submit();   
+    }
+            $('#summernote').summernote({
+                    placeholder: '내용을 입력해주세요.',
+                    tabsize:2,
+                    height: 500,
+                  callbacks : {
+                        onImageUpload: function(files, editor, welEditable) {
+                            sendFile(files[0],this);
+                         
+                        }
+                    } 
+                });
+       
+        
+
+
+
 </script>
 
 </body>

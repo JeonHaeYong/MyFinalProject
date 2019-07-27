@@ -99,14 +99,14 @@ public class InfoServiceImpl implements InfoService{
 
 		StringBuilder sb=new StringBuilder();
 		if(needPrev)
-		{sb.append("<button type='button' value="+(startNavi-1)+" class='t_navi'>"+"<이전"+" "+"</button>");
+		{sb.append("<button type='button' value="+(startNavi-1)+" class='t_navi btn'>"+"<이전"+" "+"</button>");
 		}
 		for(int i=startNavi;i<=endNavi;i++)
 		{
-			sb.append("<button type='button' value="+i+" class='t_navi'>"+i+" "+"</button>");
+			sb.append("<button type='button' value="+i+" class='t_navi btn'>"+i+" "+"</button>");
 		}
 		if(needNext)
-		{sb.append("<button type='button' value="+(endNavi+1)+" class='t_navi'>"+"다음>"+" "+"</button>");
+		{sb.append("<button type='button' value="+(endNavi+1)+" class='t_navi btn'>"+"다음>"+" "+"</button>");
 		}
 		return sb.toString();
 
@@ -153,14 +153,14 @@ public class InfoServiceImpl implements InfoService{
 
 		StringBuilder sb=new StringBuilder();
 		if(needPrev)
-		{sb.append("<button type='button' value="+(startNavi-1)+" class='infonavi'>"+"<이전"+" "+"</button>");
+		{sb.append("<button type='button' value="+(startNavi-1)+" class='infonavi btn'>"+"<이전"+" "+"</button>");
 		}
 		for(int i=startNavi;i<=endNavi;i++)
 		{
-			sb.append("<button type='button' value="+i+" class='infonavi'>"+i+" "+"</button>");
+			sb.append("<button type='button' value="+i+" class='infonavi btn'>"+i+" "+"</button>");
 		}
 		if(needNext)
-		{sb.append("<button type='button' value="+(endNavi+1)+" class='infonavi'>"+"다음>"+" "+"</button>");
+		{sb.append("<button type='button' value="+(endNavi+1)+" class='infonavi btn'>"+"다음>"+" "+"</button>");
 		}
 		return sb.toString();
 

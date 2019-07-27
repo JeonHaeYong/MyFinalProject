@@ -39,86 +39,16 @@
 
 <!--  로그인 style-->
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
-<script>
-		//파일 업로드        
-		function sendFile(files, editor) {
-			var data = new FormData(document.getElementById("writeForm"));
-			data.append("files", files);
-			$.ajax({
-				data : data,
-				type : "post",
-				url : "fileajax",
-				cache : false,
-				contentType : false,
-				processData : false,
-				enctype : "multipart/form-data",
-			}).done(
-					function(resp) {
 
-						$(".note-editable").append(
-								"<img src='" + resp
-										+ "' width='100%' height='100%'' >");
-					})
-		}
-
-		window.onload = function() {
-			//이전으로 버튼 
-			document.getElementById("tomainboard").onclick = function() {
-				location.href = "information_t?currentPage=1";
-			
-			}
-			//작성 완료 보튼 
-			document.getElementById("infowritebtn").onclick = function() {
-				
-				//제목을 입력하지 않았을 경우     
-				var inputtitle = $("#inputtitle");
-				if (inputtitle.val() == "") {
-					alert("제목을 입력해주세요.");
-					inputtitle.focus();
-					return					
-					}
-				
-				$("#type").attr("value",$("#inputGroupSelect01").val());
-						
-				if($("#inputGroupSelect01").val() =="카테고리") {
-					
-					alert("카테고리를 지정해주세요");
-					$("#inputGroupSelect01").focus();
-					return
-				}
-				//summernote가 비어있을 경우 
-			 if ($('#summernote').summernote('isEmpty')) {
-					alert('내용을 입력해주세요.');		return				
-				}
-				//summernote 작성이 완료된경우 
-				$('textarea[name="contents"]').val(
-						$('#summernote').summernote('code'));
-				
-				document.getElementById("writeForm").submit();
-				
-				}
-			$('#summernote').summernote({
-				placeholder : '내용을 입력해주세요.',
-				tabsize : 2,
-				height : 500,
-				callbacks : {
-					onImageUpload : function(files, editor, welEditable) {
-						sendFile(files[0], this);
-
-					}
-				}
-			});
-		}
-	</script>
 
 <style>
 .jumbotron {
-	background-color: white;
+	background-color: white;	padding: 5rem;
 }
 
 .jumbotron>img {
 	width: 100%;
-	height: 700px;
+	height: 600px;
 }
 
 #title {
@@ -336,7 +266,77 @@ a[name="s-menu"]:hover {
 
 	<!--  summernote script-->
 
+<script>
+		//파일 업로드        
+		function sendFile(files, editor) {
+			var data = new FormData(document.getElementById("writeForm"));
+			data.append("files", files);
+			$.ajax({
+				data : data,
+				type : "post",
+				url : "fileajax",
+				cache : false,
+				contentType : false,
+				processData : false,
+				enctype : "multipart/form-data",
+			}).done(
+					function(resp) {
 
+						$(".note-editable").append(
+								"<img src='" + resp
+										+ "' width='100%' height='100%'' >");
+					})
+		}
+
+	
+			//이전으로 버튼 
+			document.getElementById("tomainboard").onclick = function() {
+				location.href = "information_t?currentPage=1";
+			
+			}
+			//작성 완료 보튼 
+			document.getElementById("infowritebtn").onclick = function() {
+				
+				//제목을 입력하지 않았을 경우     
+				var inputtitle = $("#inputtitle");
+				if (inputtitle.val() == "") {
+					alert("제목을 입력해주세요.");
+					inputtitle.focus();
+					return					
+					}
+				
+				$("#type").attr("value",$("#inputGroupSelect01").val());
+						
+				if($("#inputGroupSelect01").val() =="카테고리") {
+					
+					alert("카테고리를 지정해주세요");
+					$("#inputGroupSelect01").focus();
+					return
+				}
+				//summernote가 비어있을 경우 
+			 if ($('#summernote').summernote('isEmpty')) {
+					alert('내용을 입력해주세요.');		return				
+				}
+				//summernote 작성이 완료된경우 
+				$('textarea[name="contents"]').val(
+						$('#summernote').summernote('code'));
+				
+				document.getElementById("writeForm").submit();
+				
+				}
+			$('#summernote').summernote({
+				placeholder : '내용을 입력해주세요.',
+				tabsize : 2,
+				height : 500,
+				callbacks : {
+					onImageUpload : function(files, editor, welEditable) {
+						sendFile(files[0], this);
+
+					}
+				}
+			});
+		
+	</script>
 
 </body>
 </html>

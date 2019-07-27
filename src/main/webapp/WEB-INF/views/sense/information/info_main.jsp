@@ -28,11 +28,12 @@
 <style>
 .jumbotron {
 	background-color: white;
+		padding: 5rem;
 }
 
 .jumbotron>img {
 	width: 100%;
-	height: 700px;
+		max-height: 600px;
 }
 
 #title {
@@ -101,6 +102,10 @@ a[name="s-menu"]:hover {
 	text-decoration-line: none;
 	font-weight: bold;
 }
+
+/* ----------------------카테고리 */
+#profile-tab,#home-tab{text-decoration:none;
+ color:black;}
 
 /* -------------------infobox -----------------   */
 .infowrapper {
