@@ -64,8 +64,18 @@
 												</c:otherwise>
 										</c:choose>
 									</li>
-									<li><a id="mypage_link" href="toMyPage"
-										class="nav-link pl-0 pr-0 ">마이페이지</a></li>
+									<li class="position-relative"><a id="mypage_link" href="toMyPage"
+										class="nav-link pl-0 pr-0">마이페이지
+											<span class="position-absolute" style="top:25px; right:10px;">
+												<img src="/mypage/msg.png" style="width: 30px;height: 30px;">
+											</span>
+											<span class="position-absolute badge badge-danger" style="top:15px; right:-40px; font-size: 13px;">
+												<!-- 메세지갯수 -->
+												<c:if test="${msg >=50 }">50+</c:if>
+												<c:if test="${msg < 50 }">${msg }</c:if>
+											</span>
+										</a>
+									</li>
 								</c:otherwise>
 							</c:choose>
 						</ul>

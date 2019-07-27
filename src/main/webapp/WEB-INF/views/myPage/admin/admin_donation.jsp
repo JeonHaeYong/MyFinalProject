@@ -4,6 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i" rel="stylesheet">
 <link rel="stylesheet" href="resources/fonts/icomoon/style.css">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
@@ -28,9 +29,17 @@
 	color: #EC7357 !important;
 	font-weight: 600 !important;
 }
+#container *
+{
+	font-family: 'SeoulNamsanM';
+}
 
 
 
+
+#menu_row > div > a{
+	font-size: 22px;
+}
 .selected_menu_btns {
 	font-family: 'Gamja Flower', cursive !important;
 	border-radius: 0px !important;
@@ -98,7 +107,7 @@ font-weight:bold;
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 
 
-	<section class="site-section bg-light block-13">
+	<section class="site-section block-13">
 
 		<div id="container" class="container">
 			
@@ -632,14 +641,18 @@ font-weight:bold;
 <script>
 	$(function()
     {
+		//페이지 로딩 후 검색 결과가 바로 보이게 실행
+		myAjax("1");
+		logAjax("1");
 		
+		//테스트용 시작
 		$("#name_text").val("후원 업체 명");
 		$("#title_text").val("제목입니다");
 		$("#explanation_text").val("설명 설명");
 		$("#goalmoney_text").val("1000000");
 		$("#startdate_text").val("2019-07-01");
 		$("#enddate_text").val("2019-07-30");
-		
+		//테스트용 끝
 		
 	    $("#submit_btn").on("click", function()
 		{

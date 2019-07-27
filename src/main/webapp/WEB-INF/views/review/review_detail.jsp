@@ -6,6 +6,7 @@
             <head>
                 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
                 <title>Insert title here</title>
+                <link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
                 <link
                       href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
                       rel="stylesheet">
@@ -81,7 +82,7 @@
                                 <div class="col-7">
                                     <div class="d-flex justify-content-between"><span class="w-20">작성자 : ${reviewDTO.writer }</span><span>${reviewDTO.formed_date }</span></div>
                                     <div class="d-flex justify-content-between"><div class="w-80">제목 : ${reviewDTO.title }</div><div class="w-20">조회수 : ${reviewDTO.view_count }</div></div>
-                                    <div><span>${reviewDTO.contents }</span></div>
+                                    <div><span class="text-break">${reviewDTO.contents }</span></div>
                                 </div>
                             </div>
                             <div class="row">
@@ -374,8 +375,8 @@
                     	if(pathRegexResult!=null){
                     		$(item).removeClass("rounded-circle");
                     	}
-                    })
-                }
+                    });
+                };
                 profileImgRounded();
             </script>
         </html>

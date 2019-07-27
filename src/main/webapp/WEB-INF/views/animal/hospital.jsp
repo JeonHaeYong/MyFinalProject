@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Hospital</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"rel="stylesheet">
 <link rel="stylesheet" href="resources/fonts/icomoon/style.css">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
@@ -21,30 +22,10 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <!--  module-->
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
-<script>
-	$(function(){
-		$(".pageNum").each(function(index,items){
-			if($(this).text() == ${currentPage}){
-				$(this).css("color","#EC7357");
-				$(this).css("font-weight","bold");
-			}
-		});
-		$(".search-btn").on("click",function(){
-			var option = $("#search option:selected").val();
-			
-			if(search == ""){
-				alert("지역을 선택해주세요.");
-			}
-			else{
-				location.href="searchToHospital?currentPage=1&&option="+option;
-			}
-		});
-	});
-		
-</script>
+
  <style>
- 	.jumbotron{background-color:white;}
-     .jumbotron>img{width:100%; height: 700px; }
+ 	.jumbotron{background-color:white; padding-top:80px;}
+     .jumbotron>img{width:100%; height:600px;}
      .container{margin-bottom: 30px; color: #754F44; }
      .header{background-color: #EC7357; color: white; text-align: center; font-size: 25px; height: 40px; line-height: 40px; font-family:'Gamja Flower', cursive;}
      .header>div{padding: 0px;}
@@ -143,5 +124,23 @@
    <script src="resources/js/jquery.sticky.js"></script>
    <script src="resources/js/isotope.pkgd.min.js"></script>
    <script src="resources/js/main.js"></script>
+   <script>
+		$(".pageNum").each(function(index,items){
+			if($(this).text() == ${currentPage}){
+				$(this).css("color","#EC7357");
+				$(this).css("font-weight","bold");
+			}
+		});
+		$(".search-btn").on("click",function(){
+			var option = $("#search option:selected").val();
+			
+			if(search == ""){
+				alert("지역을 선택해주세요.");
+			}
+			else{
+				location.href="searchToHospital?currentPage=1&&option="+option;
+			}
+		});
+</script>
 </body>
 </html>

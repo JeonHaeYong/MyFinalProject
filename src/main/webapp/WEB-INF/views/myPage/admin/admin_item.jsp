@@ -4,6 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i" rel="stylesheet">
 <link rel="stylesheet" href="resources/fonts/icomoon/style.css">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
@@ -27,9 +28,17 @@
 	color: #EC7357 !important;
 	font-weight: 600 !important;
 }
+#container *
+{
+	font-family: 'SeoulNamsanM';
+}
 
 
 
+
+#menu_row > div > a{
+	font-size: 22px;
+}
 .selected_menu_btns {
 	font-family: 'Gamja Flower', cursive !important;
 	border-radius: 0px !important;
@@ -82,7 +91,7 @@ font-weight:bold;
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 
 
-	<section class="site-section bg-light block-13">
+	<section class="site-section block-13">
 
 	<div id="container" class="container">
 
@@ -128,11 +137,16 @@ font-weight:bold;
 			<div class="col-12">
 
 				<div class="row justify-content-center mt-5">
-				
-					<div class="col-6 col-md-6 col-lg-2 text-center my-1"><h3>등록 번호</h3></div>
-					<div class="col-4 col-md-4 col-lg-3 text-center my-1"><h3>상품 명</h3></div>
-					<div class="col-4 col-md-4 col-lg-2 text-center my-1"><h3>상품 가격</h3></div>
-					<div class="col-4 col-md-4 col-lg-3 text-center my-1"><h3>판매자</h3></div>
+					
+<!-- 					<div class="col-6 col-md-6 col-lg-2 text-center my-1"><h3>등록 번호</h3></div> -->
+<!-- 					<div class="col-4 col-md-4 col-lg-3 text-center my-1"><h3>상품 명</h3></div> -->
+<!-- 					<div class="col-4 col-md-4 col-lg-2 text-center my-1"><h3>상품 가격</h3></div> -->
+<!-- 					<div class="col-4 col-md-4 col-lg-3 text-center my-1"><h3>판매자</h3></div> -->
+					
+					<div class="col-6 col-md-6 col-lg-2 text-center my-1"></div>
+					<div class="col-4 col-md-4 col-lg-3 text-center my-1"></div>
+					<div class="col-4 col-md-4 col-lg-2 text-center my-1"></div>
+					<div class="col-4 col-md-4 col-lg-3 text-center my-1"></div>
 					<div class="col-2 col-md-2 col-lg-2 text-center my-1">
 						<input id="permission_all_btn" type="checkbox">모두 체크
 					</div>
@@ -258,6 +272,14 @@ font-weight:bold;
 			myAjax(this.name);
 		})
 		
+		$(document).on("change", ".permission_check", function()
+		{
+			if($(this).prop("checked") == false)
+			{
+				$("#permission_all_btn").prop("checked", false);
+			}
+		})
+		
 		function myAjax(btnName)
 		{
 			$.ajax
@@ -280,13 +302,23 @@ font-weight:bold;
 	    		{
 		    		for(var i = 1 ; i <= array.length ; i++)
 		    		{
-						var $row = $('<div class="row justify-content-center my-1 id_row"></div>');
-		    			var $seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].seq+'</div>');
-		    			var $nameCol = $('<div class="col-4 col-md-4 col-lg-3 text-center my-1">'+array[i-1].name+'</div>');
-		    			var $priceCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].price+'</div>');
-		    			var $sellerCol = $('<div class="col-4 col-md-4 col-lg-3 text-center my-1">'+array[i-1].seller+'</div>');
-		    			var $checkCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-1"><input class="permission_check" name="'+array[i-1].seq+'" type="checkbox">'+'거래 승인'+'</div>');
-		    			$row.append($seqCol).append($nameCol).append($priceCol).append($sellerCol).append($checkCol);
+						var $row = $('<div class="row justify-content-center my-3 id_row"></div>');
+		    			var $seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-3"><h4>등록 번호</h4>'+array[i-1].seq+'</div>');
+		    			var $sellerCol = $('<div class="col-4 col-md-4 col-lg-3 text-center my-3"><h4>판매자</h4>'+array[i-1].seller+'</div>');
+		    			var $nameCol = $('<div class="col-4 col-md-4 col-lg-3 text-center my-3"><h4>상품명</h4>'+array[i-1].name+'</div>');
+		    			var $priceCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h4>가격</h4>'+array[i-1].price+'</div>');
+		    			var $checkCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-3"><input class="permission_check" name="'+array[i-1].seq+'" type="checkbox">'+'거래 승인'+'</div>');
+		    			
+		    			var $image1Col = $('<div class="col-4 col-md-4 col-lg-4 text-center my-3"><h4>이미지1</h4>'+array[i-1].imagePath1+'</div>');
+		    			var $image2Col = $('<div class="col-4 col-md-4 col-lg-4 text-center my-3"><h4>이미지2</h4>'+array[i-1].imagePath2+'</div>');
+		    			var $image3Col = $('<div class="col-4 col-md-4 col-lg-4 text-center my-3"><h4>이미지3</h4>'+array[i-1].imagePath3+'</div>');
+		    			var $contentsCol = $('<div class="col-4 col-md-4 col-lg-12 text-center my-3"></div>');
+		    			$contentsCol.text(array[i-1].contents);
+		    			$contentsCol.prepend($("<h4>설명</h4>"));
+		    			
+		    			$row.append($seqCol).append($sellerCol).append($nameCol).append($priceCol).append($checkCol)
+		    			.append($image1Col).append($image2Col).append($image3Col)
+		    			.append($contentsCol);
 		    			$("#search_result_div").append($row);
 		    		}
 		    		

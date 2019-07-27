@@ -6,6 +6,7 @@
             <head>
                 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
                 <title>재회 후기</title>
+                <link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
                 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
                       rel="stylesheet">
                 <link rel="stylesheet" href="resources/fonts/icomoon/style.css">
@@ -26,6 +27,7 @@
                     /*점보트론 이미지*/
                     .jumbotron{
                         background-color: white;
+                        padding-top: 5rem;
                     }
                     .jumbotron>img{
                         width: 100%;
@@ -157,6 +159,9 @@
             		}
             		$(param).prev().val(navi);
             		$(param).parent().submit();
+            	}
+            	if(${writeReview!=null}){
+            		alert("재회후기가 등록되었습니다.");
             	}
             </script>
         </html>

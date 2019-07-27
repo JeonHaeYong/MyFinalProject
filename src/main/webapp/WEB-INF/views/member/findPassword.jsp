@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Find Password</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"rel="stylesheet">
 <link rel="stylesheet" href="resources/fonts/icomoon/style.css">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
@@ -17,7 +18,7 @@
 <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
 <style>
 			.jumbotron {
@@ -86,47 +87,7 @@ font-family: 'Gamja Flower', cursive;
               .compl-btn:hover{font-weight: bold; background-color: #f7613e;}
              
 </style>
-<script>
-	$(function(){
-		$(".email").on("focusout",function(){
-			var email = $(this).val();
-			var regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-			var result = regex.exec(email);
-			if(result == null){
-				$(".e-span").text("올바른 형식의 이메일을 입력해주세요.");
-			}else{$(this).attr("regexFlag","true");}
-		});
-		$(".compl-btn").on("click",function(){
-			if($(".email").val() !="" && $(".id").val() !="" && $(".email").attr("regexFlag")=="true"){
-				var email = $(".email").val();
-				var id = $(".id").val();
-				
-				$.ajax({
-					url:"findPwProc",
-					type:"post",
-					data:{'email':email,'id':id}
-				}).done(function(resp){
-					if(resp == "1"){
-						alert("이메일로 임시 비밀번호가 발송되었습니다.");
-						$(".result").html("입력하신 이메일로 임시 비밀번호가 발송되었습니다.<br>로그인후, 비밀번호를 꼭!! 변경해주세요.");
-					}else if(resp =="0"){
-						alert("아이디가 존재하지 않습니다.");
-						}else if(resp == "2"){
-							alert("이메일 발송에 실패하였습니다.");
-						}
-				})
-				
-			}else if($(".email").val()=="" && $(".id").val()==""){
-				alert("아이디와 이메일을 입력해주세요.");
-				
-			}else if($(".email").attr("regexFlag")=="false"){
-				alert("올바른 형식의 이메일을 입력해주세요.");
-				
-			}
-		});
-	});
 
-</script>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
    <jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
@@ -160,7 +121,7 @@ font-family: 'Gamja Flower', cursive;
               	<div class="col-12 input-email">
               		<input type="text" name="email" class="email" regexFlag="false">
               	</div>
-              	<div class="col-12 btn-box"><input type="button" value="확인" class="btn"></div>
+              	<div class="col-12 btn-box"><input type="button" value="확인" class="compl-btn btn"></div>
               	<div class="col-12"><span class="e-span"></span></div>
               </div>
               </form>
@@ -173,6 +134,8 @@ font-family: 'Gamja Flower', cursive;
     </div>
 <!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
    <jsp:include page="/WEB-INF/views/module/footer.jsp" ></jsp:include>
+ 
+ <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
    <script src="resources/js/jquery-ui.js"></script>
    <script src="resources/js/popper.min.js"></script>
    <script src="resources/js/bootstrap.min.js"></script>
@@ -184,5 +147,47 @@ font-family: 'Gamja Flower', cursive;
    <script src="resources/js/jquery.sticky.js"></script>
    <script src="resources/js/isotope.pkgd.min.js"></script>
    <script src="resources/js/main.js"></script>
+   <script>
+
+		$(".email").on("focusout",function(){
+			var email = $(this).val();
+			var regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+			var result = regex.exec(email);
+			if(result == null){
+				$(".e-span").text("올바른 형식의 이메일을 입력해주세요.");
+			}else{$(this).attr("regexFlag","true");}
+		});
+		$(".compl-btn").on("click",function(){
+			if($(".email").val() !="" && $(".id").val() !="" && $(".email").attr("regexFlag")=="true"){
+				var email = $(".email").val();
+				var id = $(".id").val();
+				
+				$.ajax({
+					url:"findPwProc.do",
+					type:"post",
+					data:{email:email,id:id}
+				}).done(function(resp){
+					console.log(resp);
+					if(resp =="1"){
+						alert("이메일로 임시 비밀번호가 발송되었습니다.");
+						$(".result").html("입력하신 이메일로 임시 비밀번호가 발송되었습니다.<br>로그인후, 비밀번호를 꼭!! 변경해주세요.");
+					}else if(resp =="0"){
+						
+						alert("아이디가 존재하지 않습니다.");
+						}else if(resp == "2"){
+							alert("이메일 발송에 실패하였습니다.");
+						}
+				});
+				
+			}else if($(".email").val()=="" && $(".id").val()==""){
+				alert("아이디와 이메일을 입력해주세요.");
+				
+			}else if($(".email").attr("regexFlag")=="false"){
+				alert("올바른 형식의 이메일을 입력해주세요.");
+				
+			}
+		});
+	
+</script>
 </body>
 </html>

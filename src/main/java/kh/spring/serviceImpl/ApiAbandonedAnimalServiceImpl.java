@@ -92,8 +92,64 @@ public class ApiAbandonedAnimalServiceImpl implements ApiAbandonedAnimalService{
 		return list;
 	}
 
-	public Map<String, Integer> getNaviforApiAbandonedAnimal(int currentPage) {
-		Map<String, Integer> pageNavi = dao.getNaviForApiAbandonedAnimal(currentPage);
+	public Map<String, Integer> getNaviTotal(int currentPage) {
+		Map<String, Integer> pageNavi = dao.getNaviTotal(currentPage);
+		return pageNavi;
+	}
+	
+	public Map<String, Integer> getNaviCondition(int currentPage, String from, String to, String species, String speciesKind, String sido, String sigungu, String shelter,String processState) {
+		
+		if(shelter == null || shelter.equals("")) {
+			shelter = "%";
+		}
+		if(species == null || species.equals("")) {
+			species = "%";
+		}
+		if(speciesKind == null || speciesKind.equals("")) {
+			speciesKind = "%";
+		}
+		if(sido == null || sido.equals("")) {
+			sido = "%";
+		}
+		if(sigungu == null || sigungu.equals("")) {
+			sigungu = "%";
+		}
+		if(processState.equals("전체")) {
+			processState = "%";
+		}
+	
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date dateFrom = null;
+		Date dateTo = null;
+		try {
+			dateFrom = (Date) transFormat.parse(from);
+			dateTo = (Date) transFormat.parse(to);
+		} catch (ParseException e) {
+			
+			e.printStackTrace();
+		}
+		
+		int recordCountPerPage = 12;
+		int endNum = currentPage *recordCountPerPage;
+		int startNum = endNum - (recordCountPerPage-1);
+
+		
+//		List<ApiAbandonedAnimalDTO> list = dao.selectByCondition(currentPage,
+//				startNum, endNum, dateFrom, dateTo, species, speciesKind, sido, sigungu, shelter, processState);
+//		
+//		for(ApiAbandonedAnimalDTO dto : list) {
+//			
+//			if(dto.getSexCd().replace(" ", "").equals("M")) {
+//				dto.setSexCd("수컷");
+//			}else if(dto.getSexCd().replace(" ", "").equals("F")) {
+//				dto.setSexCd("암컷");
+//			}else {
+//				dto.setSexCd("미상");
+//			}
+//		
+				
+		Map<String, Integer> pageNavi = dao.getNaviCondition(currentPage, dateFrom,
+				dateTo, species, speciesKind, sido, sigungu, shelter, processState);
 		return pageNavi;
 	}
 

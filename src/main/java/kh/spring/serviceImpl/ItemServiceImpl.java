@@ -6,11 +6,13 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import kh.spring.dao.CartDAO;
 import kh.spring.dao.ItemDAO;
 import kh.spring.dto.ItemDTO;
 import kh.spring.service.ItemService;
@@ -19,6 +21,8 @@ import kh.spring.service.ItemService;
 public class ItemServiceImpl implements ItemService{
 	@Autowired
 	private ItemDAO itemDao;
+	@Autowired
+	private CartDAO cdao;
 	
 	@Override
 	public int uploadItem(ItemDTO dto) {
@@ -47,8 +51,10 @@ public class ItemServiceImpl implements ItemService{
 	}
 
 	@Override
-	public int deleteItem(ItemDTO dto) {
-		return itemDao.deleteItem(dto);
+	@Transactional("txManager")
+	public int deleteItem(String[] seqs) {
+		cdao.deleteCartByItemSeq(seqs);
+		return itemDao.deleteItem(seqs);
 	}
 
 	@Override
@@ -181,13 +187,21 @@ public class ItemServiceImpl implements ItemService{
 			
 			int seq = list.get(i-1).getSeq();
 			String name = list.get(i-1).getName();
+			String contents = list.get(i-1).getContents();
 			String price = list.get(i-1).getPrice();
 			String seller = list.get(i-1).getSeller();
+			String imagePath1 = list.get(i-1).getImagePath1();
+			String imagePath2 = list.get(i-1).getImagePath2();
+			String imagePath3 = list.get(i-1).getImagePath3();
 			
 			jo.addProperty("seq", seq);
 			jo.addProperty("name", name);
+			jo.addProperty("contents", contents);
 			jo.addProperty("price", price);
 			jo.addProperty("seller", seller);
+			jo.addProperty("imagePath1", imagePath1);
+			jo.addProperty("imagePath2", imagePath2);
+			jo.addProperty("imagePath3", imagePath3);
 			ja.add(jo);
 		}
 		outerjo.add("array", ja);

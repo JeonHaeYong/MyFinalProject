@@ -41,15 +41,14 @@ public class DisappearController {
 		return "disappear/disappearList";
 	}
 	@RequestMapping("toReportForm")
-	public String toReportForm(HttpServletRequest request) {
+	public String toReportForm_loginCheck(HttpServletRequest request) {
 		String todayDate = new SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date());
 		request.setAttribute("todayDate", todayDate);
 		return "disappear/reportForm";
 	}
 
 	@RequestMapping("insertProc.dis")
-	public String insertProc(HttpServletRequest request, MultipartFile[] image) {
-		System.out.println("개수:"+image[0].getSize() + ":" + image[1].getSize());
+	public String insertProc_loginCheck(HttpServletRequest request, MultipartFile[] image) {
 		String disappearDate = request.getParameter("disappearDate");
 		java.sql.Date disDate = null;
 		try {
@@ -92,7 +91,7 @@ public class DisappearController {
 		return "disappear/ReportContents";
 	}
 	@RequestMapping("toAlterForm")
-	public String toAlterForm(HttpServletRequest request) {
+	public String toAlterForm_loginCheck(HttpServletRequest request) {
 		int seq = Integer.parseInt(request.getParameter("seq"));
 		String todayDate = new SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date());
 		DisappearReportDTO content = null;
@@ -104,7 +103,7 @@ public class DisappearController {
 		return "disappear/alterForm";
 	}
 	@RequestMapping("alterProc.dis")
-	public String alterProc(HttpServletRequest request, MultipartFile[] image) {
+	public String alterProc_loginCheck(HttpServletRequest request, MultipartFile[] image) {
 		int seq = Integer.parseInt(request.getParameter("seq"));
 		System.out.println("글번호"+seq);
 		
@@ -138,7 +137,7 @@ public class DisappearController {
 		return "redirect:/toReportContent?seq="+seq;
 	}
 	@RequestMapping("deleteProc.dis")
-	public String deleteProc(HttpServletRequest request) {
+	public String deleteProc_loginCheck(HttpServletRequest request) {
 		int seq = Integer.parseInt(request.getParameter("seq"));
 		try {
 			drs.deleteService(seq);

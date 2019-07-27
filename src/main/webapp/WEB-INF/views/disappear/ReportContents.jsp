@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Report Contents</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i" rel="stylesheet">
 <link rel="stylesheet" href="resources/fonts/icomoon/style.css">
@@ -51,28 +52,9 @@
         #footer>div{text-align:right;}
         .btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44;}
 		.btn:hover{background-color:#FDD692; font-weight:bold;}
+		/* 댓글 ------------------------------------------- */
+		.comment{max-width: 1200px;}
     </style>
-    <script>
-    	$(function(){
-    		$(".toList-btn").on("click",function(){
-    			location.href="toDisappearList?currentPage=${currentPage}";
-    		});
-    		$(".alter-btn").on("click",function(){
-    			location.href="toAlterForm?seq=${content.seq}";
-    		});
-    		$(".delete-btn").on("click",function(){
-    			var result = confirm("정말로 삭제하시겠습니까?");
-            	if(result == true){
-    			location.href="deleteProc.dis?seq=${content.seq}";
-            	}
-    		});
-    		$(".carousel-item>img").each(function(index,items){
-    			if($(this).attr("src")=='null'){
-    				var parent = $(this).parent().remove();
-    			}
-    		});
-    	});
-    </script>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="300" id="home-section">
@@ -165,7 +147,80 @@
         		<input type="button" class="toList-btn btn" value="목록">
         	</div>
         </div>
-	
+	<!-- 댓글 입력 -->
+	<div class="container comment">
+	<div class="row">
+		<div class="col-12">
+			<div class="input-group my-3">
+				<input type="text" class="form-control" placeholder="댓글달기!"
+					aria-describedby="review_reply_btn" id="review_reply_input">
+				<div class="input-group-append">
+					<button class="btn btn-outline-secondary rounded py-0"
+						type="button" id="review_reply_btn">댓글등록</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	<div class="row reply_part">
+		<!-- 댓글 목록 보여주기 -->
+		<c:forEach var="list" items="${replyList }">
+			<div class="col-12 border-bottom mb-1">
+				<div class="firstLine d-flex justify-content-between">
+					<div class="font-weight-bold">
+						<span class="mr-2"><img src="${list.imagepath }"
+							class="profileImg_round rounded-circle"
+							style="width: 50px; height: 50px;"></span>${list.writer }</div>
+					<c:if test="${id==list.writer }">
+						<div class="modifyReply_part">
+							<a href="javascript:void(0)" onclick="modifyReplyToggle(this)"><img
+								src="review/edit.png" style="width: 20px; height: 20px;"></a>
+							<a href="javascript:void(0)" onclick="deleteReply(this)"
+								value="${list.seq }"><img src="review/cancel.png"
+								style="width: 20px; height: 20px;"></a>
+						</div>
+						<div class="modifyReply_part hide">
+							<a role="btn" class="btn btn-outline-warning rounded p-1"
+								href="javascript:void(0)" onclick="modifyReply(this);"
+								value="${list.seq }">완료</a> <a role="btn"
+								class="btn btn-outline-warning rounded p-1"
+								href="javascript:void(0)" onclick="formReset(this)"
+								value="${list.contents }">취소</a>
+						</div>
+					</c:if>
+				</div>
+				<div>
+					<span>${list.formed_date }</span>
+				</div>
+				<div class="d-flex justify-content-between">
+					<span><input type="text" readonly
+						class="form-control-plaintext reply_contents"
+						value="${list.contents }" style="width: 600px;"></span> <span
+						class="likeOk_check" value="${list.likeOk}" seq="${list.seq }"
+						writer="${list.writer }"> <span class="mr-2 reply_likes">${list.likes }</span>
+						<a class="click_like_btn likeOk_n" href="javascript:void(0)"
+						onclick="clickLikeImg(this);"><img src="review/like_1.png"
+							style="width: 25px;"></a> <a class="click_like_btn likeOk_y"
+						href="javascript:void(0)" onclick="clickLikeImg(this);"><img
+							src="review/like_2.png" style="width: 25px;"></a>
+					</span>
+				</div>
+			</div>
+		</c:forEach>
+	</div>
+	<div class="row reply_part">
+		<c:if test="${reply_navi.size()!=0 }">
+			<div class="col-12">
+				<ul class="pagination justify-content-center">
+					<c:forEach var="navi" items="${reply_navi }">
+						<li class="page-item reply_item" value="${navi }"><a
+							class="page-link text-decoration-none reply_navi" href="#toList"
+							onclick="clickReplyNavi(this);">${navi }</a></li>
+					</c:forEach>
+				</ul>
+			</div>
+		</c:if>
+	</div>
 	<!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
 	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 	<script src="resources/js/jquery-ui.js"></script>
@@ -179,5 +234,153 @@
 	<script src="resources/js/jquery.sticky.js"></script>
 	<script src="resources/js/isotope.pkgd.min.js"></script>
 	<script src="resources/js/main.js"></script>
+	<script>
+		$(".toList-btn").on("click",function(){//홈으로
+			location.href="toDisappearList?currentPage=${currentPage}";
+		});
+		$(".alter-btn").on("click",function(){
+			location.href="toAlterForm?seq=${content.seq}";
+		});
+		$(".delete-btn").on("click",function(){
+			var result = confirm("정말로 삭제하시겠습니까?");
+        	if(result == true){
+			location.href="deleteProc.dis?seq=${content.seq}";
+        	}
+		});
+		$(".carousel-item>img").each(function(index,items){ // 캐러셀 밑에 있는 사진들
+			if($(this).attr("src")=='null'){//소스값이 null이라
+				var parent = $(this).parent().remove();//carousel-item을 지워
+			}
+		});
+
+
+	  $("#review_reply_btn").on("click",function(){//댓글등록
+          if(${id==null}){//아직 로그인을 하지 않았다면,
+              alert("로그인을 먼저 해주세요.");
+              $(".login-btn").trigger("click");
+              return;
+          }
+          var reply = $("#review_reply_input").val();
+          if(reply==""){
+              alert("댓글을 입력해주세요.");
+              $("#review_reply_input").focus();
+              return;
+          }
+          //ajax로 table에 insert하기.
+          $.ajax({
+              url : "insertDisappearComment.dis",
+              type : "post",
+              data : {
+                  review_seq : "${reviewDTO.seq}",
+                  writer : "${id}",
+                  contents : reply
+              }
+          }).done(function(resp){
+              //console.log("댓글달기성공->"+resp);
+              $(".reply_part").remove();
+              $(".reply_wrapper").append(resp);
+            /*   likeOkCheck();//좋아요 클릭한것만 빨강하트 */
+              $("#review_reply_input").val("");
+              $(".modifyReply_part.hide").hide();
+              profileImgRounded();
+          })
+      });
+	  function clickReplyNavi(param){//댓글 navi 클릭했을때,
+          var currentPage = $(param).text();
+          if(currentPage=="<이전"){
+              var prev =  $(param).parent().next().attr("value");
+              currentPage = parseInt(prev) - 1 ;
+          }else if(currentPage=="다음>"){
+              var next  = $(param).parent().prev().attr("value");
+              currentPage = parseInt(next) + 1 ;
+          }
+          $.ajax({
+              url : "clickReplyNavi.dis",
+              type : "post",
+              data : {
+                  seqStr : "${reviewDTO.seq}",
+                  currentPageStr : currentPage
+              }
+          }).done(function(resp){
+              $(".reply_part").remove();
+              $(".reply_wrapper").append(resp);
+              likeOkCheck();//좋아요 클릭한것만 빨강하트
+              profileImgRounded();
+          })
+      }
+	  $(".modifyReply_part.hide").hide();
+      function modifyReplyToggle(param){//수정하려면,
+          $(param).parent().toggle();
+          $(param).parent().next().toggle();
+          $(param).parents(".firstLine").next().next().find(".reply_contents").attr("readonly",false);
+          $(param).parents(".firstLine").next().next().find(".reply_contents").css("background-color","skyblue");
+      }
+      function formReset(param){//수정취소눌렀을때,
+          var contents = $(param).attr("value");
+          $(param).parents(".firstLine").next().next().find(".reply_contents").val(contents);
+          $(param).parent().toggle();
+          $(param).parent().prev().toggle();
+          $(param).parents(".firstLine").next().next().find(".reply_contents").attr("readonly",true);
+          $(param).parents(".firstLine").next().next().find(".reply_contents").css("background-color","inherit");
+      }
+      function modifyReply(param){//댓글수정
+          var input = $(param).parents(".firstLine").next().next().find(".reply_contents");
+          var reply =  input.val();
+          var replyRegex = /^ {1,}$/;
+          var replyRegexResult = replyRegex.exec(reply);
+          if(reply==""||replyRegexResult!=null){
+              alert("댓글에 공백을 허용하지 않습니다.");
+              input.focus();
+              return false;
+          }
+          $.ajax({
+              url : "updateReplyContents.dis",
+              type : "post",
+              data : {
+                  seq : $(param).attr("value"),
+                  contents : reply
+              }
+          }).done(function(resp){
+              input.val(resp);
+              $(param).next().attr("value",resp);
+              $(param).parent().toggle();
+              $(param).parent().prev().toggle();
+              input.attr("readonly",true);
+              input.css("background-color","inherit");
+          });
+      };
+      function deleteReply(param){//댓글 삭제
+      	var seq = $(param).attr("value");
+      	var writer = $(param).parent().prev().text();
+			if(confirm("댓글을 삭제하시겠습니까?")){
+				$.ajax({
+					url : "deleteReply.dis",
+					type : "post",
+					data : {
+						seq : seq,
+						writer : writer
+					}
+				}).done(function(resp){
+					alert("댓글이 삭제되었습니다.");
+                  $(".reply_part").remove();
+                  $(".reply_wrapper").append(resp);
+                  likeOkCheck();//좋아요 클릭한것만 빨강하트
+                  $(".modifyReply_part.hide").hide();
+                  profileImgRounded();//이미지 원형
+				});
+			}
+      }
+      function profileImgRounded(){
+      	$(".profileImg_round").each(function(i,item){//기본이미지는 원형이미지 없애주기
+          	var path = $(item).attr("src");
+          	var pathRegex = /^\/profile\/[^\/]+?/;
+          	var pathRegexResult = pathRegex.exec(path);
+          	if(pathRegexResult!=null){
+          		$(item).removeClass("rounded-circle");
+          	}
+          });
+      };
+      profileImgRounded();
+	</script>
 </body>
 </html>

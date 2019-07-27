@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
 	rel="stylesheet">
@@ -211,7 +212,7 @@ b {
 
 $("#findid").on("click", function() {
 				console.log($("#email").val());
-				alert(" 해당 이메일에  전송 중 입니다 \n 아래의 확인을 누르신 후 이메일을 확인하시오");
+				
 				$
 						.ajax({
 							url : "findIdProc",

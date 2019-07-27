@@ -4,6 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i" rel="stylesheet">
 <link rel="stylesheet" href="resources/fonts/icomoon/style.css">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
@@ -28,9 +29,18 @@
 	color: #EC7357 !important;
 	font-weight: 600 !important;
 }
+#container *
+{
+	font-family: 'SeoulNamsanM';
+}
 
 
 
+
+
+#menu_row > div > a{
+	font-size: 22px;
+}
 .selected_menu_btns {
 	font-family: 'Gamja Flower', cursive !important;
 	border-radius: 0px !important;
@@ -90,7 +100,7 @@ font-weight:bold;
 <!-- 	</div> -->
 <!-- </div> -->
 
-	<section class="site-section bg-light block-13">
+	<section class="site-section block-13">
 
 		<div id="container" class="container">
 			
@@ -215,6 +225,9 @@ font-weight:bold;
 <script>
 	$(function()
     {
+		keyword = $("#search_text").val();
+		search("");
+		
 		$("#condition_select").on("change", function()
 		{
 			changeTypeDate();
@@ -237,7 +250,22 @@ font-weight:bold;
 			
 			if($("#condition_select").val() == "date")
 			{
+				var today = new Date();
+				var dd = today.getDate();
+				var mm = today.getMonth() + 1;
+				var yyyy = today.getFullYear();
+				
+				if(dd < 10)
+				{
+					dd = '0' + dd;
+				} 
+				if(mm < 10)
+				{
+					mm = '0' + mm;
+				} 
+				
 				$("#search_text").attr("type", "date");
+				$("#search_text").attr("max", yyyy + "-" + mm + "-" + dd);
 			}
 			else
 			{
@@ -252,9 +280,9 @@ font-weight:bold;
 		function search(btnName)
 		{
 			
-			console.log(btnName);
-			console.log(keyword);
-			console.log($("#condition_select").val());
+// 			console.log(btnName);
+// 			console.log(keyword);
+// 			console.log($("#condition_select").val());
 			
 			$.ajax
 	    	({

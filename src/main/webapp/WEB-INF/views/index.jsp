@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>라온펫</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link
    href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
    rel="stylesheet">
@@ -44,6 +45,7 @@ function cookieToJson(cookies){
 	.pricing img{width:405px; height:800px;  border: 5px dashed #754F44;}
 	.from{font-family:'Gamja Flower', cursive; font-size:22px;}
 	.cartoon-container{max-width:1300px;}
+/* 만화 부분 끝*/	
  	#acs_div
 	{
 		width: 100%;
@@ -84,7 +86,7 @@ function cookieToJson(cookies){
       <section class="site-section" id="about-section">
       <div class="container cartoon-container">
         <div class="row no-gutters mb-5">
-            <div class="col-12 col-sm-12 col-md-12 col-lg-4 bc" "data-aos="fade-up" data-aos-delay="">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="100">
                <div class="row pricing">
                  <div class="col-12"><span class="icon-paw d-block display-5 text-white mb-2 pt-2"></span></div>
                  <div class="col-12 "><img src="/resources/images/abandonedAnimalStory01.png"></div>
@@ -92,7 +94,7 @@ function cookieToJson(cookies){
 
             </div>
             
-            <div class="col-12 col-sm-12 col-md-12 col-lg-4 bc" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="200">
                <div class="row pricing">
               <div class="col-12 ">
               	<span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span>
@@ -102,7 +104,7 @@ function cookieToJson(cookies){
              </div>
             </div>
             
-            <div class="col-12 col-sm-12 col-md-12 col-lg-4 bc" data-aos="fade-up" data-aos-delay="200">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="300">
                <div class="row pricing">
                 <div class="col-12">
                 	<span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span>
@@ -378,8 +380,6 @@ function cookieToJson(cookies){
                            document.getElementById("form").submit();
                            }
                            //                            로그인 버튼과 회원가입 버튼의 script
-		
-		
   		 </script>
   	
 <script>

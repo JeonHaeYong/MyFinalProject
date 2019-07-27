@@ -99,12 +99,11 @@ public class AbandonedController {
 		String imagePath = "resources/images/tempProtect/" + time +"_"+image.getOriginalFilename();
 		dto.setImagePath(imagePath);
 
-
 		dto.setWriter((String)session.getAttribute("id"));
 		Timestamp ts = new Timestamp(time);
 		dto.setWriteTime(ts);
 		int result = tempService.uploadTempProtect(dto);
-
+	
 		return "redirect: listTempProtect?currentPage=1";
 	}
 
@@ -121,7 +120,13 @@ public class AbandonedController {
 		return "abandoned/listTempProtect";
 	}
 	@RequestMapping("writeTempProtect")
-	public String writeTempProtect() {
+	public String writeTempProtect(HttpServletRequest request) {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date today = new Date();
+		String todayStr = sdf.format(today);
+		request.setAttribute("todayStr", todayStr);
+
 		return "abandoned/writeTempProtect";
 	}
 	@RequestMapping("detailAbandoned")
@@ -148,7 +153,7 @@ public class AbandonedController {
 
 		try {
 			List<ApiAbandonedAnimalDTO> list = apiService.selectAll(currentPage);
-			Map<String, Integer> pageNavi = apiService.getNaviforApiAbandonedAnimal(currentPage);
+			Map<String, Integer> pageNavi = apiService.getNaviTotal(currentPage);
 			request.setAttribute("list", list);
 			request.setAttribute("pageNavi", pageNavi);
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -185,7 +190,7 @@ public class AbandonedController {
 
 		try {
 			List<ApiAbandonedAnimalDTO> list = apiService.selectByCondition(currentPage, from, to, species, speciesKind, sido, sigungu, shelter, processState);
-			Map<String, Integer> pageNavi = apiService.getNaviforApiAbandonedAnimal(currentPage);
+			Map<String, Integer> pageNavi = apiService.getNaviCondition(currentPage,from, to, species, speciesKind, sido, sigungu, shelter, processState );
 			request.setAttribute("list", list);
 			request.setAttribute("listsize", list.size());
 			System.out.println(list.size());
