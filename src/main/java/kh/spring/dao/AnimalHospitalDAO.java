@@ -18,4 +18,6 @@ public interface AnimalHospitalDAO {
 	public int gyeonggiHospitalData(GyeonggiDTO gdto);
 	public int seoulHospitalData(SeoulDTO sdto);
 	public int ulsanHospitalData(UlsanDTO udto);
+	public int deleteHospitalData(String area);
+	
 }
