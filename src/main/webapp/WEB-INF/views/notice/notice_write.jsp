@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>공지사항</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i" rel="stylesheet">
 <link rel="stylesheet" href="resources/fonts/icomoon/style.css">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
@@ -23,7 +24,10 @@
 #container {
 	margin-top: 5%;
 }
-
+#container *
+{
+	font-family: 'SeoulNamsanM';
+}
 .my_buttons{
 font-family: 'Gamja Flower', cursive !important;
 background-color:#FDD69270 !important;
@@ -44,31 +48,27 @@ font-weight:bold;
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 
 
-	<section class="site-section bg-light block-13">
+	<section class="site-section block-13">
 
 		<div id="container" class="container">
 			
 			<div class="row justify-content-center">
 				
-				<div class="col-4 col-md-12 col-lg-12 text-center my-3">
+				<div class="col-4 col-md-12 col-lg-2 text-center my-3">
 					
 					<label>제목</label>
 				
 				</div>
 				
-				<div class="col-8 col-md-12 col-lg-12 text-center my-1">
+				<div class="col-8 col-md-12 col-lg-10 text-center my-1">
 					
 					<input type="text" id="title_text" class="form-control" name="title" required>
 				
 				</div>
 				
-				<div class="col-12 col-md-12 col-lg-12 text-center my-3">
-					
-					<label>내용</label>
+				<div class="col-12 col-md-12 col-lg-2 text-center my-3"></div>
 				
-				</div>
-				
-				<div class="col-12 col-md-12 col-lg-12 my-1">
+				<div class="col-12 col-md-12 col-lg-10 my-1">
 					
 					<div id="summernote" contenteditable="true"></div>
 				

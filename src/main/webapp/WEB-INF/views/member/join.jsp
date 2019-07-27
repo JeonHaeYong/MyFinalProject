@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
 	rel="stylesheet">
@@ -102,27 +103,13 @@ b {
 	margin-left: 5px;
 }
 
-.btn, input[type="reset"], input[type="submit"] {
-	background-color: #EC7357;
-	border: none;
-	font-size: 15px;
-	color: white;
-	border-radius: 5px;
-	padding: 3px 5px;
-}
-
-.btn:hover, input[type="reset"]:hover, input[type="submit"]:hover {
-	font-weight: bold;
-	background-color: #f7613e;
-	color: white;
-}
+.btn, input[type="reset"]{	font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44;}
+.btn:hover,input[type="reset"]:hover{background-color:#FDD692; font-weight:bold;}
 
 
 
-#signin, #reset {
-	width: 80px;
-	height: 40px;
-}
+
+
 
 .menu-row {
 	text-align: -webkit-center;
@@ -156,7 +143,7 @@ b {
 	padding-bottom: 120px;
 	margin-bottom: 150px;
 }
-#search-btn,#emailcheck{margin-top:10px;}
+
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -301,7 +288,7 @@ b {
 								<div class="row">
 									<div class="col-lg-3 col-md-3 col-sm-3 col-3 first-col">아이디</div>
 									<div class="col-lg-9 col-md-9 col-sm-9 col-9">								
-										   <input type="text" class="form-control textbox" id="id"  name="id" flag="false" regexFlag="false" placeholder="영대소문자및숫자포함5글자이상" required >
+										   <input type="text" class="form-control textbox" id="id"  name="id" flag="false" regexFlag="false" placeholder="알파벳으로 시작하고 6~12자리 이하" required >
 						
 									</div>
 									<div class="col-12 span">
@@ -338,9 +325,12 @@ b {
 									<div id="inputName"
 										class="col-lg-3 col-md-3 col-sm-3 col-3 first-col">이름</div>
 									<div class="col-lg-9 col-md-9 col-sm-9 col-9">
-										<input type="text" placeholder="한글만 입력 가능합니다." maxlength="15"
+										<input type="text" placeholder="한글만 입력 가능합니다."
 											name="name" class="form-control name" required regexFlag="false"
-											class="textbox">
+											class="textbox" maxlength="4" oninput="maxLengthCheck(this)">
+									</div>
+									<div class="col-12 span">
+										<span class="nameResult"></span>
 									</div>
 								</div>
 
@@ -423,8 +413,8 @@ b {
 								<div class="row footer">
 									<div class="col-lg-12 col-md-12 col-sm-12 col-12"
 										id="formfooterbtn">
-										<input type="submit" id="signin" value="완료"> <input
-											type="reset" id="reset">
+										<input type="submit" id="signin" value="완료" class="btn"> <input
+											type="reset" id="reset" class="btn">
 									</div>
 								</div>
 
@@ -499,7 +489,7 @@ b {
 
 		$("#id").on("focusout", function() {
 			var idtestString = $("#id").val();
-			var regex = /^[a-zA-Z][a-zA-Z0-9_]{6,12}$/g;
+			var regex = /^[a-zA-Z][a-zA-Z0-9_]{5,12}$/g;
 			var result = regex.exec(idtestString);
 			if (result == null) {
 				$("#id").attr("regexFlag", "false");
@@ -652,6 +642,23 @@ b {
 				$("#phoneNum").attr("regexFlag", "true");
 			}
 		});
+		
+		
+	</script>
+	
+	<!--  이름-->
+<script>
+function maxLengthCheck(object){
+    if (object.value.length > object.maxLength){
+      object.value = object.value.slice(0, object.maxLength);
+       $(".nameResult").html("글자수를 초과하였습니다.4자리이내로 작성해주세요");
+    }    
+  }
+
+
+		
+		
+	
 	</script>
 	<!--우편번호  -->
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>

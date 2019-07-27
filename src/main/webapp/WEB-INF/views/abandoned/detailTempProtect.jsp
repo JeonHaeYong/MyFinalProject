@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>임시보호중</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
 	rel="stylesheet">
@@ -24,6 +25,14 @@
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
 <style>
+ @font-face {
+ 	font-family: 'SeoulNamsanM';
+ 	src: */
+ 		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/SeoulNamsanM.woff') */
+ 		format('woff'); 
+ 	font-weight: normal; 
+ 	font-style: normal; 
+}
 table {
 	width: 760px;
 }
@@ -44,13 +53,16 @@ td {
 	text-align: center;
 }
 
-.btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44;}
+.btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44; padding:6px 12px;}
 .btn:hover{background-color:#FDD692; font-weight:bold;}
 .selected_navi {
 	color: #EC7357 !important;
 	font-weight: 600;
 }
-
+.menu {
+	font-family: 'Gamja Flower', cursive;
+	color:#754F44;
+}
 .menu-bar{
 	text-align:center;
 	height:200px;
@@ -65,7 +77,7 @@ td {
 }
 
 .menu-bar div:first-child {
-	font-size: 20px;
+	font-size: 30px;
 	font-weight: bold;
 	border-bottom: 1px solid black;
 	color: #754F44;
@@ -76,13 +88,14 @@ td {
 
 .s-menu1>a {
 	text-decoration: none;
-	color: black;
+	color: #754F44;
 	font-size: 20px;
 	font-family: 'Gamja Flower', cursive;
 }
 
 .s-menu1:hover {
 	background-color: #F3F78130;
+	font-weight:bold;
 }
 
 .s-menu1 {
@@ -134,7 +147,7 @@ td {
 				<!--작은 메뉴랑 게시판목록이랑 나누는 row-->
 				<div class="col-lg-2 col-md-2 col-sm-12 col-12 menu-bar">
 					<!--작은 메뉴바-->
-					<div class="menu">MENU</div>
+					<div class="menu">M E N U</div>
 					<div class="s-menu1">
 						<a href="toAbandoned?currentPage=1">유기동물조회</a>
 					</div>

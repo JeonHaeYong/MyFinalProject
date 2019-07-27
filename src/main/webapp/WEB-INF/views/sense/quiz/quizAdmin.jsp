@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <title>Quiz Admin</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"rel="stylesheet">
 <link rel="stylesheet" href="resources/fonts/icomoon/style.css">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
@@ -60,34 +61,7 @@
         .pageNum,.prev,.next{text-decoration-line: none; color: #754F44; font-size:20px;}
      	.pageNum:hover,.prev:hover,.next:hover{font-weight: bold;}
 </style>
-<script>
-    $(function(){
-        $("textarea").css("height","100");
-        $(".pageNum").each(function(index,items){
-        	if($(this).text()==${currentPage}){
-        		$(this).css("color","#EC7357");
-				$(this).css("font-weight","bold");
-        	}
-        });
-        
-        /* Regex */
-     $(".input-point").on("focusout",function(){
-    	 var testPoint = $(".input-point").val();
-       	 var regex = /[0-9]{1,2}/g;
-       	 var result = regex.exec(testPoint);
-       	 if(result == null){
-       		 $(".point-span").text("숫자만 입력해주세요");
-       		 $(".input-point").val("");
-       	 }
-     });
-        $(".delete-btn").on("click",function(){
-        	var result = confirm("정말로 삭제하시겠습니까?");
-        	if(result == true){
-        		$("#deleteForm").submit();
-        	}
-        });
-    });
-</script>
+
 
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
@@ -175,5 +149,31 @@
    <script src="resources/js/jquery.sticky.js"></script>
    <script src="resources/js/isotope.pkgd.min.js"></script>
    <script src="resources/js/main.js"></script>
+   <script>
+        $("textarea").css("height","100");
+        $(".pageNum").each(function(index,items){
+        	if($(this).text()==${currentPage}){
+        		$(this).css("color","#EC7357");
+				$(this).css("font-weight","bold");
+        	}
+        });
+        
+        /* Regex */
+     $(".input-point").on("focusout",function(){
+    	 var testPoint = $(".input-point").val();
+       	 var regex = /[0-9]{1,2}/g;
+       	 var result = regex.exec(testPoint);
+       	 if(result == null){
+       		 $(".point-span").text("숫자만 입력해주세요");
+       		 $(".input-point").val("");
+       	 }
+     });
+        $(".delete-btn").on("click",function(){
+        	var result = confirm("정말로 삭제하시겠습니까?");
+        	if(result == true){
+        		$("#deleteForm").submit();
+        	}
+        });
+</script>
 </body>
 </html>

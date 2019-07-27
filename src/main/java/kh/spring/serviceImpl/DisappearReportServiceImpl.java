@@ -47,7 +47,7 @@ public class DisappearReportServiceImpl implements DisappearReportService{
 			
 			for(int i = 0; i < image.length; i++) {
 				if(image[i].getSize()==0) {
-					pjPathList.add("null");
+					pjPathList.add("noImage");
 				}else {
 					image[i].transferTo(new File(usersPath + "/" + i +"_"+ time + "_disappear_image.png"));
 					pjPathList.add("/DisappearReport/" + date + "/" + id + "/" + i + "_" + time + "_disappear_image.png");

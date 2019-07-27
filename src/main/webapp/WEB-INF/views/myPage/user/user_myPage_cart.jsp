@@ -6,6 +6,7 @@
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <title>마이페이지 - 장바구니</title>
+            <link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
             <link
                   href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
                   rel="stylesheet">
@@ -69,10 +70,7 @@
                                 <!-- 장바구니 -->
                                     <div id="cart_wrapper">
                                         <div class="row border-bottom border-success">
-                                            <div class="col-12"> </div>
-                                        </div>
-                                        <div class="row cart_contents">
-                                        	<c:if test="${list.size() != 0 }">
+                                            <c:if test="${list.size() != 0 }">
 	                                        	<div class="col-12 d-flex justify-content-left custom-control custom-checkbox">
 													<input type="checkbox" class="custom-control-input" id="allCheck">
 													<label class="custom-control-label" for="allCheck">전체선택</label>
@@ -84,6 +82,8 @@
                                         			<div style="text-align: center;"><a class="btn" href="freeMarket">무료나눔 가기</a></div>
                                         		</div>
 											</c:if>
+                                        </div>
+                                        <div class="row cart_contents mt-3">
 											<form class="row" action="toPayment" id="itemCheckForm" method="post">
 	                                        	<c:forEach var="dto" items="${list }" varStatus="status">
 		                                            <div class="col-lg-6 col-12 d-flex justify-content-center">
@@ -93,7 +93,7 @@
 															<label class="custom-control-label" for="customCheck${status.count }"></label>
 														</div>
 		                                                <div class="card mb-3">
-		                                                    <div class="row no-gutters">
+		                                                    <div class="row no-gutters" style="height: 100%;">
 		                                                        <div class="col-md-5">
 		                                                            <img src="${dto.imagePath1 }" class="card-img itemImage" soldout="${dto.soldout }">
 		                                                        </div>
@@ -109,11 +109,16 @@
 		                                            </div>
 	                                            </c:forEach>
                                             </form>
-                                            <div class="col-6 d-flex justify-content-left">
+                                            <c:if test="${list.size() != 0 }">
+	                                            <div class="col-12 d-flex justify-content-center">
+		                                        	<a class="btn" href="freeMarket">무료나눔 가기</a>
+		                                        </div>
+	                                        </c:if>
+                                            <div class="col-lg-6 col-12 d-lg-flex justify-content-left d-flex justify-content-center">
                                             	<button type="button" class="btn" id="delBtn">선택 상품 <span class="delete">삭제</span>하기</button>&nbsp;
                                             	<button type="button" class="btn" id="soldoutDelBtn">판매완료 상품 <span class="delete">삭제</span>하기</button>
                                             </div>
-                                            <div class="col-6 d-flex justify-content-end">
+                                            <div class="col-lg-6 col-12 d-lg-flex justify-content-end d-flex justify-content-center">
 	                                        	<input type="button" class="btn" id="payBtn" value="선택 상품 결제하기">&nbsp;
 	                                        	<input type="button" class="btn" id="allPayBtn" value="전체 상품 결제하기">
 	                                        </div>

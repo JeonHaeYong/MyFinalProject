@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Report Contents</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i" rel="stylesheet">
 <link rel="stylesheet" href="resources/fonts/icomoon/style.css">
@@ -54,27 +55,6 @@
 		/* 댓글 ------------------------------------------- */
 		.comment{max-width: 1200px;}
     </style>
-    <script>
-    	$(function(){
-    		$(".toList-btn").on("click",function(){
-    			location.href="toDisappearList?currentPage=${currentPage}";
-    		});
-    		$(".alter-btn").on("click",function(){
-    			location.href="toAlterForm?seq=${content.seq}";
-    		});
-    		$(".delete-btn").on("click",function(){
-    			var result = confirm("정말로 삭제하시겠습니까?");
-            	if(result == true){
-    			location.href="deleteProc.dis?seq=${content.seq}";
-            	}
-    		});
-    		$(".carousel-item>img").each(function(index,items){
-    			if($(this).attr("src")=='null'){
-    				var parent = $(this).parent().remove();
-    			}
-    		});
-    	});
-    </script>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="300" id="home-section">
@@ -255,6 +235,25 @@
 	<script src="resources/js/isotope.pkgd.min.js"></script>
 	<script src="resources/js/main.js"></script>
 	<script>
+		$(".toList-btn").on("click",function(){//홈으로
+			location.href="toDisappearList?currentPage=${currentPage}";
+		});
+		$(".alter-btn").on("click",function(){
+			location.href="toAlterForm?seq=${content.seq}";
+		});
+		$(".delete-btn").on("click",function(){
+			var result = confirm("정말로 삭제하시겠습니까?");
+        	if(result == true){
+			location.href="deleteProc.dis?seq=${content.seq}";
+        	}
+		});
+		$(".carousel-item>img").each(function(index,items){ // 캐러셀 밑에 있는 사진들
+			if($(this).attr("src")=='null'){//소스값이 null이라
+				var parent = $(this).parent().remove();//carousel-item을 지워
+			}
+		});
+
+
 	  $("#review_reply_btn").on("click",function(){//댓글등록
           if(${id==null}){//아직 로그인을 하지 않았다면,
               alert("로그인을 먼저 해주세요.");

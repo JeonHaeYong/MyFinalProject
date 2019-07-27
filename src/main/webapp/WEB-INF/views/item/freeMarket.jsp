@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>무료나눔</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
 	rel="stylesheet">
@@ -49,12 +50,12 @@
 	.checkboxDiv{
 		text-align: right;
 	}
-	#wsLabel::before{
-		border-color: #adb5bd;
+	label:before{
+		border-color: #adb5bd !important;
 	}
-	#withoutSoldout:checked + #wsLabel::before{
-		background-color: #ec7357;
-		border-color: #ec7357;
+	.custom-control-input:checked + label:before{
+		background-color: #ec7357 !important;
+		border-color: #ec7357 !important;
 	}
 	.menu-box{width: 150px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px; margin-top: 50px;}
     .menu-box>div{height: 35px;}
@@ -73,6 +74,12 @@
 	.itemName{
 		height: 58px;
 	}
+	.categoryBadge{
+		background-color: #FBFFB9;
+		margin: 10px 0px;
+		color: #754F44;
+		font-size: 15px;
+	}
 	.detail{
 		text-decoration: none;
 		color: #754F44;
@@ -82,18 +89,21 @@
 		background-color: #FBFFB950;
 	}
 	.price{
+		float: right;
 		text-align: right;
 		font-size: 25px;
 	}
-	
     .navi{
-    	color: #754F44;
 		text-decoration: none;
-		margin: 0px 5px;
-		font-size: 25px;
+		background-color: #FDD69270;
+		color: #754F44;
+		font-size:19px;
+		font-family: 'Gamja Flower';
+		padding:6px 12px;
 	}
 	.navi:hover{
 		font-weight: bold;
+		background-color: #FDD692;
 	}
 	.fixedMenu{
  		position: absolute; 
@@ -154,6 +164,8 @@
 		height: 20px;
 		cursor: pointer;
 	}
+	#delItem{font-family: 'Gamja Flower', cursive; background-color:#FDD69270; color:#754F44;}
+	#delItem:hover{background-color:#FDD692; font-weight:bold;}
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -190,10 +202,7 @@
 			<div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-row">
                 <div class="row menu-box">
                     <div class="col-12 s-menu">M E N U</div>
-                    <div class="col-12 "><a name="s-menu" href="freeMarket">무료나눔</a></div>
-                   	<c:if test="${type == 4}">
-                   		<div class="col-12"><a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a></div> <!-- 관리자만 볼 수 있게! -->
-                   	</c:if>
+                    <div class="col-12 "><a name="s-menu" href="freeMarket">무료나눔<c:if test="${type == 4}"><br><small>관리자모드</small></c:if></a></div>
                 </div>
             </div>
 <!--             <div class="col-1"></div> -->
@@ -202,8 +211,23 @@
 					<c:if test="${itemList.size() == 0 }">
 						<div class="col-12 m-3"><h3>등록된 상품이 없습니다.</h3></div> 
 					</c:if>
-					<c:forEach var="dto" items="${itemList }">
+					<c:if test="${sessionScope.type == 4 }">
+						<div class="col-6 custom-control custom-checkbox">
+							<input type="checkbox" class="custom-control-input" id="allCheck">
+							<label class="custom-control-label" for="allCheck">전체선택</label>
+						</div>
+						<div class="col-6 d-flex justify-content-end">
+							<input type="button" class="btn" id="delItem" value="삭제하기">
+						</div>
+					</c:if>
+					<c:forEach var="dto" items="${itemList }" varStatus="status">
 						<div class="col-lg-4 col-md-6 col-12 p-0">
+							<c:if test="${sessionScope.type == 4 }">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input itemCheck" id="customCheck${status.count }" value="${dto.seq }">
+									<label class="custom-control-label" for="customCheck${status.count }"></label>
+								</div>
+							</c:if>
 							<div class="card myCard mb-3">
 								<img class="card-img-top cardImg" src="${dto.imagePath1 }" alt="Card image" soldout="${dto.soldout }">
 								<div class="card-body">
@@ -212,7 +236,10 @@
 											<c:if test="${dto.soldout == 'y' }">[판매완료] </c:if>${dto.name }
 										</a></h4>
 									</div>
-									<p class="card-text price">${dto.price } 원</p>
+									<div style="height: 42px;">
+										<p class="badge badge-pill categoryBadge" category="${dto.category }"></p>
+										<p class="card-text price">${dto.price } 원</p>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -224,19 +251,19 @@
 			<div class="col-2"></div>
 			<div class="col-10 d-flex justify-content-center" id="naviBox">
 				<c:if test="${pageNavi.needPrev == 1 }">
-					<a class="navi" href="#conta" value="${pageNavi.startNavi - 1}">&laquo;</a>
+					<a class="btn navi mx-1" href="#conta" value="${pageNavi.startNavi - 1}">&laquo;</a>
 				</c:if>
 				<c:if test="${pageNavi.currentPage > pageNavi.startNavi }">
-					<a class="navi" href="#conta" value="${pageNavi.currentPage - 1}">&lt;</a>
+					<a class="btn navi mx-1" href="#conta" value="${pageNavi.currentPage - 1}">&lt;</a>
 				</c:if>
 				<c:forEach var="i" begin="${pageNavi.startNavi}" end="${pageNavi.endNavi}">
-					<a class="navi" href="#conta" class="pageNum" value="${i }">${i}</a>
+					<a class="btn navi mx-1" href="#conta" class="pageNum" value="${i }">${i}</a>
 				</c:forEach>
 				<c:if test="${pageNavi.currentPage < pageNavi.pageTotalCount }">
-					<a class="navi" href="#conta" value="${pageNavi.currentPage + 1}">&gt;</a>
+					<a class="btn navi mx-1" href="#conta" value="${pageNavi.currentPage + 1}">&gt;</a>
 				</c:if>
 				<c:if test="${pageNavi.needNext == 1 }">
-					<a class="navi" href="#conta" value="${pageNavi.endNavi + 1}">&raquo;</a>
+					<a class="btn navi mx-1" href="#conta" value="${pageNavi.endNavi + 1}">&raquo;</a>
 				</c:if>
 			</div>
 		</div>
@@ -286,6 +313,74 @@
 	<script src="resources/js/main.js"></script>
 	<script>
 		$(function(){
+			var count = 0;
+			$(document).on("change", "#allCheck", function(){
+        		if($("#allCheck").prop("checked")){
+        			$(".itemCheck").prop("checked", true);
+        			count = $(".itemCheck").length;
+        		}else{
+        			$(".itemCheck").prop("checked", false);
+        			count = 0;
+        		}
+        	});
+			$(document).on("change", ".itemCheck", function(){
+        		var allChecked = true;
+        		$(".itemCheck").each(function(i, item){
+        			if(!($(item).prop("checked"))){
+        				allChecked = false;
+        			}else{
+        				count++;
+        			}
+        		});
+        		console.log(allChecked);
+        		if(allChecked){
+        			$("#allCheck").prop("checked", true);
+        		}
+        		if(!$(this).prop("checked")){
+        			$("#allCheck").prop("checked", false);
+        		}
+        	});
+			$(window).on("click", "#delItem", function(){
+				
+			})
+			$("#delItem").on("click", function(){
+				if(count == 0 || $(".itemCheck").length == 0){
+					alert("삭제할 상품이 없습니다. 다시 선택해주세요.");
+				}else{
+					var checkedItem = new Array();
+        			var index = 0;
+        			$(".itemCheck").each(function(i, item){
+            			if($(item).prop("checked")){
+            				checkedItem[index] = $(this).attr("value");
+            				console.log(checkedItem[index]);
+            				index++;
+            			}
+            		});
+        			jQuery.ajaxSettings.traditional = true; 
+        			$.ajax({
+            			url: "deleteItem",
+            			type: "post",
+            			data: {
+            				"seqs": checkedItem
+            			}
+            		}).done(function(resp){
+            			window.location.reload();
+            		});
+				}
+			});
+			
+			$(".categoryBadge").each(function(i, item){
+				var category = $(item).attr("category");
+				if(category == "food"){
+					$(this).text("사료&간식");
+				}else if(category == "toy"){
+					$(this).text("장난감");
+				}else if(category == "clothing"){
+					$(this).text("의류");
+				}else{
+					$(this).text("기타");
+				}
+			});
 			
 			var withoutSoldout = "Y";
 			function withoutSoldoutChanged(){
@@ -307,6 +402,18 @@
 					$(".cardImg").each(function(i, item){
 						if($(item).attr("soldout") == 'y'){
 							$(this).css("filter", "brightness(60%)");
+						}
+					});
+					$(".categoryBadge").each(function(i, item){
+						var category = $(item).attr("category");
+						if(category == "food"){
+							$(this).text("사료&간식");
+						}else if(category == "toy"){
+							$(this).text("장난감");
+						}else if(category == "clothing"){
+							$(this).text("의류");
+						}else{
+							$(this).text("기타");
 						}
 					});
 				});
@@ -357,7 +464,9 @@
 			
 			$(".navi").each(function(i, item){
 				if($(item).text() == ${pageNavi.currentPage}){
-					$(this).css("color", "#EC7357");
+					$(this).css("color", "#754F44");
+					$(this).css("background-color", "#FDD692");
+					$(this).css("font-weight", "bold");
 				}
 			});
 			
@@ -401,6 +510,18 @@
 					$(".cardImg").each(function(i, item){
 						if($(item).attr("soldout") == 'y'){
 							$(this).css("filter", "brightness(60%)");
+						}
+					});
+					$(".categoryBadge").each(function(i, item){
+						var category = $(item).attr("category");
+						if(category == "food"){
+							$(this).text("사료&간식");
+						}else if(category == "toy"){
+							$(this).text("장난감");
+						}else if(category == "clothing"){
+							$(this).text("의류");
+						}else{
+							$(this).text("기타");
 						}
 					});
 				});

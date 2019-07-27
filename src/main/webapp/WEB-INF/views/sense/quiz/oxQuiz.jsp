@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <title>OX 상식 퀴즈</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"rel="stylesheet">
 <link rel="stylesheet" href="resources/fonts/icomoon/style.css">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
@@ -74,53 +75,7 @@
             
             
         </style>
-<script>
-	$(function(){
-		console.log(${type});
-		var quizNum = 1;
-		var corr = new Array(); //선택한 답 목록
-		var index = 0;
-		$(".btnImage").on("click", function(){
-			
-			corr[index] = $(this).attr("ox");
-			index++;
-			$("#quiz" + quizNum).css("display", "none");
-			quizNum++;
-			$("#quiz" + quizNum).css("display", "block");
-			if(index == 10){
-				$(".quiz-box").html("");
-				$.ajax({
-					url: "answerCheck",
-					method: "post",
-					traditional: true,
-					data: {
-						corr: corr
-					}
-				}).done(function(resp){
-					console.log(resp);
-					$(".quiz-box").append(resp);
-				});
-			}
-		});
-		
-		//동적으로 만들어진 태그에 이벤트 걸기
-		$(document).on("click","#restart-btn",function(){//첫번째 : click / change  등등의 이벤트/두번째 : 이벤트 적용할 타겟 태그 /세번째 : 동작 함수
-			location.href="oxQuiz"
-		});
-		$(".question").hide();
-		$(".start-btn").on("click",function(){
-			if(${id == null}){
-				alert("로그인을 해주세요~!");
-				$(".login-btn").trigger("click");
-			}else{
-				$(".question").toggle();
-				$(".start").toggle();
-			}
-		});
 
-	});
-	
-</script>
 </head>
  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
    <jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
@@ -188,5 +143,47 @@
    <script src="resources/js/jquery.sticky.js"></script>
    <script src="resources/js/isotope.pkgd.min.js"></script>
    <script src="resources/js/main.js"></script>
+   <script>
+		var quizNum = 1;
+		var corr = new Array(); //선택한 답 목록
+		var index = 0;
+		$(".btnImage").on("click", function(){
+			
+			corr[index] = $(this).attr("ox");
+			index++;
+			$("#quiz" + quizNum).css("display", "none");
+			quizNum++;
+			$("#quiz" + quizNum).css("display", "block");
+			if(index == 10){
+				$(".quiz-box").html("");
+				$.ajax({
+					url: "answerCheck",
+					method: "post",
+					traditional: true,
+					data: {
+						corr: corr
+					}
+				}).done(function(resp){
+					console.log(resp);
+					$(".quiz-box").append(resp);
+				});
+			}
+		});
+		
+		//동적으로 만들어진 태그에 이벤트 걸기
+		$(document).on("click","#restart-btn",function(){//첫번째 : click / change  등등의 이벤트/두번째 : 이벤트 적용할 타겟 태그 /세번째 : 동작 함수
+			location.href="oxQuiz"
+		});
+		$(".question").hide();
+		$(".start-btn").on("click",function(){
+			if(${id == null}){
+				alert("로그인을 해주세요~!");
+				$(".login-btn").trigger("click");
+			}else{
+				$(".question").toggle();
+				$(".start").toggle();
+			}
+		});
+</script>
     </body>
 </html>

@@ -11,6 +11,11 @@
 	<select id="selectCount" resultType="java.lang.Integer">
 		select count(*) from api_abandoned_animal
 	</select>
+	<select id="selectCountByCondition" resultType="java.lang.Integer">
+		select count(*) from api_abandoned_animal where happenDt between #{dateFrom} and #{dateTo}
+		  and orgNm like #{sidoSigungu} and careNm like #{shelter} and
+		   kindCd like #{species} and kindCd like #{speciesKind} and processState like #{processState}
+	</select>
 	<select id="selectOneBySeq" resultType="kh.spring.dto.ApiAbandonedAnimalDTO">
 		select * from api_abandoned_animal where seq=#{value}
 	</select>
