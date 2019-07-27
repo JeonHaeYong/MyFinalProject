@@ -22,22 +22,7 @@
 <link rel="stylesheet" href="resources/css/aos.css">
 <link rel="stylesheet" href="resources/css/style.css">
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
-<script>
-//팝업창!!!---------------------------------------------------------------------
- function openPopup(url){
-	 var cookies = document.cookie;
-	var result = cookieToJson(cookies);
-                	   if(result != "N"){
-                		   window.open(url,'','width=570,height=830,left=1300,top=70,status=no,toolbar=no,scrollbars=no'); 
-                	   } 
-                   }
-function cookieToJson(cookies){
-	var entry = cookies.split("=");
-	entry[0] = entry[1];
-	return entry[0];
-}
 
-</script>
 <style>
 /* 만화 부분 */
 	.no-gutters{text-align:center;}
@@ -523,6 +508,22 @@ function cookieToJson(cookies){
 		
 		
 	})
+
+//팝업창!!!--왜망가진거야 ㅠㅠㅠ-------------------------------------------------------------------
+ function openPopup(url){
+	 var cookies = document.cookie;
+	var result = cookieToJson(cookies);
+                	   if(result != "N"){
+                		   window.open(url,'','width=570,height=830,left=1300,top=70'); 
+                	   } 
+                   }
+function cookieToJson(cookies){
+	var entry = cookies.split("=");
+	entry[0] = entry[1];
+	return entry[0];
+}
+
+
 </script>
 </body>
 </html>

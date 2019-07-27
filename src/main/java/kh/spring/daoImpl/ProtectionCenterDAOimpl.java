@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kh.spring.dao.ProtectionCenterDAO;
 import kh.spring.dto.ProtectionCenterDTO;
+import kh.spring.insertDataldto.CenterDTO;
 
 @Repository
 public class ProtectionCenterDAOimpl implements ProtectionCenterDAO{
@@ -120,6 +121,26 @@ public class ProtectionCenterDAOimpl implements ProtectionCenterDAO{
 		param.put("start", start);
 		param.put("end", end);
 		return sst.selectList("ProtectionCenterDAO.searchCenterPerPage", param);
+	}
+//데이터 삽입
+	@Override
+	public int insertData(CenterDTO cdto) {
+		Map<String,String> hs = new HashMap<>();
+		String addr = cdto.getRdnmadr();
+		String tel = cdto.getPhoneNumber();
+		if(cdto.getRdnmadr() == null) {
+			addr = cdto.getLnmadr();
+			if(cdto.getLnmadr() == null) {
+				addr = "-";
+			}
+		}
+		if(cdto.getPhoneNumber() == null) {
+			tel = "-";
+		}
+		hs.put("name", cdto.getAnimalCnterNm());
+		hs.put("tel", tel);
+		hs.put("addr", addr);
+		return sst.insert("ProtectionCenterDAO.insertData",hs);
 	}
 	
 }

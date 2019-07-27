@@ -10,6 +10,9 @@ import org.springframework.stereotype.Repository;
 
 import kh.spring.dao.AnimalHospitalDAO;
 import kh.spring.dto.AnimalHospitalDTO;
+import kh.spring.insertDataldto.GyeonggiDTO;
+import kh.spring.insertDataldto.SeoulDTO;
+import kh.spring.insertDataldto.UlsanDTO;
 
 @Repository
 public class AnimalHospitalDAOImpl implements AnimalHospitalDAO {
@@ -118,5 +121,60 @@ public class AnimalHospitalDAOImpl implements AnimalHospitalDAO {
 		param.put("option", option);
 		return sst.selectList("AnimalHospitalDAO.searchAniHospitalPerPage", param);
 	}
-	
+	//--병원 데이터 삽입-------------------------------------------------------------------------------------------------------------------------------
+	@Override
+	public int gyeonggiHospitalData(GyeonggiDTO gdto) {
+		String addr = null;
+		String tel = null;
+		if(gdto.getREFINE_ROADNM_ADDR() == null) {
+			addr = gdto.getREFINE_LOTNO_ADDR();
+		}else {
+			addr = gdto.getREFINE_ROADNM_ADDR();
+		}
+		if(gdto.getLOCPLC_FACLT_TELNO() == null) {
+			tel = "-";
+		}else {tel = gdto.getLOCPLC_FACLT_TELNO();}
+		Map<String,String> hs = new HashMap<>();
+		hs.put("area", "경기");
+		hs.put("name", gdto.getBIZPLC_NM());
+		hs.put("addr", addr);
+		hs.put("tel", tel);
+		return sst.insert("AnimalHospitalDAO.insertHospitalData",hs);
+	}
+	@Override
+	public int seoulHospitalData(SeoulDTO sdto) {
+		String addr = null;
+		String tel = null;
+		if(sdto.getAddr() == null) {
+			addr = sdto.getAddr_old();
+		}else {
+			addr =sdto.getAddr();
+		}
+		if(sdto.getTel() == null) {
+			tel = "-";
+		}else {tel = sdto.getTel();}
+		Map<String,String> hs = new HashMap<>();
+		hs.put("area", "서울");
+		hs.put("name", sdto.getNm());
+		hs.put("addr", addr);
+		hs.put("tel", tel);
+		return sst.insert("AnimalHospitalDAO.insertHospitalData",hs);
+	}
+	@Override
+	public int ulsanHospitalData(UlsanDTO udto) {
+		Map<String,String> hs = new HashMap<>();
+		String addr = null;
+		String tel = null;
+		if(udto.getAddress() == null) {
+			addr = "-";
+		}else {addr = udto.getAddress();}
+		if(udto.getTel() == null) {
+			tel = "-";
+		}else {tel = udto.getTel();}
+		hs.put("area", "울산");
+		hs.put("name", udto.getTitle());
+		hs.put("addr", addr);
+		hs.put("tel", tel);
+		return sst.insert("AnimalHospitalDAO.insertHospitalData",hs);
+	}
 }
