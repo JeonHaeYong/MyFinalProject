@@ -23,13 +23,13 @@
 						<label for="exampleFormControlInput1">ID</label> <input
 							type="text" class="form-control" id="joinemail"
 							placeholder="ID를 입력하시오" required name="id"
-							onkeypress="press(this.form)">
+							>
 					</div>
 					<div class="form-group">
 						<label for="exampleFormControlInput1">Password</label> <input
 							type="password" class="form-control" id="joinpassword"
 							placeholder="비밀번호 입력하시오" required name="password"
-							onkeypress="press(this.form)">
+							>
 					</div>
 
 					<div id="loginwrapper">

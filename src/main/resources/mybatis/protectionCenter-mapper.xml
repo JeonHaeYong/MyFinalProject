@@ -20,4 +20,7 @@
 	<insert id="insertData">
 		insert into animal_center values(center_seq.nextval,#{name},#{tel},#{addr})
 	</insert>
+	<delete id="deleteCenterData">
+		delete from animal_center
+	</delete>
 </mapper>

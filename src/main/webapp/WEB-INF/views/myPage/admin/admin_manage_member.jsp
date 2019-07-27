@@ -162,121 +162,161 @@ font-weight:bold;
 			
 				<div class="col-12">
 					
-					<div class="row justify-content-center my-5">
+					<div id="upper_outter_row" class="row justify-content-center my-1">
 						
-						<div class="col-8 col-md-8 col-lg-12 text-center my-auto">
+						<div class="col-12">
 							
-							<h3>아이디 조회 및 블랙리스트 등록</h3>
-														
-						</div>
+							<div class="row justify-content-center my-5">
 						
-					</div>
-					
-					<div class="row justify-content-center">
-						
-						<div class="col-8 col-md-8 col-lg-10 text-center my-auto">
-							
-							<input id="search_text" class="form-control" type="text" placeholder="검색할 아이디를 입력하세요(없을 시 전체)">
-							
-						</div>
-						
-						<div class="col-4 col-md-4 col-lg-2 text-center my-auto">
-							
-							<input id="search_btn" class="btn my_buttons" name="1" type="button" value="검색">
-							
-						</div>
-						
-					</div>
-					
-					<div class="row justify-content-center my-3">
-						
-						<div id="search_result_div" class="col-12 col-md-12 col-lg-12 text-center my-1">
-						
-						</div>
-						
-					</div>
-					
-					
-					<div class="row justify-content-center">
-						
-						<div class="col-8 col-md-8 col-lg-10 text-center my-5">
-							
-							<input id="reason_text" class="form-control" type="text" placeholder="계정 정지 사유를 입력하세요">
-							
-						</div>
-						
-						<div class="col-4 col-md-4 col-lg-2 text-center my-5">
-							
-							<input id="black_btn" class="btn my_buttons" type="button" value="등록하기">
-							
-						</div>
-						
-					</div>
-					
-					
-					
-					
-					
-					
-					<div class="row justify-content-center my-5">
-						
-						<div class="col-8 col-md-8 col-lg-12 text-center my-auto">
-							
-							<h3>블랙리스트 조회 및 해제</h3>
-														
-						</div>
-						
-					</div>
-					
-					<div class="row justify-content-center">
-						
-						<div class="col-8 col-md-8 col-lg-10 text-center my-auto">
-							
-							<input id="blacklist_search_text" class="form-control" type="text" placeholder="검색할 아이디를 입력하세요(없을 시 전체)">
-							
-						</div>
-						
-						<div class="col-4 col-md-4 col-lg-2 text-center my-auto">
-							
-							<input id="blacklist_search_btn" class="btn my_buttons" name="1" type="button" value="검색">
-							
-						</div>
-						
-					</div>
-					
-					<div class="row justify-content-center my-3">
-						
-						<div id="blacklist_search_result_div" class="col-12 col-md-12 col-lg-12 text-center my-1">
-						
-						</div>
-						
-					</div>
-					
-					<div class="row justify-content-center">
-						
-						<div class="col-8 col-md-8 col-lg-10 text-center my-5">
-							
-							<input id="release_id_text" class="form-control" type="text" placeholder="차단 해제할 아이디를 입력하세요">
-							
-						</div>
-							
-						<div class="col-4 col-md-4 col-lg-2 text-center my-5">
+								<div id="upper_header" class="col-8 col-md-8 col-lg-12 text-center my-auto btn my_buttons">
+									
+									<h3>아이디 조회 및 블랙리스트 등록</h3>
+																
+								</div>
 								
-							<input id="release_btn" class="btn my_buttons" type="button" value="해제하기">
+							</div>
+							
+							<div id="upper_outter_body" class="row justify-content-center my-1">
+							
+								<div class="col-12">
+									
+									<div id="upper_search_row" class="row justify-content-center">
 								
+										<div class="col-8 col-md-8 col-lg-10 text-center my-auto">
+											
+											<input id="search_text" class="form-control" type="text" placeholder="검색할 아이디를 입력하세요(없을 시 전체)">
+											
+										</div>
+										
+										<div class="col-4 col-md-4 col-lg-2 text-center my-auto">
+											
+											<input id="search_btn" class="btn my_buttons" name="1" type="button" value="검색">
+											
+										</div>
+										
+									</div>
+									
+									<div id="upper_result_row" class="row justify-content-center my-3">
+										
+										<div id="search_result_div" class="col-12 col-md-12 col-lg-12 text-center my-1">
+										
+										</div>
+										
+									</div>
+									
+									
+									<div id="upper_black_row" class="row justify-content-center">
+										
+										<div class="col-8 col-md-8 col-lg-10 text-center my-5">
+											
+											<input id="reason_text" class="form-control" type="text" placeholder="계정 정지 사유를 입력하세요">
+											
+										</div>
+										
+										<div class="col-4 col-md-4 col-lg-2 text-center my-5">
+											
+											<input id="black_btn" class="btn my_buttons" type="button" value="등록하기">
+											
+										</div>
+										
+									</div>
+								
+								</div>
+							</div>
+							
 						</div>
 						
 					</div>
 					
-					<div class="row justify-content-center">
+					
+					
+					<div id="lower_outter_row" class="row justify-content-center my-1">
 						
-						<div class="col-12 text-center my-5">
+						<div class="col-12">
 							
-							<a href="admin-member-insert">데이터 입력</a>
+							<div class="row justify-content-center my-5">
+						
+								<div id="lower_header" class="col-8 col-md-8 col-lg-12 text-center my-auto btn my_buttons">
+									
+									<h3>블랙리스트 조회 및 해제</h3>
+																
+								</div>
+								
+							</div>
+							
+							<div id="lower_outter_body" class="row justify-content-center my-1">
+							
+								<div class="col-12">
+									
+									<div id="lower_search_row" class="row justify-content-center">
+						
+										<div class="col-8 col-md-8 col-lg-10 text-center my-auto">
+											
+											<input id="blacklist_search_text" class="form-control" type="text" placeholder="검색할 아이디를 입력하세요(없을 시 전체)">
+											
+										</div>
+										
+										<div class="col-4 col-md-4 col-lg-2 text-center my-auto">
+											
+											<input id="blacklist_search_btn" class="btn my_buttons" name="1" type="button" value="검색">
+											
+										</div>
+										
+									</div>
+									
+									<div id="lower_result_row" class="row justify-content-center my-3">
+								
+										<div id="blacklist_search_result_div" class="col-12 col-md-12 col-lg-12 text-center my-1">
+										
+										</div>
+										
+									</div>
+							
+									<div id="lower_release_row" class="row justify-content-center">
+										
+										<div class="col-8 col-md-8 col-lg-10 text-center my-5">
+											
+											<input id="release_id_text" class="form-control" type="text" placeholder="차단 해제할 아이디를 입력하세요">
+											
+										</div>
+											
+										<div class="col-4 col-md-4 col-lg-2 text-center my-5">
+												
+											<input id="release_btn" class="btn my_buttons" type="button" value="해제하기">
+												
+										</div>
+										
+									</div>
+									
+								</div>
+								
+							</div>
+							
+							
+					
+							<div class="row justify-content-center">
+								
+								<div class="col-12 text-center my-5">
+									
+									<a href="admin-member-insert">데이터 입력</a>
+									
+								</div>
+								
+							</div>
+							
+							
+							
+							
 							
 						</div>
 						
 					</div>
+					
+					
+					
+					
+					
+					
 					
 				</div>
 				
@@ -305,6 +345,28 @@ font-weight:bold;
 <script>
 	$(function()
     {
+		
+		$("#lower_outter_body").slideToggle(0);
+		
+		$("#upper_header, #lower_header").on("click", function()
+		{
+// 			if(this.id == "upper_header")
+// 	    	{
+// 	    		$("#upper_header").attr("class", "col-8 col-md-8 col-lg-12 text-center my-auto btn selected_menu_btns");
+// 	    		$("#lower_header").attr("class", "col-8 col-md-8 col-lg-12 text-center my-auto btn my_buttons");
+// 	    	}
+// 	    	else (this.id == "lower_header")
+// 	    	{
+// 	    		$("#upper_header").attr("class", "col-8 col-md-8 col-lg-12 text-center my-auto btn my_buttons");
+// 	    		$("#lower_header").attr("class", "col-8 col-md-8 col-lg-12 text-center my-auto btn selected_menu_btns");
+// 	    	}
+			
+
+			$("#upper_outter_body").slideToggle(500);
+			$("#lower_outter_body").slideToggle(500);
+			
+		});
+		
 		searchOnMember("1");
 		searchOnBlackList("1");
 		

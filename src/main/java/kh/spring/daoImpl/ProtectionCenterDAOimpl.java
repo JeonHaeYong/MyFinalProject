@@ -142,5 +142,8 @@ public class ProtectionCenterDAOimpl implements ProtectionCenterDAO{
 		hs.put("addr", addr);
 		return sst.insert("ProtectionCenterDAO.insertData",hs);
 	}
-	
+	@Override
+	public int deleteCenterData() {
+		return sst.delete("ProtectionCenterDAO.deleteCenterData");
+	}
 }
