@@ -151,7 +151,10 @@ public class InformationController {
 	@RequestMapping("detail_info")
 	public String detailinfo(HttpServletRequest request, int seq) {
 		try {
-			request.setAttribute("dto", service.detail_info(seq));
+			 InfomaitionDTO dto=service.detail_info(seq);
+			if(dto.getType().equals("info")) {dto.setType("정보");}
+			else {dto.setType("훈련");}
+			request.setAttribute("dto",dto);
 
 			return "sense/information/detail_info";
 		} catch (Exception e) {

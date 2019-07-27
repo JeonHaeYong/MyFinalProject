@@ -104,9 +104,16 @@ a[name="s-menu"]:hover {
 }
 
 /* ----------------------카테고리 */
-#profile-tab,#home-tab{text-decoration:none;
- color:black;}
+#profile-tab,#home-tab{
+font-family: 'Gamja Flower', cursive;
 
+text-decoration:none;
+ color:black;
+ font-size:20px;
+ }
+#profile-tab.active,#home-tab.active{
+background-color:#FDD692;
+}
 /* -------------------infobox -----------------   */
 .infowrapper {
 	font-family: 'Gamja Flower', cursive;
@@ -199,42 +206,36 @@ padding-right:105px;
 		<div class="row">
 			<div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-row">
 				<div class="row menu-box">
-					<div class="col-12 s-menu">M E N U</div>
-					<div class="col-12 ">
-						<a name="s-menu" href="oxQuiz">OX QUIZ</a>
-					</div>
-
-					<div class="col-12">
-						<a name="s-menu" href="information_t">반려동물 정보</a>
-					</div>
-					<c:choose>
-						<c:when test="${type == 4}">
-							<div class="col-12">
-								<a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a>
-							</div>
-							<!-- 관리자만 볼 수 있게! -->
-						</c:when>
-						<c:otherwise>
-							<div class="col-12" hidden>
-								<a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a>
-							</div>
-						</c:otherwise>
-					</c:choose>
+					   <div class="col-12 s-menu">M E N U</div>
+                        <div class="col-12 "><a name="s-menu" href="oxQuiz">OX QUIZ</a></div>
+                          <div class="col-12"><a name="s-menu" href="information_t?currentPage=1">반려동물 정보</a></div>
+                            <c:choose>
+                        	<c:when test="${type == 4}">
+                        		<div class="col-12"><a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a></div> <!-- 관리자만 볼 수 있게! -->
+                        	</c:when>
+                        	<c:otherwise>
+                        		 <div class="col-12" hidden><a name="s-menu" href="quizAdmin.admin?currentPage=1">관리자 설정</a></div> 
+                        	</c:otherwise>
+                        </c:choose> 
 				</div>
 			</div>
 			<div class="col-1"></div>
-			<div class="col-lg-9 col-md-8 col-sm-12 col-12 info-box">
+			<div class="col-lg-9 col-md-8 col-sm-12 col-12 info-box mt-5">
 				<!--내용   -->
-
-				<ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
-					<li class="nav-item"><a class="nav-link active" id="home-tab"
+					
+				<ul class="row nav nav-tabs justify-content-center" id="myTab" role="tablist">
+		
+					<li class="col-lg-6 col-md-6 col-sm-6 col-6 nav-item pr-0">
+						<a class=" nav-link active" id="home-tab"
 						data-toggle="tab" href="#home" role="tab" aria-controls="home"
 						aria-selected="true">정보 </a></li>
-					<li class="nav-item"><a class="nav-link" id="profile-tab"
+					
+					<li class="col-lg-6 col-md-6 col-sm-6 col-6 nav-item  pl-0"><a class="nav-link" id="profile-tab"
 						data-toggle="tab" href="#training" role="tab"
 						aria-controls="training" aria-selected="false">훈련</a></li>
-
+			
 				</ul>
+				
 				<form action="delinfo" method="post" id="delform">
 					<div class="tab-content" id="myTabContent">
 
@@ -243,16 +244,14 @@ padding-right:105px;
 							aria-labelledby="home-tab">
 							<div class="row .infinite">
 								<c:forEach var="dto" items="${infodto}">
-									<div class="col-lg-4 col-md-6 col-sm-6 dtocol">
+									<div class="col-lg-4 col-md-6 col-sm-6 col-6 dtocol">
 										<div class=infowrapper>
 											<div class=infoseq>
 												<c:if test="${type == 4}">
-												<script>
-												console.log(${type});
-												</script>
-													<input type=checkbox value="${dto.seq}" name="check">
+												
+													<input type=checkbox value="${dto.rank}" name="check">
 												</c:if>
-												NO.${dto.seq }
+												NO.${dto.rank}
 											</div>
 											<div class=infoimg>
 												<a href="detail_info?seq=${dto.seq}" class="detail">${dto.image}</a>
@@ -281,7 +280,7 @@ padding-right:105px;
 
 								<c:forEach var="tdto" items="${tdto}">
 
-									<div class="col-lg-4 col-md-6 col-sm-6 dtocol">
+									<div class="col-lg-4 col-md-6 col-sm-6 col-6 dtocol">
 
 										<div class=infowrapper>
 
@@ -289,7 +288,7 @@ padding-right:105px;
 												<c:if test="${type == '4'}">
 													<input type=checkbox value="${tdto.seq}" name="check">
 												</c:if>
-												NO.${tdto.seq }
+												NO.${tdto.rank}
 											</div>
 
 											<div class=infoimg>
