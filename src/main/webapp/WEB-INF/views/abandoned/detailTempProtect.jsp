@@ -27,8 +27,7 @@
 <style>
  @font-face {
  	font-family: 'SeoulNamsanM';
- 	src: */
- 		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/SeoulNamsanM.woff') */
+ 	src: */url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/SeoulNamsanM.woff') */
  		format('woff'); 
  	font-weight: normal; 
  	font-style: normal; 
@@ -166,11 +165,11 @@ td {
 					<!--메뉴바랑 리스트 사이 빈 공간-->
 				</div>
 				<div class="col-lg-9 col-md-9 col-sm-12 col-12 row">
-					<div class="text-center" style="margin: auto; margin-bottom: 40px;">
-						<h2>임시보호중</h2>
+					<div class="text-center" style="margin: auto; margin-bottom: 40px; font-size:40px; color:#754F44; font-family: 'SeoulNamsanM';">
+						임시보호중
 					</div>
 
-					<table class="table table-striped">
+					<table class="table table-striped" style="font-family:'SeoulNamsanM'; color:#754F44;">
 						<tbody>
 							<tr>
 								<th scope="row" width="15%">제목</th>
@@ -241,6 +240,7 @@ td {
 			
 			$("#modify").on("click",function(){
 				location.href="toModifyPageTempProtect?seq=${dto.seq}";
+				
 			})
 			$("#delete").on("click",function(){
 				location.href="deleteMyTempProtect?seq=${dto.seq}";
