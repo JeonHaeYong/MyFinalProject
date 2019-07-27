@@ -12,4 +12,5 @@ public interface ProtectionCenterService {
 	public String getNaviForCenterService(int currentPage,String option);
 	public List<ProtectionCenterDTO> searchCenterPerPageService(int currentPage, String option);
 	public void insertDataService(CenterDTO cdto);
+	public void deleteCenterData();
 }

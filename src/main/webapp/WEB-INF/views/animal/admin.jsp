@@ -38,8 +38,10 @@
      .menu-bar div:first-child{font-size: 25px; font-weight: bold;  border-bottom: 1px solid black; color: #754F44;}
      a[name="s-menu"]{color: #754F44; text-decoration-line: none; font-size:20px;}
      a[name="s-menu"]:hover{color: #754F44;}
-     .btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44; font-size:30px;}
-	.btn:hover{background-color:#FDD692; font-weight:bold; color:#754F44;}
+     .btns{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44; font-size:30px; margin-top:10px; border-radius:30px; border:none;
+     		height: 65px; width:270px;}
+	.btns:hover{background-color:#FDD692; font-weight:bold; color:#754F44;}
+	
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
@@ -67,17 +69,30 @@
                 	<div class="col-12 title"><h1>관리자 설정</h1></div>
                 </div>
           		<div class="row section">
-          			<div class="col-lg-4 col-md-4 col-12">
-          				<input type="button" value="서울병원 데이터" class="seoul-btn btn">
+          			<div class="col-lg-6 col-md-6 col-12">
+          				<input type="button" value="서울병원 데이터 삽입" class="seoul-btn btns">
           			</div>
-          			<div class="col-lg-4 col-md-4 col-12">
-          				<input type="button" value="경기병원 데이터" class="gyeonggi-btn btn">
+          			<div class="col-lg-6 col-md-6 col-12">
+          				<input type="button" value="서울병원 데이터삭제 " class="seoul-delete-btn btns">
           			</div>
-          			<div class="col-lg-4 col-md-4 col-12">
-          				<input type="button" value="울산병원 데이터" class="ulsan-btn btn">
+          			<div class="col-lg-6 col-md-6 col-12">
+          				<input type="button" value="경기병원 데이터 삽입" class="gyeonggi-btn btns">
           			</div>
-          			<div class="col-12">
-          				<input type="button" value="보호소 데이터" class="center-btn btn">
+          			<div class="col-lg-6 col-md-6 col-12">
+          				<input type="button" value="경기병원 데이터삭제" class="gyeonggi-delete-btn btns">
+          			</div>
+          			<div class="col-lg-6 col-md-6 col-12">
+          				<input type="button" value="울산병원 데이터 삽입" class="ulsan-btn btns">
+          			</div>
+          			<div class="col-lg-6 col-md-6 col-12">
+          				<input type="button" value="울산병원 데이터삭제" class="ulsan-delete-btn btns">
+          			</div>
+          			
+          			<div class="col-lg-6 col-md-6 col-12">
+          				<input type="button" value="보호소 데이터" class="center-btn btns">
+          			</div>
+          			<div class="col-lg-6 col-md-6 col-12">
+          				<input type="button" value="보호소 데이터 삭제" class="center-delete-btn btns">
           			</div>
           		</div>
                </div>
@@ -136,6 +151,45 @@
 			url:"insertCenterData"
 		}).done(function(resp){
 			console.log(resp);
+			if(resp == '1'){
+				alert("성공");
+			}else{alert("실패");}
+		});
+	});
+	$(".seoul-delete-btn").on("click",function(){
+		$.ajax({
+			url:"deleteHospitalData",
+			data:{area:"seoul"}
+		}).done(function(resp){
+			if(resp == '1'){
+				alert("성공");
+			}else{alert("실패");}
+		});
+	});
+	$(".gyeonggi-delete-btn").on("click",function(){
+		$.ajax({
+			url:"deleteHospitalData",
+			data:{area:"gyeonggi"}
+		}).done(function(resp){
+			if(resp == '1'){
+				alert("성공");
+			}else{alert("실패");}
+		});
+	});
+	$(".ulsan-delete-btn").on("click",function(){
+		$.ajax({
+			url:"deleteHospitalData",
+			data:{area:"ulsan"}
+		}).done(function(resp){
+			if(resp == '1'){
+				alert("성공");
+			}else{alert("실패");}
+		});
+	});
+	$(".center-delete-btn").on("click",function(){
+		$.ajax({
+			url:"deleteCenterData"
+		}).done(function(resp){
 			if(resp == '1'){
 				alert("성공");
 			}else{alert("실패");}

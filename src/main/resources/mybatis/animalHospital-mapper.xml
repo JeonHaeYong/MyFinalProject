@@ -23,5 +23,8 @@
 	<insert id="insertHospitalData">
 		insert into animal_hospital values(animal_hospital_seq.nextval,#{area},#{name},#{addr},#{tel})
 	</insert>
+	<delete id="deleteHospitalData">
+		delete from animal_hospital where sigun = #{value}
+	</delete>	
 	
 </mapper>

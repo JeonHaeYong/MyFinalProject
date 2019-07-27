@@ -13,6 +13,7 @@ public interface ProtectionCenterDAO {
 	public int searchRecordTotalCount(String option);
 	public List<ProtectionCenterDTO> searchCenterPerPage(int currentPage, String option);
 	public int insertData(CenterDTO cdto);
+	public int deleteCenterData();
 	
 	
 }
