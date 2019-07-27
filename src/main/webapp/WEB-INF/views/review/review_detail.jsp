@@ -21,13 +21,14 @@
                 <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
                 <link rel="stylesheet" href="resources/css/aos.css">
                 <link rel="stylesheet" href="resources/css/style.css">
-                <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
+                <jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
                 <style>
-                    *{ font-family: 'Gamja Flower' !important; font-size: 20px;}
+                	*{ font-family: 'Gamja Flower' !important;}
                     ::placeholder{font-family: 'Gamja Flower'}
                     /*점보트론 이미지*/
                     .jumbotron{
                         background-color: white;
+                        padding-top: 5rem;
                     }
                     .jumbotron>img{
                         width: 100%;
@@ -51,7 +52,6 @@
                     	max-width: 1300px;
                     }
                 </style>
-
             </head>
             <body data-spy="scroll" data-target=".site-navbar-target"
                   data-offset="300" id="home-section">
@@ -89,7 +89,6 @@
                                 <div class="col-12">
                                     <form class="text-right" action="deleteReview" method="post" onsubmit="return deleteCheck();">
                                         <c:if test="${id == reviewDTO.writer }">
-                                            <input type="button" class="btn btn-outline-warning rounded" value="수정">
                                             <input type="hidden" value="${reviewDTO.seq }" name="seq">
                                             <input type="submit" class="btn btn-outline-warning rounded" value="삭제">
                                         </c:if>

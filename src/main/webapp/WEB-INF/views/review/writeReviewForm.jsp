@@ -22,6 +22,8 @@
                 <link rel="stylesheet" href="resources/css/style.css">
                 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
                 <style>
+                	*{ font-family: 'Gamja Flower' !important;}
+                    ::placeholder{font-family: 'Gamja Flower'}
                     /*점보트론 이미지*/
                     .jumbotron{
                         background-color: white;
@@ -115,7 +117,15 @@
                         width: 100% \9;
                         height: auto;
                     }
+                    .btn{background-color:#FDD69270;color:#754F44; margin: 0px 2px; font-size: 1.1rem;}
+					.btn:hover{background-color:#FDD692; font-weight:bold;}
+					.writeBody_fs{
+						font-size: 22px;
+					}
                     /*~파일업로드*/
+                    .input-group-text,.form-control{
+                    	font-size: 1.2rem;
+                    }
                 </style>
             </head>
             <body data-spy="scroll" data-target=".site-navbar-target"
@@ -134,7 +144,7 @@
                             </div>
                         </div>
                         <div class="col-1"></div>
-                        <div class="col-lg-9 col-md-8 col-sm-12 col-12">
+                        <div class="col-lg-9 col-md-8 col-sm-12 col-12 writeBody_fs">
                             <!-- 내용작성 -->
                             <form action="insertReview" method="post" enctype="multipart/form-data" onsubmit="return reviewWriteForm();">
                                 <input type="hidden" value="${id }" name="writer">
@@ -166,7 +176,7 @@
                                         <textarea class="form-control contents" aria-label="With textarea" placeholder="내용은 최소 50글자를 작성해주셔야합니다." rows="10" style="resize:none;" name="contents"></textarea>
                                     </div>
                                 </div>
-                                <div class="text-right"><input type="submit" value="글작성하기"></div>
+                                <div class="text-right mb-3"><input type="submit" class="btn" value="글작성하기"><input type="button" class="btn" value="목록으로" onclick="toReviewList();"></div>
                             </form>
                         </div>
                     </div>
@@ -250,5 +260,8 @@
                 		$(".contents").val(contents.substr(0,800));
                 	}
                 }
+               	function toReviewList(){
+               		location.href="toReviewList";
+               	}
             </script>
         </html>
