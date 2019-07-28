@@ -506,7 +506,7 @@ $("#birthday").attr("max",today.getFullYear()+'-0'+month+'-'+today.getDate());
 			if (result == null) {
 				$("#id").attr("regexFlag", "false");
 				$("#id").val("");
-				$("#idresult").html("알파벳으로 시작하고 6~12자리 이하로 작성해주세요.");
+				$("#idresult").html("※알파벳으로 시작하고 6~12자리 이하로 작성해주세요.");
 				$("#idresult").css("color", "red");
 			} else {
 				$("#id").attr("regexFlag", "true");
@@ -520,12 +520,12 @@ $("#birthday").attr("max",today.getFullYear()+'-0'+month+'-'+today.getDate());
 				}).done(function(resp) {
 					console.log(resp);
 					if (resp == "true") {
-						$("#idresult").html("이미 사용되고 있는 아이디 입니다.");
+						$("#idresult").html("※이미 사용되고 있는 아이디 입니다.");
 						$("#idresult").css("color", "red");
 						$("#id").attr("flag", "false");
 					} else {
-						$("#idresult").html("사용가능한 아이디 입니다.");
-						$("#idresult").css("color", "red");
+						$("#idresult").html("※사용가능한 아이디 입니다.");
+						$("#idresult").css("color", "green");
 						$("#id").attr("flag", "true");
 					}
 				})
@@ -533,25 +533,39 @@ $("#birthday").attr("max",today.getFullYear()+'-0'+month+'-'+today.getDate());
 			}
 		});
 		/* 비밀번호 Regex */
+		$("#password").on("focus", function() {			
+			$("#passwordCheck").val("");
+			$("#pwCheckResult").html("");
+		});
+		$("#passwordCheck").on("focus", function() {			
+			$("#pwCheckResult").html("");
+		});
 		$("#password").on("focusout", function() {
 			var password = $("#password").val();
 			var regex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,15}$/g;
 			var result = regex.exec(password);
 			if (result == null) {
 				$("#password").val("");
-				$("#pwResult").html("알파벳 ,숫자의 조합으로 8~15이하로 입력해주세요.");
+				$("#pwResult").html("※알파벳 ,숫자의 조합으로 8~15이하로 입력해주세요.");
 				$("#pwResult").css("color", "red");
 			} else {
 				$("#password").attr("regexFlag", "true");
 				$("#pwResult").html("");
+				
+				
 			}
 		});
 		$("#passwordCheck").on("focusout", function() {
 			if ($("#password").val() != $(this).val()) {
-				$("#pwCheckResult").html("비밀번호가 같지 않습니다.");
+				
+				$("#pwCheckResult").html("※ 비밀번호가 일치하지 않습니다.");
 				$("#pwCheckResult").css("color", "red");
+				$("#password").val("");
+				$("#passwordCheck").val("");
 			} else {
-				$("#pwCheckResult").html("");
+				$("#pwCheckResult").html("※ 비밀번호가 일치합니다.");
+				$("#pwCheckResult").css("color", "green");
+				
 			}
 		});
 		/* 이름 regex */
@@ -584,7 +598,7 @@ $("#birthday").attr("max",today.getFullYear()+'-0'+month+'-'+today.getDate());
 							var result = regex.exec(email);
 							if (result == null) {//올바른 메일작성확인
 								$("#emailcheck").attr('disabled',true);
-								$(".emailResult").html("올바른 이메일을 작성해주세요.");
+								$(".emailResult").html("※ 올바른 이메일을 작성해주세요.");
 								$(".emailResult").css("color", "red");
 								$("#email").val("");
 								
@@ -600,7 +614,7 @@ $("#birthday").attr("max",today.getFullYear()+'-0'+month+'-'+today.getDate());
 								console.log("중복확인"+resp);
 								if(resp=="true"){
 									$("#emailcheck").attr('disabled',true);
-									$(".emailResult").html("이미 가입된 이메일입니다");
+									$(".emailResult").html("※ 이미 가입된 이메일입니다");
 									$(".emailResult").css("color", "red");
 									$("#email").val("");
 								
@@ -668,7 +682,7 @@ $("#birthday").attr("max",today.getFullYear()+'-0'+month+'-'+today.getDate());
 function maxLengthCheck(object){
     if (object.value.length > object.maxLength){
       object.value = object.value.slice(0, object.maxLength);
-       $(".nameResult").html("글자수를 초과하였습니다.4자리이내로 작성해주세요");
+       $(".nameResult").html("※ 글자수를 초과하였습니다.4자리이내로 작성해주세요");
        $(".nameResult").css("color", "red");
     }    
   }
