@@ -59,9 +59,9 @@
                </div>
             </div>
             <div class="col-md-5 align-self-center text-center text-md-right">
-               <img src="resources/images/dog_1.jpg" alt="Image"
+               <img src="resources/images/dog_girl.jpg" alt="Image"
                   class="img-fluid cover-img"> <img
-                  src="resources/images/dog_2.jpg" alt="Image"
+                  src="resources/images/cat_dog.jpg" alt="Image"
                   class="img-fluid cover-img2">
             </div>
          </div>
