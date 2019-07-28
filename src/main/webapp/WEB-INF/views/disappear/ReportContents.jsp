@@ -40,8 +40,10 @@
         #wrapper>div{float: left;}
         .pet{width: 35%; height: 97%; margin: 5px;}
         .infoImg{height:200px;}
-        .w-100{height:200px;}
-        .feature{width: 100%; height: 35%;}
+        .w-100{height:400px;}
+        
+        .feature,.et{float:left; }
+        .feature{width: 50%; }
         .feature>div:first-child{height: 20%; width: 100%; font-weight: bold; font-family: 'Gamja Flower', cursive; font-size:20px;}
         .feature>div:nth-child(2){height: 80%; width: 100%; overflow-y: auto; word-wrap: break-word;}
         .petInfo{width: 63%; height: 97%; margin-left: 6px; margin-top:5px;}
@@ -52,10 +54,10 @@
        .first-col,.second-col{float: left; width: 50%; height: 100%;}
         
         .first-col>div,.second-col>div{height: 20%; text-align: center; line-height: 50px;}
-        .et{width: 100%; height: 30%; padding-left: 75px;}
+        .et{width: 50%;  padding-left: 75px;}
         .content>div:nth-child(2)>.first-col>div,.content>div:nth-child(2)>.second-col>div{height: 34%; line-height: 80px;}
         .et>div:first-child{height: 25%; font-weight: bold; font-family: 'Gamja Flower', cursive; font-size:20px;}
-        .et-contents{height: 75%; overflow-y: auto; word-wrap: break-word;}
+        .et-contents{height: 80%; overflow-y: auto; word-wrap: break-word;}
         .petImg>img{width:100%; height:100%;}
         
         #footer{ margin:auto; width:1200px;}
@@ -104,10 +106,7 @@
 				</div>
            </div>
            <hr>
-           <div class="feature">
-               <div>특징</div>
-               <div>${content.feature }</div>
-           </div>
+           
        </div>
         <div class="petInfo">
             <div class="content">
@@ -140,10 +139,16 @@
                     </div>
                 </div>
             </div>
+     <div>
         <div class="et">
             <div>기타</div>
             <div class="et-contents">${content.et }</div>
         </div>
+        <div class="feature">
+               <div>특징</div>
+               <div>${content.feature }</div>
+           </div>
+           </div>
         </div>
     </div>
       <div id="footer">
