@@ -25,10 +25,22 @@ public class NoticeController
 	NoticeService noticeService;
 	
 	@RequestMapping(value = "notice-view-page", method = RequestMethod.GET)
-	public String noticeListPage()
+	public Object noticeListPage()
 	{
-		return "/notice/notice_view";
+		Object result = "error";
+		
+		try
+		{
+			result = noticeService.noticeListPage();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
+	
 	@ResponseBody
 	@RequestMapping(value = "notice-view-do", produces="application/json;charset=utf-8")
 	public String getNotice(String page)

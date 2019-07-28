@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>관리자 페이지 - 무료 나눔 물품 승인</title>
 <link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i" rel="stylesheet">
 <link rel="stylesheet" href="resources/fonts/icomoon/style.css">
@@ -158,7 +158,7 @@ font-weight:bold;
 <!-- 					<div class="col-4 col-md-4 col-lg-2 text-center my-1"></div> -->
 <!-- 					<div class="col-4 col-md-4 col-lg-3 text-center my-1"></div> -->
 					<div class="col-2 col-md-2 col-lg-2 text-center my-1">
-						<input id="permission_all_btn" type="checkbox">모두 체크
+						<input id="check_all_btn" type="checkbox">모두 선택
 					</div>
 					
 				</div>
@@ -174,18 +174,11 @@ font-weight:bold;
 
 				<div class="row justify-content-center">
 
-					<div class="col-8 col-md-8 col-lg-4 text-left my-5"></div>
-					<div class="col-8 col-md-8 col-lg-4 text-left my-5"></div>
-					
-					<div class="col-8 col-md-8 col-lg-2 text-center my-5">
-					
-<!-- 						<input id="search_btn" class="btn my_buttons" name="1" type="button" value="검색"> -->
-					
-					</div>
-					
-					<div class="col-4 col-md-4 col-lg-2 text-center my-5">
+					<div class="col-4 col-md-4 col-lg-12 text-right my-5">
 
-						<input id="reg_btn" class="btn my_buttons" type="button" value="등록하기">
+						<input id="reg_btn" class="btn my_buttons" type="button" value="승인">
+						
+						<input id="del_btn" class="btn my_buttons" type="button" value="거부">
 
 					</div>
 
@@ -234,7 +227,7 @@ font-weight:bold;
     {
 		myAjax("1");
 		
-		$(document).on("click", "#permission_all_btn", function()
+		$(document).on("click", "#check_all_btn", function()
 		{
 			$("#search_result_div input[type=checkbox]").prop("checked", true);
 		})
@@ -243,6 +236,20 @@ font-weight:bold;
 		{
 			var popOption = "width=600, height=800, resizable=no, scrollbars=no, status=no top=100, left=1000;";
 			window.open("item?admin=Y&seq=" + this.name,"미리 보기 : "+this.name+" 번",popOption);
+		})
+		
+		$(document).on("click", "#search_btn,.navi_btns", function()
+		{
+			$("#check_all_btn").prop("checked", false);
+			myAjax(this.name);
+		})
+		
+		$(document).on("change", ".permission_check", function()
+		{
+			if($(this).prop("checked") == false)
+			{
+				$("#check_all_btn").prop("checked", false);
+			}
 		})
 		
 		$("#reg_btn").on("click", function()
@@ -273,27 +280,58 @@ font-weight:bold;
 	    		{
 	    			alert("성공");
 	    			myAjax("1");
-	    			$("#permission_all_btn").prop("checked", false);
+	    			$("#check_all_btn").prop("checked", false);
 	    		}
 	    		else
 	    		{
 	    			alert("실패");
 	    		}
-	    	});
+	    	})
+	    	.fail(function()
+	  	    {
+	  	    	alert("error");
+	  	    });
 		})
 		
-		$(document).on("click", "#search_btn,.navi_btns", function()
+		$("#del_btn").on("click", function()
 		{
-			$("#permission_all_btn").prop("checked", false);
-			myAjax(this.name);
-		})
-		
-		$(document).on("change", ".permission_check", function()
-		{
-			if($(this).prop("checked") == false)
-			{
-				$("#permission_all_btn").prop("checked", false);
-			}
+			var $check = $(".permission_check");
+			var seq = "";
+			
+	    	for(var i = 1 ; i <= $check.length ; i++)
+	    	{
+	    		if($check.eq(i-1).prop("checked") == true)
+	    		{
+	    			seq = seq + " " + $check.eq(i-1).attr("name");
+	    		}
+	    	}
+			
+			$.ajax
+	    	({
+	    		url: "admin-item-reject",
+	    		type: "POST",
+	    		data:
+	    		{
+	    			items: seq
+	    		}
+	    	})
+	    	.done(function(response)
+	    	{
+	    		if(response == "Y")
+	    		{
+	    			alert("성공");
+	    			myAjax("1");
+	    			$("#check_all_btn").prop("checked", false);
+	    		}
+	    		else
+	    		{
+	    			alert("실패");
+	    		}
+	    	})
+	    	.fail(function()
+	  	    {
+	  	    	alert("error");
+	  	    });
 		})
 		
 		function myAjax(btnName)
@@ -319,29 +357,14 @@ font-weight:bold;
 		    		for(var i = 1 ; i <= array.length ; i++)
 		    		{
 						var $row = $('<div class="row justify-content-center my-3 id_row"></div>');
-// 		    			var $seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-3"><h4>등록 번호</h4>'+array[i-1].seq+'</div>');
-// 		    			var $sellerCol = $('<div class="col-4 col-md-4 col-lg-3 text-center my-3"><h4>판매자</h4>'+array[i-1].seller+'</div>');
-// 		    			var $nameCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h4>상품명</h4>'+array[i-1].name+'</div>');
-// 		    			var $priceCol = $('<div class="col-4 col-md-4 col-lg-3 text-center my-3"><h4>가격</h4>'+array[i-1].price+'</div>');
-// 		    			var $checkCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-3"><input class="permission_check" name="'+array[i-1].seq+'" type="checkbox">'+'거래 승인'+'</div>');
 		    			
 		    			var $seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-auto">'+array[i-1].seq+'</div>');
 		    			var $nameCol = $('<div class="col-4 col-md-4 col-lg-3 text-center my-auto"><input class="btn btn-link preview_btn" name="'+array[i-1].seq+'" type="button" value="'+array[i-1].name+'"></div>');
 		    			var $priceCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-auto">'+array[i-1].price+'</div>');
 		    			var $sellerCol = $('<div class="col-4 col-md-4 col-lg-3 text-center my-auto">'+array[i-1].seller+'</div>');
-		    			var $checkCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-auto"><input class="permission_check" name="'+array[i-1].seq+'" type="checkbox">'+'거래 승인'+'</div>');
+		    			var $checkCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-auto"><input class="permission_check" name="'+array[i-1].seq+'" type="checkbox">'+'선택'+'</div>');
 		    			
-// 		    			var $image1Col = $('<div class="col-4 col-md-4 col-lg-4 text-center my-3"><h4>이미지1</h4>'+array[i-1].imagePath1+'</div>');
-// 		    			var $image2Col = $('<div class="col-4 col-md-4 col-lg-4 text-center my-3"><h4>이미지2</h4>'+array[i-1].imagePath2+'</div>');
-// 		    			var $image3Col = $('<div class="col-4 col-md-4 col-lg-4 text-center my-3"><h4>이미지3</h4>'+array[i-1].imagePath3+'</div>');
-// 		    			var $contentsCol = $('<div class="col-4 col-md-4 col-lg-12 text-center my-3"></div>');
-// 		    			$contentsCol.text(array[i-1].contents);
-// 		    			$contentsCol.prepend($("<h4>설명</h4>"));
-		    			
-		    			$row.append($seqCol).append($nameCol).append($priceCol).append($sellerCol).append($checkCol)
-// 		    			.append($image1Col).append($image2Col).append($image3Col)
-// 		    			.append($contentsCol)
-						;
+		    			$row.append($seqCol).append($nameCol).append($priceCol).append($sellerCol).append($checkCol);
 		    			$("#search_result_div").append($row);
 		    		}
 		    		
@@ -379,7 +402,6 @@ font-weight:bold;
 	    		}
 	    		else
 	    		{
-// 	    			alert("검색 결과 없음");
 	    			var $row = $('<div class="row justify-content-center my-1"></div>');
 	    			var $noResultCol = $('<div class="col-6 col-md-6 col-lg-12 text-center my-1"><h3>검색 결과가 없습니다.</h3></div>');
 	    			$row.append($noResultCol);

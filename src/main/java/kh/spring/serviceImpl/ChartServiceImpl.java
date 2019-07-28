@@ -61,7 +61,7 @@ public class ChartServiceImpl implements ChartService
 		for(int i = 1 ; i <= 12 ; i++)
 		{
 			JsonObject jajo = new JsonObject();
-			jajo.addProperty("time", chartDAO.getMonthVisitTime(i));
+			jajo.addProperty("time", chartDAO.getMonthVisitTime(i).get(0));
 			jajo.addProperty("count", chartDAO.getMonthVisitCount(i));
 			jajo.addProperty("pay", chartDAO.getMonthPayAmount(i));
 			ja.add(jajo);

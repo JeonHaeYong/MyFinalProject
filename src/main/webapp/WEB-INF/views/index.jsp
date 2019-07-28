@@ -421,8 +421,17 @@
 			location.href = "page?url=WEB-INF/modifyid.jsp";
 		})
 
-		$("#reinputpw").on("click", function() {
-			location.href = "page?url=WEB-INF/modifypassword.jsp";
+		.fail(function()
+		{
+			console.log("유기 동물 현황 오류 발생");
+		});
+	  	
+		
+		$.ajax
+		({
+			url : "admin-donation-index"
+			, dataType : "JSON"
+
 		})
 
 		$("#joinMem").on("click", function() {
