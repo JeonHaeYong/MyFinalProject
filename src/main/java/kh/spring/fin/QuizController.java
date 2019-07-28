@@ -74,6 +74,7 @@ public class QuizController {
 		}catch(Exception e) {e.printStackTrace();}
 		
 		request.setAttribute("answer",answer.size());//맞힌 개수
+		request.setAttribute("incorrCount", wrongList.size());
 		request.setAttribute("wrongList", wrongList);//틀린문제 리스트
 		request.setAttribute("getPoint", getPoint);//획득 포인트
 		request.setAttribute("rankList", rankList);//랭킹 리스트 

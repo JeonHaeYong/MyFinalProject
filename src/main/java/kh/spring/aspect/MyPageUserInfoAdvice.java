@@ -20,7 +20,7 @@ public class MyPageUserInfoAdvice {
 	@Autowired
 	private MessageService msgService;
 	
-	@Around("execution(* kh.spring.fin.*.toMyPage*(..))")
+	@Around("execution(* kh.spring.fin.*.toMyPage*(..)) || execution(* kh.spring.fin.AdminController.myPage*(..))")
 	public Object perfCheck(ProceedingJoinPoint pjp) {
 		Object[] params = pjp.getArgs();
 		HttpServletRequest request = null;

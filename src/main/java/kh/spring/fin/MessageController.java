@@ -60,6 +60,10 @@ public class MessageController {
 		String[] seq = request.getParameterValues("msgSeq");
 		int result = msgService.deleteMsgBySeq(seq);
 		System.out.println(result+"행 삭제되었습니다.");
+		int type = (int)session.getAttribute("type");
+		if(type==4) {
+			return "redirect:admin-msg";
+		}
 		return "redirect:toMyPage_message";
 	}
 

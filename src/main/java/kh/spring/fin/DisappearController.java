@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import kh.spring.dto.DisappearCommentsDTO;
 import kh.spring.dto.DisappearReportDTO;
+import kh.spring.service.DisappearCommentsService;
 import kh.spring.service.DisappearReportService;
 
 @Controller
@@ -25,6 +27,8 @@ public class DisappearController {
 	private HttpSession session;
 	@Autowired
 	private DisappearReportService drs;
+	@Autowired
+	private DisappearCommentsService dcService;
 	
 	@RequestMapping("toDisappearList")
 	public String toDisappearList(HttpServletRequest request) {
@@ -99,6 +103,13 @@ public class DisappearController {
 			content = drs.toReportContentService(seq);
 		}catch(Exception e) {e.printStackTrace();}
 		request.setAttribute("content", content);
+		
+		//댓글
+		List<DisappearCommentsDTO> list = dcService.selectAllDisappearCommentsService(seq,1);
+		//(댓글 navi)
+		List<String> reply_navi = dcService.getNaviForDisappearCommentsList(seq, 1);
+		request.setAttribute("replyList", list);
+		request.setAttribute("reply_navi", reply_navi);
 		return "disappear/ReportContents";
 	}
 	@RequestMapping("toAlterForm")

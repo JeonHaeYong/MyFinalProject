@@ -33,8 +33,14 @@
 {
 	font-family: 'SeoulNamsanM';
 }
-
-
+.menu_header
+{
+	font-family: 'Gamja Flower', cursive !important;
+	font-size: 35px;
+	border-bottom: 1px solid gray;
+	color : #B45F04;
+	font-weight: 600;
+}
 
 
 #menu_row > div > a{
@@ -115,560 +121,608 @@ font-weight:bold;
 
 		<div id="container" class="container">
 			
+			<div class="row justify-content-center">
+				
+				<div class="col-2 my-auto">
 			
+					<div id="menu_row" class="row justify-content-center">
+						
+						<div class="col-6 col-md-4 col-lg-12 text-center my-3">
+							<h2 class="menu_header my-1">관리자 메뉴</h2>
+						</div>
+						
+						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+							<a href="admin-member" class="btn menu_btns">회원 관리</a>
+						</div>
 			
+						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+							<a href="admin-item" class="btn menu_btns">무료 나눔 물품 승인</a>
+						</div>
 			
+						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+							<a href="admin-paylog" class="btn menu_btns">무료 나눔 거래 내역</a>
+						</div>
 			
-			<div id="menu_row" class="row justify-content-center">
-
-				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="admin-member" class="btn menu_btns">회원 관리</a>
-				</div>
-	
-				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="admin-item" class="btn menu_btns">무료 나눔 물품 승인</a>
-				</div>
-	
-				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="admin-paylog" class="btn menu_btns">무료 나눔 거래 내역</a>
-				</div>
-	
-				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="admin-donation" class="btn selected_menu_btns">월 별 후원금 및 전달 기관</a>
-				</div>
-	
-				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="admin-quiz" class="btn menu_btns">퀴즈 당첨자</a>
-				</div>
-	
-				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="admin-chart" class="btn menu_btns">통계</a>
+						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+							<a href="admin-donation" class="btn selected_menu_btns">월 별 후원금 및 전달 기관</a>
+						</div>
+			
+						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+							<a href="admin-quiz" class="btn menu_btns">퀴즈 당첨자</a>
+						</div>
+			
+						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+							<a href="admin-chart" class="btn menu_btns">통계</a>
+						</div>
+						
+						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+							<a href="admin-msg" class="btn menu_btns">관리자쪽지함</a>
+						</div>
+						
+						<div class="col-12 text-center px-1">
+							<a href="admin-pwChange" class="btn menu_btns">비밀번호변경</a>
+						</div>
+					</div>
+				
 				</div>
 				
-				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="admin-msg" class="btn menu_btns">관리자쪽지함</a>
-				</div>
-	
-			</div>
-			
-			
-			
-			
-			
-			<div class="row justify-content-center">
-
-				<div class="col-12 col-md-12 col-lg-12 text-center my-3">
-					
-					<div class="row justify-content-center">
-						
-						<div id="top_header" class="col-12 col-md-12 col-lg-12 text-center my-3 btn my_buttons">
-							
-							<h2>후원 업체 등록</h2>
-							
-						</div>
-						
-					</div>
-					
-					<div id="top_body" class="row justify-content-center my-1">
-						
+				
+				
+				
+				
+				<div class="col-1"></div>
+				
+				
+				
+				
+				
+				<div class="col-9">
+				
+					<div id="contents_row" class="row justify-content-center mt-5">
+				
 						<div class="col-12">
 							
 							<div class="row justify-content-center">
-						
-								<div class="col-12 col-md-12 col-lg-2 text-center my-1">
-								
-									<label>후원 업체명</label>
-								
-								</div>
-								
-								<div class="col-12 col-md-12 col-lg-10 text-center my-1">
-								
-									<input id="name_text" class="form-control" type="text">
-								
-								</div>
-								
-							</div>
-							
-							<div class="row justify-content-center">
-								
-								<div class="col-12 col-md-12 col-lg-2 text-center my-1">
-								
-									<label>제목</label>
-								
-								</div>
-								
-								<div class="col-12 col-md-12 col-lg-10 text-center my-1">
-								
-									<input id="title_text" class="form-control" type="text">
-								
-								</div>
-								
-							</div>
-							
-							<div class="row justify-content-center">
-								
-								<div class="col-12 col-md-12 col-lg-2 text-center my-1">
-								
-									<label>설명</label>
-								
-								</div>
-								
-								<div class="col-12 col-md-12 col-lg-10 text-center my-1">
-								
-									<textarea id="explanation_text" class="form-control" rows="5"></textarea>
-								
-								</div>
-								
-							</div>
-							
-							<div class="row justify-content-center">
-								
-								<div class="col-12 col-md-12 col-lg-2 text-center my-1">
-								
-									<label>사진1</label>
-								
-								</div>
-								
-								<div class="col-12 col-md-12 col-lg-10 text-center my-1">
-								
-									<input id="image1_file" class="form-control" name="image1" type="file">
-								
-								</div>
-								
-							</div>
-							
-							<div class="row justify-content-center">
-								
-								<div class="col-12 col-md-12 col-lg-2 text-center my-1">
-								
-									<label>사진2</label>
-								
-								</div>
-								
-								<div class="col-12 col-md-12 col-lg-10 text-center my-1">
-								
-									<input id="image2_file" class="form-control" name="image2" type="file">
-								
-								</div>
-								
-							</div>
-							
-							<div class="row justify-content-center">
-								
-								<div class="col-12 col-md-12 col-lg-2 text-center my-1">
-								
-									<label>사진3</label>
-								
-								</div>
-								
-								<div class="col-12 col-md-12 col-lg-10 text-center my-1">
-								
-									<input id="image3_file" class="form-control" name="image3" type="file">
-								
-								</div>
-								
-							</div>
-							
-							<div class="row justify-content-center">
-								
-								<div class="col-12 col-md-12 col-lg-2 text-center my-1">
-								
-									<label>좌측 하단 사진</label>
-								
-								</div>
-								
-								<div class="col-12 col-md-12 col-lg-10 text-center my-1">
-								
-									<input id="left_file" class="form-control" name="left" type="file">
-								
-								</div>
-								
-							</div>
-							
-							<div class="row justify-content-center">
-								
-								<div class="col-12 col-md-12 col-lg-2 text-center my-1">
-								
-									<label>우측 하단 사진</label>
-								
-								</div>
-								
-								<div class="col-12 col-md-12 col-lg-10 text-center my-1">
-								
-									<input id="right_file" class="form-control" name="right" type="file">
-								
-								</div>
-								
-							</div>
-							
-							<div class="row justify-content-center">
-								
-								<div class="col-12 col-md-12 col-lg-2 text-center my-1">
-								
-									<label>목표 금액</label>
-								
-								</div>
-								
-								<div class="col-12 col-md-12 col-lg-10 text-center my-1">
-								
-									<input id="goalmoney_text" class="form-control" type="text">
-								
-								</div>
-								
-							</div>
-							
-							<div class="row justify-content-center">
-								
-								<div class="col-12 col-md-12 col-lg-2 text-center my-1">
-								
-									<label>시작 날짜</label>
-								
-								</div>
-								
-								<div class="col-12 col-md-12 col-lg-4 text-center my-1">
-								
-									<input id="startdate_text" class="form-control" type="date">
-								
-								</div>
-								
-								<div class="col-12 col-md-12 col-lg-2 text-center my-1">
-								
-									<label>종료 날짜</label>
-								
-								</div>
-								
-								<div class="col-12 col-md-12 col-lg-4 text-center my-1">
-								
-									<input id="enddate_text" class="form-control" type="date">
-								
-								</div>
-								
-							</div>
-							
-							<div class="row justify-content-center">
-								
-								<div class="col-12 col-md-12 col-lg-12 text-center my-5">
-								
-									<input id="submit_btn" class="btn my_buttons" type="button" value="후원 업체 등록">
-								
-								</div>
-								
-							</div>
-							
-						</div>
-						
-					</div>
-					
-					
-				</div>
 
-			</div>
-			
-			
-			<div class="row justify-content-center">
-
-				<div class="col-12 col-md-12 col-lg-12 text-center my-1">
-					
-					<div class="row justify-content-center">
-					
-						<div id="mid_header" class="col-12 col-md-12 col-lg-12 text-center my-3 btn my_buttons">
-							
-							<h2>등록 정보 조회 및 변경</h2>
-							
-						</div>
-						
-					</div>
-					
-					<div id="mid_body" class="row justify-content-center my-1">
-						
-						<div class="col-12">
-							
-							<div class="row justify-content-center">
-						
-								<div class="col-12 col-md-12 col-lg-2 text-center my-1">
-								
-									<label>등록 번호</label>
-								
-								</div>
-								
-								<div class="col-12 col-md-12 col-lg-10 text-center my-1">
-								
-									<input id="select_seq_text" class="form-control" type="text" readonly>
-								
-								</div>
-								
-							</div>
-							
-							<div class="row justify-content-center">
-						
-								<div class="col-12 col-md-12 col-lg-2 text-center my-1">
-								
-									<label>후원 업체명</label>
-								
-								</div>
-								
-								<div class="col-12 col-md-12 col-lg-10 text-center my-1">
-								
-									<input id="select_name_text" class="form-control" type="text">
-								
-								</div>
-								
-							</div>
-							
-							<div class="row justify-content-center">
-						
-								<div class="col-12 col-md-12 col-lg-2 text-center my-1">
-								
-									<label>제목</label>
-								
-								</div>
-								
-								<div class="col-12 col-md-12 col-lg-10 text-center my-1">
-								
-									<input id="select_title_text" class="form-control" type="text">
-								
-								</div>
-								
-							</div>
-							
-							<div class="row justify-content-center">
-								
-								<div class="col-12 col-md-12 col-lg-2 text-center my-1">
-								
-									<label>설명</label>
-								
-								</div>
-								
-								<div class="col-12 col-md-12 col-lg-10 text-center my-1">
-								
-									<textarea id="select_explanation_text" class="form-control" rows="5"></textarea>
-								
-								</div>
-								
-							</div>
-							
-							<div class="row justify-content-center">
-								
-								<div class="col-12 col-md-12 col-lg-2 text-center my-1">
-								
-									<label>사진1</label>
-								
-								</div>
-								
-								<div class="col-12 col-md-12 col-lg-10 text-center my-1">
-								
-									<input id="select_image1_file" class="form-control" name="image1" type="file">
-								
-								</div>
-								
-							</div>
-							
-							<div class="row justify-content-center">
-								
-								<div class="col-12 col-md-12 col-lg-2 text-center my-1">
-								
-									<label>사진2</label>
-								
-								</div>
-								
-								<div class="col-12 col-md-12 col-lg-10 text-center my-1">
-								
-									<input id="select_image2_file" class="form-control" name="image2" type="file">
-								
-								</div>
-								
-							</div>
-							
-							<div class="row justify-content-center">
-								
-								<div class="col-12 col-md-12 col-lg-2 text-center my-1">
-								
-									<label>사진3</label>
-								
-								</div>
-								
-								<div class="col-12 col-md-12 col-lg-10 text-center my-1">
-								
-									<input id="select_image3_file" class="form-control" name="image3" type="file">
-								
-								</div>
-								
-							</div>
-							
-							<div class="row justify-content-center">
-								
-								<div class="col-12 col-md-12 col-lg-2 text-center my-1">
-								
-									<label>좌측 하단 사진</label>
-								
-								</div>
-								
-								<div class="col-12 col-md-12 col-lg-10 text-center my-1">
-								
-									<input id="select_left_file" class="form-control" name="left" type="file">
-								
-								</div>
-								
-							</div>
-							
-							<div class="row justify-content-center">
-								
-								<div class="col-12 col-md-12 col-lg-2 text-center my-1">
-								
-									<label>우측 하단 사진</label>
-								
-								</div>
-								
-								<div class="col-12 col-md-12 col-lg-10 text-center my-1">
-								
-									<input id="select_right_file" class="form-control" name="right" type="file">
-								
-								</div>
-								
-							</div>
-							
-							<div class="row justify-content-center">
-								
-								<div class="col-12 col-md-12 col-lg-2 text-center my-1">
-								
-									<label>목표 금액</label>
-								
-								</div>
-								
-								<div class="col-12 col-md-12 col-lg-10 text-center my-1">
-								
-									<input id="select_goalmoney_text" class="form-control" type="text">
-								
-								</div>
-								
-							</div>
-							
-							<div class="row justify-content-center">
-								
-								<div class="col-12 col-md-12 col-lg-2 text-center my-1">
-								
-									<label>현재 모금 금액</label>
-								
-								</div>
-								
-								<div class="col-12 col-md-12 col-lg-10 text-center my-1">
-								
-									<input id="select_currentmoney_text" class="form-control" type="text" readonly>
-								
-								</div>
-								
-							</div>
-							
-							<div class="row justify-content-center">
-								
-								<div class="col-12 col-md-12 col-lg-2 text-center my-1">
-								
-									<label>시작 날짜</label>
-								
-								</div>
-								
-								<div class="col-12 col-md-12 col-lg-4 text-center my-1">
-								
-									<input id="select_startdate_text" class="form-control" type="date">
-								
-								</div>
-								
-								<div class="col-12 col-md-12 col-lg-2 text-center my-1">
-								
-									<label>종료 날짜</label>
-								
-								</div>
-								
-								<div class="col-12 col-md-12 col-lg-4 text-center my-1">
-								
-									<input id="select_enddate_text" class="form-control" type="date">
-								
-								</div>
-								
-							</div>
-							
-							<div class="row justify-content-center">
-								
-								<div id="search_result_div" class="col-12 col-md-12 col-lg-12 text-center my-3">
-								
-								
-								</div>
-								
 								<div class="col-12 col-md-12 col-lg-12 text-center my-3">
-								
-									<input id="update_btn" class="btn my_buttons" type="button" value="등록 정보 변경">
-								
+									
+									<div class="row justify-content-center">
+										
+										<div id="top_header" class="col-12 col-md-12 col-lg-12 text-center my-3 btn my_buttons">
+											
+											<h2>후원 업체 등록</h2>
+											
+										</div>
+										
+									</div>
+									
+									<div id="top_body" class="row justify-content-center my-1">
+										
+										<div class="col-12">
+											
+											<div class="row justify-content-center">
+										
+												<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+												
+													<label>후원 업체명</label>
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+												
+													<input id="name_text" class="form-control" type="text">
+												
+												</div>
+												
+											</div>
+											
+											<div class="row justify-content-center">
+												
+												<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+												
+													<label>제목</label>
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+												
+													<input id="title_text" class="form-control" type="text">
+												
+												</div>
+												
+											</div>
+											
+											<div class="row justify-content-center">
+												
+												<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+												
+													<label>설명</label>
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+												
+													<textarea id="explanation_text" class="form-control" rows="5"></textarea>
+												
+												</div>
+												
+											</div>
+											
+											<div class="row justify-content-center">
+												
+												<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+												
+													<label>사진1</label>
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+												
+													<input id="image1_file" class="form-control" name="image1" type="file">
+												
+												</div>
+												
+											</div>
+											
+											<div class="row justify-content-center">
+												
+												<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+												
+													<label>사진2</label>
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+												
+													<input id="image2_file" class="form-control" name="image2" type="file">
+												
+												</div>
+												
+											</div>
+											
+											<div class="row justify-content-center">
+												
+												<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+												
+													<label>사진3</label>
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+												
+													<input id="image3_file" class="form-control" name="image3" type="file">
+												
+												</div>
+												
+											</div>
+											
+											<div class="row justify-content-center">
+												
+												<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+												
+													<label>좌측 하단 사진</label>
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+												
+													<input id="left_file" class="form-control" name="left" type="file">
+												
+												</div>
+												
+											</div>
+											
+											<div class="row justify-content-center">
+												
+												<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+												
+													<label>우측 하단 사진</label>
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+												
+													<input id="right_file" class="form-control" name="right" type="file">
+												
+												</div>
+												
+											</div>
+											
+											<div class="row justify-content-center">
+												
+												<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+												
+													<label>목표 금액</label>
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+												
+													<input id="goalmoney_text" class="form-control" type="text">
+												
+												</div>
+												
+											</div>
+											
+											<div class="row justify-content-center">
+												
+												<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+												
+													<label>시작 날짜</label>
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-4 text-center my-1">
+												
+													<input id="startdate_text" class="form-control" type="date">
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+												
+													<label>종료 날짜</label>
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-4 text-center my-1">
+												
+													<input id="enddate_text" class="form-control" type="date">
+												
+												</div>
+												
+											</div>
+											
+											<div class="row justify-content-center">
+												
+												<div class="col-12 col-md-12 col-lg-12 text-center my-5">
+												
+													<input id="submit_btn" class="btn my_buttons" type="button" value="후원 업체 등록">
+												
+												</div>
+												
+											</div>
+											
+										</div>
+										
+									</div>
+									
+									
 								</div>
-								
-								<div class="col-12 col-md-12 col-lg-12 text-center my-3">
+				
+							</div>
+							
+							
+							
+							
+							<div class="row justify-content-center">
+
+								<div class="col-12 col-md-12 col-lg-12 text-center my-1">
+									
+									<div class="row justify-content-center">
+									
+										<div id="mid_header" class="col-12 col-md-12 col-lg-12 text-center my-3 btn my_buttons">
+											
+											<h2>등록 정보 조회 및 변경</h2>
+											
+										</div>
 										
-									<input id="search_btn" class="btn my_buttons" name="1" type="button" value="검색">
+									</div>
+									
+									<div id="mid_body" class="row justify-content-center my-1">
 										
+										<div class="col-12">
+											
+											<div class="row justify-content-center">
+										
+												<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+												
+													<label>등록 번호</label>
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+												
+													<input id="select_seq_text" class="form-control" type="text" readonly>
+												
+												</div>
+												
+											</div>
+											
+											<div class="row justify-content-center">
+										
+												<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+												
+													<label>후원 업체명</label>
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+												
+													<input id="select_name_text" class="form-control" type="text">
+												
+												</div>
+												
+											</div>
+											
+											<div class="row justify-content-center">
+										
+												<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+												
+													<label>제목</label>
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+												
+													<input id="select_title_text" class="form-control" type="text">
+												
+												</div>
+												
+											</div>
+											
+											<div class="row justify-content-center">
+												
+												<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+												
+													<label>설명</label>
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+												
+													<textarea id="select_explanation_text" class="form-control" rows="5"></textarea>
+												
+												</div>
+												
+											</div>
+											
+											<div class="row justify-content-center">
+												
+												<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+												
+													<label>사진1</label>
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+												
+													<input id="select_image1_file" class="form-control" name="image1" type="file">
+												
+												</div>
+												
+											</div>
+											
+											<div class="row justify-content-center">
+												
+												<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+												
+													<label>사진2</label>
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+												
+													<input id="select_image2_file" class="form-control" name="image2" type="file">
+												
+												</div>
+												
+											</div>
+											
+											<div class="row justify-content-center">
+												
+												<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+												
+													<label>사진3</label>
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+												
+													<input id="select_image3_file" class="form-control" name="image3" type="file">
+												
+												</div>
+												
+											</div>
+											
+											<div class="row justify-content-center">
+												
+												<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+												
+													<label>좌측 하단 사진</label>
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+												
+													<input id="select_left_file" class="form-control" name="left" type="file">
+												
+												</div>
+												
+											</div>
+											
+											<div class="row justify-content-center">
+												
+												<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+												
+													<label>우측 하단 사진</label>
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+												
+													<input id="select_right_file" class="form-control" name="right" type="file">
+												
+												</div>
+												
+											</div>
+											
+											<div class="row justify-content-center">
+												
+												<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+												
+													<label>목표 금액</label>
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+												
+													<input id="select_goalmoney_text" class="form-control" type="text">
+												
+												</div>
+												
+											</div>
+											
+											<div class="row justify-content-center">
+												
+												<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+												
+													<label>현재 모금 금액</label>
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-10 text-center my-1">
+												
+													<input id="select_currentmoney_text" class="form-control" type="text" readonly>
+												
+												</div>
+												
+											</div>
+											
+											<div class="row justify-content-center">
+												
+												<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+												
+													<label>시작 날짜</label>
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-4 text-center my-1">
+												
+													<input id="select_startdate_text" class="form-control" type="date">
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-2 text-center my-1">
+												
+													<label>종료 날짜</label>
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-4 text-center my-1">
+												
+													<input id="select_enddate_text" class="form-control" type="date">
+												
+												</div>
+												
+											</div>
+											
+											<div class="row justify-content-center">
+												
+												<div id="search_result_div" class="col-12 col-md-12 col-lg-12 text-center my-3">
+												
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-12 text-center my-3">
+												
+													<input id="update_btn" class="btn my_buttons" type="button" value="등록 정보 변경">
+												
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-12 text-center my-3">
+														
+													<input id="search_btn" class="btn my_buttons" name="1" type="button" value="검색">
+														
+												</div>
+												
+											</div>
+											
+										</div>
+										
+									</div>
+									
+								</div>
+				
+							</div>
+							
+							
+							<div class="row justify-content-center">
+				
+								<div class="col-12 col-md-12 col-lg-12 text-center my-1">
+									
+									<div class="row justify-content-center">
+									
+										<div id="bot_header" class="col-12 col-md-12 col-lg-12 text-center my-3 btn my_buttons">
+											
+											<h2>후원금 검색</h2>
+											
+										</div>
+										
+									</div>
+									
+									<div id="bot_body" class="row justify-content-center my-1">
+										
+										<div class="col-12">
+											
+											<div class="row justify-content-center">
+									
+												<div class="col-12 col-md-12 col-lg-6 text-center my-3">
+													
+													<input id="select_group_btn" class="btn selected_menu_btns" type="button" value="월 별 후원금 검색">
+													
+												</div>
+												
+												<div class="col-12 col-md-12 col-lg-6 text-center my-3">
+													
+													<input id="select_all_btn" class="btn menu_btns" type="button" value="개인 별 후원금 검색">
+													
+												</div>
+												
+											</div>
+											
+											<div class="row justify-content-center">
+											
+												<div id="log_result_div" class="col-12 col-md-12 col-lg-12 text-center my-3">
+													
+												</div>
+												
+						<!-- 						<div class="col-12 col-md-12 col-lg-12 text-center my-3"> -->
+						<!-- 							<input id="log_btn" class="btn my_buttons" name="1" type="button" value="월 별 후원금 검색"> -->
+						<!-- 						</div> -->
+												
+											</div>
+											
+										</div>
+										
+									</div>
+												
 								</div>
 								
 							</div>
+							
+							
+							
+							
+							
+							
+							
 							
 						</div>
 						
 					</div>
 					
 				</div>
-
+				
+				
 			</div>
 			
-			<div class="row justify-content-center">
-				
-				<div class="col-12 col-md-12 col-lg-12 text-center my-1">
-					
-					<div class="row justify-content-center">
-					
-						<div id="bot_header" class="col-12 col-md-12 col-lg-12 text-center my-3 btn my_buttons">
-							
-							<h2>후원금 검색</h2>
-							
-						</div>
-						
-					</div>
-					
-					<div id="bot_body" class="row justify-content-center my-1">
-						
-						<div class="col-12">
-							
-							<div class="row justify-content-center">
-					
-								<div class="col-12 col-md-12 col-lg-6 text-center my-3">
-									
-									<input id="select_group_btn" class="btn selected_menu_btns" type="button" value="월 별 후원금 검색">
-									
-								</div>
-								
-								<div class="col-12 col-md-12 col-lg-6 text-center my-3">
-									
-									<input id="select_all_btn" class="btn menu_btns" type="button" value="개인 별 후원금 검색">
-									
-								</div>
-								
-							</div>
-							
-							<div class="row justify-content-center">
-							
-								<div id="log_result_div" class="col-12 col-md-12 col-lg-12 text-center my-3">
-									
-								</div>
-								
-		<!-- 						<div class="col-12 col-md-12 col-lg-12 text-center my-3"> -->
-		<!-- 							<input id="log_btn" class="btn my_buttons" name="1" type="button" value="월 별 후원금 검색"> -->
-		<!-- 						</div> -->
-								
-							</div>
-							
-						</div>
-						
-					</div>
-								
-				</div>
-				
-			</div>
+			
+			
+			
+			
+			
+			
+			
 			
 		</div>
 

@@ -10,7 +10,7 @@ public class DisappearCommentsDTO {
 	private String contents;
 	private Timestamp write_date;
 	
-	private String likeOk; //조회하는 사람이 좋아요 했는지..
+
 	private String imagepath; //댓글 작성자의 프로필사진
 	
 	private String formed_date; //시간이용해, 얼마전에 작성했는지... 띄워주기.
@@ -63,12 +63,7 @@ public class DisappearCommentsDTO {
 		return this.getFormedTime();
 	}
 	
-	public String getLikeOk() {
-		return likeOk;
-	}
-	public void setLikeOk(String likeOk) {
-		this.likeOk = likeOk;
-	}
+	
 	
 	public String getImagepath() {
 		return imagepath;

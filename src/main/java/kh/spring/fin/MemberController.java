@@ -365,6 +365,10 @@ public class MemberController {
 		}
 		int result = mservice.updatePwService(id, pw);
 		System.out.println("ID:"+id+"의 pw변경이 " + result +"행 완료되었습니다.");
+		int type = (int)session.getAttribute("type");
+		if(type==4) {
+			return "redirect:admin-pwChange";
+		}
 		return "redirect:toMyPage";
 	}
 

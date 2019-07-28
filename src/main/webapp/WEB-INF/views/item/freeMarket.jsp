@@ -211,7 +211,7 @@
 					<c:if test="${itemList.size() == 0 }">
 						<div class="col-12 m-3"><h3>등록된 상품이 없습니다.</h3></div> 
 					</c:if>
-					<c:if test="${sessionScope.type == 4 }">
+					<c:if test="${sessionScope.type == 4 && itemList.size() != 0 }">
 						<div class="col-6 custom-control custom-checkbox">
 							<input type="checkbox" class="custom-control-input" id="allCheck">
 							<label class="custom-control-label" for="allCheck">전체선택</label>
@@ -340,10 +340,8 @@
         			$("#allCheck").prop("checked", false);
         		}
         	});
-			$(window).on("click", "#delItem", function(){
-				
-			})
-			$("#delItem").on("click", function(){
+			
+			$(document).on("click", "#delItem", function(){
 				if(count == 0 || $(".itemCheck").length == 0){
 					alert("삭제할 상품이 없습니다. 다시 선택해주세요.");
 				}else{
@@ -352,7 +350,7 @@
         			$(".itemCheck").each(function(i, item){
             			if($(item).prop("checked")){
             				checkedItem[index] = $(this).attr("value");
-            				console.log(checkedItem[index]);
+            				alert(checkedItem[index]);
             				index++;
             			}
             		});

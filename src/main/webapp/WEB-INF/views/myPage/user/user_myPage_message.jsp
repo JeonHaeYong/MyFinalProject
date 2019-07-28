@@ -487,10 +487,10 @@
                 	var category = $(this).attr("value");
                 	var currentPage = $(this).text();
                 	if(currentPage=="<이전"){
-                		var prev =  $(this).parent().next().attr("value");
+                		var prev =  $(this).next().text();
                 		currentPage = parseInt(prev) - 1 ;
                 	}else if(currentPage=="다음>"){
-                		var next  = $(this).parent().prev().attr("value");
+                		var next  = $(this).prev().text();
                 		currentPage = parseInt(next) + 1 ;
                 	}
                 	//리스트랑 navi 가져오기.

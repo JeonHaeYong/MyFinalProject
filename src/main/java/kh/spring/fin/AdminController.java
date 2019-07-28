@@ -39,7 +39,7 @@ public class AdminController
 	@Autowired
 	private HttpSession session;
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
-	
+
 	@Autowired
 	BlackListService blackService;
 	@Autowired
@@ -54,7 +54,7 @@ public class AdminController
 	LogService logService;
 	@Autowired
 	DonationPaymentService donationPaymentService;
-	
+
 	//Member Start
 	@RequestMapping(value = "admin-member")
 	public String manageMemberPage()
@@ -67,7 +67,7 @@ public class AdminController
 	{
 		logger.info("회원 데이터 삽입 시도");
 		String result = "error";
-		
+
 		try
 		{
 			result = blackService.insertRandomMembers();
@@ -76,7 +76,7 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	@ResponseBody
@@ -92,9 +92,9 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
-		
+
 	}
 	@RequestMapping(value = "admin-member-black")
 	public String blackMember(String id, String reason)
@@ -108,14 +108,14 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	@RequestMapping(value = "admin-member-release", method = RequestMethod.POST)
 	public String releaseMember(BlackListDTO dto)
 	{
 		String result = "error";
-		
+
 		try
 		{
 			result = blackService.delete(dto);
@@ -124,7 +124,7 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	@ResponseBody
@@ -140,15 +140,15 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
-		
+
 	}
-	
+
 	//Member End
-	
-	
-	
+
+
+
 	//Chart Start
 	@RequestMapping(value = "admin-chart")
 	public String chartPage()
@@ -168,9 +168,9 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
-		
+
 	}
 	@RequestMapping(value = "admin-chart-insert")
 	public String insertDummyData()
@@ -184,7 +184,7 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	@ResponseBody
@@ -200,16 +200,16 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
-	
+
 	//Chart End
-	
-	
-	
+
+
+
 	//Donation Start
-	
+
 	@RequestMapping(value = "admin-donation")
 	public String donationPage()
 	{
@@ -227,7 +227,7 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	@ResponseBody
@@ -243,7 +243,7 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	@RequestMapping(value = "admin-donation-update", method = RequestMethod.POST)
@@ -258,7 +258,7 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	@ResponseBody
@@ -274,7 +274,7 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	@ResponseBody
@@ -290,7 +290,7 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	@ResponseBody
@@ -306,15 +306,15 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	//Donation End
-	
-	
-	
+
+
+
 	//Item Start
-	
+
 	@RequestMapping(value = "admin-item")
 	public String itemPage()
 	{
@@ -324,7 +324,7 @@ public class AdminController
 	public Object insertItemDummy()
 	{
 		Object result = "error";
-		
+
 		try
 		{
 			result = itemService.insertDummy();
@@ -333,7 +333,7 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	@ResponseBody
@@ -341,7 +341,7 @@ public class AdminController
 	public Object itemSearch(String page)
 	{
 		Object result = "";
-		
+
 		try
 		{
 			result = itemService.selectForAdmin(page);
@@ -350,7 +350,7 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	@ResponseBody
@@ -358,7 +358,7 @@ public class AdminController
 	public Object itemPermission(String items)
 	{
 		Object result = "";
-		
+
 		try
 		{
 			result = itemService.permissionItems(items);
@@ -367,7 +367,7 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	@ResponseBody
@@ -375,7 +375,7 @@ public class AdminController
 	public Object itemReject(String items)
 	{
 		Object result = "";
-		
+
 		try
 		{
 			result = itemService.rejectItems(items);
@@ -384,15 +384,15 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
-	
+
 	//Item End
-	
-	
+
+
 	//Quiz Start
-	
+
 	@RequestMapping(value = "admin-quiz")
 	public String quizPage()
 	{
@@ -403,7 +403,7 @@ public class AdminController
 	public Object quizSearch(String page)
 	{
 		Object result = "";
-		
+
 		try
 		{
 			result = memberService.selectRankFiveByPoint(page);
@@ -412,14 +412,14 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	@RequestMapping(value = "admin-quiz-random")
 	public Object updatePointRandom()
 	{
 		Object result = "";
-		
+
 		try
 		{
 			result = memberService.updateRandomPoint();
@@ -428,16 +428,16 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	//Quiz End
-	
-	
-	
-	
+
+
+
+
 	//PayLog start
-	
+
 	@RequestMapping(value = "admin-paylog")
 	public String paylogPage()
 	{
@@ -447,7 +447,7 @@ public class AdminController
 	public Object insertPayLogDummy()
 	{
 		Object result = "error";
-		
+
 		try
 		{
 			result = logService.insertDummy();
@@ -456,7 +456,7 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	@ResponseBody
@@ -464,7 +464,7 @@ public class AdminController
 	public Object selectFromPayLog(String page, String condition, String keyword)
 	{
 		Object result = "error";
-		
+
 		try
 		{
 			result = logService.selectPayLog(page, condition, keyword);
@@ -473,14 +473,20 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
-	
+
 	//PayLog end
-	
-	
-	
+
+
+	@RequestMapping("admin-mypage")
+	public String myPage(HttpServletRequest request) 
+	{
+		return "myPage/user/user_myPage_profile";
+	}
+
+
 	//퀴즈 관리자 -------------------------------------------------------------------------------------------
 	@RequestMapping("quizAdmin.admin")
 	public String quizAdmin(HttpServletRequest request) {
@@ -508,7 +514,7 @@ public class AdminController
 			String correct = request.getParameter("correct");
 			int point = Integer.parseInt(request.getParameter("point"));
 			String explain = request.getParameter("explain");
-			
+
 			QuizDTO qdto = new QuizDTO(0, quiz, correct, point, explain);
 			qs.insertQuizService(qdto);
 			return "redirect:/quizAdmin.admin?currentPage="+session.getAttribute("currentPage");
@@ -564,5 +570,10 @@ public class AdminController
 		List<String> sentNavi = msgService.getNaviforMsg(page, "sender", loginId);
 		request.setAttribute("sentNavi", sentNavi);
 		return "myPage/admin/admin_message";
+	}
+	
+	@RequestMapping("admin-pwChange")
+	public String admin_pwChange(){
+		return "myPage/admin/admin_pw";
 	}
 }
