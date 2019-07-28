@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -91,7 +92,9 @@ a{
 				
 				<div class="col-12 col-md-12 col-lg-12 text-right my-1">
 					
-					<input id="write_btn" class="btn my_buttons mx-1" type="button" value="글 작성">
+					<c:if test="${admin == 'Y'}">
+						<input id="write_btn" class="btn my_buttons mx-1" type="button" value="글 작성">
+					</c:if>
 					
 				</div>
 				
@@ -142,11 +145,6 @@ a{
 		$(document).on("click", "#contents_div > .notice_contents_row", function()
 		{
 			location.href = $(this).children("div").children("a").attr("href");
-		});
-		
-		$("#write_btn").on("click", function()
-		{
-			location.href = "notice-write-page";
 		});
 		
 		function myAjax(btnName)
@@ -230,4 +228,12 @@ a{
 		
     };
 </script>
+<c:if test="${admin == 'Y'}">
+<script>
+	$("#write_btn").on("click", function()
+	{
+		location.href = "notice-write-page";
+	});
+</script>
+</c:if>
 </html>

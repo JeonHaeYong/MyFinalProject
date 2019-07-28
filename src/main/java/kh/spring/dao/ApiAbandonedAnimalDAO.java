@@ -8,6 +8,7 @@ import java.util.Map;
 import kh.spring.dto.ApiAbandonedAnimalDTO;
 
 public interface ApiAbandonedAnimalDAO {
+	public List<ApiAbandonedAnimalDTO> selectForMain();
 	public int insertApi(ApiAbandonedAnimalDTO dto);
 	public int apiAbandonedAnimalContentsSize();
 	public int apiSizeByCondition(Date dateFrom,

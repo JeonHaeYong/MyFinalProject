@@ -370,6 +370,23 @@ public class AdminController
 		
 		return result;
 	}
+	@ResponseBody
+	@RequestMapping(value = "admin-item-reject")
+	public Object itemReject(String items)
+	{
+		Object result = "";
+		
+		try
+		{
+			result = itemService.rejectItems(items);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 	
 	//Item End
 	

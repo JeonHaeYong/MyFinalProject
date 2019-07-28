@@ -8,6 +8,8 @@ public interface NoticeService
 	
 	public String insertDummy() throws Exception;
 	
+	public Object noticeListPage() throws Exception;
+	
 	public String selectForPage(String page) throws Exception;
 	
 	public Object NoticeDetailPage(NoticeDTO dto) throws Exception;
