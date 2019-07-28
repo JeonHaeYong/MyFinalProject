@@ -24,6 +24,11 @@ public class ApiAbandonedAnimalDAOImpl implements ApiAbandonedAnimalDAO {
 	@Autowired
 	private SqlSessionTemplate sst;
 	
+	
+	public List<ApiAbandonedAnimalDTO> selectForMain(){
+		return sst.selectList("ApiDAO.selectForMain");
+	}
+	
 	public int insertApi(ApiAbandonedAnimalDTO dto) {
 		return sst.insert("ApiDAO.insert", dto);
 	}

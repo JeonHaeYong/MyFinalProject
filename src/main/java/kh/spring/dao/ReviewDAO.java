@@ -10,6 +10,7 @@ public interface ReviewDAO {
 	public List<ReviewDTO> selectAllReviewByCurrentpage(int start, int end);
 	public int modifyReview(ReviewDTO dto);
 	public int deleteReview(int seq);
+	public int deleteReview(String[] seq);
 	public List<ReviewDTO> selectReviewPerPage(int start, int end);
 	public int getReviewCount();
 	public ReviewDTO selectReviewBySeq(int seq);

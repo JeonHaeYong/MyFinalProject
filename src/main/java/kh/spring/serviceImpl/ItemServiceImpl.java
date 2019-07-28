@@ -267,5 +267,22 @@ public class ItemServiceImpl implements ItemService{
 		return "N";
 		
 	}
+
+	@Override
+	public String rejectItems(String items) throws Exception
+	{
+		String[] seqArr = items.split(" ");
+		
+		if(seqArr.length >= 2)
+		{
+			for(int i = 2 ; i <= seqArr.length ; i++)
+			{
+				itemDao.deleteItemBySeq(Integer.parseInt(seqArr[i-1]));
+			}
+			return "Y";
+		}
+		
+		return "N";
+	}
 	
 }

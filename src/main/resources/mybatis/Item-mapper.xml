@@ -79,4 +79,8 @@
 		update item set permission = 'y' where seq = #{value}
 	</update>
 	
+	<delete id="deleteBySeq">
+		delete from item where seq = #{value}
+	</delete>
+	
 </mapper>

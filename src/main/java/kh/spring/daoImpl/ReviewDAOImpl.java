@@ -64,4 +64,10 @@ public class ReviewDAOImpl implements ReviewDAO {
 		return sst.update("ReviewDAO.updateViewCount",seq);
 	}
 
+
+	@Override
+	public int deleteReview(String[] seq) {
+		return sst.delete("ReviewDAO.deleteReviewListByAdmin",seq);
+	}
+
 }

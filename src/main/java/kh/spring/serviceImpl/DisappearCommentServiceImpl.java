@@ -4,18 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
 
 import kh.spring.dao.DisappearCommentsDAO;
 import kh.spring.dao.ReviewCommentsLikesDAO;
 import kh.spring.dto.DisappearCommentsDTO;
-import kh.spring.dto.ReviewCommentsLikesDTO;
 import kh.spring.service.DisappearCommentsService;
 import kh.spring.statics.ReviewCommentsStatics;
 
 
 
-
+@Service
 public class DisappearCommentServiceImpl implements DisappearCommentsService{
 	@Autowired
 	private DisappearCommentsDAO dcdao;

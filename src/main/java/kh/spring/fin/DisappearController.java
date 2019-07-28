@@ -49,6 +49,7 @@ public class DisappearController {
 
 	@RequestMapping("insertProc.dis")
 	public String insertProc_loginCheck(HttpServletRequest request, MultipartFile[] image) {
+		System.out.println(image.length);
 		String disappearDate = request.getParameter("disappearDate");
 		java.sql.Date disDate = null;
 		try {
@@ -72,15 +73,15 @@ public class DisappearController {
 			
 			List<String> imgPath = drs.imageUploadService(image);
 			DisappearReportDTO drdto = null;
-			if(imgPath.size() == 1) {
+			if(imgPath.size() == 2) {
 				drdto = new DisappearReportDTO(0, disDate, areaList, disappearArea, tel, kind, gender, neuter, age, furColor, feature, et, imgPath.get(0), "noImage", "noImage", writer, null, ip);
 
-			} else if(imgPath.size() ==2) {
-				drdto = new DisappearReportDTO(0, disDate, areaList, disappearArea, tel, kind, gender, neuter, age, furColor, feature, et, imgPath.get(0), imgPath.get(1), "noImage", writer, null, ip);
-
-			}else if(imgPath.size()==3) {
-				drdto = new DisappearReportDTO(0, disDate, areaList, disappearArea, tel, kind, gender, neuter, age, furColor, feature, et, imgPath.get(0), imgPath.get(1), imgPath.get(2), writer, null, ip);
-
+			} else if(imgPath.size() ==3) {
+				if(image[1].getSize()==0) {
+					drdto = new DisappearReportDTO(0, disDate, areaList, disappearArea, tel, kind, gender, neuter, age, furColor, feature, et, imgPath.get(0), imgPath.get(1), "noImage", writer, null, ip);
+				}else {
+					drdto = new DisappearReportDTO(0, disDate, areaList, disappearArea, tel, kind, gender, neuter, age, furColor, feature, et, imgPath.get(0), imgPath.get(1), imgPath.get(2), writer, null, ip);
+				}
 			}
 			
 			try {
@@ -115,6 +116,7 @@ public class DisappearController {
 	@RequestMapping("alterProc.dis")
 	public String alterProc_loginCheck(HttpServletRequest request, MultipartFile[] image) {
 		int seq = Integer.parseInt(request.getParameter("seq"));
+		System.out.println(image.length);
 		System.out.println("글번호"+seq);
 		
 		String disappearDate = request.getParameter("disappearDate");
@@ -134,16 +136,28 @@ public class DisappearController {
 		String furColor = request.getParameter("furColor");
 		String feature = request.getParameter("feature");
 		String et = request.getParameter("et");
-		if(image.length == 0) { // 이미지가 없을 경
-			DisappearReportDTO drdto = new DisappearReportDTO(seq, disDate, areaList, disappearArea, tel, kind, gender, neuter, age, furColor, feature, et, null, null, null, null, null, null);
-			drs.updateNoimageService(drdto);
-		}else {// 이미지가 있을 경
-			List<String> imgPath = drs.imageUploadService(image);
-			DisappearReportDTO drdto = new DisappearReportDTO(seq, disDate, areaList, disappearArea, tel, kind, gender, neuter, age, furColor, feature, et, imgPath.get(0), imgPath.get(1), imgPath.get(2), null, null, null);
+		
+		List<String> imgPath = drs.imageUploadService(image);
+		DisappearReportDTO drdto = null;
+		if(imgPath.size()==1){
+			System.out.println("이미지 없음");
+			drdto = new DisappearReportDTO(seq, disDate, areaList, disappearArea, tel, kind, gender, neuter, age, furColor, feature, et, null, null, null, null, null, null);
+		}else if(imgPath.size() == 2) {
+			System.out.println("이미지 하나");
+			drdto = new DisappearReportDTO(seq, disDate, areaList, disappearArea, tel, kind, gender, neuter, age, furColor, feature, et, imgPath.get(0), null, null, null, null, null);
+		} else if(imgPath.size() ==3) {
+			if(image[2].getSize()==0) {
+				System.out.println("이미지 둘");
+				drdto = new DisappearReportDTO(seq, disDate, areaList, disappearArea, tel, kind, gender, neuter, age, furColor, feature, et, imgPath.get(0), imgPath.get(1), null, null, null, null);
+			}else {
+				System.out.println("이미지 셋");
+				drdto = new DisappearReportDTO(seq, disDate, areaList, disappearArea, tel, kind, gender, neuter, age, furColor, feature, et, imgPath.get(0), imgPath.get(1), imgPath.get(2), null, null, null);
+			}
+		}
 			try {
 				drs.updateService(drdto);
 			}catch(Exception e) {e.printStackTrace();}
-		}
+		
 		return "redirect:/toReportContent?seq="+seq;
 	}
 	@RequestMapping("deleteProc.dis")
