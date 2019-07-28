@@ -71,9 +71,9 @@ public class ChartDAOImpl implements ChartDAO
 		return sst.selectOne("ChartDAO.getMonthVisitCount", month);
 	}
 	@Override
-	public String getMonthVisitTime(int month) throws Exception
+	public List<String> getMonthVisitTime(int month) throws Exception
 	{
-		return sst.selectOne("ChartDAO.getMonthVisitTime", month);
+		return sst.selectList("ChartDAO.getMonthVisitTime", month);
 	}
 
 	@Override

@@ -449,7 +449,7 @@
 		})
 		.fail(function()
 		{
-			alert("error");
+			console.log("유기 동물 현황 오류 발생");
 		});
 	  	
 		
