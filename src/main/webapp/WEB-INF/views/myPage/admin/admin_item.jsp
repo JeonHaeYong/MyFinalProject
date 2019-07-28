@@ -232,7 +232,14 @@ font-weight:bold;
 		
 		$(document).on("click", "#check_all_btn", function()
 		{
-			$("#search_result_div input[type=checkbox]").prop("checked", true);
+			if($("#check_all_btn").prop("checked") == true)
+			{
+				$("#search_result_div input[type=checkbox]").prop("checked", true);
+			}
+			else if($("#check_all_btn").prop("checked") == false)
+			{
+				$("#search_result_div input[type=checkbox]").prop("checked", false);
+			}
 		})
 		
 		$(document).on("click", ".preview_btn", function()
