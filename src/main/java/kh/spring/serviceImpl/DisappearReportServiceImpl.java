@@ -71,10 +71,7 @@ public class DisappearReportServiceImpl implements DisappearReportService{
 	public DisappearReportDTO toReportContentService(int seq) {
 		return drdao.toReportContent(seq);
 	}
-	@Override
-	public int updateNoimageService(DisappearReportDTO drdto) {
-		return drdao.updateNoImage(drdto);
-	}
+
 	@Override
 	public int updateService(DisappearReportDTO drdto) {
 		return drdao.update(drdto);

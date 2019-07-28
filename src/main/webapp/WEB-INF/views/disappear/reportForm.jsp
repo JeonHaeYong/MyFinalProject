@@ -72,7 +72,7 @@
 	<div class="row">
 		<div class="col-12">
 			<div id="wrapper" class="aa">
-				<form action="insertProc.dis" method="post" id="reportForm" enctype="multipart/form-data">
+				<form action="insertProc.dis" method="post" id="reportForm" enctype="multipart/form-data" onsubmit="return submit_check()">
         <input type="hidden" name="seq" value="0">
         <div class="basic">기본정보</div>
         <div class="basic-info">
@@ -83,9 +83,9 @@
                 <div>연락처</div>
             </div>
             <div class="input-box">
-                <div><input type="date" max=${todayDate } name="disappearDate" id="disappearDate"></div>
+                <div><input type="date" max=${todayDate } name="disappearDate" id="disappearDate" required></div>
                 <div>
-                    <select name="areaList" id="areaList" >
+                    <select name="areaList" id="areaList" required>
                         <option value="모든지역">모든지역</option><option value="강원도">강원도</option>
                         <option value="경기도">경기도</option> <option value="경상남도">경상남도</option>
                         <option value="경상북도">경상북도</option><option value="광주광역시">광주광역시</option>
@@ -97,8 +97,9 @@
                         <option value="충청남도">충청남도</option><option value="충청북도">충청북도</option>
                     </select>
                 </div>
-                <div><input type="text" name="disappearArea" class="disappearArea" maxlength="60"></div>
-                <div><input type="text" name="tel" class="tel" maxlength="16"></div>
+                <div><input type="text" name="disappearArea" class="disappearArea" maxlength="60" required></div>
+                <div><input type="text" name="tel" class="tel" maxlength="16" required><br>
+                	<span class="tel-span"></span></div>
             </div>
         </div>
         
@@ -115,26 +116,26 @@
                 <div>사진</div>
             </div>
             <div class="input-box">
-                <div><select name="kind" id="kind" >
+                <div><select name="kind" id="kind" required>
                         <option value="개">개</option><option value="고양이">고양이</option><option value="기타동물">기타동물</option> 
                     </select>
                 </div>
                 <div>
-                    <span class="check"><input type="radio" name="gender" value="남">수컷</span>
-                    <span class="check"><input type="radio" name="gender" value="여">암컷</span>
+                    <span class="check"><input type="radio" name="gender" value="남" required>수컷</span>
+                    <span class="check"><input type="radio" name="gender" value="여" required>암컷</span>
                     <span class="check"><input type="checkbox" name="neuter" value="O">중성화완료</span>
                 </div>
-                <div><select name="age" id="age" >
+                <div><select name="age" id="age">
                         <option value="나이모름">나이 모름</option><option value="1-5살">1-5살</option><option value="6-10살">6-10살</option> <option value="10-15살">10-15살</option>
                         <option value="16-20살">16-20살</option><option value="21이">21살이상</option>
                     </select>
                     </div>
-                <div><input type="text" placeholder="털색을 설명해주세요" class="furColor" name="furColor" class="notnull" maxlength="30"></div>
-                <div><input type="text" placeholder="눈에 띄는 특징을 적어주세요" class="feature" name="feature" class="notnull" maxlength="60"></div>
+                <div><input type="text" placeholder="털색을 설명해주세요" class="furColor" name="furColor" class="notnull" maxlength="30" required></div>
+                <div><input type="text" placeholder="눈에 띄는 특징을 적어주세요" class="feature" name="feature" class="notnull" maxlength="60" required></div>
                 <div><input type="text" placeholder="기타사항을 입력해주세요" class="et" name="et" maxlength="90"></div>
                 <div>
                 <c:forEach var="i" begin="0" end="2" varStatus="status">
-                	<label for="input-img${status.index+1 }" class="label-btn" id="lable-btn${status.index+1 }">사진 선택${status.index+1 }</label>
+                	<label for="input-img${status.index+1 }" class="label-btn" id="label-btn${status.index+1 }">사진 선택${status.index+1 }</label>
                 	<input type="file" name="image" id="input-img${status.index+1 }" class="file-btn" seq="${status.index+1 }" accept="image/gif, image/jpeg, image/png" hidden>
                 </c:forEach>
                 </div>
@@ -148,7 +149,7 @@
             </div>
             <div class="expl">첫번째 사진은 꼭 넣어주세요.<br>사진은 3개까지 가능합니다~</div>
         <div id="footer">
-            <input type="button" class="insert-btn btn" value="등록">
+            <input type="submit" class="insert-btn btn" value="등록">
             <input type="button" class="toList-btn btn" value="취소">
         </div>
         </form>
@@ -171,15 +172,17 @@
    <script src="resources/js/isotope.pkgd.min.js"></script>
    <script src="resources/js/main.js"></script>
    <script>
+   	function submit_check(){
+   		if($(".img1").html() == ""){
+				alert("사진은 하나 이상 꼭 넣어주세요.");
+				return false;
+			}else {return true;}
+   		
+   	}
     		$(".toList-btn").on("click",function(){
     			location.href="toDisappearList?currentPage=${currentPage}";
     		});
-    		$(".insert-btn").on("click",function(){
-    			  if($("#disappearDate").val() !=""&& $(".disappearArea").val() !=""&& $(".tel").val() !=""&& $('input:radio[name=gender]').is(':checked')==true
-    				 && $(".furColor").val()!="" && $(".feature").val()!=""&&$("#input-img1").val()!=""){
-    				$("#reportForm").submit();
-    			}else{alert("기타사항을 제외하고 모두 입력해주세요.");} 
-    		});
+    		
     		$(".file-btn").on("change",function(){ 
     			$(this).each(function(index,items){ 
     				var i = $(this).attr("seq");
@@ -192,24 +195,35 @@
     				reader.readAsDataURL($(this)[0].files[0]);
     			})
     		});
-			$(this).children("img").attr("src","/resources/images/disappear/cat_01.png");
+			//$(this).children("img").attr("src","/resources/images/disappear/cat_01.png");
 			/*사진 선택 버튼 */
+			
 			$("#input-img2").attr("disabled",true);
-			$("#lable-btn2").css("background-color","#dce0e6");
+			$("#label-btn2").css("background-color","#dce0e6");
 			$("#input-img3").attr("disabled",true);
-			$("#lable-btn3").css("background-color","#dce0e6");
+			$("#label-btn3").css("background-color","#dce0e6");
 			
 			$("#input-img1").on("change",function(){
 				$("#input-img2").attr("disabled",false);
-				$("#lable-btn2").css("background-color","white");
+				$("#label-btn2").css("background-color","white");
 			});
 			$("#input-img2").on("change",function(){
 				$("#input-img3").attr("disabled",false);
-				$("#lable-btn3").css("background-color","white");
+				$("#label-btn3").css("background-color","white");
 			})
-			
-			
     		/*Regex------------------------------ */
+    		$(".tel").on("focusout",function(){
+    			var text = $(this).val();
+    			var regex = /[0-9]/g;
+    			var result = regex.exec(text);
+    			if(result == null){
+    				$(this).val("");
+    				$(".tel-span").text("숫자만 입력해주세요.");
+    				$(".tel-span").css("color","red");
+    			}else{
+    				$(".tel-span").text("");
+    			}
+    		})
     </script>
 </body>
 </html>
