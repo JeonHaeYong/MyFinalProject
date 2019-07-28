@@ -88,6 +88,7 @@
 	                                        	<c:forEach var="dto" items="${list }" varStatus="status">
 		                                            <div class="col-lg-6 col-12 d-flex justify-content-center">
 														<div class="custom-control custom-checkbox">
+															<input type="hidden" class="priceCheck" value="${dto.price }" seq="${dto.cart_seq }">
 															<input type="hidden" class="soldoutCheck" value="${dto.soldout }" seq="${dto.cart_seq }">
 															<input type="checkbox" class="custom-control-input itemCheck" id="customCheck${status.count }" name="items" value="${dto.cart_seq }">
 															<label class="custom-control-label" for="customCheck${status.count }"></label>
@@ -98,10 +99,10 @@
 		                                                            <img src="${dto.imagePath1 }" class="card-img itemImage" soldout="${dto.soldout }">
 		                                                        </div>
 		                                                        <div class="col-md-7">
-		                                                            <div class="card-body myCardBody text-truncate">
-		                                                                <p class="card-title cardText">상품명 : <a class="itemName cardText" href="item?seq=${dto.seq }">${dto.name }</a></p>
-		                                                                <p class="card-text cardText">금액 : ${dto.price }</p>
-		                                                                <p class="card-text cardTextSmall">판매자 : ${dto.seller }</p>
+		                                                            <div class="card-body myCardBody">
+		                                                                <p class="card-title cardText text-truncate">상품명 : <a class="itemName cardText" href="item?seq=${dto.seq }">${dto.name }</a></p>
+		                                                                <p class="card-text cardText text-truncate">금액 : ${dto.price }</p>
+		                                                                <p class="card-text cardTextSmall text-truncate">판매자 : ${dto.seller }</p>
 		                                                            </div>
 		                                                        </div>
 		                                                    </div>
@@ -109,6 +110,9 @@
 		                                            </div>
 	                                            </c:forEach>
                                             </form>
+                                            <div class="col-12 d-flex justify-content-end">
+	                                        	<p id="totalPrice">선택상품 총 금액 : 0원</p>
+	                                        </div>
                                             <c:if test="${list.size() != 0 }">
 	                                            <div class="col-12 d-flex justify-content-center">
 		                                        	<a class="btn" href="freeMarket">무료나눔 가기</a>
@@ -154,16 +158,37 @@
         	});
       		var count = 0;
         	$("#allCheck").on("change", function(){
+        		var totalPrice = 0;
         		if($("#allCheck").prop("checked")){
         			$(".itemCheck").prop("checked", true);
         			count = $(".itemCheck").length;
+        			$(".itemCheck").each(function(i, item){
+           				if($(this).prev().val() == 'y'){
+           					alert("판매완료된 상품입니다.");
+           					$(this).prop("checked", false);
+           					$("#allCheck").prop("checked", false);
+           				}else{
+           					var price = parseInt($(this).prev().prev().val().replace(/ /g, "").replace(/,/g, ""));
+           					totalPrice += price;
+           				}
+           				count++;
+            		});
+        			$("#totalPrice").text("선택 상품 총 금액: " + comma(totalPrice) + "원");
         		}else{
         			$(".itemCheck").prop("checked", false);
+        			$("#totalPrice").text("선택 상품 총 금액: 0원");
         			count = 0;
         		}
         	});
+        	
+        	function comma(str) {
+    	        str = String(str);
+    	        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+    	    }
+        	
         	$(".itemCheck").on("change", function(){
         		var allChecked = true;
+        		var totalPrice = 0;
         		$(".itemCheck").each(function(i, item){
         			if(!($(item).prop("checked"))){
         				allChecked = false;
@@ -171,10 +196,14 @@
         				if($(this).prev().val() == 'y'){
         					alert("판매완료된 상품입니다.");
         					$(this).prop("checked", false);
+        				}else{
+        					var price = parseInt($(this).prev().prev().val().replace(/ /g, "").replace(/,/g, ""));
+        					totalPrice += price;
         				}
         				count++;
         			}
         		});
+        		$("#totalPrice").text("선택 상품 총 금액: " + comma(totalPrice) + "원");
         		if(allChecked){
         			$("#allCheck").prop("checked", true);
         		}

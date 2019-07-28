@@ -170,30 +170,32 @@
 	<script src="resources/js/isotope.pkgd.min.js"></script>
 	<script src="resources/js/main.js"></script>
 	<script>
-		history.pushState(null, null, location.href);
-		window.onpopstate = function(event) {
-			history.go(1);
-		};
-		$("#goBuyList").on("click", function(){
-			location.href = "toMyPage_buyList";
-		});
-		$("#goFreemarket").on("click", function(){
-			location.href = "freeMarket?currentPage=1&category=all";
-		});
-		// 뒤로가기 방지
-		window.history.forward(1);
-		//새로고침, 뒤로가기 막기
-		document.onkeydown = function(e) {
-			key = (e) ? e.keyCode : event.keyCode;
-			if (key == 8 || key == 116) {
-				if (e) {
-					e.preventDefault();
-				} else {
-					event.keyCode = 0;
-					event.returnValue = false;
+		$(function(){
+			history.pushState(null, null, location.href);
+			window.onpopstate = function(event) {
+				history.go(1);
+			};
+			$("#goBuyList").on("click", function(){
+				location.href = "toMyPage_buyList";
+			});
+			$("#goFreemarket").on("click", function(){
+				location.href = "freeMarket?currentPage=1&category=all";
+			});
+			// 뒤로가기 방지
+			window.history.forward(1);
+			//새로고침, 뒤로가기 막기
+			document.onkeydown = function(e) {
+				key = (e) ? e.keyCode : event.keyCode;
+				if (key == 8 || key == 116) {
+					if (e) {
+						e.preventDefault();
+					} else {
+						event.keyCode = 0;
+						event.returnValue = false;
+					}
 				}
 			}
-		}
+		});
 	</script>
 </body>
 </html>
