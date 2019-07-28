@@ -6,35 +6,20 @@
 	</insert>
 	
 	<update id="modifyDisappearComment">
-		update disappear_comments set contents=#{contents} where seq=#{seq}
+		update disappear_comments set contents=#{contents} where seq = #{seq}
 	</update>
 	
 	<delete id="deleteDisappearComment">
-		delete from disappear_comments where seq=#{value}
+		delete from disappear_comments where seq = #{value}
 	</delete>
 	
 	<select id="selectAllDisappearCommentsByDisappearSeq" resultType="kh.spring.dto.DisappearCommentsDTO">
-		select * from 
-		<choose>
-			<when test="id==null">
-				(select row_number() over(order by write_date desc) rown, disappear_comments.* , member.imagepath from disappear_comments , member where member.id = disappear_comments.writer and disappear_seq = #{seq}) 
-			</when>
-			<otherwise>
-				(select row_number() over(order by rc.write_date desc) rown, rc.* , rcl.ID as likeOk , m.imagepath
-				from disappear_comments rc , (select * from disappear_comments_likes where id=#{id}) rcl , member m where m.id = rc.writer and rc.seq = rcl.R_COMMENTS_SEQ(+) and rc.disappear_seq = #{seq}) 
-			</otherwise>
-		</choose>
-		 where rown between #{start} and #{end}
+		select * from (select row_number()over(order by seq desc)as rown, disappear_comments.* from disappear_comments where disappear_seq = #{seq}) where rown between #{start} and #{end}
 	</select>
 	<select id="selectDisappearCommentsCountByDisappearSeq" resultType="int">
 		select count(*) from disappear_comments where disappear_seq = #{disappearSeq}
 	</select>
-	<update id="updateDisappearCommentsLike">
-		update disappear_comments set likes = likes + 1 where seq = #{seq}
-	</update>
-	<update id="updateDisappearCommentsLikeMinus">
-		update disappear_comments set likes = likes - 1 where seq = #{seq}
-	</update>
+	
 	<select id="selectDisappearCommentsSeqCurrVal" resultType="int">
 		select disappear_comments_seq.currval from dual
 	</select>
@@ -43,6 +28,8 @@
 	</select>
 	<update id="updateReplyContentsByseq">
 		update disappear_comments set contents = #{contents} where seq = #{seq}
+		
+		
 	</update>
 	<select id="selectDTOBySeq" resultType="kh.spring.dto.DisappearCommentsDTO">
 		select * from disappear_comments where seq = #{seq}

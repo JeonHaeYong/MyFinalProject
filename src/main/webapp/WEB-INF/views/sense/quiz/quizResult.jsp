@@ -5,10 +5,12 @@
 			        	<div id="title" class="col-12"><h1>나는 얼마나 잘 알고 있을까??</h1></div>
             		</div>
 		<!-- 맞힌문제 개수 / 획득 포인트 -->
+		
 		<div class="row">
 			<div class="col-6 corrCount">맞은 개수 : ${answer }개</div><div class="col-6 getPoint">획득 포인트: ${getPoint }점</div>
 		</div>
 		<!-- 틀린문제 / 해설 -->
+		
 		<div class="col-12 incorrCount">틀린문제들~</div>
 		<div class="row header">
 			<div class="col-5">문제</div>
@@ -22,6 +24,7 @@
             <div class='col-5 ex'>${wrongL.explain }</div>
 		</div>
 		</c:forEach>
+	
 	
 		<!--랭킹  -->
 		<div class='row header'>

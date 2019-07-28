@@ -92,6 +92,9 @@ public class ReviewCommentsController {
 		if(!writer.equals(dto.getWriter())||!loginId.equals(writer)) {
 			return "redirect:error";
 		}
+		System.out.println(writer);
+		System.out.println(dto.getWriter());
+		System.out.println(loginId);
 		rcService.deleteReviewCommentService(dto.getSeq());
 		//해당 글의 댓글 가져오기
 		List<ReviewCommentsDTO> list = rcService.selectAllReviewCommentsService(seq,1,loginId);

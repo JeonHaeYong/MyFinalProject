@@ -23,6 +23,17 @@
 <!--  module-->
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
 <style>
+	/*점보트론  */
+	.myJumbo {
+	background-color: white;
+	padding: 5rem;
+}
+
+#jumboImg {
+	width: 100%;
+	max-height: 600px;
+}
+	
 	.empty{width: 100%; text-align: center; margin: auto; margin-bottom: 50px; height:50px;}
 	#title{width: 100%; text-align: center; margin: auto; margin-bottom: 50px;}
 	h1{ font-family: 'Gamja Flower', cursive;}
@@ -65,6 +76,11 @@
  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
    <jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 <!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
+<div class="jumbotron myJumbo pr-0 pl-0 pb-2">
+		<img src="resources/images/disappear/disapperjumbo.jpg" id="jumboImg">
+
+	</div>
+
 <div class="px-0 pb-0 empty"></div>
  <div id="title"><h1>실종 신고 수정</h1></div>
 

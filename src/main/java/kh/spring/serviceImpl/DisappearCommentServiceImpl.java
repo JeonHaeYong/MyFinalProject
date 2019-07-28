@@ -18,8 +18,8 @@ import kh.spring.statics.ReviewCommentsStatics;
 public class DisappearCommentServiceImpl implements DisappearCommentsService{
 	@Autowired
 	private DisappearCommentsDAO dcdao;
-	@Autowired
-	private ReviewCommentsLikesDAO rcl_dao;
+	
+
 
 	@Override
 	public int insertDisappearCommentService(DisappearCommentsDTO dto) {
@@ -33,13 +33,14 @@ public class DisappearCommentServiceImpl implements DisappearCommentsService{
 
 	@Override
 	public int deleteDisappearCommentService(int seq) {
+		System.out.println("삭제할 댓글 서비스 :" + seq);
 		return dcdao.deleteDisappearComment(seq);
 	}
 
 	@Override
-	public List<DisappearCommentsDTO> selectAllDisappearCommentsService(int seq , int commentPage,String loginId) {
+	public List<DisappearCommentsDTO> selectAllDisappearCommentsService(int seq , int commentPage) {
 		int[] start_end = this.getRecordPerPageStartEnd(commentPage);
-		return dcdao.selectAllDisappearCommentsByDisappearSeq(seq,start_end[0],start_end[1],loginId);
+		return dcdao.selectAllDisappearCommentsByDisappearSeq(seq,start_end[0],start_end[1]);
 	}
 	/**
 	 * 해당 페이지에 띄워야할 list얻기위해 begin , end
