@@ -19,7 +19,7 @@ public interface ChartDAO
 	
 	public int getMonthVisitCount(int month) throws Exception;
 	public int getMonthPayAmount(int month) throws Exception;
-	public String getMonthVisitTime(int month) throws Exception;
+	public List<String> getMonthVisitTime(int month) throws Exception;
 	
 	public int updateTodayPayAmount(int money) throws Exception;
 	

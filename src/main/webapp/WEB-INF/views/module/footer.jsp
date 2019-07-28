@@ -63,28 +63,17 @@
 </div>
 
 <!-- footer영역입니다 -->
-<footer class="site-footer">
+<footer class="site-footer" style="padding:2em;">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-9">
 				<div class="row">
 					<div class="col-md-5">
-						<h2 class="footer-heading mb-4">About Us</h2>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-							Neque facere laudantium magnam voluptatum autem. Amet aliquid
-							nesciunt veritatis aliquam.</p>
+						<img class="mr-3" src="/resources/images/doglogo2.png" width="50px" style="float:left;"><h2 class="footer-heading ml-4 mb-4" style="font-family: 'Gamja Flower';font-size:27px">라온펫</h2>
+						<p style="color:#fff;font-family: 'Gamja Flower';font-size:20px;">라온펫은 유기동물의 숫자가 '제로'가 되는 그 날을 향해 달립니다. </p>
 					</div>
 					<div class="col-md-3 ml-auto">
-						<h2 class="footer-heading mb-4">Quick Links</h2>
-						<ul class="list-unstyled">
-							<li><a href="#about-section" class="smoothscroll">About
-									Us</a></li>
-							<li><a href="#trainers-section" class="smoothscroll">Trainers</a></li>
-							<li><a href="#services-section" class="smoothscroll">Services</a></li>
-							<li><a href="#testimonials-section" class="smoothscroll">Testimonials</a></li>
-							<li><a href="#contact-section" class="smoothscroll">Contact
-									Us</a></li>
-						</ul>
+
 					</div>
 					<div class="col-md-3">
 						<h2 class="footer-heading mb-4">Follow Us</h2>
@@ -113,9 +102,9 @@
 				</form>
 			</div>
 		</div>
-		<div class="row pt-5 mt-5 text-center">
+		<div class="row pt-3 text-center">
 			<div class="col-md-12">
-				<div class="border-top pt-5">
+				<div class="border-top pt-3">
 					<p>
 						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						Copyright &copy;

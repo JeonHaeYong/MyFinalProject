@@ -48,6 +48,21 @@ public class NoticeServiceImpl implements NoticeService
 	}
 	
 	@Override
+	public Object noticeListPage() throws Exception
+	{
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/notice/notice_view");
+		String id = (String)session.getAttribute("id");
+		
+		if((id != null) && (memberDAO.selectOneMember(id).getType() == 4))
+		{
+			mav.addObject("admin", "Y");
+		}
+		
+		return mav;
+	}
+	
+	@Override
 	public String selectForPage(String page) throws Exception
 	{
 		
