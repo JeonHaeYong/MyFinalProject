@@ -80,9 +80,10 @@ text-align:left;
 margin-left:15px;
 margin-right:15px;
 padding-left:5px;
-height:15%;
+height:10%;
 margin-top:2px;
 }
+.animal-feature{width:70%; font-size:25px; color:#754F44; font-weight:bold; margin-left:15px; overflow:hidden; text-overflow:ellipsis; white-space: nowrap;}
 .w-100 {
 width:100%;
 	top: 0;
@@ -139,6 +140,7 @@ height: 180px;
 						</div>
 				
                    <div class="animal-kind">${list.kind }<img src=""></div>
+                   <div class="animal-feature">${list.feature }</div>
                     <div class="petInfo">
                     	<div>${list.gender} </div>
                     	<div>${list.age }</div>
@@ -188,7 +190,6 @@ height: 180px;
 		})
 		$(".carousel-item img").each(function(index,items){
 			if($(this).attr("src") =='noImage'){
-				console.log($(this).parent().parent().attr("class"));
 				 $(this).parent().parent().remove();
 				 $(this).parent().remove();
 				 $(this).remove();

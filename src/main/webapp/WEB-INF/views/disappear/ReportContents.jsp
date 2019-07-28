@@ -22,6 +22,16 @@
 <link rel="stylesheet" href="resources/css/style.css">
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
  <style>
+ 	/*점보트론  */
+	.myJumbo {
+	background-color: white;
+	padding: 5rem;
+}
+
+#jumboImg {
+	width: 100%;
+	max-height: 600px;
+}
  		.empty{width: 100%; text-align: center; margin: auto; margin-bottom: 50px; height:50px;}
         .title{text-align: center;}
         h1{ font-family: 'Gamja Flower', cursive;}
@@ -30,8 +40,10 @@
         #wrapper>div{float: left;}
         .pet{width: 35%; height: 97%; margin: 5px;}
         .infoImg{height:200px;}
-        .w-100{height:200px;}
-        .feature{width: 100%; height: 35%;}
+        .w-100{height:400px;}
+        
+        .feature,.et{float:left; }
+        .feature{width: 50%; }
         .feature>div:first-child{height: 20%; width: 100%; font-weight: bold; font-family: 'Gamja Flower', cursive; font-size:20px;}
         .feature>div:nth-child(2){height: 80%; width: 100%; overflow-y: auto; word-wrap: break-word;}
         .petInfo{width: 63%; height: 97%; margin-left: 6px; margin-top:5px;}
@@ -42,10 +54,10 @@
        .first-col,.second-col{float: left; width: 50%; height: 100%;}
         
         .first-col>div,.second-col>div{height: 20%; text-align: center; line-height: 50px;}
-        .et{width: 100%; height: 30%; padding-left: 75px;}
+        .et{width: 50%;  padding-left: 75px;}
         .content>div:nth-child(2)>.first-col>div,.content>div:nth-child(2)>.second-col>div{height: 34%; line-height: 80px;}
         .et>div:first-child{height: 25%; font-weight: bold; font-family: 'Gamja Flower', cursive; font-size:20px;}
-        .et-contents{height: 75%; overflow-y: auto; word-wrap: break-word;}
+        .et-contents{height: 80%; overflow-y: auto; word-wrap: break-word;}
         .petImg>img{width:100%; height:100%;}
         
         #footer{ margin:auto; width:1200px;}
@@ -60,6 +72,10 @@
 	data-offset="300" id="home-section">
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
+	<div class="jumbotron myJumbo pr-0 pl-0 pb-2">
+		<img src="resources/images/disappear/disapperjumbo.jpg" id="jumboImg">
+
+	</div>
 	<div class="px-0 pb-0 empty"></div>
 	<div class="title"><h1>실종신고</h1></div>
     <div id="wrapper">
@@ -90,10 +106,7 @@
 				</div>
            </div>
            <hr>
-           <div class="feature">
-               <div>특징</div>
-               <div>${content.feature }</div>
-           </div>
+           
        </div>
         <div class="petInfo">
             <div class="content">
@@ -126,10 +139,16 @@
                     </div>
                 </div>
             </div>
+     <div>
         <div class="et">
             <div>기타</div>
             <div class="et-contents">${content.et }</div>
         </div>
+        <div class="feature">
+               <div>특징</div>
+               <div>${content.feature }</div>
+           </div>
+           </div>
         </div>
     </div>
       <div id="footer">
@@ -384,6 +403,41 @@
 				 $(this).parent().remove();
 				 $(this).remove();
 			}
+      });
+      $("#review_reply_input").keydown(function(e){
+    	  if(e.keyCode == 13){
+    		  if(${id==null}){//아직 로그인을 하지 않았다면,
+                  alert("로그인을 먼저 해주세요.");
+                  $(".login-btn").trigger("click");
+                  return;
+              }
+              var reply = $("#review_reply_input").val();
+              if(reply==""){
+                  alert("댓글을 입력해주세요.");
+                  $("#review_reply_input").focus();
+                  return;
+              }
+              //ajax로 table에 insert하기.
+              $.ajax({
+            	 
+                  url : "insertDisappearComment",
+                  type : "post",
+                  data : {
+                      seqStr : "${content.seq}",
+                      writer : "${id}",
+                      contents : reply
+                  }
+              }).done(function(resp){
+                  //console.log("댓글달기성공->"+resp);
+                  $(".reply_part").remove();
+                  $(".comment").append(resp);
+                  
+                /*   likeOkCheck();//좋아요 클릭한것만 빨강하트 */
+                  $("#review_reply_input").val("");
+                  $(".modifyReply_part.hide").hide();
+                  profileImgRounded();
+              });
+    	  }
       });
 	</script>
 </body>
