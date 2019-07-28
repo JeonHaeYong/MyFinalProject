@@ -25,7 +25,9 @@ public class AdminCheckAdvice
 	@Autowired
 	MemberServiceImpl memberService;
 	
-	@Pointcut("execution(* kh.spring.fin.AdminController.*(..))")
+	@Pointcut("execution(* kh.spring.fin.AdminController.selectACSDTO(..)) || execution(* kh.spring.fin.AdminController.selectDonationAjax(..))")
+	public void adminContollerException() {};
+	@Pointcut("execution(* kh.spring.fin.AdminController.*(..)) && !adminContollerException()")
 	public void adminContoller() {};
 	@Pointcut("execution(* kh.spring.fin.NoticeController.noticeWrite*(..)) || execution(* kh.spring.fin.NoticeController.noticeUpdate*(..)) || execution(* kh.spring.fin.NoticeController.noticeDelete*(..))")
 	public void noticeContoller() {};
