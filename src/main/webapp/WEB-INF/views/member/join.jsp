@@ -27,6 +27,26 @@
 
 <!--join info style  -->
 <style>
+
+
+
+
+
+/*  점보트론 */
+.myJumbo {
+	background-color: white;
+	padding: 5rem;
+}
+
+#jumboImg {
+	width: 100%;
+	max-height: 600px;
+}
+
+
+
+/* body */
+
 #joinInfo {
 	display: none;
 	padding-bottom: 200px;
@@ -44,15 +64,7 @@
 	height: 600px;
 }
 
-.myJumbo {
-	background-color: white;
-	padding: 5rem;
-}
 
-#jumboImg {
-	width: 100%;
-	max-height: 600px;
-}
 
 .title {
 	padding-top: 80px;
