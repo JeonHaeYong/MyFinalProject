@@ -33,7 +33,14 @@
 {
 	font-family: 'SeoulNamsanM';
 }
-
+.menu_header
+{
+	font-family: 'Gamja Flower', cursive !important;
+	font-size: 35px;
+	border-bottom: 1px solid gray;
+	color : #B45F04;
+	font-weight: 600;
+}
 
 
 
@@ -94,63 +101,60 @@ font-weight:bold;
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
-
-<!-- <div class="row justify-content-center"></div> -->
-<!-- <div class="col-12 col-md-12 col-lg-12 text-center my-5"></div> -->
-<!-- <div class="row justify-content-center"> -->
-<!-- 	<div class="col-12 col-md-12 col-lg-12 text-center my-5"> -->
-<!-- 	</div> -->
-<!-- </div> -->
-
-	<section class="site-section block-13">
+	
+		<section class="site-section block-13">
 
 		<div id="container" class="container">
+		
+			<div class="row justify-content-center">
+				
+				<div class="col-2 my-auto">
 			
+					<div id="menu_row" class="row justify-content-center">
+						
+						<div class="col-6 col-md-4 col-lg-12 text-center my-3">
+							<h2 class="menu_header my-1">관리자 메뉴</h2>
+						</div>
+						
+						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+							<a href="admin-member" class="btn menu_btns">회원 관리</a>
+						</div>
 			
+						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+							<a href="admin-item" class="btn menu_btns">무료 나눔 물품 승인</a>
+						</div>
 			
+						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+							<a href="admin-paylog" class="btn selected_menu_btns">무료 나눔 거래 내역</a>
+						</div>
 			
+						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+							<a href="admin-donation" class="btn menu_btns">월 별 후원금 및 전달 기관</a>
+						</div>
 			
+						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+							<a href="admin-quiz" class="btn menu_btns">퀴즈 당첨자</a>
+						</div>
 			
-			<div id="menu_row" class="row justify-content-center">
-
-				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="admin-member" class="btn menu_btns">회원 관리</a>
-				</div>
-	
-				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="admin-item" class="btn menu_btns">무료 나눔 물품 승인</a>
-				</div>
-	
-				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="admin-paylog" class="btn selected_menu_btns">무료 나눔 거래 내역</a>
-				</div>
-	
-				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="admin-donation" class="btn menu_btns">월 별 후원금 및 전달 기관</a>
-				</div>
-	
-				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="admin-quiz" class="btn menu_btns">퀴즈 당첨자</a>
-				</div>
-	
-				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="admin-chart" class="btn menu_btns">통계</a>
+						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+							<a href="admin-chart" class="btn menu_btns">통계</a>
+						</div>
+						
+						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+							<a href="admin-msg" class="btn menu_btns">관리자쪽지함</a>
+						</div>
+			
+					</div>
+				
 				</div>
 				
-				<div class="col-6 col-md-4 col-lg-2 text-center px-1">
-					<a href="admin-msg" class="btn menu_btns">관리자쪽지함</a>
-				</div>
-	
-			</div>
-			
-			
-			
-			
-			
-			
-			<div id="contents_row" class="row justify-content-center mt-5">
-			
-				<div class="col-12">
+				
+				
+				<div class="col-1"></div>
+				
+				
+				
+				<div class="col-9">
 				
 					<div class="row justify-content-center">
 						
@@ -206,12 +210,13 @@ font-weight:bold;
 					
 				</div>
 				
+				
 			</div>
-
+		
 		</div>
 
 	</section>
-
+	
 
 	<!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
 	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>

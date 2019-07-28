@@ -33,7 +33,14 @@
                     {
                         font-family: 'SeoulNamsanM';
                     }
-
+					.menu_header
+					{
+						font-family: 'Gamja Flower', cursive !important;
+						font-size: 35px;
+						border-bottom: 1px solid gray;
+						color : #B45F04;
+						font-weight: 600;
+					}
 
 
 
@@ -159,264 +166,301 @@
                 <!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 
 
-                <section class="site-section block-13">
+	<section class="site-section block-13">
 
-                    <div id="container" class="container">
+		<div id="container" class="container">
+		
+			<div class="row justify-content-center">
+				
+				<div class="col-2 my-auto">
+			
+					<div id="menu_row" class="row justify-content-center">
+						
+						<div class="col-6 col-md-4 col-lg-12 text-center my-3">
+							<h2 class="menu_header my-1">관리자 메뉴</h2>
+						</div>
+						
+						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+							<a href="admin-member" class="btn menu_btns">회원 관리</a>
+						</div>
+			
+						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+							<a href="admin-item" class="btn menu_btns">무료 나눔 물품 승인</a>
+						</div>
+			
+						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+							<a href="admin-paylog" class="btn menu_btns">무료 나눔 거래 내역</a>
+						</div>
+			
+						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+							<a href="admin-donation" class="btn menu_btns">월 별 후원금 및 전달 기관</a>
+						</div>
+			
+						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+							<a href="admin-quiz" class="btn menu_btns">퀴즈 당첨자</a>
+						</div>
+			
+						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+							<a href="admin-chart" class="btn menu_btns">통계</a>
+						</div>
+						
+						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+							<a href="admin-msg" class="btn selected_menu_btns">관리자쪽지함</a>
+						</div>
+			
+					</div>
+				
+				</div>
+				
+				
+				
+				<div class="col-1"></div>
+				
+				
+				
+				<div class="col-9">
+				
+					<div id="contents_row" class="row justify-content-center mt-5">
+				
+						<div class="tab-content" id="pills-tabContent">
+		                    <div class="tab-pane fade show active" id="pills-profile">
+		                        <!-- 쪽지함 -->
+		                        <div id="message_wrapper">
+		                            <div class="row justify-content-center">
+		                                <div class="col-10">
+		                                    <nav>
+		                                        <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
+		                                            <a class="nav-item nav-link active msg_box_nav text-decoration-none" id="nav-inbox-tab" data-toggle="tab" href="#nav-inbox" role="tab" aria-controls="nav-inbox" aria-selected="true">받은 쪽지함</a>
+		                                            <a class="nav-item nav-link msg_box_nav text-decoration-none" id="nav-sentbox-tab" data-toggle="tab" href="#nav-sentbox" role="tab" aria-controls="nav-sentbox" aria-selected="false">보낸 쪽지함</a>
+		                                        </div>
+		                                    </nav>
+		                                    <div class="tab-content" id="nav-tabContent">
+		                                        <!-- 받은쪽지함 -->
+		                                        <div class="tab-pane fade show active selectedBox" id="nav-inbox" role="tabpanel" aria-labelledby="nav-inbox-tab" name="receivedBox">
+		                                            <div class="row receivedList_prev_part">
+		                                                <div class="col-1">
+		                                                    <div class="custom-control custom-checkbox">
+		                                                        <input type="checkbox" class="custom-control-input" id="r_allCheck">
+		                                                        <label class="custom-control-label" for="r_allCheck"></label>
+		                                                    </div> 
+		                                                </div>
+		                                                <div class="col-2">보낸사람</div>
+		                                                <div class="col-4">내용</div>
+		                                                <div class="col-3">받은날짜</div>
+		                                                <div class="col-2 text-center">read</div>
+		                                            </div>
+		                                            <!-- 테이블에서 값 가져오기 -->
+		                                            <!-- 받은쪽지함 내용 -->
+		                                            <c:if test="${receivedList.size()==0 }">
+		                                                <div class="row">
+		                                                    <div class="col-12 text-center">
+		                                                        받은 쪽지가 없습니다.
+		                                                    </div>
+		                                                </div>
+		                                            </c:if>
+		                                            <form class="receivedList_part" id="receivedMsg_delete_form" action="deleteMsg" method="post">
+		                                                <!-- 받은쪽지함 내용들 -->
+		                                                <c:forEach var="r_list" items="${receivedList }" varStatus="status">
+		                                                    <div class="row r_list_row">
+		                                                        <div class="col-1">
+		                                                            <div class="custom-control custom-checkbox">
+		                                                                <input type="checkbox" class="custom-control-input received_check" id="r_${status.count }" name="msgSeq" value="${r_list.seq }">
+		                                                                <label class="custom-control-label" for="r_${status.count }"></label>
+		                                                            </div> 
+		                                                        </div>
+		                                                        <div class="col-2 text-truncate">${r_list.sender }</div>
+		                                                        <div class="col-4 r_click_parent text-truncate">
+		                                                            <c:if test="${r_list.readOk =='N'}">
+		                                                                <a class="received_msg_click text-decoration-none" href="javascript:void(0)"  seq="${r_list.seq }" data-toggle="modal" data-target="#received_msg_modal" value="${r_list.sender }">${r_list.contents }</a>
+		                                                            </c:if>
+		                                                            <c:if test="${r_list.readOk =='Y'}">
+		                                                                <a class="received_msg_click text-decoration-none readMsg" href="javascript:void(0)"  seq="${r_list.seq }" data-toggle="modal" data-target="#received_msg_modal" value="${r_list.sender }">${r_list.contents }</a>
+		                                                            </c:if>
+		                                                        </div>
+		                                                        <div class="col-3">${r_list.message_date }</div>
+		                                                        <div class="col-2 r_readOk text-center">${r_list.readOk }</div>
+		                                                    </div>
+		                                                </c:forEach>
+		                                                <!-- 받은쪽지함 내용들 -->
+		                                            </form>
+		                                            <!-- 받은쪽지 네비게이터 띄워주기 -->
+		                                            <div class="row receivedList_part my-4">
+		                                                <div class="col-12 text-center">
+		                                                    <c:forEach var="navi" items="${receivedNavi }">
+		                                                        <a class="ml-1 navi navi_click_a" href="javascript:void(0)"  value="recipient">${navi }</a>
+		                                                    </c:forEach>
+		                                                </div>
+		                                            </div><!-- /받은쪽지 네비게이터-->
+		                                            <!-- 받은쪽지클릭하면 내용띄워주기 -->
+		                                            <div class="modal fade p-0" id="received_msg_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		                                                <div class="modal-dialog modal-dialog-centered" role="document">
+		                                                    <div class="modal-content">
+		                                                        <div class="modal-header">
+		                                                            <h5 class="modal-title" id="exampleModalLabel">쪽지 읽기</h5>
+		                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		                                                                <span aria-hidden="true">&times;</span>
+		                                                            </button>
+		                                                        </div>
+		                                                        <div class="modal-body">
+		                                                            <div class="container-fluid">
+		                                                                <div id="r_sender_modal" sender="">보낸사람 : </div>
+		                                                                <div>
+		                                                                    <textarea class="border-0" id="r_contents_modal" rows="8" cols="40" style="resize:none;" readonly></textarea>
+		                                                                </div>
+		                                                            </div>
+		                                                        </div>
+		                                                        <div class="modal-footer">
+		                                                            <button id="received_msg_close_btn" type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+		                                                            <button id="reply_msg_btn" type="button" class="btn btn-primary">답장 보내기</button>
+		                                                        </div>
+		                                                    </div>
+		                                                </div>
+		                                            </div>
+		                                        </div>
+		                                        <!-- 보낸쪽지함 -->
+		                                        <div class="tab-pane fade selectedBox" id="nav-sentbox" role="tabpanel" aria-labelledby="nav-sentbox-tab" name="sentBox">
+		                                            <div class="row sentList_prev_part">
+		                                                <div class="col-1">
+		                                                    <div class="custom-control custom-checkbox">
+		                                                        <input type="checkbox" class="custom-control-input" id="s_allCheck">
+		                                                        <label class="custom-control-label" for="s_allCheck"></label>
+		                                                    </div> 
+		                                                </div>
+		                                                <div class="col-2">받는사람</div>
+		                                                <div class="col-4">내용</div>
+		                                                <div class="col-3">보낸날짜</div>
+		                                                <div class="col-2 text-center">read</div>
+		                                            </div>
+		                                            <c:if test="${sentList.size()==0 }">
+		                                                <div class="row">
+		                                                    <div class="col-12 text-center">
+		                                                        보낸 쪽지가 없습니다.
+		                                                    </div>
+		                                                </div>
+		                                            </c:if>
+		                                            <form class="sentList_part" id="sentMsg_delete_form" action="deleteMsg" method="post">
+		                                                <c:forEach var="s_list" items="${sentList }" varStatus="status">
+		                                                    <!-- 보낸쪽지함 내용들 -->
+		                                                    <div class="row s_list_row">
+		                                                        <div class="col-1">
+		                                                            <div class="custom-control custom-checkbox">
+		                                                                <input type="checkbox" class="custom-control-input sent_check" id="s_${status.count }" name="msgSeq" value="${s_list.seq }">
+		                                                                <label class="custom-control-label" for="s_${status.count }"></label>
+		                                                            </div> 
+		                                                        </div>
+		                                                        <div class="col-2 text-truncate">${s_list.recipient }</div>
+		                                                        <div class="col-4 s_click_parent text-truncate">
+		                                                            <a class="sent_msg_click text-decoration-none" href="javascript:void(0)"  seq="${s_list.seq }" data-toggle="modal" data-target="#s_msg_modal" value="${s_list.recipient }">${s_list.contents }</a>
+		                                                        </div>
+		                                                        <div class="col-3">${s_list.message_date }</div>
+		                                                        <div class="col-2 s_readOk text-center">${s_list.readOk }</div>
+		                                                    </div>
+		                                                    <!-- //보낸쪽지함 내용들 -->
+		                                                </c:forEach>
+		                                            </form>
+		                                            <!-- 보낸쪽지 네비게이터 띄워주기 -->
+		                                            <div class="row sentList_part my-4">
+		                                                <div class="col-12 text-center">
+		                                                    <c:forEach var="navi" items="${sentNavi }">
+		                                                        <a class="ml-1 navi navi_click_a" href="javascript:void(0)"  value="sender">${navi }</a>
+		                                                    </c:forEach>
+		                                                </div>
+		                                            </div>
+		                                            <!-- /보낸쪽지 네비게이터-->
+		                                            <!-- 보낸쪽지클릭하면 내용띄워주기 -->
+		                                            <div class="modal fade p-0" id="s_msg_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		                                                <div class="modal-dialog modal-dialog-centered" role="document">
+		                                                    <div class="modal-content">
+		                                                        <div class="modal-header">
+		                                                            <h5 class="modal-title" id="exampleModalLabel">쪽지 읽기</h5>
+		                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		                                                                <span aria-hidden="true">&times;</span>
+		                                                            </button>
+		                                                        </div>
+		                                                        <div class="modal-body">
+		                                                            <div class="container-fluid">
+		                                                                <div id="s_recipient_modal">받는사람:</div>
+		                                                                <div>
+		                                                                    <textarea class="border-0" id="s_contents_modal" rows="8" cols="40" style="resize:none;" readonly></textarea>
+		                                                                </div>
+		                                                            </div>
+		                                                        </div>
+		                                                        <div class="modal-footer">
+		                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+		                                                        </div>
+		                                                    </div>
+		                                                </div>
+		                                            </div>
+		                                            <!-- /보낸쪽지클릭하면 내용띄워주기 -->
+		                                        </div>
+		                                        <!-- /보낸쪽지함 -->
+		                                    </div>
+		                                </div>
+		                            </div>
+		                        </div>
+		                        <!-- /쪽지함 -->
+		                    </div>
+		                </div>
+						
+						
+						<div class="row">
+		                    <div class="col-12 text-center">
+		                        <button type="button" class="btn laon_btn_style" id="selectMsg_delete">선택 삭제하기</button>
+		                        <button id="sendMsg_btn"type="button" class="btn laon_btn_style" data-toggle="modal" data-target="#msg_modal" data-whatever="@mdo">쪽지보내기</button>
+		                    </div>
+		                    <div class="modal fade text-left" id="msg_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		                        <div class="modal-dialog" role="document">
+		                            <div class="modal-content">
+		                                <div class="modal-header">
+		                                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+		                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		                                        <span aria-hidden="true">&times;</span>
+		                                    </button>
+		                                </div>
+		                                <div class="modal-body">
+		                                    <form id="msg_send_form" action="insertMsg" method="post">
+		                                        <div class="form-group">
+		                                            <label for="recipient-name" class="col-form-label">받는사람ID : </label>
+		                                            <input type="text" class="form-control" id="recipient-name" name="recipient">
+		                                        </div>
+		                                        <div class="form-group">
+		                                            <label for="message-text" class="col-form-label">보낼메세지:</label>
+		                                            <textarea rows="8" cols="80" class="form-control" id="message-text" style="resize:none;" name="contents"></textarea>
+		                                        </div>
+		                                        <div><span id="counter">0/300</span></div>
+		                                        <input type="hidden" value="${sessionScope.id }" name="sender">
+		                                    </form>
+		                                </div>
+		                                <div class="modal-footer">
+		                                    <button id="msg_close_btn" type="button" class="btn bg4_ft2" data-dismiss="modal">닫기</button>
+		                                    <button id="msg_send_btn" type="button" class="btn bg2_ft4">쪽지 보내기</button>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+						
+						
+						
+						
+						
+						
+						
+						
+						
+					</div>
+					
+				</div>
+				
+				
+			</div>
+		
+		</div>
 
+	</section>
 
-
-
-
-                        <div id="menu_row" class="row justify-content-center">
-
-                            <div class="col-6 col-md-4 col-lg-2 text-center px-1">
-                                <a href="admin-member" class="btn menu_btns">회원 관리</a>
-                            </div>
-
-                            <div class="col-6 col-md-4 col-lg-2 text-center px-1">
-                                <a href="admin-item" class="btn menu_btns">무료 나눔 물품 승인</a>
-                            </div>
-
-                            <div class="col-6 col-md-4 col-lg-2 text-center px-1">
-                                <a href="admin-paylog" class="btn menu_btns">무료 나눔 거래 내역</a>
-                            </div>
-
-                            <div class="col-6 col-md-4 col-lg-2 text-center px-1">
-                                <a href="admin-donation" class="btn menu_btns">월 별 후원금 및 전달 기관</a>
-                            </div>
-
-                            <div class="col-6 col-md-4 col-lg-2 text-center px-1">
-                                <a href="admin-quiz" class="btn menu_btns">퀴즈 당첨자</a>
-                            </div>
-
-                            <div class="col-6 col-md-4 col-lg-2 text-center px-1">
-                                <a href="admin-chart" class="btn menu_btns">통계</a>
-                            </div>
-
-                            <div class="col-6 col-md-4 col-lg-2 text-center px-1">
-                                <a href="admin-msg" class="btn selected_menu_btns">관리자쪽지함</a>
-                            </div>
-
-                        </div>
-
-
-                    </div>
-                </section>
-                <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-profile">
-                        <!-- 쪽지함 -->
-                        <div id="message_wrapper">
-                            <div class="row justify-content-center">
-                                <div class="col-10">
-                                    <nav>
-                                        <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
-                                            <a class="nav-item nav-link active msg_box_nav text-decoration-none" id="nav-inbox-tab" data-toggle="tab" href="#nav-inbox" role="tab" aria-controls="nav-inbox" aria-selected="true">받은 쪽지함</a>
-                                            <a class="nav-item nav-link msg_box_nav text-decoration-none" id="nav-sentbox-tab" data-toggle="tab" href="#nav-sentbox" role="tab" aria-controls="nav-sentbox" aria-selected="false">보낸 쪽지함</a>
-                                        </div>
-                                    </nav>
-                                    <div class="tab-content" id="nav-tabContent">
-                                        <!-- 받은쪽지함 -->
-                                        <div class="tab-pane fade show active selectedBox" id="nav-inbox" role="tabpanel" aria-labelledby="nav-inbox-tab" name="receivedBox">
-                                            <div class="row receivedList_prev_part">
-                                                <div class="col-1">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="r_allCheck">
-                                                        <label class="custom-control-label" for="r_allCheck"></label>
-                                                    </div> 
-                                                </div>
-                                                <div class="col-2">보낸사람</div>
-                                                <div class="col-4">내용</div>
-                                                <div class="col-3">받은날짜</div>
-                                                <div class="col-2 text-center">read</div>
-                                            </div>
-                                            <!-- 테이블에서 값 가져오기 -->
-                                            <!-- 받은쪽지함 내용 -->
-                                            <c:if test="${receivedList.size()==0 }">
-                                                <div class="row">
-                                                    <div class="col-12 text-center">
-                                                        받은 쪽지가 없습니다.
-                                                    </div>
-                                                </div>
-                                            </c:if>
-                                            <form class="receivedList_part" id="receivedMsg_delete_form" action="deleteMsg" method="post">
-                                                <!-- 받은쪽지함 내용들 -->
-                                                <c:forEach var="r_list" items="${receivedList }" varStatus="status">
-                                                    <div class="row r_list_row">
-                                                        <div class="col-1">
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input received_check" id="r_${status.count }" name="msgSeq" value="${r_list.seq }">
-                                                                <label class="custom-control-label" for="r_${status.count }"></label>
-                                                            </div> 
-                                                        </div>
-                                                        <div class="col-2 text-truncate">${r_list.sender }</div>
-                                                        <div class="col-4 r_click_parent text-truncate">
-                                                            <c:if test="${r_list.readOk =='N'}">
-                                                                <a class="received_msg_click text-decoration-none" href="javascript:void(0)"  seq="${r_list.seq }" data-toggle="modal" data-target="#received_msg_modal" value="${r_list.sender }">${r_list.contents }</a>
-                                                            </c:if>
-                                                            <c:if test="${r_list.readOk =='Y'}">
-                                                                <a class="received_msg_click text-decoration-none readMsg" href="javascript:void(0)"  seq="${r_list.seq }" data-toggle="modal" data-target="#received_msg_modal" value="${r_list.sender }">${r_list.contents }</a>
-                                                            </c:if>
-                                                        </div>
-                                                        <div class="col-3">${r_list.message_date }</div>
-                                                        <div class="col-2 r_readOk text-center">${r_list.readOk }</div>
-                                                    </div>
-                                                </c:forEach>
-                                                <!-- 받은쪽지함 내용들 -->
-                                            </form>
-                                            <!-- 받은쪽지 네비게이터 띄워주기 -->
-                                            <div class="row receivedList_part my-4">
-                                                <div class="col-12 text-center">
-                                                    <c:forEach var="navi" items="${receivedNavi }">
-                                                        <a class="ml-1 navi navi_click_a" href="javascript:void(0)"  value="recipient">${navi }</a>
-                                                    </c:forEach>
-                                                </div>
-                                            </div><!-- /받은쪽지 네비게이터-->
-                                            <!-- 받은쪽지클릭하면 내용띄워주기 -->
-                                            <div class="modal fade p-0" id="received_msg_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">쪽지 읽기</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="container-fluid">
-                                                                <div id="r_sender_modal" sender="">보낸사람 : </div>
-                                                                <div>
-                                                                    <textarea class="border-0" id="r_contents_modal" rows="8" cols="40" style="resize:none;" readonly></textarea>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button id="received_msg_close_btn" type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                                                            <button id="reply_msg_btn" type="button" class="btn btn-primary">답장 보내기</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- 보낸쪽지함 -->
-                                        <div class="tab-pane fade selectedBox" id="nav-sentbox" role="tabpanel" aria-labelledby="nav-sentbox-tab" name="sentBox">
-                                            <div class="row sentList_prev_part">
-                                                <div class="col-1">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="s_allCheck">
-                                                        <label class="custom-control-label" for="s_allCheck"></label>
-                                                    </div> 
-                                                </div>
-                                                <div class="col-2">받는사람</div>
-                                                <div class="col-4">내용</div>
-                                                <div class="col-3">보낸날짜</div>
-                                                <div class="col-2 text-center">read</div>
-                                            </div>
-                                            <c:if test="${sentList.size()==0 }">
-                                                <div class="row">
-                                                    <div class="col-12 text-center">
-                                                        보낸 쪽지가 없습니다.
-                                                    </div>
-                                                </div>
-                                            </c:if>
-                                            <form class="sentList_part" id="sentMsg_delete_form" action="deleteMsg" method="post">
-                                                <c:forEach var="s_list" items="${sentList }" varStatus="status">
-                                                    <!-- 보낸쪽지함 내용들 -->
-                                                    <div class="row s_list_row">
-                                                        <div class="col-1">
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input sent_check" id="s_${status.count }" name="msgSeq" value="${s_list.seq }">
-                                                                <label class="custom-control-label" for="s_${status.count }"></label>
-                                                            </div> 
-                                                        </div>
-                                                        <div class="col-2 text-truncate">${s_list.recipient }</div>
-                                                        <div class="col-4 s_click_parent text-truncate">
-                                                            <a class="sent_msg_click text-decoration-none" href="javascript:void(0)"  seq="${s_list.seq }" data-toggle="modal" data-target="#s_msg_modal" value="${s_list.recipient }">${s_list.contents }</a>
-                                                        </div>
-                                                        <div class="col-3">${s_list.message_date }</div>
-                                                        <div class="col-2 s_readOk text-center">${s_list.readOk }</div>
-                                                    </div>
-                                                    <!-- //보낸쪽지함 내용들 -->
-                                                </c:forEach>
-                                            </form>
-                                            <!-- 보낸쪽지 네비게이터 띄워주기 -->
-                                            <div class="row sentList_part my-4">
-                                                <div class="col-12 text-center">
-                                                    <c:forEach var="navi" items="${sentNavi }">
-                                                        <a class="ml-1 navi navi_click_a" href="javascript:void(0)"  value="sender">${navi }</a>
-                                                    </c:forEach>
-                                                </div>
-                                            </div>
-                                            <!-- /보낸쪽지 네비게이터-->
-                                            <!-- 보낸쪽지클릭하면 내용띄워주기 -->
-                                            <div class="modal fade p-0" id="s_msg_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">쪽지 읽기</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="container-fluid">
-                                                                <div id="s_recipient_modal">받는사람:</div>
-                                                                <div>
-                                                                    <textarea class="border-0" id="s_contents_modal" rows="8" cols="40" style="resize:none;" readonly></textarea>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- /보낸쪽지클릭하면 내용띄워주기 -->
-                                        </div>
-                                        <!-- /보낸쪽지함 -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /쪽지함 -->
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <button type="button" class="btn laon_btn_style" id="selectMsg_delete">선택 삭제하기</button>
-                        <button id="sendMsg_btn"type="button" class="btn laon_btn_style" data-toggle="modal" data-target="#msg_modal" data-whatever="@mdo">쪽지보내기</button>
-                    </div>
-                    <div class="modal fade text-left" id="msg_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form id="msg_send_form" action="insertMsg" method="post">
-                                        <div class="form-group">
-                                            <label for="recipient-name" class="col-form-label">받는사람ID : </label>
-                                            <input type="text" class="form-control" id="recipient-name" name="recipient">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="message-text" class="col-form-label">보낼메세지:</label>
-                                            <textarea rows="8" cols="80" class="form-control" id="message-text" style="resize:none;" name="contents"></textarea>
-                                        </div>
-                                        <div><span id="counter">0/300</span></div>
-                                        <input type="hidden" value="${sessionScope.id }" name="sender">
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button id="msg_close_btn" type="button" class="btn bg4_ft2" data-dismiss="modal">닫기</button>
-                                    <button id="msg_send_btn" type="button" class="btn bg2_ft4">쪽지 보내기</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
+                
 
 
                 <!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->

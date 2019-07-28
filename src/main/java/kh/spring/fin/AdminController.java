@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kh.spring.dto.BlackListDTO;
+import kh.spring.dto.MemberDTO;
 import kh.spring.dto.MessageDTO;
 import kh.spring.dto.QuizDTO;
 import kh.spring.service.BlackListService;
@@ -479,6 +480,12 @@ public class AdminController
 	
 	//PayLog end
 	
+	
+	@RequestMapping("admin-mypage")
+	public String myPage(HttpServletRequest request) 
+	{
+		return "myPage/user/user_myPage_profile";
+	}
 	
 	
 	//퀴즈 관리자 -------------------------------------------------------------------------------------------

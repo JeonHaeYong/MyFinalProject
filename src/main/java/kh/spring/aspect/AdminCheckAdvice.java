@@ -31,8 +31,12 @@ public class AdminCheckAdvice
 	public void adminContoller() {};
 	@Pointcut("execution(* kh.spring.fin.NoticeController.noticeWrite*(..)) || execution(* kh.spring.fin.NoticeController.noticeUpdate*(..)) || execution(* kh.spring.fin.NoticeController.noticeDelete*(..))")
 	public void noticeContoller() {};
+	@Pointcut("execution(* kh.spring.fin.InformationController.infowrite(..)) || execution(* kh.spring.fin.InformationController.writeformproc(..))"
+		+ " || execution(* kh.spring.fin.InformationController.imageUploadLogin(..)) || execution(* kh.spring.fin.InformationController.updatewrite(..))"
+		+ " || execution(* kh.spring.fin.InformationController.upload(..)) || execution(* kh.spring.fin.InformationController.delinfo(..))")
+	public void infomaitionController() {};
 	
-	@Around("adminContoller() || noticeContoller()")
+	@Around("adminContoller() || noticeContoller() || infomaitionController()")
 	public Object adminCheck(ProceedingJoinPoint pjp)
 	{
 		Object returnObj = "error";
