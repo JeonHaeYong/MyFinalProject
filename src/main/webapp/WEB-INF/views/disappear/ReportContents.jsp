@@ -22,6 +22,16 @@
 <link rel="stylesheet" href="resources/css/style.css">
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
  <style>
+ 	/*점보트론  */
+	.myJumbo {
+	background-color: white;
+	padding: 5rem;
+}
+
+#jumboImg {
+	width: 100%;
+	max-height: 600px;
+}
  		.empty{width: 100%; text-align: center; margin: auto; margin-bottom: 50px; height:50px;}
         .title{text-align: center;}
         h1{ font-family: 'Gamja Flower', cursive;}
@@ -60,6 +70,10 @@
 	data-offset="300" id="home-section">
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
+	<div class="jumbotron myJumbo pr-0 pl-0 pb-2">
+		<img src="resources/images/disappear/disapperjumbo.jpg" id="jumboImg">
+
+	</div>
 	<div class="px-0 pb-0 empty"></div>
 	<div class="title"><h1>실종신고</h1></div>
     <div id="wrapper">
@@ -385,6 +399,41 @@
 				 $(this).parent().remove();
 				 $(this).remove();
 			}
+      });
+      $("#review_reply_input").keydown(function(e){
+    	  if(e.keyCode == 13){
+    		  if(${id==null}){//아직 로그인을 하지 않았다면,
+                  alert("로그인을 먼저 해주세요.");
+                  $(".login-btn").trigger("click");
+                  return;
+              }
+              var reply = $("#review_reply_input").val();
+              if(reply==""){
+                  alert("댓글을 입력해주세요.");
+                  $("#review_reply_input").focus();
+                  return;
+              }
+              //ajax로 table에 insert하기.
+              $.ajax({
+            	 
+                  url : "insertDisappearComment",
+                  type : "post",
+                  data : {
+                      seqStr : "${content.seq}",
+                      writer : "${id}",
+                      contents : reply
+                  }
+              }).done(function(resp){
+                  //console.log("댓글달기성공->"+resp);
+                  $(".reply_part").remove();
+                  $(".comment").append(resp);
+                  
+                /*   likeOkCheck();//좋아요 클릭한것만 빨강하트 */
+                  $("#review_reply_input").val("");
+                  $(".modifyReply_part.hide").hide();
+                  profileImgRounded();
+              });
+    	  }
       });
 	</script>
 </body>

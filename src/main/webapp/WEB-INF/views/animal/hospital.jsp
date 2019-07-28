@@ -75,7 +75,15 @@
                    <div><a href="listTempProtect?currentPage=1" name="s-menu">임시보호중</a></div>
                    <div><a href="toHospital?currentPage=1" name="s-menu">동물병원 조회</a></div>
                    <div><a href="toCenter?currentPage=1" name="s-menu">보호센터 조회</a></div>
-                   <div><a href="inputData.admin" name="s-menu">관리자 설정</a></div>
+                   <c:choose>
+                   		<c:when test="${type==4 }">
+                   			<div><a href="inputData.admin" name="s-menu">관리자 설정</a></div>
+                   		</c:when>
+                   		<c:otherwise>
+                   			<div hidden><a href="inputData.admin" name="s-menu">관리자 설정</a></div>
+                   		</c:otherwise>
+                   </c:choose>
+                   
                </div>
                
                <div class="col-1"><!--메뉴바랑 리스트 사이 빈 공간--></div>
