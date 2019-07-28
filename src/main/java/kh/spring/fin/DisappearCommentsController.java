@@ -6,12 +6,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.spring.dto.DisappearCommentsDTO;
 import kh.spring.service.DisappearCommentsService;
-
+@Controller
 public class DisappearCommentsController {
 	@Autowired
 	private HttpSession session;
@@ -20,6 +21,7 @@ public class DisappearCommentsController {
 	
 	@RequestMapping(value="insertDisappearComment.dis" ,produces = "application/text; charset=utf8")
 	public String insertDisappearComment(HttpServletRequest request , DisappearCommentsDTO dto) {//ajax로 댓글 insert하기
+		System.out.println("ajax도착");
 		String loginId = (String)session.getAttribute("id");
 		if(!loginId.equals(dto.getWriter())) {
 			return "redirect:error";

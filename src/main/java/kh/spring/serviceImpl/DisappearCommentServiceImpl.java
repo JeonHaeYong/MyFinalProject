@@ -14,8 +14,6 @@ import kh.spring.service.DisappearCommentsService;
 import kh.spring.statics.ReviewCommentsStatics;
 
 
-
-
 public class DisappearCommentServiceImpl implements DisappearCommentsService{
 	@Autowired
 	private DisappearCommentsDAO dcdao;
