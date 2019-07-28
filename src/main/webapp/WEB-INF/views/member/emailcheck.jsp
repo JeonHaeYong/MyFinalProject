@@ -80,23 +80,19 @@
 					dataType:"json"
 				}).done(function(resp) {
 					if(resp==true)
-					{
-						opener.$("#email").prop("flag","true");
-						
-						opener.alert("인증이 완료되었습니다");
+					{	opener.$("#email").prop("flag","true");
+						alert("인증이 완료되었습니다");
 						window.close();
-						$(opener.document).find("#emailCheck").attr('disabled',false);
+						window.opener.alert("회원가입을 계속 진행해세요");				
 					}
 					else{						
 						count++;
 						if(count==3){
-							alert(count+"회 다시 인증번호 발송해주세요");
+							alert("인증번호 횟수를 초과하였습니다\n다시 인증번호 발송해주세요");
 							window.opener.document.getElementById("email").value = "";		
-					
-						
-							window.close();}
+						window.close();}
 						else{
-						alert(count+"회 인증번호가 잘못되었습니다 이메일 인증번호를 다시 작성하시오");
+						alert(count+"회 인증번호가 잘못되었습니다\n인증번호를 다시 확인해주세요\n남은회수 : "+(3-count)+"회");
 					
 					
 						

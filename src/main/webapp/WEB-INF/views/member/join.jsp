@@ -507,7 +507,7 @@ $("#birthday").attr("max",today.getFullYear()+'-0'+month+'-'+today.getDate());
 				$("#id").attr("regexFlag", "false");
 				$("#id").val("");
 				$("#idresult").html("알파벳으로 시작하고 6~12자리 이하로 작성해주세요.");
-
+				$("#idresult").css("color", "red");
 			} else {
 				$("#id").attr("regexFlag", "true");
 				$("#idresult").html("");
@@ -525,7 +525,7 @@ $("#birthday").attr("max",today.getFullYear()+'-0'+month+'-'+today.getDate());
 						$("#id").attr("flag", "false");
 					} else {
 						$("#idresult").html("사용가능한 아이디 입니다.");
-						$("#idresult").css("color", "green");
+						$("#idresult").css("color", "red");
 						$("#id").attr("flag", "true");
 					}
 				})
@@ -585,8 +585,9 @@ $("#birthday").attr("max",today.getFullYear()+'-0'+month+'-'+today.getDate());
 							if (result == null) {//올바른 메일작성확인
 								$("#emailcheck").attr('disabled',true);
 								$(".emailResult").html("올바른 이메일을 작성해주세요.");
+								$(".emailResult").css("color", "red");
 								$("#email").val("");
-							
+								
 							} else {//올바른메일인경우
 								$("#email").attr("regexFlag", "true");
 								console.log("메일 값"+$("#email").val());
@@ -600,6 +601,7 @@ $("#birthday").attr("max",today.getFullYear()+'-0'+month+'-'+today.getDate());
 								if(resp=="true"){
 									$("#emailcheck").attr('disabled',true);
 									$(".emailResult").html("이미 가입된 이메일입니다");
+									$(".emailResult").css("color", "red");
 									$("#email").val("");
 								
 									}
@@ -624,8 +626,7 @@ $("#birthday").attr("max",today.getFullYear()+'-0'+month+'-'+today.getDate());
 				}).done(function(resp) {
 						console.log(resp);
 						if (resp == true) {	//메일 전송 성공													
-					
-							window.open('emailcheck','window팝업','width=470, height=300, menubar=no, status=no, toolbar=no');
+								window.open('emailcheck','window팝업','width=470, height=300, menubar=no, status=no, toolbar=no');
 					
 						}
 						else{
@@ -668,6 +669,7 @@ function maxLengthCheck(object){
     if (object.value.length > object.maxLength){
       object.value = object.value.slice(0, object.maxLength);
        $(".nameResult").html("글자수를 초과하였습니다.4자리이내로 작성해주세요");
+       $(".nameResult").css("color", "red");
     }    
   }
 
