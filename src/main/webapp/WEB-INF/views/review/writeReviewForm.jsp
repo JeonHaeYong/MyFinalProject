@@ -35,13 +35,12 @@
                         max-height: 600px;
                     }
                     /*왼쪽 메뉴 */
-                    .menu-box{width: 150px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px; margin-top: 50px;}
+                    .menu-box{width: 150px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px;}
                     .menu-box>div{height: 35px;}
                     .menu-box>div:first-child{font-weight: bold; border-bottom: 1px solid #754F44; line-height: 33px; color:#B45F04; font-size:40px;}
-                    .menu-box>div:not(.s-menu):hover{background-color: #FBFFB950;}
+                    .menu-box>div:not(.s-menu):hover{color: #754F44; font-weight:bold; background-color: #FBFFB950;}
                     .menu-row{text-align: -webkit-center;}
                     a[name="s-menu"]{color: #754F44; text-decoration-line: none;}
-                    a[name="s-menu"]:hover{color: #754F44; text-decoration-line: none; font-weight:bold;}
                     /*~왼쪽 메뉴 */
                     /*파일업로드*/
                     .filebox input[type="file"] {
@@ -148,7 +147,7 @@
                         <div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-row">
                             <div class="row menu-box">
                                 <div class="col-12 s-menu">M E N U</div>
-                                <div class="col-12 "><a name="s-menu" href="toReviewList">재회 후기</a></div>
+                                <div class="col-12 "><a name="s-menu" href="toReviewList"><div>재회후기</div></a></div>
                             </div>
                         </div>
                         <div class="col-1"></div>

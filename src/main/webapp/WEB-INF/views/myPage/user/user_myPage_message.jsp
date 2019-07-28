@@ -88,6 +88,13 @@
                     }
                     .laon_btn_style{background-color:#FDD69270;color:#754F44; margin: 0px 2px; font-size: 1.1rem;cursor: pointer;}
 					.laon_btn_style:hover{background-color:#FDD692; font-weight:bold; color:#754F44;}
+					#receivedMsg_delete_form,#sentMsg_delete_form{
+						min-height: 300px;
+					}
+					.noMsg_height{
+						min-height: 300px;
+						line-height: 300px;
+					}
                 </style>
                 <jsp:include page="/WEB-INF/views/myPage/user/user_module/mypage_user_style.jsp" ></jsp:include><!-- user 마이페이지 스타일 -->
                 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
@@ -122,18 +129,19 @@
                                                 </div>
                                                 <div class="col-2">보낸사람</div>
                                                 <div class="col-5">내용</div>
-                                                <div class="col-3">받은날짜</div>
-                                                <div class="col-1 text-center">read</div>
+                                                <div class="col-lg-3 col-4">받은날짜</div>
+                                                <div class="col-lg-1 d-none d-lg-block text-center">read</div>
                                             </div>
                                             <!-- 테이블에서 값 가져오기 -->
                                             <!-- 받은쪽지함 내용 -->
                                             <c:if test="${receivedList.size()==0 }">
-                                            	<div class="row">
+                                            	<div class="row noMsg_height">
                                             		<div class="col-12 text-center">
                                             			받은 쪽지가 없습니다.
                                             		</div>
                                             	</div>
                                             </c:if>
+                                            <c:if test="${receivedList.size()!=0 }">
                                             <form class="receivedList_part" id="receivedMsg_delete_form" action="deleteMsg" method="post">
                                             <!-- 받은쪽지함 내용들 -->
                                             <c:forEach var="r_list" items="${receivedList }" varStatus="status">
@@ -153,8 +161,8 @@
                                                     		<a class="received_msg_click text-decoration-none readMsg" href="javascript:void(0)"  seq="${r_list.seq }" data-toggle="modal" data-target="#received_msg_modal" value="${r_list.sender }">${r_list.contents }</a>
                                                     	</c:if>
                                                     </div>
-                                                    <div class="col-3">${r_list.message_date }</div>
-                                                    <div class="col-1 r_readOk text-center">${r_list.readOk }</div>
+                                                    <div class="col-lg-3 col-4">${r_list.message_date }</div>
+                                                    <div class="col-lg-1 d-none d-lg-block r_readOk text-center">${r_list.readOk }</div>
                                                 </div>
                                             </c:forEach>
                                             <!-- 받은쪽지함 내용들 -->
@@ -192,6 +200,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            </c:if>
                                         </div>
                                         <!-- 보낸쪽지함 -->
                                         <div class="tab-pane fade selectedBox" id="nav-sentbox" role="tabpanel" aria-labelledby="nav-sentbox-tab" name="sentBox">
@@ -204,16 +213,17 @@
                                                 </div>
                                                 <div class="col-2">받는사람</div>
                                                 <div class="col-5">내용</div>
-                                                <div class="col-3">보낸날짜</div>
-                                                <div class="col-1 text-center">read</div>
+                                                <div class="col-lg-3 col-4">보낸날짜</div>
+                                                <div class="col-lg-1 d-none d-lg-block text-center">read</div>
                                             </div>
                                             <c:if test="${sentList.size()==0 }">
-                                            	<div class="row">
+                                            	<div class="row noMsg_height">
                                             		<div class="col-12 text-center">
                                             			보낸 쪽지가 없습니다.
                                             		</div>
                                             	</div>
                                             </c:if>
+                                            <c:if test="${sentList.size()!=0 }">
                                             <form class="sentList_part" id="sentMsg_delete_form" action="deleteMsg" method="post">
                                             <c:forEach var="s_list" items="${sentList }" varStatus="status">
                                             <!-- 보낸쪽지함 내용들 -->
@@ -228,8 +238,8 @@
                                                     <div class="col-5 s_click_parent text-truncate">
                                                     	<a class="sent_msg_click text-decoration-none" href="javascript:void(0)"  seq="${s_list.seq }" data-toggle="modal" data-target="#s_msg_modal" value="${s_list.recipient }">${s_list.contents }</a>
                                                     </div>
-                                                    <div class="col-3">${s_list.message_date }</div>
-                                                    <div class="col-1 s_readOk text-center">${s_list.readOk }</div>
+                                                    <div class="col-lg-3 col-4">${s_list.message_date }</div>
+                                                    <div class="col-lg-1 d-none d-lg-block s_readOk text-center">${s_list.readOk }</div>
                                                 </div>
                                                 <!-- //보낸쪽지함 내용들 -->
                                             </c:forEach>
@@ -267,6 +277,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            </c:if>
                                             <!-- /보낸쪽지클릭하면 내용띄워주기 -->
                                         </div>
                                         <!-- /보낸쪽지함 -->

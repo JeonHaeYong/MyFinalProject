@@ -13,7 +13,7 @@
 	color:white;
  } 
  #logout,.logoutBtn{
-	background:none; border:none; font-family:'Gamja Flower', cursive; font-size:20px; color:#754F44; font-weight: bold;
+	background:none; border:none; font-family:'Gamja Flower', cursive; font-size:20px; color:#754F44; font-weight: bold;cursor: pointer;
  }
 #loginbtn:hover{ 
 	background-color:#F5505D;
