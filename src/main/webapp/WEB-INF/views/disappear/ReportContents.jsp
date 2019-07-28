@@ -253,7 +253,7 @@
 			}
 		});
 
-
+/* 댓글~~!!!! */
 	  $("#review_reply_btn").on("click",function(){//댓글등록
           if(${id==null}){//아직 로그인을 하지 않았다면,
               alert("로그인을 먼저 해주세요.");
@@ -268,21 +268,24 @@
           }
           //ajax로 table에 insert하기.
           $.ajax({
-              url : "insertDisappearComment.dis",
+              url : "insertDisappearComment",
               type : "post",
               data : {
-                  review_seq : "${reviewDTO.seq}",
-                  writer : "${id}",
-                  contents : reply
+                  data : "data"
               }
           }).done(function(resp){
-              //console.log("댓글달기성공->"+resp);
-              $(".reply_part").remove();
-              $(".reply_wrapper").append(resp);
-            /*   likeOkCheck();//좋아요 클릭한것만 빨강하트 */
-              $("#review_reply_input").val("");
-              $(".modifyReply_part.hide").hide();
-              profileImgRounded();
+//               //console.log("댓글달기성공->"+resp);
+//               $(".reply_part").remove();
+//               $(".reply_wrapper").append(resp);
+//             /*   likeOkCheck();//좋아요 클릭한것만 빨강하트 */
+//               $("#review_reply_input").val("");
+//               $(".modifyReply_part.hide").hide();
+//               profileImgRounded();
+				console.log("insert성공");
+          }).fail(function(a,b,c){
+        	  console.log(a);
+        	  console.log(b);
+        	  console.log(c);
           })
       });
 	  function clickReplyNavi(param){//댓글 navi 클릭했을때,
@@ -298,7 +301,7 @@
               url : "clickReplyNavi.dis",
               type : "post",
               data : {
-                  seqStr : "${reviewDTO.seq}",
+                  seqStr : "${DisappearReportDTO.seq}",
                   currentPageStr : currentPage
               }
           }).done(function(resp){
@@ -381,6 +384,15 @@
           });
       };
       profileImgRounded();
+      //이미지 없는 캐ㅅ러셀 삭제
+      $(".carousel-item img").each(function(index,items){
+			if($(this).attr("src") =='noImage'){
+				console.log($(this).parent().parent().attr("class"));
+				
+				 $(this).parent().remove();
+				 $(this).remove();
+			}
+      });
 	</script>
 </body>
 </html>

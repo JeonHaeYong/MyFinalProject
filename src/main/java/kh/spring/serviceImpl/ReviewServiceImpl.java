@@ -3,6 +3,7 @@ package kh.spring.serviceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,7 @@ public class ReviewServiceImpl implements ReviewService {
 		int end = start_end[1];
 		return rdao.selectAllReviewByCurrentpage(start, end);
 	}
-	
+	@Override
 	public int getReviewCount() {
 		return rdao.getReviewCount();
 	}
@@ -149,6 +150,10 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public int deleteReviewService(String[] seq) {//관리자가 글삭제
 		return rdao.deleteReview(seq);
+	}
+	@Override
+	public List<ReviewDTO> selectRandomReview(Set<Integer> rSet) {
+		return rdao.selectRandomReview(rSet);
 	}
 
 	

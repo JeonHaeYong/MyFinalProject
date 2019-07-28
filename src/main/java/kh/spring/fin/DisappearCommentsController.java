@@ -19,26 +19,25 @@ public class DisappearCommentsController {
 	@Autowired
 	private DisappearCommentsService dcService;
 	
-	@RequestMapping(value="insertDisappearComment.dis" ,produces = "application/text; charset=utf8")
-	public String insertDisappearComment(HttpServletRequest request , DisappearCommentsDTO dto) {//ajax로 댓글 insert하기
-		System.out.println("ajax도착");
+	@RequestMapping(value="insertDisappearComment" ,produces = "application/text; charset=utf8")
+	public String insertDisappearComment(HttpServletRequest request) {//ajax로 댓글 insert하기
 		String loginId = (String)session.getAttribute("id");
-		if(!loginId.equals(dto.getWriter())) {
-			return "redirect:error";
-		}
-		int result = dcService.insertDisappearCommentService(dto);
-		if(result!=1) {
-			System.out.println("result--->>"+result);
-			return "redirect:error";
-		}
-		int seq = dto.getDisappear_seq();
-		//해당 글의 댓글 가져오기
-		List<DisappearCommentsDTO> list = dcService.selectAllDisappearCommentsService(seq,1,loginId);
-		//(댓글 navi)
-		List<String> reply_navi = dcService.getNaviForDisappearCommentsList(seq, 1);
-		request.setAttribute("replyList", list);
-		request.setAttribute("reply_navi", reply_navi);
-		return "disappear/comments";
+//		if(!loginId.equals(dto.getWriter())) {
+//			return "redirect:error";
+//		}
+//		int result = dcService.insertDisappearCommentService(dto);
+//		if(result!=1) {
+//			System.out.println("result--->>"+result);
+//			return "redirect:error";
+//		}
+//		int seq = dto.getDisappear_seq();
+//		//해당 글의 댓글 가져오기
+//		List<DisappearCommentsDTO> list = dcService.selectAllDisappearCommentsService(seq,1,loginId);
+//		//(댓글 navi)
+//		List<String> reply_navi = dcService.getNaviForDisappearCommentsList(seq, 1);
+//		request.setAttribute("replyList", list);
+//		request.setAttribute("reply_navi", reply_navi);
+		return "disappear/comment";
 	}
 	
 	

@@ -28,7 +28,14 @@ public class DisappearReportDAOImpl implements DisappearReportDAO{
 		if(drdto.getEt()==null) { // 기타 사항 없을경우
 			drdto.setEt("");
 		}
-		
+		String disappearArea = this.replaceAll(drdto.getDisappearArea());
+		String furColor = this.replaceAll(drdto.getFurColor());
+		String feature = this.replaceAll(drdto.getFeature());
+		String et = this.replaceAll(drdto.getEt());
+		drdto.setDisappearArea(disappearArea);
+		drdto.setFurColor(furColor);
+		drdto.setFeature(feature);
+		drdto.setEt(et);
 		return sst.insert("DisappearReportDAO.insert", drdto);
 	}
 	@Override
@@ -92,25 +99,33 @@ public class DisappearReportDAOImpl implements DisappearReportDAO{
 	public DisappearReportDTO toReportContent(int seq) {
 		return sst.selectOne("DisappearReportDAO.ReportContent", seq);
 	}
-	@Override 
-	public int updateNoImage(DisappearReportDTO drdto) {
-		if(drdto.getNeuter() == null) {
-			drdto.setNeuter("X");
-		}
-		if(drdto.getEt()==null) {
-			drdto.setEt("");
-		}
-		return sst.update("DisappearReportDAO.updateNoImage",drdto);
-	}
+
 	@Override
 	public int update(DisappearReportDTO drdto) {
+		System.out.println("수정!!");
+		System.out.println(drdto.getImage1() +":"+ drdto.getImage2()+":"+drdto.getImage3());
 		if(drdto.getNeuter() == null) {
 			drdto.setNeuter("X");
 		}
 		if(drdto.getEt()==null) {
 			drdto.setEt("");
 		}
-		return sst.update("DisappearReportDAO.update",drdto);
+		//System.out.println(drdto.getDisDate()+drdto.getAreaList()+drdto.getDisappearArea() +drdto.getTel()+drdto.getGender()+drdto.getNeuter()+drdto.getAge()+ drdto.getFurColor() + drdto.getFeature()+drdto.getEt());
+//		String disappearArea = this.replaceAll(drdto.getDisappearArea());
+//		String furColor = this.replaceAll(drdto.getFurColor());
+//		String feature = this.replaceAll(drdto.getFeature());
+//		String et = this.replaceAll(drdto.getEt());
+//		drdto.setDisappearArea(disappearArea);
+//		drdto.setFurColor(furColor);
+//		drdto.setFeature(feature);
+//		drdto.setEt(et);
+		System.out.println(drdto.getSeq());
+		int result = 0;
+		try {
+			result =	sst.update("DisappearReportDAO.update",drdto);
+		}catch(Exception e) {e.printStackTrace();}
+				System.out.println(result);
+		return result;
 	}
 	@Override
 	public int delete(int seq) {

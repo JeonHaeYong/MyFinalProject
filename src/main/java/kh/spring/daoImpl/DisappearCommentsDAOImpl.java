@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kh.spring.dao.DisappearCommentsDAO;
 import kh.spring.dto.DisappearCommentsDTO;
 
+@Repository
 public class DisappearCommentsDAOImpl implements DisappearCommentsDAO{
 	@Autowired
 	private SqlSessionTemplate sst;

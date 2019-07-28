@@ -1,27 +1,22 @@
 package kh.spring.fin;
 
-import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.parsers.ParserConfigurationException;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.xml.sax.SAXException;
 
 import kh.spring.dto.ApiAbandonedAnimalDTO;
-import kh.spring.serviceImpl.ApiAbandonedAnimalServiceImpl;
-
+import kh.spring.dto.ReviewDTO;
 import kh.spring.loginapi.NaverLoginBO;
 import kh.spring.service.ApiAbandonedAnimalService;
+import kh.spring.service.ReviewService;
 
 @Controller
 public class HomeController {
@@ -29,9 +24,10 @@ public class HomeController {
 	private String apiResult = null;
 	@Autowired
 	private HttpSession session;
-	
 	@Autowired
 	private ApiAbandonedAnimalService apiService;
+	@Autowired
+	private ReviewService rservice;
 	
 	@Autowired
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
@@ -46,6 +42,19 @@ public class HomeController {
 		
 		List<ApiAbandonedAnimalDTO> list = apiService.selectForMain();
 		request.setAttribute("list", list);
+		//재회후기뽑아오기
+		int reviewCount = rservice.getReviewCount();
+		if(reviewCount>=3) {//리뷰글 3개이상일때만 가져오기
+			Set<Integer> rSet = new HashSet<>();
+			while(rSet.size()<4) {// 랜덤으로 4개
+				int rand = (int)(Math.random()*reviewCount+1);
+				rSet.add(rand);
+				System.out.println("random숫자->"+rand);
+			}
+			System.out.println("set"+rSet.toString());
+			List<ReviewDTO> reList = rservice.selectRandomReview(rSet);
+			request.setAttribute("reList", reList);
+		}
 		return "index";
 	}
 	@RequestMapping("popUp.home")

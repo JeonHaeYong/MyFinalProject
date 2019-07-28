@@ -3,6 +3,7 @@ package kh.spring.daoImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +69,13 @@ public class ReviewDAOImpl implements ReviewDAO {
 	@Override
 	public int deleteReview(String[] seq) {
 		return sst.delete("ReviewDAO.deleteReviewListByAdmin",seq);
+	}
+
+
+	@Override
+	public List<ReviewDTO> selectRandomReview(Set<Integer> rset) {
+		Object[] rsetArr = rset.toArray();
+		return sst.selectList("ReviewDAO.selectRandomReview",rsetArr);
 	}
 
 }

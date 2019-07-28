@@ -1,7 +1,7 @@
 package kh.spring.dao;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 import kh.spring.dto.ReviewDTO;
 
@@ -15,4 +15,5 @@ public interface ReviewDAO {
 	public int getReviewCount();
 	public ReviewDTO selectReviewBySeq(int seq);
 	public int updateViewCount(int seq);
+	public List<ReviewDTO> selectRandomReview(Set<Integer> rset);
 }

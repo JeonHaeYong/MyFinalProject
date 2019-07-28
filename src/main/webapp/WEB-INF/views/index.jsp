@@ -264,7 +264,7 @@
 	</section>
 
 
-
+	<!-- 재회후기부분 -->
 	<section class="site-section bg-light block-13" id="testimonials-section" data-aos="fade">
 	<div class="container">
 
@@ -274,75 +274,69 @@
 				<h2 class="text-black mb-2">재회 후기</h2>
 			</div>
 		</div>
-		<div data-aos="fade-up" data-aos-delay="200">
-			<div class="owl-carousel nonloop-block-13">
-				<div>
-					<div class="block-testimony-1 text-center">
-
-						<blockquote class="mb-4">
-							<p>&ldquo;Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem porro aliquam quisquam perferendis illum ad corporis tempore voluptatum, obcaecati, a unde? Aliquam suscipit dicta,
-								error velit quaerat eligendi quam ipsa..&rdquo;</p>
-						</blockquote>
-
-						<figure> <img src="resources/images/person_1.jpg" alt="Image" class="img-fluid rounded-circle mx-auto"> </figure>
-						<h3 class="font-size-20 text-black">Ricky Fisher</h3>
+		<c:choose>
+			<c:when test="${reList==null }">
+				<div>재회후기가 없습니다.</div>
+			</c:when>
+			<c:otherwise>
+				<!-- 재회후기 내용 -->
+					<div data-aos="fade-up" data-aos-delay="200">
+						<div class="owl-carousel nonloop-block-13">
+							<c:forEach var="list" items="${reList }" varStatus="i">
+								<div>
+									<div class="block-testimony-1 text-center">
+				
+										<blockquote class="mb-4">
+											<p>&ldquo;${list.contents }!&rdquo;</p>
+										</blockquote>
+				
+										<figure> <img src="review/${list.image_path1}" alt="Image" class="img-fluid rounded-circle mx-auto"> </figure>
+										<h3 class="font-size-20 text-black">${list.writer }</h3>
+									</div>
+								</div>
+							</c:forEach>
+			
+<!-- 							<div> -->
+<!-- 								<div class="block-testimony-1 text-center"> -->
+			
+			
+<!-- 									<blockquote class="mb-4"> -->
+<!-- 										<p>&ldquo;Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores numquam, animi est ratione aut explicabo fuga illum a nesciunt tempora! Incidunt laborum blanditiis quidem -->
+<!-- 											voluptatibus enim placeat!&rdquo;</p> -->
+<!-- 									</blockquote> -->
+			
+<!-- 									<figure> <img src="resources/images/person_1.jpg" alt="Image" class="img-fluid rounded-circle mx-auto"> </figure> -->
+<!-- 									<h3 class="font-size-20 text-black">Mellisa Griffin</h3> -->
+			
+			
+<!-- 								</div> -->
+<!-- 							</div> -->
+			
+<!-- 							<div> -->
+<!-- 								<div class="block-testimony-1 text-center"> -->
+			
+			
+			
+<!-- 									<blockquote class="mb-4"> -->
+<!-- 										<p>&ldquo;Lorem ipsum dolor sit amet, consectetur adipisicing elit. A nemo distinctio ratione numquam. Magni quae a adipisci hic laborum voluptate optio ab tenetur. Officiis mollitia nam -->
+<!-- 											itaque laborum?.&rdquo;</p> -->
+<!-- 									</blockquote> -->
+			
+<!-- 									                     <figure> <img src="resources/images/person_2.jpg" -->
+<!-- 									alt="Image" class="img-fluid rounded-circle mx-auto"> -->
+<!-- 									</figure> -->
+<!-- 									<h3 class="font-size-20 mb-4 text-black">Robert Steward</h3> -->
+			
+			
+<!-- 								</div> -->
+<!-- 							</div> -->
+			
+			
+						</div>
 					</div>
-				</div>
-
-				<div>
-					<div class="block-testimony-1 text-center">
-
-
-
-						<blockquote class="mb-4">
-							<p>&ldquo;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat ad provident ipsa similique quidem. Fugit nam deserunt ipsam? Excepturi, possimus.&rdquo;</p>
-						</blockquote>
-
-						<figure> <img src="resources/images/person_2.jpg" alt="Image" class="img-fluid rounded-circle mx-auto"> </figure>
-						<h3 class="font-size-20 mb-4 text-black">Ken Davis</h3>
-
-
-					</div>
-				</div>
-
-				<div>
-					<div class="block-testimony-1 text-center">
-
-
-						<blockquote class="mb-4">
-							<p>&ldquo;Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores numquam, animi est ratione aut explicabo fuga illum a nesciunt tempora! Incidunt laborum blanditiis quidem
-								voluptatibus enim placeat!&rdquo;</p>
-						</blockquote>
-
-						<figure> <img src="resources/images/person_1.jpg" alt="Image" class="img-fluid rounded-circle mx-auto"> </figure>
-						<h3 class="font-size-20 text-black">Mellisa Griffin</h3>
-
-
-					</div>
-				</div>
-
-				<div>
-					<div class="block-testimony-1 text-center">
-
-
-
-						<blockquote class="mb-4">
-							<p>&ldquo;Lorem ipsum dolor sit amet, consectetur adipisicing elit. A nemo distinctio ratione numquam. Magni quae a adipisci hic laborum voluptate optio ab tenetur. Officiis mollitia nam
-								itaque laborum?.&rdquo;</p>
-						</blockquote>
-
-						<!--                      <figure> <img src="resources/images/person_2.jpg" -->
-						alt="Image" class="img-fluid rounded-circle mx-auto">
-						</figure>
-						<h3 class="font-size-20 mb-4 text-black">Robert Steward</h3>
-
-
-					</div>
-				</div>
-
-
-			</div>
-		</div>
+					<!-- /재회후기 내용 -->
+			</c:otherwise>
+		</c:choose>
 	</div>
 	</section>
 
@@ -611,7 +605,6 @@
 		        entry[0] = entry[1];
 		        return entry[0];
 	        }
-	        
         })
 	</script>
 </body>

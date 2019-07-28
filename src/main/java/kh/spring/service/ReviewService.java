@@ -1,7 +1,7 @@
 package kh.spring.service;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 import kh.spring.dto.ReviewDTO;
 
@@ -14,4 +14,6 @@ public interface ReviewService {
 	public List<String> getNaviForReviewList(int currentPage);
 	public ReviewDTO selectReviewBySeq(int seq);
 	public int updateViewCount(int seq);
+	public int getReviewCount();
+	public List<ReviewDTO> selectRandomReview(Set<Integer> rSet);
 }

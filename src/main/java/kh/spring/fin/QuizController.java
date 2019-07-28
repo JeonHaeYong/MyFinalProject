@@ -66,9 +66,11 @@ public class QuizController {
 		List<MemberDTO> rankList = new ArrayList<>();
 		int getPoint = plusPoint - minusPoint;
 		System.out.println(getPoint +" = "+ plusPoint +" - "+ minusPoint);
+		
 		try {
 			qs.updatePointService(getPoint, id); // 포인트 업데이트
 			rankList = ms.memberPointService();// 포인트 순으로 멤버 리스트 출력
+			
 		}catch(Exception e) {e.printStackTrace();}
 		
 		request.setAttribute("answer",answer.size());//맞힌 개수
