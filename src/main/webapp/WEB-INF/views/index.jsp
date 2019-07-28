@@ -48,13 +48,11 @@
          <div class="row">
             <div
                class="col-md-5 mr-auto align-self-center text-center text-md-left">
-               <div class="intro-text">
-                  <h1>We Love Dogs</h1>
-                  <p class="mb-4">Lorem ipsum dolor sit amet consectetur
-                     adipisicing elit. Cumque odio exercitationem iste, excepturi
-                     similique omnis.</p>
+               <div class="intro-text" style="font-family:'Gamja Flower'">
+                  <p style="font-size:50px;">라온펫은?</p>
+                  <p class="mb-4" style="color:#754F44;">유기동물을 조회하여 주인을 찾아주고, 실종신고를 통해 반려동물을 찾을 수 있도록 도와드립니다. 또 반려동물 관련 물품 거래를 통해 보호센터에 후원을 할 수도 있고, 반려동물 관련 지식정보도 제공해 드립니다.</p>
                   <p>
-                     <a href="#" class="btn btn-primary">Get In Touch</a>
+                     <a href="#" class="btn btn-primary">-> 공지사항</a>
                   </p>
                </div>
             </div>
@@ -145,9 +143,8 @@
          <div class="row justify-content-center" data-aos="fade-up">
             <div class="col-lg-6 text-center heading-section mb-5">
 
-               <h2 class="text-black mb-2">유기동물을 도와주세요!</h2>
-               <p>유기동물들을 도와주세요!(설명)유기동물들을 도와주세요!(설명)유기동물들을 도와주세요!(설명)유기동물들을
-                  도와주세요!(설명)</p>
+               <h2 class="text-black mb-2">주인을 찾습니다!</h2>
+               <p>[공고중 or 보호중]  </p>
             </div>
          </div>
 
@@ -156,16 +153,15 @@
                <div class="row">
                   <div class="mb-4 mb-lg-0 col-lg-6 order-lg-2" data-aos="fade-left">
                      <a href="#" class="rotate10"> <img
-                        src="resources/images/dog_3.jpg" alt="Image" class="img-fluid">
+                        src="${list[0].popfile }" alt="Image" class="img-fluid" style="width:400px;">
                      </a>
                   </div>
                   <div
                      class="col-lg-5 mr-auto text-lg-right align-self-center order-lg-1"
                      data-aos="fade-right">
-                     <h2 class="text-black">종류 성별/나이/체중/특징</h2>
-                     <p class="mb-4">Far far away, behind the word mountains,
-                        Separated they live in Bookmarksgrove right at the coast of the
-                        Semantics, a large language ocean.</p>
+                     <h2 class="text-black"></h2>
+                     <p class="mb-4">발견장소 : ${list[0].happenPlace}<br>${list[0].kindCd }<br>${list[0].age }<br>
+                    ${list[0].weight }<br>${list[0].specialMark }</p>
                      <p>
                         <a href="#" class="btn btn-primary">Read More</a>
                      </p>
@@ -178,15 +174,14 @@
             <div class="col-12">
                <div class="row">
                   <div class="mb-4 mb-lg-0 col-lg-6" data-aos="fade-right">
-                     <img src="resources/images/dog_4.jpg" alt="Image"
-                        class="img-fluid"> </a>
+                     <img src="${list[1].popfile }" alt="Image"
+                        class="img-fluid" style="width:400px;"> </a>
                   </div>
                   <div class="col-lg-5 ml-auto align-self-center"
                      data-aos="fade-left">
-                     <h2 class="text-black">종류 성별/나이/체중/특징</h2>
-                     <p class="mb-4">Far far away, behind the word mountains,
-                        Separated they live in Bookmarksgrove right at the coast of the
-                        Semantics, a large language ocean.</p>
+                     <h2 class="text-black"></h2>
+                     <p class="mb-4">발견장소 : ${list[1].happenPlace}<br>${list[1].kindCd }<br>${list[1].age }<br>
+                    ${list[1].weight }<br>${list[1].specialMark }</p>
                      <p>
                         <a href="#" class="btn btn-primary">Read More</a>
                      </p>
@@ -500,7 +495,10 @@
 // 			alert("error");
 			console.log("index ajax error");
 		});
-		
+//------------ 공고중인 유기동물
+		$.ajax({
+			url
+		})
 		
 	})
 
