@@ -4,7 +4,14 @@
 				<div class="row">
 			        	<div id="title" class="col-12"><h1>나는 얼마나 잘 알고 있을까??</h1></div>
             		</div>
-		<!-- 맞힌문제 개수 / 획득 포인트 -->
+		<c:choose>
+			<c:when test="${incorrCount == 0}">
+				<div class="row">
+					<div class="col-12 perfect">100점 입니다!!</div>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<!-- 맞힌문제 개수 / 획득 포인트 -->
 		
 		<div class="row">
 			<div class="col-6 corrCount">맞은 개수 : ${answer }개</div><div class="col-6 getPoint">획득 포인트: ${getPoint }점</div>
@@ -24,7 +31,9 @@
             <div class='col-5 ex'>${wrongL.explain }</div>
 		</div>
 		</c:forEach>
-	
+			</c:otherwise>	
+		</c:choose>
+		
 	
 		<!--랭킹  -->
 		<div class='row header'>

@@ -71,6 +71,7 @@
             .wrong-q,.answer{text-align: center;}
             .wrong{margin-bottom: 40px;}
             .incorrCount,.corrCount,.getPoint{font-size:30px;}
+            .perfect{font-size:40px; font-weight:bold;}
     </style>
             
             
