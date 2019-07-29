@@ -73,6 +73,13 @@ public class QuizDAOImpl implements QuizDAO {
 		return sst.update("QuizDAO.updatePoint",hs);
 	}
 	@Override
+	public int updateZeroPoint(int point, String id) {
+		Map<String,Object> hs = new HashMap<>();
+		hs.put("point", point);
+		hs.put("id", id);
+		return sst.update("QuizDAO.updateZeroPoint",hs);
+	}
+	@Override
 	public List<QuizDTO> selectQuizPerPage(int currentPage){
 		Map<String,Integer> hs = new HashMap<>();
 		int end = currentPage * recordCountPerPage;

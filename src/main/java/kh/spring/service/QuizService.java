@@ -12,4 +12,5 @@ public interface QuizService {
 	public int updatePointService(int point, String id);
 	public List<QuizDTO> selectQuizPerPageService(int currentPage);
 	public String getNaviQuizService(int currentPage);
+	public int updateZeroPoint(int point, String id);
 }

@@ -239,8 +239,7 @@ font-weight:bold;
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <script>
-	$(function()
-    {
+
 		drawChart();
 		setInterval(drawChart, 5000);
 	    
@@ -371,11 +370,6 @@ font-weight:bold;
 	    		alert("error");
 	    	});
 	    }
-    });
-    
-    onload = function()
-    {
 
-    };
 </script>
 </html>

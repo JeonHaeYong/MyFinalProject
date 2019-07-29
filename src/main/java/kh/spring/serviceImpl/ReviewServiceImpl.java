@@ -2,7 +2,6 @@ package kh.spring.serviceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import kh.spring.dao.ReviewCommentsLikesDAO;
 import kh.spring.dao.ReviewDAO;
 import kh.spring.dto.ReviewDTO;
 import kh.spring.service.ReviewService;
-import kh.spring.statics.MessageStatics;
 import kh.spring.statics.ReviewStatics;
 
 @Service
