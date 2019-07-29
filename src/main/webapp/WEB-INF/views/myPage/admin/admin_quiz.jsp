@@ -183,15 +183,15 @@ font-weight:bold;
 			
 					</div>
 					
-					<div class="row justify-content-center">
+<!-- 					<div class="row justify-content-center"> -->
 
-						<div class="col-12 col-md-12 col-lg-12 text-center my-5">
+<!-- 						<div class="col-12 col-md-12 col-lg-12 text-center my-5"> -->
 			
-							<a href="admin-quiz-random">데이터 업데이트</a>
+<!-- 							<a href="admin-quiz-random">데이터 업데이트</a> -->
 			
-						</div>
+<!-- 						</div> -->
 			
-					</div>
+<!-- 					</div> -->
 	
 				</div>
 				

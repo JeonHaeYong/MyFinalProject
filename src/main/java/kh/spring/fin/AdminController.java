@@ -67,23 +67,23 @@ public class AdminController
 		logger.info("회원 관리 페이지");
 		return "myPage/admin/admin_manage_member";
 	}
-	@RequestMapping(value = "admin-member-insert")
-	public String insertRandomMembers()
-	{
-		logger.info("회원 데이터 삽입 시도");
-		String result = "error";
-
-		try
-		{
-			result = blackService.insertRandomMembers();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		return result;
-	}
+//	@RequestMapping(value = "admin-member-insert")
+//	public String insertRandomMembers()
+//	{
+//		logger.info("회원 데이터 삽입 시도");
+//		String result = "error";
+//
+//		try
+//		{
+//			result = blackService.insertRandomMembers();
+//		}
+//		catch(Exception e)
+//		{
+//			e.printStackTrace();
+//		}
+//
+//		return result;
+//	}
 	@ResponseBody
 	@RequestMapping(value = "admin-member-search", produces="application/json;charset=utf-8")
 	public String searchMember(String id, String page)
@@ -177,21 +177,21 @@ public class AdminController
 		return result;
 
 	}
-	@RequestMapping(value = "admin-chart-insert")
-	public String insertDummyData()
-	{
-		String result = "error";
-		try
-		{
-			result = chartService.insertRandomRecord();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		return result;
-	}
+//	@RequestMapping(value = "admin-chart-insert")
+//	public String insertDummyData()
+//	{
+//		String result = "error";
+//		try
+//		{
+//			result = chartService.insertRandomRecord();
+//		}
+//		catch(Exception e)
+//		{
+//			e.printStackTrace();
+//		}
+//
+//		return result;
+//	}
 	@ResponseBody
 	@RequestMapping(value = "admin-chart-acs", produces="application/json;charset=utf-8")
 	public String selectACSDTO()
@@ -420,22 +420,22 @@ public class AdminController
 
 		return result;
 	}
-	@RequestMapping(value = "admin-quiz-random")
-	public Object updatePointRandom()
-	{
-		Object result = "";
-
-		try
-		{
-			result = memberService.updateRandomPoint();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		return result;
-	}
+//	@RequestMapping(value = "admin-quiz-random")
+//	public Object updatePointRandom()
+//	{
+//		Object result = "";
+//
+//		try
+//		{
+//			result = memberService.updateRandomPoint();
+//		}
+//		catch(Exception e)
+//		{
+//			e.printStackTrace();
+//		}
+//
+//		return result;
+//	}
 	@RequestMapping(value = "admin-quiz-zero")
 	public Object updatePointZeroAllUsers()
 	{
@@ -464,22 +464,22 @@ public class AdminController
 	{
 		return "myPage/admin/admin_paylog";
 	}
-	@RequestMapping(value = "admin-paylog-insert")
-	public Object insertPayLogDummy()
-	{
-		Object result = "error";
-
-		try
-		{
-			result = logService.insertDummy();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		return result;
-	}
+//	@RequestMapping(value = "admin-paylog-insert")
+//	public Object insertPayLogDummy()
+//	{
+//		Object result = "error";
+//
+//		try
+//		{
+//			result = logService.insertDummy();
+//		}
+//		catch(Exception e)
+//		{
+//			e.printStackTrace();
+//		}
+//
+//		return result;
+//	}
 	@ResponseBody
 	@RequestMapping(value = "admin-paylog-search", produces="application/json;charset=utf-8")
 	public Object selectFromPayLog(String page, String condition, String keyword)

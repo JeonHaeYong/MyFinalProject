@@ -144,24 +144,24 @@ public class NoticeController
 		return result;
 	}
 	
-	@RequestMapping(value = "notice-write-random", method = RequestMethod.GET)
-	public String noticeWriteDummy()
-	{
-		logger.info("게시글 데이터 삽입 시도");
-		
-		String result = "error";
-		
-		try
-		{
-			result = noticeService.insertDummy();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		
-		return result;
-	}
+//	@RequestMapping(value = "notice-write-random", method = RequestMethod.GET)
+//	public String noticeWriteDummy()
+//	{
+//		logger.info("게시글 데이터 삽입 시도");
+//		
+//		String result = "error";
+//		
+//		try
+//		{
+//			result = noticeService.insertDummy();
+//		}
+//		catch(Exception e)
+//		{
+//			e.printStackTrace();
+//		}
+//		
+//		return result;
+//	}
 	
 	@RequestMapping(value = "notice-delete-do")
 	public String noticeDelete(NoticeDTO dto)

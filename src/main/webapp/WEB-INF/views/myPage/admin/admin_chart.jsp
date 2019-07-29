@@ -201,9 +201,9 @@ font-weight:bold;
 					
 							</div>
 							
-							<div class="row justify-content-center">
-								<a href="admin-chart-insert">데이터 입력</a>		
-							</div>
+<!-- 							<div class="row justify-content-center"> -->
+<!-- 								<a href="admin-chart-insert">데이터 입력</a>		 -->
+<!-- 							</div> -->
 							
 						</div>
 						

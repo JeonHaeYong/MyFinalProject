@@ -72,7 +72,7 @@ body{
 {
 	font-family: 'SeoulNamsanM' !important;
 	font-weight:bold;
-	color: brown;
+	color: #B45F04;
 }
 .namsan
 {

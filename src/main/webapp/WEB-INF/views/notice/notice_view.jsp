@@ -112,7 +112,7 @@ a{
 				
 				<div class="col-12 col-md-12 col-lg-12 text-center my-5">
 				
-					<a href="notice-write-random">데이터 삽입</a>
+<!-- 					<a href="notice-write-random">데이터 삽입</a> -->
 					
 				</div>
 				

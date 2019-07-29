@@ -199,15 +199,15 @@ font-weight:bold;
 					
 					
 					
-					<div class="row justify-content-center">
+<!-- 					<div class="row justify-content-center"> -->
 						
-						<div class="col-12 text-center my-5">
+<!-- 						<div class="col-12 text-center my-5"> -->
 							
-							<a href="admin-paylog-insert">데이터 입력</a>
+<!-- 							<a href="admin-paylog-insert">데이터 입력</a> -->
 							
-						</div>
+<!-- 						</div> -->
 						
-					</div>
+<!-- 					</div> -->
 					
 					
 					
