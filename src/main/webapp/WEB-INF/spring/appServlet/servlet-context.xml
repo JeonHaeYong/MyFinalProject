@@ -27,7 +27,8 @@
 	<mvc:resources mapping="/resources/**"
 		location="/resources/" />
 	<!-- mypage이미지매칭 -->
-
+<mvc:resources mapping="/weather/**"
+		location="/resources/images/weather/" />
 	<mvc:resources mapping="/mypage/**"
 		location="/resources/images/mypage/" />
 	<mvc:resources mapping="/trainingBoard/**"

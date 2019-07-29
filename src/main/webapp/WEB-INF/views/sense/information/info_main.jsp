@@ -52,7 +52,7 @@ h3, h1 {
 	min-width: 400px;
 	box-sizing: border-box;
 	
-	margin-bottom: 100px;
+
 }
 
 .info-box {
@@ -74,11 +74,12 @@ h3, h1 {
 font-family: 'Gamja Flower', cursive;
 
 text-decoration:none;
- color:black;
+ color: #754F44;
  font-size:20px;
  }
 #profile-tab.active,#home-tab.active{
 background-color:#FDD692;
+
 }
 /* -------------------infobox -----------------   */
 .infowrapper {
@@ -146,7 +147,7 @@ background-color:#FDD692;
 	font-family: 'Gamja Flower', cursive;
 }
 
-#infowrite:hover, #infodel:hover,.infonavi:hober, .t_navi:hover {
+#infowrite:hover, #infodel:hover,.infonavi:hover, .t_navi:hover {
 	background-color: #FDD692;
 	font-weight: bold;
 }
@@ -186,7 +187,7 @@ padding-right:105px;
 				</div>
 			</div>
 			<div class="col-1"></div>
-			<div class="col-lg-9 col-md-8 col-sm-12 col-12 info-box mt-5">
+			<div class="col-lg-9 col-md-8 col-sm-12 col-12 info-box mt-5 mb-5">
 				<!--내용   -->
 					
 				<ul class="row nav nav-tabs justify-content-center" id="myTab" role="tablist">

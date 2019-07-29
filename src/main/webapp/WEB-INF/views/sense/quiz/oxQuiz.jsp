@@ -25,6 +25,9 @@
 
  <style>
            
+         
+           
+           
      		.jumbotron{background-color:white; padding-top: 80px;  }
      		.jumbotron>img{width:100%; max-height:600px;}
             #title{width: 100%; text-align: center; margin: auto; margin-bottom: 50px;}
@@ -33,8 +36,7 @@
                 border: 0px solid black;
                 min-width: 400px;       
                 box-sizing: border-box;
-            
-                margin-bottom:100px;
+                
             }
             .quiz-box{
                 padding: 10px;
@@ -42,6 +44,7 @@
                 margin: 0px;
                 margin-top:45px;
                 padding: 0px;
+                 margin-bottom:245px;
             
             }
             .question{width: 100%;}

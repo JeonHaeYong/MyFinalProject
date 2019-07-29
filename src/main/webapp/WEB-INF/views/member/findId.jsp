@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>라온펫 - 아이디/비밀번호 찾기</title>
 <link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
@@ -144,7 +144,7 @@ b {
 									id="email" class="form-control">
 							</div>
 							<div class=" col-lg-3 col-md-3 col-sm-3 col-3 pl-0 btn-box">
-							<input type="button" value="확인"  id="findid" class="btn"></div>
+							<input type="button" value="확인"  id="findid" class="btn" ></div>
 						</div>
 						
 					</form>
@@ -205,7 +205,9 @@ b {
 
 $("#findid").on("click", function() {
 				console.log($("#email").val());
+				
 				alert('확인 버튼을 누르신 후 메일 전송을 기달려주세요 ');
+				$("#findid").attr('disabled',true);
 				$
 						.ajax({
 							url : "findIdProc",
@@ -220,14 +222,19 @@ $("#findid").on("click", function() {
 						.done(
 								function(resp) {
 								if(resp==true){
+									$("#findid").attr('disabled',true);
 									alert('이메일에 아이디가 발송되었습니다.');
+								
 								}
 								else if(resp==null)
 									{
+									$("#findid").attr('disabled',false);
 									alert('잘못된 정보입니다 정보를 확인하시오');
+									
 									}
 								else {
 									alert('메일 전송에 실패하였습니다. 해당 메일을 확인하시오');
+									
 								}
 								
 								
@@ -252,6 +259,8 @@ $("#findid").on("click", function() {
 				var email = $(".email").val();
 				var id = $(".id").val();
 				alert('확인 버튼을 누르신 후 메일 전송을 기달려주세요 ');
+				
+				$(".compl-btn").attr('disabled',true);
 				$.ajax({
 					url:"findPwProc.do",
 					type:"post",
@@ -260,20 +269,24 @@ $("#findid").on("click", function() {
 					console.log(resp);
 					if(resp =="1"){
 						alert("이메일로 임시 비밀번호가 발송되었습니다.");
-					
+						$("#findid").attr('disabled', true);
 					}else if(resp =="0"){
 						
 						alert("아이디가 존재하지 않습니다.");
+						$("#findid").attr('disabled', false);
 						}else if(resp == "2"){
 							alert("이메일 발송에 실패하였습니다.");
+							$("#findid").attr('disabled', false);
 						}
 				});
 				
 			}else if($(".email").val()=="" && $(".id").val()==""){
 				alert("아이디와 이메일을 입력해주세요.");
+				$("#findid").attr('disabled', false);
 				
 			}else if($(".email").attr("regexFlag")=="false"){
 				alert("올바른 형식의 이메일을 입력해주세요.");
+				$("#findid").attr('disabled', false);
 				
 			}
 		});

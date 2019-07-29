@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>라온펫 - 회원가입</title>
 <link rel="icon" type="image/png" sizes="16x16"
 	href="/resources/images/favicon.png">
 <link
@@ -210,7 +210,7 @@ a[name="s-menu"] {
 
 						<div class="col-12 col-sm-12 col-md-12 col-lg-12" id="textInfo"
 							align="left">
-							<b>제1조(목적)</b><br> 본 회원약관은 AcAT(이하 '갑'라 한다)이 운영하는 인터넷관련
+							<b>제1조(목적)</b><br> 본 회원약관은 "라온펫"(이하 '갑'라 한다)이 운영하는 인터넷관련
 							서비스(이하 '서비스'라 한다)를 이용함에 있어 관리자와 이용자(이하 '회원'라 한다)의 권리, 의무 및 책임사항을
 							규정함을 목적으로 한다.<br> <b>제2조 (약관의 효력)</b><br> 1.본 약관은 '갑'에
 							회원 가입 시 회원들에게 통지함으로써 효력을 발생합니다.<br> 2.'갑'은 이 약관의 내용을 변경할 수
