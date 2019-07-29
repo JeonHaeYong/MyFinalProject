@@ -156,12 +156,12 @@ background-color:#FDD692;
 .infotext {
 	border-top: 1px solid #754F4470;
 	margin-top: 2px;
-	font-size: 20px;
+	font-size: 15px;
 	line-height: 50px;
 	text-align: center;
-	margin-left: 15px;
-	margin-right: 15px;
-	padding-left: 5px;
+	margin-left: 10px;
+	margin-right: 10px;
+	
 	height: 18%;
 	margin-top: 2px;
 }
