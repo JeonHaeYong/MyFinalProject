@@ -154,7 +154,7 @@
       <div id="footer">
         	<div>
         		<c:choose>
-        			<c:when test="${content.writer == id }">
+        			<c:when test="${content.writer == id || type == 4}">
         				<input type="button" class="alter-btn btn" value="수정">
         				<input type="button" class="delete-btn btn" value="삭제">
         			</c:when>

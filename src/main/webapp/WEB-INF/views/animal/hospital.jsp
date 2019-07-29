@@ -50,6 +50,7 @@
      .search-btn:hover{background-color:#fcc96f; font-weight:bold;}
     
      .contents{max-width:1700px;}
+     
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
@@ -97,6 +98,7 @@
                 	<div class="col-lg-4  col-md-3 d-none d-md-block  ">주소</div>
            	   </div>
             <!--section start-->
+            <div class="list_wrapper"><!-- ajax 여기에 어팬드 -->
             <c:forEach var="list" items="${list }">
             	<div class="row section">
                 	<div class="col-lg-1  d-none d-lg-block no">${list.rown}</div>
@@ -106,7 +108,7 @@
                 	<div class="col-lg-4  col-md-3 col-12  addr">${list.address }</div>
             	</div>
 			</c:forEach>
-          
+          </div>
             <!--section end-->
             <!--footer-->
             <div class="row footer">
@@ -152,7 +154,33 @@
 				location.href="searchToHospital?currentPage=1&&option="+option;
 			}
 		});
-		
+		$(".navi-btn").each(function(index,items){ // 네비버튼 클릭하면 ajax로 정보 가져오기
+			$(this).on("click",function(){
+				var currentPage = $(this).attr("currentPage");
+				$.ajax({
+					url:"hospitalList_ajax",
+					data:{currentPageStr : currentPage},
+					type:"get"
+				}).done(function(resp){
+					$(".list_wrapper").html("");
+					$(".list_wrapper").append(resp);
+				})
+			})
+		});
+		$(".navi-option-btn").each(function(index,items){ // 네비버튼 클릭하면 ajax로 정보 가져오기
+			$(this).on("click",function(){
+				var currentPage = $(this).attr("currentPage");
+				var option = $(this).attr("option");
+				$.ajax({
+					url:"searchHospitalList_ajax",
+					data:{currentPageStr : currentPage, option:option},
+					type:"get"
+				}).done(function(resp){
+					$(".list_wrapper").html("");
+					$(".list_wrapper").append(resp);
+				})
+			})
+		});
 </script>
 </body>
 </html>
