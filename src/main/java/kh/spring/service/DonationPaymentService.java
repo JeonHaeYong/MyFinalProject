@@ -12,5 +12,5 @@ public interface DonationPaymentService {
 	public Map<String, Integer> getNaviForDonationPayment(int currentPage, int recordTotalCount);
 	
 	public Object selectDonatedListByGroup(String page) throws Exception;
-	public Object selectDonatedListAll(String page) throws Exception;
+	public Object selectDonatedListAll(String page, String target) throws Exception;
 }
