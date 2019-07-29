@@ -67,10 +67,19 @@
                                 <img class="mr-3" src="/resources/images/doglogo2.png" width="50px" style="float:left;"><h2 class="footer-heading ml-4 mb-4" style="font-family: 'Gamja Flower';font-size:27px">라온펫</h2>
                                 <p style="color:#fff;font-family: 'Gamja Flower';font-size:20px;">라온펫은 유기동물의 숫자가 '제로'가 되는 그 날을 향해 달립니다. </p>
                             </div>
-                    <img src="" alt="Image" id="kk">
+                             <div class="col-12">
+                              <p style="color:#fff;font-family: 'Gamja Flower';font-size:20px;">오늘의 날씨 </p>
+                 			   <img src="" alt="Image" id="kk"></div>
+                 			   <p id="temp" style="color:#fff;font-family: 'Gamja Flower';font-size:20px;"></p>
+                 			   <p id="humidity" style="color:#fff;font-family: 'Gamja Flower';font-size:20px;"></p>
+                 			   <p id="country" style="color:#fff;font-family: 'Gamja Flower';font-size:20px;"></p>
                         </div>
                     </div>
-                    <div class="col-md-2"></div>
+                    
+                    
+                    <div class="col-md-1"></div>
+                    
+                    
                     <div class="col-md-4">
                         <form class="mx-3">
                             <div class="form-row">
@@ -168,18 +177,18 @@
     			async : "false",
     			success : function(resp) {
     				console.log(resp);
-    				console.log("현재온도 : " + (resp.main.temp - 273.15));
-    				console.log("현재습도 : " + resp.main.humidity);
+    				$("#temp").html("현재온도 : " + (resp.main.temp - 273.15));
+    				$("#humidity").html("현재습도 : " + resp.main.humidity);
     				console.log("날씨 : " + resp.weather[0].main);
     				console.log("상세날씨설명 : " + resp.weather[0].description);
     				console.log("날씨 이미지 : " + resp.weather[0].icon);
     				console.log("바람 : " + resp.wind.speed);
-    				console.log("나라 : " + resp.sys.country);
+    				$("#country").html("나라 : " + resp.sys.country);
     				console.log("도시이름 : " + resp.name);
     				console.log("구름 : " + (resp.clouds.all) + "%");
     				var imgURL = "http://openweathermap.org/img/w/"
     						+ resp.weather[0].icon + ".png";
-    				$("#kk").attr("src", imgURL);
+    				$("#kk").attr("src", imgURL); //이미지
     				console.log(resp.weather[0].icon);
     			}
     		})

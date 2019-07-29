@@ -51,7 +51,7 @@ h3, h1 {
 	border: 0px solid black;
 	min-width: 400px;
 	box-sizing: border-box;
-	text-align: center;
+	
 	margin-bottom: 100px;
 }
 

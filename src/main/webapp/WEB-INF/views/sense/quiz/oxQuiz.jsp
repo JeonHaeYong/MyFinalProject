@@ -33,7 +33,7 @@
                 border: 0px solid black;
                 min-width: 400px;       
                 box-sizing: border-box;
-                text-align: center;
+            
                 margin-bottom:100px;
             }
             .quiz-box{
@@ -47,16 +47,16 @@
             .question{width: 100%;}
             .btnImage{ line-height: 350px; display: inline-block; font-size: 500px; cursor: pointer; color:#FDD692; font-family:'Gamja Flower', cursive;}
             .btnImage:hover{color:#faba4b;}
-            .btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44; font-size:30px;}
-			.btn:hover{background-color:#FDD692; font-weight:bold; color:#754F44;}
-            
+          
+              .start-btn ,#restart-btn{font-family: 'Gamja Flower', cursive; background-color:#FDD69270;color:#754F44; font-size:30px;}
+			.start-btn:hover,#restart-btn:hover{cursor: pointer; background-color:#FDD692; font-weight:bold; color:#754F44;}
             .quiz{display:none;}
             .quiz-box{font-family:'Gamja Flower', cursive;}
             #quiz1{display: block;}
             .menu-box{width: 200px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px; margin-top: 50px; margin-bottom:50px;}
             .menu-box>div{height: 35px;}
             .menu-box>div:first-child{font-weight: bold; border-bottom: 1px solid #754F44; line-height: 33px; color:#B45F04; font-size:40px;}
-            .menu-box>div:not(.s-menu):hover{cursor: pointer; background-color: #FBFFB950; color: #754F44; text-decoration-line: none; font-weight:bold;}
+            .menu-box>div:not(.s-menu):hover{cursor: pointer;background-color: #FBFFB950; color: #754F44; text-decoration-line: none; font-weight:bold;}
             .menu-row{text-align: -webkit-center;}
             a[name="s-menu"]{color: #754F44; text-decoration-line: none;}
          
@@ -75,7 +75,7 @@
     </style>
             
             
-        </style>
+      
 
 </head>
  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">

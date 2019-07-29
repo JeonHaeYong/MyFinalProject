@@ -83,7 +83,7 @@
 					{	opener.$("#email").prop("flag","true");
 						alert("인증이 완료되었습니다");
 						window.close();
-						window.opener.alert("회원가입을 계속 진행해세요");				
+						window.opener.alert("회원가입을 계속 진행하세요");				
 					}
 					else{						
 						count++;
