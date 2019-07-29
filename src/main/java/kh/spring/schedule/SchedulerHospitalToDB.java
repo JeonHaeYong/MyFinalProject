@@ -32,7 +32,7 @@ public class SchedulerHospitalToDB {
 	ProtectionCenterService pcs;
 	static String json;
 
-	@Scheduled(cron="5 5 0 * * *")
+	@Scheduled(cron="01 05 0 * * *")
 	public void inputSeoulHospitalData() {
 		ahs.deleteHospitalData("서울");//기존 데이터 지우기
 		System.out.println("서울삭제");
@@ -63,7 +63,7 @@ public class SchedulerHospitalToDB {
 		}System.out.println("끝~!");
 
 	}
-	@Scheduled(cron="5 8 0 * * *")
+	@Scheduled(cron="01 05 0 * * *")
 	public void inputGyeonggiHospitalData() {
 		ahs.deleteHospitalData("경기");//기존 데이터 지우기
 		System.out.println("경기삭제!");
@@ -140,7 +140,7 @@ public class SchedulerHospitalToDB {
 			}System.out.println("끝~!");
 		}
 	}
-	@Scheduled(cron="5 10 0 * * *")
+	@Scheduled(cron="01 05 0 * * *")
 	public void insertUlsanHospitalData() {
 		ahs.deleteHospitalData("울산");//기존데이터 지우기
 		System.out.println("울산삭제");
@@ -162,7 +162,7 @@ public class SchedulerHospitalToDB {
 			}
 		}System.out.println("끝~!");
 	}
-	@Scheduled(cron="5 12 0 * * *")
+	@Scheduled(cron="01 05 0 * * *")
 	public void insertCenterData() {
 		pcs.deleteCenterData();//기존데이터 지우기
 		
