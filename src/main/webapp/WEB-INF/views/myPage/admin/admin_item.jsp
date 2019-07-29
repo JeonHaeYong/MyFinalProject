@@ -373,7 +373,7 @@ font-weight:bold;
 		    			
 		    			var $seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-auto">'+array[i-1].seq+'</div>');
 		    			var $nameCol = $('<div class="col-4 col-md-4 col-lg-3 text-center my-auto"><input class="btn btn-link preview_btn" name="'+array[i-1].seq+'" type="button" value="'+array[i-1].name+'"></div>');
-		    			var $priceCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-auto">'+array[i-1].price+'</div>');
+		    			var $priceCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-auto">'+array[i-1].price+' 원 </div>');
 		    			var $sellerCol = $('<div class="col-4 col-md-4 col-lg-3 text-center my-auto">'+array[i-1].seller+'</div>');
 		    			var $checkCol = $('<div class="col-2 col-md-2 col-lg-2 text-center my-auto"><input class="permission_check" name="'+array[i-1].seq+'" type="checkbox">'+'선택'+'</div>');
 		    			

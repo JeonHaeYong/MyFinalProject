@@ -754,7 +754,9 @@ font-weight:bold;
 		$("#name_text").val("후원 업체 명");
 		$("#title_text").val("제목입니다");
 		$("#explanation_text").val("설명 설명");
-		$("#goalmoney_text").val("1000000");
+		
+		var testMoney = 1000000;
+		$("#goalmoney_text").val(testMoney.toLocaleString() + " 원 ");
 		$("#startdate_text").val("2019-07-01");
 		$("#enddate_text").val("2019-07-30");
 		//테스트용 끝
@@ -763,6 +765,20 @@ font-weight:bold;
 		$("#bot_body").slideToggle(0);
 		
 		var nowOpen = "top_header";
+		
+		
+		var inputMoney;
+		
+		$("#goalmoney_text, #select_goalmoney_text").on("input", function()
+		{
+			inputMoney = this.value.replace(/,/g,'').replace(/ /g,'').replace(/원/g,'') * 1;
+		});
+		$("#goalmoney_text, #select_goalmoney_text").on("focusout", function()
+		{
+			
+			this.value = inputMoney.toLocaleString() + " 원 ";
+		});		
+		
 		
 		$("#top_header, #mid_header, #bot_header").on("click", function()
 		{
@@ -829,7 +845,7 @@ font-weight:bold;
 
 	        
 	        var $goalmoney = $('<input type="hidden" name="goalmoney">');
-	        $goalmoney.val($("#goalmoney_text").val());
+	        $goalmoney.val($("#goalmoney_text").val().replace(/,/g,'').replace(/ /g,'').replace(/원/g,''));
 	        
 	        var $startdate = $('<input type="hidden" name="startdate">');
 	        $startdate.val($("#startdate_text").val());
@@ -883,7 +899,7 @@ font-weight:bold;
 
 		        
 		        var $goalmoney = $('<input type="hidden" name="goalmoney">');
-		        $goalmoney.val($("#select_goalmoney_text").val());
+		        $goalmoney.val($("#select_goalmoney_text").val().replace(/,/g,'').replace(/ /g,'').replace(/원/g,''));
 		        
 		        var $startdate = $('<input type="hidden" name="startdate">');
 		        $startdate.val($("#select_startdate_text").val());
@@ -926,8 +942,10 @@ font-weight:bold;
 	    		$("#select_name_text").val(response.name);
 	    		$("#select_title_text").val(response.title);
 	    		$("#select_explanation_text").val(response.explanation.replace(/(<br>)/g, "\n"));
-	    		$("#select_goalmoney_text").val(response.goalmoney);
-	    		$("#select_currentmoney_text").val(response.currentmoney);
+	    		var goalMoney = response.goalmoney;
+	    		$("#select_goalmoney_text").val(goalMoney.toLocaleString() + " 원 ");
+	    		var currentMoney = response.currentmoney;
+	    		$("#select_currentmoney_text").val(currentMoney.toLocaleString() + " 원 ");
 	    		$("#select_startdate_text").val(response.startdate);
 	    		$("#select_enddate_text").val(response.enddate);
 	    		
@@ -1015,8 +1033,12 @@ font-weight:bold;
 						var $row = $('<div class="row justify-content-center my-1 id_row"></div>');
 		    			var $timeCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].time+'</div>');
 		    			var $nameCol = $('<div class="col-4 col-md-4 col-lg-6 text-center my-1">'+array[i-1].name+'</div>');
-		    			var $donationCol = $('<div class="col-4 col-md-4 col-lg-4 text-center my-1">'+array[i-1].donation+'</div>');
+		    			var $donationCol = $('<div class="col-4 col-md-4 col-lg-4 text-center my-1"></div>');
 		    			$row.append($timeCol).append($nameCol).append($donationCol);
+		    			
+		    			var money = array[i-1].donation;
+		    			$donationCol.text(money.toLocaleString() + " 원 ");
+		    			
 		    			$("#log_result_div").append($row);
 		    		}
 		    		
@@ -1113,11 +1135,15 @@ font-weight:bold;
 						var $seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].seq+'</div>');
 		    			var $idCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].id+'</div>');
 		    			var $targetCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].target+'</div>');
-		    			var $amountCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].amount+'</div>');
+		    			var $amountCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1"></div>');
 		    			var $timeCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].time+'</div>');
 		    			var $typeCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].type+'</div>');
 		    			
 		    			$row.append($seqCol).append($idCol).append($targetCol).append($amountCol).append($timeCol).append($typeCol);
+		    			
+		    			var amount = array[i-1].amount;
+		    			$amountCol.text(amount.toLocaleString() + " 원 ");
+		    			
 		    			$("#log_result_div").append($row);
 		    		}
 		    		
