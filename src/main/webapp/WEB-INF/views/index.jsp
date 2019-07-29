@@ -61,24 +61,10 @@
 	display: inline-block;
 	box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.8);
 }
-/* .effect:after { */
-/*     position: absolute; */
-/*     display: block; */
-/*     content: ""; */
-/*     top: 0; */
-/*     left: 0; */
-/*     width: 100%; */
-/*     height: 100%; */
-/*     box-shadow:  */
-/*       inset 20px 20px 20px 20px #fff /* 배경과 같은 색 */
-,
-*
-/
-/*       inset 20px 20px 20px 20px #fff, */
-/*       inset 20px 20px 20px 20px #fff, */
-/*       inset 20px 20px 20px 20px #fff; */
-
-/* } */
+#donation_img
+{
+	border-radius: 20px;
+}
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section" onload="javascript:openPopup('popUp.home')">
@@ -285,7 +271,6 @@
 							<c:forEach var="list" items="${reList }" varStatus="i">
 								<div>
 									<div class="block-testimony-1 text-center">
-				
 										<blockquote class="mb-4">
 											<p class="text-break text-break">&ldquo;${list.contents }!&rdquo;</p>
 										</blockquote>

@@ -45,7 +45,10 @@ color:#754F44;
 background-color:#FDD692;
 font-weight:bold;
 }
-
+.border-lr
+{
+	border-right: 1px solid gray;
+}
 
 	
 </style>
@@ -63,19 +66,19 @@ font-weight:bold;
 
 			<div class="row justify-content-center mb-5">
 
-				<div class="col-8 col-md-8 col-lg-8 my-3">
+				<div class="col-8 col-md-8 col-lg-8 my-3 border-lr">
 
-					<h3>${dto.title}</h3>
+					<h2>${dto.title}</h2>
 
 				</div>
 				
-				<div class="col-2 col-md-2 col-lg-2 text-center my-3">
+				<div class="col-2 col-md-2 col-lg-2 text-center my-3 border-lr">
 
 					${dto.write_time}
 
 				</div>
 				
-				<div class="col-2 col-md-2 col-lg-2 text-center my-3">
+				<div class="col-2 col-md-2 col-lg-2 text-center my-3 border-lr">
 
 					${dto.view_count}
 
@@ -85,7 +88,7 @@ font-weight:bold;
 			
 			<div class="row justify-content-center mt-5">
 			
-				<div class="col-12 col-md-12 col-lg-12 my-5">
+				<div class="col-12 col-md-12 col-lg-12 my-5 bt">
 
 					${dto.contents}
 
