@@ -22,7 +22,7 @@
 </script>
 </head>
 <body>
-	<img src="/resources/images/index/popupImg.png"><br>
+	<img src="/resources/images/index/popupImg.png" width="100%"><br>
 	<input type="checkbox" id="noPopup">하루동안 보지 않기
 </body>
 </html>

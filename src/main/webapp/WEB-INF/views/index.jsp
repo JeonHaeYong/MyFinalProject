@@ -70,6 +70,7 @@
 	height: 100%;
 	border-radius: 20px;
 }
+.small-title{font-family: 'Gamja Flower', cursive; font-size:50px;}
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section" >
@@ -187,7 +188,7 @@
 		<div class="row justify-content-center" data-aos="fade-up">
 			<div class="col-lg-6 text-center heading-section mb-5">
 
-				<h2 class="text-black mb-2">주인을 찾습니다!</h2>
+				<h2 class="text-black mb-2 small-title">주인을 찾습니다!</h2>
 				<p style="color: #754F44; font-size: 20px; font-weight: bold;">[공고중 or 보호중]</p>
 			</div>
 		</div>
@@ -237,7 +238,7 @@
 		<div class="row justify-content-center" data-aos="fade-up">
 			<div class="col-lg-12 text-center heading-section mb-5">
 
-				<h2 class="text-black mb-2">후원하기</h2>
+				<h2 class="text-black mb-2 small-title">후원하기</h2>
 			</div>
 		</div>
 		<div class="row">
@@ -267,7 +268,7 @@
 		<div class="row justify-content-center" data-aos="fade-up">
 			<div class="col-lg-6 text-center heading-section mb-5">
 
-				<h2 class="text-black mb-2">재회 후기</h2>
+				<h2 class="text-black mb-2 small-title">재회 후기</h2>
 			</div>
 		</div>
 		<c:choose>
