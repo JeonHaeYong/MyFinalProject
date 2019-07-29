@@ -72,26 +72,23 @@
                                 <img class="mr-3" src="/resources/images/doglogo2.png" width="50px" style="float:left;"><h2 class="footer-heading ml-4 mb-4" style="font-family: 'Gamja Flower';font-size:27px">라온펫</h2>
                                 <p style="color:#fff;font-family: 'Gamja Flower';font-size:20px;">라온펫은 유기동물의 숫자가 '제로'가 되는 그 날을 향해 달립니다. </p>
                             </div>
-<!--                             <div class="col-md-3 ml-auto"> -->
-
-<!--                             </div> -->
-<!--                             <div class="col-md-3"> -->
-<!--                                 <h2 class="footer-heading mb-4">Follow Us</h2> -->
-<!--                                 <a href="#" class="pl-0 pr-3 social-link"><span class="icon-facebook"></span></a>  -->
-<!--                                 <a href="#" class="pl-3 pr-3 social-link"><span class="icon-twitter"></span></a> -->
-<!--                                 <a href="#" class="pl-3 pr-3 social-link"><span class="icon-instagram"></span></a>  -->
-<!--                                 <a href="#" class="pl-3 pr-3 social-link"><span class="icon-linkedin"></span></a> -->
-<!--                             </div> -->
+                            <div class="col-12 mt-5 footer_font_namsan">
+                                <div class="footer_ftc_white">
+                                	<a href="javascript:void(0);" class="pr-3">이용안내</a>| 
+                                	<a href="javascript:void(0);" class="px-3"> 개인정보처리방침</a>| 
+                                	<a href="javascript:void(0);" class="pl-3">저작권정책 </a>
+                                </div>
+                                <div class="footer_ftc_white">
+                                	<div>(우)04540 서울특별시 중구 남대문로 120 대일빌딩 3층 KH정보교육원 종로지원</div>
+                                	<div>동물등록 유실유기동물 등 동물보호상담센터 : 1577-0954</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-2"></div>
                     <div class="col-md-4">
-                        <form class="mx-3">
+                        <form class="mx-3 footer_font_namsan">
                             <div class="form-row">
-<!--                                 <div class="form-group col-md-6"> -->
-<!--                                     <label for="inputName">이름</label> -->
-<!--                                     <input type="text" class="form-control" id="inputName" placeholder="name"> -->
-<!--                                 </div> -->
                                 <div class="form-group col-md-12 inquire_form">
                                     <label for="inputEmail">이메일</label>
                                     <input type="email" class="form-control" id="inputEmail" placeholder="Email">

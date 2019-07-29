@@ -349,6 +349,7 @@ public class MemberController {
 	@RequestMapping("currPwCheck")
 	public String currPwCheck(String id , String pw) {
 		int result = mservice.isLoginOkService(id, pw);
+		
 		if(result==0) {
 			return "false";
 		}
