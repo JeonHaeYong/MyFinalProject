@@ -45,12 +45,29 @@ color:#754F44;
 background-color:#FDD692;
 font-weight:bold;
 }
+
+
 .border-lr
 {
-	border-right: 1px solid gray;
+	border-left: 1px solid #FDD69270;
+	border-right: 1px solid #FDD69270;
+}
+.border-b
+{
+	border-bottom: 1px solid #FDD69270;
+}	
+
+
+.font-20
+{
+	font-size: 20px !important;
+}
+.font-45
+{
+	font-size: 45px !important;
 }
 
-	
+
 </style>
 
 </head>
@@ -64,21 +81,21 @@ font-weight:bold;
 
 		<div id="container" class="container">
 
-			<div class="row justify-content-center mb-5">
+			<div class="row justify-content-center mb-5 border-b">
 
-				<div class="col-8 col-md-8 col-lg-8 my-3 border-lr">
+				<div class="col-8 col-md-8 col-lg-8 my-3">
 
-					<h2>${dto.title}</h2>
+					<h2 class="font-45">${dto.title}</h2>
 
 				</div>
 				
-				<div class="col-2 col-md-2 col-lg-2 text-center my-3 border-lr">
+				<div class="col-2 col-md-2 col-lg-2 text-center my-3 border-lr font-20">
 
 					${dto.write_time}
 
 				</div>
 				
-				<div class="col-2 col-md-2 col-lg-2 text-center my-3 border-lr">
+				<div class="col-2 col-md-2 col-lg-2 text-center my-3 font-20">
 
 					${dto.view_count}
 
@@ -88,7 +105,7 @@ font-weight:bold;
 			
 			<div class="row justify-content-center mt-5">
 			
-				<div class="col-12 col-md-12 col-lg-12 my-5 bt">
+				<div class="col-12 col-md-12 col-lg-12 my-5 bt font-20">
 
 					${dto.contents}
 
