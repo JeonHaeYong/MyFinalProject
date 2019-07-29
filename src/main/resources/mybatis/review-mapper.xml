@@ -36,7 +36,7 @@ where r1.seq = r2.seq(+)) where rown between #{start} and #{end}
   		</foreach>
 	</delete>
 	<select id="selectRandomReview" resultType="kh.spring.dto.ReviewDTO">
-		select * from review where seq in
+		select * from (select row_number() over(order by write_date desc) as rown , review.* from review) where rown in
 		<foreach item="seq" index="index" collection="array" open="(" separator="," close=")">
         	#{seq}
   		</foreach>

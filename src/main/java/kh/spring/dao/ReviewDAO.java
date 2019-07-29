@@ -3,6 +3,7 @@ package kh.spring.dao;
 import java.util.List;
 import java.util.Set;
 
+import kh.spring.dto.BoardListDTO;
 import kh.spring.dto.ReviewDTO;
 
 public interface ReviewDAO {

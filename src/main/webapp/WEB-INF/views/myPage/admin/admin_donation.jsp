@@ -745,8 +745,7 @@ font-weight:bold;
 <script src="resources/js/isotope.pkgd.min.js"></script>
 <script src="resources/js/main.js"></script>
 <script>
-	$(function()
-    {
+
 		//페이지 로딩 후 검색 결과가 바로 보이게 실행
 		myAjax("1");
 		logGroupAjax("1");
@@ -798,24 +797,9 @@ font-weight:bold;
 				nowOpen = this.id;
 			}
 			
-			
-// 			$("#top_body").slideToggle(500);
-// 			$("#mid_body").slideToggle(500);
-// 			$("#bot_body").slideToggle(500);
+
 		});
-// 		$("#mid_header").on("click", function()
-// 		{
-// 			$("#top_body").slideToggle(500);
-// 			$("#mid_body").slideToggle(500);
-// 			$("#bot_body").slideToggle(500);
-// 		});
-// 		$("#bot_header").on("click", function()
-// 		{
-// 			$("#top_body").slideToggle(500);
-// 			$("#mid_body").slideToggle(500);
-// 			$("#bot_body").slideToggle(500);
-// 		});
-		
+
 		
 	    $("#submit_btn").on("click", function()
 		{
@@ -1179,12 +1163,6 @@ font-weight:bold;
 
 	    	})
 	    }
-	    
-    });
-    
-    onload = function()
-    {
-		
-    };
+
 </script>
 </html>

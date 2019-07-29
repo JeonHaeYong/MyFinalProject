@@ -134,36 +134,28 @@
 onload = function()
 {
 	
+	var randomNum = Math.floor(Math.random() * 4) + 1;
 	
-// 	$(document).on("mouseenter", "#site_logo_col", function() 
-// 	{
-// 		$("#site_logo_img").fadeOut(200, function() 
-// 		{
-// 			$("#site_logo_img").attr("src", "resources/images/catlogo.png");
-// 		})
-// 		.fadeIn(200);
-// 	});
-// 	$(document).on("mouseleave", "#site_logo_col", function() 
-// 	{
-// 		$("#site_logo_img").fadeOut(200, function() 
-// 		{
-// 			$("#site_logo_img").attr("src", "resources/images/doglogo2.png");
-// 		})
-// 		.fadeIn(200);
-// 	});
-//
-//
-//	
-// 	$(document).on("hover", "#site_logo_col", 
-// 	function()
-// 	{
-// 		$("#site_logo_img").attr("src", "resources/images/catlogo.png");
-// 	},
-// 	function()
-// 	{
-// 		$("#site_logo_img").attr("src", "resources/images/doglogo2.png");
-// 	});
-
+	if(randomNum == 1)
+	{
+		$("#site_logo_img").attr("src", "resources/images/cat-logo.png");
+	}
+	else if(randomNum == 2)
+	{
+		$("#site_logo_img").attr("src", "resources/images/hedgehog-logo.png");
+	}
+	else if(randomNum == 3)
+	{
+		$("#site_logo_img").attr("src", "resources/images/turtle-logo.png");
+	}
+	else if(randomNum == 4)
+	{
+		$("#site_logo_img").attr("src", "resources/images/bird-logo.png");
+	}
+	else
+	{
+		
+	}
 
 	//카카오 로그아웃
 	$("#logout").on("click",function(){

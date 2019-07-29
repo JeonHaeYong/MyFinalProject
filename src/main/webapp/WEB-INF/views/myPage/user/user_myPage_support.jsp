@@ -52,7 +52,7 @@
    <!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 			<jsp:include page="/WEB-INF/views/myPage/user/user_module/top_menu_info.jsp"></jsp:include>
                             <!-- /마이페이지 상단메뉴 -->
-                            <div class="tab-content">
+                            <div class="tab-content" id="goTop">
                                 <!-- 내글 목록 -->
                                 <div class="tab-pane fade show active">
                                     <div class="support_wrapper">
@@ -62,7 +62,12 @@
                                             <div class="col-4 text-truncate">후원 날짜</div>
                                             <div class="col-2 text-truncate">후원 방식</div>
                                         </div>
-                                        <div class="row donation_List">
+                                        <div class="row donation_List ajaxRow">
+                                        	<c:if test="${dpList.size() == 0 }">
+                                        		<div class="col-12 row mt-2 mb-1">
+	                                        		후원 내역이 없습니다.
+	                                        	</div>
+                                        	</c:if>
 	                                    	<c:forEach var="dto" items="${dpList }">
 	                                    		<div class="col-12 row mt-2 mb-1">
 	                                    			<div class="col-4 text-truncate">${dto.donation_name }</div>
@@ -72,22 +77,22 @@
 	                                    		</div>
 		                                   	</c:forEach>
                                     	</div>
-                                    	<div class="row mt-3">
+                                    	<div class="row mt-3 ajaxRow">
 											<div class="col-12 d-flex justify-content-center" id="naviBox">
 												<c:if test="${pageNavi.needPrev == 1 }">
-													<a class="btn navi" href="toMyPage_support?currentPage=${pageNavi.startNavi - 1}">&laquo;</a>
+													<a class="btn navi" href="#goTop" value="${pageNavi.startNavi - 1}">&laquo;</a>
 												</c:if>
 												<c:if test="${pageNavi.currentPage > pageNavi.startNavi }">
-													<a class="btn navi" href="toMyPage_support?currentPage=${pageNavi.currentPage - 1}">&lt;</a>
+													<a class="btn navi" href="#goTop" value="${pageNavi.currentPage - 1}">&lt;</a>
 												</c:if>
 												<c:forEach var="i" begin="${pageNavi.startNavi}" end="${pageNavi.endNavi}">
-													<a class="btn navi" href="toMyPage_support?currentPage=${i }" class="pageNum">${i}</a>
+													<a class="btn navi" href="#goTop" class="pageNum" value="${i }">${i}</a>
 												</c:forEach>
 												<c:if test="${pageNavi.currentPage < pageNavi.pageTotalCount }">
-													<a class="btn navi" href="toMyPage_support?currentPage=${pageNavi.currentPage + 1}">&gt;</a>
+													<a class="btn navi" href="#goTop" value="${pageNavi.currentPage + 1}">&gt;</a>
 												</c:if>
 												<c:if test="${pageNavi.needNext == 1 }">
-													<a class="btn navi" href="toMyPage_support?currentPage=${pageNavi.endNavi + 1}">&raquo;</a>
+													<a class="btn navi" href="#goTop" value="${pageNavi.endNavi + 1}">&raquo;</a>
 												</c:if>
 											</div>
 										</div>
@@ -118,5 +123,25 @@
 				$(item).css("color", "#EC7357");
 			}
 		});	
+		
+		$(document).on("click", ".navi", function(){
+			var currentPage = $(this).attr("value");
+			$.ajax({
+				url: "toMyPage_support",
+				data: {
+					currentPage: currentPage,
+					template: "y"
+				}
+			}).done(function(resp){
+				$(".ajaxRow").remove();
+				$(".support_wrapper").append(resp);
+				$(".navi").each(function(i, item){
+					if($(item).text() == currentPage){
+						$(this).css("color", "#EC7357");
+					}
+				});
+			});
+		});
+		
    </script>
 </html>

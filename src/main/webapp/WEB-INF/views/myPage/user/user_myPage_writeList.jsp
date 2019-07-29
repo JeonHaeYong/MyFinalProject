@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
     <html>
         <head>
@@ -26,8 +27,21 @@
 					cursor: pointer;
 				}
 				.write_contents:hover{
-					background-color: rgba(137, 255, 137, 0.34);
+					background-color: #FBFFB950;
 				}
+				 .navi{
+                        text-decoration: none;
+                        background-color: #FDD69270;
+                        color: #754F44;
+                        font-size:20px;
+                        padding:6px 12px;
+                        border-radius: 30px;
+                        font-family: 'Gamja Flower';
+                    }
+                    .navi:hover{
+                        font-weight: bold;
+                        background-color: #FDD692;
+                    }
             </style>
             <jsp:include page="/WEB-INF/views/myPage/user/user_module/mypage_user_style.jsp" ></jsp:include><!-- user 마이페이지 스타일 -->
             <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
@@ -41,21 +55,46 @@
                                 <!-- 내글 목록 -->
                                 <div class="tab-pane fade show active">
                                     <div id="writeList_wrapper">
-                                        <div class="row border-bottom border-success">
-                                            <div class="col-md-3 col-3">글쓴 게시판</div>
-                                            <div class="col-7">글 제목</div>
-                                            <div class="col-lg-2 d-lg-block d-none">글 쓴날짜</div>
-                                        </div>
-                                        <div class="row write_contents">
-                                            <div class="col-3">실종신고게시판</div>
-                                            <div class="col-7">우리리치가 없어졌어요ㅠㅠ</div>
-                                            <div class="col-lg-2 d-lg-block d-none">2015-05-06</div>
-                                        </div>
-                                        <div class="row write_contents">
-                                            <div class="col-3">무료나눔</div>
-                                            <div class="col-7">개껌 나눔합니다! 여러종류있어요</div>
-                                            <div class="col-lg-2 d-lg-block d-none">2017-05-06</div>
-                                        </div>
+                                    	<div>
+	                                        <div class="row border-bottom">
+	                                            <div class="col-lg-2 col-5">게시판</div>
+	                                            <div class="col-7">글 제목</div>
+	                                            <div class="col-lg-3 d-lg-block d-none">글 쓴날짜</div>
+	                                        </div>
+	                                        <c:if test="${list.size()==0 }">
+	                                        	<div style="height: 300px; line-height: 300px" class="text-center">작성한 글이 없습니다.</div>
+	                                        </c:if>
+	                                        
+	                                        <c:if test="${list.size()!=0 }">
+	                                        	<div style="min-height: 300px;">
+		                                        	<c:forEach var="list" items="${list }">
+		                                        		<c:if test="${list.type =='재회후기'}">
+		                                        			<form action="toReviewDetail" method="post">
+		                                        		</c:if>
+		                                        		<c:if test="${list.type =='무료나눔' }">
+		                                        			<form action="item" method="post">
+		                                        		</c:if>
+		                                        		<c:if test="${list.type =='실종신고' }">
+		                                        			<form action="toReportContent" method="post">
+		                                        		</c:if>
+			                                        		<input type="hidden" value="${list.seq }" name="seq">
+			                                        		<div class="row write_contents" onclick="toDetail(this);">
+					                                            <div class="col-lg-2 col-5">${list.type }</div>
+					                                            <div class="col-7 text-truncate">${list.title}</div>
+					                                            <div class="col-lg-3 d-lg-block d-none">${list.formed_date }</div>
+					                                       	</div>
+			                                        	</form>
+		                                        	</c:forEach>
+		                                        </div>
+	                                            <div class="row my-4">
+	                                            	<div class="col-12 text-center">
+	                                            		<c:forEach var="navi" items="${navi }">
+	                                            			<a class="ml-1 navi boardList_navi" href="javascript:void(0)">${navi }</a>
+	                                            		</c:forEach>
+	                                            	</div>
+	                                            </div>
+	                                        </c:if>
+                                    	</div>
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +103,7 @@
             <!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
 
             <jsp:include page="/WEB-INF/views/module/footer.jsp" ></jsp:include>
-
+			
         </body>
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <script src="resources/js/jquery-ui.js"></script>
@@ -77,7 +116,34 @@
         <script src="resources/js/jquery.fancybox.min.js"></script>
         <script src="resources/js/jquery.sticky.js"></script>
         <script src="resources/js/isotope.pkgd.min.js"></script>
-
-
         <script src="resources/js/main.js"></script>
+        <script>
+        	$(document).on("click",".boardList_navi",function(){
+            	var currentPage = $(this).text();
+            	if(currentPage=="<"){
+            		var prev =  $(this).next().text();
+            		currentPage = parseInt(prev) - 1 ;
+            	}else if(currentPage==">"){
+            		var next  = $(this).prev().text();
+            		currentPage = parseInt(next) + 1 ;
+            	}
+            	//리스트랑 navi 가져오기.
+            	$.ajax({
+            		url: "toMyPage_writeList",
+            		type: "post",
+            		data : {
+            			currentPage : currentPage,
+            			data : currentPage
+            		}
+            	}).done(function(resp){
+					$("#writeList_wrapper").html("");
+					$("#writeList_wrapper").append(resp);
+            	}).fail(function(a,b,c){
+            		location.href="error";
+            	});
+        	});
+        	function toDetail(param){
+        		$(param).parents("form").submit();
+        	}
+        </script>
     </html>
