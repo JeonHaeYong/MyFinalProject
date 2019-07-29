@@ -33,6 +33,28 @@
 		
 	</c:when>
 	
+	<c:when test="${type == 'withdrawal'}">
+		
+		<script>
+			
+			alert("7일 이내 판매 내역이 있을 경우 탈퇴가 불가능합니다.");
+			document.location.href="toMyPage_support";
+			
+		</script>
+		
+	</c:when>
+	
+	<c:when test="${type == 'paymentFail'}">
+		
+		<script>
+			
+			alert("이미 판매완료된 상품은 결제하실 수 없습니다.");
+			document.location.href="toMyPage_cart";
+			
+		</script>
+		
+	</c:when>
+	
 </c:choose>
 
 </body>

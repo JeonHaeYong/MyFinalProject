@@ -27,4 +27,5 @@ public interface ItemDAO {
 	public int selectCountForAdmin() throws Exception;
 	public int updatePermissionBySeq(int seq) throws Exception;
 	public int deleteItemBySeq(int seq) throws Exception;
+	public String soldoutCheck(int seq) throws Exception;
 }

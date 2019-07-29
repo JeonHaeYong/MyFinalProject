@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import kh.spring.dto.ItemDTO;
 import kh.spring.dto.ItemDTOList;
@@ -43,14 +44,21 @@ public class PaymentController {
 	}
 
 	@RequestMapping("paymentProc")
-	public String paymentProc(HttpServletRequest request, ItemDTOList list, PaymentDTO dto) {
+	public Object paymentProc(HttpServletRequest request, ItemDTOList list, PaymentDTO dto) {
 		dto.setBuyer((String)request.getSession().getAttribute("id"));
 		try {
 			int totalAmount = 0;
 			for(ItemDTO item : list.getList()) {
 				totalAmount += Integer.parseInt(item.getPrice().replaceAll(",", "").replaceAll(" ", ""));
 			}
-			request.setAttribute("payItem", ps.paymentComplete(dto, list));
+			List<ItemDTO> payItem = ps.paymentComplete(dto, list);
+			if(payItem == null) {
+				ModelAndView mav = new ModelAndView();
+				mav.addObject("type", "paymentFail");
+				mav.setViewName("member/loginfail");
+				return mav;
+			}
+			request.setAttribute("payItem", payItem);
 			request.setAttribute("totalAmount", totalAmount);
 			request.setAttribute("payMem", dto);
 		}catch(Exception e) {

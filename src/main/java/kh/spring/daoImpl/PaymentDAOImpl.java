@@ -117,4 +117,9 @@ public class PaymentDAOImpl implements PaymentDAO {
 		return sst.update("PaymentDAO.updateWithdrawalByseller",id);
 	}
 
+	@Override
+	public int checkPayDate(String id) {
+		return sst.selectOne("PaymentDAO.checkPayDate", id);
+	}
+
 }

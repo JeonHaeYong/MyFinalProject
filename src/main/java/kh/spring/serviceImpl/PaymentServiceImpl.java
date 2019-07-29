@@ -57,6 +57,11 @@ public class PaymentServiceImpl implements PaymentService {
 		String[] cartSeqs = new String[list.getList().size()];
 		int i = 0;
 		for(ItemDTO idto : list.getList()) {
+			if(idao.soldoutCheck(idto.getSeq()).equals("y")) {
+				return null;
+			}
+		}
+		for(ItemDTO idto : list.getList()) {
 			PaymentDTO pdto = dto;
 			pdto.setItem_seq(idto.getSeq());
 			pdto.setItem_name(idto.getName());
