@@ -40,4 +40,8 @@
 	<update id="updateWithdrawalByseller">
 		update payment set seller ='탈퇴한 회원' where seller = #{id}
 	</update>
+	
+	<select id="checkPayDate" resultType="int">
+		select count(*) from payment where (PAY_DATE between (sysdate - 6) and (sysdate)) and seller = #{value}
+	</select>
 </mapper>

@@ -195,5 +195,10 @@ public class ItemDAOImpl implements ItemDAO{
 	{
 		return sst.delete("ItemDAO.deleteBySeq", seq);
 	}
+	
+	@Override
+	public String soldoutCheck(int seq) throws Exception {
+		return sst.selectOne("ItemDAO.soldoutCheck", seq);
+	}
 
 }

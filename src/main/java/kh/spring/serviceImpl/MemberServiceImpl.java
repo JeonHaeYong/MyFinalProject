@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -67,26 +68,32 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	@Transactional("txManager")
-	public int withdrawalService(String id) throws Exception {
-		BlackListDTO dto = new BlackListDTO();
-		dto.setId(id);
-		mdao.deleteMember(id);
-		bdao.deleteById(dto);
-		cdao.deleteCart(id);
-		disappeardao.updateWithdrawalWriter(id);
-		dissappearCommentsdao.updateWithdrawalWriter(id);
-		tempdao.updateWithdrawalBywriter(id);
-		reviewdao.updateWithdrawalWriter(id);
-		reviewCommentsdao.updateWithdrawalWriter(id);
-		reviewCommentsLikesdao.updateWithdrawalId(id);
-		idao.updateWithdrawalSeller(id);
-		dpdao.updateWithdrawalDonator(id);
-		messagedao.updateWithdrawalByrecipient(id);
-		messagedao.updateWithdrawalBysender(id);
-		pdao.updateWithdrawalBybuyer(id);
-		pdao.updateWithdrawalByseller(id);
-		
-		return 0;
+	public Object withdrawalService(String id) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		if(!(pdao.checkPayDate(id) >= 1)) {
+			BlackListDTO dto = new BlackListDTO();
+			dto.setId(id);
+			mdao.deleteMember(id);
+			bdao.deleteById(dto);
+			cdao.deleteCart(id);
+			disappeardao.updateWithdrawalWriter(id);
+			dissappearCommentsdao.updateWithdrawalWriter(id);
+			tempdao.updateWithdrawalBywriter(id);
+			reviewdao.updateWithdrawalWriter(id);
+			reviewCommentsdao.updateWithdrawalWriter(id);
+			reviewCommentsLikesdao.updateWithdrawalId(id);
+			idao.updateWithdrawalSeller(id);
+			dpdao.updateWithdrawalDonator(id);
+			messagedao.updateWithdrawalByrecipient(id);
+			messagedao.updateWithdrawalBysender(id);
+			pdao.updateWithdrawalBybuyer(id);
+			pdao.updateWithdrawalByseller(id);
+			mav.setViewName("redirect:logout");
+		}else {
+			mav.addObject("type", "withdrawal");
+			mav.setViewName("member/loginfail");
+		}
+		return mav;
 	}
 
 	@Override
