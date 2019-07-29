@@ -44,6 +44,7 @@
 .cartoon-container {
 	max-width: 1300px;
 }
+.cartoonTitle{text-align:center; font-size:50px;font-family: 'Gamja Flower', cursive;}
 /* 만화 부분 끝*/
 #acs_div {
 	width: 100%;
@@ -69,7 +70,7 @@
 }
 </style>
 </head>
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section" onload="javascript:openPopup('popUp.home')">
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section" >
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 
@@ -93,7 +94,11 @@
 	</section>
 
 	<section class="site-section" id="about-section">
+	
 	<div class="container cartoon-container">
+		<div class="row">
+			<div class="col-12 cartoonTitle">'공고'와'보호'의 차이를 알고 있니~? </div>
+		</div>
 		<div class="row no-gutters mb-5">
 			<div class="col-12 col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="100">
 				<div class="row pricing">
@@ -545,13 +550,16 @@
 	        });
 	        
 	        //팝업창!!!--왜망가진거야 ㅠㅠㅠ-------------------------------------------------------------------
+	        
+	        openPopup('popUp.home');
+	        
 	        function openPopup(url)
 	        {
 		        var cookies = document.cookie;
 		        var result = cookieToJson(cookies);
 		        if(result != "N")
 		        {
-			        window.open(url, '', 'width=570,height=830,left=1300,top=70');
+			        window.open(url, '', 'width=515,height=750,left=1300,top=70');
 		        }
 	        }
 	        function cookieToJson(cookies)
@@ -561,6 +569,7 @@
 		        return entry[0];
 	        }
         })
+     
 	</script>
 </body>
 </html>
