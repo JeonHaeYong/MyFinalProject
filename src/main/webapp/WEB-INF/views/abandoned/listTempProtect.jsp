@@ -276,7 +276,7 @@ a:hover {
 							</c:forEach>
 						</c:if>
 						<c:if test="${listsize == 0 }">
-							<div id="dataNotExist" style="margin:auto">해당 데이터가 존재하지 않습니다.</div>
+							<div id="dataNotExist" style="margin:auto; margin-top:20px; font-weight:bold;">해당 데이터가 존재하지 않습니다.</div>
 						</c:if>
 					</div>
 

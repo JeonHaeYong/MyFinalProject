@@ -50,7 +50,7 @@
 .infowrapper {
 font-family: 'Gamja Flower', cursive;
 	box-sizing: border-box;
-	height: 350px;
+	height:500px;
 	overflow: hidden;
 	border: 2px solid #754F4470;
 }
@@ -70,7 +70,7 @@ margin-left:15px;
 margin-top:15px;
 margin-right:15px;
 box-sizing: border-box;
-height:50%;
+height:60%;
 }
 
 .animal-kind{
@@ -88,13 +88,15 @@ margin-top:2px;
 width:100%;
 	top: 0;
 	left: 0;
-height: 180px;
+height: 350px;
 }
 .animal-kind>img{margin-left:5px;}
-.writeInfo>div{float: left; height:15%;}
-.petInfo>div{float: left; heigth:15%; margin-left:15px;}
-.writer{margin-left: 20px;}
-.writeDate{margin-left: 100px;}
+.writer{padding-left:20px;}
+.writer,.writeDate{width:50%;  float:left; font-size:25px;}
+/* .writeInfo>div{float: left; height:15%;} */
+.petInfo>div{float: left; heigth:15%; margin-left:15px; font-size:23px;}
+
+
 .footer{text-align:right; margin-right:170px; margin-bottom: 30px;}
 .btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44;}
 .btn:hover{background-color:#FDD692; font-weight:bold;}
@@ -145,11 +147,12 @@ height: 180px;
                     	<div>${list.gender} </div>
                     	<div>${list.age }</div>
                     	<div class="furColor">${list.furColor }</div>
-                    </div><br>
-                    <div class="writeInfo">
+                    </div><br><br>
+                  <!--   <div class="writeInfo"> -->
                     	<div class="writer">${list.writer }</div>
                     	<div class="writeDate">${list.writeDate }</div>
-                    </div>
+                    	<!-- </div>  -->
+             
 				</div>
 			</div>
 			  </c:forEach> 

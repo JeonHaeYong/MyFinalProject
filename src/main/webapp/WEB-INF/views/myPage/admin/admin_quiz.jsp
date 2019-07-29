@@ -131,11 +131,11 @@ font-weight:bold;
 						</div>
 			
 						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
-							<a href="admin-quiz" class="btn menu_btns">퀴즈 당첨자</a>
+							<a href="admin-quiz" class="btn selected_menu_btns">퀴즈 당첨자</a>
 						</div>
 			
 						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
-							<a href="admin-chart" class="btn selected_menu_btns">통계</a>
+							<a href="admin-chart" class="btn menu_btns">통계</a>
 						</div>
 						
 						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
@@ -209,8 +209,6 @@ font-weight:bold;
 <script src="resources/js/isotope.pkgd.min.js"></script>
 <script src="resources/js/main.js"></script>
 <script>
-	$(function()
-    {
 		myAjax("1");
 		
 		$(document).on("click", "#search_btn,.navi_btns", function()
@@ -293,11 +291,5 @@ font-weight:bold;
 	    		alert("error");
 	    	});
 		}
-    })
-    
-    onload = function()
-    {
-		
-    };
 </script>
 </html>

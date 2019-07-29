@@ -30,6 +30,9 @@
 	<update id="updatePoint">
 		update member set point = (point + #{point}) where id = #{id}
 	</update>
+	<update id="updateZeroPoint">
+		update member set point = 0 where id = #{id}
+	</update>
 	
 	
 	

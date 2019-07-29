@@ -297,7 +297,6 @@ td {
 	</script>
 </body>
 
-
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="resources/js/jquery-ui.js"></script>
 <script src="resources/js/popper.min.js"></script>
@@ -309,7 +308,15 @@ td {
 <script src="resources/js/jquery.fancybox.min.js"></script>
 <script src="resources/js/jquery.sticky.js"></script>
 <script src="resources/js/isotope.pkgd.min.js"></script>
-
-
 <script src="resources/js/main.js"></script>
+<script>
+	$(function(){
+		$(".nav-link").each(function(i, item){
+	        if($(item).attr("href").match("^toAbandoned")){
+	           $(this).attr("class", "active");
+	        }
+	     });
+	})
+</script>
+
 </html>

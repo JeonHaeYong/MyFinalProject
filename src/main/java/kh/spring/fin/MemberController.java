@@ -3,17 +3,11 @@ package kh.spring.fin;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,18 +19,19 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import kh.spring.dto.BlackListDTO;
+import kh.spring.dto.BoardListDTO;
 import kh.spring.dto.MemberDTO;
 import kh.spring.dto.MessageDTO;
 import kh.spring.dto.PaymentDTO;
 import kh.spring.loginapi.NaverLoginBO;
 import kh.spring.loginapi.kakao_restapi;
 import kh.spring.service.BlackListService;
+import kh.spring.service.BoardListService;
 import kh.spring.service.DonationPaymentService;
 import kh.spring.service.MemberService;
 import kh.spring.service.MessageService;
@@ -58,6 +53,8 @@ public class MemberController {
 	private DonationPaymentService dps;
 	@Autowired
 	private BlackListService blackService;
+	@Autowired
+	private BoardListService boardService;
 	
 	//로그인
 	@RequestMapping("login")
@@ -85,9 +82,8 @@ public class MemberController {
 					session.setAttribute("id", mdto.getId());
 					session.setAttribute("type", mdto.getType());
 					int msg = msgService.selectMsgYetReadCount(dto.getId());//안읽은 메세지갯수
-					System.out.println("안읽은메세지수->"+msg);
 					session.setAttribute("msg", msg);
-					if(referer.equals("join")) 
+					if(referer.equals("join")||referer.equals("findId")||referer.equals("findPassword")) 
 					{
 						mav.setViewName("redirect:/");
 						return mav;	
@@ -145,6 +141,8 @@ public class MemberController {
 		if(insert==1) {
 			session.setAttribute("id", dto.getId());
 			session.setAttribute("type", 1);
+			int msg = msgService.selectMsgYetReadCount(dto.getId());//안읽은 메세지갯수
+			session.setAttribute("msg", msg);
 		}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -424,23 +422,42 @@ public class MemberController {
 	}
 
 	@RequestMapping("toMyPage_writeList")
-	public String toMyPage_writeList_loginCheck(HttpServletRequest request) {
+	public String toMyPage_writeList_loginCheck(HttpServletRequest request,String currentPage,String data) {//내가쓴 글목록
+		String id = (String)session.getAttribute("id");
+		if(currentPage==null) {
+			currentPage="1";
+		}
+		int page = Integer.parseInt(currentPage);
+		//list담기
+		List<BoardListDTO> list = boardService.selectAllBoardList(id, page);
+		request.setAttribute("list", list);
+		//list navi 담기
+		List<String> navi = boardService.getNaviForBoardList(id, page);
+		request.setAttribute("navi", navi);
+		if(data!=null) {
+			return "myPage/user/writeList_template";
+		}
 		return "myPage/user/user_myPage_writeList";
 	}
+	
 
 	@RequestMapping("toMyPage_support")
-	public String toMyPage_support_loginCheck(HttpServletRequest request, String currentPage) {
+	public String toMyPage_support_loginCheck(HttpServletRequest request, String currentPage, String template) {
 		String id = (String)request.getSession().getAttribute("id");
 		if(currentPage == null) {
 			currentPage = "1";
 		}
 		request.setAttribute("dpList", dps.selectDonationPaymentById(id, Integer.parseInt(currentPage)));
 		request.setAttribute("pageNavi", dps.getNaviForDonationPayment(Integer.parseInt(currentPage), dps.getDonationPaymentTotalCountById(id)));
+		System.out.println("support template : " + template);
+		if(template != null) {
+			return "myPage/user/support_template";
+		}
 		return "myPage/user/user_myPage_support";
 	}
 
 	@RequestMapping("toMyPage_buyList")
-	public String toMyPage_buyList_loginCheck(HttpServletRequest request, String currentPage) {
+	public String toMyPage_buyList_loginCheck(HttpServletRequest request, String currentPage, String template) {
 		String id = (String)request.getSession().getAttribute("id");
 		if(currentPage == null) {
 			currentPage = "1";
@@ -448,6 +465,10 @@ public class MemberController {
 		List<PaymentDTO> buyList = ps.selectPaymentPerPageForBuyList(id, Integer.parseInt(currentPage));
 		request.setAttribute("buyList", buyList);
 		request.setAttribute("pageNavi", ps.getNaviForBuyList(id, Integer.parseInt(currentPage)));
+		System.out.println("buyList template : " + template);
+		if(template != null) {
+			return "myPage/user/buyList_template";
+		}
 		return "myPage/user/user_myPage_buyList";
 	}
 
@@ -517,10 +538,7 @@ public class MemberController {
 	}
 
 	//-비밀번호 찾기--------------------------------------------------------------------------------------------
-	@RequestMapping("findPassword")
-	public String findPassword() {
-		return "member/findPassword";
-	}
+	
 	@ResponseBody
 	@RequestMapping("findPwProc.do")
 	public String findPwProc(HttpServletRequest request) {

@@ -39,7 +39,7 @@
 						<div id="search_and_join" align="center" class="col pb-1 pb-1">
 							<hr>
 
-							<div id="search"><a href="findId"class="pr-3">아이디 찾기</a>| <a class="p1-3 pr-3 " href="findPassword"> 비밀번호 찾기</a>| <a href=join
+							<div id="search"><a href="findId"class="pr-3">아이디 찾기</a>| <a class="p1-3 pr-3 " href="findId"> 비밀번호 찾기</a>| <a href=join
 								class="pl-3" target="_blank">회원가입 </a></div>
 							<hr>
 						</div>
@@ -134,36 +134,28 @@
 onload = function()
 {
 	
+	var randomNum = Math.floor(Math.random() * 4) + 1;
 	
-// 	$(document).on("mouseenter", "#site_logo_col", function() 
-// 	{
-// 		$("#site_logo_img").fadeOut(200, function() 
-// 		{
-// 			$("#site_logo_img").attr("src", "resources/images/catlogo.png");
-// 		})
-// 		.fadeIn(200);
-// 	});
-// 	$(document).on("mouseleave", "#site_logo_col", function() 
-// 	{
-// 		$("#site_logo_img").fadeOut(200, function() 
-// 		{
-// 			$("#site_logo_img").attr("src", "resources/images/doglogo2.png");
-// 		})
-// 		.fadeIn(200);
-// 	});
-//
-//
-//	
-// 	$(document).on("hover", "#site_logo_col", 
-// 	function()
-// 	{
-// 		$("#site_logo_img").attr("src", "resources/images/catlogo.png");
-// 	},
-// 	function()
-// 	{
-// 		$("#site_logo_img").attr("src", "resources/images/doglogo2.png");
-// 	});
-
+	if(randomNum == 1)
+	{
+		$("#site_logo_img").attr("src", "resources/images/cat-logo.png");
+	}
+	else if(randomNum == 2)
+	{
+		$("#site_logo_img").attr("src", "resources/images/hedgehog-logo.png");
+	}
+	else if(randomNum == 3)
+	{
+		$("#site_logo_img").attr("src", "resources/images/turtle-logo.png");
+	}
+	else if(randomNum == 4)
+	{
+		$("#site_logo_img").attr("src", "resources/images/bird-logo.png");
+	}
+	else
+	{
+		
+	}
 
 	//카카오 로그아웃
 	$("#logout").on("click",function(){

@@ -73,26 +73,26 @@
           				<input type="button" value="서울병원 데이터 삽입" class="seoul-btn btns">
           			</div>
           			<div class="col-lg-6 col-md-6 col-12">
-          				<input type="button" value="서울병원 데이터삭제 " class="seoul-delete-btn btns">
+          				<input type="button" value="서울병원 데이터삭제 " class="seoul-delete-btn btns" flag="false">
           			</div>
           			<div class="col-lg-6 col-md-6 col-12">
-          				<input type="button" value="경기병원 데이터 삽입" class="gyeonggi-btn btns">
+          				<input type="button" value="경기병원 데이터 삽입" class="gyeonggi-btn btns" >
           			</div>
           			<div class="col-lg-6 col-md-6 col-12">
-          				<input type="button" value="경기병원 데이터삭제" class="gyeonggi-delete-btn btns">
+          				<input type="button" value="경기병원 데이터삭제" class="gyeonggi-delete-btn btns" flag="false">
           			</div>
           			<div class="col-lg-6 col-md-6 col-12">
           				<input type="button" value="울산병원 데이터 삽입" class="ulsan-btn btns">
           			</div>
           			<div class="col-lg-6 col-md-6 col-12">
-          				<input type="button" value="울산병원 데이터삭제" class="ulsan-delete-btn btns">
+          				<input type="button" value="울산병원 데이터삭제" class="ulsan-delete-btn btns" flag="false">
           			</div>
           			
           			<div class="col-lg-6 col-md-6 col-12">
           				<input type="button" value="보호소 데이터" class="center-btn btns">
           			</div>
           			<div class="col-lg-6 col-md-6 col-12">
-          				<input type="button" value="보호소 데이터 삭제" class="center-delete-btn btns">
+          				<input type="button" value="보호소 데이터 삭제" class="center-delete-btn btns" flag="false">
           			</div>
           		</div>
                </div>
@@ -114,47 +114,74 @@
 </body>
 <script>
 	$(".seoul-btn").on("click",function(){
+		if($(".seoul-delete-btn").attr("flag")=="false"){
+			alert("데이터를 먼저 삭제해주세요");
+		}else if($(".seoul-delete-btn").attr("flag") == "true"){
 		alert("5~10분정도 시간이 소요됩니다.");
+		
 		$.ajax({
 			url:"seoulHospitalData"
 		}).done(function(resp){
 			if(resp == '1'){
 				alert("성공");
+				$(".seoul-delete-btn").attr("flag","false");
 			}else{alert("실패");}
 		});
+		}
 	});
 	
 	$(".gyeonggi-btn").on("click",function(){
-		alert("5~10분정도 시간이 소요됩니다.");
-		$.ajax({
-			url:"gyeonggiHospitalData"
-		}).done(function(resp){
-			if(resp == '1'){
-				alert("성공");
-			}else{alert("실패");}
-		});
+		if($(".gyeonggi-delete-btn").attr("flag")=="false"){
+			alert("데이터를 먼저 삭제해주세요");
+		}else if($(".gyeonggi-delete-btn").attr("flag")=="true"){
+			alert("5~10분정도 시간이 소요됩니다.");
+			$.ajax({
+				url:"gyeonggiHospitalData"
+			}).done(function(resp){
+				if(resp == '1'){
+					alert("성공");
+					$(".gyeonggi-delete-btn").attr("flag","false");
+				}else{alert("실패");}
+			});
+		}
+		
+		
 	});
 	$(".ulsan-btn").on("click",function(){
-		alert("5~10분정도 시간이 소요됩니다.");
-		$.ajax({
-			url:"ulsanHospitalData"
-		}).done(function(resp){
-			console.log(resp);
-			if(resp == '1'){
-				alert("성공");
-			}else{alert("실패");}
-		});
+		if($(".ulsan-delete-btn").attr("flag")=="false"){
+			alert("데이터를 먼저 삭제해주세요");
+		}else if($(".ulsan-delete-btn").attr("flag")=="true"){
+			alert("5~10분정도 시간이 소요됩니다.");
+			$.ajax({
+				url:"ulsanHospitalData"
+			}).done(function(resp){
+				console.log(resp);
+				if(resp == '1'){
+					alert("성공");
+					$(".ulsan-delete-btn").attr("flag","false");
+				}else{alert("실패");}
+			});
+		}
+		
+		
 	});
 	$(".center-btn").on("click",function(){
-		alert("5~10분정도 시간이 소요됩니다.");
-		$.ajax({
-			url:"insertCenterData"
-		}).done(function(resp){
-			console.log(resp);
-			if(resp == '1'){
-				alert("성공");
-			}else{alert("실패");}
-		});
+		if($(".center-delete-btn").attr("flag")=="false"){
+			alert("데이터를 먼저 삭제해주세요.");
+		}else if($(".center-delete-btn").attr("flag")=="true"){
+			alert("5~10분정도 시간이 소요됩니다.");
+			$.ajax({
+				url:"insertCenterData"
+			}).done(function(resp){
+				console.log(resp);
+				if(resp == '1'){
+					alert("성공");
+					$(".center-delete-btn").attr("flag","false");
+				}else{alert("실패");}
+			});
+		}
+		
+		
 	});
 	$(".seoul-delete-btn").on("click",function(){
 		$.ajax({
@@ -163,6 +190,7 @@
 		}).done(function(resp){
 			if(resp == '1'){
 				alert("성공");
+				$(".seoul-delete-btn").attr("flag","true");
 			}else{alert("실패");}
 		});
 	});
@@ -173,6 +201,7 @@
 		}).done(function(resp){
 			if(resp == '1'){
 				alert("성공");
+				$(".gyeonggi-delete-btn").attr("flag","true");
 			}else{alert("실패");}
 		});
 	});
@@ -183,6 +212,7 @@
 		}).done(function(resp){
 			if(resp == '1'){
 				alert("성공");
+				$(".ulsan-delete-btn").attr("flag","true");
 			}else{alert("실패");}
 		});
 	});
@@ -192,6 +222,7 @@
 		}).done(function(resp){
 			if(resp == '1'){
 				alert("성공");
+				$(".center-delete-btn").attr("flag","true");
 			}else{alert("실패");}
 		});
 	});

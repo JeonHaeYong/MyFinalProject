@@ -65,6 +65,9 @@ body{
 {
 	height: 50px;
 }
+
+
+
 </style>
 
 </head>
@@ -98,31 +101,30 @@ body{
 						<div class="row justify-content-center">
 		
 							<div class="col-8 text-center">
-		
-		
-								<div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+								
+								<div id="carouselExampleInterval" class="carousel slide carousel-fade" data-ride="carousel">
 									<div id="carousel-inner" class="carousel-inner">
 										
 										<c:if test="${dto.image1 != '없음'}">
-											<div class="carousel-item" data-interval="3000">
+											<div class="carousel-item">
 												<img src="${dto.image1}" class="d-block w-100 c-img" alt="...">
 											</div>
 										</c:if>
 										
 										<c:if test="${dto.image2 != '없음'}">
-											<div class="carousel-item" data-interval="3000">
+											<div class="carousel-item">
 												<img src="${dto.image2}" class="d-block w-100 c-img" alt="...">
 											</div>
 										</c:if>
 										
 										<c:if test="${dto.image3 != '없음'}">
-											<div class="carousel-item" data-interval="3000">
+											<div class="carousel-item">
 												<img src="${dto.image3}" class="d-block w-100 c-img" alt="...">
 											</div>
 										</c:if>
 										
 										<c:if test="${ ((dto.image1 == '없음') && (dto.image2 == '없음')) && (dto.image3 == '없음') }">
-											<div class="carousel-item" data-interval="3000">
+											<div class="carousel-item">
 												<img src="resources/images/dog_1.jpg" class="d-block w-100 c-img" alt="...">
 											</div>
 										</c:if>
@@ -237,9 +239,9 @@ body{
 				
 				<div class="row justify-content-center">
 
-					<div class="col-12 col-lg-12 my-5 text-center">
+					<div class="col-12 col-lg-12 mt-5 text-center">
 						
-						<h1> 현재 진행중인 후원 업체가 없습니다</h1>	
+						<h1 class="pt-5 my-auto" style="height:500px"> 현재 진행중인 후원 업체가 없습니다</h1>	
 						
 					</div>
 					
@@ -280,9 +282,7 @@ body{
 <script src="resources/js/isotope.pkgd.min.js"></script>
 <script src="resources/js/main.js"></script>
 <script>
-	$(function()
-    {
-		$("#carousel-inner div:first-child").addClass("active");
+		
 		
 	    $("img").on("error", function()
 		{
@@ -293,15 +293,17 @@ body{
 	    	location.href = "donationForm";
 	    });
 	    
-    });
-    
-    onload = function()
-    {
-		
-    };
+	    $("#carousel-inner div:first-child").addClass("active");
+	    
+	    $('.carousel').carousel
+	    ({
+	    	interval: 3000
+	    })
+	    
 </script>
 <c:if test="${dto.currentmoney != null}">
 <script>
+
 var percent = Math.floor((${dto.currentmoney}*1) / (${dto.goalmoney}*1) * 100);
 $("#progress-bar").attr("style", "width:"+ percent + "%");
 $("#progress-bar").text(percent+"%");
