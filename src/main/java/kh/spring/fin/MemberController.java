@@ -442,18 +442,22 @@ public class MemberController {
 	
 
 	@RequestMapping("toMyPage_support")
-	public String toMyPage_support_loginCheck(HttpServletRequest request, String currentPage) {
+	public String toMyPage_support_loginCheck(HttpServletRequest request, String currentPage, String template) {
 		String id = (String)request.getSession().getAttribute("id");
 		if(currentPage == null) {
 			currentPage = "1";
 		}
 		request.setAttribute("dpList", dps.selectDonationPaymentById(id, Integer.parseInt(currentPage)));
 		request.setAttribute("pageNavi", dps.getNaviForDonationPayment(Integer.parseInt(currentPage), dps.getDonationPaymentTotalCountById(id)));
+		System.out.println("support template : " + template);
+		if(template != null) {
+			return "myPage/user/support_template";
+		}
 		return "myPage/user/user_myPage_support";
 	}
 
 	@RequestMapping("toMyPage_buyList")
-	public String toMyPage_buyList_loginCheck(HttpServletRequest request, String currentPage) {
+	public String toMyPage_buyList_loginCheck(HttpServletRequest request, String currentPage, String template) {
 		String id = (String)request.getSession().getAttribute("id");
 		if(currentPage == null) {
 			currentPage = "1";
@@ -461,6 +465,10 @@ public class MemberController {
 		List<PaymentDTO> buyList = ps.selectPaymentPerPageForBuyList(id, Integer.parseInt(currentPage));
 		request.setAttribute("buyList", buyList);
 		request.setAttribute("pageNavi", ps.getNaviForBuyList(id, Integer.parseInt(currentPage)));
+		System.out.println("buyList template : " + template);
+		if(template != null) {
+			return "myPage/user/buyList_template";
+		}
 		return "myPage/user/user_myPage_buyList";
 	}
 

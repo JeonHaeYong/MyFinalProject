@@ -63,6 +63,11 @@
                                             <div class="col-2 text-truncate">후원 방식</div>
                                         </div>
                                         <div class="row donation_List ajaxRow">
+                                        	<c:if test="${dpList.size() == 0 }">
+                                        		<div class="col-12 row mt-2 mb-1">
+	                                        		후원 내역이 없습니다.
+	                                        	</div>
+                                        	</c:if>
 	                                    	<c:forEach var="dto" items="${dpList }">
 	                                    		<div class="col-12 row mt-2 mb-1">
 	                                    			<div class="col-4 text-truncate">${dto.donation_name }</div>
