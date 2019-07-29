@@ -44,12 +44,12 @@ public class HomeController {
 		request.setAttribute("list", list);
 		//재회후기뽑아오기
 		int reviewCount = rservice.getReviewCount();
-		if(reviewCount>=3) {//리뷰글 3개이상일때만 가져오기
+		if(reviewCount>=4) {//리뷰글 4개이상일때만 가져오기
 			Set<Integer> rSet = new HashSet<>();
 			while(rSet.size()<4) {// 랜덤으로 4개
 				int rand = (int)(Math.random()*reviewCount+1);
 				rSet.add(rand);
-				System.out.println("random숫자->"+rand);
+				
 			}
 			System.out.println("set"+rSet.toString());
 			List<ReviewDTO> reList = rservice.selectRandomReview(rSet);
