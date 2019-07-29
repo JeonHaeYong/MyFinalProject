@@ -98,11 +98,17 @@ height: 350px;
 
 
 .footer{text-align:right; margin-right:170px; margin-bottom: 30px;}
-.btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44;}
-.btn:hover{background-color:#FDD692; font-weight:bold;}
+/* .btns,.pageNum,.prev,.next{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44;}
+.btns:hover{background-color:#FDD692; font-weight:bold;} */
+
+
+.btns{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44; border-radius:30px; border:none; font-size:25px;}
+.btns:hover{background-color:#FDD692; font-weight:bold;}
+
+
 .navi-section{text-align: center; margin-top:20px; font-family: 'Gamja Flower', cursive; font-size:25px;}
-.pageNum{text-decoration-line: none; color:#754F44; font-size:25px;}
-.pageNum:hover{font-weight:bold; text-decoration-line: none;}
+.pageNum,.prev,.next{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44; border:none; border-radius:30px; margin-left:5px; width:40px;}
+.pageNum:hover,.prev:hover,.next:hover{background-color:#FDD692; font-weight:bold;}
 .furColor{overflow:hidden; text-overflow:ellipsis; white-space;nowrop;}
 
 </style>
@@ -119,9 +125,14 @@ height: 350px;
 	<div class="px-0 pb-0 empty"></div>
 	<div id="title"><h1>잠시 길 잃은 동물들</h1></div>
 	<div class="containier ">
-		<div class="row disappearList">
+	<form action="selectDeleteDisappearReport" id="listForm" method="get">
+		<div class="row disappearList"><!--ajax 여기에 어팬드  -->
+		
 		   <c:forEach var="list" items="${list }"> 
 			<div class="col-lg-4 col-md-6 col-sm-6 dtocol">
+				<c:if test="${type == 4 }">
+					<input type="checkbox" value="${list.seq }" name="check">
+				</c:if>
 				<div class="infowrapper">
 						<div class="infoimg">
 							
@@ -156,6 +167,7 @@ height: 350px;
 				</div>
 			</div>
 			  </c:forEach> 
+			  
 			
 			
 		</div>
@@ -164,9 +176,13 @@ height: 350px;
 		</div>
 		<div class="row mt-5 footer" align="right">
 			<div class="col-12">
-					<input type="button" value="글쓰기" class="write-btn btn">
+				<c:if test="${type == 4 }">
+					<input type="button" value="선택삭제" class="select-delete-btn btns">
+					</c:if>
+					<input type="button" value="글쓰기" class="write-btn btns">
 			</div>
 		</div>
+		</form>
 	</div>
 	<!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
 	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
@@ -209,6 +225,25 @@ height: 350px;
 
 			}
 		});
+		$(".navi-btn").each(function(index,items){ // 네비버튼 클릭하면 ajax로 정보 가져오기
+			$(this).on("click",function(){
+				var currentPage = $(this).attr("currentPage");
+				$.ajax({
+					url:"list_ajax",
+					data:{currentPageStr : currentPage},
+					type:"get"
+				}).done(function(resp){
+					$(".disappearList").html("");
+					$(".disappearList").append(resp);
+				})
+			})
+		})
+		$(".select-delete-btn").on("click",function(){
+			var result = confirm("정말로 삭제하시겠습니까?");
+        	if(result == true){
+        		$("#listForm").submit();
+        	}
+		})
 </script>
 </body>
 </html>

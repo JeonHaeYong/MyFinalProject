@@ -273,8 +273,8 @@
 							<c:forEach var="list" items="${reList }" varStatus="i">
 								<div>
 									<div class="block-testimony-1 text-center">
-										<blockquote class="mb-4">
-											<p class="text-break text-break">&ldquo;${list.contents }!&rdquo;</p>
+										<blockquote class="mb-4" style="font-family: 'Gamja Flower';font-weight: bold;">
+											<p class="text-break text-break reviewContent_part">${list.contents }</p>
 										</blockquote>
 				
 										<figure> <img src="review/${list.image_path1}" alt="Image" class="img-fluid rounded-circle mx-auto" style="width: 120px; height: 120px; max-width: 120px;"> </figure>
@@ -341,6 +341,14 @@
 	        document.getElementById("form").submit();
         }
         //                            로그인 버튼과 회원가입 버튼의 script
+        $(".reviewContent_part").each(function(i,item){
+        	var content = $(item).text();
+        	content = content.substr(0,100);
+        	contentStr = "&ldquo;";
+        	contentStr += content;
+        	contentStr += "!&rdquo;";
+        	$(item).html(contentStr);
+        });
 	</script>
 
 	<script>

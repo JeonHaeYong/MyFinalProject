@@ -12,4 +12,6 @@ public interface MessageDAO {
 	public int getMsgAllCount(String type, String id);
 	public int selectSeqCurrVal();
 	public int deleteMsgBySeq(String[] seq);
+	public int updateWithdrawalBysender(String id);//sender가 탈퇴했을때
+	public int updateWithdrawalByrecipient(String id);//recipient가 탈퇴했을때
 }

@@ -15,6 +15,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import kh.spring.dao.BlackListDAO;
+import kh.spring.dao.CartDAO;
 import kh.spring.dao.DisappearCommentsDAO;
 import kh.spring.dao.DisappearReportDAO;
 import kh.spring.dao.DonationPaymentDAO;
@@ -42,6 +43,8 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private BlackListDAO bdao;
 	@Autowired
+	private CartDAO cdao;
+	@Autowired
 	private DisappearReportDAO disappeardao;
 	@Autowired
 	private DisappearCommentsDAO dissappearCommentsdao;
@@ -62,11 +65,27 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private PaymentDAO pdao;
 
+	@Override
+	@Transactional("txManager")
 	public int withdrawalService(String id) throws Exception {
 		BlackListDTO dto = new BlackListDTO();
 		dto.setId(id);
 		mdao.deleteMember(id);
 		bdao.deleteById(dto);
+		cdao.deleteCart(id);
+		disappeardao.updateWithdrawalWriter(id);
+		dissappearCommentsdao.updateWithdrawalWriter(id);
+		tempdao.updateWithdrawalBywriter(id);
+		reviewdao.updateWithdrawalWriter(id);
+		reviewCommentsdao.updateWithdrawalWriter(id);
+		reviewCommentsLikesdao.updateWithdrawalId(id);
+		idao.updateWithdrawalSeller(id);
+		dpdao.updateWithdrawalDonator(id);
+		messagedao.updateWithdrawalByrecipient(id);
+		messagedao.updateWithdrawalBysender(id);
+		pdao.updateWithdrawalBybuyer(id);
+		pdao.updateWithdrawalByseller(id);
+		
 		return 0;
 	}
 

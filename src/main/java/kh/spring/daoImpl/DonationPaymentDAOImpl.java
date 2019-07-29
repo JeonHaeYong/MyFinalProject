@@ -56,5 +56,11 @@ public class DonationPaymentDAOImpl implements DonationPaymentDAO {
 		return sst.selectOne("DonationPaymentDAO.selectCountForList");
 	}
 
+	@Override
+	public int selectCountAll() throws Exception
+	{
+		return sst.selectOne("DonationPaymentDAO.selectCountAll");
+	}
+
 	
 }

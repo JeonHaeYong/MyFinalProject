@@ -15,4 +15,6 @@ public interface PaymentDAO {
 	public List<PaymentDTO> selectPaymentPerPageForBuyList(Map<String, String> param);
 	public int getPaymentTotalCountById(String id);
 	public Map<String, Integer> getNaviForBuyList(int currentPage, int recordTotalCount);
+	public int updateWithdrawalBybuyer(String id);//buyer가 탈퇴했을때
+	public int updateWithdrawalByseller(String id);//seller가 탈퇴했을때
 }

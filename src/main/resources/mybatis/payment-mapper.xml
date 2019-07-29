@@ -34,5 +34,10 @@
 	<select id="getPaymentTotalCountById" resultType="int">
 		select count(*) from payment p, item i where p.item_seq = i.seq and buyer=#{value}
 	</select>
-	
+	<update id="updateWithdrawalBybuyer">
+		update payment set buyer='탈퇴한 회원' where buyer= #{id}
+	</update>
+	<update id="updateWithdrawalByseller">
+		update payment set seller ='탈퇴한 회원' where seller = #{id}
+	</update>
 </mapper>

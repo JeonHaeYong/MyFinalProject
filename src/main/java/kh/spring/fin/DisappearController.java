@@ -9,10 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kh.spring.dto.DisappearCommentsDTO;
@@ -43,6 +41,17 @@ public class DisappearController {
 		request.setAttribute("list", list);
 		request.setAttribute("navi", navi);
 		return "disappear/disappearList";
+	}
+	@RequestMapping("list_ajax")
+	public String list_ajax(HttpServletRequest request, String currentPageStr) {
+		int currentPage = Integer.parseInt(currentPageStr);
+		session.setAttribute("currentPage", currentPage);
+		List<DisappearReportDTO> list = new ArrayList<>();
+		try {
+			 list = drs.selectPerPageService(currentPage);
+		}catch(Exception e) {e.printStackTrace();}
+		request.setAttribute("list", list);
+		return "disappear/list_ajax";
 	}
 	@RequestMapping("toReportForm")
 	public String toReportForm_loginCheck(HttpServletRequest request) {

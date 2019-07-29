@@ -349,6 +349,7 @@ public class MemberController {
 	@RequestMapping("currPwCheck")
 	public String currPwCheck(String id , String pw) {
 		int result = mservice.isLoginOkService(id, pw);
+		
 		if(result==0) {
 			return "false";
 		}
@@ -568,9 +569,13 @@ public class MemberController {
 	
 	@RequestMapping("withdrawal")
 	public String withdrawal(HttpServletRequest request, MemberDTO dto) {
-		
-		
-		return "index";
+		try {
+			mservice.withdrawalService(dto.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+		return "redirect:logout";
 	}
 
 }
