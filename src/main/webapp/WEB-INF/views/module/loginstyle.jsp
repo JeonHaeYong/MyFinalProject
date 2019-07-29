@@ -122,6 +122,9 @@
 .footer_ftc_white{
 	color: white;
 }
+input[type=button],button[type=button]{
+	cursor: pointer;
+}
 </style>
 <link
 	href="https://fonts.googleapis.com/css?family=Gamja+Flower&display=swap&subset=korean"

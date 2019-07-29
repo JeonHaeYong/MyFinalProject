@@ -24,6 +24,9 @@ public class ReviewCommentsController {
 	@RequestMapping(value="insertReviewComment" ,produces = "application/text; charset=utf8")
 	public String insertReviewComment(HttpServletRequest request , ReviewCommentsDTO dto) {//ajax로 댓글 insert하기
 		String loginId = (String)session.getAttribute("id");
+		String contents = dto.getContents();
+		contents = contents.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "");
+		dto.setContents(contents);
 		if(!loginId.equals(dto.getWriter())) {
 			return "redirect:error";
 		}

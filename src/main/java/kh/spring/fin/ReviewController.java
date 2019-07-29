@@ -62,6 +62,12 @@ public class ReviewController {
 		String savePath = resourcePath+"/"+today;
 		System.out.println("파일저장할 위치 -> " + savePath);
 		File uploadPath = new File(savePath);
+		String title = dto.getTitle();
+		String contents = dto.getContents();
+		title = title.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "");
+		contents = contents.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "");
+		dto.setTitle(title);
+		dto.setContents(contents);
 		if(image.getSize()!=0) {
 			System.out.println(image.getName()+":"+image.getOriginalFilename());
 			if(!uploadPath.exists()) {	//해당하는 이름의 폴더가 없다면

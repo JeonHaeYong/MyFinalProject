@@ -35,6 +35,9 @@ public class MessageController {
 		//				break;
 		//			}
 		//		}
+		String contents = dto.getContents();
+		contents = contents.replaceAll("<", "'").replaceAll(">", "'").replaceAll("\"", "");
+		dto.setContents(contents);
 		int insertResult = msgService.insertMsg_service(dto);
 		System.out.println("입력결과-> " + insertResult);
 		String referer = request.getHeader("referer");

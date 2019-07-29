@@ -22,7 +22,7 @@
                 <link rel="stylesheet" href="resources/css/aos.css">
                 <link rel="stylesheet" href="resources/css/style.css">
                 <style>
-                /*                     #FBFFB9 1번, #FDD692 2번, #EC7357 3번, #754F44 4번, */
+                /* #FBFFB9 1번, #FDD692 2번, #EC7357 3번, #754F44 4번, */
                     /*부트스트랩 모달시 패딩 없애주기.*/
                     .modal-open{padding-right: 0px !important;}
                     .readMsg{
@@ -194,8 +194,8 @@
                                                         	</div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button id="received_msg_close_btn" type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                                                            <button id="reply_msg_btn" type="button" class="btn btn-primary">답장 보내기</button>
+                                                            <button id="received_msg_close_btn" type="button" class="mx-1 btn btn-secondary" data-dismiss="modal">닫기</button>
+                                                            <button id="reply_msg_btn" type="button" class="mx-1 btn btn-primary">답장 보내기</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -317,8 +317,8 @@
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button id="msg_close_btn" type="button" class="btn bg4_ft2" data-dismiss="modal">닫기</button>
-                                    <button id="msg_send_btn" type="button" class="btn bg2_ft4">쪽지 보내기</button>
+                                    <button id="msg_close_btn" type="button" class="mx-1 btn bg4_ft2" data-dismiss="modal">닫기</button>
+                                    <button id="msg_send_btn" type="button" class="mx-1 btn bg2_ft4">쪽지 보내기</button>
                                 </div>
                             </div>
                         </div>
@@ -435,6 +435,7 @@
                 	$("#r_sender_modal").html("");
                 	$("#r_contents_modal").html("");
                 	var contents = $(this).text();
+                	console.log(contents);
                 	var sender = $(this).attr("value");
                 	$("#r_sender_modal").append("보낸사람 : "+sender+"<hr>");
                 	$("#r_sender_modal").prop("sender",sender);
@@ -465,6 +466,7 @@
                 	$("#s_recipient_modal").html("");
                 	$("#s_contents_modal").html("");
                 	var contents = $(this).text();
+                	console.log(contents);
                 	var recipient = $(this).attr("value");
                 	$("#s_recipient_modal").append("받는사람 : "+recipient+"<hr>");
                 	$("#s_contents_modal").append(contents);

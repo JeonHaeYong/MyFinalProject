@@ -374,6 +374,10 @@ public class MemberController {
 	//정보수정하기(id,pw,email제외)
 	@RequestMapping("modifyProfile")
 	public String modifyProfileInfo(MemberDTO dto) {
+		String addr = dto.getAddress2();
+		addr = addr.replaceAll("<", "&lt;");
+		addr = addr.replaceAll(">", "&gt;");
+		addr = addr.replaceAll("\"", "");
 		String loginId = (String)session.getAttribute("id");
 		if(!loginId.equals(dto.getId())) {
 			return "rediect:/logout";

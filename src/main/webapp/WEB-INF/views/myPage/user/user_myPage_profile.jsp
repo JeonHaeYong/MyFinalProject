@@ -158,7 +158,7 @@
                         <div class="form-group row">
                             <label for="my_birth" class="col-sm-2 col-form-label">Birthday</label>
                             <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext modify_info_input" id="my_birth" value="${memberDTO.birthDay }" placeholder="숫자8자리 (ex.12340101)" name="birthDay">
+                                <input type="text" readonly class="form-control-plaintext modify_info_input" id="my_birth" value="${memberDTO.birthDay }" placeholder="ex.1234-01-01" name="birthDay">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -295,13 +295,9 @@
                     return false;
                 }
                 //pw regex확인
-                var pwRegex = /^[a-zA-Z0-9]{8,15}$/g;
+                var pwRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,15}$/g;
                 var regexResult = pwRegex.exec(pw1);
-                var pwRegex2 = /^[a-zA-Z]{8,15}$/g;
-                var regexResult2 = pwRegex2.exec(pw1);
-                var pwRegex3 = /^[0-9]{8,15}$/g;
-                var regexResult3 = pwRegex3.exec(pw1);
-                if(regexResult==null||regexResult2!=null||regexResult3!=null){	
+                if(regexResult==null){	
                     alert("변경할 비밀번호의 조건을 확인해주세요.\r\n조건->알파벳과 숫자의 조합으로 8~15이하");
                     $("#changePw1").focus();
                     return false;
@@ -385,11 +381,11 @@
                 /* 생년월일 regex */
                 var birth = $("#my_birth").val();
                 if(birth!=""){
-                    var birthRegex = /^[0-9]{8}$/g
+                    var birthRegex = /^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/
                     var birthRegexResult = birthRegex.exec(birth);
                     if (birthRegexResult == null) {
                         $("#my_birth").focus();
-                        alert("생일은 숫자8자리로 입력해주세요.");
+                        alert("생일은 1900-01-01 형식으로 입력해주세요.");
                         return;
                     }
                 }
