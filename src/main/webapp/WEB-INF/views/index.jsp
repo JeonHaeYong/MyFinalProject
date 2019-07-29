@@ -44,6 +44,9 @@
 .cartoon-container {
 	max-width: 1300px;
 }
+.cartoonTitle{text-align:center; font-size:40px;font-family: 'Gamja Flower', cursive;}
+.cartoonTitle>div:nth-child(2){text-align:center; font-size:15px;font-family: 'Gamja Flower', cursive;}
+.cartoonTitle>span{color:#EC7357; font-size:60px;}
 /* 만화 부분 끝*/
 #acs_div {
 	width: 100%;
@@ -67,9 +70,10 @@
 	height: 100%;
 	border-radius: 20px;
 }
+.small-title{font-family: 'Gamja Flower', cursive; font-size:50px;}
 </style>
 </head>
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section" onload="javascript:openPopup('popUp.home')">
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section" >
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 
@@ -83,6 +87,40 @@
 					<p>
 						<a href="notice-view-page" class="btn btn-primary">-> 공지사항</a>
 					</p>
+					
+					<p>
+					<!--  날씨-->
+					<div class="col-12 weather" align="left">
+						<p style="font-size: 30px; color: black;">오늘의 날씨요정</p>
+						<div class="row">
+							<div class=" col-5 pr-0 ">
+								<img src="" alt="Image" id="kk">
+							</div>
+							<div class=" col-7 pl-0" >
+								<p id="temp"
+									style="color:#754F44; font-family: 'Gamja Flower'; font-size: 20px;"
+									class="mb-0"></p>
+								<p id="humidity"
+									style="color:#754F44; font-family: 'Gamja Flower'; font-size: 20px;"
+									class="mb-0"></p>
+								<p id="country"
+									style="color: #754F44; font-family: 'Gamja Flower'; font-size: 20px;"
+									class="mb-0"></p>
+									
+							</div>
+						</div>
+						<div class="row col-12 mt-3 " >
+						<p id="weathertext"
+									style="color: #754F44; font-family: 'Gamja Flower'; font-size: 22px;"
+									class="mb-0 pl-2"></p> </div>
+									<div class="row col-12">
+						<p id="weathertext2"
+									style="color: #754F44; font-family: 'Gamja Flower'; font-size: 22px;"
+									class="mb-0 pl-2"></p> </div>
+					</div>
+					
+					</p>
+					
 				</div>
 			</div>
 			<div class="col-md-5 align-self-center text-center text-md-right">
@@ -93,9 +131,14 @@
 	</section>
 
 	<section class="site-section" id="about-section">
+	
 	<div class="container cartoon-container">
+		<div class="row">
+			<div class="col-12 cartoonTitle" data-aos="fade-up" data-aos-delay="100"><span>"공고"</span>와<span> "보호"</span>의 차이를 알고 있니~? </div>
+			<div class="col-12 cartoonTitle" data-aos="fade-up" data-aos-delay="150">지금부터 알아보자!!</div>
+		</div>
 		<div class="row no-gutters mb-5">
-			<div class="col-12 col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+			<div class="col-12 col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="200">
 				<div class="row pricing">
 					<div class="col-12">
 						<span class="icon-paw d-block display-5 text-white mb-2 pt-2"></span>
@@ -107,7 +150,7 @@
 
 			</div>
 
-			<div class="col-12 col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+			<div class="col-12 col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="300">
 				<div class="row pricing">
 					<div class="col-12 ">
 						<span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span> <span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span>
@@ -119,7 +162,7 @@
 				</div>
 			</div>
 
-			<div class="col-12 col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+			<div class="col-12 col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="400">
 				<div class="row pricing">
 					<div class="col-12">
 						<span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span> <span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span> <span
@@ -130,7 +173,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-12 from">
+			<div class="col-12 from" data-aos="fade-up" data-aos-delay="410">
 				출처-포인핸드<img src="/resources/images/pet.png">
 			</div>
 		</div>
@@ -179,7 +222,7 @@
 		<div class="row justify-content-center" data-aos="fade-up">
 			<div class="col-lg-6 text-center heading-section mb-5">
 
-				<h2 class="text-black mb-2">주인을 찾습니다!</h2>
+				<h2 class="text-black mb-2 small-title">주인을 찾습니다!</h2>
 				<p style="color: #754F44; font-size: 20px; font-weight: bold;">[공고중 or 보호중]</p>
 			</div>
 		</div>
@@ -229,7 +272,7 @@
 		<div class="row justify-content-center" data-aos="fade-up">
 			<div class="col-lg-12 text-center heading-section mb-5">
 
-				<h2 class="text-black mb-2">후원하기</h2>
+				<h2 class="text-black mb-2 small-title">후원하기</h2>
 			</div>
 		</div>
 		<div class="row">
@@ -259,7 +302,7 @@
 		<div class="row justify-content-center" data-aos="fade-up">
 			<div class="col-lg-6 text-center heading-section mb-5">
 
-				<h2 class="text-black mb-2">재회 후기</h2>
+				<h2 class="text-black mb-2 small-title">재회 후기</h2>
 			</div>
 		</div>
 		<c:choose>
@@ -545,13 +588,16 @@
 	        });
 	        
 	        //팝업창!!!--왜망가진거야 ㅠㅠㅠ-------------------------------------------------------------------
+	        
+	        openPopup('popUp.home');
+	        
 	        function openPopup(url)
 	        {
 		        var cookies = document.cookie;
 		        var result = cookieToJson(cookies);
 		        if(result != "N")
 		        {
-			        window.open(url, '', 'width=570,height=830,left=1300,top=70');
+			        window.open(url, '', 'width=430,height=625,left=1300,top=70');
 		        }
 	        }
 	        function cookieToJson(cookies)
@@ -561,6 +607,86 @@
 		        return entry[0];
 	        }
         })
+
+        
+        
+        
+        //날씨
+            var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=078b2ce4ce1dc66e407d2f265bdfdd41";
+    		$.ajax({
+    			url : apiURI,
+    			dataType : "json",
+    			type : "GET",
+    			async : "false",
+    			success : function(resp) {
+    				var temp=resp.main.temp - 273;
+    				console.log(resp);
+    				$("#temp").html("현재온도 : " + temp.toFixed(2));
+    				$("#humidity").html("현재습도 : " + resp.main.humidity);
+    				console.log("날씨 : " + resp.weather[0].main);
+    				console.log("상세날씨설명 : " + resp.weather[0].description);
+    				console.log("날씨 이미지 : " + resp.weather[0].icon);
+    				console.log("바람 : " + resp.wind.speed);
+    				$("#country").html("나라 : " + resp.sys.country);
+    				console.log("도시이름 : " + resp.name);
+    				console.log("구름 : " + (resp.clouds.all) + "%");
+    				if(resp.weather[0].icon=="01d" || resp.weather[0].icon=="01n"){
+    					//clear sky
+    					var imgURL ="resources/images/weather/clearsky.png";
+    					$("#weathertext").html("오늘은 맑은 날씨입니다.");
+    					$("#weathertext2").html("애완동물과 신나는 산책 어떠세요?");
+    					
+    				}
+    				else if(resp.weather[0].icon=="02d" || resp.weather[0].icon=="02n"|| resp.weather[0].icon=="03d" || resp.weather[0].icon=="03n"){
+    					//few clouds //scattered clouds
+    					var imgURL ="resources/images/weather/fewcloud.png";
+    					$("#weathertext").html("오늘은 구름이 가득한 날씨 입니다.");
+    					$("#weathertext2").html("오랜만에 애완동물 목욕 어떠세요?");
+    				}
+    				
+    				else if(resp.weather[0].icon=="04d" || resp.weather[0].icon=="04n"){
+    					//broken clouds
+    					var imgURL ="resources/images/weather/cloud.png";
+    					$("#weathertext").html("오늘은 흐린 날씨입니다.");
+    					$("#weathertext2").html("애완동물과 공놀이 어떠세요?");
+    				}
+    				else if(resp.weather[0].icon=="09d" || resp.weather[0].icon=="09n"||resp.weather[0].icon=="10d" || resp.weather[0].icon=="10n"){
+    					//shower rain
+    					var imgURL ="resources/images/weather/rain.png";
+    					$("#weathertext").html("오늘은 비 오는 날씨입니다.");
+    					$("#weathertext2").html("애완동물과의 산책은 삼가해주세요!");
+    				}
+    			
+    				else if(resp.weather[0].icon=="11d" || resp.weather[0].icon=="11n"){
+    					//thunderstorm
+    					var imgURL ="resources/images/weather/strom.png";
+    					$("#weathertext").html("오늘은 찌릿!천둥 치는 날입니다.");
+    					$("#weathertext2").html("애완동물이 놀라지 않게 조심 해주세요!");
+    				}
+    				else if(resp.weather[0].icon=="13d" || resp.weather[0].icon=="13n"){
+    					//snow
+    					var imgURL ="resources/images/weather/snow.png";
+    					$("#weathertext").html("오늘은 눈오는 날입니다.");
+    					$("#weathertext2").html("애완동물과 뽀송뽀송 눈밭 산책 어떠세요?");
+    				}
+    				else if(resp.weather[0].icon=="50d" || resp.weather[0].icon=="50n"){
+    					//mist
+    					var imgURL ="resources/images/weather/mist.png";
+    					$("#weathertext").html("오늘은 안개 낀 입니다.");
+    					$("#weathertext2").html("애완동물과 청소 어떠세요?");
+    				}
+    				else{//이미지 없는 경우대비 
+    				
+    					var imgURL = "http://openweathermap.org/img/w/"
+    						+ resp.weather[0].icon + ".png";
+    					$("#weathertext").html("");
+    					
+    				}
+    				$("#kk").attr("src", imgURL);
+    				
+    			}
+    		});
+
 	</script>
 </body>
 </html>

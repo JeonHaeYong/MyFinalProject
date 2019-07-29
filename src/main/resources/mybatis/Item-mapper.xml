@@ -87,4 +87,8 @@
 		update item set seller='탈퇴한 회원' where seller=#{value}
 	</update>
 	
+	<select id="soldoutCheck" resultType="String">
+		select soldout from item where seq=#{value}
+	</select>
+	
 </mapper>

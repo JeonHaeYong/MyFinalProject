@@ -51,7 +51,7 @@ h3, h1 {
 	min-width: 400px;
 	box-sizing: border-box;
 	text-align: center;
-	margin-bottom: 100px;
+	
 }
 
 .info-box {
@@ -188,7 +188,7 @@ font-weight:bold;
 				</div>
 			</div>
 		</div>
-		<div class="row mt-5" align="right">
+		<div class="row mt-5 pb-5" align="right">
 			<div class="col-12">
 				<div>
 				 <button id="tomainboard" class="btn">글목록으로</button>

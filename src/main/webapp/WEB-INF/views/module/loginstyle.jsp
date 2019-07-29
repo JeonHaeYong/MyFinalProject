@@ -125,6 +125,11 @@
 input[type=button],button[type=button]{
 	cursor: pointer;
 }
+.weather{
+
+padding-top:105px;
+
+}
 </style>
 <link
 	href="https://fonts.googleapis.com/css?family=Gamja+Flower&display=swap&subset=korean"
