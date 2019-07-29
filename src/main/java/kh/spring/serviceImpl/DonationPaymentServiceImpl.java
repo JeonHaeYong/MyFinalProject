@@ -207,7 +207,7 @@ public class DonationPaymentServiceImpl implements DonationPaymentService {
 		}
 		
 		int currentPage = Integer.parseInt(page);
-		int recordTotalCount = dpdao.selectCountForList();
+		int recordTotalCount = dpdao.selectCountAll();
 		int pageTotalCount;
 		boolean needPrev = true;
 		boolean needNext = true;
