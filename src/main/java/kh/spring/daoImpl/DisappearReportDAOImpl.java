@@ -14,9 +14,9 @@ import kh.spring.dto.DisappearReportDTO;
 @Repository
 public class DisappearReportDAOImpl implements DisappearReportDAO{
 	// 한 페이지에 몇 개의 글이 보이게 할 것인지
-	public static int recordCountPerPage = 2;
+	public static int recordCountPerPage = 9;
 	// 한 페이지에 네비게이터가 총 몇 개가 보이게 할 것인지
-	public static int naviCountPerPage = 2;
+	public static int naviCountPerPage = 5;
 	@Autowired
 	private SqlSessionTemplate sst; 
 	
@@ -51,7 +51,7 @@ public class DisappearReportDAOImpl implements DisappearReportDAO{
 	public List<DisappearReportDTO> selectPerPage(int currentPage){
 		Map<String, Integer> hs = new HashMap<>();
 		int end = currentPage * recordCountPerPage;
-		int start = end - 1;
+		int start = end - 8;
 		hs.put("start", start);
 		hs.put("end", end);
 		return sst.selectList("DisappearReportDAO.selectPerPage", hs);
