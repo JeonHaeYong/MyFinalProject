@@ -43,3 +43,4 @@ atlassian-ide-plugin.xml
 .gradletasknamecache
 
 *.lnk
+*.ucls
