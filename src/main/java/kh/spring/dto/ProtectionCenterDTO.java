@@ -7,10 +7,11 @@ public class ProtectionCenterDTO {
 	private String address;
 	private String workday;
 	private String weekday;
+	private int rown;
 	public ProtectionCenterDTO() {
 		super();
 	}
-	public ProtectionCenterDTO(int seq, String center, String tel, String address, String workday, String weekday) {
+	public ProtectionCenterDTO(int seq, String center, String tel, String address, String workday, String weekday, int rown) {
 		super();
 		this.seq = seq;
 		this.center = center;
@@ -18,6 +19,7 @@ public class ProtectionCenterDTO {
 		this.address = address;
 		this.workday = workday;
 		this.weekday = weekday;
+		this.rown = rown;
 	}
 	public int getSeq() {
 		return seq;
@@ -54,5 +56,11 @@ public class ProtectionCenterDTO {
 	}
 	public void setWeekday(String weekday) {
 		this.weekday = weekday;
+	}
+	public int getRown() {
+		return rown;
+	}
+	public void setRown(int rown) {
+		this.rown = rown;
 	}
 }
