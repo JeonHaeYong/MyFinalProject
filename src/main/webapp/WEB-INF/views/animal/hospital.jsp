@@ -34,11 +34,11 @@
      .section>div{padding: 0px;}
      .section>div:not(.addr){line-height: 50px;}.title{text-align: center; font-size:30px; margin-left:50px; font-family:'Gamja Flower', cursive;}
      .footer{text-align: center; padding-top:15px; font-size: 18px;}
-     .menu-bar{text-align: center; height: 200px; font-family:'Gamja Flower', cursive; margin-bottom:40px;}
-     .menu-bar>div{height: 40px;}
+     .menu-bar{text-align: center; height: 250px; font-family:'Gamja Flower', cursive; margin-bottom:40px;}
+     
      .menu-bar>div:not(.menu){line-height: 40px;}
      .menu-bar>div:not(.menu):hover{background-color: #FBFFB950; font-weight: bold; }
-     .menu-bar div:first-child{font-size: 25px; font-weight: bold;  border-bottom: 1px solid black; color: #754F44;}
+     .menu-bar div:first-child{font-size: 40px; font-weight: bold;  border-bottom: 1px solid black; color:#B45F04;}
      a[name="s-menu"]{color: #754F44; text-decoration-line: none; font-size:20px;}
      a[name="s-menu"]:hover{color: #754F44;}
     /* .pageNum,.prev,.next{text-decoration-line: none; color: #754F44; font-size:25px; font-family:'Gamja Flower', cursive;}
@@ -79,7 +79,7 @@
            </div>
            <div class="row">
                <div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-bar">
-                   <div class="menu">MENU</div>
+                   <div class="menu">M E N U</div>
                     <div><a href="toAbandoned?currentPage=1" name="s-menu">유기동물조회</a></div>
                    <div><a href="listTempProtect?currentPage=1" name="s-menu">임시보호중</a></div>
                    <div><a href="toHospital?currentPage=1" name="s-menu">동물병원 조회</a></div>

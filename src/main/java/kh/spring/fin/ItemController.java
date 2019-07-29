@@ -203,4 +203,17 @@ public class ItemController {
 		return null;
 	}
 	
+	@ResponseBody
+	@RequestMapping("soldoutCheck")
+	public Object soldoutCheck_loginCheck(HttpServletRequest request, int seq) {
+		try {
+			String result = is.soldoutCheck(seq);
+			System.out.println(result);
+			return is.soldoutCheck(seq);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+	}
+	
 }

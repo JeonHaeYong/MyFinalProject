@@ -246,6 +246,16 @@ body{
 					
 				</div>
 				
+				<div class="row justify-content-center my-5">
+
+					<div class="col-12 col-lg-12 my-5 text-center">
+						
+						<h1>모금된 금액은 모금 기간 종료 후 기관에 전달됩니다.</h1>
+						
+					</div>
+					
+				</div>
+				
 			</c:when>
 			
 			<c:otherwise>

@@ -284,12 +284,12 @@ public class AdminController
 	}
 	@ResponseBody
 	@RequestMapping(value = "admin-donation-all", produces="application/json;charset=utf-8")
-	public Object selectDonatedListAll(String page)
+	public Object selectDonatedListAll(String page, String target)
 	{
 		Object result = "error";
 		try
 		{
-			result = donationPaymentService.selectDonatedListAll(page);
+			result = donationPaymentService.selectDonatedListAll(page, target);
 		}
 		catch(Exception e)
 		{

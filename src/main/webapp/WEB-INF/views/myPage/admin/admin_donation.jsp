@@ -682,6 +682,14 @@ font-weight:bold;
 											
 											<div class="row justify-content-center">
 											
+												<div id="log_option_div" class="col-12 col-md-12 col-lg-12 text-center my-3">
+													
+												</div>
+												
+											</div>
+											
+											<div class="row justify-content-center">
+											
 												<div id="log_result_div" class="col-12 col-md-12 col-lg-12 text-center my-3">
 													
 												</div>
@@ -993,6 +1001,7 @@ font-weight:bold;
 	    
 		$(document).on("click", "#select_group_btn, .group_navi_btns", function()
 		{
+			$("#log_option_div").empty();
 	    	logGroupAjax(this.name);	    	
 		});
 		
@@ -1085,13 +1094,46 @@ font-weight:bold;
 	    	})
 	    }
 	    
-	    $(document).on("click", "#select_all_btn, .all_navi_btns", function()
+	    var targetKeyword;
+	    
+	    $(document).on("click", "#search_btn", function()
 	    {
+	    	targetKeyword = $("#search_text").val();
+	    	logAllAjax(this.name);	    	
+	    });
+	    
+	    $(document).on("click", ".all_navi_btns", function()
+	    {
+	    	logAllAjax(this.name);	    	
+	    });
+	    
+	    $(document).on("click", "#select_all_btn", function()
+	    {
+	    	$("#select_group_btn").attr("class", "btn menu_btns");
+			$("#select_all_btn").attr("class", "btn selected_menu_btns");
+			
+			var $search_row = $('<div id="search_row" class="row justify-content-center my-5 id_row"></div>');
+			
+			var $search_text_col = $('<div class="col-9 text-center my-1"></div>');
+			var $search_btn_col = $('<div class="col-3 text-center my-1"></div>');
+			
+			var $search_text = $('<input id="search_text" class="form-control" type="text" placeholder="검색할 아이디를 입력하세요(없을 시 전체)">');
+			var $search_btn = $('<input id="search_btn" class="btn my_buttons" name="1" type="button" value="검색">');
+			
+			$search_text_col.append($search_text);
+			$search_btn_col.append($search_btn);
+			
+			$search_row.append($search_text_col).append($search_btn_col);
+			
+			$("#log_option_div").append($search_row);
+	    	
 	    	logAllAjax(this.name);	    	
 	    });
 	    
 	    function logAllAjax(btnName)
 	    {
+	    	$("#log_result_div").empty();
+
 	    	$.ajax
 	    	({
 	    		url: "admin-donation-all",
@@ -1100,23 +1142,16 @@ font-weight:bold;
 	    		data:
 	    		{
 	    			page: btnName
+	    			,target: targetKeyword
 	    		}
 	    	})
 	    	.done(function(response)
 	    	{
-	    		$("#log_result_div").empty();
-	    		
-	    		
-	    		
 	    		var array = response.array;
 	    		
 	    		if(array.length != 0)
 	    		{
-	    			
-	    			$("#select_group_btn").attr("class", "btn menu_btns");
-	    			$("#select_all_btn").attr("class", "btn selected_menu_btns");
-	    			
-	    			var $menu_row = $('<div class="row justify-content-center my-1 id_row"></div>');
+	    			var $menu_row = $('<div class="row justify-content-center my-5 id_row"></div>');
 	    			
 	    			var $menu_seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1"><h3>번호</h3></div>');
 	    			var $menu_idCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1"><h3>기부자</h3></div>');

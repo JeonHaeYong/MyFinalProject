@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>라온펫 - 무료나눔 결제</title>
 <link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
@@ -157,6 +157,7 @@
 		    				<option value="trans">실시간 계좌이체</option>
 		    				<option value="vbank">가상계좌</option>
 		    				<option value="phone">휴대폰 소액결제</option>
+		    				<option value="test">결제스킵</option>
 						</select>
 					</div>
 					<p class="totalAmountBottom pt-2 totalAmount">총 결제 금액 : ${totalAmount }원</p>
@@ -274,113 +275,146 @@
 		$("#payBtn").on("click", function(){
 			$(".soldoutCheck").each(function(i, item){
 				if($(item).val() == 'y'){
-					alert("판매완료된 상품은 결제하실 수 없습니다. 다시 확인해주세요.");
+					alert("이미 판매된 상품은 결제하실 수 없습니다.\n장바구니에서 판매 완료 상품을 삭제해주세요.");
 					location.href = "toMyPage_cart";
 				}
 			});
 			
-			var name = $("#inputName").val();
-			var regex = /^[가-힣]{2,5}$/g;
-			var result = regex.exec(name);
-			var payMethod = $("#selectMethod option:selected").val();
-			if(result == null){
-				alert("잘못된 이름 형식입니다.");
-				$("#inputName").val("").focus();
-				return;
-			}
-			if($("#inputName").val() == ""){
-				alert("이름을 입력해주세요.");
-				$("#inputName").focus();
-				return;
-			}else if($("#inputPhone").val() == ""){
-				alert("전화번호를 입력해주세요.");
-				$("#inputPhone").focus();
-				return;
-			}else if(!phoneCheck){
-				alert("전화번호 형식이 잘못되었습니다.");
-				$("#inputPhone").val("").focus();
-				return;
-			}
-			else if($("#zipcode").val() == "" || $("#inputAddress").val() == "" || $("#inputAddress2").val() == ""){
-				alert("주소를 입력해주세요.");
-				return;
-			}else if(payMethod == "0"){
-				alert("결제 방식을 선택해주세요.");
-				return;
+			var soldoutCheck = '';
+			for(var i = 0; i < ${items.size()}; i++){
+				var seq = ${items.get(i).seq};
+				$.ajax({
+					url: "soldoutCheck",
+					type: "post",
+					data: {
+						seq: seq
+					}
+				}).done(function(resp){
+					soldoutCheck = resp;
+					alert(soldoutCheck);
+				});
+				if(soldoutCheck == 'y'){
+					break;
+				}
 			}
 			
-			var orderNum = new Date().getTime();
-			$("#orderNumber").val(orderNum);
-			var address2 = 
-			$("#inputAddress2").val($("#inputAddress2").val().replace(/<.?script>/g, ""));
-			$("#payForm").submit();
-// 			var IMP = window.IMP; // 생략가능
-// 			IMP.init('imp84992027'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
-// 			IMP.request_pay({
-// 				pg : 'inicis', // version 1.1.0부터 지원.
-// 				/* 
-// 				    'kakao':카카오페이, 
-// 				    html5_inicis':이니시스(웹표준결제)
-// 				        'nice':나이스페이
-// 				        'jtnet':제이티넷
-// 				        'uplus':LG유플러스
-// 				        'danal':다날
-// 				        'payco':페이코
-// 				        'syrup':시럽페이
-// 				        'paypal':페이팔
-// 				 */
-// 				pay_method : payMethod,
-// 				/* 
-// 				    'samsung':삼성페이, 
-// 				    'card':신용카드, 
-// 				    'trans':실시간계좌이체,
-// 				    'vbank':가상계좌,
-// 				    'phone':휴대폰소액결제 
-// 				 */
-// 				merchant_uid : orderNum,
-// 				/* 
-// 				    merchant_uid에 경우 
-// 				    https://docs.iamport.kr/implementation/payment
-// 				    위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
-// 				    참고하세요. 
-// 				    나중에 포스팅 해볼게요.
-// 				 */
-// 				name : "무료나눔 결제", //결제창에서 보여질 이름 //
-// 				amount : ${totalAmount},
-// 				buyer_email : $("#inputEmail").val(),
-// 				buyer_name : $("#inputName").val(),
-// 				buyer_tel : $("#inputPhone").val(),
-// 				m_redirect_url : ''
-// 			/*  
-// 			    모바일 결제시,
-// 			    결제가 끝나고 랜딩되는 URL을 지정 
-// 			    (카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐) 
-// 			 */
-// 			}, function(rsp) {
-// 				console.log(rsp);
-// 				if (rsp.success) {
-// 					alert("결제가 완료되었습니다");
-// 					jQuery.ajax({
-// 						url : "https://www.myservice.com/payments/complete", // 가맹점 서버
-// 						method : "POST",
-// 						headers : {
-// 							"Content-Type" : "application/json"
-// 						},
-// 						data : {
-// 							imp_uid : rsp.imp_uid,
-// 							merchant_uid : rsp.merchant_uid
-// 						}
-// 					}).done(function(data) {
-						
-// 					})
-// 					$("#payForm").submit();
-// 				} else {
-// 					var msg = '결제에 실패하였습니다.';
-// 					msg += '에러내용 : ' + rsp.error_msg;
-// 					alert(msg);
-// 					location.href = "toMyPage_cart";
-// 				}
-// 			});
+			setTimeout(function() {
+				if(soldoutCheck == 'y'){
+					alert("이미 판매된 상품은 결제하실 수 없습니다.\n장바구니에서 판매 완료 상품을 삭제해주세요.");
+					location.href = "toMyPage_cart";
+				}else if(soldoutCheck == 'n'){
+					var name = $("#inputName").val();
+					var regex = /^[가-힣]{2,5}$/g;
+					var result = regex.exec(name);
+					var payMethod = $("#selectMethod option:selected").val();
+					if(result == null){
+						alert("잘못된 이름 형식입니다.");
+						$("#inputName").val("").focus();
+						return;
+					}
+					if($("#inputName").val() == ""){
+						alert("이름을 입력해주세요.");
+						$("#inputName").focus();
+						return;
+					}else if($("#inputPhone").val() == ""){
+						alert("전화번호를 입력해주세요.");
+						$("#inputPhone").focus();
+						return;
+					}else if(!phoneCheck){
+						alert("전화번호 형식이 잘못되었습니다.");
+						$("#inputPhone").val("").focus();
+						return;
+					}
+					else if($("#zipcode").val() == "" || $("#inputAddress").val() == "" || $("#inputAddress2").val() == ""){
+						alert("주소를 입력해주세요.");
+						return;
+					}else if(payMethod == "0"){
+						alert("결제 방식을 선택해주세요.");
+						return;
+					}
+					
+					var orderNum = new Date().getTime();
+					$("#orderNumber").val(orderNum);
+					var address2 = 
+					$("#inputAddress2").val($("#inputAddress2").val().replace(/<.?script>/g, ""));
+					
+					if(payMethod == "test"){
+						$("#payForm").submit();
+					}
+					
+					
+					
+					var IMP = window.IMP; // 생략가능
+					IMP.init('imp84992027'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+					IMP.request_pay({
+						pg : 'inicis', // version 1.1.0부터 지원.
+						/* 
+						    'kakao':카카오페이, 
+						    html5_inicis':이니시스(웹표준결제)
+						        'nice':나이스페이
+						        'jtnet':제이티넷
+						        'uplus':LG유플러스
+						        'danal':다날
+						        'payco':페이코
+						        'syrup':시럽페이
+						        'paypal':페이팔
+						 */
+						pay_method : payMethod,
+						/* 
+						    'samsung':삼성페이, 
+						    'card':신용카드, 
+						    'trans':실시간계좌이체,
+						    'vbank':가상계좌,
+						    'phone':휴대폰소액결제 
+						 */
+						merchant_uid : orderNum,
+						/* 
+						    merchant_uid에 경우 
+						    https://docs.iamport.kr/implementation/payment
+						    위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
+						    참고하세요. 
+						    나중에 포스팅 해볼게요.
+						 */
+						name : "무료나눔 결제", //결제창에서 보여질 이름 //
+						amount : ${totalAmount},
+						buyer_email : $("#inputEmail").val(),
+						buyer_name : $("#inputName").val(),
+						buyer_tel : $("#inputPhone").val(),
+						m_redirect_url : ''
+					/*  
+					    모바일 결제시,
+					    결제가 끝나고 랜딩되는 URL을 지정 
+					    (카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐) 
+					 */
+					}, function(rsp) {
+						console.log(rsp);
+						if (rsp.success) {
+							jQuery.ajax({
+								url : "https://www.myservice.com/payments/complete", // 가맹점 서버
+								method : "POST",
+								headers : {
+									"Content-Type" : "application/json"
+								},
+								data : {
+									imp_uid : rsp.imp_uid,
+									merchant_uid : rsp.merchant_uid
+								}
+							}).done(function(data) {
+								
+							})
+							$("#payForm").submit();
+						} else {
+							var msg = '결제에 실패하였습니다.';
+							msg += '에러내용 : ' + rsp.error_msg;
+							alert(msg);
+							location.href = "toMyPage_cart";
+						}
+					});
+				}else{
+					alert("알 수 없는 문제가 발생했습니다.");
+					location.href = "/";
+				}
+			}, 3000);
 		});
 		
 		$("#cancelBtn").on("click", function(){
