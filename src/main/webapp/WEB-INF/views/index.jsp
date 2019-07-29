@@ -555,7 +555,7 @@
 		        
 		        var name = response.name;
 		        var title = response.title;
-		        var explanation = response.explanation;
+		        var explanation = response.explanation.replace(/<br>/g, "\n");
 		        var image1 = response.image1;
 		        var image2 = response.image2;
 		        var image3 = response.image3;
