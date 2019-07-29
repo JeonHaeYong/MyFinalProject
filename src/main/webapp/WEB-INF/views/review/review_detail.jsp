@@ -310,6 +310,7 @@
                 likeOkCheck();
                 function clickReplyNavi(param){//댓글 navi 클릭했을때,
                     var currentPage = $(param).text();
+<<<<<<< HEAD
                     if(currentPage=="<이전")
                     {
                         var prev =  $(param).parent().next().attr("value");
@@ -320,6 +321,14 @@
 //                         var next  = $(param).parent().prev().attr("value");
 //                         currentPage = parseInt(next) + 1 ;
                     	currentPage = $(".reply_navi")[9].val() * 1 + 1;
+=======
+                    if(currentPage=="<이전"){
+                        var prev =  $(param).next().text();
+                        currentPage = parseInt(prev) - 1 ;
+                    }else if(currentPage=="다음>"){
+                        var next  = $(param).prev().text();
+                        currentPage = parseInt(next) + 1 ;
+>>>>>>> a9ebeb21af9383bdb3da4ccad3e4ee04b0a48505
                     }
                     $.ajax({
                         url : "clickReplyNavi",
