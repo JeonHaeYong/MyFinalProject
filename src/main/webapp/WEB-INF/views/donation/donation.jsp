@@ -64,6 +64,8 @@ body{
 #progress-bar
 {
 	height: 50px;
+	font-size: 20px;
+	color:black;
 }
 
 .bold_brown_namsan
@@ -225,7 +227,7 @@ body{
 						<div>
 							
 							<img src="/resources/images/pie-chart-64.png" alt="사진이 없습니다.">
-							<span>${dto.currentmoney} / ${dto.goalmoney}</span>
+							<span id="money_span"></span>
 							
 						</div>
 							
@@ -359,6 +361,16 @@ function CountDownTimer(dt, id)
     
     timer = setInterval(showRemaining, 1000);
 }
+
+
+
+var currentMoeny = ${dto.currentmoney};
+var goalMoney = ${dto.goalmoney};
+
+$("#money_span").text(currentMoeny.toLocaleString() + " 원 / " + goalMoney.toLocaleString() + " 원");
+
+
+
 // Source: stackoverflow
 </script>
 </c:if>

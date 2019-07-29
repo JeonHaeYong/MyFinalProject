@@ -335,10 +335,14 @@ font-weight:bold;
 		    			var $seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].seq+'</div>');
 		    			var $buyerCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].buyer+'</div>');
 		    			var $nameCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].name+'</div>');
-		    			var $priceCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].price+'</div>');
+		    			var $priceCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1"></div>');
 		    			var $sellerCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].seller+'</div>');
 		    			var $timeCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">' + array[i-1].time.substring(0, array[i-1].time.length-2) + '</div>');
 		    			$row.append($seqCol).append($buyerCol).append($nameCol).append($priceCol).append($sellerCol).append($timeCol);
+		    			
+		    			var price = array[i-1].price;
+		    			$priceCol.text(price.toLocaleString() + " 원 ");
+		    			
 		    			$("#search_result_div").append($row);
 		    			
 		    		}
