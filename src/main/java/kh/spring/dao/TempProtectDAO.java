@@ -13,4 +13,5 @@ public interface TempProtectDAO {
 	public int modifyTempProtect(TempProtectDTO dto);
 	public int tempProtectContentsSize();
 	public Map<String, Integer> getNaviForTempProtect(int currentPage);
+	public int updateWithdrawalBywriter (String id);//writer 가 탈퇴했을때
 }

@@ -29,4 +29,7 @@
 		 phone, writeTime from temp_protect)"
 				+ " where rown between #{array[0]} and #{array[1]}
 	</select>
+	<update id="updateWithdrawalBywriter">
+		update temp_protect set writer ='탈퇴한 회원' where writer = #{id}
+	</update>
 </mapper>
