@@ -6,17 +6,19 @@ public class AnimalHospitalDTO {
 	private String title;
 	private String address;
 	private String tel;
+	private int rown;
 	
 	public AnimalHospitalDTO() {
 		super();
 	}
-	public AnimalHospitalDTO(int seq, String siGun, String title, String address, String tel) {
+	public AnimalHospitalDTO(int seq, String siGun, String title, String address, String tel, int rown) {
 		super();
 		this.seq = seq;
 		this.siGun = siGun;
 		this.title = title;
 		this.address = address;
 		this.tel = tel;
+		this.rown = rown;
 	}
 	public int getSeq() {
 		return seq;
@@ -47,5 +49,11 @@ public class AnimalHospitalDTO {
 	}
 	public void setTel(String tel) {
 		this.tel = tel;
+	}
+	public int getRown() {
+		return rown;
+	}
+	public void setRown(int rown) {
+		this.rown = rown;
 	}
 }

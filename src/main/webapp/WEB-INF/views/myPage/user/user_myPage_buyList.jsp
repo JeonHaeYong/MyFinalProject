@@ -83,17 +83,22 @@
             <jsp:include page="/WEB-INF/views/myPage/user/user_module/top_menu_info.jsp"></jsp:include>
                             <!-- /마이페이지 상단메뉴 -->
                             <!-- 마이페이지 메뉴별 내용띄워주기 -->
-                            <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-content" id="goTop">
                                 <!-- 구매내역 -->
                                 <div class="tab-pane fade show active" id="pills-profile">
-                                    <div class="cart_wrapper">
+                                    <div class="buyList_wrapper">
                                         <div class="row border-bottom border-success">
                                             <div class="col-5 text-truncate">상품명</div>
                                             <div class="col-2 text-truncate">금액</div>
                                             <div class="col-3 text-truncate">구매일</div>
                                             <div class="col-2 text-truncate">판매자</div>
                                         </div>
-                                        <div class="row buyList_contents">
+                                        <div class="row buyList_contents ajaxRow">
+                                        	<c:if test="${buyList.size() == 0 }">
+                                        		<div class="col-12 row mt-2 mb-1">
+	                                        		구매 내역이 없습니다.
+	                                        	</div>
+                                        	</c:if>
                                         	<c:forEach var="dto" items="${buyList }">
 	                                            <div class="col-12 row mt-2 mb-1">
                                                     <div class="col-5 text-truncate"><a class="itemName" href="item?seq=${dto.item_seq }">${dto.item_name}</a></div>
@@ -103,22 +108,22 @@
                                                 </div>
                                         	</c:forEach>
                                         </div>
-                                        <div class="row mt-3">
+                                        <div class="row mt-3 ajaxRow">
 											<div class="col-12 d-flex justify-content-center" id="naviBox">
 												<c:if test="${pageNavi.needPrev == 1 }">
-													<a class="btn navi" href="toMyPage_buyList?currentPage=${pageNavi.startNavi - 1}">&laquo;</a>
+													<a class="btn navi" href="#goTop" value="${pageNavi.startNavi - 1}">&laquo;</a>
 												</c:if>
 												<c:if test="${pageNavi.currentPage > pageNavi.startNavi }">
-													<a class="btn navi" href="toMyPage_buyList?currentPage=${pageNavi.currentPage - 1}">&lt;</a>
+													<a class="btn navi" href="#goTop" value="${pageNavi.currentPage - 1}">&lt;</a>
 												</c:if>
 												<c:forEach var="i" begin="${pageNavi.startNavi}" end="${pageNavi.endNavi}">
-													<a class="btn navi" href="toMyPage_buyList?currentPage=${i }" class="pageNum">${i}</a>
+													<a class="btn navi" href="#goTop" value="${i }" class="pageNum">${i}</a>
 												</c:forEach>
 												<c:if test="${pageNavi.currentPage < pageNavi.pageTotalCount }">
-													<a class="btn navi" href="toMyPage_buyList?currentPage=${pageNavi.currentPage + 1}">&gt;</a>
+													<a class="btn navi" href="#goTop" value="${pageNavi.currentPage + 1}">&gt;</a>
 												</c:if>
 												<c:if test="${pageNavi.needNext == 1 }">
-													<a class="btn navi" href="toMyPage_buyList?currentPage=${pageNavi.endNavi + 1}">&raquo;</a>
+													<a class="btn navi" href="#goTop" value="${pageNavi.endNavi + 1}">&raquo;</a>
 												</c:if>
 											</div>
 										</div>
@@ -224,6 +229,25 @@
             $("#msg_close_btn").on("click", function(){
             	$('#message-text').val("");
             });
+            
+            $(document).on("click", ".navi", function(){
+				var currentPage = $(this).attr("value");
+				$.ajax({
+					url: "toMyPage_buyList",
+					data: {
+						currentPage: currentPage,
+						template: "y"
+					}
+				}).done(function(resp){
+					$(".ajaxRow").remove();
+					$(".buyList_wrapper").append(resp);
+					$(".navi").each(function(i, item){
+						if($(item).text() == currentPage){
+							$(this).css("color", "#EC7357");
+						}
+					});
+				});
+			});
         </script>
         
     </html>
