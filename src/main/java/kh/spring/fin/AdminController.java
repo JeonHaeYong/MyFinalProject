@@ -439,7 +439,7 @@ public class AdminController
 	@RequestMapping(value = "admin-quiz-zero")
 	public Object updatePointZeroAllUsers()
 	{
-		Object result = "";
+		Object result = "error";
 
 		try
 		{
