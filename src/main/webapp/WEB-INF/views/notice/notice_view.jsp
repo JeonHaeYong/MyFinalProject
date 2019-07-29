@@ -55,6 +55,10 @@ font-weight:bold;
 a{
 	text-decoration: none !important;
 }
+#contents_div
+{
+	min-height: 300px;
+}
 </style>
 
 </head>
@@ -136,6 +140,8 @@ a{
     {
 		myAjax("1");
 		
+		var lengthCheck;
+		
 		$(document).on("click", ".navi_btns", function()
 		{
 			console.log(this.name)
@@ -144,7 +150,10 @@ a{
 		
 		$(document).on("click", "#contents_div > .notice_contents_row", function()
 		{
-			location.href = $(this).children("div").children("a").attr("href");
+			if(lengthCheck == 1)
+			{
+				location.href = $(this).children("div").children("a").attr("href");
+			}
 		});
 		
 		function myAjax(btnName)
@@ -166,53 +175,67 @@ a{
 	    		
 	    		var array = response.array;
 	    		
-	    		for(var i = 1 ; i <= array.length ; i++)
+	    		if(array.length != 0)
 	    		{
-					
+	    			lengthCheck = 1;
+	    			
+	    			for(var i = 1 ; i <= array.length ; i++)
+		    		{
+						
+		    			var $row = $('<div class="row justify-content-center my-1 notice_contents_row"></div>');
+		    			
+						var $seqCol = $('<div class="col-0 col-md-0 col-lg-2 text-center my-3 d-none d-lg-block">'+array[i-1].seq+'</div>');
+						var $titleCol = $('<div class="col-8 col-md-6 col-lg-6 text-center my-3"><span class="mx-5 d-inline d-md-none">제목 : </span><a href=notice-detail-page?seq='+array[i-1].seq+'>'+array[i-1].title+'</a></div>');
+						var $viewCountCol = $('<div class="col-4 col-md-3 col-lg-2 text-center my-3"><span class="d-inline d-md-none">조회수 : </span>'+array[i-1].view_count+'</div>');
+						var $writeTimeCol = $('<div class="col-6 col-md-3 col-lg-2 text-center my-3"><span class="d-inline d-md-none">작성 일시 : </span>'+array[i-1].write_time+'</div>');
+		    			
+		    			
+		    			$row.append($seqCol).append($titleCol).append($viewCountCol).append($writeTimeCol);
+		    			$("#contents_div").append($row);
+		    			
+		    		}
+		    		
+		    		var $naviRow = $('<div id="navi_row" class="row justify-content-center my-5"></div>');
+		    		
+		    		if(response.needPrev)
+		    		{
+		    			var $prevBtn = $('<input class="btn navi_btns mx-1" type="button" value="이전" name="'+(response.startNavi-1)+'">');
+		    			$naviRow.append($prevBtn);
+		    		}
+		    		
+		    		for(var i = response.startNavi ; i <= response.endNavi ; i++)
+		    		{
+		    			
+		    			if(i == response.currentPage)
+		    			{
+			    			var $naviBtn = $('<input class="btn selected_btn mx-1" type="button" value="'+i+'" name="'+i+'">');
+
+		    			}
+		    			else
+		    			{
+			    			var $naviBtn = $('<input class="btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
+
+		    			}
+		    			$naviRow.append($naviBtn);
+		    		}
+		    		
+		    		if(response.needNext)
+		    		{
+		    			var $nextBtn = $('<input class="btn navi_btns mx-1" type="button" value="이후" name="'+(response.endNavi+1)+'">');
+		    			$naviRow.append($nextBtn);
+		    		}
+		    		
+		    		$("#contents_div").append($naviRow);
+	    		}
+	    		else
+	    		{
+	    			
+	    			lengthCheck = 0;
 	    			var $row = $('<div class="row justify-content-center my-1 notice_contents_row"></div>');
-	    			
-					var $seqCol = $('<div class="col-0 col-md-0 col-lg-2 text-center my-3 d-none d-lg-block">'+array[i-1].seq+'</div>');
-					var $titleCol = $('<div class="col-8 col-md-6 col-lg-6 text-center my-3"><span class="mx-5 d-inline d-md-none">제목 : </span><a href=notice-detail-page?seq='+array[i-1].seq+'>'+array[i-1].title+'</a></div>');
-					var $viewCountCol = $('<div class="col-4 col-md-3 col-lg-2 text-center my-3"><span class="d-inline d-md-none">조회수 : </span>'+array[i-1].view_count+'</div>');
-					var $writeTimeCol = $('<div class="col-6 col-md-3 col-lg-2 text-center my-3"><span class="d-inline d-md-none">작성 일시 : </span>'+array[i-1].write_time+'</div>');
-	    			
-	    			
-	    			$row.append($seqCol).append($titleCol).append($viewCountCol).append($writeTimeCol);
+	    			$row.append('<h1 class="my-5"> 공지 사항이 없습니다. </h1>');
 	    			$("#contents_div").append($row);
 	    			
 	    		}
-	    		
-	    		var $naviRow = $('<div id="navi_row" class="row justify-content-center my-5"></div>');
-	    		
-	    		if(response.needPrev)
-	    		{
-	    			var $prevBtn = $('<input class="btn navi_btns mx-1" type="button" value="이전" name="'+(response.startNavi-1)+'">');
-	    			$naviRow.append($prevBtn);
-	    		}
-	    		
-	    		for(var i = response.startNavi ; i <= response.endNavi ; i++)
-	    		{
-	    			
-	    			if(i == response.currentPage)
-	    			{
-		    			var $naviBtn = $('<input class="btn selected_btn mx-1" type="button" value="'+i+'" name="'+i+'">');
-
-	    			}
-	    			else
-	    			{
-		    			var $naviBtn = $('<input class="btn navi_btns mx-1" type="button" value="'+i+'" name="'+i+'">');
-
-	    			}
-	    			$naviRow.append($naviBtn);
-	    		}
-	    		
-	    		if(response.needNext)
-	    		{
-	    			var $nextBtn = $('<input class="btn navi_btns mx-1" type="button" value="이후" name="'+(response.endNavi+1)+'">');
-	    			$naviRow.append($nextBtn);
-	    		}
-	    		
-	    		$("#contents_div").append($naviRow);
 	    		
 	    	})
 	    	.fail(function()
