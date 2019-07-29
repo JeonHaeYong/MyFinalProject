@@ -25,7 +25,7 @@ public class MessageController {
 	private HttpSession session;
 
 	@RequestMapping("insertMsg")
-	public String insertMsg(HttpServletRequest request, MessageDTO dto) {
+	public String insertMsg_loginCheck(HttpServletRequest request, MessageDTO dto) {
 		System.out.println("보낸사람:"+dto.getSender()+"/받는사람:"+dto.getRecipient()+"/내용"+dto.getContents());
 		//		int count=0;
 		//		while(true) {

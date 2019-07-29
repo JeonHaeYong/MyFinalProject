@@ -287,51 +287,14 @@
 									<div class="block-testimony-1 text-center">
 				
 										<blockquote class="mb-4">
-											<p>&ldquo;${list.contents }!&rdquo;</p>
+											<p class="text-break text-break">&ldquo;${list.contents }!&rdquo;</p>
 										</blockquote>
 				
-										<figure> <img src="review/${list.image_path1}" alt="Image" class="img-fluid rounded-circle mx-auto"> </figure>
+										<figure> <img src="review/${list.image_path1}" alt="Image" class="img-fluid rounded-circle mx-auto" style="width: 120px; height: 120px; max-width: 120px;"> </figure>
 										<h3 class="font-size-20 text-black">${list.writer }</h3>
 									</div>
 								</div>
 							</c:forEach>
-			
-<!-- 							<div> -->
-<!-- 								<div class="block-testimony-1 text-center"> -->
-			
-			
-<!-- 									<blockquote class="mb-4"> -->
-<!-- 										<p>&ldquo;Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores numquam, animi est ratione aut explicabo fuga illum a nesciunt tempora! Incidunt laborum blanditiis quidem -->
-<!-- 											voluptatibus enim placeat!&rdquo;</p> -->
-<!-- 									</blockquote> -->
-			
-<!-- 									<figure> <img src="resources/images/person_1.jpg" alt="Image" class="img-fluid rounded-circle mx-auto"> </figure> -->
-<!-- 									<h3 class="font-size-20 text-black">Mellisa Griffin</h3> -->
-			
-			
-<!-- 								</div> -->
-<!-- 							</div> -->
-			
-<!-- 							<div> -->
-<!-- 								<div class="block-testimony-1 text-center"> -->
-			
-			
-			
-<!-- 									<blockquote class="mb-4"> -->
-<!-- 										<p>&ldquo;Lorem ipsum dolor sit amet, consectetur adipisicing elit. A nemo distinctio ratione numquam. Magni quae a adipisci hic laborum voluptate optio ab tenetur. Officiis mollitia nam -->
-<!-- 											itaque laborum?.&rdquo;</p> -->
-<!-- 									</blockquote> -->
-			
-<!-- 									                     <figure> <img src="resources/images/person_2.jpg" -->
-<!-- 									alt="Image" class="img-fluid rounded-circle mx-auto"> -->
-<!-- 									</figure> -->
-<!-- 									<h3 class="font-size-20 mb-4 text-black">Robert Steward</h3> -->
-			
-			
-<!-- 								</div> -->
-<!-- 							</div> -->
-			
-			
 						</div>
 					</div>
 					<!-- /재회후기 내용 -->
@@ -342,9 +305,6 @@
 
 
 	<!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
-
-
-
 
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script src="resources/js/jquery-ui.js"></script>
