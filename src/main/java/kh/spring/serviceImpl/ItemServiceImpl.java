@@ -285,4 +285,9 @@ public class ItemServiceImpl implements ItemService{
 		return "N";
 	}
 	
+	@Override
+	public String soldoutCheck(int seq) throws Exception {
+		return itemDao.soldoutCheck(seq);
+	}
+	
 }

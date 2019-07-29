@@ -71,10 +71,13 @@
                                     <div id="cart_wrapper">
                                         <div class="row border-bottom border-success">
                                             <c:if test="${list.size() != 0 }">
-	                                        	<div class="col-12 d-flex justify-content-left custom-control custom-checkbox">
+	                                        	<div class="col-6 d-flex justify-content-left custom-control custom-checkbox">
 													<input type="checkbox" class="custom-control-input" id="allCheck">
 													<label class="custom-control-label" for="allCheck">전체선택</label>
 												</div>
+	                                            <div class="col-6 d-flex justify-content-end">
+		                                        	<a class="btn p-0 px-3 py-1 mb-1" href="freeMarket" style="height:30px;">무료나눔 가기</a>
+		                                        </div>
 											</c:if>
 											<c:if test="${list.size() == 0 }">
 												<div class="col-12 mt-3" style="height: 300px;">
@@ -113,11 +116,6 @@
                                             <div class="col-12 d-flex justify-content-end">
 	                                        	<p id="totalPrice">선택상품 총 금액 : 0원</p>
 	                                        </div>
-                                            <c:if test="${list.size() != 0 }">
-	                                            <div class="col-12 d-flex justify-content-center">
-		                                        	<a class="btn" href="freeMarket">무료나눔 가기</a>
-		                                        </div>
-	                                        </c:if>
                                             <div class="col-lg-6 col-12 d-lg-flex justify-content-left d-flex justify-content-center">
                                             	<button type="button" class="btn" id="delBtn">선택 상품 <span class="delete">삭제</span>하기</button>&nbsp;
                                             	<button type="button" class="btn" id="soldoutDelBtn">판매완료 상품 <span class="delete">삭제</span>하기</button>

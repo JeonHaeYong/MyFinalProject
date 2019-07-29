@@ -23,4 +23,5 @@ public interface ItemService {
 	public String selectForAdmin(String page) throws Exception;
 	public String permissionItems(String items) throws Exception;
 	public String rejectItems(String items) throws Exception;
+	public String soldoutCheck(int seq) throws Exception;
 }
