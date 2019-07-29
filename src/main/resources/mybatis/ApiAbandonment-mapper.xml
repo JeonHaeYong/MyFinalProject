@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ApiDAO">
-	
+	<select id="selectForMain" resultType="kh.spring.dto.ApiAbandonedAnimalDTO">
+			select * from (select row_number() over(order by noticeEdt desc) as rown, api_abandoned_animal.*
+		 from api_abandoned_animal) where rown between 1 and 2
+	</select>
 	<insert id="insert">
 		insert into api_abandoned_animal values(api_abandoned_animal_seq.nextval, #{noticeEdt},#{popfile},#{processState},#{sexCd},#{neuterYn},
 		#{specialMark},#{careNm},#{careTel},#{careAddr},#{orgNm},#{chargeNm},#{officetel},#{noticeComment},#{desertionNo},

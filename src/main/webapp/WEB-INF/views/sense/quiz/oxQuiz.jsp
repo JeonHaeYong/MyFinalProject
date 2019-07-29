@@ -25,8 +25,8 @@
 
  <style>
            
-     		.jumbotron{background-color:white; padding-top: 80px; }
-     		.jumbotron>img{width:100%; height: 700px;}
+     		.jumbotron{background-color:white; padding-top: 80px;  }
+     		.jumbotron>img{width:100%; max-height:600px;}
             #title{width: 100%; text-align: center; margin: auto; margin-bottom: 50px;}
             h3,h1{ font-family:'Gamja Flower', cursive;}
             .container{
@@ -71,6 +71,7 @@
             .wrong-q,.answer{text-align: center;}
             .wrong{margin-bottom: 40px;}
             .incorrCount,.corrCount,.getPoint{font-size:30px;}
+            .perfect{font-size:40px; font-weight:bold;}
     </style>
             
             
@@ -144,6 +145,8 @@
    <script src="resources/js/isotope.pkgd.min.js"></script>
    <script src="resources/js/main.js"></script>
    <script>
+  		console.log(${type})
+   
 		var quizNum = 1;
 		var corr = new Array(); //선택한 답 목록
 		var index = 0;

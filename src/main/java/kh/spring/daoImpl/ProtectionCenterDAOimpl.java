@@ -6,15 +6,18 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import kh.spring.dao.ProtectionCenterDAO;
 import kh.spring.dto.ProtectionCenterDTO;
+import kh.spring.insertDataldto.CenterDTO;
 
 @Repository
 public class ProtectionCenterDAOimpl implements ProtectionCenterDAO{
 	@Autowired
 	private SqlSessionTemplate sst;
+
 	
 	// 한 페이지에 몇 개의 글이 보이게 할 것인지
 	public static int recordCountPerPage = 10;
@@ -121,5 +124,28 @@ public class ProtectionCenterDAOimpl implements ProtectionCenterDAO{
 		param.put("end", end);
 		return sst.selectList("ProtectionCenterDAO.searchCenterPerPage", param);
 	}
-	
+//데이터 삽입
+	@Override
+	public int insertData(CenterDTO cdto) {
+		Map<String,String> hs = new HashMap<>();
+		String addr = cdto.getRdnmadr();
+		String tel = cdto.getPhoneNumber();
+		if(cdto.getRdnmadr() == null) {
+			addr = cdto.getLnmadr();
+			if(cdto.getLnmadr() == null) {
+				addr = "-";
+			}
+		}
+		if(cdto.getPhoneNumber() == null) {
+			tel = "-";
+		}
+		hs.put("name", cdto.getAnimalCnterNm());
+		hs.put("tel", tel);
+		hs.put("addr", addr);
+		return sst.insert("ProtectionCenterDAO.insertData",hs);
+	}
+	@Override
+	public int deleteCenterData() {
+		return sst.delete("ProtectionCenterDAO.deleteCenterData");
+	}
 }

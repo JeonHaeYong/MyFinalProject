@@ -21,9 +21,14 @@
 
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
 <style>
-			.jumbotron {
-padding:5rem;
+.myJumbo {
 	background-color: white;
+	padding: 5rem;
+}
+
+#jumboImg {
+	width: 100%;
+	max-height: 600px;
 }
 	 		 #title{width: 100%; text-align: center; margin: auto; margin-bottom: 50px;}
             h3{ font-family:'Gamja Flower', cursive;}
@@ -83,8 +88,7 @@ font-family: 'Gamja Flower', cursive;
               .email,.id{width:350px;}
               .input-email{margin-bottom:20px;}
               .btn-box{margin-left:150px;}
-              .compl-btn{background-color: #EC7357; border: none; font-size: 20px; color:white; border-radius: 5px;}
-              .compl-btn:hover{font-weight: bold; background-color: #f7613e;}
+          
              
 </style>
 
@@ -92,8 +96,9 @@ font-family: 'Gamja Flower', cursive;
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
    <jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 <!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
-	<div class="jumbotron px-0 pb-0">
-		<img src="resources/images/member/joinimg.jpg"  max-height="600px" width="100%">
+	<div class="jumbotron myJumbo pr-0 pl-0 pb-2">
+		<img src="resources/images/member/joinimg.jpg" id="jumboImg">
+
 	</div>
 	
   <div id="title"><b>비밀번호 찾기</b></div>

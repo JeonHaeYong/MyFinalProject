@@ -5,7 +5,7 @@
 			<div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-row">
                 <div class="row menu-box">
                     <div class="col-12 s-menu">M E N U</div>
-                    <div class="col-12 "><a name="s-menu" href="freeMarket">무료나눔<c:if test="${type == 4}"><br>관리자모드</c:if></a></div>
+                    <div class="col-12 "><a name="s-menu" href="freeMarket">무료나눔<c:if test="${type == 4}"><br><small>관리자모드</small></c:if></a></div>
                 </div>
             </div>
 <!--             <div class="col-1"></div> -->
@@ -14,17 +14,20 @@
 					<c:if test="${itemList.size() == 0 }">
 						<div class="col-12 m-3"><h3>등록된 상품이 없습니다.</h3></div> 
 					</c:if>
-					<c:if test="${sessionScope.type == 4 }">
-						<div class="col-12 custom-control custom-checkbox">
-							<input type="checkbox" class="custom-control-input" id="allCheck" name="items" value="${dto.cart_seq }">
+					<c:if test="${sessionScope.type == 4 && itemList.size() != 0 }">
+						<div class="col-6 custom-control custom-checkbox">
+							<input type="checkbox" class="custom-control-input" id="allCheck">
 							<label class="custom-control-label" for="allCheck">전체선택</label>
 						</div>
+						<div class="col-6 d-flex justify-content-end">
+							<input type="button" class="btn" id="delItem" value="삭제하기">
+						</div>
 					</c:if>
-					<c:forEach var="dto" items="${itemList }">
+					<c:forEach var="dto" items="${itemList }" varStatus="status">
 						<div class="col-lg-4 col-md-6 col-12 p-0">
 							<c:if test="${sessionScope.type == 4 }">
 								<div class="custom-control custom-checkbox">
-									<input type="checkbox" class="custom-control-input itemCheck" id="customCheck${status.count }" name="items" value="${dto.cart_seq }">
+									<input type="checkbox" class="custom-control-input itemCheck" id="customCheck${status.count }" value="${dto.seq }">
 									<label class="custom-control-label" for="customCheck${status.count }"></label>
 								</div>
 							</c:if>

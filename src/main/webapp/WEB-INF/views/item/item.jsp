@@ -133,6 +133,26 @@
 				height: 20px;
 				cursor: pointer;
 			}
+            .bg2_ft4{
+	            color : #754F44 !important;
+	            background-color: #FDD69270 !important;
+	            border: none;
+			}
+			.bg2_ft4:hover{
+				color : #754F44 !important;
+	            background-color: #FDD692 !important;
+	            font-weight: bold !important;
+			}
+			.bg4_ft2{
+	            color : #FDD692 !important;
+	            background-color: rgba(117, 79, 68, 0.91) !important;
+	            border: none;
+			}
+			.bg4_ft2:hover{
+	            color : #FDD692 !important;
+	            background-color: #754F44 !important;
+	            font-weight: bold !important;
+			}
         </style>
     </head>
     <body data-spy="scroll" data-target=".site-navbar-target"
@@ -267,8 +287,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button id="msg_close_btn" type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                        <button id="msg_send_btn" type="button" class="btn btn-primary">쪽지 보내기</button>
+                        <button id="msg_close_btn" type="button" class="btn btn-secondary bg4_ft2" data-dismiss="modal">닫기</button>
+                        <button id="msg_send_btn" type="button" class="btn btn-primary bg2_ft4">쪽지 보내기</button>
                     </div>
                 </div>
             </div>

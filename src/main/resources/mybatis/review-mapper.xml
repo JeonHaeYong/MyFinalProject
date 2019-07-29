@@ -29,4 +29,16 @@ where r1.seq = r2.seq(+)) where rown between #{start} and #{end}
 	<update id="updateViewCount">
 		update review set view_count = view_count + 1 where seq = #{seq}
 	</update>
+	<delete id="deleteReviewListByAdmin">
+		delete from review where seq in
+		<foreach item="seq" index="index" collection="array" open="(" separator="," close=")">
+        	#{seq}
+  		</foreach>
+	</delete>
+	<select id="selectRandomReview" resultType="kh.spring.dto.ReviewDTO">
+		select * from review where seq in
+		<foreach item="seq" index="index" collection="array" open="(" separator="," close=")">
+        	#{seq}
+  		</foreach>
+	</select>
 </mapper>

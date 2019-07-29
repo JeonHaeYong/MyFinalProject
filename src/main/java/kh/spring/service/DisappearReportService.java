@@ -12,7 +12,7 @@ public interface DisappearReportService {
 	public List<DisappearReportDTO> selectPerPageService(int currentPage);
 	public String getNaviService (int currentPage);
 	public DisappearReportDTO toReportContentService(int seq);
-	public int updateNoimageService(DisappearReportDTO drdto);
+
 	public int updateService(DisappearReportDTO drdto);
 	public int deleteService(int seq);
 }

@@ -26,7 +26,7 @@
  <style>
 	
             .jumbotron{background-color:white; padding-top: 80px; }
-     		.jumbotron>img{width:100%; height: 700px;}
+     		.jumbotron>img{width:100%; max-height:600px;}
             #title{width: 100%; text-align: center; margin: auto; margin-bottom: 50px;}
             h3,h1{ font-family:'Gamja Flower', cursive;}
             .container{min-width: 400px;box-sizing: border-box;margin-bottom:100px; font-family: 'Gamja Flower', cursive;}
@@ -58,8 +58,10 @@
         .check-del,.navi{text-align: center;}
         input[type="checkbox"]{margin-top:15px;}
         .list-explain{border-bottom:1px solid gray;}
-        .pageNum,.prev,.next{text-decoration-line: none; color: #754F44; font-size:20px;}
+        .navi>div{margin-top:20px;}
+        .pageNum,.prev,.next{text-decoration-line: none; color: #754F44; font-size:30px;}
      	.pageNum:hover,.prev:hover,.next:hover{font-weight: bold;}
+     	
 </style>
 
 

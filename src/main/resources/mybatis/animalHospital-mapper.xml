@@ -20,5 +20,11 @@
 	<select id="searchAniHospitalPerPage" resultType="kh.spring.dto.AnimalHospitalDTO">
 		select * from (select row_number()over(order by seq asc) as rown, animal_hospital.* from animal_hospital where sigun = #{option}) where rown between #{start} and #{end}
 	</select>
+	<insert id="insertHospitalData">
+		insert into animal_hospital values(animal_hospital_seq.nextval,#{area},#{name},#{addr},#{tel})
+	</insert>
+	<delete id="deleteHospitalData">
+		delete from animal_hospital where sigun = #{value}
+	</delete>	
 	
 </mapper>

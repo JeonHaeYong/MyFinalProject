@@ -23,6 +23,17 @@
 <!--  module-->
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
 <style>
+	/*점보트론  */
+	.myJumbo {
+	background-color: white;
+	padding: 5rem;
+}
+
+#jumboImg {
+	width: 100%;
+	max-height: 600px;
+}
+	
 	.empty{width: 100%; text-align: center; margin: auto; margin-bottom: 50px; height:50px;}
 	#title{width: 100%; text-align: center; margin: auto; margin-bottom: 50px;}
 	h1{ font-family: 'Gamja Flower', cursive;}
@@ -65,6 +76,11 @@
  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">
    <jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 <!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
+<div class="jumbotron myJumbo pr-0 pl-0 pb-2">
+		<img src="resources/images/disappear/disapperjumbo.jpg" id="jumboImg">
+
+	</div>
+
 <div class="px-0 pb-0 empty"></div>
  <div id="title"><h1>실종 신고 수정</h1></div>
 
@@ -72,7 +88,7 @@
 	<div class="row">
 		<div class="col-12">
 			<div id="wrapper" class="aa">
-	<form action="alterProc.dis" method="post" id="reportForm" enctype="multipart/form-data">
+	<form action="alterProc.dis" method="post" id="reportForm" enctype="multipart/form-data" onsubmit="return submit_check()">
         <input type="hidden" name="seq" class="seq" value="${content.seq }">
         <div class="basic">기본정보</div>
         <div class="basic-info">
@@ -83,9 +99,9 @@
                 <div>연락처</div>
             </div>
             <div class="input-box">
-                <div><input type="date" max=${todayDate } name="disappearDate" id="disappearDate"></div>
+                <div><input type="date" max=${todayDate } name="disappearDate" id="disappearDate" required></div>
                 <div>
-                    <select name="areaList" id="areaList" >
+                    <select name="areaList" id="areaList" required>
                         <option value="모든지역">모든지역</option><option value="강원도">강원도</option>
                         <option value="경기도">경기도</option> <option value="경상남도">경상남도</option>
                         <option value="경상북도">경상북도</option><option value="광주광역시">광주광역시</option>
@@ -97,8 +113,10 @@
                         <option value="충청남도">충청남도</option><option value="충청북도">충청북도</option>
                     </select>
                 </div>
-                <div><input type="text" name="disappearArea" class="disappearArea"></div>
-                <div><input type="text" name="tel" class="tel"></div>
+                <div><input type="text" name="disappearArea" maxlength="60" class="disappearArea"required></div>
+                <div><input type="text" name="tel" class="tel" maxlength="16" required><br>
+                	<span class="tel-span"></span>
+                </div>
             </div>
         </div>
         
@@ -115,13 +133,13 @@
                 <div>사진</div>
             </div>
             <div class="input-box">
-                <div><select name="kind" id="kind" >
+                <div><select name="kind" id="kind" required>
                         <option value="개">개</option><option value="고양이">고양이</option><option value="기타">기타동물</option> 
                     </select>
                 </div>
                 <div>
-                    <span class="check"><input type="radio" name="gender" value="남" class="radio">수컷</span>
-                    <span class="check"><input type="radio" name="gender" value="여" class="radio">암컷</span>
+                    <span class="check"><input type="radio" name="gender" value="남" class="radio" required>수컷</span>
+                    <span class="check"><input type="radio" name="gender" value="여" class="radio" required>암컷</span>
                     <span class="check"><input type="checkbox" name="neuter" value="O">중성화완료</span>
                 </div>
                 <div><select name="age" id="age" >
@@ -129,12 +147,12 @@
                         <option value="16-20살">16-20살</option><option value="21이">21살이상</option>
                     </select>
                     </div>
-                <div><input type="text" placeholder="털색을 설명해주세요" class="furColor" name="furColor"></div>
-                <div><input type="text" placeholder="눈에 띄는 특징을 적어주세요" class="feature" name="feature"></div>
-                <div><input type="text" placeholder="기타사항을 입력해주세요" class="et" name="et"></div>
+                <div><input type="text" placeholder="털색을 설명해주세요" class="furColor" name="furColor" maxlength="30" required></div>
+                <div><input type="text" placeholder="눈에 띄는 특징을 적어주세요" class="feature" name="feature" maxlength="60" required></div>
+                <div><input type="text" placeholder="기타사항을 입력해주세요" class="et" name="et" maxlength="90"></div>
                 <div>
                 	<c:forEach var="i" begin="0" end="2" varStatus="status">
-                		<label for="input-img${status.index+1 }" class="label-btn">사진 선택${status.index+1 }</label>
+                		<label for="input-img${status.index+1 }" class="label-btn" id="label-btn${status.index+1 }">사진 선택${status.index+1 }</label>
                 		<input type="file" name="image" id="input-img${status.index+1 }" class="file-btn" seq="${status.index+1 }" accept="image/gif, image/jpeg, image/png" hidden>
                 	</c:forEach>
                 </div>
@@ -148,7 +166,7 @@
             <div class="expl">첫번째 사진은 꼭 넣어주세요.<br>사진은 3개까지 가능합니다~</div>
             
         <div id="footer">
-            <input type="button" class="alter-btn btn" value="수정">
+            <input type="submit" class="alter-btn btn" value="수정">
             <input type="button" class="toList-btn btn" value="취소">
         </div>
         </form>
@@ -168,6 +186,9 @@
 	$(".furColor").val('${content.furColor}');
 	$(".feature").val('${content.feature}');
 	$(".et").val('${content.et}');
+	$(".img1").html('<img src="${content.image1}">');
+	$(".img2").html('<img src="${content.image2}">');
+	$(".img3").html('<img src="${content.image3}">');
 
 </script>
 
@@ -185,15 +206,11 @@
    <script src="resources/js/isotope.pkgd.min.js"></script>
    <script src="resources/js/main.js"></script>
    <script>
+  
     		$(".toList-btn").on("click",function(){
     			location.href="toDisappearList?currentPage=${currentPage}";
     		});
-    		$(".alter-btn").on("click",function(){
-    			if($("#disappearDate").val() !=""&& $(".disappearArea").val() !=""&& $(".tel").val() !=""&& $('input:radio[name=gender]').is(':checked')==true
-    					&& $(".furColor").val()!="" && $(".feature").val()!=""&&$("#input-img1").val()!=""){
-    				$("#reportForm").submit();
-    			}else{alert("기타사항을 제외하고 모두 입력해주세요.");}
-    		});
+    		
     		$(".file-btn").on("change",function(){
     			$(this).each(function(index,items){
     				var i = $(this).attr("seq");
@@ -201,12 +218,43 @@
     				var reader = new FileReader();
     				reader.onload = function(e){
     					var src = e.target.result;
+    					$(".img"+i).html("");
     					$(".img"+i).append("<img src='"+src+"'>")
     				}
     				reader.readAsDataURL($(this)[0].files[0]);
     			})
     		});
-    
+    		$("#input-img2").attr("disabled",true);
+			$("#label-btn2").css("background-color","#dce0e6");
+			$("#input-img3").attr("disabled",true);
+			$("#label-btn3").css("background-color","#dce0e6");
+			
+			$("#input-img1").on("change",function(){
+				$("#input-img2").attr("disabled",false);
+				$("#label-btn2").css("background-color","white");
+			});
+			$("#input-img2").on("change",function(){
+				$("#input-img3").attr("disabled",false);
+				$("#label-btn3").css("background-color","white");
+			})
+    		/*Regex------------------------------ */
+    		$(".tel").on("focusout",function(){
+    			var text = $(this).val();
+    			var regex = /[0-9]/g;
+    			var result = regex.exec(text);
+    			if(result == null){
+    				$(this).val("");
+    				$(".tel-span").text("숫자만 입력해주세요.");
+    				$(".tel-span").css("color","red");
+    			}else{
+    				$(".tel-span").text("");
+    			}
+    		});
+    		/*사진 이미지 없는 경우------------------------------ */
+    		$(".img-div").each(function(index,items){
+    			if($(this).children("img").attr("src")=="noImage"){
+    			$(this).html("");}
+    		})
     </script>
 </body>
 </html>

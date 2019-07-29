@@ -63,5 +63,17 @@ src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/Lo
                 input:focus{
                     outline: none;
                 }
+                .laon_btn_style{
+                    	background-color:#FDD69270;
+                    	color:#754F44;
+                    }
+                .laon_btn_style:hover{
+                    	background-color:#FDD692; 
+                    	color:#754F44;
+                    	font-weight:bold;
+                    }
+                    input[type=button],button[type=button]{
+                     cursor: pointer;
+                    }
 </style>
    <!-- /user 마이페이지 스타일 -->

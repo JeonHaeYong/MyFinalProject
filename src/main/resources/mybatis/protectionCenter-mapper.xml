@@ -17,4 +17,10 @@
 	<select id="searchCenterPerPage" resultType="kh.spring.dto.ProtectionCenterDTO">
 		select * from (select row_number()over(order by seq asc) as rown, animal_center.* from animal_center where address like #{option}) where rown between #{start} and #{end}
 	</select>
+	<insert id="insertData">
+		insert into animal_center values(center_seq.nextval,#{name},#{tel},#{addr})
+	</insert>
+	<delete id="deleteCenterData">
+		delete from animal_center
+	</delete>
 </mapper>

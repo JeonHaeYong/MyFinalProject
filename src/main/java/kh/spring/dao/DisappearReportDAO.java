@@ -10,7 +10,6 @@ public interface DisappearReportDAO {
 	public int recordAllCount();
 	public String getNavi(int currentPage);
 	public DisappearReportDTO toReportContent(int seq);
-	public int updateNoImage(DisappearReportDTO drdto);
 	public int update(DisappearReportDTO drdto);
 	public int delete(int seq);
 	public String replaceAll(String text);

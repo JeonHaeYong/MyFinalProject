@@ -67,6 +67,11 @@
                         -moz-appearance: none;
                         appearance: none;
                     }
+                    .custom-control-input:checked~.custom-control-label:before {
+    color: #fff;
+    border-color: #FDD692;
+    background-color: #FDD692;
+}
             </style>
             <jsp:include page="/WEB-INF/views/myPage/user/user_module/mypage_user_style.jsp" ></jsp:include><!-- user 마이페이지 스타일 -->
             <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
@@ -98,7 +103,7 @@
                             		-
                             	</c:if>
                             	<c:if test="${memberDTO.type==1 }">
-                            		<button type="button" id="my_password" class="btn btn-outline-warning rounded" data-toggle="modal" data-target="#password_change_modal">비밀번호 변경하기</button>
+                            		<button type="button" id="my_password" class="btn laon_btn_style" data-toggle="modal" data-target="#password_change_modal">비밀번호 변경하기</button>
                             	</c:if>
                                 <!-- Modal -->
                                 <div class="modal fade" id="password_change_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -131,7 +136,7 @@
 
                                             </div>
                                             <div class="modal-footer">
-                                                <button id="change_pw_btn" type="button" class="btn btn-primary rounded">비밀번호 변경</button>
+                                                <button id="change_pw_btn" type="button" class="btn laon_btn_style">비밀번호 변경</button>
                                             </div>
                                         </div>
                                     </div>
@@ -185,7 +190,7 @@
                             <div class="col-sm-10">
                                 <div class="form-inline">
                                     <input type="text" readonly class="form-control-plaintext w-25 addr_info_input" id="my_zipcode" value="${memberDTO.zipcode }" placeholder="찾기버튼!" name="zipcode">
-                                    <input id="search_addr_btn" type="button" class="py-1 ml-2 btn btn-outline-warning btn-sm rounded address_search_btn d-none" value="찾기">
+                                    <input id="search_addr_btn" type="button" class="py-1 ml-2 btn laon_btn_style btn-sm address_search_btn d-none" value="찾기">
                                 </div>
                             </div>
                         </div>
@@ -202,11 +207,11 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-center modify_bot_part">
-                            <button id="modify_btn" type="button" class="btn btn-outline-warning rounded">내정보 수정</button>
+                            <button id="modify_btn" type="button" class="btn laon_btn_style">내정보 수정</button>
                         </div>
                         <div class="justify-content-center modify_bot_part hide">
-                            <button id="modify_profile_btn" type="button" class="btn btn-outline-warning rounded mx-1">정보 수정 완료</button>
-                            <button id="back_btn" type="button" class="btn btn-outline-warning rounded mx-1">정보수정 취소</button>
+                            <button id="modify_profile_btn" type="button" class="btn laon_btn_style mx-1">정보 수정 완료</button>
+                            <button id="back_btn" type="button" class="btn laon_btn_style mx-1">정보수정 취소</button>
                             <input id="reset_btn" type="reset" class="d-none">
                         </div>
                     </form>
