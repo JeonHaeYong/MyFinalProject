@@ -71,6 +71,10 @@
                         font-weight: bold;
                         background-color: #FDD692;
                     }
+                    .navi.active{
+                    	font-weight: bold;
+                        background-color: #FDD692;
+                    }
                     .card_title{
                     	color: #754F44;
                     	font-size: 24px;
@@ -302,5 +306,10 @@
                 	$(body).append(form);
                 	$("#deleteReviewList_form").submit();
                 });
+                $(".navi").each(function(i,item){
+                	if($(item).text()=="${currentPage}"){
+                		$(item).addClass("active");
+                	}
+                })
             </script>
         </html>

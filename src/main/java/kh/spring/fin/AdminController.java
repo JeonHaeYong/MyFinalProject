@@ -591,6 +591,7 @@ public class AdminController
 			currentPage = "1";
 		}
 		int page = Integer.parseInt(currentPage);
+		request.setAttribute("currentPage", currentPage);
 		String loginId = (String)session.getAttribute("id");
 		//페이지에 띄울 쪽지 리스트 담기.
 		//받은쪽지

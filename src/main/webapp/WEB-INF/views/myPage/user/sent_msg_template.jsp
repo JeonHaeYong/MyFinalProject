@@ -25,8 +25,15 @@
                                             <div class="row sentList_part my-4">
                                             	<div class="col-12 text-center">
                                             		<c:forEach var="navi" items="${sentNavi }">
-															<a class="ml-1 navi navi_click_a" href="javascript:void(0)"  value="sender">${navi }</a>
-                                            		</c:forEach>
+				                                        	<c:choose>
+				                                        		<c:when test="${currentPage==navi }">
+				                                        			<a class="ml-1 navi navi_click_a active" href="javascript:void(0)"  value="sender">${navi }</a>
+				                                        		</c:when>
+				                                        		<c:otherwise>
+				                                        			<a class="ml-1 navi navi_click_a" href="javascript:void(0)"  value="sender">${navi }</a>
+				                                        		</c:otherwise>
+				                                        	</c:choose>
+				                                     </c:forEach>
                                             	</div>
                                             </div>
                                             <!-- /보낸쪽지 네비게이터-->

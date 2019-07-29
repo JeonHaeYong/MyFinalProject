@@ -38,11 +38,11 @@
                         change_profileImg_mdBtn
                     </button>
                     <!-- Modal -->
-                    <div class="modal fade" id="change_profileImg_md" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal fade ft_gamja" id="change_profileImg_md" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title" id="change_img_title">프로필 사진 변경</h1>
+                                    <h2 class="modal-title" id="change_img_title">프로필 사진 변경</h2>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -84,8 +84,8 @@
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                                    <button type="button" class="btn btn-primary changeImg_btn">변경하기</button>
+                                    <button type="button" class="mx-1 btn btn-secondary" data-dismiss="modal">닫기</button>
+                                    <button type="button" class="mx-1 btn btn-primary changeImg_btn">변경하기</button>
                                 </div>
                             </div>
                         </div>

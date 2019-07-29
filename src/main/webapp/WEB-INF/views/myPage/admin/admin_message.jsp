@@ -250,7 +250,7 @@
 		                                    <div class="tab-content" id="nav-tabContent">
 		                                        <!-- 받은쪽지함 -->
 		                                        <div class="tab-pane fade show active selectedBox" id="nav-inbox" role="tabpanel" aria-labelledby="nav-inbox-tab" name="receivedBox">
-		                                            <div class="row receivedList_prev_part">
+		                                            <div class="row receivedList_prev_part font-weight-bold">
 		                                                <div class="col-1">
 		                                                    <div class="custom-control custom-checkbox">
 		                                                        <input type="checkbox" class="custom-control-input" id="r_allCheck">
@@ -298,10 +298,17 @@
 		                                            </form>
 		                                            <!-- 받은쪽지 네비게이터 띄워주기 -->
 		                                            <div class="row receivedList_part my-4">
-		                                                <div class="col-12 text-center">
+		                                                <div class="col-12 text-center">receivedNavi
 		                                                    <c:forEach var="navi" items="${receivedNavi }">
-		                                                        <a class="ml-1 navi navi_click_a" href="javascript:void(0)"  value="recipient">${navi }</a>
-		                                                    </c:forEach>
+					                                        	<c:choose>
+					                                        		<c:when test="${currentPage==navi }">
+					                                        			<a class="ml-1 navi navi_click_a active" href="javascript:void(0)"  value="recipient">${navi }</a>
+					                                        		</c:when>
+					                                        		<c:otherwise>
+					                                        			<a class="ml-1 navi navi_click_a" href="javascript:void(0)"  value="recipient">${navi }</a>
+					                                        		</c:otherwise>
+					                                        	</c:choose>
+				                                     		</c:forEach>
 		                                                </div>
 		                                            </div><!-- /받은쪽지 네비게이터-->
 		                                            <!-- 받은쪽지클릭하면 내용띄워주기 -->
@@ -332,7 +339,7 @@
 		                                        </div>
 		                                        <!-- 보낸쪽지함 -->
 		                                        <div class="tab-pane fade selectedBox" id="nav-sentbox" role="tabpanel" aria-labelledby="nav-sentbox-tab" name="sentBox">
-		                                            <div class="row sentList_prev_part">
+		                                            <div class="row sentList_prev_part font-weight-bold">
 		                                                <div class="col-1">
 		                                                    <div class="custom-control custom-checkbox">
 		                                                        <input type="checkbox" class="custom-control-input" id="s_allCheck">
@@ -375,8 +382,15 @@
 		                                            <div class="row sentList_part my-4">
 		                                                <div class="col-12 text-center">
 		                                                    <c:forEach var="navi" items="${sentNavi }">
-		                                                        <a class="ml-1 navi navi_click_a" href="javascript:void(0)"  value="sender">${navi }</a>
-		                                                    </c:forEach>
+					                                        	<c:choose>
+					                                        		<c:when test="${currentPage==navi }">
+					                                        			<a class="ml-1 navi navi_click_a active" href="javascript:void(0)"  value="sender">${navi }</a>
+					                                        		</c:when>
+					                                        		<c:otherwise>
+					                                        			<a class="ml-1 navi navi_click_a" href="javascript:void(0)"  value="sender">${navi }</a>
+					                                        		</c:otherwise>
+					                                        	</c:choose>
+				                                     		</c:forEach>
 		                                                </div>
 		                                            </div>
 		                                            <!-- /보낸쪽지 네비게이터-->

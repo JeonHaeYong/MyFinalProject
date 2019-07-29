@@ -80,6 +80,17 @@
 							style="color: #fff; font-family: 'Gamja Flower'; font-size: 20px;">라온펫은
 							유기동물의 숫자가 '제로'가 되는 그 날을 향해 달립니다.</p>
 					</div>
+					<div class="mt-5 col-12 footer_font_namsan">
+						<div class="footer_ftc_white">
+						<a href="javascript:void(0);" class="pr-3">이용안내</a>| <a
+							href="javascript:void(0);" class="px-3"> 개인정보처리방침</a>| <a
+							href="javascript:void(0);" class="pl-3">저작권정책 </a>
+					</div>
+					<div class="footer_ftc_white">
+						<div>(우)04540 서울특별시 중구 남대문로 120 대일빌딩 3층 KH정보교육원 종로지원</div>
+						<div>동물등록 유실유기동물 등 동물보호상담센터 : 1577-0954</div>
+					</div>
+					</div>
 
 				</div>
 
@@ -101,11 +112,11 @@
 					<div class="form-group inquire_form">
 						<label for="inputContent">문의 내용</label>
 						<textarea class="form-control" id="inputContent" rows="5"
-							style="resize: none;" placeholder="문의내용을 적어주세요. 최대 200자"></textarea>
+							style="resize: none;" placeholder="문의내용은 30자 이상 200자 이하"></textarea>
 					</div>
 					<div class="form-group inquire_form text-right">
 						<input class="btn inquire_btn" type="button" value="보내기"
-							onclick="alert('구현중');">
+							onclick="sendInquire();">
 					</div>
 				</form>
 			</div>
@@ -115,15 +126,6 @@
 
 			<div class="col-md-12">
 				<div class="border-top pt-3">
-					<div class="footer_ftc_white">
-						<a href="javascript:void(0);" class="pr-3">이용안내</a>| <a
-							href="javascript:void(0);" class="px-3"> 개인정보처리방침</a>| <a
-							href="javascript:void(0);" class="pl-3">저작권정책 </a>
-					</div>
-					<div class="footer_ftc_white">
-						<div>(우)04540 서울특별시 중구 남대문로 120 대일빌딩 3층 KH정보교육원 종로지원</div>
-						<div>동물등록 유실유기동물 등 동물보호상담센터 : 1577-0954</div>
-					</div>
 					<p>
 						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						Copyright Snowball &copy;
@@ -150,6 +152,38 @@
 	rel="stylesheet">
 <script src='https://developers.kakao.com/sdk/js/kakao.min.js'></script>
 <script>
+function sendInquire(){
+	var email = $("#inputEmail").val();
+	var contents = $("#inputContent").val();
+	var emailRegex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	var emailRegexResult = emailRegex.exec(email);
+	if(emailRegexResult==null){
+		alert("이메일 형식을 맞춰주세요.");
+		$("#inputEmail").focus();
+		return false;
+	}
+	if(contents.length>200||contents.length<30){
+		alert("문의내용은 30자 이상 200자 이하로 작성해주세요.");
+		$("#inputContent").val(contents.substr(0,200));
+		$("#inputContent").focus();
+		return false;
+	}
+	$.ajax({
+		url : "sendInquire",
+		type : "post",
+		data : {
+			email : email,
+			contents : contents
+		}
+	}).done(function(resp){
+		if(resp=="true"){
+			alert("문의사항을 전달했습니다. 2~3일내에 적어주신 email로 답변해드리겠습니다.");
+			$("#inputEmail").val("");
+			$("#inputContent").val("");
+		}
+	})
+	
+}
 
         onload = function()
         {
@@ -188,6 +222,14 @@
                 alert("로그인을 먼저 해주세요.");
                 $(".login-btn").trigger("click");
             }
+            $("#inputContent").on("keyup",function(){
+            	var content = $(this).val();
+            	if(content.length>200){
+            		alert("문의내용은 200자 이하로 작성해주세요.");
+            		$(this).val(content.substr(0,200));
+            		$(this).focus();
+            	}
+            })
 
         };
 

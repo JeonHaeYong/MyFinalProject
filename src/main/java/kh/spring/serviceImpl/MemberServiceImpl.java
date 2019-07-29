@@ -429,6 +429,11 @@ public class MemberServiceImpl implements MemberService {
 	public int updateImagePath(MemberDTO dto) {
 		return mdao.updateImagePath(dto);
 	}
+
+	@Override
+	public List<String> selectAllType4() {
+		return mdao.selectAllType4();
+	}
 	
 }
 

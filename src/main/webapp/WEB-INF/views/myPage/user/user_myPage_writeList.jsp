@@ -38,10 +38,11 @@
                         border-radius: 30px;
                         font-family: 'Gamja Flower';
                     }
-                    .navi:hover{
+                    .navi:hover,.navi.active{
                         font-weight: bold;
                         background-color: #FDD692;
                     }
+                    
             </style>
             <jsp:include page="/WEB-INF/views/myPage/user/user_module/mypage_user_style.jsp" ></jsp:include><!-- user 마이페이지 스타일 -->
             <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
@@ -55,8 +56,8 @@
                                 <!-- 내글 목록 -->
                                 <div class="tab-pane fade show active">
                                     <div id="writeList_wrapper">
-                                    	<div>
-	                                        <div class="row border-bottom">
+                                    	<div class="text-center">
+	                                        <div class="row border-bottom font-weight-bold">
 	                                            <div class="col-lg-2 col-5">게시판</div>
 	                                            <div class="col-7">글 제목</div>
 	                                            <div class="col-lg-3 d-lg-block d-none">글 쓴날짜</div>
@@ -77,6 +78,9 @@
 		                                        		<c:if test="${list.type =='실종신고' }">
 		                                        			<form action="toReportContent" method="post">
 		                                        		</c:if>
+		                                        		<c:if test="${list.type =='임시보호' }">
+		                                        			<form action="detailTempProtect" method="post">
+		                                        		</c:if>
 			                                        		<input type="hidden" value="${list.seq }" name="seq">
 			                                        		<div class="row write_contents" onclick="toDetail(this);">
 					                                            <div class="col-lg-2 col-5">${list.type }</div>
@@ -89,8 +93,15 @@
 	                                            <div class="row my-4">
 	                                            	<div class="col-12 text-center">
 	                                            		<c:forEach var="navi" items="${navi }">
-	                                            			<a class="ml-1 navi boardList_navi" href="javascript:void(0)">${navi }</a>
-	                                            		</c:forEach>
+				                                        	<c:choose>
+				                                        		<c:when test="${currentPage==navi }">
+				                                        			<a class="ml-1 navi boardList_navi active" href="javascript:void(0)">${navi }</a>
+				                                        		</c:when>
+				                                        		<c:otherwise>
+				                                        			<a class="ml-1 navi boardList_navi" href="javascript:void(0)">${navi }</a>
+				                                        		</c:otherwise>
+				                                        	</c:choose>
+				                                        </c:forEach>
 	                                            	</div>
 	                                            </div>
 	                                        </c:if>

@@ -439,6 +439,7 @@ public class MemberController {
 		//list navi 담기
 		List<String> navi = boardService.getNaviForBoardList(id, page);
 		request.setAttribute("navi", navi);
+		request.setAttribute("currentPage", currentPage);
 		if(data!=null) {
 			return "myPage/user/writeList_template";
 		}
