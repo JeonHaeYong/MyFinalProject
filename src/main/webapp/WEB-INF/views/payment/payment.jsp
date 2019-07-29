@@ -157,6 +157,7 @@
 		    				<option value="trans">실시간 계좌이체</option>
 		    				<option value="vbank">가상계좌</option>
 		    				<option value="phone">휴대폰 소액결제</option>
+		    				<option value="test">결제스킵</option>
 						</select>
 					</div>
 					<p class="totalAmountBottom pt-2 totalAmount">총 결제 금액 : ${totalAmount }원</p>
@@ -313,74 +314,76 @@
 			$("#orderNumber").val(orderNum);
 			var address2 = 
 			$("#inputAddress2").val($("#inputAddress2").val().replace(/<.?script>/g, ""));
-			$("#payForm").submit();
-// 			var IMP = window.IMP; // 생략가능
-// 			IMP.init('imp84992027'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
-// 			IMP.request_pay({
-// 				pg : 'inicis', // version 1.1.0부터 지원.
-// 				/* 
-// 				    'kakao':카카오페이, 
-// 				    html5_inicis':이니시스(웹표준결제)
-// 				        'nice':나이스페이
-// 				        'jtnet':제이티넷
-// 				        'uplus':LG유플러스
-// 				        'danal':다날
-// 				        'payco':페이코
-// 				        'syrup':시럽페이
-// 				        'paypal':페이팔
-// 				 */
-// 				pay_method : payMethod,
-// 				/* 
-// 				    'samsung':삼성페이, 
-// 				    'card':신용카드, 
-// 				    'trans':실시간계좌이체,
-// 				    'vbank':가상계좌,
-// 				    'phone':휴대폰소액결제 
-// 				 */
-// 				merchant_uid : orderNum,
-// 				/* 
-// 				    merchant_uid에 경우 
-// 				    https://docs.iamport.kr/implementation/payment
-// 				    위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
-// 				    참고하세요. 
-// 				    나중에 포스팅 해볼게요.
-// 				 */
-// 				name : "무료나눔 결제", //결제창에서 보여질 이름 //
-// 				amount : ${totalAmount},
-// 				buyer_email : $("#inputEmail").val(),
-// 				buyer_name : $("#inputName").val(),
-// 				buyer_tel : $("#inputPhone").val(),
-// 				m_redirect_url : ''
-// 			/*  
-// 			    모바일 결제시,
-// 			    결제가 끝나고 랜딩되는 URL을 지정 
-// 			    (카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐) 
-// 			 */
-// 			}, function(rsp) {
-// 				console.log(rsp);
-// 				if (rsp.success) {
-// 					alert("결제가 완료되었습니다");
-// 					jQuery.ajax({
-// 						url : "https://www.myservice.com/payments/complete", // 가맹점 서버
-// 						method : "POST",
-// 						headers : {
-// 							"Content-Type" : "application/json"
-// 						},
-// 						data : {
-// 							imp_uid : rsp.imp_uid,
-// 							merchant_uid : rsp.merchant_uid
-// 						}
-// 					}).done(function(data) {
+			if(payMethod == "test"){
+				$("#payForm").submit();
+			}
+			var IMP = window.IMP; // 생략가능
+			IMP.init('imp84992027'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+			IMP.request_pay({
+				pg : 'inicis', // version 1.1.0부터 지원.
+				/* 
+				    'kakao':카카오페이, 
+				    html5_inicis':이니시스(웹표준결제)
+				        'nice':나이스페이
+				        'jtnet':제이티넷
+				        'uplus':LG유플러스
+				        'danal':다날
+				        'payco':페이코
+				        'syrup':시럽페이
+				        'paypal':페이팔
+				 */
+				pay_method : payMethod,
+				/* 
+				    'samsung':삼성페이, 
+				    'card':신용카드, 
+				    'trans':실시간계좌이체,
+				    'vbank':가상계좌,
+				    'phone':휴대폰소액결제 
+				 */
+				merchant_uid : orderNum,
+				/* 
+				    merchant_uid에 경우 
+				    https://docs.iamport.kr/implementation/payment
+				    위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
+				    참고하세요. 
+				    나중에 포스팅 해볼게요.
+				 */
+				name : "무료나눔 결제", //결제창에서 보여질 이름 //
+				amount : ${totalAmount},
+				buyer_email : $("#inputEmail").val(),
+				buyer_name : $("#inputName").val(),
+				buyer_tel : $("#inputPhone").val(),
+				m_redirect_url : ''
+			/*  
+			    모바일 결제시,
+			    결제가 끝나고 랜딩되는 URL을 지정 
+			    (카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐) 
+			 */
+			}, function(rsp) {
+				console.log(rsp);
+				if (rsp.success) {
+					alert("결제가 완료되었습니다");
+					jQuery.ajax({
+						url : "https://www.myservice.com/payments/complete", // 가맹점 서버
+						method : "POST",
+						headers : {
+							"Content-Type" : "application/json"
+						},
+						data : {
+							imp_uid : rsp.imp_uid,
+							merchant_uid : rsp.merchant_uid
+						}
+					}).done(function(data) {
 						
-// 					})
-// 					$("#payForm").submit();
-// 				} else {
-// 					var msg = '결제에 실패하였습니다.';
-// 					msg += '에러내용 : ' + rsp.error_msg;
-// 					alert(msg);
-// 					location.href = "toMyPage_cart";
-// 				}
-// 			});
+					})
+					$("#payForm").submit();
+				} else {
+					var msg = '결제에 실패하였습니다.';
+					msg += '에러내용 : ' + rsp.error_msg;
+					alert(msg);
+					location.href = "toMyPage_cart";
+				}
+			});
 		});
 		
 		$("#cancelBtn").on("click", function(){
