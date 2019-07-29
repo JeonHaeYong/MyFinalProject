@@ -38,7 +38,6 @@
 
 body {
 	min-width: 375px;
-	font-family: 'SeoulNamsanM';
 }
 
 .container {
