@@ -30,7 +30,7 @@ public class kakao_restapi {
 		final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
 		postParams.add(new BasicNameValuePair("grant_type", "authorization_code"));
 		postParams.add(new BasicNameValuePair("client_id", "8f0beb524de484b185f094b0604de956"));
-		postParams.add(new BasicNameValuePair("redirect_uri", "http://localhost/oauth"));
+		postParams.add(new BasicNameValuePair("redirect_uri", "http://192.168.60.42/oauth"));
 		postParams.add(new BasicNameValuePair("code", autorize_code));
 		final HttpClient client = HttpClientBuilder.create().build();
 		final HttpPost post = new HttpPost(RequestUrl);
@@ -56,7 +56,7 @@ public class kakao_restapi {
 		final String RequestUrl = "https://kapi.kakao.com/v1/user/me";
 
 		String CLIENT_ID = "8f0beb524de484b185f094b0604de956"; // REST API KEY
-		String REDIRECT_URI = "http://localhost/oauth"; // 리다이렉트 URI
+		String REDIRECT_URI = "http://192.168.60.42/oauth"; // 리다이렉트 URI
 		String code = autorize_code; // 로그인 과정중 얻은 토큰 값
 		final HttpClient client = HttpClientBuilder.create().build();
 		final HttpPost post = new HttpPost(RequestUrl);  

@@ -112,7 +112,7 @@
                         <div class="border-top pt-3">
                             <p>
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                Copyright &copy;
+                                Copyright Snowball &copy;
                                 <script>
                                     document.write(new Date().getFullYear());
                                 </script>

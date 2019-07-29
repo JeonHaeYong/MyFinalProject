@@ -61,24 +61,12 @@
 	display: inline-block;
 	box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.8);
 }
-/* .effect:after { */
-/*     position: absolute; */
-/*     display: block; */
-/*     content: ""; */
-/*     top: 0; */
-/*     left: 0; */
-/*     width: 100%; */
-/*     height: 100%; */
-/*     box-shadow:  */
-/*       inset 20px 20px 20px 20px #fff /* 배경과 같은 색 */
-,
-*
-/
-/*       inset 20px 20px 20px 20px #fff, */
-/*       inset 20px 20px 20px 20px #fff, */
-/*       inset 20px 20px 20px 20px #fff; */
-
-/* } */
+#donation_img
+{
+	width: 100%;
+	height: 100%;
+	border-radius: 20px;
+}
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section" onload="javascript:openPopup('popUp.home')">
@@ -93,7 +81,7 @@
 					<p style="font-size: 50px; color: black;">라온펫은?</p>
 					<p class="mb-4" style="color: #754F44; font-weight: bold;">유기동물을 조회하여 주인을 찾아주고, 실종신고를 통해 반려동물을 찾을 수 있도록 도와드립니다. 또 반려동물 관련 물품 거래를 통해 보호센터에 후원을 할 수도 있고, 반려동물 관련 지식정보도 제공해 드립니다.</p>
 					<p>
-						<a href="#" class="btn btn-primary">-> 공지사항</a>
+						<a href="notice-view-page" class="btn btn-primary">-> 공지사항</a>
 					</p>
 				</div>
 			</div>
@@ -285,7 +273,6 @@
 							<c:forEach var="list" items="${reList }" varStatus="i">
 								<div>
 									<div class="block-testimony-1 text-center">
-				
 										<blockquote class="mb-4" style="font-family: 'Gamja Flower';font-weight: bold;">
 											<p class="text-break text-break reviewContent_part">${list.contents }</p>
 										</blockquote>
