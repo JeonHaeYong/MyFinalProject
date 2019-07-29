@@ -564,6 +564,7 @@ public class AdminController
 	@RequestMapping("admin-msg")
 	public String admin_msg_loginCheck(HttpServletRequest request,String currentPage) {
 		int type = (int)session.getAttribute("type");
+		System.out.println("관리자타입!"+type);
 		if(type!=4) {
 			request.setAttribute("errorMsg", "잘못된 접근입니다.error:a_m_error");
 			return "error";

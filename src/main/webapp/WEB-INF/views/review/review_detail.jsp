@@ -225,6 +225,8 @@
                     	$("#review_reply_input").focus();
                         return false;
                     }
+                    reply = reply.replace( /</g , "&lt;");
+                    reply = reply.replace( />/g , "&gt;");
                     //ajax로 table에 insert하기.
                     $.ajax({
                         url : "insertReviewComment",

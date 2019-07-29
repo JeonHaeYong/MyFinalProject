@@ -13,4 +13,5 @@ public interface DonationPaymentDAO {
 	public List<DonationPaymentDTO> selectDonatedListByGroup(Map<String, Integer> param) throws Exception;
 	public List<DonationPaymentDTO> selectDonatedListAll(Map<String, Integer> param) throws Exception;
 	public int selectCountForList() throws Exception;
+	public int selectCountAll() throws Exception;
 }
