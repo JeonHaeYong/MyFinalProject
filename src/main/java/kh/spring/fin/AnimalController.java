@@ -56,6 +56,7 @@ public class AnimalController {
 		request.setAttribute("navi", navi);
 		return "animal/hospital";
 	}
+
 	@RequestMapping("searchToHospital")
 	public String searchHospital(HttpServletRequest request) {
 		String option = request.getParameter("option");
@@ -138,7 +139,9 @@ public class AnimalController {
 		System.out.println("경기~~");
 		Gson g = new Gson();
 		JsonParser jp = new JsonParser();
+
 					String address = "https://openapi.gg.go.kr/Animalhosptl?KEY=226fb5b860bd4d349bada1d7d8a82bff&Type=json&pIndex=1&pSize=1";
+
 					BufferedReader br;
 					URL url;
 					HttpURLConnection conn;
@@ -183,8 +186,10 @@ public class AnimalController {
 					JsonObject row = animal2.get(1).getAsJsonObject();
 					JsonArray ggInfo = row.get("row").getAsJsonArray();
 					int gCount = 0;
+
 					for(int i = 0; i < ggInfo.size(); i ++) {
 						GyeonggiDTO gdto = g.fromJson(ggInfo.get(i), GyeonggiDTO.class);
+
 						if(gdto.getBSN_STATE_NM().equals("정상")) {
 							Pattern p = Pattern.compile("동물병원");
 							Matcher m = p.matcher(gdto.getBIZPLC_NM());
@@ -233,9 +238,10 @@ public class AnimalController {
 	@ResponseBody
 	@RequestMapping("insertCenterData")
 	public String insertCenterData() {
-		
+
 		String key ="daClz41uTyPYm%2BuHXvoYArzIFgS4ZRRO%2BGz8PW1JPQQ1FyO%2BfxwypxzeO%2Blg1E7LLg0VuRKAtze9DUDagO%2BPnA%3D%3D";
 		String address = "http://api.data.go.kr/openapi/animalprtccnter-std?serviceKey="+key+"&pageNo=1&numOfRows=1&type=json";//2페이지까지
+
 		BufferedReader br;
 		URL url;
 		HttpURLConnection conn;
@@ -305,6 +311,10 @@ public class AnimalController {
 		}else if(area.equals("ulsan")) {
 			ahs.deleteHospitalData("울산");
 		}
+
+
+		System.out.println("끝~!");
+
 		}catch(Exception e) {
 			e.printStackTrace();
 			return "0";
@@ -320,6 +330,7 @@ public class AnimalController {
 			e.printStackTrace();
 			return "0";
 		}
+
 		return "1";
 	}
 	
