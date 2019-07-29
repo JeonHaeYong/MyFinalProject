@@ -71,6 +71,8 @@
 	border-radius: 20px;
 }
 .small-title{font-family: 'Gamja Flower', cursive; font-size:50px;}
+#acs_title+p{font-size:28px; color:black; font-family: 'Gamja Flower', cursive;}
+
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section" >
@@ -134,8 +136,8 @@
 	
 	<div class="container cartoon-container">
 		<div class="row">
-			<div class="col-12 cartoonTitle" data-aos="fade-up" data-aos-delay="100"><span>"공고"</span>와<span> "보호"</span>의 차이를 알고 있니~? </div>
-			<div class="col-12 cartoonTitle" data-aos="fade-up" data-aos-delay="150">지금부터 알아보자!!</div>
+			<div class="col-12 cartoonTitle text-black" data-aos="fade-up" data-aos-delay="100"><span>"공고"</span>와<span> "보호"</span>의 차이를 알고 있니~? </div>
+			<div class="col-12 cartoonTitle text-black" data-aos="fade-up" data-aos-delay="150">지금부터 알아보자!!</div>
 		</div>
 		<div class="row no-gutters mb-5">
 			<div class="col-12 col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="200">
@@ -222,8 +224,8 @@
 		<div class="row justify-content-center" data-aos="fade-up">
 			<div class="col-lg-6 text-center heading-section mb-5">
 
-				<h2 class="text-black mb-2 small-title">주인을 찾습니다!</h2>
-				<p style="color: #754F44; font-size: 20px; font-weight: bold;">[공고중 or 보호중]</p>
+				<h2 class="text-black mb-2 small-title">주인을 찾습니다!!</h2>
+				<p style="color: #754F44; font-size: 20px; font-weight: bold; font-family: 'Gamja Flower', cursive;">[공고중 or 보호중]</p>
 			</div>
 		</div>
 
@@ -302,7 +304,7 @@
 		<div class="row justify-content-center" data-aos="fade-up">
 			<div class="col-lg-6 text-center heading-section mb-5">
 
-				<h2 class="text-black mb-2 small-title">재회 후기</h2>
+				<h2 class="text-black mb-2 small-title">우리 다시 만났어요!!</h2>
 			</div>
 		</div>
 		<c:choose>
