@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Hospital</title>
+<title>라온펫 - 동물병원 조회</title>
 <link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"rel="stylesheet">
 <link rel="stylesheet" href="resources/fonts/icomoon/style.css">
@@ -32,8 +32,7 @@
      .section{text-align: center; border-bottom: 1px solid black;}
      .section:hover{background-color: #FDD69250;}
      .section>div{padding: 0px;}
-     .section>div:not(.addr){line-height: 50px;}
-     
+     .section>div:not(.addr){line-height: 50px;}.title{text-align: center; font-size:30px; margin-left:50px; font-family:'Gamja Flower', cursive;}
      .footer{text-align: center; padding-top:15px; font-size: 18px;}
      .menu-bar{text-align: center; height: 200px; font-family:'Gamja Flower', cursive; margin-bottom:40px;}
      .menu-bar>div{height: 40px;}
@@ -59,8 +58,9 @@
 	   <div class="jumbotron px-0 pb-0">
 	   		<img  src="/resources/images/dog_8.jpg">
         </div>
-
+			
         <div class="container contents">
+       
             <div class="row search-box">
            		 <div class="col-lg-2 col-md-3 col-sm-12 col-12"></div>
            		 <div class="col-1"></div>
@@ -90,6 +90,7 @@
                <div class="col-1"><!--메뉴바랑 리스트 사이 빈 공간--></div>
                  
                <div class="col-lg-8 col-md-7 col-sm-12 col-12 content-wrapper">
+               
                  <div class="row header">
                		<div class="col-lg-1  d-none d-lg-block ">No.</div>
                 	<div class="col-lg-2 col-md-2 d-none d-md-block ">지역</div>

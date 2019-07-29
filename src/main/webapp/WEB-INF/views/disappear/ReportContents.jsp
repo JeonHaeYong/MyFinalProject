@@ -66,6 +66,7 @@
 		.btn:hover{background-color:#FDD692; font-weight:bold;}
 		/* 댓글 ------------------------------------------- */
 		.comment{max-width: 1200px;}
+		.menu-disappear{color:#EC7357;}
     </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"

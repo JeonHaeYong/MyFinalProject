@@ -71,6 +71,7 @@
 		label{border: 2px solid #754F4490; border-radius:10px; padding: 5px; font-family: 'Gamja Flower', cursive;}
 		label:hover{cursor:pointer;}
 		.expl{text-align:center;  font-family: 'Gamja Flower', cursive; font-size:23px;}
+		.menu-disappear{color:#EC7357;}
 </style>
 </head>
  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">

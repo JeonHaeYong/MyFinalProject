@@ -110,7 +110,7 @@ height: 350px;
 .pageNum,.prev,.next{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44; border:none; border-radius:30px; margin-left:5px; width:40px;}
 .pageNum:hover,.prev:hover,.next:hover{background-color:#FDD692; font-weight:bold;}
 .furColor{overflow:hidden; text-overflow:ellipsis; white-space;nowrop;}
-
+#menu-disappear{color:#EC7357;}
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
