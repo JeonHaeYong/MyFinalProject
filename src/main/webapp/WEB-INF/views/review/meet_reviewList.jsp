@@ -54,8 +54,10 @@
                         background-color: #EC7357;
                         color: white;
                     }
-                    .font_namsan{
+                    .font_namsan>p{
 						font-family: 'SeoulNamsanM' !important;
+						font-weight: bold;
+						color: #754F44;
                     }
                     .navi{
                         text-decoration: none;
@@ -111,10 +113,10 @@
                                     <h3 class="m-0">-재회후기-</h3>
                                 </div>
                                 <div class="card-body font_namsan">
-                                    <blockquote class="blockquote">
+                                    <blockquote class="blockquote font_namsan">
                                         <p>라온펫을 통해 반려동물을 다시 만난 재회 후기입니다.<br>
-                                           	 다들 축하해주세요!!<br>
-                                            	라온펫을통해 반려동물을 만났다면? -> <input type="button" class="write-btn toWrite" value="후기쓰러가기"></p>
+                                           	 다들 축하해주세요!!</p>
+                                            	<small>라온펫을통해 반려동물을 만났다면? -> <input type="button" class="write-btn toWrite" value="후기쓰러가기"></small>
                                     </blockquote>
                                 </div>
                             </div>
@@ -177,7 +179,7 @@
                             <div class="row my-4">
                                 <div class="col-12 text-center">
                                     <c:forEach var="navi" items="${navi }">
-                                        <form class="ml-1" action="toReviewList" method="post">
+                                        <form class="ml-1 d-inline-flex" action="toReviewList" method="post">
                                             <input type="hidden" value="${navi }" name="currentPage">
                                             <a class="navi navi_click_a" href="javascript:void(0)" onclick="reviewNaviClick(this);">${navi }</a>
                                         </form>

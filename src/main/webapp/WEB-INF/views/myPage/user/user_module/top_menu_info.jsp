@@ -102,7 +102,7 @@
                             <a class="nav-link my_page_nav" id="toMyPage_writeList"  href="toMyPage_writeList">내 글목록</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link my_page_nav" id="toMyPage_support" href="toMyPage_support">후원목록</a>
+                            <a class="nav-link my_page_nav" id="toMyPage_support" href="toMyPage_support">후원내역</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link my_page_nav" id="toMyPage_cart" href="toMyPage_cart">장바구니</a>
