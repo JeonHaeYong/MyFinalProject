@@ -7,9 +7,11 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileUploadBase.SizeLimitExceededException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
 
 import kh.spring.dto.ReviewCommentsDTO;
@@ -62,20 +64,24 @@ public class ReviewController {
 		String savePath = resourcePath+"/"+today;
 		System.out.println("파일저장할 위치 -> " + savePath);
 		File uploadPath = new File(savePath);
-		System.out.println(image.getName()+":"+image.getOriginalFilename());
-		if(!uploadPath.exists()) {	//해당하는 이름의 폴더가 없다면
-			uploadPath.mkdir();	//폴더를 만들어줘라. mkdir() : makeDirectory
+		if(image.getSize()!=0) {
+			System.out.println(image.getName()+":"+image.getOriginalFilename());
+			if(!uploadPath.exists()) {	//해당하는 이름의 폴더가 없다면
+				uploadPath.mkdir();	//폴더를 만들어줘라. mkdir() : makeDirectory
+			}
+			String fileName = null;
+			try {
+				fileName = System.currentTimeMillis()+image.getOriginalFilename();
+				image.transferTo(new File(savePath+"/"+fileName));
+				dto.setImage_path1(today+"/"+fileName);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else {
+			dto.setImage_path1("noImage.png");
 		}
-		String fileName = null;
-		try {
-			fileName = System.currentTimeMillis()+image.getOriginalFilename();
-			image.transferTo(new File(savePath+"/"+fileName));
-			dto.setImage_path1(today+"/"+fileName);
-			int result = rservice.insertReviewService(dto);
-			System.out.println("후기작성이 "+ result+"개 입력 완료되었습니다");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		int result = rservice.insertReviewService(dto);
+		System.out.println("후기작성이 "+ result+"개 입력 완료되었습니다");
 		///----
 		return "redirect:toReviewList";
 	}
@@ -102,8 +108,17 @@ public class ReviewController {
 	}
 	//글 삭제하기.
 	@RequestMapping("deleteReview")
-	public String deleteReview(String seq) {
-		rservice.deleteReviewService(Integer.parseInt(seq));
+	public String deleteReview(HttpServletRequest request,String seq,String[] reviewList) {
+		int type = (int)session.getAttribute("type");
+		if(seq!=null) {
+			rservice.deleteReviewService(Integer.parseInt(seq));
+		}else {
+			if(type!=4) {
+				request.setAttribute("errorMsg", "잘못된 접근입니다.");
+				return "error";
+			}
+			System.out.println("관리자가 "+rservice.deleteReviewService(reviewList)+"개 재회 리뷰 글 삭제함");
+		}
 		return "redirect:toReviewList";
 	}
 }

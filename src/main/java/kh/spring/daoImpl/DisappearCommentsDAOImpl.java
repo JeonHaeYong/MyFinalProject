@@ -6,11 +6,12 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import kh.spring.dao.DisappearCommentsDAO;
 import kh.spring.dto.DisappearCommentsDTO;
 
-
+@Repository
 public class DisappearCommentsDAOImpl implements DisappearCommentsDAO{
 	@Autowired
 	private SqlSessionTemplate sst;
@@ -27,10 +28,14 @@ public class DisappearCommentsDAOImpl implements DisappearCommentsDAO{
 
 	@Override
 	public int deleteDisappearComment(int Disappear_seq) {
+		System.out.println("삭제할 댓글:" + Disappear_seq);
+		
 		return sst.delete("DisappearCommentsDAO.deleteDisappearComment", Disappear_seq);
 	}
 	@Override
 	public List<DisappearCommentsDTO> selectDisappearCommentsPerPage(int start, int end){
+		System.out.println("selectDisappearCommentsPerPage:"+ start + ":" + end);
+
 		Map<String, Integer> param = new HashMap<>();
 		param.put("start", start);
 		param.put("end", end);
@@ -43,11 +48,9 @@ public class DisappearCommentsDAOImpl implements DisappearCommentsDAO{
 	}
 
 	@Override
-	public List<DisappearCommentsDTO> selectAllDisappearCommentsByDisappearSeq(int seq , int start, int end , String loginId) {
+	public List<DisappearCommentsDTO> selectAllDisappearCommentsByDisappearSeq(int seq , int start, int end) {
 		Map<String, Object> param = new HashMap<>();
-		if(loginId!=null) {
-			param.put("id", loginId);
-		}
+		System.out.println("selectAllDisappearCommentsByDisappearSeq:"+seq +":"+ start + ":" + end);
 		param.put("seq", seq);
 		param.put("start", start);
 		param.put("end", end);

@@ -159,7 +159,7 @@
 		    				<option value="phone">휴대폰 소액결제</option>
 						</select>
 					</div>
-					<p class="totalAmountBottom pt-2">총 결제 금액 : ${totalAmount }원</p>
+					<p class="totalAmountBottom pt-2 totalAmount">총 결제 금액 : ${totalAmount }원</p>
 					<div class="form-group d-flex justify-content-center">
 						<input type="button" class="btn" id="payBtn" value="결제하기">
 						<input type="button" class="btn" id="cancelBtn" value="취소하기">
@@ -189,7 +189,13 @@
 	<!--우편번호  -->
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<script>
-		
+		function comma(str) {
+	        str = String(str);
+	        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+	    }
+		$(function(){
+			$(".totalAmount").text("총 결제 금액 : " + comma("${totalAmount}") + "원");
+		});
 		$(".soldoutCheck").each(function(i, item){
 			if($(item).val() == 'y'){
 				alert("판매완료된 상품은 결제하실 수 없습니다. 다시 확인해주세요.");
@@ -305,6 +311,8 @@
 			
 			var orderNum = new Date().getTime();
 			$("#orderNumber").val(orderNum);
+			var address2 = 
+			$("#inputAddress2").val($("#inputAddress2").val().replace(/<.?script>/g, ""));
 			$("#payForm").submit();
 // 			var IMP = window.IMP; // 생략가능
 // 			IMP.init('imp84992027'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용

@@ -177,4 +177,9 @@ public class AnimalHospitalDAOImpl implements AnimalHospitalDAO {
 		hs.put("tel", tel);
 		return sst.insert("AnimalHospitalDAO.insertHospitalData",hs);
 	}
+	@Override
+	public int deleteHospitalData(String area) {
+		return sst.delete("AnimalHospitalDAO.deleteHospitalData",area);
+	}
+	
 }

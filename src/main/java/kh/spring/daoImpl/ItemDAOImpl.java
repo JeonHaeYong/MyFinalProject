@@ -186,4 +186,11 @@ public class ItemDAOImpl implements ItemDAO{
 		return sst.update("ItemDAO.updatePermissionBySeq", seq);
 	}
 
+
+	@Override
+	public int deleteItemBySeq(int seq) throws Exception
+	{
+		return sst.delete("ItemDAO.deleteBySeq", seq);
+	}
+
 }

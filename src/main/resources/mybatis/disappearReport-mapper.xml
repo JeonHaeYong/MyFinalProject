@@ -15,13 +15,22 @@
 	<select id="ReportContent" resultType="kh.spring.dto.DisappearReportDTO">
 		select * from disappearReport where seq = #{value}
 	</select>
-	<update id="updateNoImage">
-		update disappearReport set disdate = #{disDate}, areaList = #{areaList}, disappeararea = #{disappearArea}, tel = #{tel}, kind = #{kind}, gender = #{gender},
-											neuter = #{neuter}, age = #{age}, furColor = #{furColor}, feature = #{feature}, et = #{et} where seq = #{seq}
-	</update>
+
 	<update id="update">
-		update disappearReport set disdate = #{disDate}, areaList = #{areaList}, disappeararea = #{disappearArea}, tel = #{tel}, kind = #{kind}, gender = #{gender},
-											neuter = #{neuter}, age = #{age}, furColor = #{furColor}, feature = #{feature}, et = #{et}, image1 = #{image1}, image2 = #{image2}, image3 = #{image3} where seq = #{seq}
+				update disappearReport set disDate = #{disDate}, areaList = #{areaList}, disappearArea = #{disappearArea}, tel = #{tel}, kind = #{kind}, gender = #{gender},
+					neuter = #{neuter}, age = #{age}, furcolor = #{furColor}, feature = #{feature}, et = #{et} 
+						<if test="image1!=null">
+							,image1 = #{image1}
+						</if>	
+						<if test="image2!=null">
+							,image2 = #{image2}
+						</if>				
+						<if test="image3!=null">
+							,image3=#{image3}
+						</if>
+					 where seq = #{seq}
+			
+		
 	</update>
 	<delete id="delete">
 		delete disappearReport where seq = #{value}

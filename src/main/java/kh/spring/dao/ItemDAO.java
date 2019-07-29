@@ -25,4 +25,5 @@ public interface ItemDAO {
 	public List<ItemDTO> selectForAdmin(int start, int end) throws Exception;
 	public int selectCountForAdmin() throws Exception;
 	public int updatePermissionBySeq(int seq) throws Exception;
+	public int deleteItemBySeq(int seq) throws Exception;
 }

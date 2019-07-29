@@ -22,6 +22,27 @@
 <link rel="stylesheet" href="resources/css/style.css">
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
 <style>
+	
+	
+	/*점보트론  */
+	.myJumbo {
+	background-color: white;
+	padding: 5rem;
+}
+
+#jumboImg {
+	width: 100%;
+	max-height: 600px;
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	.empty{width: 100%; text-align: center; margin: auto; margin-bottom: 50px; height:50px;}
   #title{text-align: center;}
   h1{ font-family: 'Gamja Flower', cursive;}
@@ -59,9 +80,10 @@ text-align:left;
 margin-left:15px;
 margin-right:15px;
 padding-left:5px;
-height:15%;
+height:10%;
 margin-top:2px;
 }
+.animal-feature{width:70%; font-size:25px; color:#754F44; font-weight:bold; margin-left:15px; overflow:hidden; text-overflow:ellipsis; white-space: nowrap;}
 .w-100 {
 width:100%;
 	top: 0;
@@ -87,6 +109,11 @@ height: 180px;
 	data-offset="300" id="home-section">
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
+	<div class="jumbotron myJumbo pr-0 pl-0 pb-2">
+		<img src="resources/images/disappear/disapperjumbo.jpg" id="jumboImg">
+
+	</div>
+	
 	<div class="px-0 pb-0 empty"></div>
 	<div id="title"><h1>잠시 길 잃은 동물들</h1></div>
 	<div class="containier ">
@@ -113,6 +140,7 @@ height: 180px;
 						</div>
 				
                    <div class="animal-kind">${list.kind }<img src=""></div>
+                   <div class="animal-feature">${list.feature }</div>
                     <div class="petInfo">
                     	<div>${list.gender} </div>
                     	<div>${list.age }</div>
@@ -162,7 +190,6 @@ height: 180px;
 		})
 		$(".carousel-item img").each(function(index,items){
 			if($(this).attr("src") =='noImage'){
-				console.log($(this).parent().parent().attr("class"));
 				 $(this).parent().parent().remove();
 				 $(this).parent().remove();
 				 $(this).remove();

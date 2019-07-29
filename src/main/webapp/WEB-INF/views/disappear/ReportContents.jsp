@@ -22,6 +22,16 @@
 <link rel="stylesheet" href="resources/css/style.css">
 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp"></jsp:include>
  <style>
+ 	/*점보트론  */
+	.myJumbo {
+	background-color: white;
+	padding: 5rem;
+}
+
+#jumboImg {
+	width: 100%;
+	max-height: 600px;
+}
  		.empty{width: 100%; text-align: center; margin: auto; margin-bottom: 50px; height:50px;}
         .title{text-align: center;}
         h1{ font-family: 'Gamja Flower', cursive;}
@@ -30,8 +40,10 @@
         #wrapper>div{float: left;}
         .pet{width: 35%; height: 97%; margin: 5px;}
         .infoImg{height:200px;}
-        .w-100{height:200px;}
-        .feature{width: 100%; height: 35%;}
+        .w-100{height:400px;}
+        
+        .feature,.et{float:left; }
+        .feature{width: 50%; }
         .feature>div:first-child{height: 20%; width: 100%; font-weight: bold; font-family: 'Gamja Flower', cursive; font-size:20px;}
         .feature>div:nth-child(2){height: 80%; width: 100%; overflow-y: auto; word-wrap: break-word;}
         .petInfo{width: 63%; height: 97%; margin-left: 6px; margin-top:5px;}
@@ -42,10 +54,10 @@
        .first-col,.second-col{float: left; width: 50%; height: 100%;}
         
         .first-col>div,.second-col>div{height: 20%; text-align: center; line-height: 50px;}
-        .et{width: 100%; height: 30%; padding-left: 75px;}
+        .et{width: 50%;  padding-left: 75px;}
         .content>div:nth-child(2)>.first-col>div,.content>div:nth-child(2)>.second-col>div{height: 34%; line-height: 80px;}
         .et>div:first-child{height: 25%; font-weight: bold; font-family: 'Gamja Flower', cursive; font-size:20px;}
-        .et-contents{height: 75%; overflow-y: auto; word-wrap: break-word;}
+        .et-contents{height: 80%; overflow-y: auto; word-wrap: break-word;}
         .petImg>img{width:100%; height:100%;}
         
         #footer{ margin:auto; width:1200px;}
@@ -60,6 +72,10 @@
 	data-offset="300" id="home-section">
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
+	<div class="jumbotron myJumbo pr-0 pl-0 pb-2">
+		<img src="resources/images/disappear/disapperjumbo.jpg" id="jumboImg">
+
+	</div>
 	<div class="px-0 pb-0 empty"></div>
 	<div class="title"><h1>실종신고</h1></div>
     <div id="wrapper">
@@ -90,10 +106,7 @@
 				</div>
            </div>
            <hr>
-           <div class="feature">
-               <div>특징</div>
-               <div>${content.feature }</div>
-           </div>
+           
        </div>
         <div class="petInfo">
             <div class="content">
@@ -126,10 +139,16 @@
                     </div>
                 </div>
             </div>
+     <div>
         <div class="et">
             <div>기타</div>
             <div class="et-contents">${content.et }</div>
         </div>
+        <div class="feature">
+               <div>특징</div>
+               <div>${content.feature }</div>
+           </div>
+           </div>
         </div>
     </div>
       <div id="footer">
@@ -161,16 +180,12 @@
 			</div>
 		</div>
 	</div>
-</div>
 	<div class="row reply_part">
 		<!-- 댓글 목록 보여주기 -->
 		<c:forEach var="list" items="${replyList }">
 			<div class="col-12 border-bottom mb-1">
 				<div class="firstLine d-flex justify-content-between">
-					<div class="font-weight-bold">
-						<span class="mr-2"><img src="${list.imagepath }"
-							class="profileImg_round rounded-circle"
-							style="width: 50px; height: 50px;"></span>${list.writer }</div>
+					<div class="font-weight-bold"><span class="mr-2"><img src="${list.imagepath }" class="profileImg_round rounded-circle" style="width: 50px ; height: 50px;"></span>${list.writer }</div>
 					<c:if test="${id==list.writer }">
 						<div class="modifyReply_part">
 							<a href="javascript:void(0)" onclick="modifyReplyToggle(this)"><img
@@ -195,15 +210,7 @@
 				<div class="d-flex justify-content-between">
 					<span><input type="text" readonly
 						class="form-control-plaintext reply_contents"
-						value="${list.contents }" style="width: 600px;"></span> <span
-						class="likeOk_check" value="${list.likeOk}" seq="${list.seq }"
-						writer="${list.writer }"> <span class="mr-2 reply_likes">${list.likes }</span>
-						<a class="click_like_btn likeOk_n" href="javascript:void(0)"
-						onclick="clickLikeImg(this);"><img src="review/like_1.png"
-							style="width: 25px;"></a> <a class="click_like_btn likeOk_y"
-						href="javascript:void(0)" onclick="clickLikeImg(this);"><img
-							src="review/like_2.png" style="width: 25px;"></a>
-					</span>
+						value="${list.contents }" style="width: 600px;"></span>
 				</div>
 			</div>
 		</c:forEach>
@@ -221,6 +228,10 @@
 			</div>
 		</c:if>
 	</div>
+	
+	
+</div>
+	
 	<!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
 	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 	<script src="resources/js/jquery-ui.js"></script>
@@ -253,7 +264,7 @@
 			}
 		});
 
-
+/* 댓글~~!!!! */
 	  $("#review_reply_btn").on("click",function(){//댓글등록
           if(${id==null}){//아직 로그인을 하지 않았다면,
               alert("로그인을 먼저 해주세요.");
@@ -267,18 +278,19 @@
               return;
           }
           //ajax로 table에 insert하기.
-          $.ajax({
-              url : "insertDisappearComment.dis",
+          $.ajax({       	 
+              url : "insertDisappearComment",
               type : "post",
               data : {
-                  review_seq : "${reviewDTO.seq}",
+                  seqStr : "${content.seq}",
                   writer : "${id}",
                   contents : reply
               }
           }).done(function(resp){
               //console.log("댓글달기성공->"+resp);
               $(".reply_part").remove();
-              $(".reply_wrapper").append(resp);
+              $(".comment").append(resp);
+              
             /*   likeOkCheck();//좋아요 클릭한것만 빨강하트 */
               $("#review_reply_input").val("");
               $(".modifyReply_part.hide").hide();
@@ -295,17 +307,17 @@
               currentPage = parseInt(next) + 1 ;
           }
           $.ajax({
-              url : "clickReplyNavi.dis",
+              url : "clickCommentNavi",
               type : "post",
               data : {
-                  seqStr : "${reviewDTO.seq}",
+                  seqStr : "${content.seq}",
                   currentPageStr : currentPage
               }
           }).done(function(resp){
               $(".reply_part").remove();
-              $(".reply_wrapper").append(resp);
-              likeOkCheck();//좋아요 클릭한것만 빨강하트
+              $(".comment").append(resp);
               profileImgRounded();
+              $(".modifyReply_part.hide").hide();
           })
       }
 	  $(".modifyReply_part.hide").hide();
@@ -334,7 +346,7 @@
               return false;
           }
           $.ajax({
-              url : "updateReplyContents.dis",
+              url : "updateCommentContents",
               type : "post",
               data : {
                   seq : $(param).attr("value"),
@@ -352,9 +364,11 @@
       function deleteReply(param){//댓글 삭제
       	var seq = $(param).attr("value");
       	var writer = $(param).parent().prev().text();
+      	console.log($(param).parent().prev().children(".writer").text());
+      	console.log(writer);
 			if(confirm("댓글을 삭제하시겠습니까?")){
 				$.ajax({
-					url : "deleteReply.dis",
+					url : "deleteComment",
 					type : "post",
 					data : {
 						seq : seq,
@@ -363,8 +377,8 @@
 				}).done(function(resp){
 					alert("댓글이 삭제되었습니다.");
                   $(".reply_part").remove();
-                  $(".reply_wrapper").append(resp);
-                  likeOkCheck();//좋아요 클릭한것만 빨강하트
+                  $(".comment").append(resp);
+                  //likeOkCheck();//좋아요 클릭한것만 빨강하트
                   $(".modifyReply_part.hide").hide();
                   profileImgRounded();//이미지 원형
 				});
@@ -381,6 +395,50 @@
           });
       };
       profileImgRounded();
+      //이미지 없는 캐ㅅ러셀 삭제
+      $(".carousel-item img").each(function(index,items){
+			if($(this).attr("src") =='noImage'){
+				console.log($(this).parent().parent().attr("class"));
+				
+				 $(this).parent().remove();
+				 $(this).remove();
+			}
+      });
+      $("#review_reply_input").keydown(function(e){
+    	  if(e.keyCode == 13){
+    		  if(${id==null}){//아직 로그인을 하지 않았다면,
+                  alert("로그인을 먼저 해주세요.");
+                  $(".login-btn").trigger("click");
+                  return;
+              }
+              var reply = $("#review_reply_input").val();
+              if(reply==""){
+                  alert("댓글을 입력해주세요.");
+                  $("#review_reply_input").focus();
+                  return;
+              }
+              //ajax로 table에 insert하기.
+              $.ajax({
+            	 
+                  url : "insertDisappearComment",
+                  type : "post",
+                  data : {
+                      seqStr : "${content.seq}",
+                      writer : "${id}",
+                      contents : reply
+                  }
+              }).done(function(resp){
+                  //console.log("댓글달기성공->"+resp);
+                  $(".reply_part").remove();
+                  $(".comment").append(resp);
+                  
+                /*   likeOkCheck();//좋아요 클릭한것만 빨강하트 */
+                  $("#review_reply_input").val("");
+                  $(".modifyReply_part.hide").hide();
+                  profileImgRounded();
+              });
+    	  }
+      });
 	</script>
 </body>
 </html>

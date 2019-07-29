@@ -20,8 +20,9 @@
                 <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css">
                 <link rel="stylesheet" href="resources/css/aos.css">
                 <link rel="stylesheet" href="resources/css/style.css">
-                <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
+                <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>     
                 <style>
+                @font-face { font-family: 'Openas'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/Openas.woff') format('woff'); font-weight: normal; font-style: normal; }
                 	*{ font-family: 'Gamja Flower' !important;}
                     ::placeholder{font-family: 'Gamja Flower'}
                     /*점보트론 이미지*/
@@ -34,13 +35,12 @@
                         max-height: 600px;
                     }
                     /*왼쪽 메뉴 */
-                    .menu-box{width: 150px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px; margin-top: 50px;}
+                    .menu-box{width: 150px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px;}
                     .menu-box>div{height: 35px;}
                     .menu-box>div:first-child{font-weight: bold; border-bottom: 1px solid #754F44; line-height: 33px; color:#B45F04; font-size:40px;}
-                    .menu-box>div:not(.s-menu):hover{background-color: #FBFFB950;}
+                    .menu-box>div:not(.s-menu):hover{color: #754F44; font-weight:bold; background-color: #FBFFB950;}
                     .menu-row{text-align: -webkit-center;}
                     a[name="s-menu"]{color: #754F44; text-decoration-line: none;}
-                    a[name="s-menu"]:hover{color: #754F44; text-decoration-line: none; font-weight:bold;}
                     /*~왼쪽 메뉴 */
                     /*파일업로드*/
                     .filebox input[type="file"] {
@@ -66,6 +66,10 @@
                         border: 1px solid #ebebeb;
                         border-bottom-color: #e2e2e2;
                         border-radius: .25em;
+                    }
+                    .filebox label:hover{
+                    	background-color: #FDD69270;
+                    	font-weight: bold;
                     }
                     /* named upload */
                     .filebox .upload-name {
@@ -117,14 +121,17 @@
                         width: 100% \9;
                         height: auto;
                     }
-                    .btn{background-color:#FDD69270;color:#754F44; margin: 0px 2px; font-size: 1.1rem;}
-					.btn:hover{background-color:#FDD692; font-weight:bold;}
+                    .laon_btn_style{background-color:#FDD69270;color:#754F44; margin: 0px 2px; font-size: 1.1rem;cursor: pointer;}
+					.laon_btn_style:hover{background-color:#FDD692; font-weight:bold; color:#754F44;}
 					.writeBody_fs{
 						font-size: 22px;
 					}
                     /*~파일업로드*/
                     .input-group-text,.form-control{
                     	font-size: 1.2rem;
+                    }
+                    .ft4 *{
+                    	color: #754F44;
                     }
                 </style>
             </head>
@@ -140,15 +147,15 @@
                         <div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-row">
                             <div class="row menu-box">
                                 <div class="col-12 s-menu">M E N U</div>
-                                <div class="col-12 "><a name="s-menu" href="toReviewList">재회 후기</a></div>
+                                <div class="col-12 "><a name="s-menu" href="toReviewList"><div>재회후기</div></a></div>
                             </div>
                         </div>
                         <div class="col-1"></div>
                         <div class="col-lg-9 col-md-8 col-sm-12 col-12 writeBody_fs">
                             <!-- 내용작성 -->
-                            <form action="insertReview" method="post" enctype="multipart/form-data" onsubmit="return reviewWriteForm();">
+                            <form class="ft4" action="insertReview" method="post" enctype="multipart/form-data" onsubmit="return reviewWriteForm();">
                                 <input type="hidden" value="${id }" name="writer">
-                                <div class="form-group text-center">
+                                <div class="form-group text-center ft4">
                                     <h1>재회후기 작성하기</h1>	
                                 </div>
                                 <div class="form-group">
@@ -176,7 +183,7 @@
                                         <textarea class="form-control contents" aria-label="With textarea" placeholder="내용은 최소 50글자를 작성해주셔야합니다." rows="10" style="resize:none;" name="contents"></textarea>
                                     </div>
                                 </div>
-                                <div class="text-right mb-3"><input type="submit" class="btn" value="글작성하기"><input type="button" class="btn" value="목록으로" onclick="toReviewList();"></div>
+                                <div class="text-right mb-3"><input type="submit" class="btn laon_btn_style" value="글작성하기"><input type="button" class="btn laon_btn_style" value="목록으로" onclick="toReviewList();"></div>
                             </form>
                         </div>
                     </div>
@@ -219,6 +226,8 @@
                     if (window.FileReader) { //html5 이상에서 window.FileReader지원한다. 지원하는 브라우저에 한해서
                         if (!$(this)[0].files[0].type.match(/image/)) {//image 파일만
                             alert('이미지 파일만 선택할 수 있습니다.');
+                            $(fileTarget).siblings('.upload-name').val("파일선택");
+                            $("#input-file").val("");
                             return;
                         }
                         var reader = new FileReader();
@@ -241,22 +250,40 @@
                 });
                 function reviewWriteForm(){
                 	var title = $(".title").val();
-                	var titleRegex = /^.{10,30}$/;
+                	var titleRegex = /^ +$/;
                 	var titleRegexResult = titleRegex.exec(title);
-                	if(titleRegexResult==null){
+                	if(titleRegexResult!=null){
+                		alert("제목을 작성해주세요.");
+                		$(".title").val("");
+                		$(".title").focus();
+                		return false;
+                	}else if(title.length<10||title.length>30){
                 		alert("제목은 10글자 이상 , 30글자 이하로 작성해주세요.");
+                		$(".title").val(title.substr(0,30));
                 		$(".title").focus();
                 		return false;
                 	}
                 	var contents = $(".contents").val();
-                	var contentsRegex = /^.{50,}/;
+                	var contentsRegex = /^ +$/;
                 	var contentsRegexResult = contentsRegex.exec(contents);
-                	if(contentsRegexResult==null){
-                		alert("내용은 최소 50글자를 작성해주셔야합니다.");
+                	if(contentsRegexResult!=null){
+                		alert("내용을 작성해주세요");
+                		$(".contents").val("");
+                		$(".contents").focus();
+                		return false;
+                	}else if(contents.length < 50){
+                		alert("내용은 50글자 이상 작성해주세요.");
+                		$(".contents").val(contents.substr(0,50));
                 		$(".contents").focus();
                 		return false;
                 	}
-                	if(contents.length>800){
+                	if($(fileTarget).siblings('.upload-name').val()=="파일선택"){
+                		if(!confirm("이미지파일 없이 글을 작성하시겠습니까?")){
+                				return false;
+                		}
+                		$("#input-file").val("");
+                	}
+                    if(contents.length>800){
                 		$(".contents").val(contents.substr(0,800));
                 	}
                 }

@@ -34,15 +34,22 @@ public class DonationPaymentDAOImpl implements DonationPaymentDAO {
 	}
 
 	@Override
-	public List<DonationPaymentDTO> selectDonatedList(Map<String, Integer> param) throws Exception
+	public List<DonationPaymentDTO> selectDonatedListByGroup(Map<String, Integer> param) throws Exception
 	{
 		return sst.selectList("DonationPaymentDAO.selectList", param);
 	}
-
+	
+	@Override
+	public List<DonationPaymentDTO> selectDonatedListAll(Map<String, Integer> param) throws Exception
+	{
+		return sst.selectList("DonationPaymentDAO.selectAll", param);
+	}
+	
 	@Override
 	public int selectCountForList() throws Exception
 	{
 		return sst.selectOne("DonationPaymentDAO.selectCountForList");
 	}
+
 	
 }

@@ -31,9 +31,14 @@
 	font-family: 'Gamja Flower', cursive;
 	font-size: 40px;
 }
-.jumbotron {
-padding:5rem;
+.myJumbo {
 	background-color: white;
+	padding: 5rem;
+}
+
+#jumboImg {
+	width: 100%;
+	max-height: 600px;
 }
 .btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44;
 margin-top:20px;
@@ -100,10 +105,8 @@ b {
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 
-
-	<div class="jumbotron px-0 pb-0">
-		<img src="resources/images/member/joinimg.jpg"  max-height="600px"
-			width="100%">
+<div class="jumbotron myJumbo pr-0 pl-0 pb-2">
+		<img src="resources/images/member/joinimg.jpg" id="jumboImg">
 
 	</div>
 

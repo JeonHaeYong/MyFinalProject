@@ -22,4 +22,5 @@ public interface ItemService {
 	public Object insertDummy() throws Exception;
 	public String selectForAdmin(String page) throws Exception;
 	public String permissionItems(String items) throws Exception;
+	public String rejectItems(String items) throws Exception;
 }

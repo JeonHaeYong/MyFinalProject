@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kh.spring.dto.BlackListDTO;
+import kh.spring.dto.MessageDTO;
 import kh.spring.dto.QuizDTO;
 import kh.spring.service.BlackListService;
 import kh.spring.service.ChartService;
@@ -25,6 +26,7 @@ import kh.spring.service.DonationService;
 import kh.spring.service.ItemService;
 import kh.spring.service.LogService;
 import kh.spring.service.MemberService;
+import kh.spring.service.MessageService;
 import kh.spring.service.QuizService;
 
 @Controller
@@ -33,9 +35,11 @@ public class AdminController
 	@Autowired
 	private QuizService qs;
 	@Autowired
+	private MessageService msgService;
+	@Autowired
 	private HttpSession session;
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
-	
+
 	@Autowired
 	BlackListService blackService;
 	@Autowired
@@ -50,7 +54,7 @@ public class AdminController
 	LogService logService;
 	@Autowired
 	DonationPaymentService donationPaymentService;
-	
+
 	//Member Start
 	@RequestMapping(value = "admin-member")
 	public String manageMemberPage()
@@ -63,7 +67,7 @@ public class AdminController
 	{
 		logger.info("회원 데이터 삽입 시도");
 		String result = "error";
-		
+
 		try
 		{
 			result = blackService.insertRandomMembers();
@@ -72,7 +76,7 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	@ResponseBody
@@ -88,9 +92,9 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
-		
+
 	}
 	@RequestMapping(value = "admin-member-black")
 	public String blackMember(String id, String reason)
@@ -104,14 +108,14 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	@RequestMapping(value = "admin-member-release", method = RequestMethod.POST)
 	public String releaseMember(BlackListDTO dto)
 	{
 		String result = "error";
-		
+
 		try
 		{
 			result = blackService.delete(dto);
@@ -120,7 +124,7 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	@ResponseBody
@@ -136,15 +140,15 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
-		
+
 	}
-	
+
 	//Member End
-	
-	
-	
+
+
+
 	//Chart Start
 	@RequestMapping(value = "admin-chart")
 	public String chartPage()
@@ -164,9 +168,9 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
-		
+
 	}
 	@RequestMapping(value = "admin-chart-insert")
 	public String insertDummyData()
@@ -180,7 +184,7 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	@ResponseBody
@@ -196,16 +200,16 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
-	
+
 	//Chart End
-	
-	
-	
+
+
+
 	//Donation Start
-	
+
 	@RequestMapping(value = "admin-donation")
 	public String donationPage()
 	{
@@ -223,7 +227,7 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	@ResponseBody
@@ -239,7 +243,7 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	@RequestMapping(value = "admin-donation-update", method = RequestMethod.POST)
@@ -254,23 +258,39 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	@ResponseBody
 	@RequestMapping(value = "admin-donation-log", produces="application/json;charset=utf-8")
-	public Object selectDonatedList(String page)
+	public Object selectDonatedListByGroup(String page)
 	{
 		Object result = "error";
 		try
 		{
-			result = donationPaymentService.selectDonatedList(page);
+			result = donationPaymentService.selectDonatedListByGroup(page);
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
-		
+
+		return result;
+	}
+	@ResponseBody
+	@RequestMapping(value = "admin-donation-all", produces="application/json;charset=utf-8")
+	public Object selectDonatedListAll(String page)
+	{
+		Object result = "error";
+		try
+		{
+			result = donationPaymentService.selectDonatedListAll(page);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+
 		return result;
 	}
 	@ResponseBody
@@ -286,15 +306,15 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	//Donation End
-	
-	
-	
+
+
+
 	//Item Start
-	
+
 	@RequestMapping(value = "admin-item")
 	public String itemPage()
 	{
@@ -304,7 +324,7 @@ public class AdminController
 	public Object insertItemDummy()
 	{
 		Object result = "error";
-		
+
 		try
 		{
 			result = itemService.insertDummy();
@@ -313,7 +333,7 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	@ResponseBody
@@ -321,7 +341,7 @@ public class AdminController
 	public Object itemSearch(String page)
 	{
 		Object result = "";
-		
+
 		try
 		{
 			result = itemService.selectForAdmin(page);
@@ -330,7 +350,7 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	@ResponseBody
@@ -338,7 +358,7 @@ public class AdminController
 	public Object itemPermission(String items)
 	{
 		Object result = "";
-		
+
 		try
 		{
 			result = itemService.permissionItems(items);
@@ -347,15 +367,32 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
-	
+	@ResponseBody
+	@RequestMapping(value = "admin-item-reject")
+	public Object itemReject(String items)
+	{
+		Object result = "";
+
+		try
+		{
+			result = itemService.rejectItems(items);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
 	//Item End
-	
-	
+
+
 	//Quiz Start
-	
+
 	@RequestMapping(value = "admin-quiz")
 	public String quizPage()
 	{
@@ -366,7 +403,7 @@ public class AdminController
 	public Object quizSearch(String page)
 	{
 		Object result = "";
-		
+
 		try
 		{
 			result = memberService.selectRankFiveByPoint(page);
@@ -375,14 +412,14 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	@RequestMapping(value = "admin-quiz-random")
 	public Object updatePointRandom()
 	{
 		Object result = "";
-		
+
 		try
 		{
 			result = memberService.updateRandomPoint();
@@ -391,16 +428,16 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	//Quiz End
-	
-	
-	
-	
+
+
+
+
 	//PayLog start
-	
+
 	@RequestMapping(value = "admin-paylog")
 	public String paylogPage()
 	{
@@ -410,7 +447,7 @@ public class AdminController
 	public Object insertPayLogDummy()
 	{
 		Object result = "error";
-		
+
 		try
 		{
 			result = logService.insertDummy();
@@ -419,7 +456,7 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 	@ResponseBody
@@ -427,7 +464,7 @@ public class AdminController
 	public Object selectFromPayLog(String page, String condition, String keyword)
 	{
 		Object result = "error";
-		
+
 		try
 		{
 			result = logService.selectPayLog(page, condition, keyword);
@@ -436,14 +473,20 @@ public class AdminController
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
-	
+
 	//PayLog end
-	
-	
-	
+
+
+	@RequestMapping("admin-mypage")
+	public String myPage(HttpServletRequest request) 
+	{
+		return "myPage/user/user_myPage_profile";
+	}
+
+
 	//퀴즈 관리자 -------------------------------------------------------------------------------------------
 	@RequestMapping("quizAdmin.admin")
 	public String quizAdmin(HttpServletRequest request) {
@@ -471,7 +514,7 @@ public class AdminController
 			String correct = request.getParameter("correct");
 			int point = Integer.parseInt(request.getParameter("point"));
 			String explain = request.getParameter("explain");
-			
+
 			QuizDTO qdto = new QuizDTO(0, quiz, correct, point, explain);
 			qs.insertQuizService(qdto);
 			return "redirect:/quizAdmin.admin?currentPage="+session.getAttribute("currentPage");
@@ -498,5 +541,39 @@ public class AdminController
 	@RequestMapping("inputData.admin")
 	public String inputData() {
 		return "animal/admin";
+	}
+	@RequestMapping("admin-msg")
+	public String admin_msg_loginCheck(HttpServletRequest request,String currentPage) {
+		int type = (int)session.getAttribute("type");
+		if(type!=4) {
+			request.setAttribute("errorMsg", "잘못된 접근입니다.error:a_m_error");
+			return "error";
+		}
+		if(currentPage==null) {
+			currentPage = "1";
+		}
+		int page = Integer.parseInt(currentPage);
+		String loginId = (String)session.getAttribute("id");
+		//페이지에 띄울 쪽지 리스트 담기.
+		//받은쪽지
+		List<MessageDTO> receivedList = msgService.selectAllMsgByCurrentPage("recipient",loginId, page);
+		request.setAttribute("receivedList", receivedList);
+		//보낸쪽지
+		List<MessageDTO> sentList = msgService.selectAllMsgByCurrentPage("sender",loginId, page);
+		request.setAttribute("sentList", sentList);
+
+		//페이지 navi담기.
+		//받은쪽지
+		List<String> receivedNavi = msgService.getNaviforMsg(page, "recipient", loginId);
+		request.setAttribute("receivedNavi", receivedNavi);
+		//보낸쪽지
+		List<String> sentNavi = msgService.getNaviforMsg(page, "sender", loginId);
+		request.setAttribute("sentNavi", sentNavi);
+		return "myPage/admin/admin_message";
+	}
+	
+	@RequestMapping("admin-pwChange")
+	public String admin_pwChange(){
+		return "myPage/admin/admin_pw";
 	}
 }

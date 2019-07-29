@@ -50,4 +50,9 @@ public class AnimalHospitalServiceImpl implements AnimalHospitalService{
 	public void ulsanHospitalService(UlsanDTO udto) {//울산병원 데이터 삽입
 		adao.ulsanHospitalData(udto);
 	}
+	@Override
+	public void deleteHospitalData(String area) {
+		adao.deleteHospitalData(area);
+	}
+	
 }

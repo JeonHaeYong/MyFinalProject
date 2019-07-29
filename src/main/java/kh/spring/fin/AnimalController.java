@@ -138,8 +138,9 @@ public class AnimalController {
 		System.out.println("경기~~");
 		Gson g = new Gson();
 		JsonParser jp = new JsonParser();
-			
-					String address = "https://openapi.gg.go.kr/Animalhosptl?KEY=226fb5b860bd4d349bada1d7d8a82bff&Type=json&pIndex=2&pSize=1000";//3페이지까지
+
+					String address = "https://openapi.gg.go.kr/Animalhosptl?KEY=226fb5b860bd4d349bada1d7d8a82bff&Type=json&pIndex=1&pSize=1";
+
 					BufferedReader br;
 					URL url;
 					HttpURLConnection conn;
@@ -153,21 +154,47 @@ public class AnimalController {
 					}catch(Exception e) {
 						e.printStackTrace();
 					}
-					//경기병원
 					JsonObject gRoot = jp.parse(json).getAsJsonObject();
 					JsonArray animal = gRoot.get("Animalhosptl").getAsJsonArray();
-					JsonObject row = animal.get(1).getAsJsonObject();
+					JsonObject first = animal.get(0).getAsJsonObject();
+					JsonArray head1 = first.get("head").getAsJsonArray();
+					JsonObject count = head1.get(0).getAsJsonObject();
+					int total_count = Integer.parseInt(count.get("list_total_count").getAsString());
+					
+					int pageNum = 0;
+					if(total_count%1000 == 0) {
+						pageNum = total_count/1000;
+					}else if (total_count%1000 != 0) {
+						pageNum = (total_count/1000)+1;
+					}
+					
+					for(int j = 1; j <= pageNum; j++) {
+						String address2 = "https://openapi.gg.go.kr/Animalhosptl?KEY=226fb5b860bd4d349bada1d7d8a82bff&Type=json&pIndex="+j+"&pSize=1000";//3페이지까지
+						
+						try {
+							url = new URL(address2);
+							conn = (HttpURLConnection)url.openConnection();
+							conn.setRequestMethod(protocol);
+							br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+							json = br.readLine();
+						}catch(Exception e) {
+							e.printStackTrace();
+						}
+					JsonObject gRoot2 = jp.parse(json).getAsJsonObject();
+					JsonArray animal2 = gRoot2.get("Animalhosptl").getAsJsonArray();
+					JsonObject row = animal2.get(1).getAsJsonObject();
 					JsonArray ggInfo = row.get("row").getAsJsonArray();
 					int gCount = 0;
-					for(int j = 0; j < ggInfo.size(); j ++) {
-						GyeonggiDTO gdto = g.fromJson(ggInfo.get(j), GyeonggiDTO.class);
+
+					for(int i = 0; i < ggInfo.size(); i ++) {
+						GyeonggiDTO gdto = g.fromJson(ggInfo.get(i), GyeonggiDTO.class);
+
 						if(gdto.getBSN_STATE_NM().equals("정상")) {
 							Pattern p = Pattern.compile("동물병원");
 							Matcher m = p.matcher(gdto.getBIZPLC_NM());
 
 							if(m.find()) {
 								System.out.println(gCount++);
-								//System.out.println(m.group());
 								System.out.println(gdto.getBIZPLC_NM());
 
 								try {
@@ -180,7 +207,7 @@ public class AnimalController {
 							}else {continue;}
 						}else {continue;}
 					}
-			
+					}
 				System.out.println("끝");
 				return "1";
 	}
@@ -210,9 +237,10 @@ public class AnimalController {
 	@ResponseBody
 	@RequestMapping("insertCenterData")
 	public String insertCenterData() {
-	
+
 		String key ="daClz41uTyPYm%2BuHXvoYArzIFgS4ZRRO%2BGz8PW1JPQQ1FyO%2BfxwypxzeO%2Blg1E7LLg0VuRKAtze9DUDagO%2BPnA%3D%3D";
-		String address = "http://api.data.go.kr/openapi/animalprtccnter-std?serviceKey="+key+"&pageNo=1&numOfRows=1000&type=json";//2페이지까지
+		String address = "http://api.data.go.kr/openapi/animalprtccnter-std?serviceKey="+key+"&pageNo=1&numOfRows=1&type=json";//2페이지까지
+
 		BufferedReader br;
 		URL url;
 		HttpURLConnection conn;
@@ -228,26 +256,81 @@ public class AnimalController {
 		JsonObject root = jp.parse(json).getAsJsonObject();
 		JsonObject response = root.get("response").getAsJsonObject();
 		JsonObject body = response.get("body").getAsJsonObject();
-		JsonArray items = body.get("items").getAsJsonArray();
-
-		int count = 0;
-		System.out.println(items.size());
-		
-		for(int i = 0; i < items.size(); i++) {
-			System.out.println(++count);
-			Gson g = new Gson();
-			CenterDTO cdto = g.fromJson(items.get(i), CenterDTO.class);
-			System.out.println(cdto.getAnimalCnterNm());
-			try {
-				pcs.insertDataService(cdto);
-				Thread.sleep(200);
-			}catch(Exception e) {
-				e.printStackTrace();
-				return "0";
-			}
+		int totalCount = Integer.parseInt(body.get("totalCount").getAsString());
+		System.out.println(totalCount);
+		int pageNum = 0;
+		if(totalCount%1000 ==0) {
+			pageNum = totalCount/1000;
+		}else if(totalCount%1000!=0) {
+			pageNum = (totalCount/1000)+1;
 		}
-
+		for(int j = 1; j <= pageNum; j++) {
+			String address2 = "http://api.data.go.kr/openapi/animalprtccnter-std?serviceKey="+key+"&pageNo="+j+"&numOfRows=1000&type=json";//2페이지까지
+			try {
+				url = new URL(address2);
+				conn = (HttpURLConnection)url.openConnection();
+				conn.setRequestMethod(protocol);
+				br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+				json = br.readLine();
+				}catch(Exception e) {e.printStackTrace();}
+			JsonObject root2 = jp.parse(json).getAsJsonObject();
+			JsonObject response2 = root2.get("response").getAsJsonObject();
+			JsonObject body2 = response2.get("body").getAsJsonObject();
+			JsonArray items = body2.get("items").getAsJsonArray();
+			int count = 0;
+			System.out.println(items.size());
+			
+			for(int i = 0; i < items.size(); i++) {
+				System.out.println(++count);
+				Gson g = new Gson();
+				CenterDTO cdto = g.fromJson(items.get(i), CenterDTO.class);
+				System.out.println(cdto.getAnimalCnterNm());
+				try {
+					pcs.insertDataService(cdto);
+					Thread.sleep(200);
+				}catch(Exception e) {
+					e.printStackTrace();
+					return "0";
+				}
+			}
+		}		
 		System.out.println("끝~!");
 		return "1";
 	}
+	@ResponseBody
+	@RequestMapping("deleteHospitalData")
+	public String deleteHospitalData(HttpServletRequest request) {
+		String area = request.getParameter("area");
+		System.out.println(area);
+		try {
+		if(area.equals("seoul")) {
+			ahs.deleteHospitalData("서울");
+		}else if(area.equals("gyeonggi")) {
+			ahs.deleteHospitalData("경기");
+		}else if(area.equals("ulsan")) {
+			ahs.deleteHospitalData("울산");
+		}
+
+
+		System.out.println("끝~!");
+
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "0";
+			}
+		return "1";
+	}
+	@ResponseBody
+	@RequestMapping("deleteCenterData")
+	public String deleteCenterData() {
+		try {
+		pcs.deleteCenterData();
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "0";
+		}
+
+		return "1";
+	}
+	
 }

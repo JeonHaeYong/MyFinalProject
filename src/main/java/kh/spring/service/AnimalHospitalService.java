@@ -15,4 +15,6 @@ public interface AnimalHospitalService {
 	public void seoulHospitalService(SeoulDTO sdto);
 	public void gyeonggiHospitalService(GyeonggiDTO gdto);
 	public void ulsanHospitalService(UlsanDTO udto);
+	public void deleteHospitalData(String area);
+
 }

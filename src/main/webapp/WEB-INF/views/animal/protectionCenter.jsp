@@ -78,11 +78,18 @@
            <div class="row">
                <div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-bar">
                    <div class="menu">MENU</div>
-                   <div><a href="" name="s-menu">유기동물조회</a></div>
-                   <div><a href="" name="s-menu">임시보호중</a></div>
+                   <div><a href="toAbandoned?currentPage=1" name="s-menu">유기동물조회</a></div>
+                   <div><a href="listTempProtect?currentPage=1" name="s-menu">임시보호중</a></div>
                    <div><a href="toHospital?currentPage=1" name="s-menu">동물병원 조회</a></div>
                    <div><a href="toCenter?currentPage=1" name="s-menu">보호센터 조회</a></div>
-                    <div><a href="inputData.admin" name="s-menu">관리자 설정</a></div>
+                    <c:choose>
+                   		<c:when test="${type==4 }">
+                   			<div><a href="inputData.admin" name="s-menu">관리자 설정</a></div>
+                   		</c:when>
+                   		<c:otherwise>
+                   			<div hidden><a href="inputData.admin" name="s-menu">관리자 설정</a></div>
+                   		</c:otherwise>
+                   </c:choose>
                </div>
                
                <div class="col-1"><!--메뉴바랑 리스트 사이 빈 공간--></div>

@@ -63,7 +63,15 @@
 				<p style="font-size: 60px;">ERROR</p>
 			</div>
 			<div class="col-12 d-flex justify-content-center">
-				<p>알수없는 문제가 발생하였습니다.<br>관리자에게 문의하세요.<br>laonpetAdmin@gmail.com</p>
+				<c:choose>
+					<c:when test="${errorMsg!=null }">
+						<p>${errorMsg }
+					</c:when>
+					<c:otherwise>
+						<p>알수없는 문제가 발생하였습니다.
+					</c:otherwise>
+				</c:choose>
+				<br>관리자에게 문의하세요.<br>laonpetAdmin@gmail.com</p>
 			</div>
 		</div>
 	</div>
@@ -82,5 +90,27 @@
 	<script src="resources/js/jquery.sticky.js"></script>
 	<script src="resources/js/isotope.pkgd.min.js"></script>
 	<script src="resources/js/main.js"></script>
+	<script>
+		$(function(){
+			history.pushState(null, null, location.href);
+			window.onpopstate = function(event) {
+				history.go(1);
+			};
+			// 뒤로가기 방지
+			window.history.forward(1);
+			//새로고침, 뒤로가기 막기
+			document.onkeydown = function(e) {
+				key = (e) ? e.keyCode : event.keyCode;
+				if (key == 8 || key == 116) {
+					if (e) {
+						e.preventDefault();
+					} else {
+						event.keyCode = 0;
+						event.returnValue = false;
+					}
+				}
+			}
+		});
+	</script>
 </body>
 </html>

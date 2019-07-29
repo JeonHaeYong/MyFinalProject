@@ -9,7 +9,7 @@ public interface DisappearCommentsService {
 	public int insertDisappearCommentService(DisappearCommentsDTO dto);
 	public int modifyDisappearCommentService(DisappearCommentsDTO dto);
 	public int deleteDisappearCommentService(int seq);
-	public List<DisappearCommentsDTO> selectAllDisappearCommentsService(int seq , int commentPage,String loginId);
+	public List<DisappearCommentsDTO> selectAllDisappearCommentsService(int seq , int commentPage);
 	public int[] getRecordPerPageStartEnd(int currentPage);
 	public int getDisappearCommentsCountByDisappearSeq(int DisappearSeq);
 	public List<String> getNaviForDisappearCommentsList(int DisappearSeq, int currentPage);

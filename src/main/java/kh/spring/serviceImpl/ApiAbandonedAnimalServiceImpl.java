@@ -32,7 +32,13 @@ import kh.spring.service.ApiAbandonedAnimalService;
 public class ApiAbandonedAnimalServiceImpl implements ApiAbandonedAnimalService{
 	@Autowired
 	private ApiAbandonedAnimalDAO dao;
-
+	
+	public List<ApiAbandonedAnimalDTO> selectForMain(){
+		List<ApiAbandonedAnimalDTO> list = dao.selectForMain();
+		
+		return list;
+	}
+	
 	public ApiAbandonedAnimalDTO selectOneApiAbandonedAnimal(int seq){
 		ApiAbandonedAnimalDTO dto = dao.selectOneApiAbandonedAnimal(seq);
 		if(dto.getSexCd().replace(" ", "").equals("M")) {
