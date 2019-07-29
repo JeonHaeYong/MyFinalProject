@@ -64,11 +64,13 @@ public class QuizController {
 			}
 		}
 		List<MemberDTO> rankList = new ArrayList<>();
-		int getPoint = plusPoint - minusPoint;
+		int getPoint = plusPoint - minusPoint; // 획득 포인트
 		System.out.println(getPoint +" = "+ plusPoint +" - "+ minusPoint);
-		
 		try {
-			qs.updatePointService(getPoint, id); // 포인트 업데이트
+					qs.updatePointService(getPoint, id); // 포인트 업데이트
+//					MemberDTO member = ms.selectOneMemberService(id);
+//					System.out.println("멤버 포인트 : " + (member.getPoint()));
+					//qs.updateZeroPoint(0, id);
 			rankList = ms.memberPointService();// 포인트 순으로 멤버 리스트 출력
 			
 		}catch(Exception e) {e.printStackTrace();}

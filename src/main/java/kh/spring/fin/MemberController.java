@@ -530,10 +530,7 @@ public class MemberController {
 	}
 
 	//-비밀번호 찾기--------------------------------------------------------------------------------------------
-	@RequestMapping("findPassword")
-	public String findPassword() {
-		return "member/findPassword";
-	}
+	
 	@ResponseBody
 	@RequestMapping("findPwProc.do")
 	public String findPwProc(HttpServletRequest request) {

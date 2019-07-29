@@ -42,12 +42,12 @@
      .menu-bar div:first-child{font-size: 25px; font-weight: bold;  border-bottom: 1px solid black; color: #754F44;}
      a[name="s-menu"]{color: #754F44; text-decoration-line: none; font-size:20px;}
      a[name="s-menu"]:hover{color: #754F44;}
-     .pageNum,.prev,.next{text-decoration-line: none; color: #754F44; font-size:25px; font-family:'Gamja Flower', cursive;}
+    .pageNum,.prev,.next{text-decoration-line: none; color: #754F44; font-size:25px; font-family:'Gamja Flower', cursive;}
      .pageNum:hover,.prev:hover,.next:hover{font-weight: bold;}
      .search-box{margin-bottom:10px;}
      .search-box>div{padding:0px;}
-     input[type="button"]{background-color:#FDD692; border:none; font-family:'Gamja Flower', cursive; font-size:20px; padding: 0px 3px;}
-     input[type="button"]:hover{background-color:#fcc96f; font-weight:bold;}
+    .search-btn{background-color:#FDD692; border:none; font-family:'Gamja Flower', cursive; font-size:20px; padding: 0px 3px;}
+     .search-btn:hover{background-color:#fcc96f; font-weight:bold;}
     
      .contents{max-width:1700px;}
 </style>
@@ -88,7 +88,7 @@
                
                <div class="col-1"><!--메뉴바랑 리스트 사이 빈 공간--></div>
                  
-               <div class="col-lg-8 col-md-7 col-sm-12 col-12">
+               <div class="col-lg-8 col-md-7 col-sm-12 col-12 content-wrapper">
                  <div class="row header">
                		<div class="col-lg-1  d-none d-lg-block ">No.</div>
                 	<div class="col-lg-2 col-md-2 d-none d-md-block ">지역</div>
@@ -106,8 +106,8 @@
                 	<div class="col-lg-4  col-md-3 col-12  addr">${list.address }</div>
             	</div>
 			</c:forEach>
-          
-
+           </div>
+ </div>
           
             <!--section end-->
             <!--footer-->
@@ -116,8 +116,8 @@
                 ${navi} 
                 </div>
             </div>
-               </div>
-           </div>
+              
+          
         </div>
 	
 	<!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
@@ -135,8 +135,8 @@
    <script src="resources/js/main.js"></script>
    <script>
 		$(".pageNum").each(function(index,items){
-			if($(this).text() == ${currentPage}){
-				$(this).css("color","#EC7357");
+			if($(this).val() == ${currentPage}){
+				$(this).css("background-color","#FDD692");
 				$(this).css("font-weight","bold");
 			}
 		});
@@ -150,6 +150,7 @@
 				location.href="searchToHospital?currentPage=1&&option="+option;
 			}
 		});
+		
 </script>
 </body>
 </html>

@@ -14,7 +14,7 @@
 	</delete>
 	
 	<select id="selectAllDisappearCommentsByDisappearSeq" resultType="kh.spring.dto.DisappearCommentsDTO">
-		select * from (select row_number()over(order by seq desc)as rown, disappear_comments.* from disappear_comments where disappear_seq = #{seq}) where rown between #{start} and #{end}
+		select * from (select row_number()over(order by seq desc)as rown, disappear_comments.* , member.imagepath from disappear_comments, member where member.id = disappear_comments.writer and disappear_seq = #{seq}) where rown between #{start} and #{end}
 	</select>
 	<select id="selectDisappearCommentsCountByDisappearSeq" resultType="int">
 		select count(*) from disappear_comments where disappear_seq = #{disappearSeq}
