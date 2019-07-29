@@ -18,7 +18,7 @@
 			<div class="row  align-items-center">
 				<div id="site_logo_col" class="col-6 col-xl-2">
 					<h1 class="mb-0 site-logo">
-						<a href="/" class="h2 mb-0" style="font-family:Gamja Flower;"><img id="site_logo_img" src="/resources/images/doglogo2.png" width="80px"><strong>라온</strong>펫</a>
+						<a href="/" class="h2 mb-0" style="font-family:Gamja Flower;"><img id="site_logo_img" src="/resources/images/doglogo2.png" width="80px" height="80px"><strong>라온</strong>펫</a>
 					</h1>
 				</div>
 				<div class="col-8 col-xl-10  d-none d-xl-block pr-0">
