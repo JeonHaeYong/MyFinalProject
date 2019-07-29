@@ -197,17 +197,23 @@ public class DonationPaymentServiceImpl implements DonationPaymentService {
 	}
 
 	@Override
-	public Object selectDonatedListAll(String page) throws Exception
+	public Object selectDonatedListAll(String page, String target) throws Exception
 	{
-		HashMap<String, Integer> param = new HashMap<>();
+		HashMap<String, String> param = new HashMap<>();
 		
 		if((page == null) || (page.equals("")))
 		{
 			page = "1";
 		}
 		
+		if((target == null) || (target.equals("")))
+		{
+			target = "%";
+		}
+		param.put("target", target);
+		
 		int currentPage = Integer.parseInt(page);
-		int recordTotalCount = dpdao.selectCountAll();
+		int recordTotalCount = dpdao.selectCountAll(param);
 		int pageTotalCount;
 		boolean needPrev = true;
 		boolean needNext = true;
@@ -215,8 +221,10 @@ public class DonationPaymentServiceImpl implements DonationPaymentService {
 		int start = currentPage * recordCountPerPage - recordCountPerPage + 1;
 		int end = currentPage * recordCountPerPage;
 		
-		param.put("start", start);
-		param.put("end", end);
+		
+		param.put("start", ""+start);
+		param.put("end", ""+end);
+		
 		
 		List<DonationPaymentDTO> list = dpdao.selectDonatedListAll(param);
 		

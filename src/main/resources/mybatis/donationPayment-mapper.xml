@@ -32,7 +32,7 @@
 	
 	<select id="selectAll" resultType="kh.spring.dto.DonationPaymentDTO">
 		select * 
-		from (select row_number() over(order by seq desc) as rown, donated_payment.* from donated_payment)
+		from (select row_number() over(order by seq desc) as rown, donated_payment.* from donated_payment where donator like #{target})
 		where rown between #{start} and #{end}	
 	</select>
 	
@@ -49,6 +49,6 @@
 	</update>
 	
 	<select id="selectCountAll" resultType="java.lang.Integer">
-		select count(*) from DONATED_PAYMENT
+		select count(*) from DONATED_PAYMENT where donator like #{target}
 	</select>
 </mapper>
