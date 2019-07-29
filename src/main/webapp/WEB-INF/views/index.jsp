@@ -94,7 +94,7 @@
 						<p style="font-size: 30px; color: black;">오늘의 날씨요정</p>
 						<div class="row">
 							<div class=" col-5 pr-0 ">
-								<img src="" alt="Image" id="kk">
+								<img src="" alt="Image" id="weatherimg" width="70%">
 							</div>
 							<div class=" col-7 pl-0" >
 								<p id="temp"
@@ -623,13 +623,16 @@
     				console.log(resp);
     				$("#temp").html("현재온도 : " + temp.toFixed(2));
     				$("#humidity").html("현재습도 : " + resp.main.humidity);
-    				console.log("날씨 : " + resp.weather[0].main);
+    				 $("#country").html("도시이름 : 서울" );
+    				/* $("#country").html("도시이름 : " + resp.name); */
+    				/* console.log("날씨 : " + resp.weather[0].main);
     				console.log("상세날씨설명 : " + resp.weather[0].description);
     				console.log("날씨 이미지 : " + resp.weather[0].icon);
-    				console.log("바람 : " + resp.wind.speed);
-    				$("#country").html("나라 : " + resp.sys.country);
-    				console.log("도시이름 : " + resp.name);
-    				console.log("구름 : " + (resp.clouds.all) + "%");
+    				console.log("바람 : " + resp.wind.speed); */
+    				/* $("#country").html("나라 : " + resp.sys.country); */
+    				/* console.log("구름 : " + (resp.clouds.all) + "%");  */
+    			
+    		
     				if(resp.weather[0].icon=="01d" || resp.weather[0].icon=="01n"){
     					//clear sky
     					var imgURL ="resources/images/weather/clearsky.png";
@@ -660,20 +663,20 @@
     				else if(resp.weather[0].icon=="11d" || resp.weather[0].icon=="11n"){
     					//thunderstorm
     					var imgURL ="resources/images/weather/strom.png";
-    					$("#weathertext").html("오늘은 찌릿!천둥 치는 날입니다.");
+    					$("#weathertext").html("오늘은 찌릿!천둥 치는 날씨입니다.");
     					$("#weathertext2").html("애완동물이 놀라지 않게 조심 해주세요!");
     				}
     				else if(resp.weather[0].icon=="13d" || resp.weather[0].icon=="13n"){
     					//snow
     					var imgURL ="resources/images/weather/snow.png";
-    					$("#weathertext").html("오늘은 눈오는 날입니다.");
+    					$("#weathertext").html("오늘은 눈오는 날씨입니다.");
     					$("#weathertext2").html("애완동물과 뽀송뽀송 눈밭 산책 어떠세요?");
     				}
     				else if(resp.weather[0].icon=="50d" || resp.weather[0].icon=="50n"){
     					//mist
     					var imgURL ="resources/images/weather/mist.png";
-    					$("#weathertext").html("오늘은 안개 낀 입니다.");
-    					$("#weathertext2").html("애완동물과 청소 어떠세요?");
+    					$("#weathertext").html("오늘은 안개 낀 날씨 입니다.");
+    					$("#weathertext2").html("애완동물과 낮잠 자기 좋은 날씨 입니다!");
     				}
     				else{//이미지 없는 경우대비 
     				
@@ -682,7 +685,7 @@
     					$("#weathertext").html("");
     					
     				}
-    				$("#kk").attr("src", imgURL);
+    				$("#weatherimg").attr("src", imgURL);
     				
     			}
     		});

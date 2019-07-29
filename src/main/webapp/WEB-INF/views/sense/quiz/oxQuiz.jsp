@@ -80,6 +80,9 @@
 				color: #EC7357 !important;
 				font-weight: 600 !important;
 			}
+			
+			.start{
+			padding-bottom:100px;}
     </style>
             
             
