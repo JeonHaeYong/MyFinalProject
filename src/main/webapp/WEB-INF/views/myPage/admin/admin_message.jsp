@@ -600,7 +600,7 @@
                                 $(clickThis).addClass("readMsg");
                             }
                         }).fail(function(a,b,c){
-                            alert("error");
+                            console.log("에러 발생");
                         });
                     }
                 });
