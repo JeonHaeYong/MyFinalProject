@@ -201,7 +201,7 @@
 						</div>
 			
 						<div class="col-12  text-center px-1">
-							<a href="admin-donation" class="btn selected_menu_btns">월 별 후원금 및 전달 기관</a>
+							<a href="admin-donation" class="btn menu_btns">월 별 후원금 및 전달 기관</a>
 						</div>
 			
 						<div class="col-12  text-center px-1">

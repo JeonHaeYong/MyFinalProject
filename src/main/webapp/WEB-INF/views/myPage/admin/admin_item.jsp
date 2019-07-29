@@ -122,7 +122,7 @@ font-weight:bold;
 						</div>
 			
 						<div class="col-12  text-center px-1">
-							<a href="admin-item" class="btn menu_btns">무료 나눔 물품 승인</a>
+							<a href="admin-item" class="btn selected_menu_btns">무료 나눔 물품 승인</a>
 						</div>
 			
 						<div class="col-12 text-center px-1">
@@ -130,7 +130,7 @@ font-weight:bold;
 						</div>
 			
 						<div class="col-12  text-center px-1">
-							<a href="admin-donation" class="btn selected_menu_btns">월 별 후원금 및 전달 기관</a>
+							<a href="admin-donation" class="btn menu_btns">월 별 후원금 및 전달 기관</a>
 						</div>
 			
 						<div class="col-12  text-center px-1">

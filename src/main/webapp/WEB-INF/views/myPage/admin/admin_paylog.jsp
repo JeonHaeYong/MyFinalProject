@@ -125,11 +125,11 @@ font-weight:bold;
 						</div>
 			
 						<div class="col-12 text-center px-1">
-							<a href="admin-paylog" class="btn menu_btns">무료 나눔 거래 내역</a>
+							<a href="admin-paylog" class="btn selected_menu_btns">무료 나눔 거래 내역</a>
 						</div>
 			
 						<div class="col-12  text-center px-1">
-							<a href="admin-donation" class="btn selected_menu_btns">월 별 후원금 및 전달 기관</a>
+							<a href="admin-donation" class="btn menu_btns">월 별 후원금 및 전달 기관</a>
 						</div>
 			
 						<div class="col-12  text-center px-1">
@@ -321,7 +321,7 @@ font-weight:bold;
 	    			var $menu_row = $('<div class="row justify-content-center my-3 id_row"></div>');
 	    			var $menu_seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-3"><h3>번호</h3></div>');
 	    			var $menu_buyerCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-3"><h3>구매자</h3></div>');
-	    			var $menu_nameCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>상품명</h3></div>');
+	    			var $menu_nameCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>후원명</h3></div>');
 	    			var $menu_priceCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>결제금액</h3></div>');
 	    			var $menu_sellerCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>판매자</h3></div>');
 	    			var $menu_timeCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-3"><h3>일시</h3></div>');
