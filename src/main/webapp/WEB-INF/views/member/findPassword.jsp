@@ -37,37 +37,14 @@
 	font-family: 'Gamja Flower', cursive;
 	font-size: 40px;
 }
-.menu-row{
-text-align: -webkit-center;
-
-}
-.s-menu1>a{
- text-decoration:none;
- color:black;
- font-size:20px;
- font-family: 'Gamja Flower', cursive;
-}
-.s-menu1:hover{
-background-color:#F3F78130;
-}
-
-
-.s-menu1{
- padding-top:10px;
- padding-left:0px;
- padding-right:0px;
-}
-.s-menu
-{
-color:#B45F04;
-border-bottom:2px solid black;
-}
-.menu-box{
-width:150px;
-height:100px;
-padding-bottom:120px;
-margin-bottom:150px;
-}
+ .menu-box{width: 200px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px; margin-top: 50px; margin-bottom:50px;}
+            .menu-box>div{height: 35px;}
+            .menu-box>div:first-child{font-weight: bold; border-bottom: 1px solid #754F44; line-height: 33px; color:#B45F04; font-size:40px;}
+            .menu-box>div:not(.s-menu):hover{background-color: #FBFFB950;
+            color: #754F44; text-decoration-line: none; font-weight:bold;
+            }
+            .menu-row{text-align: -webkit-center;}
+            a[name="s-menu"]{color: #754F44; text-decoration-line: none;}
 #wrapper {
 	padding-top: 20px;
 	padding-left: 50px;
@@ -106,11 +83,18 @@ font-family: 'Gamja Flower', cursive;
         <div class="row">
                <div class="col-lg-2 col-md-3 col-sm-12 col-12 menu-row">
                     <div class="row menu-box">
-                        <div class="col-12 s-menu"><b>M E N U</b></div>
-                        <div class="col-12 s-menu1 " ><a href="join">회원가입</a></div>
-                         <div class="col-12 s-menu1" ><a href="findId">아이디 찾기</a></div>
-                        <div class="col-12 s-menu1" ><a href="findPassword"> 비밀번호 찾기</a></div>
-                         
+                      	<div class="col-12 s-menu">
+						<b>M E N U</b>
+					</div>
+					<div class="col-12 ">
+						<a name="s-menu" href="join">회원가입</a>
+					</div>
+					<div class="col-12 ">
+						<a  name="s-menu" href="findId">아이디 찾기</a>
+					</div>
+					<div class="col-12 ">
+						<a  name="s-menu" href="findPassword"> 비밀번호 찾기</a>
+					</div>
                     </div>
                 </div>
                  <div class="col-1"></div>
@@ -121,10 +105,10 @@ font-family: 'Gamja Flower', cursive;
             <form action="findPwProc" method="post" id="findPwForm">
               <div class="row input-section">
               	<div class="col-12 suggest">아이디를 입력해주세요.</div>
-              	<div class="col-12"><input type="text" name="id" class="id"></div>
+              	<div class="col-12"><input type="text" name="id" class="id form-control"></div>
               	<div class="col-12 suggest">가입하실 때, 입력하신 이메일을 입력해주세요.</div>
               	<div class="col-12 input-email">
-              		<input type="text" name="email" class="email" regexFlag="false">
+              		<input type="text" name="email" class="email form-control" regexFlag="false">
               	</div>
               	<div class="col-12 btn-box"><input type="button" value="확인" class="compl-btn btn"></div>
               	<div class="col-12"><span class="e-span"></span></div>
