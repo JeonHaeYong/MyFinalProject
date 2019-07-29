@@ -105,7 +105,7 @@
                             	<c:if test="${memberDTO.type==1 }">
                             		<button type="button" id="my_password" class="btn laon_btn_style" data-toggle="modal" data-target="#password_change_modal">비밀번호 변경하기</button>
                             	</c:if>
-                                <!-- Modal -->
+                                <!-- Modal 비밀번호 변경 -->
                                 <div class="modal fade" id="password_change_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
@@ -207,7 +207,8 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-center modify_bot_part">
-                            <button id="modify_btn" type="button" class="btn laon_btn_style">내정보 수정</button>
+                            <button id="modify_btn" type="button" class="btn laon_btn_style mx-1">내정보 수정</button>
+                            <button id="withdrawal_modal_btn" type="button" class="btn laon_btn_style mx-1" data-toggle="modal" data-target="#withdrawal_modal">탈퇴하기</button>
                         </div>
                         <div class="justify-content-center modify_bot_part hide">
                             <button id="modify_profile_btn" type="button" class="btn laon_btn_style mx-1">정보 수정 완료</button>
@@ -215,6 +216,31 @@
                             <input id="reset_btn" type="reset" class="d-none">
                         </div>
                     </form>
+                    <!-- Modal 탈퇴하기 -->
+                    <div class="modal fade" id="withdrawal_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                	<span>탈퇴하기</span>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                	<p>비밀번호를 입력해주세요.</p>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="pw">비밀번호</span>
+                                        </div>
+                                        <input id="inputPw" type="password" class="form-control" placeholder="Password" aria-label="password" aria-describedby="pw">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button id="withdrawal_btn" type="button" class="btn laon_btn_style">탈퇴하기</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <jsp:include page="/WEB-INF/views/myPage/user/user_module/menu_footer.jsp" ></jsp:include>
@@ -482,5 +508,32 @@
 	                $(".profile_upload_part").toggle();
 	                $(".profile_upload_part.hide").addClass("d-flex");
                 }
+                
+                var pwCount = 0;
+                $("#withdrawal_btn").on("click", function(){
+                	
+                	var pw = $("#inputPw").val();
+                	//현재비밀번호가 맞는지->ajax로 확인
+                    $.ajax({
+                        url : "currPwCheck",
+                        type : "post",
+                        data : {
+                            id : "${memberDTO.id}",
+                            pw : pw
+                        }
+                    }).done(function(resp){
+                        if(resp=="false"){
+                            alert("비밀번호가 틀립니다.\r\n현재" + (++pwCount) + "회/5회 입력 틀렸습니다."  );
+                            if(pwCount==5){
+                                alert("비밀번호를 5번 틀리셨습니다.로그아웃됩니다.");
+                                $("#modify_profile_form").attr("action","logout");
+                                $("#modify_profile_form").submit();
+                            }
+                        }else{
+                            $("#modify_profile_form").attr("action","withdrawal");
+                            $("#modify_profile_form").submit();
+                        }
+                    });
+                });
         </script>
     </html>

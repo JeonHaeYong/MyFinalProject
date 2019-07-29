@@ -563,6 +563,15 @@ public class MemberController {
 
 		return result;
 	}
+	
+	//-탈퇴하기--------------------------------------------------------------------------------------------
+	
+	@RequestMapping("withdrawal")
+	public String withdrawal(HttpServletRequest request, MemberDTO dto) {
+		
+		
+		return "index";
+	}
 
 }
 

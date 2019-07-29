@@ -24,6 +24,11 @@ public class DonationPaymentDAOImpl implements DonationPaymentDAO {
 	}
 	
 	@Override
+	public int updateWithdrawalDonator(String id) {
+		return sst.update("DonationPaymentDAO.updateWithdrawalDonator", id);
+	}
+	
+	@Override
 	public List<DonationPaymentDTO> selectDonationPaymentById(Map<String, String> param) {
 		return sst.selectList("DonationPaymentDAO.selectDonationPaymentById", param);
 	}

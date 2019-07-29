@@ -7,6 +7,7 @@ import kh.spring.dto.ReviewCommentsDTO;
 
 public interface ReviewCommentsDAO {
 	public int insertReviewComment(ReviewCommentsDTO dto);
+	public int updateWithdrawalWriter(String id);
 	public int modifyReviewComment(ReviewCommentsDTO dto);
 	public int deleteReviewComment(int seq);//review삭제되면, 해당 글의 댓글모두삭제
 	public List<ReviewCommentsDTO> selectAllReviewCommentsByReviewSeq(int seq , int start, int end , String loginId);

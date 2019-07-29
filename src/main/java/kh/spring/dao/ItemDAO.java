@@ -7,6 +7,7 @@ import kh.spring.dto.ItemDTO;
 
 public interface ItemDAO {
 	public int deleteItem(String[] seqs);
+	public int updateWithdrawalSeller(String id);
 	public ItemDTO readOneItem(int seq);
 	public int insertItem(ItemDTO dto);
 	public int modifyItem(ItemDTO dto);

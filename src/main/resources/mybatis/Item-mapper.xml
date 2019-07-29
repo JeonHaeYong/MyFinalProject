@@ -83,4 +83,8 @@
 		delete from item where seq = #{value}
 	</delete>
 	
+	<update id="updateWithdrawalSeller">
+		update item set seller='탈퇴한 회원' where seller=#{value}
+	</update>
+	
 </mapper>

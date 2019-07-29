@@ -21,6 +21,11 @@ public class DisappearReportDAOImpl implements DisappearReportDAO{
 	private SqlSessionTemplate sst; 
 	
 	@Override
+	public int updateWithdrawalWriter(String id) {
+		return sst.update("DisappearReportDAO.updateWithdrawalWriter", id);
+	}
+	
+	@Override
 	public int insert(DisappearReportDTO drdto) {
 		if(drdto.getNeuter() == null) { //중성화 안했을 경우
 			drdto.setNeuter("X");
