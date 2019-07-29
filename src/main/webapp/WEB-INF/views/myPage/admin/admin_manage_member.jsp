@@ -367,9 +367,7 @@ font-weight:bold;
 <script src="resources/js/isotope.pkgd.min.js"></script>
 <script src="resources/js/main.js"></script>
 <script>
-	$(function()
-    {
-		
+
 		$("#lower_outter_body").slideToggle(0);
 		
 		$("#upper_header, #lower_header").on("click", function()
@@ -627,13 +625,6 @@ font-weight:bold;
 	    }
 
 	    
-    });
-    
-	
-	
-    onload = function()
-    {
-		
-    };
+
 </script>
 </html>

@@ -209,8 +209,6 @@ font-weight:bold;
 <script src="resources/js/isotope.pkgd.min.js"></script>
 <script src="resources/js/main.js"></script>
 <script>
-	$(function()
-    {
 		myAjax("1");
 		
 		$(document).on("click", "#search_btn,.navi_btns", function()
@@ -293,11 +291,5 @@ font-weight:bold;
 	    		alert("error");
 	    	});
 		}
-    })
-    
-    onload = function()
-    {
-		
-    };
 </script>
 </html>

@@ -237,9 +237,9 @@ body{
 				
 				<div class="row justify-content-center">
 
-					<div class="col-12 col-lg-12 my-5 text-center">
+					<div class="col-12 col-lg-12 mt-5 text-center">
 						
-						<h1> 현재 진행중인 후원 업체가 없습니다</h1>	
+						<h1 class="pt-5 my-auto" style="height:500px"> 현재 진행중인 후원 업체가 없습니다</h1>	
 						
 					</div>
 					
