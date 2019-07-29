@@ -311,10 +311,10 @@
                 function clickReplyNavi(param){//댓글 navi 클릭했을때,
                     var currentPage = $(param).text();
                     if(currentPage=="<이전"){
-                        var prev =  $(param).parent().next().attr("value");
+                        var prev =  $(param).next().text();
                         currentPage = parseInt(prev) - 1 ;
                     }else if(currentPage=="다음>"){
-                        var next  = $(param).parent().prev().attr("value");
+                        var next  = $(param).prev().text();
                         currentPage = parseInt(next) + 1 ;
                     }
                     $.ajax({
