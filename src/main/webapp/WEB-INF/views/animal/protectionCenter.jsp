@@ -104,7 +104,7 @@
             <!--section start-->
             <c:forEach var="list" items="${list }">
             	<div class="row section">
-                	<div class="col-lg-1  d-none d-lg-block ">${list.seq}</div>
+                	<div class="col-lg-1  d-none d-lg-block ">${list.rown}</div>
                 	<div class="col-lg-3 col-md-3 col-12 ">${list.center }</div>
                 	<div class="col-lg-3 col-md-3 col-12">${list.tel }</div>
                 	<div class="col-lg-5 col-md-6  col-12">${list.address }</div>
