@@ -43,8 +43,8 @@
      .menu-bar div:first-child{font-size: 25px; font-weight: bold;  border-bottom: 1px solid black; color: #754F44;}
       a[name="s-menu"]{color: #754F44; text-decoration-line: none; font-size:20px;}
       a[name="s-menu"]:hover{color: #754F44;}
-     .pageNum,.prev,.next{text-decoration-line: none; color: #754F44; font-size:25px; font-family:'Gamja Flower', cursive;}
-     .pageNum:hover,.prev:hover,.next:hover{font-weight: bold;}
+      .navi-btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44; border:none; border-radius:30px; margin-left:5px; width:40px;}
+     .navi-btn:hover{background-color:#FDD692; font-weight:bold;}
      .search-box{margin-bottom:10px;}
      .search-box>div{padding:0px;}
      .search-btn{background-color:#FDD692; border:none; font-family:'Gamja Flower', cursive; font-size:20px; padding: 0px 3px;}
@@ -161,7 +161,37 @@
 				location.href="searchToCenter?currentPage=1&&option="+option;
 			}
 		});
-		
+		$(".pageNum").each(function(index,items){ // 네비버튼 클릭
+			$(this).on("click",function(){
+				var currentPage = $(this).val();
+				location.href="toCenter?currentPage="+currentPage;
+			})
+		});
+		$(".prev").on("click",function(){
+			var currentPage = $(".prev").attr("currentPage");
+			location.href="toCenter?currentPage="+currentPage;
+		});
+		$(".next").on("click",function(){
+			var currentPage = $(".next").attr("currentPage");
+			location.href="toCenter?currentPage="+currentPage;
+		});
+		$(".opt-pageNum").each(function(index,items){ // 네비버튼 클릭-검색
+			$(this).on("click",function(){
+				var currentPage = $(this).val();
+				var option = $(this).attr("option");
+				location.href="searchToCenter?currentPage="+currentPage+"&&option="+option;
+			})
+		});
+		$(".opt-prev").on("click",function(){
+			var currentPage = $(".prev").attr("currentPage");
+			var option = $(this).attr("option");
+			location.href="searchToCenter?currentPage="+currentPage+"&&option="+option;
+		});
+		$(".opt-next").on("click",function(){
+			var currentPage = $(".next").attr("currentPage");
+			var option = $(this).attr("option");
+			location.href="searchToCenter?currentPage="+currentPage+"&&option="+option;
+		});
 
 		
 </script>

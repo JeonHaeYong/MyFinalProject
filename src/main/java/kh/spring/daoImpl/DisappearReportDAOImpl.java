@@ -14,9 +14,9 @@ import kh.spring.dto.DisappearReportDTO;
 @Repository
 public class DisappearReportDAOImpl implements DisappearReportDAO{
 	// 한 페이지에 몇 개의 글이 보이게 할 것인지
-	public static int recordCountPerPage = 9;
+	public static int recordCountPerPage = 2;
 	// 한 페이지에 네비게이터가 총 몇 개가 보이게 할 것인지
-	public static int naviCountPerPage = 10;
+	public static int naviCountPerPage = 2;
 	@Autowired
 	private SqlSessionTemplate sst; 
 	
@@ -51,7 +51,7 @@ public class DisappearReportDAOImpl implements DisappearReportDAO{
 	public List<DisappearReportDTO> selectPerPage(int currentPage){
 		Map<String, Integer> hs = new HashMap<>();
 		int end = currentPage * recordCountPerPage;
-		int start = end - 8;
+		int start = end - 1;
 		hs.put("start", start);
 		hs.put("end", end);
 		return sst.selectList("DisappearReportDAO.selectPerPage", hs);
@@ -90,17 +90,13 @@ public class DisappearReportDAOImpl implements DisappearReportDAO{
 				}
 				StringBuilder sb = new StringBuilder();
 				if(needPrev) {
-					//sb.append("<a class='prev' href='toDisappearList?currentPage=" + (startNavi - 1) + "'> ◀  </a>");
 					sb.append("<input type='button' currentPage='"+(startNavi - 1)+"' value='이전' class='prev navi-btn'>");
 				}
 				for(int i = startNavi; i <= endNavi; i++) {
-					//sb.append("<a class='pageNum' href='toDisappearList?currentPage=" + i + "'> " + i + "</a>");
 					sb.append("<input type='button' currentPage='"+i+"' class='pageNum navi-btn' value='"+i+"'>");
-
 				}
 				if(needNext) {
-					//sb.append("<a class='next' href='toDisappearList?currentPage=" + (endNavi + 1) + "'> ▶ </a>");
-					sb.append("<input type='button' currentPage='"+(startNavi + 1)+"' value='다음' class='next navi-btn'>");
+					sb.append("<input type='button' currentPage='"+(endNavi + 1)+"' value='다음' class='next navi-btn'>");
 				}
 				return sb.toString();
 	}
