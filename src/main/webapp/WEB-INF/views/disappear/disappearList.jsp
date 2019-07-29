@@ -39,14 +39,6 @@
 			color: #EC7357 !important;
 			font-weight: 600 !important;
 		}	
-	
-	
-	
-	
-	
-	
-	
-	
 	.empty{width: 100%; text-align: center; margin: auto; margin-bottom: 50px; height:50px;}
   #title{text-align: center;}
   h1{ font-family: 'Gamja Flower', cursive;}
@@ -102,17 +94,18 @@ height: 350px;
 
 
 .footer{text-align:right; margin-right:170px; margin-bottom: 30px;}
-/* .btns,.pageNum,.prev,.next{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44;}
-.btns:hover{background-color:#FDD692; font-weight:bold;} */
+
+
 
 
 .btns{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44; border-radius:30px; border:none; font-size:25px;}
 .btns:hover{background-color:#FDD692; font-weight:bold;}
 
 
+
 .navi-section{text-align: center; margin-top:20px; font-family: 'Gamja Flower', cursive; font-size:25px;}
-.pageNum,.prev,.next{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44; border:none; border-radius:30px; margin-left:5px; width:40px;}
-.pageNum:hover,.prev:hover,.next:hover{background-color:#FDD692; font-weight:bold;}
+.navi-btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44; border:none; border-radius:50px; margin-left:5px; width:60px;}
+.navi-btn:hover{background-color:#FDD692; font-weight:bold;}
 .furColor{overflow:hidden; text-overflow:ellipsis; white-space;nowrop;}
 #menu-disappear{color:#EC7357;}
 </style>
@@ -229,25 +222,37 @@ height: 350px;
 
 			}
 		});
-		$(".navi-btn").each(function(index,items){ // 네비버튼 클릭하면 ajax로 정보 가져오기
+		$(".pageNum").each(function(index,items){ // 네비버튼 클릭하면 ajax로 정보 가져오기
 			$(this).on("click",function(){
-				var currentPage = $(this).attr("currentPage");
+				var currentPage = $(this).val();
 				$.ajax({
 					url:"list_ajax",
-					data:{currentPageStr : currentPage},
+					data:{currentPageStr:currentPage},
 					type:"get"
 				}).done(function(resp){
 					$(".disappearList").html("");
 					$(".disappearList").append(resp);
-				})
+					
+				});
 			})
-		})
+		});
+		$(".prev").on("click",function(){
+			var currentPage = $(".prev").attr("currentPage");
+			location.href="toDisappearList?currentPage="+currentPage;
+
+		
+		});
+		$(".next").on("click",function(){
+			var currentPage = $(".next").attr("currentPage");
+			location.href="toDisappearList?currentPage="+currentPage;
+		});
 		$(".select-delete-btn").on("click",function(){
 			var result = confirm("정말로 삭제하시겠습니까?");
         	if(result == true){
         		$("#listForm").submit();
         	}
 		})
+
 </script>
 </body>
 </html>

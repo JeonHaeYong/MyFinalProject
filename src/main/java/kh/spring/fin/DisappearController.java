@@ -102,7 +102,6 @@ public class DisappearController {
 			}catch(Exception e) {e.printStackTrace();}
 		
 		return "redirect:/toDisappearList?currentPage="+session.getAttribute("currentPage");
-
 	}
 	@RequestMapping("toReportContent")
 	public String toContent(HttpServletRequest request) {
