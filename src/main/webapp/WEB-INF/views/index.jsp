@@ -653,7 +653,7 @@
     					//broken clouds
     					var imgURL ="resources/images/weather/cloud.png";
     					$("#weathertext").html("오늘은 흐린 날씨입니다.");
-    					$("#weathertext2").html("애완동물과 공놀이 어떠세요?");
+    					$("#weathertext2").html("애완동물과 실내에서 공놀이 어떠세요?");
     				}
     				else if(resp.weather[0].icon=="09d" || resp.weather[0].icon=="09n"||resp.weather[0].icon=="10d" || resp.weather[0].icon=="10n"){
     					//shower rain
@@ -666,7 +666,7 @@
     					//thunderstorm
     					var imgURL ="resources/images/weather/strom.png";
     					$("#weathertext").html("오늘은 찌릿!천둥 치는 날씨입니다.");
-    					$("#weathertext2").html("애완동물이 놀라지 않게 조심 해주세요!");
+    					$("#weathertext2").html("애완동물이 놀라지 않게 조심 해주세요~!");
     				}
     				else if(resp.weather[0].icon=="13d" || resp.weather[0].icon=="13n"){
     					//snow
