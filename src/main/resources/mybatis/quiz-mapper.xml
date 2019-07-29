@@ -33,7 +33,9 @@
 	<update id="updateZeroPoint">
 		update member set point = 0 where id = #{id}
 	</update>
-	
+	<update id="updatePointZeroAllUsers">
+		update member set point = 0
+	</update>
 	
 	
 	

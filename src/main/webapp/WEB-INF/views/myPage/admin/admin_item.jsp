@@ -302,7 +302,7 @@ font-weight:bold;
 	    	})
 	    	.fail(function()
 	  	    {
-	  	    	alert("error");
+	  	    	console.log("에러 발생");
 	  	    });
 		})
 		
@@ -343,7 +343,7 @@ font-weight:bold;
 	    	})
 	    	.fail(function()
 	  	    {
-	  	    	alert("error");
+	    		console.log("에러 발생");
 	  	    });
 		})
 		
@@ -424,7 +424,7 @@ font-weight:bold;
 	    	})
 	    	.fail(function()
 	    	{
-	    		alert("error");
+	    		console.log("에러 발생");
 	    	});
 		}
 

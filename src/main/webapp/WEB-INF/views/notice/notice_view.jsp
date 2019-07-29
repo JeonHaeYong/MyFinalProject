@@ -246,7 +246,7 @@ a{
 	    	})
 	    	.fail(function()
 	    	{
-	    		alert("error");
+	    		alert("에러 발생");
 	    	});
 			
 		}

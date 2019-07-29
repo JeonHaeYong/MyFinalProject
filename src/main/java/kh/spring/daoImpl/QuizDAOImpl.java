@@ -148,4 +148,10 @@ public class QuizDAOImpl implements QuizDAO {
 	      reText = reText.replaceAll("\\</", "");
 	      return reText;
 	   }
+
+	@Override
+	public int updatePointZeroAllUsers() throws Exception
+	{
+		return sst.update("QuizDAO.updatePointZeroAllUsers");
+	}
 }
