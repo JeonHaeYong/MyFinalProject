@@ -358,6 +358,7 @@
                 });
                 $('#msg_modal').on('hidden.bs.modal', function (e) {//modal 취소클릭해서 없어진후에 실행
                 	$("#msg_send_form")[0].reset();
+                	$("#recipient-name").prop("readonly",false);
                 });
                 $("#msg_send_btn").on("click",function(){
                     var recipient = $("#recipient-name").val();
@@ -519,6 +520,7 @@
             	  var recipient_name = $("#r_sender_modal").prop("sender");
             	  $('#received_msg_close_btn').trigger("click");
             	  $("#recipient-name").val(recipient_name);
+            	  $("#recipient-name").prop("readonly",true);
             	  $("#sendMsg_btn").trigger("click");
               });
             </script>
