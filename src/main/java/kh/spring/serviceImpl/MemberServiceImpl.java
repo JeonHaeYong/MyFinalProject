@@ -250,7 +250,7 @@ public class MemberServiceImpl implements MemberService {
 			sendMail.setSubject("[라온펫]회원가입 이메일 인증입니다.");
 			sendMail.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>")
 					.append("<p>아래의 인증번호를 입력하시면 이메일 인증이 완료됩니다.</p>")
-					.append("인증번호=")
+					.append("인증번호:")
 					.append(authkey)
 					.toString());
 			sendMail.setFrom("wlsgid916@gmial.com ", "[라온펫관리자]");
@@ -268,7 +268,7 @@ public class MemberServiceImpl implements MemberService {
 	public boolean newPw(String email)  {
 
 		// 임의의 authkey 생성
-		String authkey = new TempKey().getKey(50, false);
+		String authkey = new TempKey().getKey(20, false);
 		session.setAttribute("newPw",authkey);	
 		// mail 작성 관련 
 		try {
@@ -281,7 +281,7 @@ public class MemberServiceImpl implements MemberService {
 				.append("임시비밀번호: ")
 				.append(authkey)
 				.toString());
-		sendMail.setFrom("wlsgid916@gmial.com", "관리자입니다");
+		sendMail.setFrom("wlsgid916@gmial.com", "[라온펫관리자]");
 		sendMail.setTo(email);
 		sendMail.send();
 		return true;
@@ -304,7 +304,7 @@ public class MemberServiceImpl implements MemberService {
 						.append("회원님의 아이디는 ")
 						.append(id).append("입니다")
 						.toString());
-				sendMail.setFrom("wlsgid916@gmial.com ", "관리자입니다");
+				sendMail.setFrom("wlsgid916@gmial.com ", "[라온펫관리자]");
 				sendMail.setTo(email);
 				sendMail.send();
 				return true;
