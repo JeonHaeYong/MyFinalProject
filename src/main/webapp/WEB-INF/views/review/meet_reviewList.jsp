@@ -22,6 +22,7 @@
                 <link rel="stylesheet" href="resources/css/style.css">
                 <jsp:include page="/WEB-INF/views/module/loginstyle.jsp" ></jsp:include>
                 <style>
+                	body *{font-family: 'Gamja Flower' !important}
                     ::placeholder{font-family: 'Gamja Flower'}
                     /*점보트론 이미지*/
                     .jumbotron{
