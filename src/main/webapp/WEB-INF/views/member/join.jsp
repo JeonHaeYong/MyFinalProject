@@ -649,6 +649,7 @@ a[name="s-menu"] {
 
 							}
 						});
+
 		$("#emailcheck")
 				.on(
 						"click",
@@ -681,6 +682,7 @@ a[name="s-menu"] {
 												}
 											});
 						});
+
 
 		/* 생년월일 regex */
 		$("#birthday").on("focusout", function() {
