@@ -99,11 +99,11 @@
 	
 	<div class="container cartoon-container">
 		<div class="row">
-			<div class="col-12 cartoonTitle"><span>"공고"</span>와<span> "보호"</span>의 차이를 알고 있니~? </div>
-			<div class="col-12 cartoonTitle">지금부터 알아보자!!</div>
+			<div class="col-12 cartoonTitle" data-aos="fade-up" data-aos-delay="100"><span>"공고"</span>와<span> "보호"</span>의 차이를 알고 있니~? </div>
+			<div class="col-12 cartoonTitle" data-aos="fade-up" data-aos-delay="150">지금부터 알아보자!!</div>
 		</div>
 		<div class="row no-gutters mb-5">
-			<div class="col-12 col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+			<div class="col-12 col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="200">
 				<div class="row pricing">
 					<div class="col-12">
 						<span class="icon-paw d-block display-5 text-white mb-2 pt-2"></span>
@@ -115,7 +115,7 @@
 
 			</div>
 
-			<div class="col-12 col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+			<div class="col-12 col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="300">
 				<div class="row pricing">
 					<div class="col-12 ">
 						<span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span> <span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span>
@@ -127,7 +127,7 @@
 				</div>
 			</div>
 
-			<div class="col-12 col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+			<div class="col-12 col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="400">
 				<div class="row pricing">
 					<div class="col-12">
 						<span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span> <span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span> <span
@@ -138,7 +138,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-12 from">
+			<div class="col-12 from" data-aos="fade-up" data-aos-delay="410">
 				출처-포인핸드<img src="/resources/images/pet.png">
 			</div>
 		</div>
@@ -562,7 +562,7 @@
 		        var result = cookieToJson(cookies);
 		        if(result != "N")
 		        {
-			        window.open(url, '', 'width=515,height=750,left=1300,top=70');
+			        window.open(url, '', 'width=430,height=625,left=1300,top=70');
 		        }
 	        }
 	        function cookieToJson(cookies)

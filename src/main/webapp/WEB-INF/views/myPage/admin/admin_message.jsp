@@ -188,11 +188,11 @@
 							<h2 class="menu_header my-1">관리자 메뉴</h2>
 						</div>
 						
-						<div class="col-12 text-center px-1">
+						<div class="col-12  text-center px-1">
 							<a href="admin-member" class="btn menu_btns">회원 관리</a>
 						</div>
 			
-						<div class="col-12 text-center px-1">
+						<div class="col-12  text-center px-1">
 							<a href="admin-item" class="btn menu_btns">무료 나눔 물품 승인</a>
 						</div>
 			
@@ -200,20 +200,20 @@
 							<a href="admin-paylog" class="btn menu_btns">무료 나눔 거래 내역</a>
 						</div>
 			
-						<div class="col-12 text-center px-1">
-							<a href="admin-donation" class="btn menu_btns">월 별 후원금 및 전달 기관</a>
+						<div class="col-12  text-center px-1">
+							<a href="admin-donation" class="btn selected_menu_btns">월 별 후원금 및 전달 기관</a>
 						</div>
 			
-						<div class="col-12 text-center px-1">
+						<div class="col-12  text-center px-1">
 							<a href="admin-quiz" class="btn menu_btns">퀴즈 당첨자</a>
 						</div>
 			
-						<div class="col-12 text-center px-1">
+						<div class="col-12  text-center px-1">
 							<a href="admin-chart" class="btn menu_btns">통계</a>
 						</div>
 						
-						<div class="col-12 text-center px-1">
-							<a href="admin-msg" class="btn selected_menu_btns">관리자쪽지함</a>
+						<div class="col-12  text-center px-1">
+							<a href="admin-msg" class="btn menu_btns">관리자쪽지함</a>
 						</div>
 						
 						<div class="col-12 text-center px-1">
