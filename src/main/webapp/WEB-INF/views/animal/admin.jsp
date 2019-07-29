@@ -41,7 +41,11 @@
      .btns{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44; font-size:30px; margin-top:10px; border-radius:30px; border:none;
      		height: 65px; width:270px;}
 	.btns:hover{background-color:#FDD692; font-weight:bold; color:#754F44;}
-	
+	#abandoned_link
+	{
+		color: #EC7357 !important;
+		font-weight: 600 !important;
+	}
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">

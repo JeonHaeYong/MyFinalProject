@@ -44,6 +44,9 @@
 .cartoon-container {
 	max-width: 1300px;
 }
+.cartoonTitle{text-align:center; font-size:40px;font-family: 'Gamja Flower', cursive;}
+.cartoonTitle>div:nth-child(2){text-align:center; font-size:15px;font-family: 'Gamja Flower', cursive;}
+.cartoonTitle>span{color:#EC7357; font-size:60px;}
 /* 만화 부분 끝*/
 #acs_div {
 	width: 100%;
@@ -69,7 +72,7 @@
 }
 </style>
 </head>
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section" onload="javascript:openPopup('popUp.home')">
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section" >
 	<jsp:include page="/WEB-INF/views/module/menu.jsp"></jsp:include>
 	<!-- -----여기까지 고정 Header입니다----------------------------------------------------------------------------------------------------------- -->
 
@@ -93,9 +96,14 @@
 	</section>
 
 	<section class="site-section" id="about-section">
+	
 	<div class="container cartoon-container">
+		<div class="row">
+			<div class="col-12 cartoonTitle" data-aos="fade-up" data-aos-delay="100"><span>"공고"</span>와<span> "보호"</span>의 차이를 알고 있니~? </div>
+			<div class="col-12 cartoonTitle" data-aos="fade-up" data-aos-delay="150">지금부터 알아보자!!</div>
+		</div>
 		<div class="row no-gutters mb-5">
-			<div class="col-12 col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+			<div class="col-12 col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="200">
 				<div class="row pricing">
 					<div class="col-12">
 						<span class="icon-paw d-block display-5 text-white mb-2 pt-2"></span>
@@ -107,7 +115,7 @@
 
 			</div>
 
-			<div class="col-12 col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+			<div class="col-12 col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="300">
 				<div class="row pricing">
 					<div class="col-12 ">
 						<span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span> <span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span>
@@ -119,7 +127,7 @@
 				</div>
 			</div>
 
-			<div class="col-12 col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+			<div class="col-12 col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="400">
 				<div class="row pricing">
 					<div class="col-12">
 						<span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span> <span class="icon-paw d-inline-block display-5 text-white mb-2 pt-2"></span> <span
@@ -130,7 +138,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-12 from">
+			<div class="col-12 from" data-aos="fade-up" data-aos-delay="410">
 				출처-포인핸드<img src="/resources/images/pet.png">
 			</div>
 		</div>
@@ -545,13 +553,16 @@
 	        });
 	        
 	        //팝업창!!!--왜망가진거야 ㅠㅠㅠ-------------------------------------------------------------------
+	        
+	        openPopup('popUp.home');
+	        
 	        function openPopup(url)
 	        {
 		        var cookies = document.cookie;
 		        var result = cookieToJson(cookies);
 		        if(result != "N")
 		        {
-			        window.open(url, '', 'width=570,height=830,left=1300,top=70');
+			        window.open(url, '', 'width=430,height=625,left=1300,top=70');
 		        }
 	        }
 	        function cookieToJson(cookies)
@@ -561,6 +572,10 @@
 		        return entry[0];
 	        }
         })
+     //-----------------------------------------
+   
+	
+	
 	</script>
 </body>
 </html>

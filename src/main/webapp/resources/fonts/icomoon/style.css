@@ -1361,7 +1361,8 @@
 }
 .icon-paw:before {
   content: "\f1b0";
-  color :#EC7357;
+  color :#03803d;
+  font-size:30px;
 }
 .icon-spoon:before {
   content: "\f1b1";

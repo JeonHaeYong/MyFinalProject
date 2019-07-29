@@ -13,4 +13,6 @@ public interface QuizService {
 	public List<QuizDTO> selectQuizPerPageService(int currentPage);
 	public String getNaviQuizService(int currentPage);
 	public int updateZeroPoint(int point, String id);
+	
+	public Object updatePointZeroAllUsers() throws Exception;
 }

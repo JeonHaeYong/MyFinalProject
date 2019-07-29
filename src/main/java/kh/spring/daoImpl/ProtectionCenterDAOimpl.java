@@ -85,23 +85,29 @@ public class ProtectionCenterDAOimpl implements ProtectionCenterDAO{
 		StringBuilder sb = new StringBuilder();
 		if(option == null) {
 			if(needPrev) {
-				sb.append("<a class='prev' href='toCenter?currentPage=" + (startNavi - 1) + "'> ◀  </a>");
+				sb.append("<input type='button' currentPage='"+(startNavi - 1)+"' value='이전' class='prev navi-btn'>");
+
 			}
 			for(int i = startNavi; i <= endNavi; i++) {
-				sb.append("<a class='pageNum' href='toCenter?currentPage=" + i + "'> " + i + "</a>");
+				sb.append("<input type='button' currentPage='"+i+"' class='pageNum navi-btn' value='"+i+"'>");
+
 			}
 			if(needNext) {
-				sb.append("<a class='next' href='toCenter?currentPage=" + (endNavi + 1) + "'> ▶ </a>");
+				sb.append("<input type='button' currentPage='"+(endNavi + 1)+"' value='다음' class='next navi-btn'>");
+
 			}
 		}else {
 			if(needPrev) {
-				sb.append("<a class='prev' href='searchToCenter?option="+option+"&&currentPage=" + (startNavi - 1) + "'> ◀  </a>");
+				sb.append("<input type='button' currentPage='"+(startNavi - 1)+"' option='"+option+"' value='이전' class='opt-prev navi-btn'>");
+
 			}
 			for(int i = startNavi; i <= endNavi; i++) {
-				sb.append("<a class='pageNum' href='searchToCenter?option="+option+"&&currentPage=" + i + "'> " + i + "</a>");
+				sb.append("<input type='button' currentPage='"+i+"' option='"+option+"' class='opt-pageNum navi-btn' value='"+i+"'>");
+
 			}
 			if(needNext) {
-				sb.append("<a class='next' href='searchToCenter?option="+option+"&&currentPage=" + (endNavi + 1) + "'> ▶ </a>");
+				sb.append("<input type='button' currentPage='"+(endNavi + 1)+"' option='"+option+"' value='다음' class='opt-next navi-btn'>");
+
 			}
 		}
 		
