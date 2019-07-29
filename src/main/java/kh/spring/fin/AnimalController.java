@@ -138,8 +138,8 @@ public class AnimalController {
 		System.out.println("경기~~");
 		Gson g = new Gson();
 		JsonParser jp = new JsonParser();
-				for(int i = 1; i < 4; i++ ) {
-					String address = "https://openapi.gg.go.kr/Animalhosptl?KEY=226fb5b860bd4d349bada1d7d8a82bff&Type=json&pIndex=" + i + "&pSize=1000";//3페이지까지
+			
+					String address = "https://openapi.gg.go.kr/Animalhosptl?KEY=226fb5b860bd4d349bada1d7d8a82bff&Type=json&pIndex=2&pSize=1000";//3페이지까지
 					BufferedReader br;
 					URL url;
 					HttpURLConnection conn;
@@ -159,7 +159,7 @@ public class AnimalController {
 					JsonObject row = animal.get(1).getAsJsonObject();
 					JsonArray ggInfo = row.get("row").getAsJsonArray();
 					int gCount = 0;
-					for(int j = 0; i < ggInfo.size(); j ++) {
+					for(int j = 0; j < ggInfo.size(); j ++) {
 						GyeonggiDTO gdto = g.fromJson(ggInfo.get(j), GyeonggiDTO.class);
 						if(gdto.getBSN_STATE_NM().equals("정상")) {
 							Pattern p = Pattern.compile("동물병원");
@@ -180,7 +180,7 @@ public class AnimalController {
 							}else {continue;}
 						}else {continue;}
 					}
-				}
+			
 				System.out.println("끝");
 				return "1";
 	}
@@ -210,9 +210,9 @@ public class AnimalController {
 	@ResponseBody
 	@RequestMapping("insertCenterData")
 	public String insertCenterData() {
-		for(int j = 1; j < 3; j ++) {
+	
 		String key ="daClz41uTyPYm%2BuHXvoYArzIFgS4ZRRO%2BGz8PW1JPQQ1FyO%2BfxwypxzeO%2Blg1E7LLg0VuRKAtze9DUDagO%2BPnA%3D%3D";
-		String address = "http://api.data.go.kr/openapi/animalprtccnter-std?serviceKey="+key+"&pageNo="+j+"&numOfRows=1000&type=json";//2페이지까지
+		String address = "http://api.data.go.kr/openapi/animalprtccnter-std?serviceKey="+key+"&pageNo=1&numOfRows=1000&type=json";//2페이지까지
 		BufferedReader br;
 		URL url;
 		HttpURLConnection conn;
@@ -246,7 +246,7 @@ public class AnimalController {
 				return "0";
 			}
 		}
-		}
+
 		System.out.println("끝~!");
 		return "1";
 	}

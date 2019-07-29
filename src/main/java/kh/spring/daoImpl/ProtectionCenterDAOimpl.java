@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import kh.spring.dao.ProtectionCenterDAO;
@@ -16,6 +17,7 @@ import kh.spring.insertDataldto.CenterDTO;
 public class ProtectionCenterDAOimpl implements ProtectionCenterDAO{
 	@Autowired
 	private SqlSessionTemplate sst;
+
 	
 	// 한 페이지에 몇 개의 글이 보이게 할 것인지
 	public static int recordCountPerPage = 10;
