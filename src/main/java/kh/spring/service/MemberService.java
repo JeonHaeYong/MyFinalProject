@@ -5,6 +5,7 @@ import java.util.List;
 import kh.spring.dto.MemberDTO;
 
 public interface MemberService {
+	public Object withdrawalService(String id) throws Exception;
 	public int insertMemberService(MemberDTO dto);
 	public List<MemberDTO> selectAllMembersService();
 	public int isLoginOkService(String id, String password); 

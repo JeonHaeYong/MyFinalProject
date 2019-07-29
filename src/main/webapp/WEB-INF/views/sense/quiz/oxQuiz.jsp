@@ -75,6 +75,11 @@
             .wrong{margin-bottom: 40px;}
             .incorrCount,.corrCount,.getPoint{font-size:30px;}
             .perfect{font-size:40px; font-weight:bold;}
+            #quiz_link
+			{
+				color: #EC7357 !important;
+				font-weight: 600 !important;
+			}
     </style>
             
             

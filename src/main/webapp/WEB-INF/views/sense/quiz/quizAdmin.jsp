@@ -61,6 +61,11 @@
         .navi>div{margin-top:20px;}
         .pageNum,.prev,.next{text-decoration-line: none; color: #754F44; font-size:30px;}
      	.pageNum:hover,.prev:hover,.next:hover{font-weight: bold;}
+     	#quiz_link
+		{
+			color: #EC7357 !important;
+			font-weight: 600 !important;
+		}
      	
 </style>
 

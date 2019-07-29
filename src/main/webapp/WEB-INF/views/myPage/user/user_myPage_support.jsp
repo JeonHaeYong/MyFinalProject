@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>마이페이지 - 후원내역</title>
 <link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link
    href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
@@ -57,21 +57,23 @@
                                 <div class="tab-pane fade show active">
                                     <div class="support_wrapper">
                                     	<div class="row border-bottom border-success">
-                                            <div class="col-4 text-truncate">후원 업체 명</div>
-                                            <div class="col-2 text-truncate">후원 금액</div>
-                                            <div class="col-4 text-truncate">후원 날짜</div>
-                                            <div class="col-2 text-truncate">후원 방식</div>
+                                    		<div class="col-12 row mb-1">
+	                                            <div class="col-4 text-truncate">후원 업체 명</div>
+	                                            <div class="col-2 text-truncate">후원 금액</div>
+	                                            <div class="col-4 text-truncate">후원 날짜</div>
+	                                            <div class="col-2 text-truncate">후원 방식</div>
+                                            </div>
                                         </div>
                                         <div class="row donation_List ajaxRow">
                                         	<c:if test="${dpList.size() == 0 }">
-                                        		<div class="col-12 row mt-2 mb-1">
-	                                        		후원 내역이 없습니다.
+                                        		<div class="col-12 row mt-2 mb-1 d-flex justify-content-center" style="height: 300px;">
+	                                        		<div><h4 style="line-height: 150px; text-align: center;">후원내역이 없습니다.</h4></div>
 	                                        	</div>
                                         	</c:if>
 	                                    	<c:forEach var="dto" items="${dpList }">
 	                                    		<div class="col-12 row mt-2 mb-1">
 	                                    			<div class="col-4 text-truncate">${dto.donation_name }</div>
-		                                            <div class="col-2 text-truncate">${dto.donation }원</div>
+		                                            <div class="col-2 text-truncate donation" donation="${dto.donation }"></div>
 		                                            <div class="col-4 text-truncate">${dto.donated_time }</div>
 		                                            <div class="col-2 text-truncate">${dto.donate_type }</div>
 	                                    		</div>
@@ -80,19 +82,19 @@
                                     	<div class="row mt-3 ajaxRow">
 											<div class="col-12 d-flex justify-content-center" id="naviBox">
 												<c:if test="${pageNavi.needPrev == 1 }">
-													<a class="btn navi" href="#goTop" value="${pageNavi.startNavi - 1}">&laquo;</a>
+													<a class="btn navi mx-1" href="#goTop" value="${pageNavi.startNavi - 1}">&laquo;</a>
 												</c:if>
 												<c:if test="${pageNavi.currentPage > pageNavi.startNavi }">
-													<a class="btn navi" href="#goTop" value="${pageNavi.currentPage - 1}">&lt;</a>
+													<a class="btn navi mx-1" href="#goTop" value="${pageNavi.currentPage - 1}">&lt;</a>
 												</c:if>
 												<c:forEach var="i" begin="${pageNavi.startNavi}" end="${pageNavi.endNavi}">
-													<a class="btn navi" href="#goTop" class="pageNum" value="${i }">${i}</a>
+													<a class="btn navi mx-1" href="#goTop" class="pageNum" value="${i }">${i}</a>
 												</c:forEach>
 												<c:if test="${pageNavi.currentPage < pageNavi.pageTotalCount }">
-													<a class="btn navi" href="#goTop" value="${pageNavi.currentPage + 1}">&gt;</a>
+													<a class="btn navi mx-1" href="#goTop" value="${pageNavi.currentPage + 1}">&gt;</a>
 												</c:if>
 												<c:if test="${pageNavi.needNext == 1 }">
-													<a class="btn navi" href="#goTop" value="${pageNavi.endNavi + 1}">&raquo;</a>
+													<a class="btn navi mx-1" href="#goTop" value="${pageNavi.endNavi + 1}">&raquo;</a>
 												</c:if>
 											</div>
 										</div>
@@ -123,6 +125,16 @@
 				$(item).css("color", "#EC7357");
 			}
 		});	
+		
+		//콤마찍기
+	    function comma(str) {
+	        str = String(str);
+	        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+	    }
+		
+		$(".donation").each(function(i, item){
+			$(item).text(comma($(this).attr("donation")) + "원");
+		});
 		
 		$(document).on("click", ".navi", function(){
 			var currentPage = $(this).attr("value");

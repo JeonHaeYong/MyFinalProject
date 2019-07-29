@@ -112,35 +112,35 @@ font-weight:bold;
 			
 					<div id="menu_row" class="row justify-content-center">
 						
-						<div class="col-6 col-md-4 col-lg-12 text-center my-3">
+					<div class="col-12 text-center my-3">
 							<h2 class="menu_header my-1">관리자 메뉴</h2>
 						</div>
 						
-						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+						<div class="col-12  text-center px-1">
 							<a href="admin-member" class="btn menu_btns">회원 관리</a>
 						</div>
 			
-						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+						<div class="col-12  text-center px-1">
 							<a href="admin-item" class="btn menu_btns">무료 나눔 물품 승인</a>
 						</div>
 			
-						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
-							<a href="admin-paylog" class="btn selected_menu_btns">무료 나눔 거래 내역</a>
+						<div class="col-12 text-center px-1">
+							<a href="admin-paylog" class="btn menu_btns">무료 나눔 거래 내역</a>
 						</div>
 			
-						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
-							<a href="admin-donation" class="btn menu_btns">월 별 후원금 및 전달 기관</a>
+						<div class="col-12  text-center px-1">
+							<a href="admin-donation" class="btn selected_menu_btns">월 별 후원금 및 전달 기관</a>
 						</div>
 			
-						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+						<div class="col-12  text-center px-1">
 							<a href="admin-quiz" class="btn menu_btns">퀴즈 당첨자</a>
 						</div>
 			
-						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+						<div class="col-12  text-center px-1">
 							<a href="admin-chart" class="btn menu_btns">통계</a>
 						</div>
 						
-						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+						<div class="col-12  text-center px-1">
 							<a href="admin-msg" class="btn menu_btns">관리자쪽지함</a>
 						</div>
 						
@@ -335,10 +335,14 @@ font-weight:bold;
 		    			var $seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].seq+'</div>');
 		    			var $buyerCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].buyer+'</div>');
 		    			var $nameCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].name+'</div>');
-		    			var $priceCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].price+'</div>');
+		    			var $priceCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1"></div>');
 		    			var $sellerCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">'+array[i-1].seller+'</div>');
 		    			var $timeCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1">' + array[i-1].time.substring(0, array[i-1].time.length-2) + '</div>');
 		    			$row.append($seqCol).append($buyerCol).append($nameCol).append($priceCol).append($sellerCol).append($timeCol);
+		    			
+		    			var price = array[i-1].price;
+		    			$priceCol.text(price.toLocaleString() + " 원 ");
+		    			
 		    			$("#search_result_div").append($row);
 		    			
 		    		}
@@ -387,7 +391,7 @@ font-weight:bold;
 	    	})
 	    	.fail(function()
 	    	{
-	    		alert("error");
+	    		console.log("에러 발생");
 	    	});			
 		}
 

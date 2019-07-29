@@ -166,6 +166,5 @@ public class MemberDAOImpl implements MemberDAO {
 	public int updateImagePath(MemberDTO dto) {
 		return sst.update("MemberDAO.updateImagePath",dto);
 	}
-
 	
 }

@@ -110,35 +110,35 @@ font-weight:bold;
 			
 					<div id="menu_row" class="row justify-content-center">
 						
-						<div class="col-6 col-md-4 col-lg-12 text-center my-3">
+						<div class="col-12 text-center my-3">
 							<h2 class="menu_header my-1">관리자 메뉴</h2>
 						</div>
 						
-						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+						<div class="col-12  text-center px-1">
 							<a href="admin-member" class="btn menu_btns">회원 관리</a>
 						</div>
 			
-						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+						<div class="col-12  text-center px-1">
 							<a href="admin-item" class="btn menu_btns">무료 나눔 물품 승인</a>
 						</div>
 			
-						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+						<div class="col-12 text-center px-1">
 							<a href="admin-paylog" class="btn menu_btns">무료 나눔 거래 내역</a>
 						</div>
 			
-						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
-							<a href="admin-donation" class="btn menu_btns">월 별 후원금 및 전달 기관</a>
+						<div class="col-12  text-center px-1">
+							<a href="admin-donation" class="btn selected_menu_btns">월 별 후원금 및 전달 기관</a>
 						</div>
 			
-						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
-							<a href="admin-quiz" class="btn selected_menu_btns">퀴즈 당첨자</a>
+						<div class="col-12  text-center px-1">
+							<a href="admin-quiz" class="btn menu_btns">퀴즈 당첨자</a>
 						</div>
 			
-						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+						<div class="col-12  text-center px-1">
 							<a href="admin-chart" class="btn menu_btns">통계</a>
 						</div>
 						
-						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+						<div class="col-12  text-center px-1">
 							<a href="admin-msg" class="btn menu_btns">관리자쪽지함</a>
 						</div>
 						
@@ -171,6 +171,16 @@ font-weight:bold;
 	
 						<div id="search_result_div" class="col-12 col-md-12 col-lg-12 text-center my-1"></div>
 	
+					</div>
+					
+					<div class="row justify-content-center">
+
+						<div class="col-12 col-md-12 col-lg-12 text-center my-5">
+			
+							<input id="point_zero_btn" class="btn my_buttons" type="button" value="점수 초기화">
+							
+						</div>
+			
 					</div>
 					
 					<div class="row justify-content-center">
@@ -210,6 +220,11 @@ font-weight:bold;
 <script src="resources/js/main.js"></script>
 <script>
 		myAjax("1");
+		
+		$("#point_zero_btn").on("click", function()
+		{
+			location.href = "admin-quiz-zero";
+		});
 		
 		$(document).on("click", "#search_btn,.navi_btns", function()
 		{
@@ -288,7 +303,7 @@ font-weight:bold;
 	    	})
 	    	.fail(function()
 	    	{
-	    		alert("error");
+	    		console.log("에러 발생");
 	    	});
 		}
 </script>

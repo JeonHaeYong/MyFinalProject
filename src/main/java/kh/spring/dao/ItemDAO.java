@@ -7,6 +7,7 @@ import kh.spring.dto.ItemDTO;
 
 public interface ItemDAO {
 	public int deleteItem(String[] seqs);
+	public int updateWithdrawalSeller(String id);
 	public ItemDTO readOneItem(int seq);
 	public int insertItem(ItemDTO dto);
 	public int modifyItem(ItemDTO dto);
@@ -26,4 +27,5 @@ public interface ItemDAO {
 	public int selectCountForAdmin() throws Exception;
 	public int updatePermissionBySeq(int seq) throws Exception;
 	public int deleteItemBySeq(int seq) throws Exception;
+	public String soldoutCheck(int seq) throws Exception;
 }

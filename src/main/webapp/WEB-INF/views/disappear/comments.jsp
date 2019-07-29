@@ -29,14 +29,10 @@
                             </div>
                             <div class="row reply_part">
                                 <c:if test="${reply_navi.size()!=0 }">
-                                    <div class="col-12">
-                                        <ul class="pagination justify-content-center">
-                                            <c:forEach var="navi" items="${reply_navi }">
-                                                <li class="page-item reply_item" value="${navi }">
-                                                    <a class="page-link text-decoration-none reply_navi" href="#toList" onclick="clickReplyNavi(this);">${navi }</a>
-                                                </li>
-                                            </c:forEach>
-                                        </ul>
-                                    </div>
+                                   <div class="col-12 text-center">
+					<c:forEach var="navi" items="${reply_navi }">
+						<a class="ml-1 navi reply_navi" href="#toList" onclick="clickReplyNavi(this);">${navi }</a>
+					</c:forEach>
+				</div>
                                 </c:if>
                             </div>

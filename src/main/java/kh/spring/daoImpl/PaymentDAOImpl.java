@@ -107,4 +107,19 @@ public class PaymentDAOImpl implements PaymentDAO {
 		return pageNavi;
 	}
 
+	@Override
+	public int updateWithdrawalBybuyer(String id) {
+		return sst.update("PaymentDAO.updateWithdrawalBybuyer",id);
+	}
+
+	@Override
+	public int updateWithdrawalByseller(String id) {
+		return sst.update("PaymentDAO.updateWithdrawalByseller",id);
+	}
+
+	@Override
+	public int checkPayDate(String id) {
+		return sst.selectOne("PaymentDAO.checkPayDate", id);
+	}
+
 }

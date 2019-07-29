@@ -47,4 +47,10 @@
         	#{seq}
   		</foreach>
 	</delete>
+	<update id="updateWithdrawalBysender">
+		update message set sender='탈퇴한 회원' where sender= #{id}
+	</update>
+	<update id="updateWithdrawalByrecipient">
+		update message set recipient='탈퇴한 회원' where recipient= #{id}
+	</update>
 </mapper>

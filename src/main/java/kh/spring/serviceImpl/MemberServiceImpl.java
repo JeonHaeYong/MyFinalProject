@@ -9,17 +9,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import kh.spring.dao.BlackListDAO;
+import kh.spring.dao.CartDAO;
+import kh.spring.dao.DisappearCommentsDAO;
+import kh.spring.dao.DisappearReportDAO;
+import kh.spring.dao.DonationPaymentDAO;
+import kh.spring.dao.ItemDAO;
 import kh.spring.dao.MemberDAO;
-
-
+import kh.spring.dao.MessageDAO;
+import kh.spring.dao.PaymentDAO;
+import kh.spring.dao.ReviewCommentsDAO;
+import kh.spring.dao.ReviewCommentsLikesDAO;
+import kh.spring.dao.ReviewDAO;
+import kh.spring.dao.TempProtectDAO;
 import kh.spring.dto.BlackListDTO;
-import kh.spring.dto.ItemDTO;
 import kh.spring.dto.MemberDTO;
 import kh.spring.mail.MailHandler;
 import kh.spring.mail.TempKey;
@@ -34,7 +43,58 @@ public class MemberServiceImpl implements MemberService {
 	private HttpSession session;
 	@Autowired
 	private BlackListDAO bdao;
+	@Autowired
+	private CartDAO cdao;
+	@Autowired
+	private DisappearReportDAO disappeardao;
+	@Autowired
+	private DisappearCommentsDAO dissappearCommentsdao;
+	@Autowired
+	private TempProtectDAO tempdao;
+	@Autowired
+	private ReviewDAO reviewdao;
+	@Autowired
+	private ReviewCommentsDAO reviewCommentsdao;
+	@Autowired
+	private ReviewCommentsLikesDAO reviewCommentsLikesdao;
+	@Autowired
+	private ItemDAO idao;
+	@Autowired
+	private DonationPaymentDAO dpdao;
+	@Autowired
+	private MessageDAO messagedao;
+	@Autowired
+	private PaymentDAO pdao;
 
+	@Override
+	@Transactional("txManager")
+	public Object withdrawalService(String id) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		if(!(pdao.checkPayDate(id) >= 1)) {
+			BlackListDTO dto = new BlackListDTO();
+			dto.setId(id);
+			mdao.deleteMember(id);
+			bdao.deleteById(dto);
+			cdao.deleteCart(id);
+			disappeardao.updateWithdrawalWriter(id);
+			dissappearCommentsdao.updateWithdrawalWriter(id);
+			tempdao.updateWithdrawalBywriter(id);
+			reviewdao.updateWithdrawalWriter(id);
+			reviewCommentsdao.updateWithdrawalWriter(id);
+			reviewCommentsLikesdao.updateWithdrawalId(id);
+			idao.updateWithdrawalSeller(id);
+			dpdao.updateWithdrawalDonator(id);
+			messagedao.updateWithdrawalByrecipient(id);
+			messagedao.updateWithdrawalBysender(id);
+			pdao.updateWithdrawalBybuyer(id);
+			pdao.updateWithdrawalByseller(id);
+			mav.setViewName("redirect:logout");
+		}else {
+			mav.addObject("type", "withdrawal");
+			mav.setViewName("member/loginfail");
+		}
+		return mav;
+	}
 
 	@Override
 	public int insertMemberService(MemberDTO dto) {
@@ -369,9 +429,7 @@ public class MemberServiceImpl implements MemberService {
 	public int updateImagePath(MemberDTO dto) {
 		return mdao.updateImagePath(dto);
 	}
-
 	
-
 }
 
 

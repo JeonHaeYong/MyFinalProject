@@ -21,6 +21,7 @@ import kh.spring.dto.MessageDTO;
 import kh.spring.dto.QuizDTO;
 import kh.spring.service.BlackListService;
 import kh.spring.service.ChartService;
+import kh.spring.service.DisappearReportService;
 import kh.spring.service.DonationPaymentService;
 import kh.spring.service.DonationService;
 import kh.spring.service.ItemService;
@@ -34,6 +35,8 @@ public class AdminController
 {
 	@Autowired
 	private QuizService qs;
+	@Autowired
+	private DisappearReportService drs;
 	@Autowired
 	private MessageService msgService;
 	@Autowired
@@ -54,7 +57,9 @@ public class AdminController
 	LogService logService;
 	@Autowired
 	DonationPaymentService donationPaymentService;
-
+	@Autowired
+	QuizService quizServiece;
+	
 	//Member Start
 	@RequestMapping(value = "admin-member")
 	public String manageMemberPage()
@@ -431,6 +436,22 @@ public class AdminController
 
 		return result;
 	}
+	@RequestMapping(value = "admin-quiz-zero")
+	public Object updatePointZeroAllUsers()
+	{
+		Object result = "error";
+
+		try
+		{
+			result = quizServiece.updatePointZeroAllUsers();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
+	}
 	//Quiz End
 
 
@@ -534,6 +555,22 @@ public class AdminController
 				}catch(Exception e) {e.printStackTrace();}
 			}
 			return "redirect:/quizAdmin.admin?currentPage=" + session.getAttribute("currentPage");
+		}
+		return "redirect:/";
+	}
+	@RequestMapping("selectDeleteDisappearReport")
+	public String selectDeleteDisappearReport(HttpServletRequest request) {
+		int type = (int)session.getAttribute("type");
+		if(type == 4) {
+			String[] num = request.getParameterValues("check");
+			int[] seq = new int[num.length];
+			for(int i = 0; i < num.length; i++) {
+				seq[i] = Integer.parseInt(num[i]);
+				try {
+					drs.deleteService(seq[i]);
+				}catch(Exception e) {e.printStackTrace();}
+			}
+			return "redirect:/toDisappearList?currentPage=" + session.getAttribute("currentPage");
 		}
 		return "redirect:/";
 	}

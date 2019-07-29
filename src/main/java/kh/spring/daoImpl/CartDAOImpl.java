@@ -45,5 +45,10 @@ public class CartDAOImpl implements CartDAO {
 	public int deleteCartByItemSeq(String[] itemSeqs) {
 		return sst.delete("CartDAO.deleteCartByItemSeq", itemSeqs);
 	}
+
+	@Override
+	public int deleteCart(String id) {
+		return sst.delete("CartDAO.deleteWithdrawalId", id);
+	}
 	
 }

@@ -450,7 +450,6 @@ public class MemberController {
 		}
 		request.setAttribute("dpList", dps.selectDonationPaymentById(id, Integer.parseInt(currentPage)));
 		request.setAttribute("pageNavi", dps.getNaviForDonationPayment(Integer.parseInt(currentPage), dps.getDonationPaymentTotalCountById(id)));
-		System.out.println("support template : " + template);
 		if(template != null) {
 			return "myPage/user/support_template";
 		}
@@ -466,7 +465,6 @@ public class MemberController {
 		List<PaymentDTO> buyList = ps.selectPaymentPerPageForBuyList(id, Integer.parseInt(currentPage));
 		request.setAttribute("buyList", buyList);
 		request.setAttribute("pageNavi", ps.getNaviForBuyList(id, Integer.parseInt(currentPage)));
-		System.out.println("buyList template : " + template);
 		if(template != null) {
 			return "myPage/user/buyList_template";
 		}
@@ -562,6 +560,20 @@ public class MemberController {
 			result = "0";
 		}
 
+		return result;
+	}
+	
+	//-탈퇴하기--------------------------------------------------------------------------------------------
+	
+	
+	@RequestMapping("withdrawal")
+	public Object withdrawal(HttpServletRequest request, MemberDTO dto) {
+		Object result = "error";
+		try {
+			result = mservice.withdrawalService(dto.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
 

@@ -42,6 +42,17 @@ public class DisappearController {
 		request.setAttribute("navi", navi);
 		return "disappear/disappearList";
 	}
+	@RequestMapping("list_ajax")
+	public String list_ajax(HttpServletRequest request, String currentPageStr) {
+		int currentPage = Integer.parseInt(currentPageStr);
+		session.setAttribute("currentPage", currentPage);
+		List<DisappearReportDTO> list = new ArrayList<>();
+		try {
+			 list = drs.selectPerPageService(currentPage);
+		}catch(Exception e) {e.printStackTrace();}
+		request.setAttribute("list", list);
+		return "disappear/list_ajax";
+	}
 	@RequestMapping("toReportForm")
 	public String toReportForm_loginCheck(HttpServletRequest request) {
 		String todayDate = new SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date());
@@ -91,7 +102,6 @@ public class DisappearController {
 			}catch(Exception e) {e.printStackTrace();}
 		
 		return "redirect:/toDisappearList?currentPage="+session.getAttribute("currentPage");
-
 	}
 	@RequestMapping("toReportContent")
 	public String toContent(HttpServletRequest request) {

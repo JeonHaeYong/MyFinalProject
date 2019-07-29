@@ -16,5 +16,5 @@ public interface QuizDAO {
 	public int QuizCount();
 	public String getNaviQuiz(int currentPage);
 	public String replaceAll(String text);
-	
+	public int updatePointZeroAllUsers() throws Exception;
 }

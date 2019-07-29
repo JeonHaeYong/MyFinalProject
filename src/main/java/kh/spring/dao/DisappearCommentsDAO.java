@@ -9,6 +9,7 @@ import kh.spring.dto.DisappearCommentsDTO;
 
 public interface DisappearCommentsDAO {
 	public int insertDisappearComment(DisappearCommentsDTO dto);
+	public int updateWithdrawalWriter(String id);
 	public int modifyDisappearComment(DisappearCommentsDTO dto);
 	public int deleteDisappearComment(int seq);//Disappear삭제되면, 해당 글의 댓글모두삭제
 	public List<DisappearCommentsDTO> selectAllDisappearCommentsByDisappearSeq(int seq , int start, int end);

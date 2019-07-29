@@ -28,10 +28,11 @@
 	</select>
 	<update id="updateReplyContentsByseq">
 		update disappear_comments set contents = #{contents} where seq = #{seq}
-		
-		
 	</update>
 	<select id="selectDTOBySeq" resultType="kh.spring.dto.DisappearCommentsDTO">
 		select * from disappear_comments where seq = #{seq}
 	</select>
+	<update id="updateWithdrawalWriter">
+		update disappear_comments set writer ='탈퇴한 회원' where writer = #{id}
+	</update>
 </mapper>

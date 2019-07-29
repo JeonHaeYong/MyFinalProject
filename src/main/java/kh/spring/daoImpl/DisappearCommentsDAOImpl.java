@@ -22,6 +22,11 @@ public class DisappearCommentsDAOImpl implements DisappearCommentsDAO{
 	}
 
 	@Override
+	public int updateWithdrawalWriter(String id) {
+		return sst.update("DisappearCommentsDAO.updateWithdrawalWriter", id);
+	}
+	
+	@Override
 	public int modifyDisappearComment(DisappearCommentsDTO dto) {
 		return sst.update("DisappearCommentsDAO.modifyDisappearComment", dto);
 	}

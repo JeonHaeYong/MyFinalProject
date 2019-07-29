@@ -34,15 +34,11 @@
 	width: 100%;
 	max-height: 600px;
 }
-	
-	
-	
-	
-	
-	
-	
-	
-	
+#disappear_link
+		{
+			color: #EC7357 !important;
+			font-weight: 600 !important;
+		}	
 	.empty{width: 100%; text-align: center; margin: auto; margin-bottom: 50px; height:50px;}
   #title{text-align: center;}
   h1{ font-family: 'Gamja Flower', cursive;}
@@ -98,13 +94,20 @@ height: 350px;
 
 
 .footer{text-align:right; margin-right:170px; margin-bottom: 30px;}
-.btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44;}
-.btn:hover{background-color:#FDD692; font-weight:bold;}
-.navi-section{text-align: center; margin-top:20px; font-family: 'Gamja Flower', cursive; font-size:25px;}
-.pageNum{text-decoration-line: none; color:#754F44; font-size:25px;}
-.pageNum:hover{font-weight:bold; text-decoration-line: none;}
-.furColor{overflow:hidden; text-overflow:ellipsis; white-space;nowrop;}
 
+
+
+
+.btns{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44; border-radius:30px; border:none; font-size:25px;}
+.btns:hover{background-color:#FDD692; font-weight:bold;}
+
+
+
+.navi-section{text-align: center; margin-top:20px; font-family: 'Gamja Flower', cursive; font-size:25px;}
+.navi-btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44; border:none; border-radius:50px; margin-left:5px; width:60px;}
+.navi-btn:hover{background-color:#FDD692; font-weight:bold;}
+.furColor{overflow:hidden; text-overflow:ellipsis; white-space;nowrop;}
+#menu-disappear{color:#EC7357;}
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -119,9 +122,14 @@ height: 350px;
 	<div class="px-0 pb-0 empty"></div>
 	<div id="title"><h1>잠시 길 잃은 동물들</h1></div>
 	<div class="containier ">
-		<div class="row disappearList">
+	<form action="selectDeleteDisappearReport" id="listForm" method="get">
+		<div class="row disappearList"><!--ajax 여기에 어팬드  -->
+		
 		   <c:forEach var="list" items="${list }"> 
 			<div class="col-lg-4 col-md-6 col-sm-6 dtocol">
+				<c:if test="${type == 4 }">
+					<input type="checkbox" value="${list.seq }" name="check">
+				</c:if>
 				<div class="infowrapper">
 						<div class="infoimg">
 							
@@ -156,6 +164,7 @@ height: 350px;
 				</div>
 			</div>
 			  </c:forEach> 
+			  
 			
 			
 		</div>
@@ -164,9 +173,13 @@ height: 350px;
 		</div>
 		<div class="row mt-5 footer" align="right">
 			<div class="col-12">
-					<input type="button" value="글쓰기" class="write-btn btn">
+				<c:if test="${type == 4 }">
+					<input type="button" value="선택삭제" class="select-delete-btn btns">
+					</c:if>
+					<input type="button" value="글쓰기" class="write-btn btns">
 			</div>
 		</div>
+		</form>
 	</div>
 	<!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
 	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
@@ -209,6 +222,37 @@ height: 350px;
 
 			}
 		});
+		$(".pageNum").each(function(index,items){ // 네비버튼 클릭하면 ajax로 정보 가져오기
+			$(this).on("click",function(){
+				var currentPage = $(this).val();
+				$.ajax({
+					url:"list_ajax",
+					data:{currentPageStr:currentPage},
+					type:"get"
+				}).done(function(resp){
+					$(".disappearList").html("");
+					$(".disappearList").append(resp);
+					
+				});
+			})
+		});
+		$(".prev").on("click",function(){
+			var currentPage = $(".prev").attr("currentPage");
+			location.href="toDisappearList?currentPage="+currentPage;
+
+		
+		});
+		$(".next").on("click",function(){
+			var currentPage = $(".next").attr("currentPage");
+			location.href="toDisappearList?currentPage="+currentPage;
+		});
+		$(".select-delete-btn").on("click",function(){
+			var result = confirm("정말로 삭제하시겠습니까?");
+        	if(result == true){
+        		$("#listForm").submit();
+        	}
+		})
+
 </script>
 </body>
 </html>
