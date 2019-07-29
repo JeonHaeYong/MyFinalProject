@@ -166,7 +166,7 @@
         <div class="container">
             <div class="row m-3">
                 <div class="col-md-6 col-12">
-                    <div id="demo" class="carousel slide" data-ride="carousel">
+                    <div id="demo" class="carousel slide carousel-fade" data-ride="carousel">
                         <ul class="carousel-indicators">
                             <li data-target="#demo" data-slide-to="0" class="active"></li>
                             <c:if test="${item.imagePath2 != null}">
@@ -178,16 +178,16 @@
                         </ul>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="${item.imagePath1 }" class="itemImage"> 
+                                <img src="${item.imagePath1 }" class="itemImage d-block w-100"> 
                             </div>
                             <c:if test="${item.imagePath2 != null}">
                             	<div class="carousel-item">
-									<img src="${item.imagePath2 }" class="itemImage">  
+									<img src="${item.imagePath2 }" class="itemImage d-block w-100">  
 								</div>
                             </c:if>
                             <c:if test="${item.imagePath3 != null}">
                             	<div class="carousel-item">
-									<img src="${item.imagePath3 }" class="itemImage">  
+									<img src="${item.imagePath3 }" class="itemImage d-block w-100">  
 								</div>
                             </c:if>
                         </div>
