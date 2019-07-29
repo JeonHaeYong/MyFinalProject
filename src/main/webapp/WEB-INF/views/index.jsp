@@ -93,7 +93,7 @@
 					<p style="font-size: 50px; color: black;">라온펫은?</p>
 					<p class="mb-4" style="color: #754F44; font-weight: bold;">유기동물을 조회하여 주인을 찾아주고, 실종신고를 통해 반려동물을 찾을 수 있도록 도와드립니다. 또 반려동물 관련 물품 거래를 통해 보호센터에 후원을 할 수도 있고, 반려동물 관련 지식정보도 제공해 드립니다.</p>
 					<p>
-						<a href="#" class="btn btn-primary">-> 공지사항</a>
+						<a href="notice-view-page" class="btn btn-primary">-> 공지사항</a>
 					</p>
 				</div>
 			</div>
