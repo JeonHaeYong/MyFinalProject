@@ -26,13 +26,15 @@
 						role="navigation">
 						<ul	class="site-menu main-menu js-clone-nav ml-0 mr-0 pl-0 d-none d-lg-block">
 
+
 							<li><a id="abandoned_link" href="toAbandoned?currentPage=1" class="nav-link">유기동물</a></li>
 							<li><a id="disappear_link" href="toDisappearList?currentPage=1" class="nav-link">실종신고</a></li>
 
+
 							<li><a id="review_link" href="toReviewList" class="nav-link">재회</a></li>
-							<li><a id="market_link" href="freeMarket?currentPage=1&category=all"
-								class="nav-link">무료나눔</a></li>
+							<li><a id="market_link" href="freeMarket?currentPage=1&category=all" class="nav-link">무료나눔</a></li>
 							<li><a id="quiz_link" href="/oxQuiz" class="nav-link">Fun</a></li>
+
 							<li><a id="donation_link" href="donation" class="nav-link">후원하기</a></li>
 							<li>
 								<a id="notice_link" href="notice-view-page"	class="nav-link ">공지사항</a>

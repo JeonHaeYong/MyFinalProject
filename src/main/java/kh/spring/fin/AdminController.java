@@ -57,7 +57,9 @@ public class AdminController
 	LogService logService;
 	@Autowired
 	DonationPaymentService donationPaymentService;
-
+	@Autowired
+	QuizService quizServiece;
+	
 	//Member Start
 	@RequestMapping(value = "admin-member")
 	public String manageMemberPage()
@@ -426,6 +428,22 @@ public class AdminController
 		try
 		{
 			result = memberService.updateRandomPoint();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+	@RequestMapping(value = "admin-quiz-zero")
+	public Object updatePointZeroAllUsers()
+	{
+		Object result = "";
+
+		try
+		{
+			result = quizServiece.updatePointZeroAllUsers();
 		}
 		catch(Exception e)
 		{
