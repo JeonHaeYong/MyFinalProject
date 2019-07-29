@@ -56,6 +56,7 @@ public class AnimalController {
 		request.setAttribute("navi", navi);
 		return "animal/hospital";
 	}
+
 	@RequestMapping("searchToHospital")
 	public String searchHospital(HttpServletRequest request) {
 		String option = request.getParameter("option");

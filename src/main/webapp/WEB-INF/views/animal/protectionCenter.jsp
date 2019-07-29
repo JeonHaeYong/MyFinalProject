@@ -47,8 +47,8 @@
      .pageNum:hover,.prev:hover,.next:hover{font-weight: bold;}
      .search-box{margin-bottom:10px;}
      .search-box>div{padding:0px;}
-     input[type="button"]{background-color:#FDD692; border:none; font-family:'Gamja Flower', cursive; font-size:20px; padding: 0px 3px;}
-     input[type="button"]:hover{background-color:#fcc96f; font-weight:bold;}
+     .search-btn{background-color:#FDD692; border:none; font-family:'Gamja Flower', cursive; font-size:20px; padding: 0px 3px;}
+     .search-btn:hover{background-color:#fcc96f; font-weight:bold;}
      .contents{max-width:1700px;}
 </style>
 </head>

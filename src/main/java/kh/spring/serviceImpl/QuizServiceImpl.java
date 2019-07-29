@@ -40,6 +40,10 @@ public class QuizServiceImpl implements QuizService {
 		return qdao.updatePoint(point, id);
 	}
 	@Override
+	public int updateZeroPoint(int point, String id) {
+		return qdao.updateZeroPoint(point, id);
+	}
+	@Override
 	public List<QuizDTO> selectQuizPerPageService(int currentPage){
 		return qdao.selectQuizPerPage(currentPage);
 	}

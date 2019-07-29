@@ -11,6 +11,7 @@ public interface QuizDAO {
 	public int getQuizNum();
 	public int deleteQuiz(int seq);
 	public int updatePoint(int point, String id);
+	public int updateZeroPoint(int point, String id);
 	public List<QuizDTO> selectQuizPerPage(int currentPage);
 	public int QuizCount();
 	public String getNaviQuiz(int currentPage);
