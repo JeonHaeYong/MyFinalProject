@@ -59,13 +59,13 @@ body{
 
 .progress
 {
-	height: 40px;
+	height: 50px;
 }
 #progress-bar
 {
 	height: 50px;
 	font-size: 20px;
-	color:black;
+	color: #B45F04;
 }
 
 .bold_brown_namsan
@@ -77,6 +77,9 @@ body{
 .namsan
 {
 	font-family: 'SeoulNamsanM' !important;
+}
+#info_div{
+	color: #B45F04;
 }
 </style>
 
@@ -233,7 +236,7 @@ body{
 							
 					</div>
 					
-					<div class="col-4 text-center px-0 my-auto progress">
+					<div class="col-4 text-center px-0 progress">
 								
 						<div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
 							
