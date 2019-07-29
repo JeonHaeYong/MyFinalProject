@@ -58,5 +58,15 @@ public class MessageDAOImpl implements MessageDAO{
 		return sst.delete("MessageDAO.deleteMsgBySeq",seq);
 	}
 
+	@Override
+	public int updateWithdrawalBysender(String id) {
+		return sst.update("MessageDAO.updateWithdrawalBysender",id);
+	}
+
+	@Override
+	public int updateWithdrawalByrecipient(String id) {
+		return sst.update("MessageDAO.updateWithdrawalByrecipient",id);
+	}
+
 
 }

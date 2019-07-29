@@ -50,6 +50,11 @@
      .search-btn{background-color:#FDD692; border:none; font-family:'Gamja Flower', cursive; font-size:20px; padding: 0px 3px;}
      .search-btn:hover{background-color:#fcc96f; font-weight:bold;}
      .contents{max-width:1700px;}
+     #abandoned_link
+	{
+		color: #EC7357 !important;
+		font-weight: 600 !important;
+	}
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"

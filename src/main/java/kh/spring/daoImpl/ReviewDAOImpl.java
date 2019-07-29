@@ -22,7 +22,11 @@ public class ReviewDAOImpl implements ReviewDAO {
 	public int insertReview(ReviewDTO dto) {
 		return sst.insert("ReviewDAO.insertReview", dto);
 	}
-
+	
+	@Override
+	public int updateWithdrawalWriter(String id) {
+		return sst.update("ReviewDAO.updateWithdrawalWriter", id);
+	}
 
 	@Override
 	public int modifyReview(ReviewDTO dto) {

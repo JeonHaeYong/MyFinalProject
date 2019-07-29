@@ -32,5 +32,9 @@
 		</foreach>
 	</delete>
 	
+	<delete id="deleteWithdrawalId">
+		delete from cart where id=#{id}
+	</delete>
+	
 	
 </mapper>

@@ -36,4 +36,8 @@
 		delete disappearReport where seq = #{value}
 	</delete>
 	
+	<update id="updateWithdrawalWriter">
+		update disappearReport set writer ='탈퇴한 회원' where writer = #{id}
+	</update>
+	
 </mapper>

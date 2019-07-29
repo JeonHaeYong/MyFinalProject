@@ -133,6 +133,11 @@
                     .ft4 *{
                     	color: #754F44;
                     }
+                    #review_link
+					{
+						color: #EC7357 !important;
+						font-weight: 600 !important;
+					}
                 </style>
             </head>
             <body data-spy="scroll" data-target=".site-navbar-target"

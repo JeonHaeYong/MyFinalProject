@@ -49,6 +49,11 @@
      .search-btn:hover{background-color:#fcc96f; font-weight:bold;}
     
      .contents{max-width:1700px;}
+     #abandoned_link
+	{
+		color: #EC7357 !important;
+		font-weight: 600 !important;
+	}
      
 </style>
 </head>

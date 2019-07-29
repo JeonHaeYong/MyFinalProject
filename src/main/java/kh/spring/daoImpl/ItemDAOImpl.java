@@ -25,6 +25,9 @@ public class ItemDAOImpl implements ItemDAO{
 		return sst.delete("ItemDAO.delete", seqs);
 	}
 
+	public int updateWithdrawalSeller(String id) {
+		return sst.update("ItemDAO.updateWithdrawalSeller", id);
+	}
 
 	public ItemDTO readOneItem(int seq) {
 		return sst.selectOne("ItemDAO.selectBySeq", seq);

@@ -3,11 +3,11 @@ package kh.spring.dao;
 import java.util.List;
 import java.util.Set;
 
-import kh.spring.dto.BoardListDTO;
 import kh.spring.dto.ReviewDTO;
 
 public interface ReviewDAO {
 	public int insertReview(ReviewDTO dto);
+	public int updateWithdrawalWriter(String id);
 	public List<ReviewDTO> selectAllReviewByCurrentpage(int start, int end);
 	public int modifyReview(ReviewDTO dto);
 	public int deleteReview(int seq);

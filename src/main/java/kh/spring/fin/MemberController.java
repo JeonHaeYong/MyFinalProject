@@ -564,6 +564,19 @@ public class MemberController {
 
 		return result;
 	}
+	
+	//-탈퇴하기--------------------------------------------------------------------------------------------
+	
+	@RequestMapping("withdrawal")
+	public String withdrawal(HttpServletRequest request, MemberDTO dto) {
+		try {
+			mservice.withdrawalService(dto.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+		return "redirect:logout";
+	}
 
 }
 

@@ -44,6 +44,10 @@
 				order by donated_time desc, donation_name asc)			
 	</select>
 	
+	<update id="updateWithdrawalDonator">
+		update donated_payment set donator='탈퇴한 회원' where donator=#{value}
+	</update>
+	
 	<select id="selectCountAll" resultType="java.lang.Integer">
 		select count(*) from DONATED_PAYMENT
 	</select>

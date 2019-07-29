@@ -109,4 +109,9 @@ public class TempProtectDAOImpl implements TempProtectDAO {
 		return pageNavi;
 	}
 
+	@Override
+	public int updateWithdrawalBywriter(String id) {
+		return sst.update("TempProtectDAO.updateWithdrawalBywriter",id);
+	}
+
 }

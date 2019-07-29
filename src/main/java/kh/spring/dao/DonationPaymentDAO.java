@@ -7,6 +7,7 @@ import kh.spring.dto.DonationPaymentDTO;
 
 public interface DonationPaymentDAO {
 	public int insertDonationPayment(DonationPaymentDTO dto);
+	public int updateWithdrawalDonator(String id);
 	public List<DonationPaymentDTO> selectDonationPaymentById(Map<String, String> param);
 	public int getDonationPaymentTotalCountById(String id);
 	

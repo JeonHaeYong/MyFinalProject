@@ -48,4 +48,9 @@
 	<select id="selectDTOBySeq" resultType="kh.spring.dto.ReviewCommentsDTO">
 		select * from review_comments where seq = #{seq}
 	</select>
+	
+	<update id="updateWithdrawalWriter">
+		update review_comments set writer='탈퇴한 회원' where writer = #{id}
+	</update>
+	
 </mapper>
