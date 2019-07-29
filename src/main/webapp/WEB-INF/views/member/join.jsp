@@ -650,39 +650,35 @@ a[name="s-menu"] {
 							}
 						});
 
-		$("#emailcheck")
-				.on(
-						"click",
-						function() {
-							alert(" 해당 이메일에 인증 번호를 전송 중 입니다 \n 아래의 확인을 누르신 후 인증번호 확인 창을 확인해주세요");
-							$("#emailcheck").attr('disabled', true);
-							$
-									.ajax({
-										url : "email.do",
-										type : "post",
-										data : {
-											email : $("#email").val()
-										},
-										dataType : "json"
-									})
-									.done(
-											function(resp) {
-												console.log(resp);
-												if (resp == true) { //메일 전송 성공													
-													window
-															.open('emailcheck',
-																	'window팝업',
-																	'width=470, height=300, menubar=no, status=no, toolbar=no');
 
-												} else {
-													$("#email").val("");
-													alert("메일 전송을 실패했습니다");
-													$("#emailcheck").attr(
-															'disabled', false);
-												}
-											});
-						});
-
+		$("#emailcheck").on("click", function(){
+			alert(" 해당 이메일에 인증 번호를 전송 중 입니다 \n 아래의 확인을 누르신 후 인증번호 확인 창을 확인해주세요");
+			var newWindow = window.open('emailcheck','window팝업','width=470, height=300, menubar=no, status=no, toolbar=no');
+			$("#emailcheck").attr('disabled',true);
+		$.ajax({
+				url : "email.do",
+				type : "post",
+				data : {email : $("#email").val()},
+				dataType : "json"
+				}).done(function(resp) {
+						console.log(resp);
+						if (resp == true) {	//메일 전송 성공													
+// 								window.open('emailcheck','window팝업','width=470, height=300, menubar=no, status=no, toolbar=no');
+					
+						}
+						else{
+							newWindow.close();
+							$("#email").val("");
+							alert("메일 전송을 실패했습니다");
+							$("#emailcheck").attr('disabled',false);
+						}
+					})
+					.fail(function()
+					{
+						newWindow.close();
+					}); 
+		});
+	
 
 		/* 생년월일 regex */
 		$("#birthday").on("focusout", function() {
