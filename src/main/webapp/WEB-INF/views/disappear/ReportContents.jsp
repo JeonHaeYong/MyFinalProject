@@ -66,6 +66,19 @@
 		.btn:hover{background-color:#FDD692; font-weight:bold;}
 		/* 댓글 ------------------------------------------- */
 		.comment{max-width: 1200px;}
+		 	.navi{
+                        text-decoration: none;
+                        background-color: #FDD69270;
+                        color: #754F44;
+                        font-size:20px;
+                        padding:6px 12px;
+                        border-radius: 30px;
+                    }
+                    .navi:hover{
+                        font-weight: bold;
+                        background-color: #FDD692;
+                    }
+                    .text-center{padding-top:30px; height:100px;}
 	
     </style>
 </head>
@@ -216,22 +229,18 @@
 			</div>
 		</c:forEach>
 	</div>
-	<div class="row reply_part">
-		<c:if test="${reply_navi.size()!=0 }">
-			<div class="col-12">
-				<ul class="pagination justify-content-center">
+		<div class="row reply_part navi-section">
+			<c:if test="${reply_navi.size()!=0 }">
+				<div class="col-12 text-center">
 					<c:forEach var="navi" items="${reply_navi }">
-						<li class="page-item reply_item" value="${navi }"><a
-							class="page-link text-decoration-none reply_navi" href="#toList"
-							onclick="clickReplyNavi(this);">${navi }</a></li>
+						<a class="ml-1 navi reply_navi" href="#toList" onclick="clickReplyNavi(this);">${navi }</a>
 					</c:forEach>
-				</ul>
-			</div>
-		</c:if>
+				</div>
+			</c:if>
+		</div>
+
+
 	</div>
-	
-	
-</div>
 	
 	<!-- ----Footer부분입니다^_^---------------------------------------------------------------------------------------------------------- -->
 	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
