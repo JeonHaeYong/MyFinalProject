@@ -63,46 +63,12 @@ h3, h1 {
 	padding: 0px;
 }
 
-.menu-box {
-	width: 150px;
-	height: 100px;
-	color: #754F44;
-	font-family: 'Gamja Flower', cursive;
-	font-size: 22px;
-	margin-top: 50px;
-}
-
-.menu-box>div {
-	height: 35px;
-}
-
-.menu-box>div:first-child {
-	font-weight: bold;
-	border-bottom: 1px solid #754F44;
-	line-height: 33px;
-	color: #B45F04;
-	font-size: 40px;
-}
-
-.menu-box>div:not (.s-menu ):hover {
-	background-color: #FBFFB950;
-}
-
-.menu-row {
-	text-align: -webkit-center;
-}
-
-a[name="s-menu"] {
-	color: #754F44;
-	text-decoration-line: none;
-}
-
-a[name="s-menu"]:hover {
-	color: #754F44;
-	text-decoration-line: none;
-	font-weight: bold;
-}
-
+ .menu-box{width: 200px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px; margin-top: 50px; margin-bottom:50px;}
+            .menu-box>div{height: 35px;}
+            .menu-box>div:first-child{font-weight: bold; border-bottom: 1px solid #754F44; line-height: 33px; color:#B45F04; font-size:40px;}
+          .menu-box>div:not(.s-menu):hover{cursor: pointer; background-color: #FBFFB950; color: #754F44; text-decoration-line: none; font-weight:bold;}
+            .menu-row{text-align: -webkit-center;}
+            a[name="s-menu"]{color: #754F44; text-decoration-line: none;}
 /* ----------------------카테고리 */
 #profile-tab,#home-tab{
 font-family: 'Gamja Flower', cursive;

@@ -76,13 +76,7 @@
 
 					</div>
 					<div class="col-md-3">
-						<h2 class="footer-heading mb-4">Follow Us</h2>
-						<a href="#" class="pl-0 pr-3 social-link"><span
-							class="icon-facebook"></span></a> <a href="#"
-							class="pl-3 pr-3 social-link"><span class="icon-twitter"></span></a>
-						<a href="#" class="pl-3 pr-3 social-link"><span
-							class="icon-instagram"></span></a> <a href="#"
-							class="pl-3 pr-3 social-link"><span class="icon-linkedin"></span></a>
+					<!-- 날씨 이미지  -->	<img src="" alt="Image" id="kk" width="100px" heigth="150px">
 					</div>
 				</div>
 			</div>
@@ -168,7 +162,30 @@ onload = function()
 		   alert("로그인을 먼저 해주세요.");
 		   $(".login-btn").trigger("click");
 	}
-
+//날씨 
+	var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=078b2ce4ce1dc66e407d2f265bdfdd41";
+		$.ajax({
+			url : apiURI,
+			dataType : "json",
+			type : "GET",
+			async : "false",
+			success : function(resp) {
+				console.log(resp);
+				console.log("현재온도 : " + (resp.main.temp - 273.15));
+				console.log("현재습도 : " + resp.main.humidity);
+				console.log("날씨 : " + resp.weather[0].main);
+				console.log("상세날씨설명 : " + resp.weather[0].description);
+				console.log("날씨 이미지 : " + resp.weather[0].icon);
+				console.log("바람 : " + resp.wind.speed);
+				console.log("나라 : " + resp.sys.country);
+				console.log("도시이름 : " + resp.name);
+				console.log("구름 : " + (resp.clouds.all) + "%");
+				var imgURL = "http://openweathermap.org/img/w/"
+						+ resp.weather[0].icon + ".png";
+				$("#kk").attr("src", imgURL);
+				console.log(resp.weather[0].icon);
+			}
+		})
 
 };
 

@@ -149,7 +149,7 @@ font-family: 'Gamja Flower', cursive;
 }
 
 .menu-box>div:not(.s-menu):hover{background-color: #FBFFB950;
-            color: #754F44; text-decoration-line: none; font-weight:bold;
+            color: #754F44; text-decoration-line: none; font-weight:bold;cursor: pointer;
             }
 
 .menu-row {

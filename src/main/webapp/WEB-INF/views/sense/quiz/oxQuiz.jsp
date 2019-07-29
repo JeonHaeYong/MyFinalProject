@@ -56,10 +56,10 @@
             .menu-box{width: 200px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px; margin-top: 50px; margin-bottom:50px;}
             .menu-box>div{height: 35px;}
             .menu-box>div:first-child{font-weight: bold; border-bottom: 1px solid #754F44; line-height: 33px; color:#B45F04; font-size:40px;}
-            .menu-box>div:not(.s-menu):hover{background-color: #FBFFB950;}
+            .menu-box>div:not(.s-menu):hover{cursor: pointer; background-color: #FBFFB950; color: #754F44; text-decoration-line: none; font-weight:bold;}
             .menu-row{text-align: -webkit-center;}
             a[name="s-menu"]{color: #754F44; text-decoration-line: none;}
-            a[name="s-menu"]:hover{color: #754F44; text-decoration-line: none; font-weight:bold;}
+         
            /*---------------------------------------------------------------------------------------------------------------------------------------------*/
            .result-box{width: 70%;  margin-top: 30px; margin-bottom: 30px;}
             .header{font-size: 25px; text-align: center; background-color: #FDD692; color: #754F44; border-radius: 30px;}

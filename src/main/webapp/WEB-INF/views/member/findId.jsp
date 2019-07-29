@@ -56,7 +56,7 @@ b {
             .menu-box>div{height: 35px;}
             .menu-box>div:first-child{font-weight: bold; border-bottom: 1px solid #754F44; line-height: 33px; color:#B45F04; font-size:40px;}
             .menu-box>div:not(.s-menu):hover{background-color: #FBFFB950;
-            color: #754F44; text-decoration-line: none; font-weight:bold;
+            color: #754F44; text-decoration-line: none; font-weight:bold; cursor: pointer;
             }
             .menu-row{text-align: -webkit-center;}
             a[name="s-menu"]{color: #754F44; text-decoration-line: none;}
