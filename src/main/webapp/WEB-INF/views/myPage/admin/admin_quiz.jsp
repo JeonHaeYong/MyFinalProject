@@ -177,6 +177,16 @@ font-weight:bold;
 
 						<div class="col-12 col-md-12 col-lg-12 text-center my-5">
 			
+							<input id="point_zero_btn" class="btn my_buttons" type="button" value="점수 초기화">
+							
+						</div>
+			
+					</div>
+					
+					<div class="row justify-content-center">
+
+						<div class="col-12 col-md-12 col-lg-12 text-center my-5">
+			
 							<a href="admin-quiz-random">데이터 업데이트</a>
 			
 						</div>
@@ -210,6 +220,11 @@ font-weight:bold;
 <script src="resources/js/main.js"></script>
 <script>
 		myAjax("1");
+		
+		$("#point_zero_btn").on("click", function()
+		{
+			location.href = "admin-quiz-zero";
+		});
 		
 		$(document).on("click", "#search_btn,.navi_btns", function()
 		{
