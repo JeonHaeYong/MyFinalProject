@@ -187,6 +187,11 @@ background-color:#FDD692;
 .btngroup{
 padding-right:105px;
 }
+#quiz_link
+{
+	color: #EC7357 !important;
+	font-weight: 600 !important;
+}
 </style>
 
 </head>

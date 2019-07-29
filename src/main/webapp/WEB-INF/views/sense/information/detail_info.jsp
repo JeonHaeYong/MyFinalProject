@@ -131,7 +131,11 @@ color:#754F44;
 background-color:#FDD692;
 font-weight:bold;
 }
-
+#quiz_link
+{
+	color: #EC7357 !important;
+	font-weight: 600 !important;
+}
 </style>
 
 </head>

@@ -59,6 +59,11 @@
 		.expl{text-align:center;  font-family: 'Gamja Flower', cursive; font-size:23px;}
 		.label-btn{border: 2px solid #754F4490; border-radius:10px; padding: 5px; font-family: 'Gamja Flower', cursive;}
 		.label-btn:hover{cursor:pointer;}
+		#disappear_link
+		{
+			color: #EC7357 !important;
+			font-weight: 600 !important;
+		}
 </style>
 
 </head>

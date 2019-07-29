@@ -32,6 +32,11 @@
  	font-weight: normal; 
  	font-style: normal; 
 }
+#abandoned_link
+{
+	color: #EC7357 !important;
+	font-weight: 600 !important;
+}
 table {
 	width: 760px;
 }

@@ -34,7 +34,11 @@
 	width: 100%;
 	max-height: 600px;
 }
-	
+#disappear_link
+		{
+			color: #EC7357 !important;
+			font-weight: 600 !important;
+		}	
 	
 	
 	

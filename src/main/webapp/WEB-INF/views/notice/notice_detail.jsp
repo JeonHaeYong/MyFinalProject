@@ -67,6 +67,11 @@ font-weight:bold;
 	font-size: 45px !important;
 }
 
+#notice_link
+{
+	color: #EC7357 !important;
+	font-weight: 600 !important;
+}
 
 </style>
 
