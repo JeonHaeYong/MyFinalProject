@@ -44,7 +44,8 @@
 .cartoon-container {
 	max-width: 1300px;
 }
-.cartoonTitle{text-align:center; font-size:50px;font-family: 'Gamja Flower', cursive;}
+.cartoonTitle{text-align:center; font-size:40px;font-family: 'Gamja Flower', cursive;}
+.cartoonTitle>span{color:#EC7357; font-size:60px;}
 /* 만화 부분 끝*/
 #acs_div {
 	width: 100%;
@@ -97,7 +98,7 @@
 	
 	<div class="container cartoon-container">
 		<div class="row">
-			<div class="col-12 cartoonTitle">'공고'와'보호'의 차이를 알고 있니~? </div>
+			<div class="col-12 cartoonTitle"><span>공고</span>와<span> 보호</span>의 차이를 알고 있니~? </div>
 		</div>
 		<div class="row no-gutters mb-5">
 			<div class="col-12 col-sm-12 col-md-12 col-lg-4" data-aos="fade-up" data-aos-delay="100">
@@ -569,7 +570,10 @@
 		        return entry[0];
 	        }
         })
-     
+     //-----------------------------------------
+   
+	
+	
 	</script>
 </body>
 </html>
