@@ -4,7 +4,7 @@
         <html>
             <head>
                 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-                <title>관리자 페이지 - 쪽지함</title>
+                <title>관리자 페이지 - 비밀변호변경</title>
                 <link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
                 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i" rel="stylesheet">
                 <link rel="stylesheet" href="resources/fonts/icomoon/style.css">

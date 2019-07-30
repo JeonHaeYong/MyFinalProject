@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <div class="jumbotron px-0 pb-0">
-        <img src="/mypage/dog_1.jpg">
+        <img class="myjumbotron" src="/mypage/dog_1.jpg">
     </div>
     <section id="wrapper" class="mb-5">
         <div class="container">

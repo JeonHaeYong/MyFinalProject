@@ -298,7 +298,7 @@
 		                                            </form>
 		                                            <!-- 받은쪽지 네비게이터 띄워주기 -->
 		                                            <div class="row receivedList_part my-4">
-		                                                <div class="col-12 text-center">receivedNavi
+		                                                <div class="col-12 text-center">
 		                                                    <c:forEach var="navi" items="${receivedNavi }">
 					                                        	<c:choose>
 					                                        		<c:when test="${currentPage==navi }">
@@ -609,8 +609,6 @@
                         }).done(function(resp){
                             if(resp=="2"){
                                 $(readOkModi).text("Y");//msg읽음으로 바꿈
-                                var yetMsg = $("#yet_noRead_msg").text();//msg안읽은 갯수 가져오기.
-                                $("#yet_noRead_msg").text(yetMsg-1);//msg안읽은 갯수 바꾸기.
                                 $(clickThis).addClass("readMsg");
                             }
                         }).fail(function(a,b,c){

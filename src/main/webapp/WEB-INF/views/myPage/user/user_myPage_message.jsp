@@ -94,6 +94,7 @@
 					.noMsg_height{
 						min-height: 300px;
 						line-height: 300px;
+						font-size: 30px;
 					}
                 </style>
                 <jsp:include page="/WEB-INF/views/myPage/user/user_module/mypage_user_style.jsp" ></jsp:include><!-- user 마이페이지 스타일 -->
@@ -539,5 +540,6 @@
             	  $("#recipient-name").prop("readonly",true);
             	  $("#sendMsg_btn").trigger("click");
               });
+              $(".myjumbotron").attr("src","/mypage/dog_4.jpg");
             </script>
         </html>

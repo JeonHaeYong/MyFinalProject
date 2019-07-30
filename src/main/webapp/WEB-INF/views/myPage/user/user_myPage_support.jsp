@@ -154,6 +154,6 @@
 				});
 			});
 		});
-		
+		$(".myjumbotron").attr("src","/mypage/dog_4.jpg");
    </script>
 </html>

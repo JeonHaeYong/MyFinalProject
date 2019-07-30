@@ -52,7 +52,7 @@
 						</div>
 						<div id="kakaologin">
 							<a
-								href="https://kauth.kakao.com/oauth/authorize?client_id=8f0beb524de484b185f094b0604de956&redirect_uri=http://localhost/oauth&response_type=code">
+								href="https://kauth.kakao.com/oauth/authorize?client_id=8f0beb524de484b185f094b0604de956&redirect_uri=http://192.168.60.42/oauth&response_type=code">
 								<img src="resources/images/member/kakaobtn.png" class="col"
 								id="kakaoimg">
 							</a>
@@ -101,17 +101,17 @@
 			<div class="col-md-1"></div>
 
 
-			<div class="col-md-4">
+			<div class="col-md-4 footer_inquire">
 				<form class="mx-3 footer_font_namsan">
 					<div class="form-row">
 						<div class="form-group col-md-12 inquire_form">
 							<label for="inputEmail">이메일</label> <input type="email"
-								class="form-control" id="inputEmail" placeholder="Email">
+								class="form-control place_ft_gamja" id="inputEmail" placeholder="Email">
 						</div>
 					</div>
 					<div class="form-group inquire_form">
 						<label for="inputContent">문의 내용</label>
-						<textarea class="form-control" id="inputContent" rows="5"
+						<textarea class="form-control place_ft_gamja" id="inputContent" rows="5"
 							style="resize: none;" placeholder="문의내용은 30자 이상 200자 이하"></textarea>
 					</div>
 					<div class="form-group inquire_form text-right">

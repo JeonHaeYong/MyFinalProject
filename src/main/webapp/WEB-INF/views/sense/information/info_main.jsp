@@ -159,6 +159,9 @@ padding-right:105px;
 	color: #EC7357 !important;
 	font-weight: 600 !important;
 }
+.ft-bold{
+	font-weight: bold;
+}
 </style>
 
 </head>
@@ -198,11 +201,11 @@ padding-right:105px;
 				<ul class="row nav nav-tabs justify-content-center" id="myTab" role="tablist">
 		
 					<li class="col-lg-6 col-md-6 col-sm-6 col-6 nav-item pr-0">
-						<a class=" nav-link active" id="home-tab"
+						<a class=" nav-link active ft-bold" id="home-tab"
 						data-toggle="tab" href="#home" role="tab" aria-controls="home"
-						aria-selected="true">정보 </a></li>
+						aria-selected="true">관련지식 </a></li>
 					
-					<li class="col-lg-6 col-md-6 col-sm-6 col-6 nav-item  pl-0"><a class="nav-link" id="profile-tab"
+					<li class="col-lg-6 col-md-6 col-sm-6 col-6 nav-item  pl-0"><a class="nav-link ft-bold" id="profile-tab"
 						data-toggle="tab" href="#training" role="tab"
 						aria-controls="training" aria-selected="false">훈련</a></li>
 			

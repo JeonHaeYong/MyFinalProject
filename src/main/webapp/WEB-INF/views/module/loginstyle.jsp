@@ -116,7 +116,8 @@
 .footer_font_namsan{
 	font-family: 'Gamja Flower';
 }
-.footer_font_namsan::placeholder{
+
+.place_ft_gamja,.place_ft_gamja::placeholder{
 	font-family: 'Gamja Flower';
 }
 .footer_ftc_white{
@@ -129,6 +130,9 @@ input[type=button],button[type=button]{
 
 padding-top:105px;
 
+}
+#loginmodal{
+	font-family: SeoulNamsanM;
 }
 </style>
 <link

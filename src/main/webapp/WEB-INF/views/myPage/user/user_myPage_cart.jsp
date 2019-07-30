@@ -274,6 +274,6 @@
         		}
         		$("#itemCheckForm").submit();
         	});
-        	
+        	$(".myjumbotron").attr("src","/mypage/dog_3.jpg");
         </script>
     </html>

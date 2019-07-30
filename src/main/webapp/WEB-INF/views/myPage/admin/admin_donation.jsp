@@ -913,7 +913,7 @@ font-weight:bold;
 		        $startdate.val($("#select_startdate_text").val());
 		        
 		        var $enddate = $('<input type="hidden" name="enddate">');
-		        $enddate.val($("#enddate_text").val());
+		        $enddate.val($("#select_enddate_text").val());
 		        
 		        $form.append($seq).append($name).append($title).append($explanation)
 		        .append($image1).append($image2).append($image3)

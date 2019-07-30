@@ -163,6 +163,7 @@
 			}
 		});
 		$(".pageNum").each(function(index,items){ // 네비버튼 클릭
+			var currentPage = $(this).val();
 			$(this).on("click",function(){
 				location.href="toHospital?currentPage="+currentPage;
 			})

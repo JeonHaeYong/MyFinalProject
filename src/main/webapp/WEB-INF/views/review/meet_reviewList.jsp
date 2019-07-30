@@ -166,9 +166,9 @@
                                                 <input type="hidden" value="${currentPage }" name="currentPage">
                                                 <div class="card mb-3" style="max-width: 540px;">
                                                     <div class="row no-gutters">
-                                                        <div class="col-md-4 imgWrapper">
+                                                        <div class="col-md-4">
                                                             <div style="width: 100%;height: 100%;">
-                                                                <img src="/review/${list.image_path1 }" class="card-img" style="width: 100%;height: 100%;">
+                                                                <img src="/review/${list.image_path1 }" class="card-img" style="width: 100%;height: 100%; max-height: 163px;">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-8">

@@ -177,21 +177,21 @@ public class AdminController
 		return result;
 
 	}
-//	@RequestMapping(value = "admin-chart-insert")
-//	public String insertDummyData()
-//	{
-//		String result = "error";
-//		try
-//		{
-//			result = chartService.insertRandomRecord();
-//		}
-//		catch(Exception e)
-//		{
-//			e.printStackTrace();
-//		}
-//
-//		return result;
-//	}
+	@RequestMapping(value = "admin-chart-insert")
+	public String insertDummyData()
+	{
+		String result = "error";
+		try
+		{
+			result = chartService.insertRandomRecord();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
+	}
 	@ResponseBody
 	@RequestMapping(value = "admin-chart-acs", produces="application/json;charset=utf-8")
 	public String selectACSDTO()

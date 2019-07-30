@@ -52,7 +52,7 @@ public class MessageController {
 	@RequestMapping("updateReadOk")
 	public String updateReadOk(String seq) {
 		int result = msgService.updateReadOkToYes(seq);
-		if(result==1) {
+		if(result==2) {
 			session.setAttribute("msg", (int)session.getAttribute("msg")-1);
 		}
 		return result+"";

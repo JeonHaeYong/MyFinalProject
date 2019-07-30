@@ -5,7 +5,7 @@
     <html>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title>마이페이지</title>
+            <title>마이페이지-내정보</title>
             <link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
             <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
                   rel="stylesheet">
@@ -208,7 +208,9 @@
                         </div>
                         <div class="d-flex justify-content-center modify_bot_part">
                             <button id="modify_btn" type="button" class="btn laon_btn_style mx-1">내정보 수정</button>
-                            <button id="withdrawal_modal_btn" type="button" class="btn laon_btn_style mx-1" data-toggle="modal" data-target="#withdrawal_modal">탈퇴하기</button>
+                            <c:if test="${memberDTO.type==1 }">
+                            	<button id="withdrawal_modal_btn" type="button" class="btn laon_btn_style mx-1" data-toggle="modal" data-target="#withdrawal_modal">탈퇴하기</button>
+                            </c:if>
                         </div>
                         <div class="justify-content-center modify_bot_part hide">
                             <button id="modify_profile_btn" type="button" class="btn laon_btn_style mx-1">정보 수정 완료</button>
@@ -216,31 +218,33 @@
                             <input id="reset_btn" type="reset" class="d-none">
                         </div>
                     </form>
-                    <!-- Modal 탈퇴하기 -->
-                    <div class="modal fade" id="withdrawal_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                	<span>탈퇴하기</span>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                	<p>비밀번호를 입력해주세요.</p>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="pw">비밀번호</span>
-                                        </div>
-                                        <input id="inputPw" type="password" class="form-control" placeholder="Password" aria-label="password" aria-describedby="pw">
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button id="withdrawal_btn" type="button" class="btn laon_btn_style">탈퇴하기</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <c:if test="${memberDTO.type==1 }">
+                    	<!-- Modal 탈퇴하기 -->
+	                    <div class="modal fade" id="withdrawal_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	                        <div class="modal-dialog modal-dialog-centered" role="document">
+	                            <div class="modal-content">
+	                                <div class="modal-header">
+	                                	<span>탈퇴하기</span>
+	                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                                        <span aria-hidden="true">&times;</span>
+	                                    </button>
+	                                </div>
+	                                <div class="modal-body">
+	                                	<p>비밀번호를 입력해주세요.</p>
+	                                    <div class="input-group mb-3">
+	                                        <div class="input-group-prepend">
+	                                            <span class="input-group-text" id="pw">비밀번호</span>
+	                                        </div>
+	                                        <input id="inputPw" type="password" class="form-control" placeholder="Password" aria-label="password" aria-describedby="pw">
+	                                    </div>
+	                                </div>
+	                                <div class="modal-footer">
+	                                    <button id="withdrawal_btn" type="button" class="btn laon_btn_style">탈퇴하기</button>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+                    </c:if>
                 </div>
             </div>
             <jsp:include page="/WEB-INF/views/myPage/user/user_module/menu_footer.jsp" ></jsp:include>

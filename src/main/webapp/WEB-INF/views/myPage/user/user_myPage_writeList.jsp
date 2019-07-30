@@ -5,7 +5,7 @@
     <html>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title>Insert title here</title>
+            <title>마이페이지 -내 글 목록</title>
             <link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
             <link
                   href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
@@ -63,7 +63,7 @@
 	                                            <div class="col-lg-3 d-lg-block d-none">글 쓴날짜</div>
 	                                        </div>
 	                                        <c:if test="${list.size()==0 }">
-	                                        	<div style="height: 300px; line-height: 300px" class="text-center">작성한 글이 없습니다.</div>
+	                                        	<div style="height: 300px; line-height: 300px;font-size:30px;" class="text-center">작성한 글이 없습니다.</div>
 	                                        </c:if>
 	                                        
 	                                        <c:if test="${list.size()!=0 }">
@@ -156,5 +156,6 @@
         	function toDetail(param){
         		$(param).parents("form").submit();
         	}
+        	$(".myjumbotron").attr("src","/mypage/dog_cat_1.jpg");
         </script>
     </html>

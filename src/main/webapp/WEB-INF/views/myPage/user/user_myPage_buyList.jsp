@@ -250,6 +250,7 @@
 					});
 				});
 			});
+            $(".myjumbotron").attr("src","/mypage/dog_2.png");
         </script>
         
     </html>

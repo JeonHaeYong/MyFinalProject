@@ -40,6 +40,9 @@ public class HomeController {
 		System.out.println("네이버:" + naverAuthUrl);
 		session.setAttribute("url", naverAuthUrl);
 		
+		//임시
+		System.out.println(session.getServletContext().getRealPath("/"));
+		
 		List<ApiAbandonedAnimalDTO> list = apiService.selectForMain();
 		request.setAttribute("list", list);
 		//재회후기뽑아오기

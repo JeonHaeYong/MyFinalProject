@@ -75,9 +75,6 @@ src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/Lo
                     input[type=button],button[type=button]{
                      cursor: pointer;
                     }
-                    .ft_gamja{
-                    	font-family: Gamja Flower;
-                    }
                     #mypage_link{
                     	color:#EC7357 !important;
                     }

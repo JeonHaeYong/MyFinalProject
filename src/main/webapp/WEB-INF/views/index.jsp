@@ -72,7 +72,9 @@
 }
 .small-title{font-family: 'Gamja Flower', cursive; font-size:50px;}
 #acs_title+p{font-size:28px; color:black; font-family: 'Gamja Flower', cursive;}
-
+.ft_gamja>*{
+	font-family: 'Gamja Flower' !important;
+}
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section" >
@@ -590,25 +592,65 @@
 		        console.log("index ajax error");
 	        });
 	        
-	        //팝업창!!!--왜망가진거야 ㅠㅠㅠ-------------------------------------------------------------------
+	        //팝업창!!!
 	        
-	        openPopup('popUp.home');
-	        
-	        function openPopup(url)
-	        {
-		        var cookies = document.cookie;
-		        var result = cookieToJson(cookies);
-		        if(result != "N")
-		        {
-			        window.open(url, '', 'width=430,height=625,left=1300,top=70');
-		        }
-	        }
-	        function cookieToJson(cookies)
-	        {
-		        var entry = cookies.split("=");
-		        entry[0] = entry[1];
-		        return entry[0];
-	        }
+	        function cookieToJson(cookie){
+				var cookieJson = {};
+				var cookies = document.cookie;
+				var cookieArr = cookies.replace(/ /g, "").split(";");
+				for(var i = 0; i < cookieArr.length; i++){
+					var entry = cookieArr[i].split("=");
+					cookieJson[entry[0]] = entry[1];
+				}
+				return cookieJson;
+			}
+	        for(var key in cookieToJson(document.cookie)){
+				if(key == "noPopup"&&cookieToJson(document.cookie)[key]!="N"){
+					window.open("popUp.home", '', 'width=430,height=625,left=1300,top=70');
+				}
+			}
+	        var randomNum = Math.floor(Math.random() * 4) + 1;
+
+            if(randomNum == 1)
+            {
+                $("#site_logo_img").attr("src", "resources/images/cat-logo.png");
+            }
+            else if(randomNum == 2)
+            {
+                $("#site_logo_img").attr("src", "resources/images/hedgehog-logo.png");
+            }
+            else if(randomNum == 3)
+            {
+                $("#site_logo_img").attr("src", "resources/images/turtle-logo.png");
+            }
+            else if(randomNum == 4)
+            {
+                $("#site_logo_img").attr("src", "resources/images/bird-logo.png");
+            }
+            else
+            {
+
+            }
+
+            //카카오 로그아웃
+            $("#logout").on("click",function(){
+                window.open('kakaologout',
+                            'window팝업',
+                            'width=470, height=300, menubar=no, status=no, toolbar=no');
+
+            });
+            if(${errorLogin!=null}){
+                alert("로그인을 먼저 해주세요.");
+                $(".login-btn").trigger("click");
+            }
+            $("#inputContent").on("keyup",function(){
+            	var content = $(this).val();
+            	if(content.length>200){
+            		alert("문의내용은 200자 이하로 작성해주세요.");
+            		$(this).val(content.substr(0,200));
+            		$(this).focus();
+            	}
+            })
         })
 
         
@@ -623,7 +665,7 @@
     			async : "false",
     			success : function(resp) {
     				var temp=resp.main.temp - 273;
-    				console.log(resp);
+    				//console.log(resp);
     				$("#temp").html("현재온도 : " + temp.toFixed(2));
     				$("#humidity").html("현재습도 : " + resp.main.humidity);
     				 $("#country").html("도시이름 : 서울" );
