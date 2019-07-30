@@ -196,7 +196,7 @@ body{
 						
 						<div class="row">
 						
-							<div class="col-12 text-center">
+							<div id="donation_btn_col" class="col-12 text-center">
 							
 								<input id="donation_btn" class="btn my_buttons mt-5" type="button" value="후원">
 								
@@ -359,7 +359,8 @@ function CountDownTimer(dt, id)
 	    {
 		    
 		    clearInterval(timer);
-		    $target.text = '종료!';
+		    $target.text('종료!');
+		    $("#donation_btn_col").empty();
 		    
 		    return;
 	    }
