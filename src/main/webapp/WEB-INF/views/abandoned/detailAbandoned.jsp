@@ -197,37 +197,53 @@ td {
 							<tr>
 								<th scope="row">성별</th>
 								<td>${dto.sexCd }</td>
+								<th width="18%" scope="row"></th>
+								<td width="18%"></td>
 							</tr>
 							<tr>
 								<th scope="row">중성화 여부</th>
 								<td>${dto.neuterYn }</td>
+								<th width="18%" scope="row"></th>
+								<td width="18%"></td>
 							</tr>
 							<tr>
 								<th scope="row">나이/체중</th>
 								<td>${dto.age }/ ${dto.weight }</td>
+								<th width="18%" scope="row"></th>
+								<td width="18%"></td>
 							</tr>
 							<tr>
 								<th scope="row">접수일시</th>
 								<td><fmt:formatDate value="${dto.happenDt }"
 										pattern="yyyy-MM-dd" /></td>
+										<th width="18%" scope="row"></th>
+								<td width="18%"></td>
 							</tr>
 							<tr>
 								<th scope="row">발생장소</th>
 								<td>${dto.happenPlace }</td>
+								<th width="18%" scope="row"></th>
+								<td width="18%"></td>
 							</tr>
 							<tr>
 								<th scope="row">특징</th>
 								<td>${dto.specialMark }</td>
+								<th width="18%" scope="row"></th>
+								<td width="18%"></td>
 							</tr>
 							<tr>
 								<th scope="row">공고기한</th>
 								<td><fmt:formatDate value="${dto.noticeSdt }"
 										pattern="yyyy-MM-dd" /> ~ <fmt:formatDate
 										value="${dto.noticeEdt }" pattern="yyyy-MM-dd" /></td>
+										<th width="18%" scope="row"></th>
+								<td width="18%"></td>
 							</tr>
 							<tr>
 								<th></th>
-								<td>** 유기동물 문의는 보호센터에 연락하시기 바랍니다.</td>
+								<td colspan="2">** 유기동물 문의는 보호센터에 연락하시기 바랍니다.</td>
+								<th width="18%" scope="row"></th>
+							
 							</tr>
 							<tr>
 								<th scope="row">보호센터이름</th>
@@ -238,10 +254,14 @@ td {
 							<tr>
 								<th scope="row">보호장소</th>
 								<td>${dto.careAddr }</td>
+								<th width="18%" scope="row"></th>
+								<td width="18%"></td>
 							</tr>
 							<tr>
 								<th scope="row">관할기관</th>
 								<td>${dto.orgNm }</td>
+								<th width="18%" scope="row"></th>
+								<td width="18%"></td>
 							</tr>
 							<tr>
 								<th scope="row">담당자</th>
@@ -252,6 +272,8 @@ td {
 							<tr>
 								<th scope="row">특이사항</th>
 								<td>${dto.noticeComment }</td>
+								<th width="18%" scope="row"></th>
+								<td width="18%"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -280,7 +302,6 @@ td {
 	</script>
 </body>
 
-
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="resources/js/jquery-ui.js"></script>
 <script src="resources/js/popper.min.js"></script>
@@ -292,7 +313,15 @@ td {
 <script src="resources/js/jquery.fancybox.min.js"></script>
 <script src="resources/js/jquery.sticky.js"></script>
 <script src="resources/js/isotope.pkgd.min.js"></script>
-
-
 <script src="resources/js/main.js"></script>
+<script>
+	$(function(){
+		$(".nav-link").each(function(i, item){
+	        if($(item).attr("href").match("^toAbandoned")){
+	           $(this).attr("class", "active");
+	        }
+	     });
+	})
+</script>
+
 </html>

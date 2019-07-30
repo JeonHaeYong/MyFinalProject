@@ -44,10 +44,12 @@ public class HomeController {
 		request.setAttribute("list", list);
 		//재회후기뽑아오기
 		int reviewCount = rservice.getReviewCount();
+
 		if(reviewCount>100) {
 			reviewCount=100;
 		}
 		if(reviewCount>=4) {//리뷰글 3개이상일때만 가져오기
+
 			Set<Integer> rSet = new HashSet<>();
 			while(rSet.size() < 4) {// 랜덤으로 4개
 				int rand = (int)(Math.random()*reviewCount+1);

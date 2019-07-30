@@ -17,6 +17,7 @@ public interface ItemDAO {
 	public List<ItemDTO> selectItemPerPageByCategoryWithoutSoldout(String category, int start, int end);
 	public List<ItemDTO> selectItemByOrderNum(String orderNumber);
 	public int updateSoldOut(int seq);
+	public int updateSoldOut(String id);
 	public int itemContentsSize();
 	public int itemContentsSizeByCategory(String category);
 	public int itemContentsSizeWithoutSoldout();

@@ -256,6 +256,9 @@ label {
 	background-color: #FDD692 !important;
 	font-weight: bold !important;
 }
+label{
+	padding-left:20px;
+}
 </style>
 
 </head>
@@ -312,7 +315,7 @@ label {
 				<div id="formWrapper"
 					style="font-weight: 600; font-family: 'SeoulNamsanM';">
 					<form action="select" method="get">
-						<div class="row">
+						<div class="row my-1">
 							<div class="col-lg-1">날짜</div>
 							<div class="col-lg-11" style="font-family:"Gulim;">
 								<input id="from" type="date" max="${todayStr }" name="from"
@@ -321,10 +324,9 @@ label {
 									required><br>(날짜는 접수일 기준이고, 2019년 1월 1일부터 오늘까지의 자료를 조회하실 수 있습니다.)
 							</div>
 						</div>
-						<div class="row">
+						<div class="row my-1">
 
-							<div class="col-lg-1">시도</div>
-							<div class="col-lg-3">
+							<div class="col-lg-3">시도&nbsp;&nbsp;&nbsp;
 								<select id="sido_select" name="sido" style="height: 30px;">
 									<option class="op_sido" value="0">전체</option>
 									<option class="op_sido" value="6110000">서울특별시</option>
@@ -345,22 +347,19 @@ label {
 									<option class="op_sido" value="6500000">제주특별자치도</option>
 								</select>
 							</div>
-							<div class="col-lg-2">시군구</div>
-							<div class="col-lg-2">
+							<div class="col-lg-3">시군구&nbsp;&nbsp;&nbsp;
 								<select id="sigungu_select" style="height: 30px;" name="sigungu">
 									<option class="op_sigungu" value="0">전체</option>
 								</select>
 							</div>
-							<div class="col-lg-2">보호센터</div>
-							<div class="col-lg-2">
+							<div class="col-lg-6">보호센터&nbsp;&nbsp;&nbsp;
 								<select id="shelter_select" style="height: 30px;" name="shelter">
 									<option value="0">전체</option>
 								</select>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-lg-1">품종</div>
-							<div class="col-lg-5">
+						<div class="row my-1">
+							<div class="col-lg-6">품종&nbsp;&nbsp;&nbsp;
 								<select id="species_select" style="height: 30px;" name="species">
 									<option class="op_species" value="0">전체</option>
 									<option class="op_species" value="417000">개</option>
@@ -371,8 +370,8 @@ label {
 									<option class="op_kind" value="0">전체</option>
 								</select>
 							</div>
-							<div class="col-lg-1">상태</div>
-							<div class="col-lg-2">
+							<div class="col-lg-3">상태&nbsp;&nbsp;&nbsp;
+							
 
 								<!-- 									<select id="processState_select" -->
 								<!-- 										class="form-control form-control-sm" name="processState"> -->
@@ -388,7 +387,7 @@ label {
 									<option class="op_processState" value="보호중">보호중</option>
 								</select>
 							</div>
-							<div class="col-lg-3 text-right">
+							<div class="col-lg-3 text-center">
 								<button id="btnSelect" class="btn btn-sm" type="button">조회</button>
 							</div>
 							<input type="hidden" name="currentPage" value="1">
@@ -408,10 +407,10 @@ label {
 
 						<c:forEach var="dto" items="${list}">
 
-							<div class="card myCard col-lg-4 col-md-4 col-sm-12">
+							<div class="card myCard mx-3 my-3 col-lg-4 col-md-4 col-sm-12" style="padding-right:0px; padding-left:0px;">
 								<a href="detailAbandoned?seq=${dto.seq }"><img
 									src="${dto.popfile }" class="card-img-top" alt="..."
-									style="width: 211px; height: 150px; margin-bottom: 10px;"></a>
+									style="width: 100%; height: 150px; margin-bottom: 10px;"></a>
 								<div class="card-body" style="font-family:SeoulNamsanM;">
 
 									<p class="card-text">
@@ -437,46 +436,10 @@ label {
 					</c:if>
 
 					<c:if test="${listsize == 0 }">
-						<div id="dataNotExist" style="margin: auto">해당 데이터가 존재하지
+						<div id="dataNotExist" style="margin: auto; margin-top:20px; font-weight:bold;">해당 데이터가 존재하지
 							않습니다.</div>
 					</c:if>
 				</div>
-<!-- 부트스트랩 페이지네비 -->
-				<!-- 				<nav aria-label="..." style="font-size: 1.2rem; font-weight: 600"> -->
-				<!-- 					<ul class="pagination justify-content-center"> -->
-				<%-- 						<c:if test="${pageNavi.needPrev == 1 }"> --%>
-				<!-- 							<li class="page-item disabled"><a class="page-link" href="#" -->
-				<!-- 								tabindex="-1" aria-disabled="true" -->
-				<%-- 								currPage="${pageNavi.startNavi - 1 }">&laquo;&nbsp;</a></li> --%>
-				<%-- 						</c:if> --%>
-				<%-- 						<c:if test="${pageNavi.currentPage > pageNavi.startNavi }"> --%>
-				<!-- 							<li class="page-item"><a class="page-link" href="#" -->
-				<%-- 								currPage="${pageNavi.currentPage - 1}">이전</a></li> --%>
-				<%-- 						</c:if> --%>
-				<%-- 						<c:forEach var="i" begin="${pageNavi.startNavi}" --%>
-				<%-- 							end="${pageNavi.endNavi}"> --%>
-				<%-- 							<c:if test="${i==pageNavi.currentPage}"> --%>
-				<!-- 								<li class="page-item active" aria-current="page"><a -->
-				<%-- 									class="page-link" href="#" currPage="${i }">${i } <span --%>
-				<!-- 										class="sr-only">(current)</span></a></li> -->
-				<%-- 							</c:if> --%>
-				<%-- 							<c:if test="${i!=pageNavi.currentPage}"> --%>
-				<!-- 								<li class="page-item"><a class="page-link" href="#" -->
-				<%-- 									currPage="${i }">${i }</a></li> --%>
-				<%-- 							</c:if> --%>
-				<%-- 						</c:forEach> --%>
-				<%-- 						<c:if test="${pageNavi.currentPage < pageNavi.pageTotalCount }"> --%>
-				<!-- 							<li class="page-item"><a class="page-link" href="#" -->
-				<%-- 								currPage="${pageNavi.currentPage + 1}">다음</a></li> --%>
-				<%-- 						</c:if> --%>
-				<%-- 						<c:if test="${pageNavi.needNext == 1 }"> --%>
-				<!-- 							<li class="page-item"><a class="page-link" href="#" -->
-				<%-- 								currPage="${pageNavi.endNavi + 1}">&raquo;</a></li> --%>
-				<%-- 						</c:if> --%>
-				<!-- 					</ul> -->
-				<!-- 				</nav> -->
-
-
 
 				<div id="naviBox" style="margin-top: 10px;" class="text-center">
 					<c:if test="${pageNavi.needPrev == 1 }">
@@ -552,6 +515,12 @@ label {
 
 <script>
 $(function() {
+	
+	$(".nav-link").each(function(i, item){
+        if($(item).attr("href").match("^toAbandoned")){
+           $(this).attr("class", "active");
+        }
+     });
 	
 	var dogArr = [ "골든 리트리버", "그레이 하운드", "그레이트 덴", "그레이트 피레니즈", "기타",
 			"꼬똥 드 뚤레아", "네오폴리탄 마스티프", "노르포크 테리어", "노리치 테리어", "뉴펀들랜드",

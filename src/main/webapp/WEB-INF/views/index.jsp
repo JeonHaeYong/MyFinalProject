@@ -320,6 +320,7 @@
 									<div class="block-testimony-1 text-center">
 										<blockquote class="mb-4" style="font-family: 'Gamja Flower';font-weight: bold;">
 											<p class="text-break text-break reviewContent_part">${list.contents }</p>
+
 										</blockquote>
 				
 										<figure> <img src="review/${list.image_path1}" alt="Image" class="img-fluid rounded-circle mx-auto" style="width: 120px; height: 120px; max-width: 120px;"> </figure>

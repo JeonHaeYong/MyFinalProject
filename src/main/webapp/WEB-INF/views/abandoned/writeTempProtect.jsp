@@ -476,6 +476,8 @@
 										<th scope="row">연락처</th>
 										<td><input id="phone" type="tel" name="phone"
 											placeholder="${dto.phone }" required></td>
+											<th scope="row"></th>
+											<td></td>
 									</tr>
 								</tbody>
 							</table>

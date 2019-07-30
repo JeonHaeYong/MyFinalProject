@@ -63,6 +63,10 @@
 	<update id="updateSoldOut">
 		update item set soldout = 'y' where seq=#{value}
 	</update>
+	
+	<update id="updateSoldOutById">
+		update item set soldout = 'y' where seller=#{value}
+	</update>
 
 	<select id="selectForAdmin" resultType="kh.spring.dto.ItemDTO">
 		select * 
