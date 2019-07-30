@@ -208,7 +208,16 @@
 						</div>
 	                	<div class="col-12 itemInfo">
 	                		<p><span class="column">Price</span><span class="cell">${item.price }</span></p><hr>
-	                		<p><span class="column">Seller</span><span class="cell" id="sendMsg_btn" data-toggle="modal" data-target="#msg_modal" data-whatever="@mdo">${item.seller }</span></p><hr>
+	                		<p><span class="column">Seller</span>
+	                			<c:choose>
+	                				<c:when test="${item.seller == '탈퇴한 회원' }">
+	                					<span class="cell">${item.seller }</span>
+	                				</c:when>
+	                				<c:otherwise>
+	                					<span class="cell" id="sendMsg_btn" data-toggle="modal" data-target="#msg_modal" data-whatever="@mdo">${item.seller }</span>
+	                				</c:otherwise>
+	                			</c:choose>
+	                		</p><hr>
 	                		<p><span class="column">Date</span><span class="cell">${item.fomredDate }</span></p>
 	                	</div>
 	                	<div class="col-12 align-self-center text-center">

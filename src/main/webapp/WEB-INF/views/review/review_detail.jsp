@@ -80,6 +80,15 @@
                         font-weight: bold;
                         background-color: #FDD692;
                     }
+                    .navi.active{
+                    	font-weight: bold;
+                        background-color: #FDD692;
+                    }
+                    #review_link
+					{
+						color: #EC7357 !important;
+						font-weight: 600 !important;
+					}
                 </style>
             </head>
             <body data-spy="scroll" data-target=".site-navbar-target"
@@ -171,7 +180,14 @@
                                 <c:if test="${reply_navi.size()!=0 }">
                                     <div class="col-12 text-center">
                                         <c:forEach var="navi" items="${reply_navi }">
-                                           <a class="ml-1 navi reply_navi" href="#toList" onclick="clickReplyNavi(this);">${navi }</a>
+                                        	<c:choose>
+                                        		<c:when test="${currentPage==navi }">
+                                        			<a class="ml-1 navi active reply_navi" href="#toList" onclick="clickReplyNavi(this);">${navi }</a>
+                                        		</c:when>
+                                        		<c:otherwise>
+                                        			<a class="ml-1 navi reply_navi" href="#toList" onclick="clickReplyNavi(this);">${navi }</a>
+                                        		</c:otherwise>
+                                        	</c:choose>
                                         </c:forEach>
                                     </div>
                                 </c:if>
@@ -306,10 +322,10 @@
                 function clickReplyNavi(param){//댓글 navi 클릭했을때,
                     var currentPage = $(param).text();
                     if(currentPage=="<이전"){
-                        var prev =  $(param).parent().next().attr("value");
+                        var prev =  $(param).next().text();
                         currentPage = parseInt(prev) - 1 ;
                     }else if(currentPage=="다음>"){
-                        var next  = $(param).parent().prev().attr("value");
+                        var next  = $(param).prev().text();
                         currentPage = parseInt(next) + 1 ;
                     }
                     $.ajax({

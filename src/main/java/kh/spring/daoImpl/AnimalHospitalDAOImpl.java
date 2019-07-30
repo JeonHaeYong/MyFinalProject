@@ -84,26 +84,29 @@ public class AnimalHospitalDAOImpl implements AnimalHospitalDAO {
 		StringBuilder sb = new StringBuilder();
 		if(option == null){
 			if(needPrev) {
-				sb.append("<a class='prev' href='toHospital?currentPage=" + (startNavi - 1) + "'> ◀  </a>");
-				//sb.append("<input type='button' value='◀' onClick='location.href='location.href="+ (startNavi - 1) +"'>");
+				sb.append("<input type='button' currentPage='"+(startNavi - 1)+"' value='이전' class='prev navi-btn'>");
+
 			}
 			for(int i = startNavi; i <= endNavi; i++) {
-				sb.append("<a class='pageNum' href='toHospital?currentPage=" + i + "'> " + i + "</a>");
-				//sb.append("<input type='button' value='"+i+"' onClick='location.href=toHospital?currentPage="+i+"' class='pageNum'>");
-				
+				sb.append("<input type='button' currentPage='"+i+"' class='pageNum navi-btn' value='"+i+"'>");
+
 			}
 			if(needNext) {
-				sb.append("<a class='next' href='toHospital?currentPage=" + (endNavi + 1) + "'> ▶ </a>");
+				sb.append("<input type='button' currentPage='"+(endNavi + 1)+"' value='다음' class='next navi-btn'>");
+
 			}
 		}else{
 			if(needPrev) {
-				sb.append("<a class='prev' href='searchToHospital?&&option="+option+"&&currentPage=" + (startNavi - 1) + "'> ◀  </a>");
+				sb.append("<input type='button' currentPage='"+(startNavi - 1)+"' option='"+option+"' value='이전' class='opt-prev navi-btn'>");
+
 			}
 			for(int i = startNavi; i <= endNavi; i++) {
-				sb.append("<a class='pageNum' href='searchToHospital?&&option="+option+"&&currentPage=" + i + "'> " + i + "</a>");
+				sb.append("<input type='button' currentPage='"+i+"' option='"+option+"' class='opt-pageNum navi-btn' value='"+i+"'>");
+
 			}
 			if(needNext) {
-				sb.append("<a class='next' href='searchToHospital?&&option="+option+"&&currentPage=" + (endNavi + 1) + "'> ▶ </a>");
+				sb.append("<input type='button' currentPage='"+(endNavi + 1)+"' option='"+option+"' value='다음' class='opt-next navi-btn'>");
+
 			}
 		}
 		return sb.toString();

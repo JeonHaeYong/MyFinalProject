@@ -349,6 +349,7 @@ public class MemberController {
 	@RequestMapping("currPwCheck")
 	public String currPwCheck(String id , String pw) {
 		int result = mservice.isLoginOkService(id, pw);
+		
 		if(result==0) {
 			return "false";
 		}
@@ -373,6 +374,10 @@ public class MemberController {
 	//정보수정하기(id,pw,email제외)
 	@RequestMapping("modifyProfile")
 	public String modifyProfileInfo(MemberDTO dto) {
+		String addr = dto.getAddress2();
+		addr = addr.replaceAll("<", "&lt;");
+		addr = addr.replaceAll(">", "&gt;");
+		addr = addr.replaceAll("\"", "");
 		String loginId = (String)session.getAttribute("id");
 		if(!loginId.equals(dto.getId())) {
 			return "rediect:/logout";
@@ -434,6 +439,7 @@ public class MemberController {
 		//list navi 담기
 		List<String> navi = boardService.getNaviForBoardList(id, page);
 		request.setAttribute("navi", navi);
+		request.setAttribute("currentPage", currentPage);
 		if(data!=null) {
 			return "myPage/user/writeList_template";
 		}
@@ -449,7 +455,6 @@ public class MemberController {
 		}
 		request.setAttribute("dpList", dps.selectDonationPaymentById(id, Integer.parseInt(currentPage)));
 		request.setAttribute("pageNavi", dps.getNaviForDonationPayment(Integer.parseInt(currentPage), dps.getDonationPaymentTotalCountById(id)));
-		System.out.println("support template : " + template);
 		if(template != null) {
 			return "myPage/user/support_template";
 		}
@@ -465,7 +470,6 @@ public class MemberController {
 		List<PaymentDTO> buyList = ps.selectPaymentPerPageForBuyList(id, Integer.parseInt(currentPage));
 		request.setAttribute("buyList", buyList);
 		request.setAttribute("pageNavi", ps.getNaviForBuyList(id, Integer.parseInt(currentPage)));
-		System.out.println("buyList template : " + template);
 		if(template != null) {
 			return "myPage/user/buyList_template";
 		}
@@ -561,6 +565,20 @@ public class MemberController {
 			result = "0";
 		}
 
+		return result;
+	}
+	
+	//-탈퇴하기--------------------------------------------------------------------------------------------
+	
+	
+	@RequestMapping("withdrawal")
+	public Object withdrawal(HttpServletRequest request, MemberDTO dto) {
+		Object result = "error";
+		try {
+			result = mservice.withdrawalService(dto.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
 

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.spring.dto.MessageDTO;
+import kh.spring.service.MemberService;
 import kh.spring.service.MessageService;
 
 @Controller
@@ -20,6 +21,8 @@ public class MessageController {
 	private MessageService msgService;
 	@Autowired
 	private HttpSession session;
+	@Autowired
+	private MemberService memService;
 
 	@RequestMapping("insertMsg")
 	public String insertMsg_loginCheck(HttpServletRequest request, MessageDTO dto) {
@@ -35,6 +38,9 @@ public class MessageController {
 		//				break;
 		//			}
 		//		}
+		String contents = dto.getContents();
+		contents = contents.replaceAll("<", "'").replaceAll(">", "'").replaceAll("\"", "");
+		dto.setContents(contents);
 		int insertResult = msgService.insertMsg_service(dto);
 		System.out.println("입력결과-> " + insertResult);
 		String referer = request.getHeader("referer");
@@ -73,7 +79,7 @@ public class MessageController {
 		List<MessageDTO> list = msgService.selectAllMsgByCurrentPage(category,id, page);
 		//페이지 navi담기.
 		List<String> navi = msgService.getNaviforMsg(page, category, id);
-
+		request.setAttribute("currentPage", currentPage);
 		if(category.equals("recipient")) {
 			request.setAttribute("receivedList", list);
 			request.setAttribute("receivedNavi", navi);
@@ -83,6 +89,28 @@ public class MessageController {
 			request.setAttribute("sentNavi", navi);
 			return "myPage/user/sent_msg_template";
 		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("sendInquire")
+	public String sendInquire(String email , String contents) {
+		if(email==null||contents==null) {
+			return "error";
+		}
+		contents = contents.replaceAll("<", "'").replaceAll(">", "'").replaceAll("\"", "");
+		MessageDTO dto = new MessageDTO();
+		dto.setContents(contents);
+		dto.setSender(email);
+		List<String> adminList = memService.selectAllType4();
+		int insertResult = 0;
+		for(String admin : adminList ) {
+			dto.setRecipient(admin);
+			insertResult += msgService.insertMsg_service(dto);
+		}
+		if(insertResult==adminList.size()) {
+			return "true";
+		}
+		return "false";
 	}
 	
 

@@ -22,7 +22,7 @@
                 <link rel="stylesheet" href="resources/css/aos.css">
                 <link rel="stylesheet" href="resources/css/style.css">
                 <style>
-                /*                     #FBFFB9 1번, #FDD692 2번, #EC7357 3번, #754F44 4번, */
+                /* #FBFFB9 1번, #FDD692 2번, #EC7357 3번, #754F44 4번, */
                     /*부트스트랩 모달시 패딩 없애주기.*/
                     .modal-open{padding-right: 0px !important;}
                     .readMsg{
@@ -64,7 +64,7 @@
                         border-radius: 30px;
                         font-family: 'Gamja Flower';
                     }
-                    .navi:hover{
+                    .navi:hover,.navi.active{
                         font-weight: bold;
                         background-color: #FDD692;
                     }
@@ -120,7 +120,7 @@
                                     <div class="tab-content" id="nav-tabContent">
                                         <!-- 받은쪽지함 -->
                                         <div class="tab-pane fade show active selectedBox" id="nav-inbox" role="tabpanel" aria-labelledby="nav-inbox-tab" name="receivedBox">
-                                            <div class="row receivedList_prev_part">
+                                            <div class="row receivedList_prev_part font-weight-bold">
                                                 <div class="col-1">
                                                     <div class="custom-control custom-checkbox">
                                                         <input type="checkbox" class="custom-control-input" id="r_allCheck">
@@ -171,8 +171,15 @@
                                             <div class="row receivedList_part my-4">
                                             	<div class="col-12 text-center">
                                             		<c:forEach var="navi" items="${receivedNavi }">
-															<a class="ml-1 navi navi_click_a" href="javascript:void(0)"  value="recipient">${navi }</a>
-                                            		</c:forEach>
+				                                        	<c:choose>
+				                                        		<c:when test="${currentPage==navi }">
+				                                        			<a class="ml-1 navi navi_click_a active" href="javascript:void(0)"  value="recipient">${navi }</a>
+				                                        		</c:when>
+				                                        		<c:otherwise>
+				                                        			<a class="ml-1 navi navi_click_a" href="javascript:void(0)"  value="recipient">${navi }</a>
+				                                        		</c:otherwise>
+				                                        	</c:choose>
+				                                     </c:forEach>
                                             	</div>
                                             </div><!-- /받은쪽지 네비게이터-->
                                             <!-- 받은쪽지클릭하면 내용띄워주기 -->
@@ -194,8 +201,8 @@
                                                         	</div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button id="received_msg_close_btn" type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                                                            <button id="reply_msg_btn" type="button" class="btn btn-primary">답장 보내기</button>
+                                                            <button id="received_msg_close_btn" type="button" class="mx-1 btn btn-secondary" data-dismiss="modal">닫기</button>
+                                                            <button id="reply_msg_btn" type="button" class="mx-1 btn btn-primary">답장 보내기</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -204,7 +211,7 @@
                                         </div>
                                         <!-- 보낸쪽지함 -->
                                         <div class="tab-pane fade selectedBox" id="nav-sentbox" role="tabpanel" aria-labelledby="nav-sentbox-tab" name="sentBox">
-                                            <div class="row sentList_prev_part">
+                                            <div class="row sentList_prev_part font-weight-bold">
                                                 <div class="col-1">
                                                     <div class="custom-control custom-checkbox">
                                                         <input type="checkbox" class="custom-control-input" id="s_allCheck">
@@ -248,8 +255,15 @@
                                             <div class="row sentList_part my-4">
                                             	<div class="col-12 text-center">
                                             		<c:forEach var="navi" items="${sentNavi }">
-															<a class="ml-1 navi navi_click_a" href="javascript:void(0)"  value="sender">${navi }</a>
-                                            		</c:forEach>
+				                                        	<c:choose>
+				                                        		<c:when test="${currentPage==navi }">
+				                                        			<a class="ml-1 navi navi_click_a active" href="javascript:void(0)"  value="sender">${navi }</a>
+				                                        		</c:when>
+				                                        		<c:otherwise>
+				                                        			<a class="ml-1 navi navi_click_a" href="javascript:void(0)"  value="sender">${navi }</a>
+				                                        		</c:otherwise>
+				                                        	</c:choose>
+				                                     </c:forEach>
                                             	</div>
                                             </div>
                                             <!-- /보낸쪽지 네비게이터-->
@@ -317,8 +331,8 @@
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button id="msg_close_btn" type="button" class="btn bg4_ft2" data-dismiss="modal">닫기</button>
-                                    <button id="msg_send_btn" type="button" class="btn bg2_ft4">쪽지 보내기</button>
+                                    <button id="msg_close_btn" type="button" class="mx-1 btn bg4_ft2" data-dismiss="modal">닫기</button>
+                                    <button id="msg_send_btn" type="button" class="mx-1 btn bg2_ft4">쪽지 보내기</button>
                                 </div>
                             </div>
                         </div>
@@ -435,6 +449,7 @@
                 	$("#r_sender_modal").html("");
                 	$("#r_contents_modal").html("");
                 	var contents = $(this).text();
+                	console.log(contents);
                 	var sender = $(this).attr("value");
                 	$("#r_sender_modal").append("보낸사람 : "+sender+"<hr>");
                 	$("#r_sender_modal").prop("sender",sender);
@@ -465,6 +480,7 @@
                 	$("#s_recipient_modal").html("");
                 	$("#s_contents_modal").html("");
                 	var contents = $(this).text();
+                	console.log(contents);
                 	var recipient = $(this).attr("value");
                 	$("#s_recipient_modal").append("받는사람 : "+recipient+"<hr>");
                 	$("#s_contents_modal").append(contents);

@@ -59,6 +59,12 @@ a{
 {
 	min-height: 300px;
 }
+
+#notice_link
+{
+	color: #EC7357 !important;
+	font-weight: 600 !important;
+}
 </style>
 
 </head>
@@ -106,7 +112,7 @@ a{
 				
 				<div class="col-12 col-md-12 col-lg-12 text-center my-5">
 				
-					<a href="notice-write-random">데이터 삽입</a>
+<!-- 					<a href="notice-write-random">데이터 삽입</a> -->
 					
 				</div>
 				
@@ -240,7 +246,7 @@ a{
 	    	})
 	    	.fail(function()
 	    	{
-	    		alert("error");
+	    		alert("에러 발생");
 	    	});
 			
 		}

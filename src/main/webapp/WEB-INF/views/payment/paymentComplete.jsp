@@ -35,6 +35,14 @@
 		text-align: center;
 		line-height: 60px;
 	}
+	.itemName{
+		text-decoration: none;
+		color: #754F44;
+	}
+	.itemName:hover{
+		font-weight: bold;
+        background-color: #FBFFB950;
+	}
 	.formTop{
 		text-align: center;
 	}
@@ -86,7 +94,7 @@
 						<div class="row no-gutters">
 							<div class="col-12 row">
 								<div class="col-md-6 col-12 cardContents">
-									<p><a href="item?seq=${dto.seq }&currentPage=1&category=all"><h5 class="card-title">${dto.name }</h5></a><p>
+									<p><a href="item?seq=${dto.seq }&currentPage=1&category=all"><h5 class="card-title itemName">${dto.name }</h5></a><p>
 								</div>
 								<div class="col-md-3 d-md-block d-none cardContents">
 									<p class="card-text">${dto.price }원</p>

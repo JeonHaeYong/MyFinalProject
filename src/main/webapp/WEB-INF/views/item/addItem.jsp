@@ -37,7 +37,7 @@
 		height: 100%;
 		max-height: 600px;
 	}
-	#writeBtn, #cancelBtn{font-family: 'Gamja Flower', cursive; font-size: 22px; background-color:#FDD69270; color:#754F44;}
+	#writeBtn, #cancelBtn{font-family: 'Gamja Flower', cursive; font-size: 22px; background-color:#FDD69270; color:#754F44; border-radius: 25px;}
 	#writeBtn:hover, #cancelBtn:hover{background-color:#FDD692; font-weight:bold;}
 </style>
 </head>
@@ -104,8 +104,8 @@
 		</form>
 		<div class="row">
 			<div class="col-12 d-flex justify-content-end mt-3 mb-3">
-				<input type="button" class="btn myBtn" id="writeBtn" value="신청">
-				<input type="button" class="btn myBtn" id="cancelBtn" value="취소">
+				<input type="button" class="btn myBtn mx-2" id="writeBtn" value="신청">
+				<input type="button" class="btn myBtn mx-2" id="cancelBtn" value="취소">
 			</div>
 		</div>
 	</div>

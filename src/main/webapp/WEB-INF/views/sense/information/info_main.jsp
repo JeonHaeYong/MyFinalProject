@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<title>OX 상식 퀴즈</title>
+<title>유용한정보</title>
 <link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
@@ -51,8 +51,8 @@ h3, h1 {
 	border: 0px solid black;
 	min-width: 400px;
 	box-sizing: border-box;
-	text-align: center;
-	margin-bottom: 100px;
+	
+
 }
 
 .info-box {
@@ -63,56 +63,23 @@ h3, h1 {
 	padding: 0px;
 }
 
-.menu-box {
-	width: 150px;
-	height: 100px;
-	color: #754F44;
-	font-family: 'Gamja Flower', cursive;
-	font-size: 22px;
-	margin-top: 50px;
-}
-
-.menu-box>div {
-	height: 35px;
-}
-
-.menu-box>div:first-child {
-	font-weight: bold;
-	border-bottom: 1px solid #754F44;
-	line-height: 33px;
-	color: #B45F04;
-	font-size: 40px;
-}
-
-.menu-box>div:not (.s-menu ):hover {
-	background-color: #FBFFB950;
-}
-
-.menu-row {
-	text-align: -webkit-center;
-}
-
-a[name="s-menu"] {
-	color: #754F44;
-	text-decoration-line: none;
-}
-
-a[name="s-menu"]:hover {
-	color: #754F44;
-	text-decoration-line: none;
-	font-weight: bold;
-}
-
+ .menu-box{width: 200px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px; margin-top: 50px; margin-bottom:50px;}
+            .menu-box>div{height: 35px;}
+            .menu-box>div:first-child{font-weight: bold; border-bottom: 1px solid #754F44; line-height: 33px; color:#B45F04; font-size:40px;}
+          .menu-box>div:not(.s-menu):hover{cursor: pointer; background-color: #FBFFB950; color: #754F44; text-decoration-line: none; font-weight:bold;}
+            .menu-row{text-align: -webkit-center;}
+            a[name="s-menu"]{color: #754F44; text-decoration-line: none;}
 /* ----------------------카테고리 */
 #profile-tab,#home-tab{
 font-family: 'Gamja Flower', cursive;
 
 text-decoration:none;
- color:black;
+ color: #754F44;
  font-size:20px;
  }
 #profile-tab.active,#home-tab.active{
 background-color:#FDD692;
+
 }
 /* -------------------infobox -----------------   */
 .infowrapper {
@@ -180,12 +147,17 @@ background-color:#FDD692;
 	font-family: 'Gamja Flower', cursive;
 }
 
-#infowrite:hover, #infodel:hover,.infonavi:hober, .t_navi:hover {
+#infowrite:hover, #infodel:hover,.infonavi:hover, .t_navi:hover {
 	background-color: #FDD692;
 	font-weight: bold;
 }
 .btngroup{
 padding-right:105px;
+}
+#quiz_link
+{
+	color: #EC7357 !important;
+	font-weight: 600 !important;
 }
 </style>
 
@@ -220,7 +192,7 @@ padding-right:105px;
 				</div>
 			</div>
 			<div class="col-1"></div>
-			<div class="col-lg-9 col-md-8 col-sm-12 col-12 info-box mt-5">
+			<div class="col-lg-9 col-md-8 col-sm-12 col-12 info-box mt-5 mb-5">
 				<!--내용   -->
 					
 				<ul class="row nav nav-tabs justify-content-center" id="myTab" role="tablist">

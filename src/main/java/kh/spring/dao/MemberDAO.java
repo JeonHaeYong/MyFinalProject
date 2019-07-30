@@ -29,4 +29,5 @@ public interface MemberDAO {
 	public int selectCount() throws Exception;
 	public int updatePointRandom(HashMap<String, Integer> param) throws Exception;
 	public int doublemail(String email);
+	public List<String> selectAllType4();//관리자 id 뽑아오기
 }

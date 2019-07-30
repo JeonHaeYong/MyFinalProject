@@ -59,22 +59,27 @@ body{
 
 .progress
 {
-	height: 40px;
+	height: 50px;
 }
 #progress-bar
 {
 	height: 50px;
+	font-size: 20px;
+	color: #B45F04;
 }
 
 .bold_brown_namsan
 {
 	font-family: 'SeoulNamsanM' !important;
 	font-weight:bold;
-	color: brown;
+	color: #B45F04;
 }
 .namsan
 {
 	font-family: 'SeoulNamsanM' !important;
+}
+#info_div{
+	color: #B45F04;
 }
 </style>
 
@@ -191,7 +196,7 @@ body{
 						
 						<div class="row">
 						
-							<div class="col-12 text-center">
+							<div id="donation_btn_col" class="col-12 text-center">
 							
 								<input id="donation_btn" class="btn my_buttons mt-5" type="button" value="후원">
 								
@@ -225,18 +230,28 @@ body{
 						<div>
 							
 							<img src="/resources/images/pie-chart-64.png" alt="사진이 없습니다.">
-							<span>${dto.currentmoney} / ${dto.goalmoney}</span>
+							<span id="money_span"></span>
 							
 						</div>
 							
 					</div>
 					
-					<div class="col-4 text-center px-0 my-auto progress">
+					<div class="col-4 text-center px-0 progress">
 								
 						<div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
 							
 						</div>
 									
+					</div>
+					
+				</div>
+				
+				<div class="row justify-content-center my-5">
+
+					<div class="col-12 col-lg-12 my-5 text-center">
+						
+						<h1>모금된 금액은 모금 기간 종료 후 기관에 전달됩니다.</h1>
+						
 					</div>
 					
 				</div>
@@ -344,7 +359,8 @@ function CountDownTimer(dt, id)
 	    {
 		    
 		    clearInterval(timer);
-		    $target.text = '종료!';
+		    $target.text('종료!');
+		    $("#donation_btn_col").empty();
 		    
 		    return;
 	    }
@@ -359,6 +375,16 @@ function CountDownTimer(dt, id)
     
     timer = setInterval(showRemaining, 1000);
 }
+
+
+
+var currentMoeny = ${dto.currentmoney};
+var goalMoney = ${dto.goalmoney};
+
+$("#money_span").text(currentMoeny.toLocaleString() + " 원 / " + goalMoney.toLocaleString() + " 원");
+
+
+
 // Source: stackoverflow
 </script>
 </c:if>

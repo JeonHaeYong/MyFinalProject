@@ -5,6 +5,7 @@ import java.util.List;
 import kh.spring.dto.MemberDTO;
 
 public interface MemberService {
+	public Object withdrawalService(String id) throws Exception;
 	public int insertMemberService(MemberDTO dto);
 	public List<MemberDTO> selectAllMembersService();
 	public int isLoginOkService(String id, String password); 
@@ -28,4 +29,5 @@ public interface MemberService {
 	public Object selectRankFiveByPoint(String page) throws Exception;	//관리자 페이지에서 최고점수 5등까지 조회
 	public Object updateRandomPoint() throws Exception;
 	public int doublemail(String email);
+	public List<String> selectAllType4();
 }

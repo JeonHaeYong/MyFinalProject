@@ -67,7 +67,7 @@ h3, h1 {
 	min-width: 400px;
 	box-sizing: border-box;
 	text-align: center;
-	margin-bottom: 100px;
+	
 }
 
 .info-box {
@@ -145,6 +145,11 @@ a[name="s-menu"]:hover {
 #infowritebtn:hover, #tomainboard:hover {
 	background-color: #FDD692;
 	font-weight: bold;
+}
+#quiz_link
+{
+	color: #EC7357 !important;
+	font-weight: 600 !important;
 }
 </style>
 

@@ -21,6 +21,11 @@ public class ReviewCommentsDAOImpl implements ReviewCommentsDAO {
 	public int insertReviewComment(ReviewCommentsDTO dto) {//후기게시판 댓글 등록(insert)
 		return sst.insert("ReviewCommentsDAO.insertReviewComment", dto);
 	}
+	
+	@Override
+	public int updateWithdrawalWriter(String id) {
+		return sst.update("ReviewCommentsDAO.updateWithdrawalWriter", id);
+	}
 
 	@Override
 	public int modifyReviewComment(ReviewCommentsDTO dto) {

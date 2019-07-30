@@ -30,7 +30,14 @@
                                             <div class="row receivedList_part my-4">
                                             	<div class="col-12 text-center">
                                             		<c:forEach var="navi" items="${receivedNavi }">
-															<a class="ml-1 navi navi_click_a" href="javascript:void(0)"  value="recipient">${navi }</a>
-                                            		</c:forEach>
+				                                        	<c:choose>
+				                                        		<c:when test="${currentPage==navi }">
+				                                        			<a class="ml-1 navi navi_click_a active" href="javascript:void(0)"  value="recipient">${navi }</a>
+				                                        		</c:when>
+				                                        		<c:otherwise>
+				                                        			<a class="ml-1 navi navi_click_a" href="javascript:void(0)"  value="recipient">${navi }</a>
+				                                        		</c:otherwise>
+				                                        	</c:choose>
+				                                     </c:forEach>
                                             	</div>
                                             </div><!-- /받은쪽지 네비게이터-->

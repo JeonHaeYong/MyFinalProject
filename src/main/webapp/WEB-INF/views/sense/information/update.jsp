@@ -64,7 +64,7 @@ h3, h1 {
 	min-width: 400px;
 	box-sizing: border-box;
 	text-align: center;
-	margin-bottom: 100px;
+	
 }
 
 .info-box {
@@ -140,6 +140,11 @@ color:#754F44;
 #uploadwritebtn:hover,#tomainboard:horver{
 background-color:#FDD692;
 font-weight:bold;
+}
+#quiz_link
+{
+	color: #EC7357 !important;
+	font-weight: 600 !important;
 }
 </style>
 

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>무료나눔</title>
+<title>라온펫 - 무료나눔</title>
 <link rel="icon" type="image/png" sizes="16x16" href="/resources/images/favicon.png">
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Vollkorn:400i"
@@ -59,13 +59,13 @@
 		background-color: #ec7357 !important;
 		border-color: #ec7357 !important;
 	}
-	.menu-box{width: 150px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px; margin-top: 50px;}
-    .menu-box>div{height: 35px;}
-    .menu-box>div:first-child{font-weight: bold; border-bottom: 1px solid #754F44; line-height: 33px;}
-    .menu-box>div:not(.s-menu):hover{background-color: #FBFFB950;}
-    .menu-row{text-align: -webkit-center;}
-    a[name="s-menu"]{color: #754F44; text-decoration-line: none;}
-    a[name="s-menu"]:hover{color: #754F44; text-decoration-line: none; font-weight:bold;}
+	.menu-box{width: 180px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px; margin-top: 50px; margin-bottom:50px;}
+            .menu-box>div{height: 35px;}
+            .menu-box>div:first-child{font-weight: bold; border-bottom: 1px solid #754F44; line-height: 33px; color:#B45F04; font-size:40px;}
+            .menu-box>div:not(.s-menu):hover{background-color: #FBFFB950;}
+            .menu-row{text-align: -webkit-center;}
+            a[name="s-menu"]{color: #754F44; text-decoration-line: none;}
+            a[name="s-menu"]:hover{color: #754F44; text-decoration-line: none; font-weight:bold;}
 	.myCard{
 		width: 90%;
 		margin: auto;
@@ -188,7 +188,7 @@
 					</div>
 					<div class="card-body">
 						<blockquote class="blockquote mb-0 freeMarketInfo">
-							<p>**무료나눔 상품을 구매하신 분은 저렴한 가격에 원하는 물건을 살 수 있고,<br> 나눔을 하신 분은 본인의 이름으로 후원단체에 기부를 하실 수 있어요!<br>
+							<p>**무료나눔 상품을 구매하신 분은 저렴한 가격에 원하는 물건을 사실 수 있고,<br> 나눔을 하신 분은 본인의 이름으로 후원단체에 기부를 하실 수 있어요!<br>
 							<small>무료나눔을 신청하면 관리자의 승인을 받은 후 무료나눔이 가능해요.</small></p>
 							<footer class="blockquote-footer">나눔 신청하러 가기 <a class="btn addBtn cartAddBtn" href="addItem">Go</a></footer>
 						</blockquote>
@@ -395,7 +395,7 @@
 					$(".ajaxRow").remove();
 					$("#conta").append(resp);
 					$(".navi").each(function(i, item){
-						if($(item).text() == "${pageNavi.currentPage}"){
+						if($(item).text() == currentPage){
 							$(this).css("color", "#754F44");
 							$(this).css("background-color", "#FDD692");
 							$(this).css("font-weight", "bold");
@@ -463,9 +463,9 @@
 					$(this).attr("selected", true);
 				}
 			});
-			
+			var currentPage = "${pageNavi.currentPage}";
 			$(".navi").each(function(i, item){
-				if($(item).text() == "${pageNavi.currentPage}"){
+				if($(item).text() == currentPage){
 					$(this).css("color", "#754F44");
 					$(this).css("background-color", "#FDD692");
 					$(this).css("font-weight", "bold");
@@ -506,7 +506,9 @@
 					$("#conta").append(resp);
 					$(".navi").each(function(i, item){
 						if($(item).text() == currentPage){
-							$(this).css("color", "#EC7357");
+							$(this).css("color", "#754F44");
+							$(this).css("background-color", "#FDD692");
+							$(this).css("font-weight", "bold");
 						}
 					});
 					$(".cardImg").each(function(i, item){

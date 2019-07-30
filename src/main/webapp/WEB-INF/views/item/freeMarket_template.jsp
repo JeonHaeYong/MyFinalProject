@@ -54,19 +54,19 @@
 			<div class="col-2"></div>
 			<div class="col-10 d-flex justify-content-center" id="naviBox">
 				<c:if test="${pageNavi.needPrev == 1 }">
-					<a class="btn navi" href="#conta" value="${pageNavi.startNavi - 1}">&laquo;</a>
+					<a class="btn navi mx-1" href="#conta" value="${pageNavi.startNavi - 1}">&laquo;</a>
 				</c:if>
 				<c:if test="${pageNavi.currentPage > pageNavi.startNavi }">
-					<a class="btn navi" href="#conta" value="${pageNavi.currentPage - 1}">&lt;</a>
+					<a class="btn navi mx-1" href="#conta" value="${pageNavi.currentPage - 1}">&lt;</a>
 				</c:if>
 				<c:forEach var="i" begin="${pageNavi.startNavi}" end="${pageNavi.endNavi}">
-					<a class="btn navi" href="#conta" class="pageNum" value="${i }">${i}</a>
+					<a class="btn navi mx-1" href="#conta" class="pageNum" value="${i }">${i}</a>
 				</c:forEach>
 				<c:if test="${pageNavi.currentPage < pageNavi.pageTotalCount }">
-					<a class="btn navi" href="#conta" value="${pageNavi.currentPage + 1}">&gt;</a>
+					<a class="btn navi mx-1" href="#conta" value="${pageNavi.currentPage + 1}">&gt;</a>
 				</c:if>
 				<c:if test="${pageNavi.needNext == 1 }">
-					<a class="btn navi" href="#conta" value="${pageNavi.endNavi + 1}">&raquo;</a>
+					<a class="btn navi mx-1" href="#conta" value="${pageNavi.endNavi + 1}">&raquo;</a>
 				</c:if>
 			</div>
 		</div>

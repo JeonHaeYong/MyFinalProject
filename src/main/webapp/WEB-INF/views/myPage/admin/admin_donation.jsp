@@ -127,35 +127,35 @@ font-weight:bold;
 			
 					<div id="menu_row" class="row justify-content-center">
 						
-						<div class="col-6 col-md-4 col-lg-12 text-center my-3">
+						<div class="col-12 text-center my-3">
 							<h2 class="menu_header my-1">관리자 메뉴</h2>
 						</div>
 						
-						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+						<div class="col-12  text-center px-1">
 							<a href="admin-member" class="btn menu_btns">회원 관리</a>
 						</div>
 			
-						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+						<div class="col-12  text-center px-1">
 							<a href="admin-item" class="btn menu_btns">무료 나눔 물품 승인</a>
 						</div>
 			
-						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+						<div class="col-12 text-center px-1">
 							<a href="admin-paylog" class="btn menu_btns">무료 나눔 거래 내역</a>
 						</div>
 			
-						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+						<div class="col-12  text-center px-1">
 							<a href="admin-donation" class="btn selected_menu_btns">월 별 후원금 및 전달 기관</a>
 						</div>
 			
-						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+						<div class="col-12  text-center px-1">
 							<a href="admin-quiz" class="btn menu_btns">퀴즈 당첨자</a>
 						</div>
 			
-						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+						<div class="col-12  text-center px-1">
 							<a href="admin-chart" class="btn menu_btns">통계</a>
 						</div>
 						
-						<div class="col-6 col-md-4 col-lg-12 text-center px-1">
+						<div class="col-12  text-center px-1">
 							<a href="admin-msg" class="btn menu_btns">관리자쪽지함</a>
 						</div>
 						
@@ -682,6 +682,14 @@ font-weight:bold;
 											
 											<div class="row justify-content-center">
 											
+												<div id="log_option_div" class="col-12 col-md-12 col-lg-12 text-center my-3">
+													
+												</div>
+												
+											</div>
+											
+											<div class="row justify-content-center">
+											
 												<div id="log_result_div" class="col-12 col-md-12 col-lg-12 text-center my-3">
 													
 												</div>
@@ -750,19 +758,35 @@ font-weight:bold;
 		myAjax("1");
 		logGroupAjax("1");
 		
-		//테스트용 시작
+		/* //테스트용 시작
 		$("#name_text").val("후원 업체 명");
 		$("#title_text").val("제목입니다");
 		$("#explanation_text").val("설명 설명");
-		$("#goalmoney_text").val("1000000");
+		
+		var testMoney = 1000000;
+		$("#goalmoney_text").val(testMoney.toLocaleString() + " 원 ");
 		$("#startdate_text").val("2019-07-01");
 		$("#enddate_text").val("2019-07-30");
-		//테스트용 끝
+		//테스트용 끝 */
 		
 		$("#mid_body").slideToggle(0);
 		$("#bot_body").slideToggle(0);
 		
 		var nowOpen = "top_header";
+		
+		
+		var inputMoney;
+		
+		$("#goalmoney_text, #select_goalmoney_text").on("input", function()
+		{
+			inputMoney = this.value.replace(/,/g,'').replace(/ /g,'').replace(/원/g,'') * 1;
+		});
+		$("#goalmoney_text, #select_goalmoney_text").on("focusout", function()
+		{
+			
+			this.value = inputMoney.toLocaleString() + " 원 ";
+		});		
+		
 		
 		$("#top_header, #mid_header, #bot_header").on("click", function()
 		{
@@ -829,7 +853,7 @@ font-weight:bold;
 
 	        
 	        var $goalmoney = $('<input type="hidden" name="goalmoney">');
-	        $goalmoney.val($("#goalmoney_text").val());
+	        $goalmoney.val($("#goalmoney_text").val().replace(/,/g,'').replace(/ /g,'').replace(/원/g,''));
 	        
 	        var $startdate = $('<input type="hidden" name="startdate">');
 	        $startdate.val($("#startdate_text").val());
@@ -883,7 +907,7 @@ font-weight:bold;
 
 		        
 		        var $goalmoney = $('<input type="hidden" name="goalmoney">');
-		        $goalmoney.val($("#select_goalmoney_text").val());
+		        $goalmoney.val($("#select_goalmoney_text").val().replace(/,/g,'').replace(/ /g,'').replace(/원/g,''));
 		        
 		        var $startdate = $('<input type="hidden" name="startdate">');
 		        $startdate.val($("#select_startdate_text").val());
@@ -926,8 +950,10 @@ font-weight:bold;
 	    		$("#select_name_text").val(response.name);
 	    		$("#select_title_text").val(response.title);
 	    		$("#select_explanation_text").val(response.explanation.replace(/(<br>)/g, "\n"));
-	    		$("#select_goalmoney_text").val(response.goalmoney);
-	    		$("#select_currentmoney_text").val(response.currentmoney);
+	    		var goalMoney = response.goalmoney;
+	    		$("#select_goalmoney_text").val(goalMoney.toLocaleString() + " 원 ");
+	    		var currentMoney = response.currentmoney;
+	    		$("#select_currentmoney_text").val(currentMoney.toLocaleString() + " 원 ");
 	    		$("#select_startdate_text").val(response.startdate);
 	    		$("#select_enddate_text").val(response.enddate);
 	    		
@@ -967,7 +993,7 @@ font-weight:bold;
 	    	})
 	    	.fail(function()
 	    	{
-	    		alert("error");
+	    		console.log("에러 발생");
 	    	});
 	    }
 	    
@@ -975,6 +1001,7 @@ font-weight:bold;
 	    
 		$(document).on("click", "#select_group_btn, .group_navi_btns", function()
 		{
+			$("#log_option_div").empty();
 	    	logGroupAjax(this.name);	    	
 		});
 		
@@ -1015,8 +1042,12 @@ font-weight:bold;
 						var $row = $('<div class="row justify-content-center my-1 id_row"></div>');
 		    			var $timeCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].time+'</div>');
 		    			var $nameCol = $('<div class="col-4 col-md-4 col-lg-6 text-center my-1">'+array[i-1].name+'</div>');
-		    			var $donationCol = $('<div class="col-4 col-md-4 col-lg-4 text-center my-1">'+array[i-1].donation+'</div>');
+		    			var $donationCol = $('<div class="col-4 col-md-4 col-lg-4 text-center my-1"></div>');
 		    			$row.append($timeCol).append($nameCol).append($donationCol);
+		    			
+		    			var money = array[i-1].donation;
+		    			$donationCol.text(money.toLocaleString() + " 원 ");
+		    			
 		    			$("#log_result_div").append($row);
 		    		}
 		    		
@@ -1063,13 +1094,46 @@ font-weight:bold;
 	    	})
 	    }
 	    
-	    $(document).on("click", "#select_all_btn, .all_navi_btns", function()
+	    var targetKeyword;
+	    
+	    $(document).on("click", "#search_btn", function()
 	    {
+	    	targetKeyword = $("#search_text").val();
+	    	logAllAjax(this.name);	    	
+	    });
+	    
+	    $(document).on("click", ".all_navi_btns", function()
+	    {
+	    	logAllAjax(this.name);	    	
+	    });
+	    
+	    $(document).on("click", "#select_all_btn", function()
+	    {
+	    	$("#select_group_btn").attr("class", "btn menu_btns");
+			$("#select_all_btn").attr("class", "btn selected_menu_btns");
+			
+			var $search_row = $('<div id="search_row" class="row justify-content-center my-5 id_row"></div>');
+			
+			var $search_text_col = $('<div class="col-9 text-center my-1"></div>');
+			var $search_btn_col = $('<div class="col-3 text-center my-1"></div>');
+			
+			var $search_text = $('<input id="search_text" class="form-control" type="text" placeholder="검색할 아이디를 입력하세요(없을 시 전체)">');
+			var $search_btn = $('<input id="search_btn" class="btn my_buttons" name="1" type="button" value="검색">');
+			
+			$search_text_col.append($search_text);
+			$search_btn_col.append($search_btn);
+			
+			$search_row.append($search_text_col).append($search_btn_col);
+			
+			$("#log_option_div").append($search_row);
+	    	
 	    	logAllAjax(this.name);	    	
 	    });
 	    
 	    function logAllAjax(btnName)
 	    {
+	    	$("#log_result_div").empty();
+
 	    	$.ajax
 	    	({
 	    		url: "admin-donation-all",
@@ -1078,23 +1142,16 @@ font-weight:bold;
 	    		data:
 	    		{
 	    			page: btnName
+	    			,target: targetKeyword
 	    		}
 	    	})
 	    	.done(function(response)
 	    	{
-	    		$("#log_result_div").empty();
-	    		
-	    		
-	    		
 	    		var array = response.array;
 	    		
 	    		if(array.length != 0)
 	    		{
-	    			
-	    			$("#select_group_btn").attr("class", "btn menu_btns");
-	    			$("#select_all_btn").attr("class", "btn selected_menu_btns");
-	    			
-	    			var $menu_row = $('<div class="row justify-content-center my-1 id_row"></div>');
+	    			var $menu_row = $('<div class="row justify-content-center my-5 id_row"></div>');
 	    			
 	    			var $menu_seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1"><h3>번호</h3></div>');
 	    			var $menu_idCol = $('<div class="col-4 col-md-4 col-lg-2 text-center my-1"><h3>기부자</h3></div>');
@@ -1113,11 +1170,15 @@ font-weight:bold;
 						var $seqCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].seq+'</div>');
 		    			var $idCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].id+'</div>');
 		    			var $targetCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].target+'</div>');
-		    			var $amountCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].amount+'</div>');
+		    			var $amountCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1"></div>');
 		    			var $timeCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].time+'</div>');
 		    			var $typeCol = $('<div class="col-6 col-md-6 col-lg-2 text-center my-1">'+array[i-1].type+'</div>');
 		    			
 		    			$row.append($seqCol).append($idCol).append($targetCol).append($amountCol).append($timeCol).append($typeCol);
+		    			
+		    			var amount = array[i-1].amount;
+		    			$amountCol.text(amount.toLocaleString() + " 원 ");
+		    			
 		    			$("#log_result_div").append($row);
 		    		}
 		    		

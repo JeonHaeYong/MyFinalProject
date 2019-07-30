@@ -51,7 +51,7 @@ h3, h1 {
 	min-width: 400px;
 	box-sizing: border-box;
 	text-align: center;
-	margin-bottom: 100px;
+	
 }
 
 .info-box {
@@ -131,7 +131,11 @@ color:#754F44;
 background-color:#FDD692;
 font-weight:bold;
 }
-
+#quiz_link
+{
+	color: #EC7357 !important;
+	font-weight: 600 !important;
+}
 </style>
 
 </head>
@@ -184,7 +188,7 @@ font-weight:bold;
 				</div>
 			</div>
 		</div>
-		<div class="row mt-5" align="right">
+		<div class="row mt-5 pb-5" align="right">
 			<div class="col-12">
 				<div>
 				 <button id="tomainboard" class="btn">글목록으로</button>

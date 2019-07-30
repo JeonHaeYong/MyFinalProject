@@ -51,4 +51,19 @@ public class QuizServiceImpl implements QuizService {
 	public String getNaviQuizService(int currentPage) {
 		return qdao.getNaviQuiz(currentPage);
 	}
+
+	@Override
+	public Object updatePointZeroAllUsers() throws Exception
+	{
+		Object result = "error";
+		
+		int updateResult = qdao.updatePointZeroAllUsers();
+		
+		if(updateResult >= 1)
+		{
+			result = "redirect: admin-quiz";
+		}
+		
+		return result;
+	}
 }

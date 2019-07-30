@@ -166,6 +166,9 @@ public class MemberDAOImpl implements MemberDAO {
 	public int updateImagePath(MemberDTO dto) {
 		return sst.update("MemberDAO.updateImagePath",dto);
 	}
-
+	@Override
+	public List<String> selectAllType4() {
+		return sst.selectList("MemberDAO.selectAllType4");
+	}
 	
 }

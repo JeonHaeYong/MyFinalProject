@@ -143,5 +143,7 @@
 		member)
 		where rown = #{index})
 	</update>
-
+	<select id="selectAllType4" resultType="String">
+		select id from member where type=4
+	</select>
 </mapper>

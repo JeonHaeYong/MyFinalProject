@@ -10,4 +10,7 @@
 	<delete id="deleteReviewCommentLiked">
 		delete review_comments_likes where r_comments_seq = #{seq}
 	</delete>
+	<update id="updateWithdrawalId">
+		update review_comments_likes set id='탈퇴한 회원' where id = #{id}
+	</update>
 </mapper>

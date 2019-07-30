@@ -21,6 +21,7 @@ import kh.spring.dto.MessageDTO;
 import kh.spring.dto.QuizDTO;
 import kh.spring.service.BlackListService;
 import kh.spring.service.ChartService;
+import kh.spring.service.DisappearReportService;
 import kh.spring.service.DonationPaymentService;
 import kh.spring.service.DonationService;
 import kh.spring.service.ItemService;
@@ -34,6 +35,8 @@ public class AdminController
 {
 	@Autowired
 	private QuizService qs;
+	@Autowired
+	private DisappearReportService drs;
 	@Autowired
 	private MessageService msgService;
 	@Autowired
@@ -54,7 +57,9 @@ public class AdminController
 	LogService logService;
 	@Autowired
 	DonationPaymentService donationPaymentService;
-
+	@Autowired
+	QuizService quizServiece;
+	
 	//Member Start
 	@RequestMapping(value = "admin-member")
 	public String manageMemberPage()
@@ -62,23 +67,23 @@ public class AdminController
 		logger.info("회원 관리 페이지");
 		return "myPage/admin/admin_manage_member";
 	}
-	@RequestMapping(value = "admin-member-insert")
-	public String insertRandomMembers()
-	{
-		logger.info("회원 데이터 삽입 시도");
-		String result = "error";
-
-		try
-		{
-			result = blackService.insertRandomMembers();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		return result;
-	}
+//	@RequestMapping(value = "admin-member-insert")
+//	public String insertRandomMembers()
+//	{
+//		logger.info("회원 데이터 삽입 시도");
+//		String result = "error";
+//
+//		try
+//		{
+//			result = blackService.insertRandomMembers();
+//		}
+//		catch(Exception e)
+//		{
+//			e.printStackTrace();
+//		}
+//
+//		return result;
+//	}
 	@ResponseBody
 	@RequestMapping(value = "admin-member-search", produces="application/json;charset=utf-8")
 	public String searchMember(String id, String page)
@@ -172,21 +177,21 @@ public class AdminController
 		return result;
 
 	}
-	@RequestMapping(value = "admin-chart-insert")
-	public String insertDummyData()
-	{
-		String result = "error";
-		try
-		{
-			result = chartService.insertRandomRecord();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		return result;
-	}
+//	@RequestMapping(value = "admin-chart-insert")
+//	public String insertDummyData()
+//	{
+//		String result = "error";
+//		try
+//		{
+//			result = chartService.insertRandomRecord();
+//		}
+//		catch(Exception e)
+//		{
+//			e.printStackTrace();
+//		}
+//
+//		return result;
+//	}
 	@ResponseBody
 	@RequestMapping(value = "admin-chart-acs", produces="application/json;charset=utf-8")
 	public String selectACSDTO()
@@ -279,12 +284,12 @@ public class AdminController
 	}
 	@ResponseBody
 	@RequestMapping(value = "admin-donation-all", produces="application/json;charset=utf-8")
-	public Object selectDonatedListAll(String page)
+	public Object selectDonatedListAll(String page, String target)
 	{
 		Object result = "error";
 		try
 		{
-			result = donationPaymentService.selectDonatedListAll(page);
+			result = donationPaymentService.selectDonatedListAll(page, target);
 		}
 		catch(Exception e)
 		{
@@ -415,14 +420,30 @@ public class AdminController
 
 		return result;
 	}
-	@RequestMapping(value = "admin-quiz-random")
-	public Object updatePointRandom()
+//	@RequestMapping(value = "admin-quiz-random")
+//	public Object updatePointRandom()
+//	{
+//		Object result = "";
+//
+//		try
+//		{
+//			result = memberService.updateRandomPoint();
+//		}
+//		catch(Exception e)
+//		{
+//			e.printStackTrace();
+//		}
+//
+//		return result;
+//	}
+	@RequestMapping(value = "admin-quiz-zero")
+	public Object updatePointZeroAllUsers()
 	{
-		Object result = "";
+		Object result = "error";
 
 		try
 		{
-			result = memberService.updateRandomPoint();
+			result = quizServiece.updatePointZeroAllUsers();
 		}
 		catch(Exception e)
 		{
@@ -443,22 +464,22 @@ public class AdminController
 	{
 		return "myPage/admin/admin_paylog";
 	}
-	@RequestMapping(value = "admin-paylog-insert")
-	public Object insertPayLogDummy()
-	{
-		Object result = "error";
-
-		try
-		{
-			result = logService.insertDummy();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		return result;
-	}
+//	@RequestMapping(value = "admin-paylog-insert")
+//	public Object insertPayLogDummy()
+//	{
+//		Object result = "error";
+//
+//		try
+//		{
+//			result = logService.insertDummy();
+//		}
+//		catch(Exception e)
+//		{
+//			e.printStackTrace();
+//		}
+//
+//		return result;
+//	}
 	@ResponseBody
 	@RequestMapping(value = "admin-paylog-search", produces="application/json;charset=utf-8")
 	public Object selectFromPayLog(String page, String condition, String keyword)
@@ -537,6 +558,22 @@ public class AdminController
 		}
 		return "redirect:/";
 	}
+	@RequestMapping("selectDeleteDisappearReport")
+	public String selectDeleteDisappearReport(HttpServletRequest request) {
+		int type = (int)session.getAttribute("type");
+		if(type == 4) {
+			String[] num = request.getParameterValues("check");
+			int[] seq = new int[num.length];
+			for(int i = 0; i < num.length; i++) {
+				seq[i] = Integer.parseInt(num[i]);
+				try {
+					drs.deleteService(seq[i]);
+				}catch(Exception e) {e.printStackTrace();}
+			}
+			return "redirect:/toDisappearList?currentPage=" + session.getAttribute("currentPage");
+		}
+		return "redirect:/";
+	}
 	//동물병원, 동물보호소 데이터 삽입-----------------------------
 	@RequestMapping("inputData.admin")
 	public String inputData() {
@@ -554,6 +591,7 @@ public class AdminController
 			currentPage = "1";
 		}
 		int page = Integer.parseInt(currentPage);
+		request.setAttribute("currentPage", currentPage);
 		String loginId = (String)session.getAttribute("id");
 		//페이지에 띄울 쪽지 리스트 담기.
 		//받은쪽지

@@ -28,5 +28,10 @@ public class ReviewCommentsLikesDAOImpl implements ReviewCommentsLikesDAO{
 	public int deleteReviewCommentLiked(int seq) {
 		return sst.delete("ReviewCommentsLikesDAO.deleteReviewCommentLiked",seq);
 	}
+	
+	@Override
+	public int updateWithdrawalId(String id) {
+		return sst.update("ReviewCommentsLikesDAO.updateWithdrawalId", id);
+	}
 
 }

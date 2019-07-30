@@ -35,8 +35,15 @@
                             <div class="row reply_part my-4">
                                 <c:if test="${reply_navi.size()!=0 }">
                                     <div class="col-12 text-center">
-                                        <c:forEach var="navi" items="${reply_navi }">
-                                           <a class="ml-1 navi reply_navi" href="#toList" onclick="clickReplyNavi(this);">${navi }</a>
+										<c:forEach var="navi" items="${reply_navi }">
+                                        	<c:choose>
+                                        		<c:when test="${currentPage==navi }">
+                                        			<a class="ml-1 navi active reply_navi" href="#toList" onclick="clickReplyNavi(this);">${navi }</a>
+                                        		</c:when>
+                                        		<c:otherwise>
+                                        			<a class="ml-1 navi reply_navi" href="#toList" onclick="clickReplyNavi(this);">${navi }</a>
+                                        		</c:otherwise>
+                                        	</c:choose>
                                         </c:forEach>
                                     </div>
                                 </c:if>

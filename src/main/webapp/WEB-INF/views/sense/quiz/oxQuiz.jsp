@@ -25,6 +25,9 @@
 
  <style>
            
+         
+           
+           
      		.jumbotron{background-color:white; padding-top: 80px;  }
      		.jumbotron>img{width:100%; max-height:600px;}
             #title{width: 100%; text-align: center; margin: auto; margin-bottom: 50px;}
@@ -33,8 +36,7 @@
                 border: 0px solid black;
                 min-width: 400px;       
                 box-sizing: border-box;
-                text-align: center;
-                margin-bottom:100px;
+                
             }
             .quiz-box{
                 padding: 10px;
@@ -42,24 +44,25 @@
                 margin: 0px;
                 margin-top:45px;
                 padding: 0px;
+                 margin-bottom:245px;
             
             }
             .question{width: 100%;}
             .btnImage{ line-height: 350px; display: inline-block; font-size: 500px; cursor: pointer; color:#FDD692; font-family:'Gamja Flower', cursive;}
             .btnImage:hover{color:#faba4b;}
-            .btn{font-family: 'Gamja Flower', cursive;background-color:#FDD69270;color:#754F44; font-size:30px;}
-			.btn:hover{background-color:#FDD692; font-weight:bold; color:#754F44;}
-            
+          
+              .start-btn ,#restart-btn{font-family: 'Gamja Flower', cursive; background-color:#FDD69270;color:#754F44; font-size:30px;}
+			.start-btn:hover,#restart-btn:hover{cursor: pointer; background-color:#FDD692; font-weight:bold; color:#754F44;}
             .quiz{display:none;}
             .quiz-box{font-family:'Gamja Flower', cursive;}
             #quiz1{display: block;}
             .menu-box{width: 200px; height: 100px; color: #754F44;  font-family: 'Gamja Flower', cursive; font-size: 22px; margin-top: 50px; margin-bottom:50px;}
             .menu-box>div{height: 35px;}
             .menu-box>div:first-child{font-weight: bold; border-bottom: 1px solid #754F44; line-height: 33px; color:#B45F04; font-size:40px;}
-            .menu-box>div:not(.s-menu):hover{background-color: #FBFFB950;}
+            .menu-box>div:not(.s-menu):hover{cursor: pointer;background-color: #FBFFB950; color: #754F44; text-decoration-line: none; font-weight:bold;}
             .menu-row{text-align: -webkit-center;}
             a[name="s-menu"]{color: #754F44; text-decoration-line: none;}
-            a[name="s-menu"]:hover{color: #754F44; text-decoration-line: none; font-weight:bold;}
+         
            /*---------------------------------------------------------------------------------------------------------------------------------------------*/
            .result-box{width: 70%;  margin-top: 30px; margin-bottom: 30px;}
             .header{font-size: 25px; text-align: center; background-color: #FDD692; color: #754F44; border-radius: 30px;}
@@ -72,10 +75,18 @@
             .wrong{margin-bottom: 40px;}
             .incorrCount,.corrCount,.getPoint{font-size:30px;}
             .perfect{font-size:40px; font-weight:bold;}
+            #quiz_link
+			{
+				color: #EC7357 !important;
+				font-weight: 600 !important;
+			}
+			
+			.start{
+			padding-bottom:100px;}
     </style>
             
             
-        </style>
+      
 
 </head>
  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section">

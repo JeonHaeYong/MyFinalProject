@@ -9,6 +9,8 @@
         		select seq , name as title , write_date , '무료나눔' as type , seller as writer from item
         		union all
        			select seq , disappearArea as title , writeDate as write_date  , '실종신고' as type, WRITER as writer from disappearReport
+       			union all 
+				select seq , title , writetime as write_date  , '임시보호' as type, WRITER as writer from temp_protect
     		) ttl
 		) where rown between #{start} and #{end} and writer = #{id}
 	</select>
@@ -19,6 +21,8 @@
         		select seq , name as title , write_date , '무료나눔' as type , seller as writer from item
         		union all
        			select seq , disappearArea as title , writeDate as write_date  , '실종신고' as type, WRITER as writer from disappearReport
+       			union all 
+				select seq , title , writetime as write_date  , '임시보호' as type, WRITER as writer from temp_protect
 		) where writer = #{id}
 	</select>
 </mapper>

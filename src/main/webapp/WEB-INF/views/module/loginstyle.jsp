@@ -113,6 +113,23 @@
 	font-weight: bold;
 	background-color: #FDD692;
 }
+.footer_font_namsan{
+	font-family: 'Gamja Flower';
+}
+.footer_font_namsan::placeholder{
+	font-family: 'Gamja Flower';
+}
+.footer_ftc_white{
+	color: white;
+}
+input[type=button],button[type=button]{
+	cursor: pointer;
+}
+.weather{
+
+padding-top:105px;
+
+}
 </style>
 <link
 	href="https://fonts.googleapis.com/css?family=Gamja+Flower&display=swap&subset=korean"

@@ -32,7 +32,7 @@
 	
 	<select id="selectAll" resultType="kh.spring.dto.DonationPaymentDTO">
 		select * 
-		from (select row_number() over(order by seq desc) as rown, donated_payment.* from donated_payment)
+		from (select row_number() over(order by seq desc) as rown, donated_payment.* from donated_payment where donator like #{target})
 		where rown between #{start} and #{end}	
 	</select>
 	
@@ -42,5 +42,13 @@
 				group by 
 				donation_name ,to_char(donated_time, 'yy/MM'))
 				order by donated_time desc, donation_name asc)			
+	</select>
+	
+	<update id="updateWithdrawalDonator">
+		update donated_payment set donator='탈퇴한 회원' where donator=#{value}
+	</update>
+	
+	<select id="selectCountAll" resultType="java.lang.Integer">
+		select count(*) from DONATED_PAYMENT where donator like #{target}
 	</select>
 </mapper>

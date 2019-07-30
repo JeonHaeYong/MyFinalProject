@@ -41,4 +41,9 @@ where r1.seq = r2.seq(+)) where rown between #{start} and #{end}
         	#{seq}
   		</foreach>
 	</select>
+	
+	<update id="updateWithdrawalWriter">
+		update review set writer='탈퇴한 회원' where writer = #{value}
+	</update>
+	
 </mapper>

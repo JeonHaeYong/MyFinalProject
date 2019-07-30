@@ -34,7 +34,11 @@
 	font-weight: normal;
 	font-style: normal;
 }
-
+#abandoned_link
+{
+	color: #EC7357 !important;
+	font-weight: 600 !important;
+}
 body {
 	color: #754F44;
 }
@@ -91,12 +95,10 @@ a:hover {
 }
 .menu-bar {
 	text-align: center;
-	height: 200px;
+	height: 250px;
+	margin-top:80px;
 }
 
-.menu-bar>div {
-	height: 40px;
-}
 
 .menu-bar>div:not (.menu ):hover {
 	background-color: #FBFFB950;
@@ -104,10 +106,10 @@ a:hover {
 }
 
 .menu-bar div:first-child {
-	font-size: 30px;
+	font-size: 40px;
 	font-weight: bold;
 	border-bottom: 1px solid black;
-	color: #754F44;
+	color:#B45F04;
 }
 
 .menu-row {

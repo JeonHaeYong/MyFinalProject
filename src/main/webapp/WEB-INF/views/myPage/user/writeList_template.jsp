@@ -34,9 +34,16 @@
 		                                        </div>
 	                                            <div class="row my-4">
 	                                            	<div class="col-12 text-center">
-	                                            		<c:forEach var="navi" items="${navi }">
-	                                            			<a class="ml-1 navi boardList_navi" href="javascript:void(0)">${navi }</a>
-	                                            		</c:forEach>
+														<c:forEach var="navi" items="${reply_navi }">
+				                                        	<c:choose>
+				                                        		<c:when test="${currentPage==navi }">
+				                                        			<a class="ml-1 navi boardList_navi active" href="javascript:void(0)">${navi }</a>
+				                                        		</c:when>
+				                                        		<c:otherwise>
+				                                        			<a class="ml-1 navi boardList_navi" href="javascript:void(0)">${navi }</a>
+				                                        		</c:otherwise>
+				                                        	</c:choose>
+				                                        </c:forEach>
 	                                            	</div>
 	                                            </div>
 	                                        </c:if>

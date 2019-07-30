@@ -6,6 +6,7 @@ import kh.spring.dto.DisappearReportDTO;
 
 public interface DisappearReportDAO {
 	public int insert(DisappearReportDTO drdto);
+	public int updateWithdrawalWriter(String id);
 	public List<DisappearReportDTO> selectPerPage(int currentPage);
 	public int recordAllCount();
 	public String getNavi(int currentPage);
