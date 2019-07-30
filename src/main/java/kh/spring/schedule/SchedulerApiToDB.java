@@ -40,7 +40,7 @@ public class SchedulerApiToDB {
 	// 초 분 시 일 월 요일
 	@Transactional("txManager")
 
-	@Scheduled(cron="01 05 0 * * *")
+	@Scheduled(cron="55 48 * * * *")
 
 	public void updateApi() throws Exception {
 		System.out.println("updateApi 시작");

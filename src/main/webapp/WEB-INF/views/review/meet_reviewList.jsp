@@ -101,6 +101,9 @@
 						color: #EC7357 !important;
 						font-weight: 600 !important;
 					}
+					.imgWrapper{
+						height: 90%;
+					}
                 </style>
             </head>
             <body data-spy="scroll" data-target=".site-navbar-target"
@@ -163,7 +166,7 @@
                                                 <input type="hidden" value="${currentPage }" name="currentPage">
                                                 <div class="card mb-3" style="max-width: 540px;">
                                                     <div class="row no-gutters">
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-4 imgWrapper">
                                                             <div style="width: 100%;height: 100%;">
                                                                 <img src="/review/${list.image_path1 }" class="card-img" style="width: 100%;height: 100%;">
                                                             </div>
