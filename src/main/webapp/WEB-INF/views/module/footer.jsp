@@ -52,7 +52,7 @@
 						</div>
 						<div id="kakaologin">
 							<a
-								href="https://kauth.kakao.com/oauth/authorize?client_id=8f0beb524de484b185f094b0604de956&redirect_uri=http://localhost/oauth&response_type=code">
+								href="https://kauth.kakao.com/oauth/authorize?client_id=8f0beb524de484b185f094b0604de956&redirect_uri=http://192.168.60.42/oauth&response_type=code">
 								<img src="resources/images/member/kakaobtn.png" class="col"
 								id="kakaoimg">
 							</a>
