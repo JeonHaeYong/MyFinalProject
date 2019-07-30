@@ -291,7 +291,6 @@
 					}
 				}).done(function(resp){
 					soldoutCheck = resp;
-					alert(soldoutCheck);
 				});
 				if(soldoutCheck == 'y'){
 					break;
