@@ -82,6 +82,7 @@ public class MemberServiceImpl implements MemberService {
 			reviewdao.updateWithdrawalWriter(id);
 			reviewCommentsdao.updateWithdrawalWriter(id);
 			reviewCommentsLikesdao.updateWithdrawalId(id);
+			idao.updateSoldOut(id);
 			idao.updateWithdrawalSeller(id);
 			dpdao.updateWithdrawalDonator(id);
 			messagedao.updateWithdrawalByrecipient(id);
