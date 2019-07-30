@@ -69,6 +69,11 @@ public class ItemDAOImpl implements ItemDAO{
 	public int updateSoldOut(int seq) {
 		return sst.update("ItemDAO.updateSoldOut", seq);
 	}
+	
+	@Override
+	public int updateSoldOut(String id) {
+		return sst.update("ItemDAO.updateSoldOutById", id);
+	}
 
 	@Override
 	public int itemContentsSize() {

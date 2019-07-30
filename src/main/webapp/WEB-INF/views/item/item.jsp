@@ -222,8 +222,11 @@
 	                	</div>
 	                	<div class="col-12 align-self-center text-center">
 	                		<c:choose>
-	                			<c:when test="${item.soldout == 'y' }">
+	                			<c:when test="${item.soldout == 'y' && item.seller != '탈퇴한 회원' }">
 	                				<a class="btn cartBtn" id="soldout" disabled>판매완료 상품</a>
+	                			</c:when>
+	                			<c:when test="${item.soldout == 'y' && item.seller == '탈퇴한 회원' }">
+	                				<a class="btn cartBtn" id="widthdrawal" disabled>판매불가 상품</a>
 	                			</c:when>
 	                			<c:otherwise>
 	                				<a class="btn" id="addCart" href="">장바구니 담기</a>

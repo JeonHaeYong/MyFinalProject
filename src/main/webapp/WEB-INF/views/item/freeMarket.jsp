@@ -235,7 +235,15 @@
 								<div class="card-body">
 									<div class="itemName text-wrap text-truncate">
 										<h4 class="card-title"><a href="item?currentPage=${pageNavi.currentPage }&category=${category }&seq=${dto.seq }" class="detail">
-											<c:if test="${dto.soldout == 'y' }">[판매완료] </c:if>${dto.name }
+											<c:choose>
+												<c:when test="${dto.soldout == 'y' && dto.seller != '탈퇴한 회원' }">
+					                				[판매완료] 
+					                			</c:when>
+					                			<c:when test="${dto.soldout == 'y' && dto.seller == '탈퇴한 회원' }">
+					                				[판매불가] 
+					                			</c:when>
+				                			</c:choose>
+											${dto.name }
 										</a></h4>
 									</div>
 									<div style="height: 42px;">
@@ -420,14 +428,14 @@
 					});
 				});
 			}
-			
-			if(document.cookie != ""){
-				var cookies = cookieToJson(document.cookie);
-				$("#withoutSoldout").prop("checked", true);
-				withoutSoldout = "N";
-				withoutSoldoutChanged();
-				console.log(cookies);
+			for(var key in cookieToJson(document.cookie)){
+				if(key == "withoutSoldout"){
+					$("#withoutSoldout").prop("checked", true);
+					withoutSoldout = "N";
+					withoutSoldoutChanged();
+				}
 			}
+			
 			$("#withoutSoldout").on("change", function(){
 				var exdate = new Date();
 				if($(this).prop("checked")){
@@ -448,6 +456,7 @@
 					var entry = cookieArr[i].split("=");
 					cookieJson[entry[0]] = entry[1];
 				}
+				console.log(Object.keys(cookieJson));
 				return cookieJson;
 			}
 			
