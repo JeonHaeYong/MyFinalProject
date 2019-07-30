@@ -66,8 +66,16 @@ body{
 	height: 50px;
 }
 
-
-
+.bold_brown_namsan
+{
+	font-family: 'SeoulNamsanM' !important;
+	font-weight:bold;
+	color: brown;
+}
+.namsan
+{
+	font-family: 'SeoulNamsanM' !important;
+}
 </style>
 
 </head>
@@ -92,7 +100,7 @@ body{
 						
 							<div class="col-12 text-center">
 							
-								<h1>${dto.name}</h1>
+								<h1 class="bold_brown_namsan"> < ${dto.name} > </h1>
 							
 							</div>
 							
@@ -142,8 +150,8 @@ body{
 		
 							<div class="col-4 text-center">
 								
-								<h2>${dto.title}</h2>
-								<br>${dto.explanation}
+								<h2 class="bold_brown_namsan">${dto.title}</h2>
+								<br class="namsan">${dto.explanation}
 		
 							</div>
 		
